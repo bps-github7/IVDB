@@ -1,0 +1,114 @@
+/*Nav bar
+#menu {
+    margin: 0em;
+    padding: 0em;
+    list-style: none;
+    background-color: oldlace;
+    position: relative;
+    z-index: 1;
+}
+
+#menu li {
+    position: relative;
+    float: left;
+    width: 116.666666667px;
+    height: 40px;
+    background-color: grey;
+    line-height: 40px;
+    text-align: center;
+    font-size: 12px;
+    z-index: 1;
+}
+
+#menu li a {
+    text-decoration: none;
+    color: black;
+    display: block;
+    z-index: 1;
+    border: 1px solid black;
+}
+
+#menu li #sub-menu li {
+    z-index: 1;
+}
+
+#menu li a:hover {
+    background-color: cornflowerblue;
+}
+
+#menu li #sub-menu li {
+    display: none;
+}
+
+#menu li:hover #sub-menu li {
+    display: block;
+}
+
+#menu li #sub-menu li:hover {
+    display: block;
+}*/
+* {
+    margin: 0em;
+    padding: 0em;
+    box-sizing: border-box;
+}
+nav {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    min-height: 8vh;
+    background-color: #5d4954;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+/* 
+if you want to edit the whole shebang, this one yer guy */
+#menu {
+    margin: auto
+}
+
+#menu li {
+    /* position: relative; */
+    float: left;
+    list-style: none;
+    /* box-sizing: border-box;
+    position: relative; */
+    width: 116.666666667px;
+    height: 40px;
+    /* background-color: grey;
+    line-height: 40px;
+    text-align: center;
+    font-size: 12px;
+    z-index: 1; */
+
+}
+
+/*To edit the box where the nav items live, this yer guy*/
+#menu li a {
+    text-decoration: none;
+    color: rgba(245, 245, 245, 0.979);
+    display: block;
+    z-index: 1;
+    border: none;
+    padding-right: 9em;
+}
+
+#menu li #sub-menu li {
+    z-index: 1;
+}
+
+#menu li a:hover {
+    background-color: cornflowerblue;
+}
+
+#menu li #sub-menu li {
+    display: none;
+}
+
+#menu li:hover #sub-menu li {
+    display: block;
+}
+
+/* Redundant, I think... */
+/* #menu li #sub-menu li:hover { 
+    display: block;
+} */
