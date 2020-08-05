@@ -1,0 +1,74 @@
+<!---navbar/drop down menu--->
+<nav>
+    <header>
+        <a class="logo" alt="Internet Video-game Database" routerLink=''>IVDB</a>
+        <!----Incorrect method of using the label. should be one for each button------->
+        <label for="sign_in" class="search">
+            <input id="searchbar" type="text"><a routerLink="/search"><button>Search</button></a><a routerLink="/sign_in"><button>Sign in</button></a>
+        </label>
+    </header>
+    <ul class="dd-menu">
+        <li><a routerLink="/watchlists">Watchlist</a>
+            <ul class="sub-menu">
+                <li><a href="#">New Releases</a></li>
+                <li><a href="#">Popular Games</a></li>
+                <li><a href="#">Highly Rated</a></li>
+                <!-- Submenu here -->
+                <li><a href="#">Recent</a>
+                    <ul class="sub sub-menu">
+                        <li><a href="#">Recently Posted</a></li>
+                        <li><a href="#">Recently Reviewed</a></li>
+                        <li><a href="#">Recently Released</a></li>
+                    </ul>
+                </li>          
+            </ul>
+        </li>
+        <li><a routerLink="/forum">Forum</a>
+            <ul class="sub-menu">
+                <li><a href="#">Just Posted</a></li>
+                <li><a href="#">Hot Threads</a></li>
+                <li><a href="#">Admin Favorites</a></li>     
+            </ul>
+        </li>
+        <li><a routerLink="/reccomendations">Reccomendations</a>
+            <ul class="sub-menu">
+                <!-- sub sub menu here -->
+                <li><a href="#">This Week's Select Games</a>
+                    <ul class="sub sub-menu"> 
+                        <li><a href="##">Action/platform</a></li>
+                        <li><a href="##">RPG</a></li>
+                        <li><a href="##">Sports</a></li>
+                    </ul>
+                </li>
+                <li><a href="#">Browse Topics</a></li>
+                <li><a href="#">Well Traveled Reviews</a></li>
+                <li><a href="#">This Month's Top Reccomendations</a></li>          
+            </ul>
+        </li>
+        <li><a routerLink="/games">Games</a>
+            <ul class="sub-menu">
+                <li><a href="#">Platformer</a></li>
+                <li><a href="#">RPG</a></li>
+                <li><a href="#">Combat</a></li>
+                <li><a href="#">Sports</a></li>          
+            </ul>
+        </li>
+        <li><a routerLink="/streaming">Streaming</a>
+            <ul class="sub-menu">
+                <li><a href="#">What To Watch</a></li>
+                <li><a href="#">Playing Now</a></li>
+                <li><a href="#">Competitions</a></li>
+                <li><a href="#">Speed Running</a></li>          
+            </ul>
+        </li>
+        <li><a routerLink="/rate">Rate it!</a>
+            <ul class="sub-menu">
+                <li><a href="#">Submit a rating or review</a></li>
+                <li><a href="#">Search existing</a></li>          
+            </ul>
+        </li>
+    </ul>
+</nav>
+<!-- need to 
+    1)add routing to these links,
+    2) integrate search bar/ login panel-->
