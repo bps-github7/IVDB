@@ -26,10 +26,10 @@ export class PasswordValidators {
     }
 
     //probably could handle this w/ 1 function and default args, but couldnt figure this out
-    static account_passwordsShouldMatch(control: AbstractControl) {
-        let newPassword = control.get('password');
+    static accountPasswordsShouldMatch(control: AbstractControl) {
+        let password = control.get('password');
         let confirmPassword = control.get('confirmPassword');
-        if (newPassword.value !== confirmPassword.value)
+        if (password.value !== confirmPassword.value)
             return { passwordsShouldMatch: true };       
         return null;
     }

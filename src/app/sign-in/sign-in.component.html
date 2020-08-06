@@ -1,37 +1,41 @@
 <dropdown>skonedalone</dropdown>
 <br><br>
-<!-- <form >
-    <div id="form-group">
+<form [formGroup]="form">
 
-        
-        <div class="form-group">
-            <label for="">userName</label>
-            <input formControlName="userName" type="userName" class="form-control">
-            <div *ngIf="userName.touched && userName.invalid" class="alert alert-danger">
-                <div *ngIf="userName.errors.required">
-                    Username is required.
-                </div>
-                another one here for invalid
+    <!-- username formgroup -->
+    <div class="form-group">
+        <label for="username">Username: </label>
+        <input 
+            formControlName="username"
+            class="form-control"
+            id="username"
+            type="text">
+            <div *ngIf="username.touched && username.invalid" class="alert alert-danger">
+                Username is Required
             </div>
-        </div>
+    </div>
 
-        <div class="form-group">
-            <label for="">password</label>
-            <input formControlName="password" type="password" class="form-control">
+    <!-- password formgroup -->
+    <div class="form-group">
+        <label for="password">Password: </label>
+        <input 
+            formControlName="password"
+            class="form-control"
+            id="password"
+            type="password">
             <div *ngIf="password.touched && password.invalid" class="alert alert-danger">
-                <div *ngIf="password.errors.required">
-                    password is required.
-                </div>
-                anotherone here for invalid  
+                Password is required
             </div>
-        </div>
+    </div>
 
-
+    <!-- submit button... currently does nothing -->
+    <div class="form-extras">
+        <button class="btn btn-primary">Log-in</button>
         <hr>
         Don't have a Account? <a routerLink="/sign_in/createAccount">Sign up here</a><br>
         <a> 
             Forgot your password? 
         </a>
-    </div> 
-    
-</form> -->
+    </div>
+        
+</form>
