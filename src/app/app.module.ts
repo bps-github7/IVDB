@@ -3,6 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
 
 //declarations/ bootstraps
 import { AppComponent } from './app.component';
@@ -21,6 +22,7 @@ import { ReccomendationsComponent } from './reccomendations/reccomendations.comp
 import { WatchlistsComponent } from './watchlists/watchlists.component';
 import { RateComponent } from './rate/rate.component';
 import { SearchComponent } from './search/search.component';
+import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
 
 
 @NgModule({
@@ -40,17 +42,22 @@ import { SearchComponent } from './search/search.component';
     ReccomendationsComponent,
     WatchlistsComponent,
     RateComponent,
-    SearchComponent
+    SearchComponent,
+    ForgotPasswordComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
+    ReactiveFormsModule,
     RouterModule.forRoot([
         {
             path: '', component: HomeComponent
         },
         {
             path: 'sign_in/profile/:username', component: ProfileComponent
+        },
+        {
+            path: 'sign_in/createAccount/forgotPassword', component: ForgotPasswordComponent
         },
         {
             path: 'sign_in/createAccount', component: CreateAccountComponent

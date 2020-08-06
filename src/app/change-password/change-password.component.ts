@@ -1,29 +1,32 @@
-import { PasswordValidators } from './password.validators';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { Component, OnInit } from '@angular/core';
+import { PasswordValidators } from '../common/validators/password.validators';
+import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
+import { Component } from '@angular/core';
 
 @Component({
-  selector: 'change-password',
-  templateUrl: './change-password.component.html',
+  selector: 'forgotPassword',
+  template: `
+  name: <input type="text" [formControl]="name">
+  `,
   styleUrls: ['./change-password.component.css']
 })
 export class ChangePasswordComponent {
-  form: FormGroup;
+    name = new FormControl('');
 
-  constructor(fb: FormBuilder) {
-    this.form = fb.group({
-      oldPassword: ['', 
-        Validators.required, 
-        PasswordValidators.validOldPassword
-      ],
-      newPassword: ['', Validators.required],
-      confirmPassword: ['', Validators.required]
-    }, {
-      validator: PasswordValidators.passwordsShouldMatch
-    });
-  }
+    //   form: FormGroup;
+//   constructor(fb: FormBuilder) {
+//     this.form = fb.group({
+//       oldPassword: ['', 
+//         Validators.required, 
+//         PasswordValidators.validOldPasswordf
+//       ],
+//       newPassword: ['', Validators.required],
+//       confirmPassword: ['', Validators.required]
+//     }, {
+//       validator: PasswordValidators.passwordsShouldMatch
+//     });
+//   }
 
-  get oldPassword() { return this.form.get('oldPassword'); }
-  get newPassword() { return this.form.get('newPassword'); }
-  get confirmPassword() { return this.form.get('confirmPassword'); }
+//   get oldPassword() { return this.form.get('oldPassword'); }
+//   get newPassword() { return this.form.get('newPassword'); }
+//   get confirmPassword() { return this.form.get('confirmPassword'); }
 }
