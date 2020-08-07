@@ -4,6 +4,12 @@ import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule, HttpClient } from '@angular/common/http';
+
+
+//services AKA providers
+import { AuthService } from './common/services/auth.service';
+// import { fakeBackendProvider } from './mosh_common/helpers/fake-backend';
 
 //declarations/ bootstraps
 import { AppComponent } from './app.component';
@@ -23,6 +29,7 @@ import { WatchlistsComponent } from './watchlists/watchlists.component';
 import { RateComponent } from './rate/rate.component';
 import { SearchComponent } from './search/search.component';
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
+import { PostsComponent } from './posts/posts.component';
 
 
 @NgModule({
@@ -43,10 +50,12 @@ import { ForgotPasswordComponent } from './forgot-password/forgot-password.compo
     WatchlistsComponent,
     RateComponent,
     SearchComponent,
-    ForgotPasswordComponent
+    ForgotPasswordComponent,
+    PostsComponent
   ],
   imports: [
     BrowserModule,
+    HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
     RouterModule.forRoot([
@@ -93,12 +102,15 @@ import { ForgotPasswordComponent } from './forgot-password/forgot-password.compo
     ])
   ],
   providers: [
-      /*Some ideas:
-        ~watchlists.service
-        ~Reccomendations.service
-        ~sign-in.authenticator.service
-        ~forum.service
-      */
+      AuthService,
+
+      //for creating a mock backend
+
+    //none of these work. check docs
+    //   fakeBackendProvider
+    //   MockBackend,
+    //   BaseRequestOptions
+
   ],
   bootstrap: [AppComponent]
 })
