@@ -2,7 +2,7 @@
 <br><br>
 <form>
     <!-- full name formgroup -->
-    <div class="form-group">
+    <div class="form-group" [formGroup]="form">
         <label for="fullName">Full Name: </label>
         <input 
             formControlName="fullName"
@@ -15,7 +15,7 @@
     </div>
 
     <!-- email address formgroup -->
-    <div class="form-group">
+    <div class="form-group" [formGroup]="form">
         <label for="email">Email Address: </label>
         <input 
             formControlName="email"
@@ -28,7 +28,7 @@
     </div>
 
     <!-- username formgroup -->
-    <div class="form-group">
+    <div class="form-group" [formGroup]="form">
         <label for="username">Username: </label>
         <input 
             formControlName="username"
@@ -44,7 +44,7 @@
     <hr id="password section">
 
     <!-- password formgroup -->
-    <div class="form-group">
+    <div class="form-group" [formGroup]="form">
         <label for="password">Password: </label>
         <input 
             formControlName="password"
@@ -58,20 +58,23 @@
     </div>
 
     <!-- confirm password formgroup -->
-    <div class="form-group">
+    <div class="form-group" [formGroup]="form">
         <label for="confirmPassword">Confirm Password: </label>
         <input 
             formControlName="confirmPassword"
             class="form-control"
             id="confirmPassword"
-            type="text">
+            type="password">
             <div *ngIf="confirmPassword.touched && confirmPassword.invalid" class="alert alert-danger">
                 <div *ngIf="confirmPassword.errors.required">confirm Password is required.</div>
-                <div *ngIf="confirmPassword.errors.passwordsShouldMatch">Password and confirm password must match.</div>
             </div>
-    </div>
+            <div class="alert alert-danger" *ngIf="confirmPassword.valid && form.invalid && form.errors.passwordsShouldMatch">
+                Passwords do not match.
+            </div>
+        </div>
+        <button class="btn btn-primary">Submit</button>
 
-    <button class="btn btn-primary">Submit</button> 
+     
 </form> 
 
 <h1>Provided so far: </h1>

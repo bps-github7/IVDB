@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators, FormControl, ControlContainer } from '@angular/forms';
 import { PasswordValidators } from '../common/validators/password.validators';
 
 @Component({
@@ -8,36 +8,24 @@ import { PasswordValidators } from '../common/validators/password.validators';
   styleUrls: ['./create-account.component.css']
 })
 export class CreateAccountComponent {
+    form;
 
-    // fullName = new FormControl('');
-    // email = new FormControl('');
-    // username = new FormControl('');
-    // password = new FormControl('');
-    // confirmPassword = new FormControl('');
-
-    form = new FormGroup({
-
-        //gonna come back later to add specific validation errors.
-        //for now- everything is required
-
-        fullName : new FormControl('', Validators.required),
-        email : new FormControl('', Validators.required),
-        username : new FormControl('', Validators.required),
-        password : new FormControl('', [
-            Validators.required,
-            Validators.minLength(10),
-            Validators.maxLength(25)
-            //does passwordsShouldMatch validator go in this one too? probably not.
-        ]),
-        confirmPassword : new FormControl('', [
-            Validators.required]
-            )},
-    //mosh used FormBuilder in the excersise where this code is shown.
-    //the validation error this async validator should trigger is not working as of now.
-    {
-        validators: PasswordValidators.accountPasswordsShouldMatch
+    constructor(fb: FormBuilder) {
+        this.form = fb.group({
+            fullName: ['', Validators.required],
+            email: ['', Validators.required],
+            username: ['', Validators.required],
+            password: ['',
+                Validators.required,
+            ],
+            confirmPassword: ['',
+                Validators.required
+            ]
+        },
+        {
+            validators: PasswordValidators.accountPasswordsShouldMatch
+        })
     }
-    );
 
     get fullName() {
         return this.form.get('fullName');
@@ -51,15 +39,11 @@ export class CreateAccountComponent {
         return this.form.get('username');
     }
 
-    get password() {
+    get password()  {
         return this.form.get('password');
     }
 
     get confirmPassword() {
         return this.form.get('confirmPassword');
     }
-    
-    // constructor() {
-    // }
-
 }
