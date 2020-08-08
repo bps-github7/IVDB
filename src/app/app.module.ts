@@ -30,6 +30,7 @@ import { RateComponent } from './rate/rate.component';
 import { SearchComponent } from './search/search.component';
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
 import { PostsComponent } from './posts/posts.component';
+import { CreateThreadComponent } from './create-thread/create-thread.component';
 
 
 @NgModule({
@@ -51,7 +52,8 @@ import { PostsComponent } from './posts/posts.component';
     RateComponent,
     SearchComponent,
     ForgotPasswordComponent,
-    PostsComponent
+    PostsComponent,
+    CreateThreadComponent
   ],
   imports: [
     BrowserModule,
@@ -73,6 +75,10 @@ import { PostsComponent } from './posts/posts.component';
         },
         {
             path: 'sign_in', component: SignInComponent
+        },
+        //worried that your naming/case scheme is incosistent in these route paths.
+        {
+            path: 'forum/create-thread', component: CreateThreadComponent
         },
         {
             path: 'forum', component: ForumComponent
