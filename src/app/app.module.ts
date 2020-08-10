@@ -31,6 +31,7 @@ import { SearchComponent } from './search/search.component';
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
 import { PostsComponent } from './posts/posts.component';
 import { CreateThreadComponent } from './create-thread/create-thread.component';
+import { CommentComponent } from './comment/comment.component';
 
 
 @NgModule({
@@ -53,7 +54,8 @@ import { CreateThreadComponent } from './create-thread/create-thread.component';
     SearchComponent,
     ForgotPasswordComponent,
     PostsComponent,
-    CreateThreadComponent
+    CreateThreadComponent,
+    CommentComponent
   ],
   imports: [
     BrowserModule,

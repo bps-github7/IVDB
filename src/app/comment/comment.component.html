@@ -1,0 +1,17 @@
+<div>
+    <input
+    (keyup.enter)="createComment(title)" #title
+    type="text"
+    class="form-control">
+<textarea name="content" id="" cols="200" rows="10"></textarea>
+
+</div>
+
+
+<ul class="list-group">
+    <li 
+        *ngFor="let comment of comments"
+        class="list-group-item">
+        {{ comment.title }}
+    </li>
+</ul>

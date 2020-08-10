@@ -14,6 +14,7 @@ export class PostsComponent {
         http.get('http://jsonplaceholder.typicode.com/posts')
         .subscribe(response => {
             this.posts = response;
+            // console.log(response);
         });
    }
 
