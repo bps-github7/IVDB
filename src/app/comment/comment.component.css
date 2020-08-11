@@ -1,0 +1,23 @@
+#comment_area {
+    padding: 4em;
+    position: relative;
+}
+
+label {
+    position: absolute;
+    top: 15px;
+    font-size: larger;
+}
+
+button {
+    border: 1px solid springgreen;
+    position: absolute;
+    bottom: 20px;
+    left: 4em;
+}
+
+aside {
+    padding: 4em;
+    padding-right: 13em;
+    text-overflow: clip;
+}

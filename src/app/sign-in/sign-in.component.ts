@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
+import { AuthService } from '../common/services/auth.service';
 
 
 @Component({
@@ -13,13 +14,11 @@ export class SignInComponent {
     // username = new FormControl('');
     // password = new FormControl('');
     form = new FormGroup({
-        username : new FormControl('', [
-            Validators.required,
-            Validators.minLength(3)
+        username : new FormControl('guest', [
+            Validators.required
         ]),
-        password : new FormControl('', [
-            Validators.required,
-            Validators.minLength(10)
+        password : new FormControl('12345', [
+            Validators.required
         ])
     });
 
@@ -31,4 +30,18 @@ export class SignInComponent {
     get password() {
         return this.form.get('password');
     }
+
+    login() {
+        //note- not a legitimate/ secure login. needs backend to work correctly
+
+        //let isValid = AuthService.login(this.form.value);
+        //if (!isValid) this.form.setErrors({ invalidLogin : true });
+
+        //logging in should change views on the site- sign in -> signout, profile becomes available, comments are authored by
+        if (this.username.value === 'guest' && this.password.value === '12345') return { login : true }; 
+        this.form.setErrors({ invalidLogin : true });
+        
+    
+    }
+
 }

@@ -10,7 +10,7 @@ export class CommentComponent {
 
 
     comments: any;
-    private url = 'http://jsonplaceholder.typicode.com/posts';
+    private url = 'http://jsonplaceholder.typicode.com/comments';
 
     constructor(private http : HttpClient) {
         http.get(this.url)
@@ -19,18 +19,26 @@ export class CommentComponent {
         });
    }
 
-    createComment(comment_title: HTMLInputElement ) {
-        let comment = { title: comment_title.value };
-        comment_title.value = '';
+    createComment(input: HTMLInputElement ) {
+        // if comment is blank, dont do anything.
+        if (input.value === '') return false;
 
-        this.http.post(this.url, JSON.stringify(comment))
-            .subscribe(response => {
-                comment['id'] = response;
-                this.comments.splice(0,0,comment);
-                //why wouldnt we just do
-                // this.comments.splice(0,0,response)
+        // if user not signed in, tell user post will be from 'guest'
+        // then this should all be indented with that conditionals' codeblock
+        //if (!user.signed_in) alert('Posting as guest. ok?');
 
-            })
+        let comment_content = { body: input.value };
+        input.value = '';
+
+        //send new comment to server, 
+        // then post the response to comments array
+        this.http.post(this.url, comment_content)
+        .subscribe(response => {
+            comment_content['id'] = response;
+            this.comments.splice(0,0,comment_content);
+        })
+        
+        
     }
 
 }

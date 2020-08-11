@@ -32,6 +32,7 @@ import { ForgotPasswordComponent } from './forgot-password/forgot-password.compo
 import { PostsComponent } from './posts/posts.component';
 import { CreateThreadComponent } from './create-thread/create-thread.component';
 import { CommentComponent } from './comment/comment.component';
+import { NotFoundComponent } from './not-found/not-found.component';
 
 
 @NgModule({
@@ -55,7 +56,8 @@ import { CommentComponent } from './comment/comment.component';
     ForgotPasswordComponent,
     PostsComponent,
     CreateThreadComponent,
-    CommentComponent
+    CommentComponent,
+    NotFoundComponent
   ],
   imports: [
     BrowserModule,
@@ -104,9 +106,9 @@ import { CommentComponent } from './comment/comment.component';
             path: 'search', component: SearchComponent
         },
         //uncomment this aftr you create NotFoundComponent- PWM code is outdated, for older angular version, and does not work.
-        // {
-        //     path: '**', component: NotFoundComponent
-        // }
+        {
+            path: '**', component: NotFoundComponent
+        }
     ])
   ],
   providers: [

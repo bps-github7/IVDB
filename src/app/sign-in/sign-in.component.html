@@ -1,6 +1,11 @@
 <dropdown>skonedalone</dropdown>
 <br><br>
-<form [formGroup]="form">
+<form [formGroup]="form" (ngSubmit)="login()">
+
+    <!---Form validation errors--->
+    <div *ngIf="form.errors" class="alert alert-danger">
+        Username or Password is invalid.
+    </div>
 
     <!-- username formgroup -->
     <div class="form-group">

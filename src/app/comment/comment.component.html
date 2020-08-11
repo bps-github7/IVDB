@@ -1,17 +1,26 @@
-<div>
-    <input
-    (keyup.enter)="createComment(title)" #title
-    type="text"
-    class="form-control">
-<textarea name="content" id="" cols="200" rows="10"></textarea>
-
+<div id="comment_area">
+    <label for="comment">Comment:</label>
+    <textarea
+        #comment 
+        name="content" 
+        id="comment" 
+        cols="200" 
+        rows="5"></textarea>
+    <!-- should be disabled until comment content is provided -->
+    <button (click)="createComment(comment)" class="btn btn-primary">post</button>
 </div>
 
-
-<ul class="list-group">
-    <li 
-        *ngFor="let comment of comments"
-        class="list-group-item">
-        {{ comment.title }}
-    </li>
-</ul>
+<aside>
+    <p class="alert alert-danger">taken from ign*** : Comment Guidelines: <br>
+    Have fun. Don't be mean. Feel free to criticize ideas,<br>
+    not people. Report bad behavior. <a routerLink="/community-guidelines">Read our community Guidelines.</a>  <br>
+    </p>
+    <!-- guest should change to username if user is signed in -->
+    <ul class="list-group">
+        <li 
+            *ngFor="let comment of comments"
+            class="list-group-item">
+            <strong>Guest: </strong>{{ comment.body }}
+        </li>
+    </ul>
+</aside>
