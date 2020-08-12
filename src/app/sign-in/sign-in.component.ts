@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
 import { AuthService } from '../common/services/auth.service';
-
+import * as firebase from 'firebase';
+import { AngularFireAuth } from '@angular/fire/auth';
 
 @Component({
   selector: 'app-sign-in',
@@ -9,6 +10,10 @@ import { AuthService } from '../common/services/auth.service';
   styleUrls: ['./sign-in.component.css']
 })
 export class SignInComponent {
+
+    constructor(private afAuth: AngularFireAuth){
+    }
+
     // form : FormGroup;
 
     // username = new FormControl('');
@@ -29,6 +34,15 @@ export class SignInComponent {
 
     get password() {
         return this.form.get('password');
+    }
+
+    google_login() {
+        this.afAuth.signInWithRedirect(new firebase.auth.GoogleAuthProvider());
+    }
+
+    facebook_login() {
+        alert('facebook login not working at this time.');
+        //this.afAuth.signInWithRedirect(new firebase.auth.FacebookAuthProvider());
     }
 
     login() {

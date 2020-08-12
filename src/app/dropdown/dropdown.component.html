@@ -2,12 +2,21 @@
 <nav>
     <header>
         <a class="logo" alt="Internet Video-game Database" routerLink=''>IVDB</a>
-        <!----Incorrect method of using the label. should be one for each button------->
-        <label for="sign_in" class="search">
-            <input id="searchbar" type="text"><a routerLink="/search"><button>Search</button></a><a routerLink="/sign_in"><button>Sign in</button></a>
-        </label>
+        <input id="searchbar" type="text"><a routerLink="/search">
+        <button>Search</button></a>
+        <!-- would be cool if sign in button became profile drop down item -->
+        <a *ngIf="!user" routerLink="/sign_in"><button>Sign in</button></a>
     </header>
-    <ul class="dd-menu">
+        <ul class="dd-menu">
+            <li *ngIf="user" id="profile-nub">
+                <a routerLink="/profile">
+                    {{ user.displayName }}
+                </a>
+                <ul class="sub-menu">
+                    <li><a href="#">settings</a></li>
+                    <li><a href="#" (click)="logout()">logout</a></li>
+                </ul>
+            </li>
         <li><a routerLink="/watchlists">Watchlist</a>
             <ul class="sub-menu">
                 <li><a href="#">New Releases</a></li>

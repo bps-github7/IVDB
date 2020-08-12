@@ -33,9 +33,22 @@
             </div>
     </div>
 
+
     <!-- submit button... currently does nothing -->
     <div class="form-extras">
-        <button class="btn btn-primary">Log-in</button>
+        <button class="btn btn-primary">Log-in</button><br>
+            <br>
+        <button
+            (click)="google_login()" 
+            class="btn btn-primary">
+            Log in with Google
+        </button><br><br>
+
+        <button
+            (click)="facebook_login()"
+            class="btn btn-primary">
+            Log in with Facebook
+        </button><br>
         <hr>
         Don't have a Account? <a routerLink="/sign_in/createAccount">Sign up here</a><br>
         <a> 

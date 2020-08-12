@@ -11,6 +11,7 @@ body {
 nav {
     background: #1b1b1b;
     position: relative;
+    margin-bottom: 10em;
 }
 nav:after {
     content: '';
@@ -20,7 +21,7 @@ nav:after {
 nav ul {
     float: right;
     list-style: none;
-    margin-right: 320px;
+    margin-right: 200px;
     position: relative;
 }
 
@@ -33,7 +34,7 @@ nav ul li {
 nav ul li a {
     color: white;
     text-decoration: none;
-    line-height: 70px;
+    line-height: 50px;
     font-size: 20px;
     padding: 8px 15px;
 }
@@ -42,6 +43,7 @@ nav ul li a:hover {
     box-shadow: 0 0 5px #33ffff,
                 0 0 5ox #66ffff;
     color: cyan;
+
 }
 
 /* trying to make the drop down menu text fit within the box they appear in */
@@ -49,14 +51,15 @@ nav ul li a:hover > ul {
     width: 400px;
 }
 
-
+/*would be cool to have the animation/transition, ul li ul scrolls up from where its bottom ends, to where its top ends*/
 nav ul ul {
+    z-index: 3;
     position: absolute;
-    top: 70px;
+    top: -50px;
     border-top: 3px solid cyan;
     opacity: 0;
     visibility: hidden;
-    transition: top 0.3s;
+    transition: top .5s;
 }
 
 nav ul ul ul {
@@ -64,20 +67,26 @@ nav ul ul ul {
 }
 
 nav ul li:hover > ul {
-    top: 70px;
+    z-index: -1;
+    top: 50px;
     opacity: 1;
     visibility: visible;
 }
 
+
 nav ul ul li {
     position: relative;
     text-overflow: ellipsis;
-
     margin: 0px;
     width: 350px;
     float: none;
     display: list-item;
     border-bottom: 1px solid rgba(0,0,0,0,0.3);
+}
+
+.sub-menu:hover {
+    visibility: visible;
+    z-index: 1;
 }
 
 nav ul ul li a {
@@ -100,30 +109,22 @@ nav ul ul ul li {
     font-size: 15px;
 }
 
-nav .logo {
+nav header {
+    position: absolute;
+    bottom: 6px;
+    left: 10px;
+}
+
+nav header button {
+    background-color: #1b1b1b;
+    border: 1px solid blanchedalmond;
+    padding-left: 1em;
+    padding-right: 1em;
+    margin: 0px .5em;
+}
+
+nav header .logo {
     text-decoration: none;
-    position: absolute;
-    top: 12px;
-    left: 12px;
     float: left;
-    /* color: white;
-    font-size: 12px;
-    font-weight: 600;
-    line-height: 70px;
-    
-    margin-left: 6em;
-     */
-
-
-}
-
-nav .search {
-    position: absolute;
-    bottom: 5px;
-    left: 12px;
-}
-
-nav .search button {
-    margin-left: 4px;
-    background-color: rgb(42, 52, 53);
+    padding-right: 10px;
 }
