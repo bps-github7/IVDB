@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormControl, ControlContainer } from '@angular/forms';
 import { PasswordValidators } from '../common/validators/password.validators';
+import { AngularFireAuth } from '@angular/fire/auth';
+import * as firebase from 'firebase';
+
 
 @Component({
   selector: 'app-create-account',
@@ -25,6 +28,9 @@ export class CreateAccountComponent {
         {
             validators: PasswordValidators.accountPasswordsShouldMatch
         })
+    }
+
+    createAccount() {
     }
 
     get fullName() {
