@@ -122,14 +122,6 @@ import { environment } from 'src/environments/environment';
   ],
   providers: [
       AuthService,
-
-      //for creating a mock backend
-
-    //none of these work. check docs
-    //   fakeBackendProvider
-    //   MockBackend,
-    //   BaseRequestOptions
-
   ],
   bootstrap: [AppComponent]
 })

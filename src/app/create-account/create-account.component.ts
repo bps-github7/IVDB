@@ -16,13 +16,17 @@ export class CreateAccountComponent {
     constructor(fb: FormBuilder) {
         this.form = fb.group({
             fullName: ['', Validators.required],
+            //need to validate email- does it have @, domain & tld? are characters used in body valid?
             email: ['', Validators.required],
+            //need to produce warning if this username already exists
             username: ['', Validators.required],
             password: ['',
                 Validators.required,
+                Validators.minLength(12)
             ],
             confirmPassword: ['',
-                Validators.required
+                Validators.required,
+                Validators.minLength(12)
             ]
         },
         {
@@ -53,9 +57,13 @@ export class CreateAccountComponent {
 
     createAccount() {
         firebase.auth().createUserWithEmailAndPassword(this.email.value, this.password.value)
-        .catch((error) => {
+        .then((result) => {
+            return firebase.auth().currentUser.updateProfile({
+            displayName: this.username.value
+            })
+        }).catch(function(error) {
             return {"error code" : error.code,
-            "error message" : error.message};
-        });
+                "error message" : error.message};
+            })
     }
 }

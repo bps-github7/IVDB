@@ -117,6 +117,10 @@ nav header {
     left: 10px;
 }
 
+nav ul #profile-nub a {
+    color: white;
+}
+
 nav header button {
     background-color: #1b1b1b;
     border: 1px solid blanchedalmond;
@@ -129,4 +133,22 @@ nav header .logo {
     text-decoration: none;
     float: left;
     padding-right: 10px;
+}
+
+nav header ul li button a {
+    line-height: 0px;
+    font-size: 0.75;
+    padding: 0 0;
+}
+
+nav header ul li:hover > ul {
+    z-index: 0;
+    top: 28px;
+    opacity: 1;
+    visibility: visible;
+}
+
+nav header ul ul:hover {
+    z-index: 1;
+    visibility: visible;
 }
