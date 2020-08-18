@@ -11,10 +11,10 @@ import { Observable } from 'rxjs';
 })
 export class DropdownComponent {
 
-    user: Observable<firebase.User>;
+    user$: Observable<firebase.User>;
 
     constructor(private afAuth : AngularFireAuth) { 
-        this.user = afAuth.authState
+        this.user$ = afAuth.authState
     }
 
 

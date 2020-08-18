@@ -13,13 +13,8 @@ export class SignInComponent {
 
     constructor(private afAuth: AngularFireAuth){
     }
-
-    // form : FormGroup;
-
-    // username = new FormControl('');
-    // password = new FormControl('');
     form = new FormGroup({
-        username : new FormControl('guest', [
+        email : new FormControl('', [
             Validators.required
         ]),
         password : new FormControl('12345', [
@@ -28,8 +23,8 @@ export class SignInComponent {
     });
 
 
-    get username() {
-        return this.form.get('username');
+    get email() {
+        return this.form.get('email');
     }
 
     get password() {
@@ -46,15 +41,20 @@ export class SignInComponent {
     }
 
     login() {
-        //note- not a legitimate/ secure login. needs backend to work correctly
+        // //note- not a legitimate/ secure login. needs backend to work correctly
 
-        //let isValid = AuthService.login(this.form.value);
-        //if (!isValid) this.form.setErrors({ invalidLogin : true });
+        // //let isValid = AuthService.login(this.form.value);
+        // //if (!isValid) this.form.setErrors({ invalidLogin : true });
 
-        //logging in should change views on the site- sign in -> signout, profile becomes available, comments are authored by
-        if (this.username.value === 'guest' && this.password.value === '12345') return { login : true }; 
-        this.form.setErrors({ invalidLogin : true });
+        // //logging in should change views on the site- sign in -> signout, profile becomes available, comments are authored by
+        // if (this.username.value === 'guest' && this.password.value === '12345') return { login : true }; 
+        // this.form.setErrors({ invalidLogin : true });
         
+        firebase.auth().signInWithEmailAndPassword(this.email.value, this.password.value)
+        .catch((error) => {
+            return {"error code" : error.code,
+            "error message" : error.message};
+        });
     
     }
 

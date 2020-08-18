@@ -30,8 +30,6 @@ export class CreateAccountComponent {
         })
     }
 
-    createAccount() {
-    }
 
     get fullName() {
         return this.form.get('fullName');
@@ -51,5 +49,13 @@ export class CreateAccountComponent {
 
     get confirmPassword() {
         return this.form.get('confirmPassword');
+    }
+
+    createAccount() {
+        firebase.auth().createUserWithEmailAndPassword(this.email.value, this.password.value)
+        .catch((error) => {
+            return {"error code" : error.code,
+            "error message" : error.message};
+        });
     }
 }

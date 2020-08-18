@@ -4,19 +4,19 @@
 
     <!---Form validation errors--->
     <div *ngIf="form.errors" class="alert alert-danger">
-        Username or Password is invalid.
+        Email or Password is invalid.
     </div>
 
-    <!-- username formgroup -->
+    <!-- email formgroup -->
     <div class="form-group">
-        <label for="username">Username: </label>
+        <label for="email">Email: </label>
         <input 
-            formControlName="username"
+            formControlName="email"
             class="form-control"
-            id="username"
+            id="email"
             type="text">
-            <div *ngIf="username.touched && username.invalid" class="alert alert-danger">
-                Username is Required
+            <div *ngIf="email.touched && email.invalid" class="alert alert-danger">
+                Email is Required
             </div>
     </div>
 
@@ -36,7 +36,7 @@
 
     <!-- submit button... currently does nothing -->
     <div class="form-extras">
-        <button class="btn btn-primary">Log-in</button><br>
+        <button class="btn btn-primary" (click)="login()">Log-in</button><br>
             <br>
         <button
             (click)="google_login()" 
@@ -51,9 +51,7 @@
         </button><br>
         <hr>
         Don't have a Account? <a routerLink="/sign_in/createAccount">Sign up here</a><br>
-        <a> 
-            Forgot your password? 
-        </a>
+        <a>Forgot your password?</a>
     </div>
         
 </form>

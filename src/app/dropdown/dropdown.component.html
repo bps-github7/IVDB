@@ -5,10 +5,12 @@
         <input id="searchbar" type="text"><a routerLink="/search">
         <button>Search</button></a>
         <!-- would be cool if sign in button became profile drop down item -->
-        <a *ngIf="!user" routerLink="/sign_in"><button>Sign in</button></a>
+        <ng-template #anonymousUser>
+            <a routerLink="/sign_in"><button>Sign in</button></a>
+        </ng-template>
     </header>
         <ul class="dd-menu">
-            <li *ngIf="user" id="profile-nub">
+            <li *ngIf="user$ | async as user; else anonymousUser" id="profile-nub">
                 <a routerLink="/profile">
                     {{ user.displayName }}
                 </a>
