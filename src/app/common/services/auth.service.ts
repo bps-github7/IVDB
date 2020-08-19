@@ -53,4 +53,16 @@ export class AuthService {
         this.afAuth.signOut()
     }
 
+    createAccount(email : string, password : string, username : string) {
+        firebase.auth().createUserWithEmailAndPassword(email, password)
+        .then((result) => {
+            return firebase.auth().currentUser.updateProfile({
+            displayName: username
+            })
+        }).catch(function(error) {
+            return {"error code" : error.code,
+                "error message" : error.message};
+            })
+    }
+
 }

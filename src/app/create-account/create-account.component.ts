@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormControl, ControlContainer } from '@angular/forms';
 import { PasswordValidators } from '../common/validators/password.validators';
-import { AngularFireAuth } from '@angular/fire/auth';
-import * as firebase from 'firebase';
+import { AuthService } from '../common/services/auth.service';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -13,7 +13,7 @@ import * as firebase from 'firebase';
 export class CreateAccountComponent {
     form;
 
-    constructor(fb: FormBuilder) {
+    constructor(fb: FormBuilder, private auth : AuthService, private router : Router) {
         this.form = fb.group({
             fullName: ['', Validators.required],
             //need to validate email- does it have @, domain & tld? are characters used in body valid?
@@ -56,14 +56,8 @@ export class CreateAccountComponent {
     }
 
     createAccount() {
-        firebase.auth().createUserWithEmailAndPassword(this.email.value, this.password.value)
-        .then((result) => {
-            return firebase.auth().currentUser.updateProfile({
-            displayName: this.username.value
-            })
-        }).catch(function(error) {
-            return {"error code" : error.code,
-                "error message" : error.message};
-            })
+        this.auth.createAccount(this.email.value, this.password.value, this.username.value);
+        //takes user to home after creating account- or shoul this be profile- to build profile?
+        this.router.navigate(['/']);
     }
 }
