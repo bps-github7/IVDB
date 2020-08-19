@@ -13,7 +13,7 @@ import { AngularFireAuthModule } from '@angular/fire/auth';
 
 //services AKA providers
 import { AuthService } from './common/services/auth.service';
-// import { fakeBackendProvider } from './mosh_common/helpers/fake-backend';
+import { AuthGuardService } from './common/services/auth-guard.service';
 
 //declarations/ bootstraps
 import { AppComponent } from './app.component';
@@ -74,54 +74,34 @@ import { environment } from 'src/environments/environment';
     FormsModule,
     ReactiveFormsModule,
     RouterModule.forRoot([
-        {
-            path: '', component: HomeComponent
-        },
-        {
-            path: 'sign_in/profile/:username', component: ProfileComponent
-        },
-        {
-            path: 'sign_in/createAccount/forgotPassword', component: ForgotPasswordComponent
-        },
-        {
-            path: 'sign_in/createAccount', component: CreateAccountComponent
-        },
-        {
-            path: 'sign_in', component: SignInComponent
-        },
-        //worried that your naming/case scheme is incosistent in these route paths.
-        {
-            path: 'forum/create-thread', component: CreateThreadComponent
-        },
-        {
-            path: 'forum', component: ForumComponent
-        },
-        {
-            path: 'games', component: GamesComponent
-        },
-        {
-            path: 'streaming', component: StreamingComponent
-        },
-        {
-            path: 'reccomendations', component: ReccomendationsComponent
-        },
-        {
-            path: 'watchlists', component: WatchlistsComponent
-        },
-        {
-            path: 'rate', component: RateComponent
-        },
-        {
-            path: 'search', component: SearchComponent
-        },
-        //uncomment this aftr you create NotFoundComponent- PWM code is outdated, for older angular version, and does not work.
-        {
-            path: '**', component: NotFoundComponent
-        }
+        //routes asscesible to annoymous users
+        { path: '', component: HomeComponent },
+        
+        { path: 'sign_in/createAccount/forgotPassword', component: ForgotPasswordComponent },
+        { path: 'sign_in/createAccount', component: CreateAccountComponent},
+        { path: 'sign_in', component: SignInComponent },
+        { path: 'search', component: SearchComponent },
+
+        //you'll see more on these pages if youre signed in, but can view as anonymous user.
+        { path: 'forum', component: ForumComponent },
+        { path: 'games', component: GamesComponent },
+        { path: 'streaming', component: StreamingComponent },
+        { path: 'reccomendations', component: ReccomendationsComponent },
+        { path: 'watchlists', component: WatchlistsComponent },
+
+        //routes for logged in users
+        { path: 'profile', component: ProfileComponent, canActivate: [AuthGuardService] },
+        // { path: 'sign_in/profile/:username', component: ProfileComponent, canActivate: [AuthGuardService] },
+        { path: 'forum/create-thread', component: CreateThreadComponent, canActivate: [AuthGuardService] },
+        { path: 'rate', component: RateComponent,  canActivate: [AuthGuardService]  },
+    
+        //wildcard for fallthrough cases.
+        { path: '**', component: NotFoundComponent }
     ])
   ],
   providers: [
       AuthService,
+      AuthGuardService
   ],
   bootstrap: [AppComponent]
 })

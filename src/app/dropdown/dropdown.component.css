@@ -126,10 +126,12 @@ nav header button {
     border: 1px solid blanchedalmond;
     padding-left: 1em;
     padding-right: 1em;
-    margin: 0px .5em;
+    margin: 0px .10em;
 }
 
 nav header .logo {
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    font-size: large;
     text-decoration: none;
     float: left;
     padding-right: 10px;
@@ -137,18 +139,31 @@ nav header .logo {
 
 nav header ul li button a {
     line-height: 0px;
-    font-size: 0.75;
+    font-size: 12px;
     padding: 0 0;
 }
 
 nav header ul li:hover > ul {
-    z-index: 0;
-    top: 28px;
+    z-index: 1;
+    top: 21px;
     opacity: 1;
     visibility: visible;
+    padding-bottom: 2px;
 }
 
 nav header ul ul:hover {
     z-index: 1;
     visibility: visible;
+}
+
+/*Gets rid of light blue bar since that collides with header/navbar in this element*/
+nav header ul ul {
+    border-top: none;
+
+}
+
+nav header ul li {
+    display: inline-block;
+    background: #1b1b1b;
+    margin: 0 1px;
 }
