@@ -1,27 +1,26 @@
 import { Injectable } from '@angular/core';
 import { AngularFireStorage } from '@angular/fire/storage';
+import { AngularFireDatabase, AngularFireObject } from '@angular/fire/database';
+import * as firebase from 'firebase';
+import { AppUser } from '../../models/app.user';
+import { Observable } from 'rxjs';
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
 
-    constructor(private db: AngularFireStorage) { }
+    constructor(private db: AngularFireDatabase) { }
 
     save(user: firebase.User) {
-        //... do i need to use a promise to do this?
-        // return new Promise<any> ((resolve, reject) => {
-        //     this.db.upload('/users', user);
-        // })
-        this.db.upload('/users/', {
-            name: user.displayName,
-            email: user.email,
-            //username: user.username
-            //password: user.password
-        })
+        this.db.object('/Users/' + user.uid).update({
+            name : user.displayName,
+            email : user.email
+        });
+    }
 
-        // // Mosh code
-        // this.db.a  
-        //   object(/users/ + user.uid).update();
-  }
+    get(uid : string): Observable<AppUser> {
+        return this.db.object<AppUser>('/Users/' + uid).valueChanges();
+    }
 }

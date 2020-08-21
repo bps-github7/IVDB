@@ -14,9 +14,8 @@ export class AppComponent {
     constructor(private auth : AuthService, router : Router, private userService : UserService) {
         auth.user$.subscribe(user => {
             if (user) {
-                //this should be in create_account and other components where user updates profile (maybe | prob not).
+                //this line below should be in create_account and other components where user updates profile (maybe | prob not).
                 userService.save(user);
-                // NOTE: ! importante ! ^^^
                 let returnUrl = localStorage.getItem('returnUrl');
                 router.navigateByUrl(returnUrl);
             }

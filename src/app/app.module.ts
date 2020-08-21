@@ -14,6 +14,8 @@ import { AngularFireAuthModule } from '@angular/fire/auth';
 //services AKA providers
 import { AuthService } from './common/services/auth.service';
 import { AuthGuardService } from './common/services/auth-guard.service';
+import { AdminAuthGuardService } from './common/services/admin-auth-guard.service';
+
 
 //declarations/ bootstraps
 import { AppComponent } from './app.component';
@@ -38,6 +40,8 @@ import { CreateThreadComponent } from './create-thread/create-thread.component';
 import { CommentComponent } from './comment/comment.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { UserService } from './common/services/user.service';
+import { AdminHomeComponent } from './admin-home/admin-home.component';
+
 //environment
 import { environment } from 'src/environments/environment';
 
@@ -65,7 +69,8 @@ import { environment } from 'src/environments/environment';
     PostsComponent,
     CreateThreadComponent,
     CommentComponent,
-    NotFoundComponent
+    NotFoundComponent,
+    AdminHomeComponent
   ],
   imports: [
     AngularFireModule.initializeApp(environment.firebase),
@@ -97,7 +102,11 @@ import { environment } from 'src/environments/environment';
         // { path: 'sign_in/profile/:username', component: ProfileComponent, canActivate: [AuthGuardService] },
         { path: 'forum/create-thread', component: CreateThreadComponent, canActivate: [AuthGuardService] },
         { path: 'rate', component: RateComponent,  canActivate: [AuthGuardService]  },
-    
+
+        // admin-only routes:
+        { path: 'admin-home', component: AdminHomeComponent, canActivate: [AuthGuardService, AdminAuthGuardService]},
+
+
         //wildcard for fallthrough cases.
         { path: '**', component: NotFoundComponent }
     ])
@@ -105,7 +114,8 @@ import { environment } from 'src/environments/environment';
   providers: [
       AuthService,
       AuthGuardService,
-      UserService
+      UserService,
+      AdminAuthGuardService
   ],
   bootstrap: [AppComponent]
 })

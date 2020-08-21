@@ -1,8 +1,11 @@
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
 import * as firebase from 'firebase';
-import { Observable } from 'rxjs';
-import { ActivatedRoute } from '@angular/router';
+import { Observable, of } from 'rxjs';
+import { ActivatedRoute, Router } from '@angular/router';
+import { UserService } from './user.service';
+import { AppUser } from 'src/app/models/app.user';
+import { switchMap } from 'rxjs/operators';
 
 
 @Injectable({
@@ -15,7 +18,7 @@ export class AuthService {
 
 
 
-    constructor(private afAuth : AngularFireAuth, private route: ActivatedRoute) {
+    constructor(private afAuth : AngularFireAuth, private route: ActivatedRoute, private router: Router, private userService : UserService) {
         this.user$ = afAuth.authState
     }
 
@@ -49,9 +52,7 @@ export class AuthService {
 
     }
 
-    logout() {
-        this.afAuth.signOut()
-    }
+    logout() { this.afAuth.signOut(); }
 
     createAccount(email : string, password : string, username : string) {
         firebase.auth().createUserWithEmailAndPassword(email, password)
@@ -64,5 +65,16 @@ export class AuthService {
                 "error message" : error.message};
             })
     }
+
+    get appUser$(): Observable<AppUser> {
+        // uid is the property of the 'user' object is the user represented by firebase as part of authentication and not the user object stored in the database
+        // We need to get the firebase 'user' object to read and read the actual application 'user' object from the database
+        return this.user$.pipe(
+            switchMap(user => {
+                if (user) { return this.userService.get(user.uid); }
+                else { return of(null); }
+            })
+        );
+      }
 
 }
