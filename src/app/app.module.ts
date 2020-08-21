@@ -37,7 +37,10 @@ import { PostsComponent } from './posts/posts.component';
 import { CreateThreadComponent } from './create-thread/create-thread.component';
 import { CommentComponent } from './comment/comment.component';
 import { NotFoundComponent } from './not-found/not-found.component';
+import { UserService } from './common/services/user.service';
+//environment
 import { environment } from 'src/environments/environment';
+
 
 
 @NgModule({
@@ -101,7 +104,8 @@ import { environment } from 'src/environments/environment';
   ],
   providers: [
       AuthService,
-      AuthGuardService
+      AuthGuardService,
+      UserService
   ],
   bootstrap: [AppComponent]
 })
