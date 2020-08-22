@@ -1,5 +1,3 @@
-<dropdown></dropdown>
-<br><br>
 <form>
     <!-- full name formgroup -->
     <div class="form-group" [formGroup]="form">
@@ -9,9 +7,9 @@
             class="form-control"
             id="fullName"
             type="text">
-            <div *ngIf="fullName.touched && fullName.invalid" class="alert alert-danger">
-                Full Name is required
-            </div>
+        <div *ngIf="fullName.touched && fullName.invalid" class="alert alert-danger">
+            Full Name is required
+        </div>
     </div>
 
     <!-- email address formgroup -->
@@ -22,9 +20,9 @@
             class="form-control"
             id="email"
             type="text">
-            <div *ngIf="email.touched && email.invalid" class="alert alert-danger">
-                Email address is required.
-            </div>
+        <div *ngIf="email.touched && email.invalid" class="alert alert-danger">
+            Email address is required.
+        </div>
     </div>
 
     <!-- username formgroup -->
@@ -35,10 +33,10 @@
             class="form-control"
             id="username"
             type="text">
-            <div *ngIf="username.touched && username.invalid" class="alert alert-danger">
-                <div *ngIf="username.errors.required ">Username is required</div>
-                <div *ngIf="username.errors.minlength">Username should be a minimum of {{ username.errors.minlength.requiredLength }} characters long.</div>
-            </div>
+        <div *ngIf="username.touched && username.invalid" class="alert alert-danger">
+            <div *ngIf="username.errors.required ">Username is required</div>
+            <div *ngIf="username.errors.minlength">Username should be a minimum of {{ username.errors.minlength.requiredLength }} characters long.</div>
+        </div>
     </div>
 
     <hr id="password section">
@@ -51,10 +49,10 @@
             class="form-control"
             id="password"
             type="text">
-            <div *ngIf="password.touched && password.invalid" class="alert alert-danger">
-                <div *ngIf="password.errors.required">Password is required.</div>
-                <div *ngIf="password.errors.minlength">Password should be a minimum of {{ password.errors.minlength.requiredLength }} characters long.</div>
-            </div>
+        <div *ngIf="password.touched && password.invalid" class="alert alert-danger">
+            <div *ngIf="password.errors.required">Password is required.</div>
+            <div *ngIf="password.errors.minlength">Password should be a minimum of {{ password.errors.minlength.requiredLength }} characters long.</div>
+        </div>
     </div>
 
     <!-- confirm password formgroup -->
@@ -65,23 +63,12 @@
             class="form-control"
             id="confirmPassword"
             type="password">
-            <div *ngIf="confirmPassword.touched && confirmPassword.invalid" class="alert alert-danger">
-                <div *ngIf="confirmPassword.errors.required">confirm Password is required.</div>
-            </div>
-            <div class="alert alert-danger" *ngIf="confirmPassword.valid && form.invalid && form.errors.passwordsShouldMatch">
-                Passwords do not match.
-            </div>
+        <div *ngIf="confirmPassword.touched && confirmPassword.invalid" class="alert alert-danger">
+            <div *ngIf="confirmPassword.errors.required">confirm Password is required.</div>
         </div>
-        <button class="btn btn-primary" (click)="createAccount()">Submit</button>
-
-     
+        <div class="alert alert-danger" *ngIf="confirmPassword.valid && form.invalid && form.errors.passwordsShouldMatch">
+            Passwords do not match.
+        </div>
+        </div>
+    <button class="btn btn-primary" (click)="createAccount()">Submit</button>     
 </form> 
-
-<h1>Provided so far: </h1>
-<p>
-    Full name: {{ fullName.value }} <br>
-    Email Address: {{ email.value }} <br>
-    username : {{ username.value }} <br>
-    password : {{ password.value }} <br>
-    confirm password : {{ confirmPassword.value }} <br>
-</p>

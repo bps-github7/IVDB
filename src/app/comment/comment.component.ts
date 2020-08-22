@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { AuthService } from '../common/services/auth.service';
+import { AppUser } from '../models/app.user';
 
 @Component({
   selector: 'comment',
@@ -8,11 +10,12 @@ import { HttpClient } from '@angular/common/http';
 })
 export class CommentComponent {
 
-
+    appUser : AppUser;
     comments: any;
     private url = 'http://jsonplaceholder.typicode.com/comments';
 
-    constructor(private http : HttpClient) {
+    constructor(private http : HttpClient, private auth : AuthService) {
+        auth.appUser$.subscribe(appUser => this.appUser = appUser);
         http.get(this.url)
         .subscribe(response => {
             this.comments = response;

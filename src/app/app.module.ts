@@ -15,6 +15,7 @@ import { AngularFireAuthModule } from '@angular/fire/auth';
 import { AuthService } from './common/services/auth.service';
 import { AuthGuardService } from './common/services/auth-guard.service';
 import { AdminAuthGuardService } from './common/services/admin-auth-guard.service';
+import { CategoryService } from './common/services/category.service';
 
 
 //declarations/ bootstraps
@@ -40,10 +41,13 @@ import { CreateThreadComponent } from './create-thread/create-thread.component';
 import { CommentComponent } from './comment/comment.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { UserService } from './common/services/user.service';
-import { AdminHomeComponent } from './admin-home/admin-home.component';
+import { AdminHomeComponent } from './admin/admin-home/home.component';
+import { AdminGamesComponent } from './admin/admin-games/games.component';
+import { AdminGamesFormComponent } from './admin/admin-games-form/games-form.component';
 
 //environment
 import { environment } from 'src/environments/environment';
+import { AngularFireDatabase } from '@angular/fire/database';
 
 
 
@@ -70,8 +74,10 @@ import { environment } from 'src/environments/environment';
     CreateThreadComponent,
     CommentComponent,
     NotFoundComponent,
-    AdminHomeComponent
-  ],
+    AdminHomeComponent,
+    AdminGamesFormComponent,
+    AdminGamesComponent,
+    ],
   imports: [
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule,
@@ -104,8 +110,9 @@ import { environment } from 'src/environments/environment';
         { path: 'rate', component: RateComponent,  canActivate: [AuthGuardService]  },
 
         // admin-only routes:
-        { path: 'admin-home', component: AdminHomeComponent, canActivate: [AuthGuardService, AdminAuthGuardService]},
-
+        { path: 'admin/home', component: AdminHomeComponent, canActivate: [AuthGuardService, AdminAuthGuardService]},
+        { path:  'admin/games', component: AdminGamesComponent, canActivate: [AuthGuardService, AdminAuthGuardService]},
+        { path: 'admin/games/new', component: AdminGamesFormComponent, canActivate: [AuthGuardService, AdminAuthGuardService]},
 
         //wildcard for fallthrough cases.
         { path: '**', component: NotFoundComponent }
@@ -115,7 +122,8 @@ import { environment } from 'src/environments/environment';
       AuthService,
       AuthGuardService,
       UserService,
-      AdminAuthGuardService
+      AdminAuthGuardService,
+      CategoryService
   ],
   bootstrap: [AppComponent]
 })

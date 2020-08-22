@@ -13,6 +13,13 @@ import { Router } from '@angular/router';
 export class CreateAccountComponent {
     form;
 
+    /*
+
+    Regex for email validation: \b[\w.!#$%&’*+\/=?^`{|}~-]+@[\w-]+(?:\.[\w-]+)*\b
+    
+    Maybe there already is a Validator which does this. shoudl be at least
+    */
+
     constructor(fb: FormBuilder, private auth : AuthService, private router : Router) {
         this.form = fb.group({
             fullName: ['', Validators.required],

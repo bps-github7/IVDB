@@ -4,7 +4,6 @@
         <a class="logo" alt="Internet Video-game Database" routerLink=''>IVDB</a>
         <input id="searchbar" type="text">
         <a routerLink="/search"><button>Search</button></a>
-        <!-- would be cool if sign in button became profile drop down item -->
         <ul class="dd-menu">
             <li *ngIf="appUser; else anonymousUser" id="profile-nub">
                 <button id="dd-btn">
@@ -13,7 +12,7 @@
                     </a>
                 </button>
                 <ul class="sub-menu">
-                    <li *ngIf="appUser.isAdmin"><a routerLink="/admin-home">Administration page</a></li>
+                    <li *ngIf="appUser.isAdmin"><a routerLink="/admin/home">Administration page</a></li>
                     <li><a href="#">settings</a></li>
                     <li><a href="#" (click)="logout()">logout</a></li>
                 </ul>
