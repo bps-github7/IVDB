@@ -24,4 +24,8 @@ export class GenerateGameService {
     create(game) {
         return this.db.list('/Games').push(game);
     }
+
+    getAll() {
+        return this.db.list('/Games').snapshotChanges();
+    }
 }

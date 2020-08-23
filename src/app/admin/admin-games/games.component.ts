@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { GenerateGameService } from 'src/app/common/services/generate-game.service';
 
 @Component({
   selector: 'app-games',
@@ -6,10 +7,13 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./games.component.css']
 })
 export class AdminGamesComponent implements OnInit {
+    games$;
 
-  constructor() { }
+  constructor(private ggService : GenerateGameService) {
+      this.games$ = this.ggService.getAll();
+   }
 
   ngOnInit(): void {
   }
 
-}
+} 
