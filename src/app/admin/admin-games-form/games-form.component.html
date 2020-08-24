@@ -1,38 +1,56 @@
 <form #f="ngForm" (ngSubmit)="save(f.value)">
     <div class="form-group">
         <label for="title">Title</label>
-        <input 
+        <input
+            required
+            #title="ngModel"
             ngModel
             name="title"
             id="title"
             type="text"
             class="form-control">
+        <div class="alert alert-danger" *ngIf="title.touched && title.invalid">
+            Title is required
+        </div>
     </div>
     <div class="form-group">
         <label for="price">Price</label>
         <div class="input-group">
             <span class="input-group-addon">$</span>
             <input 
+                required
+                #price="ngModel"
                 ngModel
                 name="price"
                 id="price"
                 type="number"
                 class="form-control">
         </div>
+        <div class="alert alert-danger" *ngIf="price.touched && price.invalid">
+            Price is required
+        </div>
     </div>
     <div class="form-group">
         <label for="description">Description <br></label>
-        <textarea 
+        <textarea
+            required
+            #description="ngModel"
             ngModel
             name="description" 
             id="description" 
             cols="200" 
             rows="10">
         </textarea>
+        <!-- maybe this does not need to be required? -->
+        <div class="alert alert-danger" *ngIf="description.touched && description.invalid">
+            Description is required
+        </div>
     </div>
     <div class="form-group">
         <label for="category">Category (note: press ctrl + click to select multiple items)</label>
-        <select 
+        <select
+            required
+            #category="ngModel"
             ngModel
             name="category" 
             id="category" 
@@ -41,10 +59,15 @@
             <option value=""></option>
             <option *ngFor="let c of categories$ | async" [value]="c.key">{{ c.key }}</option>
         </select>
+        <div class="alert alert-danger" *ngIf="category.touched && category.invalid">
+            Category is required
+        </div>
     </div>
     <div class="form-group">
-        <label for="creators">Creators: (note: press ctrl + click to select multiple items)</label>
-        <select 
+        <label for="creators">Creator(s): (note: press ctrl + click to select multiple items)</label>
+        <select
+            required
+            #creators="ngModel"
             ngModel
             name="creators"
             id="creators"
@@ -54,28 +77,40 @@
             <option *ngFor="let c of creators$ | async" [value]="c.key">{{ c.key }}</option>
             <option value="misc">Misc.</option>
         </select>
+        <div class="alert alert-danger" *ngIf="creators.touched && creators.invalid">
+            Creator(s) is required
+        </div>
     </div>
     <!-- odd title/question, suites our purpose; could use rephrasing.. -->
     <div class="form-group">
-        <label for="console-makers">Console Makers: (note: press ctrl + click to select multiple items)
+        <label for="console-makers">Console Maker(s): (note: press ctrl + click to select multiple items)
         </label>
-        <select 
+        <select
+            required
+            #consoleMakers="ngModel"
             ngModel
-            name="console-makers"
-            id="console-makers"
+            name="consoleMakers"
+            id="consoleMakers"
             class="form-control"
             multiple>
             <option value=""></option>
             <option *ngFor="let c of consoleMakers$ | async" [value]="c.key">{{ c.key }}</option>
             <option value="misc">Misc.</option>
         </select>
+        <div class="alert alert-danger" *ngIf="consoleMakers.touched && consoleMakers.invalid">
+            Console-Maker(s) is Required
+        </div>
     </div>
     <div class="form-group">
         <label for="imageUrl">Image Url</label>
-        <input ngModel name="imageUrl" id="imageUrl" type="text" class="form-control">
+        <input required #imageUrl="ngModel" ngModel name="imageUrl" id="imageUrl" type="text" class="form-control">
+        <div class="alert alert-danger" *ngIf="imageUrl.touched && imageUrl.invalid">
+            Image URL is Required
+        </div>
     </div>
     <button class="btn btn-primary">Save</button>
+    <!-- for validation
     <p>
         {{ f.value | json }}
-    </p>
+    </p> -->
 </form>

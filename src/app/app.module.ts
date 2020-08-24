@@ -109,10 +109,11 @@ import { AngularFireDatabase } from '@angular/fire/database';
         { path: 'forum/create-thread', component: CreateThreadComponent, canActivate: [AuthGuardService] },
         { path: 'rate', component: RateComponent,  canActivate: [AuthGuardService]  },
 
-        // admin-only routes:
+        // admin-only routes: probably dont need admin/home TBT
         { path: 'admin/home', component: AdminHomeComponent, canActivate: [AuthGuardService, AdminAuthGuardService]},
-        { path:  'admin/games', component: AdminGamesComponent, canActivate: [AuthGuardService, AdminAuthGuardService]},
         { path: 'admin/games/new', component: AdminGamesFormComponent, canActivate: [AuthGuardService, AdminAuthGuardService]},
+        { path: 'admin/games/:id', component: AdminGamesFormComponent, canActivate: [AuthGuardService, AdminAuthGuardService]},
+        { path:  'admin/games', component: AdminGamesComponent, canActivate: [AuthGuardService, AdminAuthGuardService]},
 
         //wildcard for fallthrough cases.
         { path: '**', component: NotFoundComponent }

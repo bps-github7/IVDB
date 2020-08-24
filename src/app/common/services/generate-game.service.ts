@@ -26,6 +26,11 @@ export class GenerateGameService {
     }
 
     getAll() {
-        return this.db.list('/Games').snapshotChanges();
+        return this.db.list('/Games').valueChanges();
+    }
+
+    get(gameId) {
+        //probably need some other method appeneded to end.
+        return this.db.object('/Games/' + gameId).valueChanges();
     }
 }
