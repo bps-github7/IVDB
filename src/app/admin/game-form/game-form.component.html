@@ -1,0 +1,153 @@
+<div class="row">
+    <div class="col-md-6">        
+        <form #finished="ngForm" (ngSubmit)="save(finished.value)">
+            <!-- title form group -->
+            <div class="form-group">
+                <label for="title">Title: </label>
+                <input
+                    #title="ngModel"
+                    [(ngModel)]="game.title"
+                    name="title"
+                    id="title"
+                    class="form-control"
+                    required
+                    type="text"
+                    >
+                <div *ngIf="title.touched && title.invalid" class="alert alert-danger">
+                    <div *ngIf="title.errors.required">Title is required</div>
+                </div>
+            </div>
+            <!-- price form group -->
+            <div class="form-group">
+                <label for="price">Price: </label>
+                <div class="input-group">
+                    <span class="input-group-addon">$</span>
+                    <input 
+                        #price="ngModel" 
+                        name="price" 
+                        id="price"
+                        class="form-control"
+                        type="number"
+                        [min]="0"
+                        [(ngModel)]="game.price" 
+                        required>
+                </div>
+                <div *ngIf="price.touched && price.invalid" class="alert alert-danger">
+                    <div *ngIf="price.errors.required">Price is required.</div>
+                    <div *ngIf="price.errors.min">Price should be zero or greater.</div>
+                </div>
+            </div>
+            <!-- categories form group -->
+            <div class="form-group">
+                <label for="categories">Categories: </label>
+                <select
+                    [(ngModel)]="game.categories"
+                    multiple
+                    required
+                    #categories="ngModel"
+                    name="categories"
+                    id="categories"
+                    class="form-control"
+                    >
+                    <option value=""></option>
+                    <option *ngFor="let c of categories$ | async" [value]="c.name">
+                        {{ c.name }}
+                    </option>
+                </select>
+                <div *ngIf="categories.touched && categories.invalid" class="alert alert-danger">
+                    <div *ngIf="categories.errors.required">Categories is required</div>
+                    <div></div>
+                </div>
+            </div>
+            <!-- creators form group -->
+            <div class="form-group">
+                <label for="creators">Creators: </label>
+                <select
+                    #creators="ngModel"
+                    multiple
+                    required
+                    [(ngModel)]="game.creators"
+                    name="creators" 
+                    id="creators"
+                    class="form-control"
+                    >
+                    <option value=""></option>
+                    <option *ngFor="let c of creators$ | async" [value]="c.name">
+                        {{ c.name }}
+                    </option>
+                </select>
+                <div *ngIf="creators.touched && creators.invalid" class="alert alert-danger">
+                    <div *ngIf="creators.errors.required">Creators is required</div>
+                    <div></div>
+                </div>
+            </div>
+            <!-- consoleMakers form group -->
+            <div class="form-group">
+                <label for="consoleMakers">Console Makers: </label>
+                <select
+                    #consoleMakers="ngModel"
+                    multiple
+                    required
+                    [(ngModel)]="game.consoleMakers"
+                    name="consoleMakers" 
+                    id="consoleMakers"
+                    class="form-control"
+                    >
+                    <option value=""></option>
+                    <option *ngFor="let c of consoleMakers$ | async" [value]="c.name">
+                        {{ c.name }}
+                    </option>
+                </select>
+                <div *ngIf="consoleMakers.touched && consoleMakers.invalid" class="alert alert-danger">
+                    <div *ngIf="consoleMakers.errors.required">Console Maker(s) is required</div>
+                </div>
+            </div>
+            <!-- description form group     -->
+            <div class="form-group">
+                <label for="description">Description: </label>
+                <textarea
+                    #description="ngModel" 
+                    name="description"
+                    id="description"
+                    class="form-control"
+                    cols="30"
+                    rows="10"
+                    required
+                    [(ngModel)]="game.description"          
+                    ></textarea>
+                <div *ngIf="description.touched && description.invalid" class="alert alert-danger">
+                    <div *ngIf="description.errors.required">Description is required</div>
+                </div>
+            </div>
+            <!-- imageUrl form group -->
+            <div class="form-group">
+                <label for="imageUrl">Image URL: </label>
+                <input
+                    #imageUrl="ngModel"
+                    id="imageUrl"
+                    class="form-control"
+                    required
+                    [(ngModel)]="game.imageUrl"
+                    name="imageUrl"
+                    type="text"
+                    url
+                    >
+                <div *ngIf="imageUrl.touched && imageUrl.invalid" class="alert alert-danger">
+                    <div *ngIf="imageUrl.errors.required">Image URL is required</div>
+                    <div *ngIf="imageUrl.errors.url">Must be a valid URL</div>
+                </div>
+            </div>
+            <button class="btn btn-primary">Save/update game</button>
+            <button type="button" class="btn btn-danger" (click)="delete()">Delete game</button>
+        </form>
+    </div>
+    <div class="col-md-6">
+        <div class="card" style="width: 18rem;">
+            <img class="card-img-top" [src]="game.imageUrl" alt="Cover of the game being created or edited">
+            <div class="card-body">
+              <h5 class="card-title">{{ game.title }}</h5>
+              <p class="card-text">{{ game.price | currency:'USD':true }}</p>
+            </div>
+          </div>
+    </div>
+</div>
