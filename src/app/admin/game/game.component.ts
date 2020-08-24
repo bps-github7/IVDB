@@ -16,34 +16,25 @@ export class GameComponent implements OnInit, OnDestroy {
     subscription: Subscription;
 
     constructor(private gameService : GameService) {
-        this.games$ = this.gameService.getAll()
-        // this.subscription = gameService.getAllModified()
-        //     .subscribe(games => this.filteredGames = this.games = games);    
+        //   ... this is probably what breaks the table.
+        // this.games$ = this.gameService.getAll()
+        this.subscription = gameService.getAllModified()
+            .subscribe(games => this.filteredGames = this.games = games);    
     }
 
-    filter(query: HTMLInputElement) {
-        //when the site is up and running
-        /// we will want to perform this query on the server.
-        /// major efficiency drain otherwise!!!
-        // this.filteredGames = (query) ?
-        //     this.games$.filter(p => p.title.toLowerCase().includes(query.toLowerCase())) :
-        //     this.games;
-        console.log(query.value);
+    filter(query: string) {
+        //such a goofy approach. weehh
+        this.filteredGames = (query) ?
+            this.games.filter(p => p.payload.val().title.toLowerCase().includes(query.toLowerCase())) :
+            this.games;
+        console.log(query);
     }
 
     ngOnDestroy(): void {
-        // this.subscription.unsubscribe();
-        console.log("does a thing!");    }
+        this.subscription.unsubscribe();
+    }
 
     ngOnInit(): void {
     }
 
-}
-
-export interface Game {
-    key?: string;
-    title: string;
-    price: number;
-    category: string;
-    imageUrl: string;
 }
