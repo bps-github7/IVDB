@@ -14,20 +14,32 @@ export class AdminGamesFormComponent implements OnInit {
     categories$;
     creators$;
     consoleMakers$;
-    game;
-
+    game = {};
+    game$;
 
     constructor(private ggService : GenerateGameService, private router: Router, private route: ActivatedRoute) { 
         this.categories$ = ggService.getCategories();
         this.creators$ = ggService.getCreators();
         this.consoleMakers$ = ggService.getConsoleMakers();
 
-        let id = this.route.snapshot.paramMap.get('id');
-        if (id) this.ggService.get(id).pipe(take(1)).subscribe(gameIud => this.game = gameIud);
+        //Dont think this is working... 
+        // let id = this.route.snapshot.paramMap.get('id');
+        // if (id) this.ggService.get(id).pipe(take(1)).subscribe(g => this.game = g);
+    
+        let id = this.route.snapshot.paramMap.get('id')
+        if (id)
+        this.game$= this.ggService.getGame(id).subscribe(g=>this.game$=g);
     }
 
     save(game) {
         this.ggService.create(game);
+        this.router.navigate(['/admin/games']);
+    }
+
+
+    //when is the browser ever in the position for this line of code to run and achieve something?
+    test() {
+        console.log(this.route.snapshot.paramMap.get('id'));
     }
 
     ngOnInit(): void {

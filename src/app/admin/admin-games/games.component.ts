@@ -13,7 +13,17 @@ export class AdminGamesComponent implements OnInit {
       this.games$ = this.ggService.getAll();
    }
 
+
+
   ngOnInit(): void {
   }
 
 } 
+
+export interface Game {
+    key?: string;
+    title: string;
+    price: number;
+    category: string;
+    imageUrl: string;
+}
