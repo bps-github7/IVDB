@@ -19,7 +19,7 @@
         </tr>
     </thead>
     <tbody>
-        <tr *ngFor="let g of filteredGames">
+        <tr *ngFor="let g of games$ | async">
             <td>{{ g.data.title }}</td>
             <td>{{ g.data.price }}</td>
             <td><a [routerLink]="['/admin/game', g.id]">edit</a></td>
