@@ -10,7 +10,6 @@ import { AngularFireAuthModule } from '@angular/fire/auth';
 import { CustomFormsModule } from 'ng2-validation';
 import { AngularFireDatabase } from '@angular/fire/database';
 
-
 //services AKA providers
 import { AuthService } from './common/services/auth.service';
 import { AuthGuardService } from './common/services/auth-guard.service';

@@ -20,7 +20,6 @@
     "@angular/platform-browser": "~9.1.1",
     "@angular/platform-browser-dynamic": "~9.1.1",
     "@angular/router": "~9.1.1",
-    "angular-4-data-table": "^0.4.6",
     "bootstrap": "^5.0.0-alpha1",
     "firebase": "^7.17.2",
     "ng2-validation": "^4.2.0",
