@@ -9,6 +9,7 @@ import { AngularFireModule } from '@angular/fire';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { CustomFormsModule } from 'ng2-validation';
 import { AngularFireDatabase } from '@angular/fire/database';
+import { RatingModule } from 'ng-starrating';
 
 //services AKA providers
 import { AuthService } from './common/services/auth.service';
@@ -80,6 +81,7 @@ import { environment } from 'src/environments/environment';
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireAuthModule,
     BrowserModule,
+    RatingModule,
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,

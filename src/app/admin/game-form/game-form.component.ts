@@ -22,9 +22,9 @@ export class GameFormComponent implements OnInit {
         private gameService : GameService,
         private router : Router,
         private route : ActivatedRoute) { 
-        this.categories$ = categories.getCategories();
-        this.creators$ = categories.getCreators();
-        this.consoleMakers$ = categories.getConsoleMakers();
+        this.categories$ = categories.getCategories$();
+        this.creators$ = categories.getCreators$();
+        this.consoleMakers$ = categories.getConsoleMakers$();
            
         
         this.id = this.route.snapshot.paramMap.get('id');
