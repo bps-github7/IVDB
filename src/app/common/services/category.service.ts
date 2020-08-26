@@ -8,17 +8,17 @@ export class CategoryService {
 
     constructor(private db: AngularFireDatabase) { }
 
-    getCategories() {
+    getCategories$() {
         return this.db.list('/Categories').valueChanges();
     }
 
     // this violates encapsulation but doesnt make a lot of sense
     // to make three seperate services for such a similar task
-    getCreators() {
+    getCreators$() {
         return this.db.list('/Creators').valueChanges();
     }
 
-    getConsoleMakers() {
+    getConsoleMakers$() {
         return this.db.list('/ConsoleMakers').valueChanges();
     }
 }

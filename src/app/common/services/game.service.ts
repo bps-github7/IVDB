@@ -47,7 +47,7 @@ export class GameService {
     
     }
 
-    getAllModified() {
+    getAll$() {
         return this.db.list('/Games').snapshotChanges()
     }
 }
