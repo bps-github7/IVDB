@@ -45,10 +45,10 @@ import { NotFoundComponent } from './not-found/not-found.component';
 import { UserService } from './common/services/user.service';
 import { GameComponent } from './admin/game/game.component';
 import { GameFormComponent } from './admin/game-form/game-form.component';
+import { CreateProfileComponent } from './create-profile/create-profile.component';
 
 //environment
 import { environment } from 'src/environments/environment';
-
 
 
 @NgModule({
@@ -75,7 +75,8 @@ import { environment } from 'src/environments/environment';
     CommentComponent,
     NotFoundComponent,
     GameComponent,
-    GameFormComponent
+    GameFormComponent,
+    CreateProfileComponent
     ],
   imports: [
     AngularFireModule.initializeApp(environment.firebase),
@@ -103,8 +104,9 @@ import { environment } from 'src/environments/environment';
         { path: 'watchlists', component: WatchlistsComponent },
 
         //routes for logged in users
-        { path: 'profile', component: ProfileComponent, canActivate: [AuthGuardService] },
-        // { path: 'sign_in/profile/:username', component: ProfileComponent, canActivate: [AuthGuardService] },
+        // { path: 'profile', component: ProfileComponent, canActivate: [AuthGuardService] },
+        { path: 'create_profile', component: CreateProfileComponent, canActivate: [AuthGuardService] },
+        { path: 'sign_in/profile/:username', component: ProfileComponent, canActivate: [AuthGuardService] },
         { path: 'forum/create-thread', component: CreateThreadComponent, canActivate: [AuthGuardService] },
         { path: 'rate', component: RateComponent,  canActivate: [AuthGuardService]  },
 

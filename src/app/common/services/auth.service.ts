@@ -9,9 +9,9 @@ import { switchMap } from 'rxjs/operators';
 
 
 @Injectable({
-    //not sure what this is... does...
   providedIn: 'root'
 })
+
 export class AuthService {
     user$: Observable<firebase.User>;
         
@@ -64,6 +64,7 @@ export class AuthService {
             return {"error code" : error.code,
                 "error message" : error.message};
             })
+        this.router.navigate(['/create_profile'])
     }
 
     get appUser$(): Observable<AppUser> {

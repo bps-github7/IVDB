@@ -5,22 +5,10 @@
             <li *ngFor="let c of categories$ | async" class="list-group-item">
                 {{ c.name }}
             </li>
-        </ul>
-    </div>
-    <div class="w-100"></div>
-    <br>
-    <div class="col-3">
-        <ul class="list-group">
             <li class="list-group-item"><h2>Creators</h2></li>
             <li *ngFor="let c of creators$ | async" class="list-group-item">
                 {{ c.name }}
             </li>
-        </ul>p
-    </div>
-    <div class="w-100"></div>
-    <br>
-    <div class="col-3">
-        <ul class="list-group">
             <li class="list-group-item"><h2>Consoles</h2></li>
             <li *ngFor="let c of consoleMakers$ | async" class="list-group-item">
                 {{ c.name }}
@@ -30,13 +18,13 @@
     <div class="col">
         <div class="row">
             <ng-container *ngFor="let g of games$ | async; let i = index">
-                <div class="col">
+                <div class="col" id="gamecard">
                     <div class="card" style="width: 15rem;">
                         <img class="card-img-top" src="{{ g.payload.val().imageUrl }}" alt="Card image cap">
                         <div class="card-body">
                             <h5 class="card-title">{{ g.payload.val().title }}</h5>
                             <p class="card-text">{{ g.payload.val().price | currency:'USD':true }}</p>
-                            <a href="#" class="btn btn-primary">Buy</a>
+                            <a href="#" class="btn btn-primary" id="buy">Buy</a>
                             <a href="#" class="btn btn-primary">Review</a>
                             <rate></rate>
                         </div>

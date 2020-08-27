@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { StarRatingComponent } from 'ng-starrating';
+import { RateService } from '../common/services/rate.service';
 
 
 @Component({
@@ -9,17 +10,18 @@ import { StarRatingComponent } from 'ng-starrating';
 })
 export class RateComponent implements OnInit {
 
-  constructor() { }
+    constructor(private rateService : RateService) { }
 
-  ngOnInit(): void {
-  }
+    ngOnInit(): void {
+    }
 
-  onRate($event:{oldValue:number, newValue:number, starRating:StarRatingComponent}) {
-    alert(`Old Value:${$event.oldValue}, 
-      New Value: ${$event.newValue}, 
-      Checked Color: ${$event.starRating.checkedcolor}, 
-      Unchecked Color: ${$event.starRating.uncheckedcolor}`);
-  }
+    onRate($event:{oldValue:number, newValue:number, starRating:StarRatingComponent}) {
+        // this.rateService.submitRating();
+    //     alert(`Old Value:${$event.oldValue}, 
+    //       New Value: ${$event.newValue}, 
+    //       Checked Color: ${$event.starRating.checkedcolor}, 
+    //       Unchecked Color: ${$event.starRating.uncheckedcolor}`);
+    }
 
 
-}
+    }
