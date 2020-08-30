@@ -27,10 +27,10 @@ export class GameService {
 
     get(gameId) : Observable<Game>{
         return this.db.object<Game>('/Games/'+gameId).valueChanges().pipe(take(1));
-        }
+    }
 
    getAll() {
-    // I dont like the way this looks. but it works for now.
+    // this one doesnt return an observable
     return this.db.list('/Games').snapshotChanges()
     .pipe(
     map(a => a.map(

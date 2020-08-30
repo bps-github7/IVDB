@@ -46,6 +46,7 @@ import { UserService } from './common/services/user.service';
 import { GameComponent } from './admin/game/game.component';
 import { GameFormComponent } from './admin/game-form/game-form.component';
 import { CreateProfileComponent } from './create-profile/create-profile.component';
+import { ViewGameComponent } from './view-game/view-game.component';
 
 //environment
 import { environment } from 'src/environments/environment';
@@ -76,7 +77,8 @@ import { environment } from 'src/environments/environment';
     NotFoundComponent,
     GameComponent,
     GameFormComponent,
-    CreateProfileComponent
+    CreateProfileComponent,
+    ViewGameComponent
     ],
   imports: [
     AngularFireModule.initializeApp(environment.firebase),
@@ -99,6 +101,7 @@ import { environment } from 'src/environments/environment';
         //you'll see more on these pages if youre signed in, but can view as anonymous user.
         { path: 'forum', component: ForumComponent },
         { path: 'games', component: GamesComponent },
+        { path: 'games/:id', component: ViewGameComponent },
         { path: 'streaming', component: StreamingComponent },
         { path: 'reccomendations', component: ReccomendationsComponent },
         { path: 'watchlists', component: WatchlistsComponent },

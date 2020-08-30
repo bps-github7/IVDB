@@ -22,7 +22,9 @@
                     <div class="card" style="width: 15rem;">
                         <img class="card-img-top" src="{{ g.payload.val().imageUrl }}" alt="Card image cap">
                         <div class="card-body">
-                            <h5 class="card-title">{{ g.payload.val().title }}</h5>
+                            <a [routerLink] = "['/games', g.payload.val().id]">
+                                <h5 class="card-title">{{ g.payload.val().title }}</h5>
+                            </a>
                             <p class="card-text">{{ g.payload.val().price | currency:'USD':true }}</p>
                             <a href="#" class="btn btn-primary" id="buy">Buy</a>
                             <a href="#" class="btn btn-primary">Review</a>
