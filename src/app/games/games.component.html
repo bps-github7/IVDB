@@ -3,15 +3,15 @@
         <ul class="list-group">
             <li class="list-group-item"><h2>Game Categories</h2></li>
             <li *ngFor="let c of categories$ | async" class="list-group-item">
-                {{ c.name }}
+                <input type="checkbox"> {{ c.name }}
             </li>
             <li class="list-group-item"><h2>Creators</h2></li>
             <li *ngFor="let c of creators$ | async" class="list-group-item">
-                {{ c.name }}
+                <input type="checkbox"> {{ c.name }}
             </li>
             <li class="list-group-item"><h2>Consoles</h2></li>
             <li *ngFor="let c of consoleMakers$ | async" class="list-group-item">
-                {{ c.name }}
+                <input type="checkbox"> {{ c.name }}
             </li>
         </ul>
     </div>
@@ -22,7 +22,9 @@
                     <div class="card" style="width: 15rem;">
                         <img class="card-img-top" src="{{ g.payload.val().imageUrl }}" alt="Card image cap">
                         <div class="card-body">
-                            <a [routerLink] = "['/games', g.payload.val().id]">
+                            <a id="title"
+                                [routerLink]="['/games',g.key]"
+                                (click)="do_thing(g.key)">
                                 <h5 class="card-title">{{ g.payload.val().title }}</h5>
                             </a>
                             <p class="card-text">{{ g.payload.val().price | currency:'USD':true }}</p>

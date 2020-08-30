@@ -19,7 +19,6 @@ export class ViewGameComponent implements OnInit {
         if (this.id)
             this.game = this.gameService.get(this.id).subscribe(g =>this.game = g);
 
-
     }
 
   ngOnInit(): void {

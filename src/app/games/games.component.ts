@@ -20,4 +20,8 @@ export class GamesComponent {
         this.consoleMakers$ = categoryService.getConsoleMakers$();
   }
 
+  do_thing(key) {
+      console.log(key);
+  }
+
 }

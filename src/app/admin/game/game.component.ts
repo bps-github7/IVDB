@@ -17,8 +17,6 @@ export class GameComponent implements OnInit, OnDestroy {
     subscription: Subscription;
 
     constructor(private gameService : GameService) {
-        //   ... this is probably what breaks the table.
-        // this.games$ = this.gameService.getAll()
         this.subscription = gameService.getAll$()
             .subscribe(games => {
                 this.filteredGames = this.games = games;

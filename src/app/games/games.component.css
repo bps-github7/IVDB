@@ -2,6 +2,10 @@
     margin: 10px 0;
 }
 
+#title {
+    border: none;
+}
+
 #buy {
     padding: 1px 8%;
 }
