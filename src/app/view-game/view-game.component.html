@@ -1,4 +1,4 @@
-<div>
+<div class="row">
     <div class="col-md-6">
         <div class="card" style="width: 18rem;">
             <img class="card-img-top" [src]="game.imageUrl" alt="the game in question">
@@ -8,15 +8,7 @@
             </div>
           </div>
     </div>
-
-    horizontal bar top of screen below navbar
-</div>
-<div>
-    veritcal scrolling jawn extends far past current screen buffer
-    <br>
-    relevant news..
-    <br>
-    related games..
-    <br>    
-    comments..
+    <div class="col-md-6">
+        {{ game.description }}
+    </div>
 </div>
