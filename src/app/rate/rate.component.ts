@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { StarRatingComponent } from 'ng-starrating';
 import { RateService } from '../common/services/rate.service';
+import { AngularFireDatabase } from '@angular/fire/database';
 
 
 @Component({
@@ -16,12 +17,8 @@ export class RateComponent implements OnInit {
     }
 
     onRate($event:{oldValue:number, newValue:number, starRating:StarRatingComponent}) {
-        // this.rateService.submitRating();
-    //     alert(`Old Value:${$event.oldValue}, 
-    //       New Value: ${$event.newValue}, 
-    //       Checked Color: ${$event.starRating.checkedcolor}, 
-    //       Unchecked Color: ${$event.starRating.uncheckedcolor}`);
+        this.rateService.submitRating($event.newValue);
     }
 
 
-    }
+}

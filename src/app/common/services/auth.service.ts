@@ -5,7 +5,7 @@ import { Observable, of } from 'rxjs';
 import { ActivatedRoute, Router } from '@angular/router';
 import { UserService } from './user.service';
 import { AppUser } from 'src/app/models/app.user';
-import { switchMap } from 'rxjs/operators';
+import { switchMap, first } from 'rxjs/operators';
 
 
 @Injectable({
@@ -68,8 +68,8 @@ export class AuthService {
     }
 
     get appUser$(): Observable<AppUser> {
-        // uid is the property of the 'user' object is the user represented by firebase as part of authentication and not the user object stored in the database
-        // We need to get the firebase 'user' object to read and read the actual application 'user' object from the database
+        // uid is the property of the 'user' object -> the user represented by firebase as part of authentication and not the user object stored in the database
+        // We need to get the firebase 'user' object to read the actual application 'user' object from the database
         return this.user$.pipe(
             switchMap(user => {
                 if (user) { return this.userService.get(user.uid); }
@@ -78,4 +78,8 @@ export class AuthService {
         );
       }
 
+      isLoggedIn() {
+        return this.afAuth.authState.pipe(first()).toPromise();
+     }
+      
 }

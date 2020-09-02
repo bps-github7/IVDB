@@ -14,24 +14,24 @@ export class GameService {
    }
 
    update(gameId, game) {
-       return this.db.object('/Games/' + gameId).update(game);
+       return this.db.object('/games/' + gameId).update(game);
    }
 
    create(game) {
-       return this.db.list('/Games').push(game);
+       return this.db.list('/games').push(game);
    }
 
    delete(gameId) {
-       this.db.object('/Games/' + gameId).remove();
+       this.db.object('/games/' + gameId).remove();
    }
 
     get(gameId) : Observable<Game>{
-        return this.db.object<Game>('/Games/'+gameId).valueChanges().pipe(take(1));
+        return this.db.object<Game>('/games/'+gameId).valueChanges().pipe(take(1));
     }
 
    getAll() {
     // this one doesnt return an observable
-    return this.db.list('/Games').snapshotChanges()
+    return this.db.list('/games').snapshotChanges()
     .pipe(
     map(a => a.map(
     ac =>{
@@ -48,6 +48,6 @@ export class GameService {
     }
 
     getAll$() {
-        return this.db.list('/Games').snapshotChanges()
+        return this.db.list('/games').snapshotChanges()
     }
 }
