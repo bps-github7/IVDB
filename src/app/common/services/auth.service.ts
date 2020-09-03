@@ -81,5 +81,5 @@ export class AuthService {
       isLoggedIn() {
         return this.afAuth.authState.pipe(first()).toPromise();
      }
-      
+
 }

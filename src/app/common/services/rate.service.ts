@@ -45,6 +45,10 @@ export class RateService {
         this.db.object('/ratings/' + rating).remove();
     }
 
+    getStars(gameId : string) : Observable<any> {
+        return 
+    }
+
     //get a rating observable from the db
     // get(rating) : Observable<Rating>{
     //      return this.db.object<Rating>('/ratings/'+rating).valueChanges().pipe(take(1));
