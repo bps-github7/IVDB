@@ -8,7 +8,8 @@ import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { AngularFireModule } from '@angular/fire';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { CustomFormsModule } from 'ng2-validation';
-import { AngularFireDatabase } from '@angular/fire/database';
+// import { AngularFireDatabase } from '@angular/fire/database';
+import { AngularFirestore } from '@angular/fire/firestore';
 import { RatingModule } from 'ng-starrating';
 
 //services AKA providers
@@ -83,6 +84,7 @@ import { environment } from 'src/environments/environment';
   imports: [
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireAuthModule,
+    AngularFirestore,
     BrowserModule,
     RatingModule,
     HttpClientModule,
