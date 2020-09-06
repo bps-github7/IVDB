@@ -3,6 +3,7 @@ import { FormGroup, FormBuilder, Validators, FormControl, ControlContainer } fro
 import { PasswordValidators } from '../common/validators/password.validators';
 import { AuthService } from '../common/services/auth.service';
 import { Router } from '@angular/router';
+import { UserService } from '../common/services/user.service';
 
 
 @Component({
@@ -20,7 +21,11 @@ export class CreateAccountComponent {
     Maybe there already is a Validator which does this. shoudl be at least
     */
 
-    constructor(fb: FormBuilder, private auth : AuthService, private router : Router) {
+    constructor(
+        fb: FormBuilder,
+        private auth : AuthService,
+        private router : Router,
+        private userService : UserService) {
         this.form = fb.group({
             fullName: ['', Validators.required],
             //need to validate email- does it have @, domain & tld? are characters used in body valid?
@@ -41,30 +46,20 @@ export class CreateAccountComponent {
         })
     }
 
+    //getters 
+    get fullName() { return this.form.get('fullName'); }
+    
+    get email() { return this.form.get('email'); }
+    
+    get username() { return this.form.get('username'); }
+    
+    get password()  { return this.form.get('password'); }
 
-    get fullName() {
-        return this.form.get('fullName');
-    }
-
-    get email() {
-        return this.form.get('email');
-    }
-
-    get username() {
-        return this.form.get('username');
-    }
-
-    get password()  {
-        return this.form.get('password');
-    }
-
-    get confirmPassword() {
-        return this.form.get('confirmPassword');
-    }
+    get confirmPassword() { return this.form.get('confirmPassword'); }
 
     createAccount() {
-        this.auth.createAccount(this.email.value, this.password.value, this.username.value);
-        //takes user to home after creating account- or shoul this be profile- to build profile?
+        this.auth.createFirebaseAccount(this.email.value, this.password.value, this.username.value);
+        // this.userService.create(this.auth.appUser$);
         this.router.navigate(['/']);
     }
 }

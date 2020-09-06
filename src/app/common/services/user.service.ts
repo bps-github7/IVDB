@@ -1,32 +1,33 @@
 import { Injectable } from '@angular/core';
-import { AngularFireStorage } from '@angular/fire/storage';
-import { AngularFireDatabase, AngularFireObject } from '@angular/fire/database';
+import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from '@angular/fire/firestore';
 import * as firebase from 'firebase';
 import { AppUser } from '../../models/app.user';
 import { Observable } from 'rxjs';
-import { FirebaseApp } from '@angular/fire';
-
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
 
-    constructor(private db: AngularFireDatabase) { }
+    usersCollection : AngularFirestoreCollection<AppUser>;
+    userDocument : AngularFirestoreDocument<AppUser>;
+    //doubt this will be nessc..
+    Users : Observable<AppUser[]>;
 
-    save(user: firebase.User) {
-        this.db.object('/users/' + user.uid).update({
+
+    constructor(private db: AngularFirestore,) {
+        this.usersCollection = this.db.collection('users');
+        this.Users = this.usersCollection.valueChanges();
+     }
+
+    update(user: firebase.User) {
+        this.db.doc('users/' + user.uid).update({
             name : user.displayName,
             email : user.email
         });
     }
 
-    get(uid : string): Observable<AppUser> {
-        return this.db.object<AppUser>('/users' + uid).valueChanges();
+    get$(uid : string): Observable<AppUser> {
+        return this.db.doc('/users/' + uid).valueChanges();
     }
-
-
-    // getUid(user : firebase.User) : string {
-    //     return user.uid
-    // }
 }

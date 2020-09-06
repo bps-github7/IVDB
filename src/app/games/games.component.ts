@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { GameService } from '../common/services/game.service';
-import { CategoryService } from '../common/services/category.service';
+import { GameInfoService } from '../common/services/gameinfo.service';
 
 @Component({
   selector: 'app-games',
@@ -9,16 +9,17 @@ import { CategoryService } from '../common/services/category.service';
 })
 export class GamesComponent {
     games$;
-    categories$;
-    creators$;
-    consoleMakers$;
+    gameInfo$
+    // categories$;
+    // creators$;
+    // consoleMakers$;
 
-    constructor(private gameService : GameService, private categoryService : CategoryService) { 
+    constructor(private gameService : GameService, private gameinfoService : GameInfoService) { 
         this.games$ = gameService.getAll$();
-        this.categories$ = categoryService.getCategories$();
-        this.creators$ = categoryService.getCreators$();
-        this.consoleMakers$ = categoryService.getConsoleMakers$();
-  }
+        this.gameInfo$ = gameinfoService.getCategories$();
+//         this.creators$ = gameinfoService.getCreators$();
+//         this.consoleMakers$ = gameinfoService.getConsoleMakers$();
+}
 
   do_thing(key) {
       console.log(key);

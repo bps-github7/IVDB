@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { CategoryService } from 'src/app/common/services/category.service';
+import { GameInfoService } from 'src/app/common/services/gameinfo.service';
 import { GameService } from 'src/app/common/services/game.service';
 import { Route } from '@angular/compiler/src/core';
 import { Router, ActivatedRoute } from '@angular/router';
@@ -18,18 +18,18 @@ export class GameFormComponent implements OnInit {
     id;
 
     constructor(
-        private categories: CategoryService,
+        private gameInfo: GameInfoService,
         private gameService : GameService,
         private router : Router,
         private route : ActivatedRoute) { 
-        this.categories$ = categories.getCategories$();
-        this.creators$ = categories.getCreators$();
-        this.consoleMakers$ = categories.getConsoleMakers$();
+        this.categories$ = gameInfo.getCategories$();
+        this.creators$ = gameInfo.getCreators$();
+        this.consoleMakers$ = gameInfo.getConsoleMakers$();
            
         
         this.id = this.route.snapshot.paramMap.get('id');
         if (this.id)
-            this.game = this.gameService.get(this.id).subscribe(g =>this.game = g);
+            this.game = this.gameService.get$(this.id).subscribe(g =>this.game = g);
 
     }
 

@@ -9,14 +9,14 @@ import { AngularFireModule } from '@angular/fire';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { CustomFormsModule } from 'ng2-validation';
 // import { AngularFireDatabase } from '@angular/fire/database';
-import { AngularFirestore } from '@angular/fire/firestore';
+import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { RatingModule } from 'ng-starrating';
 
 //services AKA providers
 import { AuthService } from './common/services/auth.service';
 import { AuthGuardService } from './common/services/auth-guard.service';
 import { AdminAuthGuardService } from './common/services/admin-auth-guard.service';
-import { CategoryService } from './common/services/category.service';
+import { GameInfoService } from './common/services/gameinfo.service';
 import { GameService } from './common/services/game.service';
 
 
@@ -84,7 +84,7 @@ import { environment } from 'src/environments/environment';
   imports: [
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireAuthModule,
-    AngularFirestore,
+    AngularFirestoreModule,
     BrowserModule,
     RatingModule,
     HttpClientModule,
@@ -130,7 +130,7 @@ import { environment } from 'src/environments/environment';
       AuthGuardService,
       UserService,
       AdminAuthGuardService,
-      CategoryService,
+      GameInfoService,
       GameService
   ],
   bootstrap: [AppComponent]

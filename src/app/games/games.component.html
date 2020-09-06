@@ -2,17 +2,18 @@
     <div class="col-3">
         <div class="list-group">
             <li class="list-group-item"><h2>Game Categories</h2></li>
-            <a *ngFor="let c of categories$ | async" class="list-group-item list-group-item-action">
-                <input type="checkbox"> {{ c.name }}
-            </a>
+            <li *ngFor="let g of (gameInfo$ | async)?.categories" class="list-group-item list-group-item-action">
+                <input type="checkbox"> {{ g }}
+            </li>
             <li class="list-group-item"><h2>Creators</h2></li>
-            <a *ngFor="let c of creators$ | async" class="list-group-item list-group-item-action">
-                <input type="checkbox"> {{ c.name }}
-            </a>
+            <li *ngFor="let g of (gameInfo$ | async)?.creators" class="list-group-item list-group-item-action">
+                <input type="checkbox"> {{ g }}
+            </li>
             <li class="list-group-item"><h2>Consoles</h2></li>
-            <a *ngFor="let c of consoleMakers$ | async" class="list-group-item list-group-item-action">
-                <input type="checkbox"> {{ c.name }}
-            </a>
+            <li *ngFor="let g of (gameInfo$ | async)?.console_makers" class="list-group-item list-group-item-action">
+                <input type="checkbox"> {{ g }}
+                <!-- find a way to show nintendo, microsoft, sony consoles when the appropriate checkbox is clicked -->
+            </li>
         </div>
     </div>
     <div class="col">
@@ -20,14 +21,15 @@
             <ng-container *ngFor="let g of games$ | async; let i = index">
                 <div class="col" id="gamecard">
                     <div class="card" style="width: 15rem;">
-                        <img class="card-img-top" src="{{ g.payload.val().imageUrl }}" alt="Card image cap">
+                        <img class="card-img-top" src="{{ g.imageUrl }}" alt="Card image cap">
                         <div class="card-body">
                             <a id="title"
                                 [routerLink]="['/games',g.key]"
                                 (click)="do_thing(g.key)">
-                                <h5 class="card-title">{{ g.payload.val().title }}</h5>
+                                <!-- what is do_thing method of game.component.ts -->
+                                <h5 class="card-title">{{ g.title }}</h5>
                             </a>
-                            <p class="card-text">{{ g.payload.val().price | currency:'USD':true }}</p>
+                            <p class="card-text">{{ g.price | currency:'USD':true }}</p>
                             <a href="#" class="btn btn-primary" id="buy">Buy</a>
                             <a href="#" class="btn btn-primary">Review</a>
                             <!---Relying heavily on fireship youtube vid

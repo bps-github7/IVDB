@@ -17,7 +17,7 @@ export class ViewGameComponent implements OnInit {
         this.id = this.route.snapshot.paramMap.get('id');
         console.log(this.id)
         if (this.id)
-            this.game = this.gameService.get(this.id).subscribe(g =>this.game = g);
+            this.game = this.gameService.get$(this.id).subscribe(g =>this.game = g);
 
     }
 

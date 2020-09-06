@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
-import { AngularFireDatabase } from '@angular/fire/database';
-import { map, take } from 'rxjs/operators';
+import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from '@angular/fire/firestore';
+// import { AngularFireDatabase } from '@angular/fire/database';
+// import { map, take } from 'rxjs/operators';
 import { Game } from '../../models/game';
 import { Observable } from 'rxjs';
 
@@ -9,45 +10,41 @@ import { Observable } from 'rxjs';
 })
 export class GameService {
 
-  constructor(private db: AngularFireDatabase) {
+        gamesCollection : AngularFirestoreCollection<Game>;
+        gameDocument : AngularFirestoreDocument<Game>;
+        games : Observable<Game[]>;
+    
 
-   }
-
-   update(gameId, game) {
-       return this.db.object('/games/' + gameId).update(game);
-   }
-
-   create(game) {
-       return this.db.list('/games').push(game);
-   }
-
-   delete(gameId) {
-       this.db.object('/games/' + gameId).remove();
-   }
-
-    get(gameId) : Observable<Game>{
-        return this.db.object<Game>('/games/'+gameId).valueChanges().pipe(take(1));
+    constructor(private db: AngularFirestore) {
+        this.gamesCollection = this.db.collection('games');
+        this.games = this.gamesCollection.valueChanges();
     }
 
-   getAll() {
-    // this one doesnt return an observable
-    return this.db.list('/games').snapshotChanges()
-    .pipe(
-    map(a => a.map(
-    ac =>{
-    const data = ac.payload.val();
-    const id = ac.payload.key;
-    console.log(data);
-    console.log(id)
-    return {data,id};
-    
-        }
-      ))
-    )
-    
+    //two seperate get methods for returning either firestoreDocument or Observable
+    get(gameId) : AngularFirestoreDocument<Game> {
+         return this.db.doc('games/' + gameId);
+    }
+
+    get$(gameId) : Observable<Game> {
+        return this.db.doc('games/' + gameId).valueChanges();
+
+    }
+
+    update(gameId, game) {
+        return this.get(gameId).update(game);
+    }
+
+    create(game) {
+        // return this.db.list('/games').push(game);
+        return this.gamesCollection.add(game);
+    }
+
+    delete(gameId) {
+        // this.db.object('/games/' + gameId).remove();
+        return this.get(gameId).delete();
     }
 
     getAll$() {
-        return this.db.list('/games').snapshotChanges()
+        return this.games;
     }
 }

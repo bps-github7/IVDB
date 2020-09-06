@@ -14,9 +14,6 @@ import { switchMap, first } from 'rxjs/operators';
 
 export class AuthService {
     user$: Observable<firebase.User>;
-        
-
-
 
     constructor(private afAuth : AngularFireAuth, private route: ActivatedRoute, private router: Router, private userService : UserService) {
         this.user$ = afAuth.authState
@@ -54,7 +51,7 @@ export class AuthService {
 
     logout() { this.afAuth.signOut(); }
 
-    createAccount(email : string, password : string, username : string) {
+    createFirebaseAccount(email : string, password : string, username : string) {
         firebase.auth().createUserWithEmailAndPassword(email, password)
         .then((result) => {
             return firebase.auth().currentUser.updateProfile({
@@ -72,14 +69,14 @@ export class AuthService {
         // We need to get the firebase 'user' object to read the actual application 'user' object from the database
         return this.user$.pipe(
             switchMap(user => {
-                if (user) { return this.userService.get(user.uid); }
+                if (user) { return this.userService.get$(user.uid); }
                 else { return of(null); }
             })
         );
       }
 
-      isLoggedIn() {
+    isLoggedIn() {
         return this.afAuth.authState.pipe(first()).toPromise();
-     }
+    }
 
 }
