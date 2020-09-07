@@ -6,6 +6,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { UserService } from './user.service';
 import { AppUser } from 'src/app/models/app.user';
 import { switchMap, first } from 'rxjs/operators';
+import { FirebaseApp } from '@angular/fire';
 
 
 @Injectable({
@@ -14,9 +15,18 @@ import { switchMap, first } from 'rxjs/operators';
 
 export class AuthService {
     user$: Observable<firebase.User>;
+    userDetails;
 
     constructor(private afAuth : AngularFireAuth, private route: ActivatedRoute, private router: Router, private userService : UserService) {
-        this.user$ = afAuth.authState
+        this.user$ = afAuth.authState;
+        this.user$.subscribe(user => {
+            if (user) {
+                this.userDetails = user;
+              }
+              else {
+                this.userDetails = null;
+              }
+        })
     }
 
     get_return_url() {
@@ -75,8 +85,22 @@ export class AuthService {
         );
       }
 
-    isLoggedIn() {
-        return this.afAuth.authState.pipe(first()).toPromise();
+
+    get authenticated(): boolean {
+        return (this.userDetails !== null) ? true : false;
     }
 
+      // Returns current user UID
+    get uid(): string {
+        return this.authenticated ? this.userDetails.uid : '';
+    }
+
+    get currentUserDisplayName(): string {
+        return this.userDetails.displayName || this.userDetails.email; 
+    }
+
+    get user(): firebase.User {
+        if (this.authenticated) return firebase.auth().currentUser;
+        console.log("didnt authenticate!");
+    }
 }

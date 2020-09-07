@@ -1,6 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { StarRatingComponent } from 'ng-starrating';
-import { RateService } from '../common/services/rate.service';
+import { RatingService } from '../common/services/rating.service';
 import { AngularFireDatabase } from '@angular/fire/database';
 import { Observable } from 'rxjs';
 
@@ -19,16 +18,12 @@ export class RateComponent implements OnInit {
     stars: Observable<any>;
     avgRating: Observable<any>;
 
-    constructor(private rateService : RateService) { }
+    constructor(private rateService : RatingService) { }
 
     ngOnInit(): void {
         //populate the stars observable with method from our service.
-        this.stars = this.rateService.getStars(this.gameId)
+        // this.stars = this.rateService.getStars(this.gameId)
 
-    }
-
-    onRate($event:{oldValue:number, newValue:number, starRating:StarRatingComponent}) {
-        this.rateService.submitRating($event.newValue);
     }
 
 

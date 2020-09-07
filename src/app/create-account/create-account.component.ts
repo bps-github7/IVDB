@@ -59,7 +59,8 @@ export class CreateAccountComponent {
 
     createAccount() {
         this.auth.createFirebaseAccount(this.email.value, this.password.value, this.username.value);
-        // this.userService.create(this.auth.appUser$);
+        this.userService.create(this.auth.user);
+        // this.userService.create(this.auth.appUser$))
         this.router.navigate(['/']);
     }
 }

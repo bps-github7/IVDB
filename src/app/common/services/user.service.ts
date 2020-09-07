@@ -15,7 +15,7 @@ export class UserService {
     Users : Observable<AppUser[]>;
 
 
-    constructor(private db: AngularFirestore,) {
+    constructor(private db: AngularFirestore) {
         this.usersCollection = this.db.collection('users');
         this.Users = this.usersCollection.valueChanges();
      }
@@ -25,6 +25,10 @@ export class UserService {
             name : user.displayName,
             email : user.email
         });
+    }
+
+    create(user : firebase.User) {
+        this.db.collection('users').add({email : user.email, name : user.displayName});
     }
 
     get$(uid : string): Observable<AppUser> {

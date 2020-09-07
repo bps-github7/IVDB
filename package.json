@@ -23,7 +23,6 @@
     "bootstrap": "^5.0.0-alpha1",
     "firebase": "^7.17.2",
     "firestore-export-import": "^0.6.1",
-    "ng-starrating": "^1.0.20",
     "ng2-validation": "^4.2.0",
     "rxjs": "~6.5.4",
     "tslib": "^1.10.0",
