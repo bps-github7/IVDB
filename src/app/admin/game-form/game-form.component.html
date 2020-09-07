@@ -81,7 +81,8 @@
                     <div></div>
                 </div>
             </div>
-            <!-- consoleMakers form group -->
+            <!-- consoleMakers form group: we dont acyually do anything with this value
+                 except use it to render console selection checkboxes below -->
             <div class="form-group">
                 <label for="consoleMakers">Console Makers: </label>
                 <select
@@ -93,30 +94,76 @@
                     id="consoleMakers"
                     class="form-control"
                     >
+                    <!-- bug here: console label still appears even if blank option is selected -->
                     <option value=""></option>
                     <option *ngFor="let g of (gameInfo$ | async)?.console_makers" [value]="g">
                         {{ g }}
                     </option>
                 </select>
                 <!-- does checkbox input need to be in some form control  element? -->
+                <label *ngIf="consoleMakers.value && !consoleMakers.invalid">Console: </label>
+
+                <!-- only one option can be selected at a time, and if deselected, checkbox data is lost upon reselect -->
                 
-                <!-- this conditional doesnt exactly work- you want something more complex like touched and not empty -->
-                <h3 *ngIf="consoleMakers.value">Console: </h3>
-                <div id="console_sublist"  *ngIf="consoleMakers.value == 'nintendo'">
+
+
+                <!-- checkbox list for nintendo -->
+                <div id="console_sublist"  *ngIf="consoleMakers.value == 'Nintendo'">
                     <ul>
-                        <li *ngFor="let n of (gameInfo$ | async)?.Nintendo"><input type="checkbox" name="" id=""> {{ n }}</li>
+                        <li *ngFor="let n of (gameInfo$ | async)?.Nintendo">
+                            <div class="checkbox">
+                                <label>
+                                    <!---think you have to do some behind the scenes scripting, because 
+                                        by default/ requirement, checkbox value evaluates to boolean only. 
+                                        use a method to get the actual value ----->
+
+                                    <!-- current set up not ideal because commiting to it would mean listing each possibility (approaching innumerable)
+                                    as a boolean key value pair -->
+                                    <input type="checkbox" value="n" name="console" ngModel> {{ n }}
+                                </label>
+                            </div>
+                        </li>
                     </ul>
                 </div>
-                <div id="console_sublist"  *ngIf="consoleMakers.value == 'sony'">
+                
+                <!-- checkbox list for sony -->
+                <div id="console_sublist"  *ngIf="consoleMakers.value == 'Sony'">
                     <ul>
-                        <li *ngFor="let n of (gameInfo$ | async)?.Sony"><input type="checkbox" name="" id=""> {{ n }}</li>
+                        <li *ngFor="let n of (gameInfo$ | async)?.Sony">
+                            <div class="checkbox">
+                                <label>
+                                    <input type="checkbox" name="console" value="n" ngModel> {{ n }}
+                                </label>
+                            </div>
+                        </li>
                     </ul>
                 </div>
-                <div id="console_sublist"  *ngIf="consoleMakers.value == 'microsoft'">
+                
+                <!-- checkbox list for Microsoft -->
+                <div id="console_sublist"  *ngIf="consoleMakers.value == 'Microsoft'">
                     <ul>
-                        <li *ngFor="let n of (gameInfo$ | async)?.Microsoft"><input type="checkbox" name="" id=""> {{ n }}</li>
+                        <li *ngFor="let n of (gameInfo$ | async)?.Microsoft">
+                            <label>
+                                <input type="checkbox" name="console" value="n" ngModel> {{ n }}
+                            </label>
+                        </li>
                     </ul>
                 </div>
+                
+                <!-- checkbox for PC -->
+                <div id="console_sublist"  *ngIf="consoleMakers.value == 'PC'">
+                    <ul>
+                        <li *ngFor="let n of (gameInfo$ | async)?.PC">
+                            <div class="checkbox">
+                                <label>
+                                    <input type="checkbox" name="console" value="n" ngModel> {{ n }}
+                                </label>
+                            </div>                            
+                        </li>
+                    </ul>
+                </div>
+                
+                <!-- error handling -->
                 <div *ngIf="consoleMakers.touched && consoleMakers.invalid" class="alert alert-danger">
                     <div *ngIf="consoleMakers.errors.required">Console Maker(s) is required</div>
                 </div>
@@ -156,7 +203,7 @@
                     <div *ngIf="imageUrl.errors.url">Must be a valid URL</div>
                 </div>
             </div>
-            <button class="btn btn-primary">Save/update game</button>
+            <button class="btn btn-primary" [disabled]="!finished.valid">Save/update game</button>
             <button type="button" class="btn btn-danger" (click)="delete()">Delete game</button>
         </form>
     </div>
@@ -170,3 +217,5 @@
           </div>
     </div>
 </div>
+
+<p> {{ finished.value | json }}</p>
