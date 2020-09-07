@@ -98,7 +98,25 @@
                         {{ g }}
                     </option>
                 </select>
-                <div *ngIf="consoleMakers.value == 'nintendo'">Chalp bisk and skone</div>
+                <!-- does checkbox input need to be in some form control  element? -->
+                
+                <!-- this conditional doesnt exactly work- you want something more complex like touched and not empty -->
+                <h3 *ngIf="consoleMakers.value">Console: </h3>
+                <div id="console_sublist"  *ngIf="consoleMakers.value == 'nintendo'">
+                    <ul>
+                        <li *ngFor="let n of (gameInfo$ | async)?.Nintendo"><input type="checkbox" name="" id=""> {{ n }}</li>
+                    </ul>
+                </div>
+                <div id="console_sublist"  *ngIf="consoleMakers.value == 'sony'">
+                    <ul>
+                        <li *ngFor="let n of (gameInfo$ | async)?.Sony"><input type="checkbox" name="" id=""> {{ n }}</li>
+                    </ul>
+                </div>
+                <div id="console_sublist"  *ngIf="consoleMakers.value == 'microsoft'">
+                    <ul>
+                        <li *ngFor="let n of (gameInfo$ | async)?.Microsoft"><input type="checkbox" name="" id=""> {{ n }}</li>
+                    </ul>
+                </div>
                 <div *ngIf="consoleMakers.touched && consoleMakers.invalid" class="alert alert-danger">
                     <div *ngIf="consoleMakers.errors.required">Console Maker(s) is required</div>
                 </div>
