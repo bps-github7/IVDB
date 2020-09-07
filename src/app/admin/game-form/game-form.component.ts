@@ -12,19 +12,15 @@ import { take } from 'rxjs/operators';
 })
 export class GameFormComponent implements OnInit {
     game: any={};
-    categories$;
-    creators$;
-    consoleMakers$;
+    gameInfo$;
     id;
 
     constructor(
-        private gameInfo: GameInfoService,
+        private gameInfoService: GameInfoService,
         private gameService : GameService,
         private router : Router,
         private route : ActivatedRoute) { 
-        this.categories$ = gameInfo.getCategories$();
-        this.creators$ = gameInfo.getCreators$();
-        this.consoleMakers$ = gameInfo.getConsoleMakers$();
+        this.gameInfo$ = gameInfoService.gameInfo$
            
         
         this.id = this.route.snapshot.paramMap.get('id');

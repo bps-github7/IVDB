@@ -50,8 +50,8 @@
                     class="form-control"
                     >
                     <option value=""></option>
-                    <option *ngFor="let c of categories$ | async" [value]="c.name">
-                        {{ c.name }}
+                    <option *ngFor="let g of (gameInfo$ | async)?.categories" [value]="g">
+                        {{ g }}
                     </option>
                 </select>
                 <div *ngIf="categories.touched && categories.invalid" class="alert alert-danger">
@@ -72,8 +72,8 @@
                     class="form-control"
                     >
                     <option value=""></option>
-                    <option *ngFor="let c of creators$ | async" [value]="c.name">
-                        {{ c.name }}
+                    <option *ngFor="let g of (gameInfo$ | async)?.creators" [value]="g">
+                        {{ g }}
                     </option>
                 </select>
                 <div *ngIf="creators.touched && creators.invalid" class="alert alert-danger">
@@ -94,10 +94,11 @@
                     class="form-control"
                     >
                     <option value=""></option>
-                    <option *ngFor="let c of consoleMakers$ | async" [value]="c.name">
-                        {{ c.name }}
+                    <option *ngFor="let g of (gameInfo$ | async)?.console_makers" [value]="g">
+                        {{ g }}
                     </option>
                 </select>
+                <div *ngIf="consoleMakers.value == 'nintendo'">Chalp bisk and skone</div>
                 <div *ngIf="consoleMakers.touched && consoleMakers.invalid" class="alert alert-danger">
                     <div *ngIf="consoleMakers.errors.required">Console Maker(s) is required</div>
                 </div>

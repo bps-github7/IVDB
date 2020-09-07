@@ -24,9 +24,7 @@
                         <img class="card-img-top" src="{{ g.imageUrl }}" alt="Card image cap">
                         <div class="card-body">
                             <a id="title"
-                                [routerLink]="['/games',g.key]"
-                                (click)="do_thing(g.key)">
-                                <!-- what is do_thing method of game.component.ts -->
+                                [routerLink]="['/games',g.key]">
                                 <h5 class="card-title">{{ g.title }}</h5>
                             </a>
                             <p class="card-text">{{ g.price | currency:'USD':true }}</p>

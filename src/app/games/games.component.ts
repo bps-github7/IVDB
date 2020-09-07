@@ -10,19 +10,9 @@ import { GameInfoService } from '../common/services/gameinfo.service';
 export class GamesComponent {
     games$;
     gameInfo$
-    // categories$;
-    // creators$;
-    // consoleMakers$;
 
     constructor(private gameService : GameService, private gameinfoService : GameInfoService) { 
         this.games$ = gameService.getAll$();
-        this.gameInfo$ = gameinfoService.getCategories$();
-//         this.creators$ = gameinfoService.getCreators$();
-//         this.consoleMakers$ = gameinfoService.getConsoleMakers$();
-}
-
-  do_thing(key) {
-      console.log(key);
-  }
-
+        this.gameInfo$ = gameinfoService.gameInfo$;
+    }
 }

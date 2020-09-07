@@ -9,39 +9,6 @@
         class="form-control" 
         placeholder="Search...">
 </p>
-
-<!-- wanted to try using datatable from Angular-4-datatable. but its not a good idea.
-<data-table
-    [items]="items"
-    [itemCount]="itemCount"
-    (reload)="reloadItems($event)"
->
-    <data-table-column
-        [property]="'title'"
-        [header]="'Title'"
-        [sortable]="true"
-        [resizable]="true"
-    >
-    <data-table-column
-        [property]="'price'"
-        [header]="'Price'"
-        [sortable]="true"
-        [resizable]="true"
-    >
-        <ng-template #dataTableCell let-item="game">
-            {{ game.price | currency:'USD':true }}
-        </ng-template>
-    <data-table-column
-        [property]="'key'"
-    >
-        <ng-template #dataTableCell let-item="game">
-            <a [routerLink]="['/admin/game', g.key]">edit</a>
-        </ng-template>
-    
-    </data-table-column>
-</data-table> -->
-
-
 <table class="table">
     <thead>
         <tr>
@@ -52,9 +19,9 @@
     </thead>
     <tbody>
         <tr *ngFor="let g of filteredGames">
-            <td>{{ g.payload.val().title }}</td>
-            <td>{{ g.payload.val().price }}</td>
-            <td><a [routerLink]="['/admin/game', g.key]">edit</a></td>
+            <td>{{ g?.title }}</td>
+            <td>{{ g?.price }}</td>
+            <td><a [routerLink]="['/admin/game', g?.id]">edit</a></td>
         </tr>
     </tbody>
 </table>

@@ -17,7 +17,7 @@ export class GameService {
 
     constructor(private db: AngularFirestore) {
         this.gamesCollection = this.db.collection('games');
-        this.games = this.gamesCollection.valueChanges();
+        this.games = this.gamesCollection.valueChanges({idField : 'id'});
     }
 
     //two seperate get methods for returning either firestoreDocument or Observable

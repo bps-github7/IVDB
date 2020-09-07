@@ -37,15 +37,7 @@ export class GameInfoService {
         this.gameInfo = this.gameInfoDocument.valueChanges();
     }
 
-    getCategories$() {
+    get gameInfo$() {
         return this.gameInfo;
-    }
-
-    getCreators$() {
-        return
-    }
-
-    getConsoleMakers$() {
-        return
     }
 }

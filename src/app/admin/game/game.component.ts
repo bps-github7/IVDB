@@ -26,7 +26,7 @@ export class GameComponent implements OnInit, OnDestroy {
     filter(query: string) {
         //such a goofy approach. weehh
         this.filteredGames = (query) ?
-            this.games.filter(p => p.payload.val().title.toLowerCase().includes(query.toLowerCase())) :
+            this.games.filter(p => p.title.toLowerCase().includes(query.toLowerCase())) :
             this.games;
         console.log(query);
     }
