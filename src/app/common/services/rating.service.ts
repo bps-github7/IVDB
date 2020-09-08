@@ -19,6 +19,6 @@ export class RatingService {
     game: Observable<Game>;
     
     constructor(private db: AngularFirestore, private auth: AuthService) { 
-        this.db.doc('user/'+ this.auth.uid)
+        // this.db.doc('user/'+ this.auth.uid)
     }
 }

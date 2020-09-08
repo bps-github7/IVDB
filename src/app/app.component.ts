@@ -12,10 +12,6 @@ export class AppComponent {
     title = 'ivdb';
     user;
 
-    clicky() {
-        console.log(this.auth.appUser$)
-    }
-
     constructor(private auth : AuthService, private router : Router, private userService : UserService, private route: ActivatedRoute) {
         this.auth.user$.subscribe(user => {
             if (user) {
@@ -24,8 +20,6 @@ export class AppComponent {
                 this.router.navigateByUrl(returnUrl);
             }
         })
-
-        // console.log(this.user.uid)
     }
 
     // This does not do what you want it to do!!

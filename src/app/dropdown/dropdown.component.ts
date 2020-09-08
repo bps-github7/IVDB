@@ -3,7 +3,7 @@ import { AngularFireAuth } from '@angular/fire/auth';
 import * as firebase from 'firebase';
 import { Observable } from 'rxjs';
 import { AuthService } from '../common/services/auth.service';
-import { AppUser } from '../models/app.user';
+import { User } from '../models/user';
 
 
 @Component({
@@ -12,13 +12,12 @@ import { AppUser } from '../models/app.user';
   styleUrls: ['./dropdown.component.css']
 })
 export class DropdownComponent {
-    appUser : AppUser;
+    user : User;
 
     constructor(public auth : AuthService) { 
-        auth.appUser$
-            .subscribe(appUser => this.appUser = appUser);
+        auth.user$
+            .subscribe(user => this.user = user);
     }
-
 
     logout() { this.auth.logout(); }
 }

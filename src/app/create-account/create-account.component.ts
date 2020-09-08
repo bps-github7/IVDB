@@ -4,6 +4,7 @@ import { PasswordValidators } from '../common/validators/password.validators';
 import { AuthService } from '../common/services/auth.service';
 import { Router } from '@angular/router';
 import { UserService } from '../common/services/user.service';
+import { User } from '../models/user';
 
 
 @Component({
@@ -11,8 +12,10 @@ import { UserService } from '../common/services/user.service';
   templateUrl: './create-account.component.html',
   styleUrls: ['./create-account.component.css']
 })
-export class CreateAccountComponent {
+export class CreateAccountComponent implements OnInit {
     form;
+    user : User;
+    authError: any;
 
     /*
 
@@ -27,7 +30,6 @@ export class CreateAccountComponent {
         private router : Router,
         private userService : UserService) {
         this.form = fb.group({
-            fullName: ['', Validators.required],
             //need to validate email- does it have @, domain & tld? are characters used in body valid?
             email: ['', Validators.required],
             //need to produce warning if this username already exists
@@ -46,21 +48,24 @@ export class CreateAccountComponent {
         })
     }
 
-    //getters 
-    get fullName() { return this.form.get('fullName'); }
-    
+    ngOnInit() {
+        this.auth.eventAuthError$.subscribe()
+    }
+  
     get email() { return this.form.get('email'); }
     
+    //should i go through trobule of changing name to match what its called in app? (displayNAme) prob not worth the effort
     get username() { return this.form.get('username'); }
     
     get password()  { return this.form.get('password'); }
 
     get confirmPassword() { return this.form.get('confirmPassword'); }
 
-    createAccount(email : string, password : string, username :  string ) {
-        //need to reconfigure these args so A) looks better B) all info nesc is passed to helper method.
-        this.auth.createFirebaseAccount(email, password, username)
-        // this.userService.create(this.auth.appUser$))
-        this.router.navigate(['/']);
+    createAccount() {
+        const data = {
+            email : this.email.value,
+            password: this.password.value,
+            displayName: this.username.value}
+        this.auth.createUser(data);
     }
 }

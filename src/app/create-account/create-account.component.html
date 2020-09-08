@@ -1,14 +1,7 @@
 <form>
-    <!-- full name formgroup -->
-    <div class="form-group" [formGroup]="form">
-        <label for="fullName">Full Name: </label>
-        <input 
-            formControlName="fullName"
-            class="form-control"
-            id="fullName"
-            type="text">
-        <div *ngIf="fullName.touched && fullName.invalid" class="alert alert-danger">
-            Full Name is required
+    <div *ngIf="authError">
+        <div class="alert alert-danger">
+            {{ authError?.message }}
         </div>
     </div>
 
@@ -48,12 +41,14 @@
             formControlName="password"
             class="form-control"
             id="password"
-            type="text">
+            type="password">
         <div *ngIf="password.touched && password.invalid" class="alert alert-danger">
             <div *ngIf="password.errors.required">Password is required.</div>
             <div *ngIf="password.errors.minlength">Password should be a minimum of {{ password.errors.minlength.requiredLength }} characters long.</div>
         </div>
     </div>
+    <!-- should have a checkbox to show password in clear text -->
+    
 
     <!-- confirm password formgroup -->
     <div class="form-group" [formGroup]="form">
@@ -69,7 +64,8 @@
         <div class="alert alert-danger" *ngIf="confirmPassword.valid && form.invalid && form.errors.passwordsShouldMatch">
             Passwords do not match.
         </div>
+        <!-- should have a checkbox to show password in clear text -->
+
         </div>
-    <!-- you could pass in the values collected in form as arg to createAccount -->
-    <button class="btn btn-primary" (click)="createAccount(email.value, username.value, password.value)">Submit</button>     
+        <button class="btn btn-primary" (click)="createAccount()">Submit</button>     
 </form> 

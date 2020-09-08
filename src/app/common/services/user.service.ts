@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from '@angular/fire/firestore';
 import * as firebase from 'firebase';
-import { AppUser } from '../../models/app.user';
+import { User } from '../../models/user';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -9,10 +9,10 @@ import { Observable } from 'rxjs';
 })
 export class UserService {
 
-    usersCollection : AngularFirestoreCollection<AppUser>;
-    userDocument : AngularFirestoreDocument<AppUser>;
+    usersCollection : AngularFirestoreCollection<User>;
+    userDocument : AngularFirestoreDocument<User>;
     //doubt this will be nessc..
-    Users : Observable<AppUser[]>;
+    Users : Observable<User[]>;
 
 
     constructor(private db: AngularFirestore) {
@@ -33,11 +33,16 @@ export class UserService {
 
     
 
-    async create(uid: string, data: AppUser) {
+    async create(uid: string, data: User) {
+        //trying something new. this was copied from auth.service
+
+        // const userRef: AngularFirestoreDocument<User> = this.db.doc(`users/${data.uid}`);
+
+        // return userRef.set(data, {merge : true});
         await this.db.collection('users').doc(uid).set(data);
     }
 
-    get$(uid : string): Observable<AppUser> {
+    get$(uid : string) {
         return this.db.doc('users/' + uid).valueChanges();
     }
 }

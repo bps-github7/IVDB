@@ -6,7 +6,7 @@
         id="comment" 
         cols="200" 
         rows="5"></textarea>
-    <!-- should be disabled until comment content is provided -->
+    <!-- should be disabled until comment content is provided -->    
     <button (click)="createComment(comment)" class="btn btn-primary">post</button>
 </div>
 
@@ -17,12 +17,12 @@
     </p>
     
     <ul
-        *ngIf="appUser; else guest"
+        *ngIf="user; else guest"
         class="list-group">
         <li
             *ngFor="let comment of comments"
             class="list-group-item">
-            <strong>{{ appUser.displayName }}: </strong>{{ comment.body }}
+            <strong>{{ user.uid }}: </strong>{{ comment.body }}
         </li>
     </ul>
     <!-- Bad implementation: depending on whether a user is signed in or not
