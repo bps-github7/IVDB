@@ -57,9 +57,9 @@ export class CreateAccountComponent {
 
     get confirmPassword() { return this.form.get('confirmPassword'); }
 
-    createAccount() {
-        this.auth.createFirebaseAccount(this.email.value, this.password.value, this.username.value);
-        this.userService.create(this.auth.user);
+    createAccount(email : string, password : string, username :  string ) {
+        //need to reconfigure these args so A) looks better B) all info nesc is passed to helper method.
+        this.auth.createFirebaseAccount(email, password, username)
         // this.userService.create(this.auth.appUser$))
         this.router.navigate(['/']);
     }

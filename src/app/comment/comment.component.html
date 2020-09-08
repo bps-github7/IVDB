@@ -22,7 +22,7 @@
         <li
             *ngFor="let comment of comments"
             class="list-group-item">
-            <strong>{{ appUser.name }}: </strong>{{ comment.body }}
+            <strong>{{ appUser.displayName }}: </strong>{{ comment.body }}
         </li>
     </ul>
     <!-- Bad implementation: depending on whether a user is signed in or not

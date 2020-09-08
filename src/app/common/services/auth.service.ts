@@ -7,6 +7,7 @@ import { UserService } from './user.service';
 import { AppUser } from 'src/app/models/app.user';
 import { switchMap, first } from 'rxjs/operators';
 import { FirebaseApp } from '@angular/fire';
+import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
 
 
 @Injectable({
@@ -14,19 +15,39 @@ import { FirebaseApp } from '@angular/fire';
 })
 
 export class AuthService {
-    user$: Observable<firebase.User>;
+    user$: Observable<any>;
     userDetails;
 
-    constructor(private afAuth : AngularFireAuth, private route: ActivatedRoute, private router: Router, private userService : UserService) {
-        this.user$ = afAuth.authState;
-        this.user$.subscribe(user => {
-            if (user) {
-                this.userDetails = user;
-              }
-              else {
-                this.userDetails = null;
-              }
-        })
+    constructor(private afAuth : AngularFireAuth, private db: AngularFirestore,  private route: ActivatedRoute, private router: Router, private userService : UserService) {
+        this.user$ = afAuth.authState.pipe(
+            switchMap(user => {
+                if (user) return this.db.doc<AppUser>(`users/${user.uid}`).valueChanges();
+                else return of(null);
+            })
+        );
+    }
+
+    async google_login() {
+        const provider = new firebase.auth.GoogleAuthProvider();
+        const credential = await this.afAuth.signInWithPopup(provider);
+        return this.updateUserData(credential.user);
+    }
+
+    async logout() {
+        await this.afAuth.signOut();
+        return this.router.navigate(['/']);
+    }
+
+    updateUserData(user) {
+        const userRef: AngularFirestoreDocument<AppUser> = this.db.doc(`users/${user.uid}`);
+
+        const data = {
+            uid : user.uid,
+            email : user.email,
+            displayName : user.displayName
+        }
+
+        return userRef.set(data, {merge : true});
     }
 
     get_return_url() {
@@ -34,10 +55,10 @@ export class AuthService {
         localStorage.setItem('returnUrl', returnUrl);
     }
 
-    google_login() {
-        this.get_return_url();
-        this.afAuth.signInWithRedirect(new firebase.auth.GoogleAuthProvider());
-    }
+    // google_login() {
+    //     this.get_return_url();
+    //     this.afAuth.signInWithRedirect(new firebase.auth.GoogleAuthProvider());
+    // }
 
     facebook_login() {
         this.get_return_url();
@@ -49,8 +70,9 @@ export class AuthService {
         this.get_return_url();
         firebase.auth().signInWithEmailAndPassword(email, password)
         .then((response) => {
+            //need some debugging here. I hate these callback things hardly ever understand how they actually work... :/
             const user = firebase.auth().currentUser;
-            // user.updateProfile({displayName: email})
+            this.updateUserData(user);
         })
         .catch((error) => {
             return {"error code" : error.code,
@@ -59,7 +81,7 @@ export class AuthService {
 
     }
 
-    logout() { this.afAuth.signOut(); }
+    // logout() { this.afAuth.signOut(); }
 
     createFirebaseAccount(email : string, password : string, username : string) {
         firebase.auth().createUserWithEmailAndPassword(email, password)
@@ -72,6 +94,11 @@ export class AuthService {
                 "error message" : error.message};
             })
         this.router.navigate(['/create_profile'])
+    
+
+        //thing is... you arent supposed to get logged in after creating account
+        this.login(username, password);
+        //suposed to confirm your email, then log in manually..
     }
 
     get appUser$(): Observable<AppUser> {
@@ -85,22 +112,4 @@ export class AuthService {
         );
       }
 
-
-    get authenticated(): boolean {
-        return (this.userDetails !== null) ? true : false;
-    }
-
-      // Returns current user UID
-    get uid(): string {
-        return this.authenticated ? this.userDetails.uid : '';
-    }
-
-    get currentUserDisplayName(): string {
-        return this.userDetails.displayName || this.userDetails.email; 
-    }
-
-    get user(): firebase.User {
-        if (this.authenticated) return firebase.auth().currentUser;
-        console.log("didnt authenticate!");
-    }
 }

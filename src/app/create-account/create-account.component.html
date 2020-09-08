@@ -70,5 +70,6 @@
             Passwords do not match.
         </div>
         </div>
-    <button class="btn btn-primary" (click)="createAccount()">Submit</button>     
+    <!-- you could pass in the values collected in form as arg to createAccount -->
+    <button class="btn btn-primary" (click)="createAccount(email.value, username.value, password.value)">Submit</button>     
 </form> 

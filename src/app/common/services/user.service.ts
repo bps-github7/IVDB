@@ -27,11 +27,17 @@ export class UserService {
         });
     }
 
-    create(user : firebase.User) {
-        this.db.collection('users').add({email : user.email, name : user.displayName});
+    // create(user : firebase.User) {
+    //     this.db.collection('users').add({email : user.email, name : user.displayName});
+    // }
+
+    
+
+    async create(uid: string, data: AppUser) {
+        await this.db.collection('users').doc(uid).set(data);
     }
 
     get$(uid : string): Observable<AppUser> {
-        return this.db.doc('/users/' + uid).valueChanges();
+        return this.db.doc('users/' + uid).valueChanges();
     }
 }
