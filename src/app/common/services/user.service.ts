@@ -1,48 +1,34 @@
 import { Injectable } from '@angular/core';
-import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from '@angular/fire/firestore';
+import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
 import * as firebase from 'firebase';
-import { User } from '../../models/user';
+import { User } from 'src/app/models/user';
 import { Observable } from 'rxjs';
+import { AngularFireObject } from '@angular/fire/database';
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
 
-    usersCollection : AngularFirestoreCollection<User>;
-    userDocument : AngularFirestoreDocument<User>;
-    //doubt this will be nessc..
-    Users : Observable<User[]>;
-
-
-    constructor(private db: AngularFirestore) {
-        this.usersCollection = this.db.collection('users');
-        this.Users = this.usersCollection.valueChanges();
-     }
+    constructor(private db: AngularFirestore) { }
 
     update(user: firebase.User) {
-        this.db.doc('users/' + user.uid).update({
+        const userRef: AngularFirestoreDocument<User> = this.db.doc(`users/${user.uid}`);
+
+        const data = {
             name : user.displayName,
-            email : user.email
-        });
+            email : user.email,
+            isAdmin: false,
+            uid: user.uid
+            //had to eliminate uid because of interface incongruency
+        }
+
+        return userRef.set(data, {merge : true});
     }
 
-    // create(user : firebase.User) {
-    //     this.db.collection('users').add({email : user.email, name : user.displayName});
-    // }
-
-    
-
-    async create(uid: string, data: User) {
-        //trying something new. this was copied from auth.service
-
-        // const userRef: AngularFirestoreDocument<User> = this.db.doc(`users/${data.uid}`);
-
-        // return userRef.set(data, {merge : true});
-        await this.db.collection('users').doc(uid).set(data);
+    get(uid : string): Observable<any>{
+        return this.db.doc(`users/${uid}`).valueChanges();
     }
 
-    get$(uid : string) {
-        return this.db.doc('users/' + uid).valueChanges();
-    }
 }

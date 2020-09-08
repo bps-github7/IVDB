@@ -17,6 +17,7 @@ import { AuthGuardService } from './common/services/auth-guard.service';
 import { AdminAuthGuardService } from './common/services/admin-auth-guard.service';
 import { GameInfoService } from './common/services/gameinfo.service';
 import { GameService } from './common/services/game.service';
+// import { UserService } from './common/services/user.service';
 
 
 
@@ -42,7 +43,6 @@ import { PostsComponent } from './posts/posts.component';
 import { CreateThreadComponent } from './create-thread/create-thread.component';
 import { CommentComponent } from './comment/comment.component';
 import { NotFoundComponent } from './not-found/not-found.component';
-import { UserService } from './common/services/user.service';
 import { GameComponent } from './admin/game/game.component';
 import { GameFormComponent } from './admin/game-form/game-form.component';
 import { CreateProfileComponent } from './create-profile/create-profile.component';
@@ -126,7 +126,7 @@ import { environment } from 'src/environments/environment';
   providers: [
       AuthService,
       AuthGuardService,
-      UserService,
+//      UserService,
       AdminAuthGuardService,
       GameInfoService,
       GameService

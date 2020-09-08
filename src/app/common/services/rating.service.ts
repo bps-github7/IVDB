@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
-import { AppUser } from 'src/app/models/app.user';
+import { User } from 'src/app/models/user';
 import { Game } from 'src/app/models/game';
 import { Observable } from 'rxjs';
 import { UserService } from './user.service';
@@ -12,10 +12,10 @@ import { AuthService } from './auth.service';
 
 export class RatingService {
 
-    userDoc: AngularFirestoreDocument<AppUser>;
+    userDoc: AngularFirestoreDocument<User>;
     gameDoc: AngularFirestoreDocument<Game>;
 
-    user: Observable<AppUser>;
+    user: Observable<User>;
     game: Observable<Game>;
     
     constructor(private db: AngularFirestore, private auth: AuthService) { 
