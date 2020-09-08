@@ -3,6 +3,7 @@ import { FormGroup, FormBuilder, Validators, FormControl, ControlContainer } fro
 import { PasswordValidators } from '../common/validators/password.validators';
 import { Router } from '@angular/router';
 import { User } from '../models/user';
+import { AuthService } from '../common/services/auth.service';
 
 
 @Component({
@@ -23,6 +24,7 @@ export class CreateAccountComponent {
 
     constructor(
         fb: FormBuilder,
+        private auth: AuthService,
         private router : Router) {
         this.form = fb.group({
             //need to validate email- does it have @, domain & tld? are characters used in body valid?
@@ -53,6 +55,6 @@ export class CreateAccountComponent {
     get confirmPassword() { return this.form.get('confirmPassword'); }
 
     createAccount() {
-        alert("email/password account creation not working at this time.")
+        this.auth.createUser(this.email.value, this.password.value, this.username.value)
     }
 }

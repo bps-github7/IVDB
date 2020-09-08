@@ -11,23 +11,32 @@ export class AuthService {
 
     user$: Observable<firebase.User>
 
-  constructor(private afAuth : AngularFireAuth) {
+    constructor(private afAuth : AngularFireAuth) {
       this.user$ = afAuth.authState;
-   }
+    }
 
-   google_login() {
+    google_login() {
        this.afAuth.signInWithPopup(new firebase.auth.GoogleAuthProvider);
-   }
+    }
 
-   facebook_login() {
+    facebook_login() {
        alert("facebook login not working at this time.")
-   }
+    }
 
     login(email : string, password : string) {
         this.afAuth.signInWithEmailAndPassword(email, password);
     }
 
-   logout() {
+    logout() {
        this.afAuth.signOut();
-   }
+    }
+
+    createUser(email : string, password : string, name : string) {
+        this.afAuth.createUserWithEmailAndPassword(email, password)
+        .then(userCredential => {
+            userCredential.user.updateProfile({
+                displayName: name
+            })
+        })
+    }
 }
