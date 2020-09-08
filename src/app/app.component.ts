@@ -15,7 +15,8 @@ export class AppComponent {
     constructor(private auth : AuthService, private router : Router, private userService : UserService, private route: ActivatedRoute) {
         this.auth.user$.subscribe(user => {
             if (user) {
-                this.auth.updateUserData(user);
+                //saves the most recent user date to db
+                // this.auth.updateUserData(user);
                 let returnUrl = localStorage.getItem('returnUrl');
                 this.router.navigateByUrl(returnUrl);
             }

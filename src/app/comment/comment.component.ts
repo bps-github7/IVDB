@@ -15,15 +15,10 @@ export class CommentComponent {
     private url = 'http://jsonplaceholder.typicode.com/comments';
 
     constructor(private http : HttpClient, private auth : AuthService) {
-        auth.user$.subscribe(user => this.user = user);
         http.get(this.url)
         .subscribe(response => {
             this.comments = response;
         });
-   }
-
-   clicky() {
-       console.log(this.user.uid);
    }
 
     createComment(input: HTMLInputElement ) {

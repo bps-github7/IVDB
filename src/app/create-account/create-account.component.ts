@@ -1,9 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormControl, ControlContainer } from '@angular/forms';
 import { PasswordValidators } from '../common/validators/password.validators';
-import { AuthService } from '../common/services/auth.service';
 import { Router } from '@angular/router';
-import { UserService } from '../common/services/user.service';
 import { User } from '../models/user';
 
 
@@ -12,10 +10,9 @@ import { User } from '../models/user';
   templateUrl: './create-account.component.html',
   styleUrls: ['./create-account.component.css']
 })
-export class CreateAccountComponent implements OnInit {
+export class CreateAccountComponent {
     form;
     user : User;
-    authError: any;
 
     /*
 
@@ -26,9 +23,7 @@ export class CreateAccountComponent implements OnInit {
 
     constructor(
         fb: FormBuilder,
-        private auth : AuthService,
-        private router : Router,
-        private userService : UserService) {
+        private router : Router) {
         this.form = fb.group({
             //need to validate email- does it have @, domain & tld? are characters used in body valid?
             email: ['', Validators.required],
@@ -47,11 +42,7 @@ export class CreateAccountComponent implements OnInit {
             validators: PasswordValidators.accountPasswordsShouldMatch
         })
     }
-
-    ngOnInit() {
-        this.auth.eventAuthError$.subscribe()
-    }
-  
+ 
     get email() { return this.form.get('email'); }
     
     //should i go through trobule of changing name to match what its called in app? (displayNAme) prob not worth the effort
@@ -62,10 +53,6 @@ export class CreateAccountComponent implements OnInit {
     get confirmPassword() { return this.form.get('confirmPassword'); }
 
     createAccount() {
-        const data = {
-            email : this.email.value,
-            password: this.password.value,
-            displayName: this.username.value}
-        this.auth.createUser(data);
+        alert("email/password account creation not working at this time.")
     }
 }

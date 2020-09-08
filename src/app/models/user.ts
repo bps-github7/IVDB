@@ -1,9 +1,9 @@
 export interface User {
     
-    email: string,
-    displayName: string,
+    name: string;
+    email: string;
     //  can't store this as plaintext...
     // password: string,
-    isAdmin?: boolean,
-    uid?: string
+    isAdmin: boolean;
+    uid?: string;
 }

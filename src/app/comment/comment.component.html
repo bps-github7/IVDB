@@ -17,24 +17,11 @@
     </p>
     
     <ul
-        *ngIf="user; else guest"
         class="list-group">
         <li
             *ngFor="let comment of comments"
             class="list-group-item">
-            <strong>{{ user.uid }}: </strong>{{ comment.body }}
+            <strong>guest: </strong>{{ comment.body }}
         </li>
     </ul>
-    <!-- Bad implementation: depending on whether a user is signed in or not
-    the entire list of comments is either he user name or email value of http response. -->
-    <ng-template #guest>
-        <ul
-            class="list-group">
-            <li
-                *ngFor="let comment of comments"
-                class="list-group-item">
-                <strong>{{ comment.email }}: </strong>{{ comment.body }}
-            </li>
-        </ul>
-    </ng-template>
 </aside>
