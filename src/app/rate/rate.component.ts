@@ -1,9 +1,9 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { RatingService } from '../common/services/rating.service';
-import { AngularFireDatabase } from '@angular/fire/database';
-import { Observable } from 'rxjs';
+import { Observable, from } from 'rxjs';
 import { User } from '../models/user';
-import { AngularFirestoreDocument, AngularFirestoreCollection, AngularFirestore } from '@angular/fire/firestore';
+import { StarService } from '../star.service';
+import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'rate',
@@ -17,28 +17,26 @@ export class RateComponent implements OnInit {
     @Input() userId;
     @Input() gameId;
 
-    userCollection : AngularFirestoreCollection<User[]>
-    users : Observable<User[][]>;
     user: any;
-    id = 'J4h6JejwiHZLV3UgbaNdoREwiMs2';
     stars: Observable<any>;
     avgRating: Observable<any>;
 
-    constructor(private rateService : RatingService, private afs : AngularFirestore) {
-        // this.user = rateService.give_me_user();
-        this.userCollection = this.afs.collection('users');
-        this.users = this.userCollection.valueChanges();
-
-        this.userCollection.doc(`${this.id}`).ref.get().then((doc) => {
-            this.user = doc.data();
-          });
+    //probably dont need this first dependcy. it pretty much does nothing now.
+    constructor(private rateService : RatingService, private starsService : StarService) {
     }
 
     ngOnInit(): void {
         //populate the stars observable with method from our service.
-        // this.stars = this.rateService.getStars(this.gameId)
+        this.stars = this.starsService.getGameRating(this.gameId);
 
+        this.avgRating = this.stars.pipe(map(arr => {
+            const ratings = arr.map(v => v.value)
+            return ratings.length ? ratings.reduce((total, val) => total + val)  / arr.legnth : 'not reviewed';
+        }))
     }
 
+    starHandler(value) {
+        this.starsService.setRating(this.userId, this.gameId, value);
+    }
 
 }

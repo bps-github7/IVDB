@@ -47,6 +47,7 @@ import { GameComponent } from './admin/game/game.component';
 import { GameFormComponent } from './admin/game-form/game-form.component';
 import { CreateProfileComponent } from './create-profile/create-profile.component';
 import { ViewGameComponent } from './view-game/view-game.component';
+import { ViewRatingsComponent } from './view-ratings/view-ratings.component';
 
 //environment
 import { environment } from 'src/environments/environment';
@@ -78,7 +79,8 @@ import { environment } from 'src/environments/environment';
     GameComponent,
     GameFormComponent,
     CreateProfileComponent,
-    ViewGameComponent
+    ViewGameComponent,
+    ViewRatingsComponent
     ],
   imports: [
     AngularFireModule.initializeApp(environment.firebase),
@@ -111,7 +113,7 @@ import { environment } from 'src/environments/environment';
         { path: 'create_profile', component: CreateProfileComponent, canActivate: [AuthGuardService] },
         { path: 'sign_in/profile/:username', component: ProfileComponent, canActivate: [AuthGuardService] },
         { path: 'forum/create-thread', component: CreateThreadComponent, canActivate: [AuthGuardService] },
-        { path: 'rate', component: RateComponent,  canActivate: [AuthGuardService]  },
+        { path: 'rate', component: ViewRatingsComponent,  canActivate: [AuthGuardService]  },
 
         // admin-only routes: probably dont need admin/home TBT
         { path: 'admin/game/new', component: GameFormComponent, canActivate: [AuthGuardService, AdminAuthGuardService]},

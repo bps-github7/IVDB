@@ -14,17 +14,17 @@ export class RatingService {
 
     userCollection : AngularFirestoreCollection<User[]>
     userDoc: AngularFirestoreDocument<User>;
-    // gameDoc: AngularFirestoreDocument<Game>;
+    gameDoc: AngularFirestoreDocument<Game>;
     user: Observable<User>;
-    // game: Observable<Game>;
+    game: Observable<Game>;
+    userKey
     
-    constructor(private db: AngularFirestore, private auth: AuthService) { 
-        this.userDoc = this.db.doc('user/J4h6JejwiHZLV3UgbaNdoREwiMs2');
-        this.user = this.userDoc.valueChanges();
-        // this.db.doc('user/'+ this.auth.uid)
+    constructor(private db: AngularFirestore, private auth: AuthService) {
+
     }
 
-    give_me_user() {
-        return this.user;
-    }
+    //probably dont need either of these
+    // get userId() { return this.userDoc.ref.id }
+
+    // get gameId() { return this.gameDoc.ref.id }
 }

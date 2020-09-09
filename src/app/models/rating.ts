@@ -1,5 +1,5 @@
 export interface Rating {
-    userId: number,
-    gameId: number,
+    userId: string,
+    gameId: string,
     value: number,
 }
