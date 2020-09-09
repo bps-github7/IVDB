@@ -24,19 +24,32 @@ export class UserService {
     update(user: firebase.User) {
         const userRef: AngularFirestoreDocument<User> = this.afs.doc(`users/${user.uid}`);
 
+        //need to read the database, if user.isAdmin is false or null, set permission to false, else true.
+        const permission = true
+        
+
         const data = {
             name : user.displayName,
             email : user.email,
-            isAdmin: false,
+            isAdmin: permission,
             uid: user.uid
         }
 
         return userRef.set(data, {merge : true});
     }
 
-    get(uid : string): Observable<any>{
+    get$(uid : string): Observable<any>{
         return this.afs.doc(`users/${uid}`).valueChanges();
     }
+
+    //oyyyy here be the problem i gues...
+    get(uid : string) : any {
+        this.afs.doc(`user/${uid}`).ref.get().then((doc)=> {
+            return doc.data
+        });
+    }
+
+
 
     create(user : firebase.User) {
         this.afs.collection('users').doc(user.uid).set({

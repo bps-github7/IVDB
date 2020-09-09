@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, BehaviorSubject } from 'rxjs';
 import { User } from 'src/app/models/user';
 import { AngularFireAuth } from '@angular/fire/auth';
 import * as firebase from 'firebase';
@@ -10,6 +10,8 @@ import * as firebase from 'firebase';
 export class AuthService {
 
     user$: Observable<firebase.User>
+    private eventAuthError = new BehaviorSubject<string>("");
+    public eventAuthError$ = this.eventAuthError.asObservable();
 
     constructor(private afAuth : AngularFireAuth) {
       this.user$ = afAuth.authState;
@@ -37,6 +39,11 @@ export class AuthService {
             userCredential.user.updateProfile({
                 displayName: name
             })
-        })
+        }).catch(error => {
+            console.log(error);
+            this.eventAuthError.next(error);
+        }
+
+        )
     }
 }
