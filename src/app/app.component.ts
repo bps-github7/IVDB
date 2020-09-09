@@ -11,19 +11,18 @@ import * as firebase from 'firebase';
 })
 export class AppComponent {
     title = 'ivdb';
-    user;
+    user: any;
 
     constructor(private auth : AuthService, private router : Router, private userService : UserService, private route: ActivatedRoute) {
         this.auth.user$.subscribe(user => {
             if (user) {
-                this.user = userService.get(user.uid);
+                this.user = user;
                 //saves the most recent user date to db
                 this.userService.save(user);
                 let returnUrl = localStorage.getItem('returnUrl');
                 this.router.navigateByUrl(returnUrl);
             }
         });
-        console.log("bisqqqq:" + this.user);
     }
 
     // This does not do what you want it to do!!

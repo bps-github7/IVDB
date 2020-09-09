@@ -13,11 +13,11 @@ import { User } from '../models/user';
   styleUrls: ['./dropdown.component.css']
 })
 export class DropdownComponent {
-    user : any;
+    appUser : User;
 
-    constructor(public auth : AuthService) { 
-        auth.user$
-            .subscribe(user => this.user = user);
+    constructor(private auth : AuthService) { 
+        auth.appUser$
+            .subscribe(appUser => this.appUser = appUser);
     }
 
     logout() { this.auth.logout(); }

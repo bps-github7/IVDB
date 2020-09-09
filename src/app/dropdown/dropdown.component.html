@@ -5,14 +5,14 @@
         <input id="searchbar" type="text">
         <a routerLink="/search"><button>Search</button></a>
         <ul class="dd-menu">
-            <li *ngIf="user; else anonymousUser" id="profile-nub">
+            <li *ngIf="appUser; else anonymousUser" id="profile-nub">
                 <button id="dd-btn">
                     <a routerLink="/profile">
-                        {{ user?.displayName }}
+                        {{ appUser?.name }}
                     </a>
                 </button>
                 <ul class="sub-menu">
-                    <li *ngIf="user?.isAdmin"><a routerLink="/admin/game">Adminster Games</a></li>
+                    <li *ngIf="appUser.isAdmin"><a routerLink="/admin/game">Adminster Games</a></li>
                     <li><a href="#">settings</a></li>
                     <li><a href="#" (click)="logout()">logout</a></li>
                 </ul>

@@ -3,6 +3,9 @@ import { Observable, BehaviorSubject } from 'rxjs';
 import { User } from 'src/app/models/user';
 import { AngularFireAuth } from '@angular/fire/auth';
 import * as firebase from 'firebase';
+import { switchMap } from 'rxjs/operators';
+import { UserService } from './user.service';
+import { of } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +16,7 @@ export class AuthService {
     private eventAuthError = new BehaviorSubject<string>("");
     public eventAuthError$ = this.eventAuthError.asObservable();
 
-    constructor(private afAuth : AngularFireAuth) {
+    constructor(private afAuth : AngularFireAuth, private userService : UserService) {
       this.user$ = afAuth.authState;
     }
 
@@ -45,5 +48,14 @@ export class AuthService {
         }
 
         )
+    }
+
+    get appUser$(): Observable<any> {
+        // uid is the property of the 'user' object -> the user represented by firebase as part of authentication and not the user object stored in the database
+        // We need to get the firebase 'user' object to read the actual application 'user' object from the database
+        return this.user$.pipe(switchMap(user => { 
+            if (user) { return this.userService.get(user.uid).valueChanges(); }
+            return of(null);
+        }));
     }
 }
