@@ -21,6 +21,7 @@
             <ng-container *ngFor="let g of games$ | async; let i = index">
                 <div class="col" id="gamecard">
                     <div class="card" style="width: 15rem;">
+                        <!-- clicking on the image or game title should take you to gameview component -->
                         <img class="card-img-top" src="{{ g.imageUrl }}" alt="Card image cap">
                         <div class="card-body">
                             <a id="title"
@@ -30,7 +31,7 @@
                             <p class="card-text">{{ g.price | currency:'USD':true }}</p>
                             <a href="#" class="btn btn-primary" id="buy">Buy</a>
                             <a href="#" class="btn btn-primary">Review</a>
-                            <rate [gameId]="g.key" [userId]="userId"></rate>--
+                            <rate [gameId]="g.id" [userId]="userId"></rate>--
                         </div>
                     </div>
                 </div>

@@ -29,6 +29,7 @@ export class RateComponent implements OnInit {
         //populate the stars observable with method from our service.
         this.stars = this.starsService.getGameRating(this.gameId);
 
+        //this doesnt work+++
         this.avgRating = this.stars.pipe(map(arr => {
             const ratings = arr.map(v => v.value)
             return ratings.length ? ratings.reduce((total, val) => total + val)  / arr.legnth : 'not reviewed';

@@ -22,11 +22,7 @@ export class UserService {
     }
 
     update(user: firebase.User) {
-        const userRef: AngularFirestoreDocument<User> = this.afs.doc(`users/${user.uid}`);
-
-        //need to read the database, if user.isAdmin is false or null, set permission to false, else true.
-        const permission = true
-        
+        const userRef: AngularFirestoreDocument<User> = this.afs.doc(`users/${user.uid}`); 
 
         const data = {
             name : user.displayName,
@@ -34,28 +30,27 @@ export class UserService {
             isAdmin: this.getPermissions(user),
             uid: user.uid
         }
-
         return userRef.set(data, {merge : true});
     }
 
     getPermissions(user : firebase.User) : boolean {
         //gets a specific attribute (the isAdmin field)
         //to check whether the logged in user is admin or not
-        let permissions;
+
+        // getting an error about permissions being undefined
+        // cant add initiailization without breaking this function.
+        let permissions : any;
         let current_user = this.get(user.uid).valueChanges();
         current_user.subscribe(doc => permissions = doc)
         if (permissions.isAdmin) return true
     }
 
-    //not ideal.. doesnt return an observable cause it will mess with the compilation.
     get(uid : string): AngularFirestoreDocument<User>{
         return this.afs.doc(`users/${uid}`);
     }
 
     create(user : firebase.User) {
-        //this works but not ideal, by default sets every new user
-        //to isAdmin = false. technically this is what would happen - admin users need to be verified/given permission by existing admins
-        // the fatal flaw is that an admin who recreates their account would lose their access... 
+        // BY DEFAULT: everyone has base permissions unless provided otherwise.
         this.afs.collection('users').doc(user.uid).set({
             displayName : user.displayName,
             email : user.email,

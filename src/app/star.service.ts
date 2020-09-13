@@ -28,7 +28,7 @@ export class StarService {
         const rating : Rating = {userId, gameId, value};
 
         //create unique path for each rating
-        const ratingPath = 'ratings/${rating.userId}_${rating.gameId}'
+        const ratingPath = `ratings/${rating.userId}_${rating.gameId}`
 
         //return the promise after setting data in the document
         return this.afs.doc(ratingPath).set(rating);
@@ -37,6 +37,6 @@ export class StarService {
     //seperate method for deleting a rating
     deleteRating(userId, gameId) {
         if (!confirm('Are you sure that you want to delete your rating for this game?')) return;
-        return this.afs.doc('ratings/${userId}_${gameId}').delete();
+        return this.afs.doc(`ratings/${userId}_${gameId}`).delete();
     }
 }

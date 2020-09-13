@@ -11,7 +11,7 @@ import * as firebase from 'firebase';
 })
 export class AppComponent {
     title = 'ivdb';
-    user: any;
+    user: any; //would be helpful if this could cast to User.
 
     constructor(private auth : AuthService, private router : Router, private userService : UserService, private route: ActivatedRoute) {
         this.auth.user$.subscribe(user => {
