@@ -3,6 +3,7 @@ import { GameService } from '../common/services/game.service';
 import { GameInfoService } from '../common/services/gameinfo.service';
 import { AuthService } from '../common/services/auth.service';
 import { RateComponent } from '../rate/rate.component';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-games',
@@ -14,7 +15,11 @@ export class GamesComponent {
     gameInfo$
     userId: string;
 
-    constructor(private gameService : GameService, private gameinfoService : GameInfoService, private auth: AuthService) { 
+    constructor(
+        private router : Router, 
+        private gameService : GameService,
+        private gameinfoService : GameInfoService,
+        private auth: AuthService) { 
         this.games$ = this.gameService.getAll$();
         this.gameInfo$ = this.gameinfoService.gameInfo$;
         this.auth.user$.subscribe(user => this.userId = user.uid);

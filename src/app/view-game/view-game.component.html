@@ -5,10 +5,17 @@
             <div class="card-body">
               <h5 class="card-title">{{ game.title }}</h5>
               <p class="card-text">{{ game.price | currency:'USD':true }}</p>
+              rating aparatus goes here
             </div>
-          </div>
+        </div>
     </div>
     <div class="col-md-6">
         {{ game.description }}
     </div>
+    <footer>
+        <!-- unclear what needs to happen- ngFor likely but not all cases 
+        {{ game.categories }}
+        {{ game.creators }}
+        {{ game.console_makers }} -->
+    </footer>
 </div>

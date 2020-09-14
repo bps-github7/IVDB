@@ -1,6 +1,6 @@
-###Change log
+### Change log
 
-8/12/2020 4:17pm EST
+##### 8/12/2020 4:17pm EST
 
 -made google Login 
 -facebook doesnt work yet because website doesnt have url (of course...)
@@ -8,8 +8,21 @@
 password: thelongstrengthenedbisk989&
 email : rehash576750@gmail.com
 
-*added a username dropdown item to dropdown menu.
+* added a username dropdown item to dropdown menu.
 -reorganized and refactored html/css- dropdown items now have cleaner animation
 -design choice/tradeoff- there is now a 10em bottom margin on the dropdown component (idle whitespace as of now. should brainstorm solutions) done to accodate z-index property using elements- w/out, the dropdown would be over lapped by the rest of the components rendered into markup.
 
--would like to 
+##### 9/13/2020 
+changes made while lacking internet access. meaning these need debug/testing to make sure they are well integrated.
+
+-refactored view-game component, making sure routing is all set up. this had been done already but wasnt sure it worked 100% well
+
+-added links from games.component.ts so that you can navigate to view-game by clicking on a game title or cover image.
+
+-added a default arg to rate.component.ts, the default value is rate and shows the 5 star rate thing
+    - the mode 'avg' shows what the cummulative rating for that game is (im pretty sure a method in rating or star service needs debug for this to work)
+    -the mode 'view' shows a list of every rating, should be able to sort by rating, alphebetize users, etc...
+    -the mode 'all' shows the combined features ofthis component
+-BIG IF: 
+    -not sure if the default param thing is set up correctly
+    -def not sure if the ngIf condtional is right for this kind of thing (*ngIf="mode == 'avg'")  

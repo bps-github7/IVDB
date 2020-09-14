@@ -22,16 +22,19 @@
                 <div class="col" id="gamecard">
                     <div class="card" style="width: 15rem;">
                         <!-- clicking on the image or game title should take you to gameview component -->
-                        <img class="card-img-top" src="{{ g.imageUrl }}" alt="Card image cap">
+                        <a [routerLink]="['/games/', g?.id]">
+                            <img class="card-img-top" src="{{ g.imageUrl }}" alt="Card image cap">
+                        </a>
                         <div class="card-body">
                             <a id="title"
-                                [routerLink]="['/games',g.key]">
+                                [routerLink]="['/games',g?.id]">
                                 <h5 class="card-title">{{ g.title }}</h5>
                             </a>
                             <p class="card-text">{{ g.price | currency:'USD':true }}</p>
                             <a href="#" class="btn btn-primary" id="buy">Buy</a>
                             <a href="#" class="btn btn-primary">Review</a>
-                            <rate [gameId]="g.id" [userId]="userId"></rate>--
+                            <!-- rating here is default mode so we don't need to pass in any additional arguments -->
+                            <rate [gameId]="g.id" [userId]="userId"></rate>
                         </div>
                     </div>
                 </div>

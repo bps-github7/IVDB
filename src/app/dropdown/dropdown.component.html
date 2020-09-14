@@ -7,7 +7,7 @@
         <ul class="dd-menu">
             <li *ngIf="appUser; else anonymousUser" id="profile-nub">
                 <button id="dd-btn">
-                    <a routerLink="/profile">
+                    <a [routerLink]="['/sign_in/profile/', appUser.uid]">
                         {{ appUser?.name }}
                     </a>
                 </button>

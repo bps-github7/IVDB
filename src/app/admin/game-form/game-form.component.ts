@@ -24,6 +24,7 @@ export class GameFormComponent implements OnInit {
            
         
         this.id = this.route.snapshot.paramMap.get('id');
+        
         if (this.id)
             this.game = this.gameService.get$(this.id).subscribe(g =>this.game = g);
 

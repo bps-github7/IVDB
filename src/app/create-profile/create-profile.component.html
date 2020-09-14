@@ -1,3 +1,30 @@
-<p>Garbanzo Beans on the loose!</p>
+<div class="row mt-4">
+    <form>
+        <div class="row">
+            <!-- i'd like a differnet form approach then the last couple ones.
+            some kind of basic animation would be cool- a single pagination where you can go forward or back
+            when you submit a choice, new relavant choices will appear when suitable, otherwise, if happy with choice
+            then submit the info, discard the current pagination froom view and move on to the next. -->
+            <div 
+            class="col-md-6 mb-2 form-group" 
+            [formGroup]="form">
+            <label for="nickname">Provide a nickname for your account (current is (username goes here))</label>
+                <input 
+                    formControlName="nickname"
+                    class="form-control"
+                    id="nickname"
+                    type="text">
+                    <!-- need a different type of validation- basically say: are you happy with this choice (yes/no)
+                    save it if yes, stagnate or move on if no -->
+                    <!-- <div *ngIf="email.touched && email.invalid" class="alert alert-danger">
+                    
+                    </div> -->
+                Skip this queston?
+                <!-- how to i integrate this into form? -->
+                <input type="radio"> Yes
+                <input type="radio"> No
 
-
+            </div>
+        </div>
+    </form>
+</div>

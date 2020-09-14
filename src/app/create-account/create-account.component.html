@@ -1,19 +1,21 @@
 <div class="row mt-4">
     <form>
         <div class="row">
+
             <div class="col-md-6 mb-2">
                 <h4>User Registration</h4>
             </div>
-        
+
+            <!-- if account creation fails, prevent routing and show this message -->
             <div class="col-md-6 mb-2">
                 <div class="row" *ngIf="authError">
                     <div class="col-12 alert alert-danger">
                         {{ authError?.message }}
                     </div>
                 </div>
-            </div>    
-        </div>    
+            </div>
 
+        </div>    
         <!-- email address formgroup -->
         <div class="row">
             <div 

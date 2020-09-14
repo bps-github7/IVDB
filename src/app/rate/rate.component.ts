@@ -16,20 +16,20 @@ export class RateComponent implements OnInit {
 
     @Input() userId;
     @Input() gameId;
+    @Input() mode: string = "rate";
 
     user: any;
     stars: Observable<any>;
     avgRating: Observable<any>;
 
-    //probably dont need this first dependcy. it pretty much does nothing now.
-    constructor(private rateService : RatingService, private starsService : StarService) {
+    constructor(private starsService : StarService) {
     }
 
     ngOnInit(): void {
         //populate the stars observable with method from our service.
         this.stars = this.starsService.getGameRating(this.gameId);
 
-        //this doesnt work+++
+        //this doesnt work+++ unsuprisingly
         this.avgRating = this.stars.pipe(map(arr => {
             const ratings = arr.map(v => v.value)
             return ratings.length ? ratings.reduce((total, val) => total + val)  / arr.legnth : 'not reviewed';
