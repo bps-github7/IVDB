@@ -13,11 +13,12 @@ import { AngularFirestoreModule } from '@angular/fire/firestore';
 
 //services AKA providers
 import { AuthService } from './common/services/auth.service';
-import { AuthGuardService } from './common/services/auth-guard.service';
-import { AdminAuthGuardService } from './common/services/admin-auth-guard.service';
+import { AuthGuard } from './common/services/auth-guard.service';
+import { AdminAuthGuard } from './common/services/admin-auth-guard.service';
 import { GameInfoService } from './common/services/gameinfo.service';
 import { GameService } from './common/services/game.service';
-// import { UserService } from './common/services/user.service';
+import { UserAuthGuard } from './common/services/user-auth-guard.service';
+import { UserService } from './common/services/user.service';
 
 
 
@@ -99,6 +100,9 @@ import { environment } from 'src/environments/environment';
         { path: 'sign_in/createAccount', component: CreateAccountComponent},
         { path: 'sign_in', component: SignInComponent },
         { path: 'search', component: SearchComponent },
+        { path: 'sign_in/create_profile', component: CreateProfileComponent, canActivate: [AuthGuard]},
+        { path: 'sign_in/create_profile/:username/update', component: CreateProfileComponent, canActivate: [AuthGuard, UserAuthGuard] },
+        { path: 'sign_in/profile/:username', component: ProfileComponent, canActivate: [AuthGuard] },
 
         //you'll see more on these pages if youre signed in, but can view as anonymous user.
         { path: 'forum', component: ForumComponent },
@@ -109,16 +113,14 @@ import { environment } from 'src/environments/environment';
         { path: 'watchlists', component: WatchlistsComponent },
 
         //routes for logged in users
-        // { path: 'profile', component: ProfileComponent, canActivate: [AuthGuardService] },
-        { path: 'create_profile', component: CreateProfileComponent, canActivate: [AuthGuardService] },
-        { path: 'sign_in/profile/:username', component: ProfileComponent, canActivate: [AuthGuardService] },
-        { path: 'forum/create-thread', component: CreateThreadComponent, canActivate: [AuthGuardService] },
-        { path: 'rate', component: ViewRatingsComponent,  canActivate: [AuthGuardService]  },
+        // { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard] },
+        { path: 'forum/create-thread', component: CreateThreadComponent, canActivate: [AuthGuard] },
+        { path: 'rate', component: ViewRatingsComponent,  canActivate: [AuthGuard]  },
 
         // admin-only routes: probably dont need admin/home TBT
-        { path: 'admin/game/new', component: GameFormComponent, canActivate: [AuthGuardService, AdminAuthGuardService]},
-        { path: 'admin/game/:id', component: GameFormComponent, canActivate: [AuthGuardService, AdminAuthGuardService]},
-        { path: 'admin/game', component: GameComponent,  canActivate: [AuthGuardService, AdminAuthGuardService]},
+        { path: 'admin/game/new', component: GameFormComponent, canActivate: [AuthGuard, AdminAuthGuard]},
+        { path: 'admin/game/:id', component: GameFormComponent, canActivate: [AuthGuard, AdminAuthGuard]},
+        { path: 'admin/game', component: GameComponent,  canActivate: [AuthGuard, AdminAuthGuard]},
 
 
         //wildcard for fallthrough cases.
@@ -127,11 +129,12 @@ import { environment } from 'src/environments/environment';
   ],
   providers: [
       AuthService,
-      AuthGuardService,
+      AuthGuard,
 //      UserService,
-      AdminAuthGuardService,
+      AdminAuthGuard,
       GameInfoService,
-      GameService
+      GameService,
+      UserAuthGuard
   ],
   bootstrap: [AppComponent]
 })

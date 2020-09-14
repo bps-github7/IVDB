@@ -26,3 +26,12 @@ changes made while lacking internet access. meaning these need debug/testing to 
 -BIG IF: 
     -not sure if the default param thing is set up correctly
     -def not sure if the ngIf condtional is right for this kind of thing (*ngIf="mode == 'avg'")  
+
+##### 9/14/2020
+
+-added an auth-guard userAuthGuard, which is supposed to allow users to access their profile and update.create it.
+this hasnt been implemented yet, i just entered it into the routing in app.module (returns true in all cases).
+
+-working on game and profile components seperately. mostly css so no breaking changes expected.
+
+-going to implement create-profile form now, or at least start working on that.

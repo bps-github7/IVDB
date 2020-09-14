@@ -5,26 +5,57 @@
             some kind of basic animation would be cool- a single pagination where you can go forward or back
             when you submit a choice, new relavant choices will appear when suitable, otherwise, if happy with choice
             then submit the info, discard the current pagination froom view and move on to the next. -->
-            <div 
-            class="col-md-6 mb-2 form-group" 
-            [formGroup]="form">
-            <label for="nickname">Provide a nickname for your account (current is (username goes here))</label>
-                <input 
-                    formControlName="nickname"
-                    class="form-control"
-                    id="nickname"
-                    type="text">
-                    <!-- need a different type of validation- basically say: are you happy with this choice (yes/no)
-                    save it if yes, stagnate or move on if no -->
-                    <!-- <div *ngIf="email.touched && email.invalid" class="alert alert-danger">
-                    
-                    </div> -->
-                Skip this queston?
-                <!-- how to i integrate this into form? -->
-                <input type="radio"> Yes
-                <input type="radio"> No
+            <zippy title="Public profile">
+                <div class="col-md-6 mb-2 form-group" [formGroup]="form">
+                    <label for="nickname">Provide a nickname for your account (current is (username goes here))</label>
+                    <input 
+                        formControlName="nickname"
+                        class="form-control"
+                        id="nickname"
+                        type="text">
+                </div>
+                
+                <!-- not sure if this will work/ html type is questionable/ unknown. -->
+                <div class="col-md-6 mb-2 form-group" [formGroup]="form">
+                    <label for="profile_image">Profile image: </label>
+                    <input 
+                        formControlName="profile_image"
+                        class="form-control"
+                        id="profile_image"
+                        type="image">
+                </div>
 
-            </div>
+                <div class="col-md-6 mb-2 form-group" [formGroup]="form">
+                    <label for="background image">Provide a background image for your account (optional)</label>
+                    <select 
+                        formControlName="background image"
+                        class="form-control"
+                        id="background image">
+                        <option value="Banana">Banana</option>
+                        <option value="Sundae">Sundae</option>
+                        <option value="Beachfront Estate">Beachfront estate</option>
+                </div>
+
+                <!-- should have a text entry- that displays entries once submitted. -->
+                <div class="col-md-6 mb-2 form-group" [formGroup]="form">
+                    <label for="gamer_tags">Enter gamertags (optional)</label>
+                    <input 
+                        formControlName="gamer_tags"
+                        class="form-control"
+                        id="gamer_tags"
+                        type="text">
+                </div>
+
+
+                <div class="col-md-6 mb-2 form-group" [formGroup]="form">
+                    <label for="bio">Biography/user description</label>
+                    <textarea 
+                        formControlName="bio"
+                        class="form-control"
+                        id="bio">
+                </div>
+            </zippy>
+            
         </div>
     </form>
 </div>

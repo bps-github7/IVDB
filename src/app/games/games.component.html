@@ -22,11 +22,11 @@
                 <div class="col" id="gamecard">
                     <div class="card" style="width: 15rem;">
                         <!-- clicking on the image or game title should take you to gameview component -->
-                        <a [routerLink]="['/games/', g?.id]">
+                        <a [routerLink]="['/games/', g?.id]" class="gamelink">
                             <img class="card-img-top" src="{{ g.imageUrl }}" alt="Card image cap">
                         </a>
                         <div class="card-body">
-                            <a id="title"
+                            <a id="title" class="gamelink"
                                 [routerLink]="['/games',g?.id]">
                                 <h5 class="card-title">{{ g.title }}</h5>
                             </a>

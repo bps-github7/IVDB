@@ -16,3 +16,13 @@ a {
     padding: 2px 11px;
     border: 4px goldenrod solid;
 }
+
+a.gamelink {
+    border: none;
+    text-decoration: none;
+}
+
+img {
+    max-width: 300px;
+    max-height: 450px;
+}

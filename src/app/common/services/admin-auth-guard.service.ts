@@ -7,7 +7,7 @@ import { switchMap, map } from 'rxjs/operators';
 import { User } from '../../models/user';
 import { UserService } from './user.service';
 
-export class AdminAuthGuardService implements CanActivate {
+export class AdminAuthGuard implements CanActivate {
 
     constructor(private auth: AuthService, private userService: UserService) { }
   
