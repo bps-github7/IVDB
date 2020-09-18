@@ -1,7 +1,6 @@
 <div class="row mt-4">
     <form>
         <div class="row">
-
             <!-- public profile tl-form group objectr -->
             <zippy title="Public profile">
                 <!-- nickname -->
@@ -46,6 +45,7 @@
                             <option value="Sundae">Sundae</option>
                             <option value="Beachfront Estate">Beachfront estate</option>
                             <option value="custom">Provide your own</option>
+                    </select>
                     <input *ngIf="background_img.value == 'custom'" type="image">
                     <div *ngIf="background_img.">
                         Background image not selected will result in random assignment. Ok?
@@ -69,7 +69,7 @@
                 </div>
 
                 <!-- biography/user description -->
-                <div class="col-md-6 mb-2 form-group" [formGroup]="form">
+                <div class="col-md-6 mb-2">
                     <label for="bio">Biography/user description</label>
                     <textarea 
                         #description="ngModel" 
@@ -82,7 +82,7 @@
                 </div>
                 
                 <!-- this is probably unnessecary -->
-                <div class="col-md-6 mb-2 form-group" [formGroup]="form">
+                <div class="col-md-6 mb-2">
                     <label for="links">links: (press enter )</label>
                     <input
                         #nickname="ngModel"
@@ -133,16 +133,9 @@
                 </zippy>
 
             </zippy>
-            
-
-
             <preferences-form></preferences-form>
-            
             <hr><br>
-
             <zippy title="account_settings">
-                
-
                 <!-- email form group -->
                 <div class="col-md-6 mb-2 form-group" [formGroup]="form">
                     <label for="email">email: </label>

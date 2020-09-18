@@ -51,8 +51,6 @@
         <!--preferences.current.console form group -->
         <div class="col-md-6 mb-2">
             <label for="console">Currently Owned Console(s): </label>
-            
-            
             <input
                 #current_consoles
                 type="text"
@@ -65,7 +63,7 @@
         <!--preferences.current.console form group -->
         <div class="col-md-6 mb-2 ">
             <label for="games">Currently Owned game(s): </label>
-            should be able to make multiple selection here
+            <!-- should be able to make multiple selection here -->
             <input
                 #current_games
                 [(ngModel)]="preferences.current_games"
@@ -109,9 +107,9 @@
         <!-- kind of annoying how joshes music sucks ass and you double binded everyuthing to formgroup. -->
 
 
-        seperate thing for childhood favorites.
+        <!-- seperate thing for childhood favorites.
         do this when you figure out how the 
-        formgroup nesting works.                     
+        formgroup nesting works.                      -->
     </zippy>
         
     <hr><br>
@@ -159,52 +157,41 @@
                 class="form-control"
                 id="disliked_games"
                 name="disliked_games">
-            </div>
+        </div>
 
-            <!--preferences.dislikes.console form group -->
-            <div class="col-md-6 mb-2">
-                <label for="disliked consoles">Disliked Console(s): </label>
-                <input
-                    #disliked_consoles
-                    type="text"
-                    formControlName="disliked_consoles"
-                    class="form-control"
-                    id="disliked_consoles"
-                    name="disliked_consoles">
-            </div>
+         
+        <!-- should use the lists from game_info to populate the selects -->
+        
+        <!--shoild define a cool interface for selecting games
+        also implmenet that thing pete described for picking out games. like tinder kinda. -->
 
-            <!-- should use the lists from game_info to populate the selects -->
-            
-            <!--shoild define a cool interface for selecting games
-            also implmenet that thing pete described for picking out games. like tinder kinda. -->
-
-            
-            <!--preferences.dislikes.console form group -->
-            <div class="col-md-6 mb-2">
-                <label for="disliked types of games">Disliked types of games: </label>
-                <select #disliked_categories [(ngModel)]="preferences.disliked_categories" name="disliked categories" id="disliked categories" multiple>
-                    <option *ngFor="let g of (gameInfo$ | async)?.categories" [value]="g">
-                        {{ g }}
-                </select>
-            </div>
+        
+        <!--preferences.dislikes.console form group -->
+        <div class="col-md-6 mb-2">
+            <label for="disliked types of games">Disliked types of games: </label>
+            <select #disliked_categories [(ngModel)]="preferences.disliked_categories" name="disliked categories" id="disliked categories" multiple>
+                <option *ngFor="let g of (gameInfo$ | async)?.categories" [value]="g">
+                    {{ g }}
+            </select>
+        </div>
 
 
-            <!--preferences.dislikes.creators form group -->
-            <div class="col-md-6 mb-2">
-                <label for="disliked_creators">Disliked creators: </label>
-                <select #disliked_creators [(ngModel)]="preferences.disliked_creators" name="disliked_creators" id="disliked_creators" multiple>
-                    <option *ngFor="let g of (gameInfo$ | async)?.creators" [value]="g">
-                        {{ g }}
-                </select>
-            </div>
+        <!--preferences.dislikes.creators form group -->
+        <div class="col-md-6 mb-2">
+            <label for="disliked_creators">Disliked creators: </label>
+            <select #disliked_creators [(ngModel)]="preferences.disliked_creators" name="disliked_creators" id="disliked_creators" multiple>
+                <option *ngFor="let g of (gameInfo$ | async)?.creators" [value]="g">
+                    {{ g }}
+            </select>
+        </div>
 
-            <!--preferences.dislikes.console form group -->
-            <div class="col-md-6 mb-2 form-group" [formGroup]="form">
-                <label for="disliked_consoleMakers">Disliked console makers: </label>
-                <select #disliked_consoleMakers [(ngModel)]="preferences" name="disliked_consoleMakers" id="disliked_consoleMakers" multiple>
-                    <option *ngFor="let g of (gameInfo$ | async)?.consoleMakers" [value]="g">
-                        {{ g }}
-                </select>
-            </div>
+        <!--preferences.dislikes.console form group -->
+        <div class="col-md-6 mb-2 form-group" [formGroup]="form">
+            <label for="disliked_consoleMakers">Disliked console makers: </label>
+            <select #disliked_consoleMakers [(ngModel)]="preferences" name="disliked_consoleMakers" id="disliked_consoleMakers" multiple>
+                <option *ngFor="let g of (gameInfo$ | async)?.consoleMakers" [value]="g">
+                    {{ g }}
+            </select>
+        </div>
     </zippy>
 </zippy>

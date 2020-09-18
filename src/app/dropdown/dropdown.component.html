@@ -13,7 +13,7 @@
                 </button>
                 <ul class="sub-menu">
                     <li *ngIf="appUser.isAdmin"><a routerLink="/admin/game">Adminster Games</a></li>
-                    <li><a href="#">settings</a></li>
+                    <li><a [routerLink]="['/sign_in/profile/', appUser.uid, '/update']">settings</a></li>
                     <li><a href="#" (click)="logout()">logout</a></li>
                 </ul>
             </li>
