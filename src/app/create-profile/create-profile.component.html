@@ -1,61 +1,95 @@
 <div class="row mt-4">
-    <form>
-        <div class="row">
-            <!-- i'd like a differnet form approach then the last couple ones.
-            some kind of basic animation would be cool- a single pagination where you can go forward or back
-            when you submit a choice, new relavant choices will appear when suitable, otherwise, if happy with choice
-            then submit the info, discard the current pagination froom view and move on to the next. -->
-            <zippy title="Public profile">
-                <div class="col-md-6 mb-2 form-group" [formGroup]="form">
-                    <label for="nickname">Provide a nickname for your account (current is (username goes here))</label>
-                    <input 
-                        formControlName="nickname"
-                        class="form-control"
-                        id="nickname"
-                        type="text">
-                </div>
-                
-                <!-- not sure if this will work/ html type is questionable/ unknown. -->
-                <div class="col-md-6 mb-2 form-group" [formGroup]="form">
-                    <label for="profile_image">Profile image: </label>
-                    <input 
-                        formControlName="profile_image"
-                        class="form-control"
-                        id="profile_image"
-                        type="image">
-                </div>
+    <form #profile>
+        <h3>Public Profile: </h3>
+    
+        <article class="row">
+            <div class="col-md-6 mb-2">
+                <label for="nickname">Provide a nickname for your account (current: username)</label>
+                <input
+                    id="nickname"
+                    class="form-control"
+                    required
+                    name="nickname"
+                    type="text">
+            </div>
 
-                <div class="col-md-6 mb-2 form-group" [formGroup]="form">
-                    <label for="background image">Provide a background image for your account (optional)</label>
-                    <select 
-                        formControlName="background image"
-                        class="form-control"
-                        id="background image">
+            <div class="col-md-6 mb-2 form-group">
+                <label for="profile_image">Profile image: </label>
+                <input 
+                    id="image"
+                    class="form-control"
+                    required
+                    [(ngModel)]="profile.image"
+                    name="image"
+                    type="image">
+            </div>
+<!--     
+            <div class="col-md-6 mb-2">
+                <label for="background_image">Provide a background image for your account (optional)</label>
+                <select
+                    multiple
+                    required
+                    [(ngModel)]="profile.background_img"
+                    name="background_img" 
+                    id="background_img"
+                    class="form-control">
                         <option value="Banana">Banana</option>
                         <option value="Sundae">Sundae</option>
                         <option value="Beachfront Estate">Beachfront estate</option>
+                        <option value="custom">Provide your own</option>
+                </select>
+                <input *ngIf="background_img.value == 'custom'" type="image">
+                <div *ngIf="background_img.value">
+                    Background image not selected will result in random assignment. Ok?
+                    <input type="radio" name="yes" id="yes"> yes
+                    <input type="radio" name="no" id="no"> no 
                 </div>
+            </div>
+    
+            <div class="col-md-6 mb-2">
+                <label for="gamer_tags">Enter gamertags (optional)</label>
+                <input id="gamer_tags"
+                    [(ngModel)]="profile.gamer_tags"
+                    class="form-control"
+                    name="gamer_tags"
+                    type="text">
+            </div>
+    
+            <div class="col-md-6 mb-2">
+                <label for="bio">Biography/user description</label>
+                <textarea 
+                    name="bio"
+                    id="bio"
+                    [(ngModel)]="profile.bio"
+                    class="form-control"
+                    cols="30"
+                    rows="10"
+                    [(ngModel)]="profile.bio">
+            </div>
 
-                <!-- should have a text entry- that displays entries once submitted. -->
-                <div class="col-md-6 mb-2 form-group" [formGroup]="form">
-                    <label for="gamer_tags">Enter gamertags (optional)</label>
-                    <input 
-                        formControlName="gamer_tags"
-                        class="form-control"
-                        id="gamer_tags"
-                        type="text">
-                </div>
 
-
-                <div class="col-md-6 mb-2 form-group" [formGroup]="form">
-                    <label for="bio">Biography/user description</label>
-                    <textarea 
-                        formControlName="bio"
-                        class="form-control"
-                        id="bio">
-                </div>
-            </zippy>
             
-        </div>
+            <div class="col-md-6 mb-2">
+                <label for="links">links: (press enter )</label>
+                <input
+                
+                    id="links"
+                    class="form-control"
+                    [(ngModel)]="profile.links"
+                    name="links"
+                    type="text">
+            </div>
+
+            
+            
+            
+            <p>gamertags should behabe just like the above</p>
+    
+            
+            <div id="gamer_tags-container">
+                for posting gamer tags submitted through above.
+                get this looking right, float it to the right. 
+            </div> -->
+        </article>
     </form>
 </div>

@@ -1,0 +1,276 @@
+<!-- preferences tl-form-group object -->
+<zippy title="preferences">
+    <!-- favorites ml formgroup object -->
+    <zippy title="favorites">
+        <!-- preferences.favorite.games form group -->
+        <div class="col-md-6 mb-2">
+        <label for="fav_games">Favorite Game(s): </label>
+        <input
+            #fav_games="ngModel"
+            id="fav_games"
+            class="form-control"
+            [(ngModel)]="preferences.fav_games"
+            name="fav_games"
+            type="text">
+        </div>
+
+        <!--preferences.favorite.console form group -->
+        <div class="col-md-6 mb-2">
+            <label for="fav_console">Favorite Console(s): </label>
+            <input
+                #fav_console
+                type="text"
+                formControlName="fav_console"
+                [(ngModel)]="preferences.fav_console"
+                class="form-control"
+                id="fav_console"
+                name="fav_console">
+        </div>
+        <!-- should be a multi select thing- the above two ^^^ -->
+
+        <!--preferences.favorite.types form group -->
+        <div class="col-md-6 mb-2 form-group">
+            <label for="types">Favorite type(s) of games: </label>
+            <select
+                #fav_types
+                [(ngModel)]="preferences.fav_types"
+                class="form-control"
+                id="fav_types"
+                name="fav_types">
+                <option *ngFor="let g of (gameInfo$ | async)?.categories" [value]="g">
+                    {{ g }}
+            </select>
+        </div>
+        <!-- probably want a scroll banner for this one. explain what we mean by this -->
+    </zippy>
+
+    <hr><br>
+
+    <!-- current ml formgroup object -->
+    <zippy title="current">
+        <!--preferences.current.console form group -->
+        <div class="col-md-6 mb-2">
+            <label for="console">Currently Owned Console(s): </label>
+            <input
+                #current_consoles
+                type="text"
+                formControlName="current_console"
+                class="form-control"
+                id="current_console"
+                name="current_console">
+        </div>
+
+        <!--preferences.current.console form group -->
+        <div class="col-md-6 mb-2 ">
+            <label for="games">Currently Owned game(s): </label>
+            <!-- should be able to make multiple selection here -->
+            <input
+                #current_games
+                [(ngModel)]="preferences.current_games"
+                type="text"
+                formControlName="current_games"
+                class="form-control"
+                id="current_games"
+                name="current_games">
+        </div>
+
+    </zippy>
+
+    <hr><br>
+
+    <!--"historic" ml-formgroup-object -->
+    <zippy title="historic">
+        <!--preferences.historic.first_console form group -->
+        <div class="col-md-6 mb-2 form-group">
+            <label for="first_console">first console ever owned: </label>
+            <input
+                #first_console
+                [(ngModel)]="preferences.first_console"
+                type="text"
+                formControlName="first_console"
+                class="form-control"
+                id="first_console"
+                name="first_console">
+        </div>
+
+        <!--preferences.historic.first_game form group -->
+        <div class="col-md-6 mb-2">
+            <label for="first_game">first game ever owned: </label>
+            <input
+                #first_game
+                type="text"
+                formControlName="first_game"
+                class="form-control"
+                id="first_game"
+                name="first_game">
+        </div>
+        <!-- kind of annoying how joshes music sucks ass and you double binded everyuthing to formgroup. -->
+
+
+        <!-- seperate thing for childhood favorites.
+        do this when you figure out how the 
+        formgroup nesting works.                      -->
+    </zippy>
+        
+    <hr><br>
+
+    <!--"most recently purchased" ml-formgroup object -->
+    <zippy title="most_recently-purchased">
+        <!-- preferences.favorite.games form group -->
+        <div class="col-md-6 mb-2">
+        <label for="recently purchased games">Recently Purchased Game(s): </label>
+        <input
+            #recently_purchased_games
+            [(ngModel)]="preferences.recently_purchased_games"
+            type="text"
+            formControlName="recently_purchased_games"
+            class="form-control"
+            id="recently_purchased_games"
+            name="recently_purchased_games">
+        </div>
+
+        <!--preferences.favorite.console form group -->
+        <div class="col-md-6 mb-2">
+            <label for="consoles">Recently Purchased Console(s): </label>
+            <input
+                #recently_purchased_console
+                type="text"
+                formControlName="recently_purchased_consoles"
+                class="form-control"
+                id="recently_purchased_consoles"
+                name="recently_purchased_consoles">
+        </div>
+
+    </zippy>
+
+    <hr><br>
+
+    <!-- "dislikes" ml-formgroup-object  -->
+    <zippy>
+        <!-- preferences.dislikes.games form group -->
+        <div class="col-md-6 mb-2">
+            <label for="disliked_games">Disliked Game(s): </label>
+            <input
+                #disliked_games
+                type="text"
+                formControlName="disliked_games"
+                class="form-control"
+                id="disliked_games"
+                name="disliked_games">
+        </div>
+
+         
+        <!-- should use the lists from game_info to populate the selects -->
+        
+        <!--shoild define a cool interface for selecting games
+        also implmenet that thing pete described for picking out games. like tinder kinda. -->
+
+        
+        <!--preferences.dislikes.console form group -->
+        <div class="col-md-6 mb-2">
+            <label for="disliked types of games">Disliked types of games: </label>
+            <select #disliked_categories [(ngModel)]="preferences.disliked_categories" name="disliked categories" id="disliked categories" multiple>
+                <option *ngFor="let g of (gameInfo$ | async)?.categories" [value]="g">
+                    {{ g }}
+            </select>
+        </div>
+
+
+        <!--preferences.dislikes.creators form group -->
+        <div class="col-md-6 mb-2">
+            <label for="disliked_creators">Disliked creators: </label>
+            <select #disliked_creators [(ngModel)]="preferences.disliked_creators" name="disliked_creators" id="disliked_creators" multiple>
+                <option *ngFor="let g of (gameInfo$ | async)?.creators" [value]="g">
+                    {{ g }}
+            </select>
+        </div>
+
+        <!--preferences.dislikes.console form group -->
+        <div class="col-md-6 mb-2 form-group">
+            <label for="disliked_consoleMakers">Disliked console makers: </label>
+            <select #disliked_consoleMakers [(ngModel)]="preferences" name="disliked_consoleMakers" id="disliked_consoleMakers" multiple>
+                <option *ngFor="let g of (gameInfo$ | async)?.consoleMakers" [value]="g">
+                    {{ g }}
+            </select>
+        </div>
+    </zippy>
+</zippy>
+
+<!-- from the first form` -->
+<br><hr>
+<article class="row">
+    <h3>Display Preferences</h3>
+    <div class="col-md-6 mb-2">
+        <!-- Complete preferences: now or later
+        can we have scroll over banner for this: explain what the hell this means..? -->
+        <label for="completion">Completing Preferences (priority:  now or later)</label>
+        <!-- we dont need to save this info to profile. it just informs the appearance of the rest of this form. -->
+        <input
+            #completion="ngModel"
+            id="completion"
+            class="form-control"
+            [(ngModel)]="profile.completion"
+            name="completion"
+            type="radio">
+        <!-- need to figure out radio buttons from pwm -->
+    </div>
+
+    <div class="col-md-6 mb-2">
+
+        <!-- Display all - yes or no; if no, create a second input to select
+        which things to display on profile. again, scroll banner here.
+ -->
+        <label for="links">Completing Preferences (priority:  now or later)</label>
+        <!-- we dont need to save this info to profile. it just informs the appearance of the rest of this form. -->
+        
+        <input type="radio" name="yes" id="radio_btn">yes
+        <input type="radio" name="no" id="radio_btn">no
+        if no, provide input for them to say what to display
+    </div>
+</article>
+
+<hr><br>
+
+<article class="row">
+    <!-- <preferences-form></preferences-form> -->
+</article>
+
+
+
+<hr><br>
+
+<article class="row">    
+    <div class="col-md-6 mb-2 form-group" [formGroup]="form">
+        <label for="email">email: </label>
+        <input
+            type="text"
+            formControlName="email"
+            class="form-control"
+            id="email"
+            name="email">
+    </div>
+
+    <div class="col-md-6 mb-2 form-group" [formGroup]="form">
+        <label for="display_name">display_name: </label>
+        <input
+            type="text"
+            formControlName="display_name"
+            class="form-control"
+            id="display_name"
+            name="display_name">
+    </div>
+
+    <div class="col-md-6 mb-2 form-group" [formGroup]="form">
+        <label for="password">password: </label>
+        <input
+            type="password"
+            formControlName="password"
+            class="form-control"
+            id="password"
+            name="password">
+    </div>
+
+    <p>same shit as on create-account for creating password <br>
+        should make a component
+    </p>
+</article>

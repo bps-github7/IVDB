@@ -52,6 +52,7 @@ import { ViewRatingsComponent } from './view-ratings/view-ratings.component';
 
 //environment
 import { environment } from 'src/environments/environment';
+import { PreferencesFormComponent } from './preferences-form/preferences-form.component';
 
 
 @NgModule({
@@ -81,7 +82,8 @@ import { environment } from 'src/environments/environment';
     GameFormComponent,
     CreateProfileComponent,
     ViewGameComponent,
-    ViewRatingsComponent
+    ViewRatingsComponent,
+    PreferencesFormComponent
     ],
   imports: [
     AngularFireModule.initializeApp(environment.firebase),
