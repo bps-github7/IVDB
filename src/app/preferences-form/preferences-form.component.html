@@ -186,7 +186,7 @@
         </div>
 
         <!--preferences.dislikes.console form group -->
-        <div class="col-md-6 mb-2 form-group" [formGroup]="form">
+        <div class="col-md-6 mb-2 form-group">
             <label for="disliked_consoleMakers">Disliked console makers: </label>
             <select #disliked_consoleMakers [(ngModel)]="preferences" name="disliked_consoleMakers" id="disliked_consoleMakers" multiple>
                 <option *ngFor="let g of (gameInfo$ | async)?.consoleMakers" [value]="g">
@@ -195,3 +195,82 @@
         </div>
     </zippy>
 </zippy>
+
+<!-- from the first form` -->
+<br><hr>
+<article class="row">
+    <h3>Display Preferences</h3>
+    <div class="col-md-6 mb-2">
+        <!-- Complete preferences: now or later
+        can we have scroll over banner for this: explain what the hell this means..? -->
+        <label for="completion">Completing Preferences (priority:  now or later)</label>
+        <!-- we dont need to save this info to profile. it just informs the appearance of the rest of this form. -->
+        <input
+            #completion="ngModel"
+            id="completion"
+            class="form-control"
+            [(ngModel)]="profile.completion"
+            name="completion"
+            type="radio">
+        <!-- need to figure out radio buttons from pwm -->
+    </div>
+
+    <div class="col-md-6 mb-2">
+
+        <!-- Display all - yes or no; if no, create a second input to select
+        which things to display on profile. again, scroll banner here.
+ -->
+        <label for="links">Completing Preferences (priority:  now or later)</label>
+        <!-- we dont need to save this info to profile. it just informs the appearance of the rest of this form. -->
+        
+        <input type="radio" name="yes" id="radio_btn">yes
+        <input type="radio" name="no" id="radio_btn">no
+        if no, provide input for them to say what to display
+    </div>
+</article>
+
+<hr><br>
+
+<article class="row">
+    <!-- <preferences-form></preferences-form> -->
+</article>
+
+
+
+<hr><br>
+
+<article class="row">    
+    <div class="col-md-6 mb-2 form-group" [formGroup]="form">
+        <label for="email">email: </label>
+        <input
+            type="text"
+            formControlName="email"
+            class="form-control"
+            id="email"
+            name="email">
+    </div>
+
+    <div class="col-md-6 mb-2 form-group" [formGroup]="form">
+        <label for="display_name">display_name: </label>
+        <input
+            type="text"
+            formControlName="display_name"
+            class="form-control"
+            id="display_name"
+            name="display_name">
+    </div>
+
+    <div class="col-md-6 mb-2 form-group" [formGroup]="form">
+        <label for="password">password: </label>
+        <input
+            type="password"
+            formControlName="password"
+            class="form-control"
+            id="password"
+            name="password">
+    </div>
+
+    <p>same shit as on create-account for creating password <br>
+        should make a component
+    </p>
+</article>

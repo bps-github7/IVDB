@@ -1,181 +1,95 @@
 <div class="row mt-4">
-    <form>
-        <div class="row">
-            <!-- public profile tl-form group objectr -->
-            <zippy title="Public profile">
-                <!-- nickname -->
-                <div class="col-md-6 mb-2">
-                    <label for="nickname">Provide a nickname for your account (current: {{ user.name }})</label>
-                    <input 
-                        #nickname="ngModel"
-                        id="nickname"
-                        class="form-control"
-                        required
-                        [(ngModel)]="profile.nickname"
-                        name="nickname"
-                        type="text"
-                    >
+    <form #profile>
+        <h3>Public Profile: </h3>
+    
+        <article class="row">
+            <div class="col-md-6 mb-2">
+                <label for="nickname">Provide a nickname for your account (current: username)</label>
+                <input
+                    id="nickname"
+                    class="form-control"
+                    required
+                    name="nickname"
+                    type="text">
+            </div>
+
+            <div class="col-md-6 mb-2 form-group">
+                <label for="profile_image">Profile image: </label>
+                <input 
+                    id="image"
+                    class="form-control"
+                    required
+                    [(ngModel)]="profile.image"
+                    name="image"
+                    type="image">
+            </div>
+<!--     
+            <div class="col-md-6 mb-2">
+                <label for="background_image">Provide a background image for your account (optional)</label>
+                <select
+                    multiple
+                    required
+                    [(ngModel)]="profile.background_img"
+                    name="background_img" 
+                    id="background_img"
+                    class="form-control">
+                        <option value="Banana">Banana</option>
+                        <option value="Sundae">Sundae</option>
+                        <option value="Beachfront Estate">Beachfront estate</option>
+                        <option value="custom">Provide your own</option>
+                </select>
+                <input *ngIf="background_img.value == 'custom'" type="image">
+                <div *ngIf="background_img.value">
+                    Background image not selected will result in random assignment. Ok?
+                    <input type="radio" name="yes" id="yes"> yes
+                    <input type="radio" name="no" id="no"> no 
                 </div>
+            </div>
+    
+            <div class="col-md-6 mb-2">
+                <label for="gamer_tags">Enter gamertags (optional)</label>
+                <input id="gamer_tags"
+                    [(ngModel)]="profile.gamer_tags"
+                    class="form-control"
+                    name="gamer_tags"
+                    type="text">
+            </div>
+    
+            <div class="col-md-6 mb-2">
+                <label for="bio">Biography/user description</label>
+                <textarea 
+                    name="bio"
+                    id="bio"
+                    [(ngModel)]="profile.bio"
+                    class="form-control"
+                    cols="30"
+                    rows="10"
+                    [(ngModel)]="profile.bio">
+            </div>
+
+
+            
+            <div class="col-md-6 mb-2">
+                <label for="links">links: (press enter )</label>
+                <input
                 
-                <!--Profile image form group: is image a valid attr for input element?-->
-                <div class="col-md-6 mb-2 form-group">
-                    <label for="profile_image">Profile image: </label>
-                    <input 
-                        #nickname="ngModel"
-                        id="image"
-                        class="form-control"
-                        required
-                        [(ngModel)]="profile.image"
-                        name="image"
-                        type="image">
-                </div>
+                    id="links"
+                    class="form-control"
+                    [(ngModel)]="profile.links"
+                    name="links"
+                    type="text">
+            </div>
 
-                <!-- background image -->
-                <div class="col-md-6 mb-2">
-                    <label for="background_image">Provide a background image for your account (optional)</label>
-                    <select
-                        #consoleMakers="ngModel"
-                        multiple
-                        required
-                        [(ngModel)]="profile.background_img"
-                        name="background_img" 
-                        id="background_img"
-                        class="form-control">
-                            <option value="Banana">Banana</option>
-                            <option value="Sundae">Sundae</option>
-                            <option value="Beachfront Estate">Beachfront estate</option>
-                            <option value="custom">Provide your own</option>
-                    </select>
-                    <input *ngIf="background_img.value == 'custom'" type="image">
-                    <div *ngIf="background_img.">
-                        Background image not selected will result in random assignment. Ok?
-                        <input type="radio" name="yes" id="yes"> yes
-                        <input type="radio" name="no" id="no"> no 
-                        <!---If no is selected, highlight the parent div red and prevent
-                        the form from being submitted without a selection being made.--->
-                    </div>
-                </div>
-
-                <!-- should have a text entry- that displays entries once submitted. -->
-                <div class="col-md-6 mb-2">
-                    <label for="gamer_tags">Enter gamertags (optional)</label>
-                    <input 
-                        #nickname="ngModel"
-                        id="gamer_tags"
-                        class="form-control"
-                        [(ngModel)]="profile.gamer_tags"
-                        name="gamer_tags"
-                        type="text">
-                </div>
-
-                <!-- biography/user description -->
-                <div class="col-md-6 mb-2">
-                    <label for="bio">Biography/user description</label>
-                    <textarea 
-                        #description="ngModel" 
-                        name="bio"
-                        id="bio"
-                        class="form-control"
-                        cols="30"
-                        rows="10"
-                        [(ngModel)]="profile.bio">
-                </div>
-                
-                <!-- this is probably unnessecary -->
-                <div class="col-md-6 mb-2">
-                    <label for="links">links: (press enter )</label>
-                    <input
-                        #nickname="ngModel"
-                        id="gamer_tags"
-                        class="form-control"
-                        [(ngModel)]="profile.gamer_tags"
-                        name="gamer_tags"
-                        type="text">
-                </div>
-
-                
-                <div id="gamer_tags-container">
-                    for posting gamer tags submitted through above.
-                    get this looking right, float it to the right. 
-                </div>
-
-                <zippy title="display preferences">
-                    <!-- Complete preferences: now or later
-                    can we have scroll over banner for this: explain what the hell this means..? -->
-                    <div class="col-md-6 mb-2">
-                        <label for="completion">Completing Preferences (priority:  now or later)</label>
-                        <!-- we dont need to save this info to profile. it just informs the appearance of the rest of this form. -->
-                        <input
-                            #nickname="ngModel"
-                            id="completion"
-                            class="form-control"
-                            [(ngModel)]="profile.completion"
-                            name="completion"
-                            type="radio">
-
-                        <!-- need to figure out radio buttons from pwm -->
-                    </div>
-
-                    <!-- Display all - yes or no; if no, create a second input to select
-                    which things to display on profile. again, scroll banner here. -->
-                    <div class="col-md-6 mb-2">
-                        <label for="links">Completing Preferences (priority:  now or later)</label>
-                        we dont need to save this info to profile. it just informs the appearance of the rest of this form.
-                        
-                        <input type="radio" name="yes" id="radio_btn">yes
-                        <input type="radio" name="no" id="radio_btn">no
-                        if no, provide input for them to say what to display
-
-                    </div>
-
-
-
-                </zippy>
-
-            </zippy>
-            <preferences-form></preferences-form>
-            <hr><br>
-            <zippy title="account_settings">
-                <!-- email form group -->
-                <div class="col-md-6 mb-2 form-group" [formGroup]="form">
-                    <label for="email">email: </label>
-                    <input
-                        type="text"
-                        formControlName="email"
-                        class="form-control"
-                        id="email"
-                        name="email">
-                </div>
-
-                <!-- display_name form group -->
-                <div class="col-md-6 mb-2 form-group" [formGroup]="form">
-                    <label for="display_name">display_name: </label>
-                    <input
-                        type="text"
-                        formControlName="display_name"
-                        class="form-control"
-                        id="display_name"
-                        name="display_name">
-                </div>
-
-                <!-- password form group -->
-                <div class="col-md-6 mb-2 form-group" [formGroup]="form">
-                    <label for="password">password: </label>
-                    <input
-                        type="password"
-                        formControlName="password"
-                        class="form-control"
-                        id="password"
-                        name="password">
-                </div>
-
-                <!-- same apparatus here as create-account
-                    -checkboxfor show password
-                    -confirm password appears when user wants to change this field.  -->
-
-
-                password
-            </zippy>
-        </div>
+            
+            
+            
+            <p>gamertags should behabe just like the above</p>
+    
+            
+            <div id="gamer_tags-container">
+                for posting gamer tags submitted through above.
+                get this looking right, float it to the right. 
+            </div> -->
+        </article>
     </form>
 </div>

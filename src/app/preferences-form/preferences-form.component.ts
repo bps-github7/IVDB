@@ -9,6 +9,7 @@ import { GameInfoService } from '../common/services/gameinfo.service';
 export class PreferencesFormComponent implements OnInit {
 
     gameInfo$;
+    preferences;
 
     constructor(
         private gameinfoService : GameInfoService) { 
