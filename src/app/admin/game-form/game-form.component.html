@@ -50,7 +50,7 @@
                     class="form-control"
                     >
                     <option value=""></option>
-                    <option *ngFor="let g of (gameInfo$ | async)?.categories" [value]="g">
+                    <option *ngFor="let g of gameInfo$" [value]="g">
                         {{ g }}
                     </option>
                 </select>
@@ -72,7 +72,7 @@
                     class="form-control"
                     >
                     <option value=""></option>
-                    <option *ngFor="let g of (gameInfo$ | async)?.creators" [value]="g">
+                    <option *ngFor="let g of gameInfo$ | async" [value]="g">
                         {{ g }}
                     </option>
                 </select>
@@ -96,8 +96,8 @@
                     >
                     <!-- bug here: console label still appears even if blank option is selected -->
                     <option value=""></option>
-                    <option *ngFor="let g of (gameInfo$ | async)?.console_makers" [value]="g">
-                        {{ g }}
+                    <option *ngFor="let g of gameInfo$" [value]="g">
+                        {{ g?.Console }}
                     </option>
                 </select>
                 <!-- does checkbox input need to be in some form control  element? -->
@@ -153,7 +153,8 @@
                 <!-- checkbox for PC -->
                 <div id="console_sublist"  *ngIf="consoleMakers.value == 'PC'">
                     <ul>
-                        <li *ngFor="let n of (gameInfo$ | async)?.PC">
+                        <li *ngFor="let n of (gameInfo$ | async)?.PC"> 
+                            <!-- where(some attribute == "pc").then(do some stuff w this) -->
                             <div class="checkbox">
                                 <label>
                                     <input type="checkbox" name="console" value="n" ngModel> {{ n }}

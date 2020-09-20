@@ -1,5 +1,5 @@
 <div class="row mt-4">
-    <form #profile>
+    <form>
         <zippy title="Public Profile: " class="row">
             <div class="form-group col-md-6 mb-2">
                 <label for="nickname">Provide a nickname for your account (current: username)</label>
@@ -34,22 +34,14 @@
                         <option value="Beachfront Estate">Beachfront estate</option>
                         <option value="custom">Provide your own</option>
                 </select>
-                <input *ngIf="background_img.value == 'custom'" type="text">
+                <!-- <input *ngIf="background_img.errorvalue == 'custom'" type="text">
                 <div *ngIf="background_img.value">
                     Background image not selected will result in random assignment. Ok?
                     <input type="radio" name="yes" id="yes"> yes
                     <input type="radio" name="no" id="no"> no 
-                </div>
+                </div> -->
             </div>
-    
-            <div class="col-md-6 mb-2 form-group">
-                <label for="gamer_tags">Enter gamertags (optional)</label>
-                <input id="gamer_tags"
-                    class="form-control"
-                    name="gamer_tags"
-                    type="text">
-            </div>
-    
+
             <div class="col-md-6 mb-2 form-group">
                 <label for="bio">Biography/user description</label>
                 <textarea 
@@ -57,9 +49,10 @@
                     id="bio"
                     class="form-control"
                     cols="30"
-                    rows="10">
+                    rows="10"></textarea>
             </div>
 
+            <p>float to the right: Links go here:</p>
 
             
             <div class="col-md-6 mb-2 form-group">
@@ -71,13 +64,24 @@
                     type="text">
             </div>
             
-            <p>gamertags should behabe just like the above</p>
-    
-            
-            <div id="gamer_tags-container">
-                for posting gamer tags submitted through above.
-                get this looking right, float it to the right. 
-            </div>
+            <p>Float to the right / gamertags go here:</p>
+
+            <div class="col-md-6 mb-2 form-group">
+                <label for="gamer_tags">Enter gamertags</label>
+                <input id="gamer_tags"
+                    class="form-control"
+                    name="gamer_tags"
+                    type="text">
+            </div> 
         </zippy>
     </form>
+    <div class="col-md-6">
+        <div class="card" style="width: 18rem;">
+            <!-- <img class="card-img-top" [src]="game.imageUrl" alt="Cover of the game being created or edited">
+            <div class="card-body">
+              <h5 class="card-title">{{ game.title }}</h5>
+              <p class="card-text">{{ game.price | currency:'USD':true }}</p>
+            </div> -->
+          </div>
+    </div>
 </div>
