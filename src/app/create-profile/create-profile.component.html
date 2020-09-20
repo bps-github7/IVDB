@@ -1,14 +1,12 @@
 <div class="row mt-4">
     <form #profile>
-        <h3>Public Profile: </h3>
-    
-        <article class="row">
-            <div class="col-md-6 mb-2">
+        <zippy title="Public Profile: " class="row">
+            <div class="form-group col-md-6 mb-2">
                 <label for="nickname">Provide a nickname for your account (current: username)</label>
                 <input
+                    required
                     id="nickname"
                     class="form-control"
-                    required
                     name="nickname"
                     type="text">
             </div>
@@ -19,17 +17,15 @@
                     id="image"
                     class="form-control"
                     required
-                    [(ngModel)]="profile.image"
                     name="image"
-                    type="image">
+                    type="text">
             </div>
-<!--     
-            <div class="col-md-6 mb-2">
+    
+            <div class="col-md-6 mb-2 form-group">
                 <label for="background_image">Provide a background image for your account (optional)</label>
                 <select
                     multiple
                     required
-                    [(ngModel)]="profile.background_img"
                     name="background_img" 
                     id="background_img"
                     class="form-control">
@@ -38,7 +34,7 @@
                         <option value="Beachfront Estate">Beachfront estate</option>
                         <option value="custom">Provide your own</option>
                 </select>
-                <input *ngIf="background_img.value == 'custom'" type="image">
+                <input *ngIf="background_img.value == 'custom'" type="text">
                 <div *ngIf="background_img.value">
                     Background image not selected will result in random assignment. Ok?
                     <input type="radio" name="yes" id="yes"> yes
@@ -46,42 +42,34 @@
                 </div>
             </div>
     
-            <div class="col-md-6 mb-2">
+            <div class="col-md-6 mb-2 form-group">
                 <label for="gamer_tags">Enter gamertags (optional)</label>
                 <input id="gamer_tags"
-                    [(ngModel)]="profile.gamer_tags"
                     class="form-control"
                     name="gamer_tags"
                     type="text">
             </div>
     
-            <div class="col-md-6 mb-2">
+            <div class="col-md-6 mb-2 form-group">
                 <label for="bio">Biography/user description</label>
                 <textarea 
                     name="bio"
                     id="bio"
-                    [(ngModel)]="profile.bio"
                     class="form-control"
                     cols="30"
-                    rows="10"
-                    [(ngModel)]="profile.bio">
+                    rows="10">
             </div>
 
 
             
-            <div class="col-md-6 mb-2">
+            <div class="col-md-6 mb-2 form-group">
                 <label for="links">links: (press enter )</label>
                 <input
-                
                     id="links"
                     class="form-control"
-                    [(ngModel)]="profile.links"
                     name="links"
                     type="text">
             </div>
-
-            
-            
             
             <p>gamertags should behabe just like the above</p>
     
@@ -89,7 +77,7 @@
             <div id="gamer_tags-container">
                 for posting gamer tags submitted through above.
                 get this looking right, float it to the right. 
-            </div> -->
-        </article>
+            </div>
+        </zippy>
     </form>
 </div>
