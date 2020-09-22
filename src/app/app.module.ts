@@ -49,10 +49,12 @@ import { GameFormComponent } from './admin/game-form/game-form.component';
 import { CreateProfileComponent } from './create-profile/create-profile.component';
 import { ViewGameComponent } from './view-game/view-game.component';
 import { ViewRatingsComponent } from './view-ratings/view-ratings.component';
+import { PreferencesFormComponent } from './preferences-form/preferences-form.component';
+import { ViewConsoleComponent } from './view-console/view-console.component';
 
 //environment
 import { environment } from 'src/environments/environment';
-import { PreferencesFormComponent } from './preferences-form/preferences-form.component';
+
 
 
 @NgModule({
@@ -83,7 +85,8 @@ import { PreferencesFormComponent } from './preferences-form/preferences-form.co
     CreateProfileComponent,
     ViewGameComponent,
     ViewRatingsComponent,
-    PreferencesFormComponent
+    PreferencesFormComponent,
+    ViewConsoleComponent
     ],
   imports: [
     AngularFireModule.initializeApp(environment.firebase),
@@ -97,6 +100,8 @@ import { PreferencesFormComponent } from './preferences-form/preferences-form.co
     RouterModule.forRoot([
         //routes asscesible to annoymous users
         { path: '', component: HomeComponent },
+        { path: 'console/:name', component: ViewConsoleComponent },
+
         
         { path: 'sign_in/createAccount/forgotPassword', component: ForgotPasswordComponent },
         { path: 'sign_in/createAccount', component: CreateAccountComponent},

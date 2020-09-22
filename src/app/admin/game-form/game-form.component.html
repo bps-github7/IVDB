@@ -110,7 +110,7 @@
                 <!-- checkbox list for nintendo -->
                 <div id="console_sublist"  *ngIf="consoleMakers.value == 'Nintendo'">
                     <ul>
-                        <li *ngFor="let n of ">
+                        <li *ngFor="let n of gameInfo?.nintendo ">
                             <div class="checkbox">
                                 <label>
                                     <!---think you have to do some behind the scenes scripting, because 
@@ -119,7 +119,9 @@
 
                                     <!-- current set up not ideal because commiting to it would mean listing each possibility (approaching innumerable)
                                     as a boolean key value pair -->
-                                    <input type="checkbox" value="n" name="console" ngModel> {{ n }}
+                                    <a [routerLink]="['../../../console/', n.name]" title="n?.qualifiedName">
+                                        <input type="checkbox" name="console" value="n" ngModel> {{ n.name }}
+                                    </a>
                                 </label>
                             </div>
                         </li>
@@ -129,10 +131,12 @@
                 <!-- checkbox list for sony -->
                 <div id="console_sublist"  *ngIf="consoleMakers.value == 'Sony'">
                     <ul>
-                        <li *ngFor="let n of gameInfo?.Sony">
+                        <li *ngFor="let n of gameInfo?.sony">
                             <div class="checkbox">
                                 <label>
-                                    <input type="checkbox" name="console" value="n" ngModel> {{ n }}
+                                    <a [routerLink]="['../../../console/', n.name]" title="n?.qualifiedName">
+                                        <input type="checkbox" name="console" value="n" ngModel> {{ n.name }}
+                                    </a>
                                 </label>
                             </div>
                         </li>
@@ -142,9 +146,11 @@
                 <!-- checkbox list for Microsoft -->
                 <div id="console_sublist"  *ngIf="consoleMakers.value == 'Microsoft'">
                     <ul>
-                        <li *ngFor="let n of gameInfo?.Microsoft">
+                        <li *ngFor="let n of gameInfo?.microsoft">
                             <label>
-                                <input type="checkbox" name="console" value="n" ngModel> {{ n }}
+                                <a [routerLink]="['../../../console/', n.name]" [title]="n?.qualifiedName">
+                                    <input type="checkbox" name="console" value="n" ngModel> {{ n.name }}
+                                </a>
                             </label>
                         </li>
                     </ul>
@@ -153,11 +159,13 @@
                 <!-- checkbox for PC -->
                 <div id="console_sublist"  *ngIf="consoleMakers.value == 'PC'">
                     <ul>
-                        <li *ngFor="let n of gameInfo?.PC"> 
+                        <li *ngFor="let n of gameInfo?.pc"> 
                             <!-- where(some attribute == "pc").then(do some stuff w this) -->
                             <div class="checkbox">
                                 <label>
-                                    <input type="checkbox" name="console" value="n" ngModel> {{ n }}
+                                    <a [routerLink]="['../../../console/', n.name]" title="n?.qualifiedName">
+                                        <input type="checkbox" name="console" value="n" ngModel> {{ n.name }}
+                                    </a>
                                 </label>
                             </div>                            
                         </li>

@@ -37,4 +37,8 @@ export class GameInfoService {
         this.gameInfoCollection.doc('KZX1GyjNGtwUzHsyICBO').ref.get().then((doc) => this.info = doc.data());
      }
 
+    get_console(name : string) {
+        return this.info.name
+    }
+
 }
