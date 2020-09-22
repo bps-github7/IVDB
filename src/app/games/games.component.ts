@@ -12,7 +12,7 @@ import { Router } from '@angular/router';
 })
 export class GamesComponent {
     games$;
-    gameInfo$
+    gameInfo;
     userId: string;
 
     constructor(
@@ -21,7 +21,7 @@ export class GamesComponent {
         private gameinfoService : GameInfoService,
         private auth: AuthService) { 
         this.games$ = this.gameService.getAll$();
-        this.gameInfo$ = this.gameinfoService.gameInfo$;
+        this.gameInfo = this.gameinfoService.info;
         this.auth.user$.subscribe(user => this.userId = user.uid);
     }
 }

@@ -8,6 +8,7 @@ interface gameInfo {
     Microsoft?: string [],
     Sony?: string [],
     Nintendo?: string [],
+    PC?: string [],
     categories?:  string | string [],
     creators?: string | string [],
     console_makers?: string | string []
@@ -23,21 +24,17 @@ interface gameInfo {
 
 export class GameInfoService {
 
-    // gameInfoCollection : AngularFirestoreCollection<gameInfo>;
-    gameInfoDocument : AngularFirestoreDocument<gameInfo>;
-    gameInfo : Observable<gameInfo>;
+    //has to be an array because reasons...
+    gameInfoCollection : AngularFirestoreCollection<gameInfo>;
+    gameInfo$ : Observable<gameInfo[]>;
+    info : any;
 
-    constructor(private db: AngularFirestore) { 
-        // this.gameInfoCollection = this.db.collection('game_info', ref => {
-        //     // return ref.orderBy('categories', 'desc');
-        //     return ref.where('categories', '==', true);
-        // });
-        // this.gameInfo = this.gameInfoCollection.valueChanges();
-        this.gameInfoDocument = this.db.doc('game_info/KZX1GyjNGtwUzHsyICBO');
-        this.gameInfo = this.gameInfoDocument.valueChanges();
-    }
+    constructor(
+        private afs : AngularFirestore
+    ) {
+        this.gameInfoCollection = this.afs.collection('game_info')
+        this.gameInfo$ = this.gameInfoCollection.valueChanges();
+        this.gameInfoCollection.doc('KZX1GyjNGtwUzHsyICBO').ref.get().then((doc) => this.info = doc.data());
+     }
 
-    get gameInfo$() {
-        return this.gameInfo;
-    }
 }

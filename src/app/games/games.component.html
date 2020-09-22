@@ -2,15 +2,15 @@
     <div class="col-3">
         <div class="list-group">
             <li class="list-group-item"><h2>Game Categories</h2></li>
-            <li *ngFor="let g of (gameInfo$ | async)?.categories" class="list-group-item list-group-item-action">
+            <li *ngFor="let g of gameInfo?.categories" class="list-group-item list-group-item-action">
                 <input type="checkbox"> {{ g }}
             </li>
             <li class="list-group-item"><h2>Creators</h2></li>
-            <li *ngFor="let g of (gameInfo$ | async)?.creators" class="list-group-item list-group-item-action">
+            <li *ngFor="let g of gameInfo?.creators" class="list-group-item list-group-item-action">
                 <input type="checkbox"> {{ g }}
             </li>
             <li class="list-group-item"><h2>Consoles</h2></li>
-            <li *ngFor="let g of (gameInfo$ | async)?.console_makers" class="list-group-item list-group-item-action">
+            <li *ngFor="let g of gameInfo?.console_makers" class="list-group-item list-group-item-action">
                 <input type="checkbox"> {{ g }}
                 <!-- find a way to show nintendo, microsoft, sony consoles when the appropriate checkbox is clicked -->
             </li>

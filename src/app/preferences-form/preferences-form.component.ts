@@ -8,12 +8,12 @@ import { GameInfoService } from '../common/services/gameinfo.service';
 })
 export class PreferencesFormComponent implements OnInit {
 
-    gameInfo$;
+    gameInfo;
     preferences;
 
     constructor(
         private gameinfoService : GameInfoService) { 
-        this.gameInfo$ = this.gameinfoService.gameInfo$
+        this.gameInfo = this.gameinfoService.info
     }
 
     ngOnInit(): void {

@@ -14,7 +14,7 @@ export class CreateProfileComponent implements OnInit {
     form: any;
     username: any;
     user;
-    gameInfo$;
+    gameInfo;
 
     //just a quick point- see game-form and its use of template driven form
     //that likely will simplify things a great bit. think about it.
@@ -32,7 +32,7 @@ export class CreateProfileComponent implements OnInit {
             this.username = this.route.snapshot.paramMap.get('username')
             //commenting this one out until the above problem is resolved.
             // if (this.username) this.user = this.userService.get(this.username) 
-            this.gameInfo$ = gameInfoService.gameInfo$
+            this.gameInfo = gameInfoService.info
         }
 
     ngOnInit(): void {

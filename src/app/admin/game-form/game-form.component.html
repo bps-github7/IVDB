@@ -50,7 +50,7 @@
                     class="form-control"
                     >
                     <option value=""></option>
-                    <option *ngFor="let g of gameInfo$" [value]="g">
+                    <option *ngFor="let g of gameInfo?.categories" [value]="g">
                         {{ g }}
                     </option>
                 </select>
@@ -72,7 +72,7 @@
                     class="form-control"
                     >
                     <option value=""></option>
-                    <option *ngFor="let g of gameInfo$ | async" [value]="g">
+                    <option *ngFor="let g of gameInfo?.creators" [value]="g">
                         {{ g }}
                     </option>
                 </select>
@@ -96,8 +96,8 @@
                     >
                     <!-- bug here: console label still appears even if blank option is selected -->
                     <option value=""></option>
-                    <option *ngFor="let g of gameInfo$" [value]="g">
-                        {{ g?.Console }}
+                    <option *ngFor="let g of gameInfo?.console_makers" [value]="g">
+                        {{ g }}
                     </option>
                 </select>
                 <!-- does checkbox input need to be in some form control  element? -->
@@ -110,7 +110,7 @@
                 <!-- checkbox list for nintendo -->
                 <div id="console_sublist"  *ngIf="consoleMakers.value == 'Nintendo'">
                     <ul>
-                        <li *ngFor="let n of (gameInfo$ | async)?.Nintendo">
+                        <li *ngFor="let n of ">
                             <div class="checkbox">
                                 <label>
                                     <!---think you have to do some behind the scenes scripting, because 
@@ -129,7 +129,7 @@
                 <!-- checkbox list for sony -->
                 <div id="console_sublist"  *ngIf="consoleMakers.value == 'Sony'">
                     <ul>
-                        <li *ngFor="let n of (gameInfo$ | async)?.Sony">
+                        <li *ngFor="let n of gameInfo?.Sony">
                             <div class="checkbox">
                                 <label>
                                     <input type="checkbox" name="console" value="n" ngModel> {{ n }}
@@ -142,7 +142,7 @@
                 <!-- checkbox list for Microsoft -->
                 <div id="console_sublist"  *ngIf="consoleMakers.value == 'Microsoft'">
                     <ul>
-                        <li *ngFor="let n of (gameInfo$ | async)?.Microsoft">
+                        <li *ngFor="let n of gameInfo?.Microsoft">
                             <label>
                                 <input type="checkbox" name="console" value="n" ngModel> {{ n }}
                             </label>
@@ -153,7 +153,7 @@
                 <!-- checkbox for PC -->
                 <div id="console_sublist"  *ngIf="consoleMakers.value == 'PC'">
                     <ul>
-                        <li *ngFor="let n of (gameInfo$ | async)?.PC"> 
+                        <li *ngFor="let n of gameInfo?.PC"> 
                             <!-- where(some attribute == "pc").then(do some stuff w this) -->
                             <div class="checkbox">
                                 <label>
