@@ -26,6 +26,7 @@ export class GameFormComponent implements OnInit {
         this.id = this.route.snapshot.paramMap.get('id');
         
         if (this.id)
+            //you assigned this twice here- is that nessecary/ non-problematic?
             this.game = this.gameService.get$(this.id).subscribe(g =>this.game = g);
 
     }

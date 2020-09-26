@@ -35,3 +35,11 @@ this hasnt been implemented yet, i just entered it into the routing in app.modul
 -working on game and profile components seperately. mostly css so no breaking changes expected.
 
 -going to implement create-profile form now, or at least start working on that.
+
+
+##### 9/25/2020
+
+-we got parts of profile, create-profile, game-form working.
+-in the process, broke the async pipe for categories, creators, console_makers, nintendo ... etc in game-form and others
+(dont really know how that happened- did angular update and deprecate these features, vscode linting?)
+-i think VSCODE LINTING did this- got a bunch of extensions to help debug the html, then these problems started happening.

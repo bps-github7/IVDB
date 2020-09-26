@@ -7,13 +7,13 @@
         <ul class="dd-menu">
             <li *ngIf="appUser; else anonymousUser" id="profile-nub">
                 <button id="dd-btn">
-                    <a [routerLink]="['/sign_in/profile/', appUser.uid]">
-                        {{ appUser?.name }}
+                    <a [routerLink]="['/sign_in/profile/', appUser?.username]">
+                        {{ appUser?.username }}
                     </a>
                 </button>
                 <ul class="sub-menu">
                     <li *ngIf="appUser.isAdmin"><a routerLink="/admin/game">Adminster Games</a></li>
-                    <li><a [routerLink]="['/sign_in/create_profile']">settings</a></li>
+                    <li><a [routerLink]="['/sign_in/create_profile/', appUser?.username]">settings</a></li>
                     <li><a href="#" (click)="logout()">logout</a></li>
                 </ul>
             </li>

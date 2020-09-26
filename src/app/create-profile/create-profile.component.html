@@ -1,9 +1,11 @@
 <div class="row mt-4">
-    <form>
+    <form #finished="ngForm" (ngSubmit)="save(finished.value)">
         <zippy title="Public Profile: " class="row">
             <div class="form-group col-md-6 mb-2">
                 <label for="nickname">Provide a nickname for your account (current: username)</label>
                 <input
+                    #nickname
+                    [(ngModel)]="profile.nickname"
                     required
                     id="nickname"
                     class="form-control"
@@ -12,8 +14,10 @@
             </div>
 
             <div class="col-md-6 mb-2 form-group">
-                <label for="profile_image">Profile image: </label>
-                <input 
+                <label for="image">Profile image: </label>
+                <input
+                    #image
+                    [(ngModel)]="profile.image"
                     id="image"
                     class="form-control"
                     required
@@ -22,12 +26,14 @@
             </div>
     
             <div class="col-md-6 mb-2 form-group">
-                <label for="background_image">Provide a background image for your account (optional)</label>
+                <label for="backgroundImg">Provide a background image for your account (optional)</label>
                 <select
+                    #backgroundImg
+                    [(ngModel)]="profile.backgroundImg"
                     multiple
                     required
-                    name="background_img" 
-                    id="background_img"
+                    name="backgroundImg" 
+                    id="backgroundImg"
                     class="form-control">
                         <option value="Banana">Banana</option>
                         <option value="Sundae">Sundae</option>
@@ -44,7 +50,9 @@
 
             <div class="col-md-6 mb-2 form-group">
                 <label for="bio">Biography/user description</label>
-                <textarea 
+                <textarea
+                    #bio
+                    [(ngModel)]="profile.bio"
                     name="bio"
                     id="bio"
                     class="form-control"
@@ -58,6 +66,8 @@
             <div class="col-md-6 mb-2 form-group">
                 <label for="links">links: (press enter )</label>
                 <input
+                    #links
+                    [(ngModel)]="profile.links"
                     id="links"
                     class="form-control"
                     name="links"
@@ -67,13 +77,18 @@
             <p>Float to the right / gamertags go here:</p>
 
             <div class="col-md-6 mb-2 form-group">
-                <label for="gamer_tags">Enter gamertags</label>
-                <input id="gamer_tags"
+                <label for="gamerTags">Enter gamertags</label>
+                <input
+                    #gamerTags
+                    [(ngModel)]="profile.gamerTags"
+                    id="gamerTags"
                     class="form-control"
-                    name="gamer_tags"
+                    name="gamerTags"
                     type="text">
             </div> 
         </zippy>
+        <!-- preferences go here -->
+        <button class="btn btn-primary" [disabled]="!finished.valid">Update Profile</button>
     </form>
     <div class="col-md-6">
         <div class="card" style="width: 18rem;">

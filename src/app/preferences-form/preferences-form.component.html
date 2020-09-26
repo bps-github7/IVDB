@@ -1,45 +1,25 @@
+<!-- why dont you make a formgroup-> formcontrol component?
+takes key value pairs where 
+
+key = id
+value = type
+options? = [ options for select, checkbox, radio, etc... ]  -->
+
+<zippy class="row" title="Favorites: ">
+    <tdf-formgroup form_id="profile" input_id="favorite_games" label="Favorite Games: "></tdf-formgroup>
+
+    <tdf-formgroup form_id="profile" input_id="favorite_consoles" label="Favorite Consoles: "></tdf-formgroup>
+
+    <tdf-formgroup form_id="profile" input_id="favorite_type" label="Favorite Types of Games: "></tdf-formgroup>
+
+
+</zippy>
+
+
 <!-- preferences tl-form-group object -->
 <zippy title="preferences">
-    <!-- favorites ml formgroup object -->
-    <zippy title="favorites">
-        <!-- preferences.favorite.games form group -->
-        <div class="col-md-6 mb-2">
-        <label for="fav_games">Favorite Game(s): </label>
-        <input
-            id="fav_games"
-            class="form-control"
-            name="fav_games"
-            type="text">
-        </div>
 
-        <!--preferences.favorite.console form group -->
-        <div class="col-md-6 mb-2">
-            <label for="fav_console">Favorite Console(s): </label>
-            <input
-    
-                type="text"
-                class="form-control"
-                id="fav_console"
-                name="fav_console">
-        </div>
-        <!-- should be a multi select thing- the above two ^^^ -->
 
-        <!--preferences.favorite.types form group -->
-        <div class="col-md-6 mb-2 form-group">
-            <label for="types">Favorite type(s) of games: </label>
-            <select
-                class="form-control"
-                id="fav_types"
-                name="fav_types">
-                <option value=""></option>
-                <!-- <option *ngFor="let g of (gameInfo$ | async)?.categories" [value]="g">
-                    {{ g }} -->
-            </select>
-        </div>
-        <!-- probably want a scroll banner for this one. explain what we mean by this -->
-    </zippy>
-
-    <hr><br>
 
     <!-- current ml formgroup object -->
     <zippy title="current">
@@ -196,48 +176,4 @@
         <input type="radio" name="no" id="radio_btn">no
         if no, provide input for them to say what to display
     </div>
-</article>
-
-<hr><br>
-
-<article class="row">
-    <!-- <preferences-form></preferences-form> -->
-</article>
-
-
-
-<hr><br>
-
-<article class="row">    
-    <div class="col-md-6 mb-2 form-group">
-        <label for="email">email: </label>
-        <input
-            type="text"
-            formControlName="email"
-            class="form-control"
-            id="email"
-            name="email">
-    </div>
-
-    <div class="col-md-6 mb-2 form-group">
-        <label for="display_name">display_name: </label>
-        <input
-            type="text"
-            class="form-control"
-            id="display_name"
-            name="display_name">
-    </div>
-
-    <div class="col-md-6 mb-2 form-group">
-        <label for="password">password: </label>
-        <input
-            type="password"
-            class="form-control"
-            id="password"
-            name="password">
-    </div>
-
-    <p>same shit as on create-account for creating password <br>
-        should make a component
-    </p>
 </article>

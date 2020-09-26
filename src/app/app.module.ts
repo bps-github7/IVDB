@@ -54,6 +54,7 @@ import { ViewConsoleComponent } from './view-console/view-console.component';
 
 //environment
 import { environment } from 'src/environments/environment';
+import { TdfFormgroupComponent } from './tdf-formgroup/tdf-formgroup.component';
 
 
 
@@ -86,7 +87,8 @@ import { environment } from 'src/environments/environment';
     ViewGameComponent,
     ViewRatingsComponent,
     PreferencesFormComponent,
-    ViewConsoleComponent
+    ViewConsoleComponent,
+    TdfFormgroupComponent
     ],
   imports: [
     AngularFireModule.initializeApp(environment.firebase),
@@ -107,7 +109,8 @@ import { environment } from 'src/environments/environment';
         { path: 'sign_in/createAccount', component: CreateAccountComponent},
         { path: 'sign_in', component: SignInComponent },
         { path: 'search', component: SearchComponent },
-        { path: 'sign_in/create_profile', component: CreateProfileComponent, canActivate: [AuthGuard]},
+        //maybe rethink these paths, they are needlessly elaborate.
+        { path: 'sign_in/create_profile/:username', component: CreateProfileComponent, canActivate: [AuthGuard]},
         { path: 'sign_in/create_profile/:username/update', component: CreateProfileComponent, canActivate: [AuthGuard, UserAuthGuard] },
         { path: 'sign_in/profile/:username', component: ProfileComponent, canActivate: [AuthGuard] },
 

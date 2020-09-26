@@ -2,7 +2,7 @@
     <img src="https://simpleicon.com/wp-content/uploads/user1.png" alt="Default user image">
     <!-- zippy may decrease accessability here.. -->
     <zippy [title]=
-    'user?.name'>
+    'user?.username'>
         <zippy title="Preferences">
             fill out with stuff submitted through create-profile form
             can have nested zippies EVERYWHEREEEE!!!!
@@ -21,6 +21,6 @@
             <a href="">Favorites, dislikes and more</a>
         </zippy>
         <!-- need to do some route/ activated route manipulation to get this working -->
-        <a [routerLink]="['sign_in/create-profile/',user.name,'/update']">Edit profile</a>
+        <a [routerLink]="['sign_in/create-profile/',user.username,'/update']">Edit profile</a>
     </zippy>
 </div>

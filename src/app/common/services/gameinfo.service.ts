@@ -5,10 +5,10 @@ import { Observable } from 'rxjs';
 
 interface gameInfo {
     //dont like how the console types are capitalized. bah..
-    Microsoft?: string [],
-    Sony?: string [],
-    Nintendo?: string [],
-    PC?: string [],
+    microsoft?: string [],
+    sony?: string [],
+    nintendo?: string [],
+    pc?: string [],
     categories?:  string | string [],
     creators?: string | string [],
     console_makers?: string | string []
@@ -29,16 +29,16 @@ export class GameInfoService {
     gameInfo$ : Observable<gameInfo[]>;
     info : any;
 
-    constructor(
-        private afs : AngularFirestore
-    ) {
-        this.gameInfoCollection = this.afs.collection('game_info')
+    constructor(private afs : AngularFirestore) {
+        this.gameInfoCollection = this.afs.collection('game_info');
         this.gameInfo$ = this.gameInfoCollection.valueChanges();
+        //LETS get rid of this line, figure out how to get observable of db doc to work instead.
         this.gameInfoCollection.doc('KZX1GyjNGtwUzHsyICBO').ref.get().then((doc) => this.info = doc.data());
      }
 
-    get_console(name : string) {
-        return this.info.name
-    }
+    // get_console(name : string) {
+    //     console;
+    //     this.gameInfo$.subscribe(resp => { console = resp })
+    // }
 
 }

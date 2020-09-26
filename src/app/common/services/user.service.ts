@@ -1,15 +1,16 @@
 import { Injectable } from '@angular/core';
-import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
+import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from '@angular/fire/firestore';
 import * as firebase from 'firebase';
 import { User } from 'src/app/models/user';
+import { Profile } from 'src/app/models/profile';
 import { Observable } from 'rxjs';
-import { AngularFireObject } from '@angular/fire/database';
 
 
 @Injectable({
   providedIn: 'root'
 })
-export class UserService {
+
+export class UserService {    
 
     constructor(private afs: AngularFirestore) { }
 
@@ -25,7 +26,7 @@ export class UserService {
         const userRef: AngularFirestoreDocument<User> = this.afs.doc(`users/${user.uid}`); 
 
         const data = {
-            name : user.displayName,
+            username : user.displayName,
             email : user.email,
             isAdmin: this.getPermissions(user),
             uid: user.uid
@@ -41,12 +42,17 @@ export class UserService {
         // cant add initiailization without breaking this function.
         let permissions : any;
         let current_user = this.get(user.uid).valueChanges();
-        current_user.subscribe(doc => permissions = doc)
+        //dont need this but try..
+        current_user.subscribe((doc) => {permissions = doc})
         if (permissions.isAdmin) return true
     }
 
     get(uid : string): AngularFirestoreDocument<User>{
         return this.afs.doc(`users/${uid}`);
+    }
+
+    get_profile(displayName : string): AngularFirestoreDocument<Profile> {
+        return this.afs.doc(`profiles/${displayName}`);
     }
 
     create(user : firebase.User) {

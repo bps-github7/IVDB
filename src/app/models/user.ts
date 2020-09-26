@@ -1,6 +1,6 @@
 export interface User {
     
-    name: string;
+    username: string;
     email: string;
     //  can't store this as plaintext...
     // password: string,

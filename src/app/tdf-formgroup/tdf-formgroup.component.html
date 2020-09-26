@@ -1,0 +1,14 @@
+<!-- by default- assumes we are working with bootstrap form -->
+<div class="col-md-6 mb-2 form-group">
+    <label for="input_id">{{ human_readable_id }}: </label>
+    <!-- hopefully this works, but i suspect it will cause problems -->
+    <input
+        #{{input_id}}
+        [(ngModel)]="form_id.input_id"
+        class="form-control"
+        type="input_type"
+        name="input_id"
+        id="input_id">
+</div>
+
+<!-- for those that need display box showing provided input, will need an additional input field. -->
