@@ -87,6 +87,16 @@
                     type="text">
             </div> 
         </zippy>
+
+        <zippy class="row" title="Favorites: ">
+            <tdf-formgroup form_id="profile" input_id="favorite_games" label="Favorite Games: "></tdf-formgroup>
+        
+            <tdf-formgroup form_id="profile" input_id="favorite_consoles" label="Favorite Consoles: "></tdf-formgroup>
+        
+            <tdf-formgroup form_id="profile" input_id="favorite_type" label="Favorite Types of Games: "></tdf-formgroup>        
+        </zippy>
+        
+
         <!-- preferences go here -->
         <button class="btn btn-primary" [disabled]="!finished.valid">Update Profile</button>
     </form>

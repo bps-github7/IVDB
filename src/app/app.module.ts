@@ -110,6 +110,7 @@ import { TdfFormgroupComponent } from './tdf-formgroup/tdf-formgroup.component';
         { path: 'sign_in', component: SignInComponent },
         { path: 'search', component: SearchComponent },
         //maybe rethink these paths, they are needlessly elaborate.
+        //try username/new instead of this first one.
         { path: 'sign_in/create_profile/:username', component: CreateProfileComponent, canActivate: [AuthGuard]},
         { path: 'sign_in/create_profile/:username/update', component: CreateProfileComponent, canActivate: [AuthGuard, UserAuthGuard] },
         { path: 'sign_in/profile/:username', component: ProfileComponent, canActivate: [AuthGuard] },

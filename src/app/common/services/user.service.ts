@@ -51,10 +51,6 @@ export class UserService {
         return this.afs.doc(`users/${uid}`);
     }
 
-    get_profile(displayName : string): AngularFirestoreDocument<Profile> {
-        return this.afs.doc(`profiles/${displayName}`);
-    }
-
     create(user : firebase.User) {
         // BY DEFAULT: everyone has base permissions unless provided otherwise.
         this.afs.collection('users').doc(user.uid).set({

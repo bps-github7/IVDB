@@ -3,6 +3,7 @@ import { AngularFireDatabase } from '@angular/fire/database';
 import { FormBuilder } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { GameInfoService } from '../common/services/gameinfo.service';
+import { ProfileService } from '../common/services/profile.service';
 import { UserService } from '../common/services/user.service';
 
 @Component({
@@ -26,7 +27,8 @@ export class CreateProfileComponent implements OnInit {
         private gameInfoService : GameInfoService,
         private router : Router,
         private route : ActivatedRoute,
-        private userService : UserService) {
+        private userService : UserService,
+        private profileService : ProfileService) {
             //conflict here- should i use username or id as the query route param
             //one hurts usability, increases practicallity, the other reverses this
             this.user = this.route.snapshot.paramMap.get('username')
@@ -40,7 +42,7 @@ export class CreateProfileComponent implements OnInit {
             //commenting this one out until the above problem is resolved.
             // i think this needs to be done with observables.
             if (this.user) {
-                this.profile = this.userService.get_profile(this.user).valueChanges().subscribe(p => this.profile = p);
+                this.profile = this.profileService.get$(this.user).subscribe(next => this.profile = next);
                 // this.userService.get_profile(this.username).valueChanges().subscribe(resp => this.profile = resp);
 
             //second line for how we retrieve the profile from user service or new profile service.
@@ -51,11 +53,10 @@ export class CreateProfileComponent implements OnInit {
     ngOnInit(): void {
     }
 
-    //should we make a new service for profile stuff, or put it in user
-    //cant decide which one is more encapsulated.
+    
     save(profile) {
-        // if(this.username) this.gameService.update(this.id, game);
-        // else this.gameService.create(game);
+        if(this.user) this.profileService.update(profile);
+        else this.profileService.create(profile);
         this.router.navigate(['/admin/game']);
     }
 
