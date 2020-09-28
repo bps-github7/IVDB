@@ -59,13 +59,11 @@
                     cols="30"
                     rows="10"></textarea>
             </div>
-
-            <p>float to the right: Links go here:</p>
-
             
             <div class="col-md-6 mb-2 form-group">
                 <label for="links">links: (press enter )</label>
                 <input
+                    (keydown.enter)="add_link(links)"
                     #links
                     [(ngModel)]="profile.links"
                     id="links"
@@ -73,19 +71,36 @@
                     name="links"
                     type="text">
             </div>
+
+            <!-- float to the right -->
+
+            <div id="container">
+                <ul> <h3>Links:</h3>
+                    <li *ngFor="let g of _links">{{ g }}</li>
+                </ul>
+            </div>
             
-            <p>Float to the right / gamertags go here:</p>
 
             <div class="col-md-6 mb-2 form-group">
                 <label for="gamerTags">Enter gamertags</label>
                 <input
+                    (keydown.enter)="add_gamerTag(gamerTags)"
                     #gamerTags
                     [(ngModel)]="profile.gamerTags"
                     id="gamerTags"
                     class="form-control"
                     name="gamerTags"
                     type="text">
-            </div> 
+            </div>
+            
+            <!-- float to the right -->
+            <div id="container">
+                <ul> <h3>gamer tags: </h3>
+                    <li *ngFor="let g of _gamerTags">{{ g }}</li>
+                </ul>
+            </div>
+
+
         </zippy>
 
         <!-- should all be in a sep component for preferences -->
@@ -112,11 +127,11 @@
     </form>
     <div class="col-md-6">
         <div class="card" style="width: 18rem;">
-            <!-- <img class="card-img-top" [src]="game.imageUrl" alt="Cover of the game being created or edited">
+            <img class="card-img-top" [src]="profile.image" alt="Cover of the game being created or edited">
             <div class="card-body">
-              <h5 class="card-title">{{ game.title }}</h5>
-              <p class="card-text">{{ game.price | currency:'USD':true }}</p>
-            </div> -->
+              <h5 class="card-title">{{ profile.nickname }}</h5>
+              <p class="card-text">{{ profile.bio }}</p>
+            </div>
           </div>
     </div>
 </div>

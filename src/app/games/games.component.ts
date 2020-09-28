@@ -21,7 +21,7 @@ export class GamesComponent {
         private gameinfoService : GameInfoService,
         private auth: AuthService) { 
         this.games$ = this.gameService.getAll$();
-        this.gameInfo = this.gameinfoService.info;
+        this.gameInfo = this.gameinfoService.gameInfo$.subscribe(resp => this.gameInfo = resp);
         this.auth.user$.subscribe(user => this.userId = user.uid);
     }
 }

@@ -86,6 +86,7 @@
             <div class="form-group">
                 <label for="consoleMakers">Console Makers: </label>
                 <select
+                    #console
                     #consoleMakers="ngModel"
                     multiple
                     required
@@ -113,13 +114,9 @@
                         <li *ngFor="let n of gameInfo?.nintendo ">
                             <div class="checkbox">
                                 <label>
-                                    <!---think you have to do some behind the scenes scripting, because 
-                                        by default/ requirement, checkbox value evaluates to boolean only. 
-                                        use a method to get the actual value ----->
-
                                     <!-- current set up not ideal because commiting to it would mean listing each possibility (approaching innumerable)
                                     as a boolean key value pair -->
-                                    <a [routerLink]="['../../../console/nintendo',  n.name]" title="n?.qualifiedName">
+                                    <a [routerLink]="['../../../console/', console.value, '/',  n.name]" title="n?.qualifiedName">
                                         <input type="checkbox" name="console" value="n" ngModel> {{ n.name }}
                                     </a>
                                 </label>
@@ -134,7 +131,7 @@
                         <li *ngFor="let n of gameInfo?.sony">
                             <div class="checkbox">
                                 <label>
-                                    <a [routerLink]="['../../../console/sony', n.name]" title="n?.qualifiedName">
+                                    <a [routerLink]="['../../../console/sony/', consoleMakers, '/', n.name]" title="n?.qualifiedName">
                                         <input type="checkbox" name="console" value="n" ngModel> {{ n.name }}
                                     </a>
                                 </label>
@@ -148,7 +145,7 @@
                     <ul>
                         <li *ngFor="let n of gameInfo?.microsoft">
                             <label>
-                                <a [routerLink]="['../../../console/microsoft/', n.name]" [title]="n?.qualifiedName">
+                                <a [routerLink]="['../../../console/microsoft/', consoleMakers, '/', n.name]" [title]="n?.qualifiedName">
                                     <input type="checkbox" name="console" value="n" ngModel> {{ n.name }}
                                 </a>
                             </label>
@@ -163,7 +160,7 @@
                             <!-- where(some attribute == "pc").then(do some stuff w this) -->
                             <div class="checkbox">
                                 <label>
-                                    <a [routerLink]="['../../../console/', n.name]" title="n?.qualifiedName">
+                                    <a [routerLink]="['../../../console/pc/', consoleMakers, '/', n.name]" title="n?.qualifiedName">
                                         <input type="checkbox" name="console" value="n" ngModel> {{ n.name }}
                                     </a>
                                 </label>

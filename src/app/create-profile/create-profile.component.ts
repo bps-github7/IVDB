@@ -15,6 +15,8 @@ import { TdfFormgroupComponent } from '.././tdf-formgroup/tdf-formgroup.componen
   styleUrls: ['./create-profile.component.css']
 })
 export class CreateProfileComponent implements OnInit {
+    _links = [];
+    _gamerTags = [];
     form: any;
     user;
     gameInfo;
@@ -56,11 +58,30 @@ export class CreateProfileComponent implements OnInit {
     ngOnInit(): void {
     }
 
+    add_link(input : HTMLInputElement) {
+        if (input.value === '') return false;
+
+        this._links.push(input.value);
+        input.value = '';
+    }
+
+    add_gamerTag(input : HTMLInputElement) {
+        if (input.value === '') return false;
+
+        this._gamerTags.push(input.value);
+        input.value = '';
+    } 
+
     
     save(profile) {
-        if(this.user) this.profileService.update(profile);
+        //does the profile exist already- then update it 
+        if (this.user) this.profileService.update(profile);
+
+        //no? make a new one
         else this.profileService.create(profile);
         this.router.navigate(['/admin/game']);
     }
+
+
 
 }

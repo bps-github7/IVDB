@@ -102,7 +102,10 @@ import { TdfFormgroupComponent } from './tdf-formgroup/tdf-formgroup.component';
     RouterModule.forRoot([
         //routes asscesible to annoymous users
         { path: '', component: HomeComponent },
+    
+        //trying something new here
         { path: 'console/:company/:name', component: ViewConsoleComponent },
+        
 
         
         { path: 'sign_in/createAccount/forgotPassword', component: ForgotPasswordComponent },
@@ -122,6 +125,7 @@ import { TdfFormgroupComponent } from './tdf-formgroup/tdf-formgroup.component';
         { path: 'streaming', component: StreamingComponent },
         { path: 'reccomendations', component: ReccomendationsComponent },
         { path: 'watchlists', component: WatchlistsComponent },
+        
 
         //routes for logged in users
         // { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard] },
