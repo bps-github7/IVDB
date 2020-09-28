@@ -52,7 +52,7 @@ export class CreateProfileComponent implements OnInit {
 
             //second line for how we retrieve the profile from user service or new profile service.
             }
-            this.gameInfo = gameInfoService.info
+            this.gameInfo = gameInfoService.gameInfo$.subscribe(resp => this.gameInfo = resp)
         }
 
     ngOnInit(): void {

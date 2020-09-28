@@ -3,6 +3,7 @@ import { AuthService } from './common/services/auth.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { UserService } from './common/services/user.service';
 import * as firebase from 'firebase';
+import { ProfileService } from './common/services/profile.service';
 
 @Component({
   selector: 'app-root',
@@ -11,9 +12,20 @@ import * as firebase from 'firebase';
 })
 export class AppComponent {
     title = 'ivdb';
-    user: any; //would be helpful if this could cast to User.
 
-    constructor(private auth : AuthService, private router : Router, private userService : UserService, private route: ActivatedRoute) {
+    //would be helpful if this could cast to User.
+    user: any;
+    displayName;
+    
+    
+
+    constructor(
+        private auth : AuthService,
+        private router : Router,
+        private userService : UserService,
+        private route: ActivatedRoute,
+        private profileService : ProfileService
+        ) {
         this.auth.user$.subscribe(user => {
             if (user) {
                 this.user = user;
@@ -23,6 +35,7 @@ export class AppComponent {
                 this.router.navigateByUrl(returnUrl);
             }
         });
+        //retrieveing the current user profile should happen here in app.component!
     }
 
     // This does not do what you want it to do!!
