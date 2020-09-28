@@ -88,13 +88,23 @@
             </div> 
         </zippy>
 
+        <!-- should all be in a sep component for preferences -->
+
         <zippy class="row" title="Favorites: ">
-            <tdf-formgroup form_id="profile" input_id="favorite_games" label="Favorite Games: "></tdf-formgroup>
+            <tdf-formgroup form="profile" id="favorite_games" title="Favorite Games"></tdf-formgroup>
         
-            <tdf-formgroup form_id="profile" input_id="favorite_consoles" label="Favorite Consoles: "></tdf-formgroup>
+            <tdf-formgroup form="profile" id="favorite_consoles" title="Favorite Consoles"></tdf-formgroup>
         
-            <tdf-formgroup form_id="profile" input_id="favorite_type" label="Favorite Types of Games: "></tdf-formgroup>        
+            <tdf-formgroup form="profile" id="favorite_type" title="Favorite Types of Games" type="select" [options]="['adventure', 'action', 'role-playing', 'sports', 'platformer']"></tdf-formgroup>      
+
+            <tdf-formgroup form="profile" id="bacon" title="bacon" type="radio" [options]="['yes','no']"></tdf-formgroup>
+        
+            <tdf-formgroup form="profile" id="apricots" title="How often do you eat apricots" type="checkbox" [options]="['hourly', 'daily', 'monthly', 'never']"></tdf-formgroup>      
         </zippy>
+
+        <!-- display settings -->
+
+        <!-- account settings -->
         
 
         <!-- preferences go here -->

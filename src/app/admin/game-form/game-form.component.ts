@@ -20,7 +20,7 @@ export class GameFormComponent implements OnInit {
         private gameService : GameService,
         private router : Router,
         private route : ActivatedRoute) { 
-        this.gameInfo = gameInfoService.info
+        this.gameInfo = gameInfoService.gameInfo$.subscribe(resp => this.gameInfo = resp)
         
         
         this.id = this.route.snapshot.paramMap.get('id');

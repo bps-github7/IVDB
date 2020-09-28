@@ -1,14 +1,51 @@
 <!-- by default- assumes we are working with bootstrap form -->
-<div class="col-md-6 mb-2 form-group">
-    <label>{{ human_readable_id }} skonedalone</label>
-    <!-- hopefully this works, but i suspect it will cause problems -->
+<div *ngIf="type == 'text' || type == 'null'" class="col-md-6 mb-2 form-group">
+    <label [for]="id">{{ title }}: </label>
     <input
-        #{{input_id}}
-        [(ngModel)]="form_id.input_id"
+        #{{id}}
+        [(ngModel)]="form.id"
         class="form-control"
-        type="input_type"
-        name="input_id"
-        id="input_id">
+        [type]="type"
+        [name]="id"
+        [id]="id">
 </div>
 
-<!-- for those that need display box showing provided input, will need an additional input field. -->
+<div *ngIf="type == 'textarea'" class="col-md-6 mb-2 form-group">
+    <label [for]="id">{{ title }}: </label>
+    <textarea
+        #{{id}}
+        [(ngModel)]="form.id"
+        class="form-control"
+        [name]="id"
+        [id]="id"></textarea>
+</div>
+
+<!--need to check that options is not null for these to work -->
+<div *ngIf="type == 'select' && options" class="col-md-6 mb-2 form-group">
+    <label [for]="id">{{ title }}: </label>
+    <select
+        #{{id}}
+        [(ngModel)]="form.id"
+        multiple
+        class="form-control"
+        [name]="id"
+        [id]="id">
+        <option *ngFor="let o of options" value="o">{{ o }}</option>
+    </select>
+</div>
+
+<!-- the choices are all appearing on the same line for radio and checkboxes -->
+<div *ngIf="type == 'checkbox'" class="checkbox">
+    <h3>{{ title }}:</h3>
+    <label *ngFor="let opt of options">
+        <input type="checkbox" name="" id="">{{ opt }}
+    </label>
+</div>
+
+<div *ngIf="type == 'radio'" class="radio">
+    
+    <h3>{{ title }}:</h3>
+    <label *ngFor="let opt of options">
+        <input type="radio" name="" id="">{{ opt }} 
+    </label>
+</div>

@@ -5,6 +5,9 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { GameInfoService } from '../common/services/gameinfo.service';
 import { ProfileService } from '../common/services/profile.service';
 import { UserService } from '../common/services/user.service';
+import { TdfFormgroupComponent } from '.././tdf-formgroup/tdf-formgroup.component';
+
+
 
 @Component({
   selector: 'app-create-profile',

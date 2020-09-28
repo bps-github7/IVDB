@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { FormGroup } from '@angular/forms';
 import { GameInfoService } from '../common/services/gameinfo.service';
+import { TdfFormgroupComponent } from '.././tdf-formgroup/tdf-formgroup.component';
+
 
 @Component({
   selector: 'preferences-form',
@@ -13,7 +16,7 @@ export class PreferencesFormComponent implements OnInit {
 
     constructor(
         private gameinfoService : GameInfoService) { 
-        this.gameInfo = this.gameinfoService.info
+        this.gameInfo = this.gameinfoService.gameInfo$.subscribe(resp => this.gameInfo = resp);
     }
 
     ngOnInit(): void {

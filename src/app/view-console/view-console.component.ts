@@ -10,6 +10,8 @@ import { GameInfoService } from '../common/services/gameinfo.service';
 export class ViewConsoleComponent implements OnInit {
 
     name : any;
+    console_maker : any;
+    consoleList;
     console : any;
 
   constructor(
@@ -17,15 +19,15 @@ export class ViewConsoleComponent implements OnInit {
     private route : ActivatedRoute,
     private gameInfoService : GameInfoService) {
 
+        this.console_maker = this.route.snapshot.paramMap.get('company');
         this.name = this.route.snapshot.paramMap.get('name');
+
+        console.log('comapny : ' + this.console_maker);
+        console.log('console : '+ this.name);
         
         if (this.name)
-            // this.console = this.gameInfoService.get_console(this.name);
-            // console.log(this.console);
-            //alternatively, you could do...
-            this.console = this.gameInfoService.info.name
-            console.log(this.console);
-            //neither approach works. this.console is undefined.
+            console = this.gameInfoService.get_console(this.console_maker, this.name);
+            console.log(console);
         }
 
 

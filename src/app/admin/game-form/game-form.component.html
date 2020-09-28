@@ -119,7 +119,7 @@
 
                                     <!-- current set up not ideal because commiting to it would mean listing each possibility (approaching innumerable)
                                     as a boolean key value pair -->
-                                    <a [routerLink]="['../../../console/', n.name]" title="n?.qualifiedName">
+                                    <a [routerLink]="['../../../console/nintendo',  n.name]" title="n?.qualifiedName">
                                         <input type="checkbox" name="console" value="n" ngModel> {{ n.name }}
                                     </a>
                                 </label>
@@ -134,7 +134,7 @@
                         <li *ngFor="let n of gameInfo?.sony">
                             <div class="checkbox">
                                 <label>
-                                    <a [routerLink]="['../../../console/', n.name]" title="n?.qualifiedName">
+                                    <a [routerLink]="['../../../console/sony', n.name]" title="n?.qualifiedName">
                                         <input type="checkbox" name="console" value="n" ngModel> {{ n.name }}
                                     </a>
                                 </label>
@@ -148,7 +148,7 @@
                     <ul>
                         <li *ngFor="let n of gameInfo?.microsoft">
                             <label>
-                                <a [routerLink]="['../../../console/', n.name]" [title]="n?.qualifiedName">
+                                <a [routerLink]="['../../../console/microsoft/', n.name]" [title]="n?.qualifiedName">
                                     <input type="checkbox" name="console" value="n" ngModel> {{ n.name }}
                                 </a>
                             </label>
