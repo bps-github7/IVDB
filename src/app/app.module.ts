@@ -55,6 +55,7 @@ import { ViewConsoleComponent } from './view-console/view-console.component';
 //environment
 import { environment } from 'src/environments/environment';
 import { TdfFormgroupComponent } from './tdf-formgroup/tdf-formgroup.component';
+import { MultiInputComponent } from './multi-input/multi-input.component';
 
 
 
@@ -88,7 +89,8 @@ import { TdfFormgroupComponent } from './tdf-formgroup/tdf-formgroup.component';
     ViewRatingsComponent,
     PreferencesFormComponent,
     ViewConsoleComponent,
-    TdfFormgroupComponent
+    TdfFormgroupComponent,
+    MultiInputComponent
     ],
   imports: [
     AngularFireModule.initializeApp(environment.firebase),

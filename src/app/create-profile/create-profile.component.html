@@ -115,7 +115,7 @@
 
         <zippy class="row" title="Favorites: ">
             
-            
+<!--             
             <div class="form-group col-md-6 mb-2">
                 <label for="fav_games">What are your favorite games?</label>
                 <input
@@ -125,11 +125,12 @@
                     class="form-control"
                     name="favGames"
                     type="text">
-            </div>
+            </div> -->
 
             <!-- ideally this should be a multi select with all the names of consoles in our db.
             we will need to come back once gameInfo service stuff is sorted out -->
-            <div class="form-group col-md-6 mb-2">
+
+            <!-- <div class="form-group col-md-6 mb-2">
                 <label for="favConsoles">What are your favorite consoles</label>
                 <input
                     #favConsoles
@@ -177,17 +178,18 @@
                     name="favoriteConsoleMakers">
                     <option *ngFor="let g of gameInfo?.console_makers" [value]="g">{{ g }}</option>
                 </select>
-            </div>
+            </div> -->
 
-            <!-- <tdf-formgroup form="profile" id="favorite_games" title="Favorite Games"></tdf-formgroup>
+            <tdf-formgroup form="favorite" id="games" title="Favorite Games" type="multi-text"></tdf-formgroup>
         
-            <tdf-formgroup form="profile" id="favorite_consoles" title="Favorite Consoles"></tdf-formgroup>
+            <tdf-formgroup form="favorite" id="consoles" title="Favorite Consoles" type="multi-text"></tdf-formgroup>
         
-            <tdf-formgroup form="profile" id="favorite_type" title="Favorite Types of Games" type="select" [options]="['adventure', 'action', 'role-playing', 'sports', 'platformer']"></tdf-formgroup>      
+            <tdf-formgroup form="favorite" id="categories" title="Favorite Categories of Games" type="select" [options]="gameInfo?.categories"></tdf-formgroup>      
 
-            <tdf-formgroup form="profile" id="bacon" title="bacon" type="radio" [options]="['yes','no']"></tdf-formgroup>
-        
-            <tdf-formgroup form="profile" id="apricots" title="How often do you eat apricots" type="checkbox" [options]="['hourly', 'daily', 'monthly', 'never']"></tdf-formgroup>       -->
+            <tdf-formgroup form="favorite" id="creators" title="Favorite Creators of Games" type="select" [options]="gameInfo?.creators"></tdf-formgroup>      
+
+            <tdf-formgroup form="favorite" id="console_makers" title="Favorite Console Makers" type="select" [options]="gameInfo?.console_makers"></tdf-formgroup>      
+
         </zippy>
 
         <zippy class="row" title="Dislikes: ">
@@ -284,7 +286,8 @@
                                 #currentlyPlayingGames
                                 [(ngModel)]="profile.currentlyPlayingGames"
                                 id="currentlyPlayingGames"
-                                type="checkbox">{{ g.title }} <br>
+                                type="checkbox"
+                                name="currentlyPlayingGames">{{ g.title }} <br>
                         </label>
                     </li>
                 </ul>
@@ -440,3 +443,4 @@
     </form>
     <p>{{ finished.value | json }}</p>
 </div>
+<fieldset></fieldset>

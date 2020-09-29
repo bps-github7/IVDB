@@ -1,5 +1,6 @@
+
 <!-- by default- assumes we are working with bootstrap form -->
-<div *ngIf="type == 'text' || type == 'null'" class="col-md-6 mb-2 form-group">
+<div *ngIf="type == 'text' || type == 'null'" class="col-md-6 mb-2 form-group" [ngModelGroup]="form">
     <label [for]="id">{{ title }}: </label>
     <input
         #{{id}}
@@ -9,6 +10,13 @@
         [name]="id"
         [id]="id">
 </div>
+
+<!-- specialized-text entry formgroup -->
+<multi-input
+    #{{id}}
+    [(ngModel)]="form.id"
+    formControl="id" *ngIf="type == 'multi-text'"></multi-input>
+
 
 <div *ngIf="type == 'textarea'" class="col-md-6 mb-2 form-group">
     <label [for]="id">{{ title }}: </label>
@@ -21,7 +29,7 @@
 </div>
 
 <!--need to check that options is not null for these to work -->
-<div *ngIf="type == 'select' && options" class="col-md-6 mb-2 form-group">
+<div *ngIf="type == 'select' && options" class="col-md-6 mb-2 form-group" [ngModelGroup]="form">
     <label [for]="id">{{ title }}: </label>
     <select
         #{{id}}
@@ -30,22 +38,31 @@
         class="form-control"
         [name]="id"
         [id]="id">
-        <option *ngFor="let o of options" value="o">{{ o }}</option>
+        <option *ngFor="let o of options" [value]=o>{{ o }}</option>
     </select>
 </div>
 
 <!-- the choices are all appearing on the same line for radio and checkboxes -->
 <div *ngIf="type == 'checkbox'" class="checkbox">
     <h3>{{ title }}:</h3>
-    <label *ngFor="let opt of options">
-        <input type="checkbox" name="" id="">{{ opt }}
-    </label>
+    <ul>
+        <li *ngFor="let opt of options">
+            <label>
+                <input type="checkbox" name="id" id="id">{{ opt }}
+            </label>
+        </li>
+    </ul>
 </div>
 
 <div *ngIf="type == 'radio'" class="radio">
     
     <h3>{{ title }}:</h3>
-    <label *ngFor="let opt of options">
-        <input type="radio" name="" id="">{{ opt }} 
-    </label>
+    <ul>
+        <li *ngFor="let opt of options">
+            <label>
+                <input type="radio" name="id" id="id">{{ opt }} 
+            </label>
+        </li>
+    </ul>
+    
 </div>
