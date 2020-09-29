@@ -259,26 +259,35 @@
                 2) users can tick off one or both checkboxes for own and playing in either column
                 3) maybe confusing to have a column with two rows, just use the table idea but make them seperate -->
 
-            <div class="form-group col-md-6 mb-2">
-                <label for="currentlyOwnedGames">What games do you currently own?</label>
-                <input
-                    #currentlyOwnedGames
-                    [(ngModel)]="profile.currentlyOwnedGames"
-                    id="currentlyOwnedGames"
-                    class="form-control"
-                    name="currentlyOwnedGames"
-                    type="text">
+            <div class="checkbox">
+                <h3>What games do you currently own?</h3>
+                <ul>
+                    <li id="game" *ngFor="let g of games">
+                        <label for="currentlyOwnedGames">
+                            <input
+                                #currentlyOwnedGames
+                                [(ngModel)]="profile.currentlyOwnedGames"
+                                id="currentlyOwnedGames"
+                                name="currentlyOwnedGames"
+                                type="checkbox">{{ g.title }} <br>
+                        </label>
+                    </li>
+                </ul>
             </div>
 
-            <div class="form-group col-md-6 mb-2">
-                <label for="currentlyPlayingGames">What games are you currently playing?</label>
-                <input
-                    #currentlyPlayingGames
-                    [(ngModel)]="profile.currentlyPlayingGames"
-                    id="currentlyPlayingGames"
-                    class="form-control"
-                    name="currentlyPlayingGames"
-                    type="text">
+            <div class="checkbox">
+                <h3>What games are you currently playing?</h3>
+                <ul>
+                    <li id="game" *ngFor="let g of games">
+                        <label  for="currentlyPlayingGames">
+                            <input
+                                #currentlyPlayingGames
+                                [(ngModel)]="profile.currentlyPlayingGames"
+                                id="currentlyPlayingGames"
+                                type="checkbox">{{ g.title }} <br>
+                        </label>
+                    </li>
+                </ul>
             </div>
 
             <div class="form-group col-md-6 mb-2">
@@ -382,7 +391,33 @@
             <!-- radio button- should we notify the user to complete their preferences 
             if they havent been filled out? -->
 
+            <div class="form-group radio">
+                <h3>completion preferences: complete your preferences now or later</h3>
+                <label for="completionPreferences">
+                    <!-- need to see pwm to see how to do radio buttons-->
+                    <input
+                        type="radio"
+                        name="now"
+                        id="now">Now
+                    <input
+                        type="radio"
+                        name="later"
+                        id="later">Later
+                </label>
+            </div>
+
             <!-- radio button- show all preferences on public profile? -->
+            <div class="form-group radio">
+                <h3>Display Preferences: show all or custom</h3>
+                <label for="completionPreferences">
+                    <!-- need to see pwm to see how to do radio buttons-->
+                    <input
+                        type="radio">show all
+                    <input
+                        type="radio">Custom
+                </label>
+            </div>
+
            
             <!-- if above question.value is 'no'- checkbox for user to
             customize which preferences to show. populate with

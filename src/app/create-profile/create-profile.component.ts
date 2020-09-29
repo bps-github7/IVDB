@@ -6,6 +6,7 @@ import { GameInfoService } from '../common/services/gameinfo.service';
 import { ProfileService } from '../common/services/profile.service';
 import { UserService } from '../common/services/user.service';
 import { TdfFormgroupComponent } from '.././tdf-formgroup/tdf-formgroup.component';
+import { GameService } from '../common/services/game.service';
 
 
 
@@ -19,6 +20,7 @@ export class CreateProfileComponent implements OnInit {
     _gamerTags = [];
     form: any;
     user;
+    games;
     gameInfo;
     profile : any={};
 
@@ -30,6 +32,7 @@ export class CreateProfileComponent implements OnInit {
     constructor(
         private fb: FormBuilder,
         private gameInfoService : GameInfoService,
+        private gameService : GameService,
         private router : Router,
         private route : ActivatedRoute,
         private userService : UserService,
@@ -37,6 +40,8 @@ export class CreateProfileComponent implements OnInit {
             //conflict here- should i use username or id as the query route param
             //one hurts usability, increases practicallity, the other reverses this
             this.user = this.route.snapshot.paramMap.get('username')
+
+            this.games = this.gameService.games.subscribe(resp => this.games = resp);
 
             // 1) i think you shouldnt use username as primary key/ uid in implementation details,
             //    but doing so in this context is acceptable: just grab uid and use it to get the username.
