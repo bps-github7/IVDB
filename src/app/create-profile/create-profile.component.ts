@@ -5,7 +5,9 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { GameInfoService } from '../common/services/gameinfo.service';
 import { ProfileService } from '../common/services/profile.service';
 import { UserService } from '../common/services/user.service';
-import { TdfFormgroupComponent } from '.././tdf-formgroup/tdf-formgroup.component';
+
+// import { TdfFormgroupComponent } from '.././tdf-formgroup/tdf-formgroup.component';
+// import { CustomInputComponent } from '.././custom-input/custom-input.component';
 import { GameService } from '../common/services/game.service';
 
 

@@ -11,6 +11,32 @@
         [id]="id">
 </div>
 
+<div *ngIf="type == 'password'" class="col-md-6 mb-2 form-group">
+    <label for="id">Password: </label>
+    <input
+        #{{id}}
+        [(ngModel)]="form.id"
+        class="form-control"
+        type="password"
+        [name]="id"
+        [id]="id"
+        >
+    
+    <label for="confirmPassword">Confirm Password: </label>
+    <input
+        #confirmPassword
+        class="form-control"
+        type="password"
+        [name]="confirmPassword"
+        [id]="confirmPassword">
+    <div class="alert alert-danger" *ngIf="confirmPassword.touched && id.value != confirmPassword.value">
+        Password and confirm password do not match
+    </div>
+
+
+    
+</div>
+
 <!-- specialized-text entry formgroup -->
 <multi-input
     #{{id}}
@@ -28,7 +54,6 @@
         [id]="id"></textarea>
 </div>
 
-<!--need to check that options is not null for these to work -->
 <div *ngIf="type == 'select' && options" class="col-md-6 mb-2 form-group" [ngModelGroup]="form">
     <label [for]="id">{{ title }}: </label>
     <select
@@ -43,26 +68,32 @@
 </div>
 
 <!-- the choices are all appearing on the same line for radio and checkboxes -->
-<div *ngIf="type == 'checkbox'" class="checkbox">
+<fieldset *ngIf="type == 'checkbox'">
     <h3>{{ title }}:</h3>
-    <ul>
-        <li *ngFor="let opt of options">
-            <label>
-                <input type="checkbox" name="id" id="id">{{ opt }}
-            </label>
-        </li>
-    </ul>
-</div>
+    <div class="checkbox" *ngFor="let opt of options">
+        <label for="{{ opt.name }}">
+            <input
+                type="checkbox"
+                name="id"
+                id="id_opt.name"
+                value="opt.name"
+                [(ngModel)]="checkboxSelected">
+            {{ opt.name }}
+        </label>
+    </div>
+</fieldset>
 
-<div *ngIf="type == 'radio'" class="radio">
-    
+<fieldset *ngIf="type == 'radio'">
     <h3>{{ title }}:</h3>
-    <ul>
-        <li *ngFor="let opt of options">
-            <label>
-                <input type="radio" name="id" id="id">{{ opt }} 
-            </label>
-        </li>
-    </ul>
-    
-</div>
+    <div class="radio" *ngFor="let opt of options">
+        <label for="{{ opt.name }}">
+            <input 
+                type="radio" 
+                name="id"
+                id="id_opt.name"
+                value="opt.name"
+                [(ngModel)]="radioSelected">
+            {{ opt.name }}
+        </label>
+    </div>
+</fieldset>

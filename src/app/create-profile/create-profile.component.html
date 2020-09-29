@@ -10,63 +10,13 @@
     </div>
     <form #finished="ngForm" (ngSubmit)="save(finished.value)">
         <zippy title="Public Profile: " class="row">
-            <div class="form-group col-md-6 mb-2">
-                <label for="nickname">Provide a nickname for your account (current: username)</label>
-                <input
-                    #nickname
-                    [(ngModel)]="profile.nickname"
-                    required
-                    id="nickname"
-                    class="form-control"
-                    name="nickname"
-                    type="text">
-            </div>
+            <tdf-formgroup form="publicProfile" id="nickname" title="Provide a nickname for your profile: (default is username)"></tdf-formgroup>
 
-            <div class="col-md-6 mb-2 form-group">
-                <label for="image">Profile image: </label>
-                <input
-                    #image
-                    [(ngModel)]="profile.image"
-                    id="image"
-                    class="form-control"
-                    required
-                    name="image"
-                    type="text">
-            </div>
-    
-            <div class="col-md-6 mb-2 form-group">
-                <label for="backgroundImg">Provide a background image for your account (optional)</label>
-                <select
-                    #backgroundImg
-                    [(ngModel)]="profile.backgroundImg"
-                    required
-                    name="backgroundImg" 
-                    id="backgroundImg"
-                    class="form-control">
-                        <option value="Banana">Banana</option>
-                        <option value="Sundae">Sundae</option>
-                        <option value="Beachfront Estate">Beachfront estate</option>
-                        <option value="custom">Provide your own</option>
-                </select>
-                <!-- <input *ngIf="background_img.errorvalue == 'custom'" type="text">
-                <div *ngIf="background_img.value">
-                    Background image not selected will result in random assignment. Ok?
-                    <input type="radio" name="yes" id="yes"> yes
-                    <input type="radio" name="no" id="no"> no 
-                </div> -->
-            </div>
+            <tdf-formgroup form="publicProfile" id="image" title="Provide a profile Image:"></tdf-formgroup>
 
-            <div class="col-md-6 mb-2 form-group">
-                <label for="bio">Biography/user description</label>
-                <textarea
-                    #bio
-                    [(ngModel)]="profile.bio"
-                    name="bio"
-                    id="bio"
-                    class="form-control"
-                    cols="30"
-                    rows="10"></textarea>
-            </div>
+            <tdf-formgroup form="publicProfile" id="backgroundImg" title="Provide a background image for your account (optional)" type="select" [options]="['Banana', 'Sundae', 'Beachfront Estate', 'custom']"></tdf-formgroup>
+
+            <tdf-formgroup form="publicProfile" id="bio" title="Provide a bio for your profile: " type="textarea"></tdf-formgroup>
             
             <div class="col-md-6 mb-2 form-group">
                 <label for="links">links: (press enter )</label>
@@ -111,78 +61,10 @@
 
         </zippy>
 
-        <!-- should all be in a sep component for preferences -->
-
         <zippy class="row" title="Favorites: ">
-            
-<!--             
-            <div class="form-group col-md-6 mb-2">
-                <label for="fav_games">What are your favorite games?</label>
-                <input
-                    #favGames
-                    [(ngModel)]="profile.favGames"
-                    id="favGames"
-                    class="form-control"
-                    name="favGames"
-                    type="text">
-            </div> -->
-
-            <!-- ideally this should be a multi select with all the names of consoles in our db.
-            we will need to come back once gameInfo service stuff is sorted out -->
-
-            <!-- <div class="form-group col-md-6 mb-2">
-                <label for="favConsoles">What are your favorite consoles</label>
-                <input
-                    #favConsoles
-                    [(ngModel)]="profile.favConsoles"
-                    id="favConsoles"
-                    class="form-control"
-                    name="favConsoles"
-                    type="text">
-            </div>
-
-            <div class="form-group col-md-6 mb-2">
-                <label for="favoriteCategories">What categories of games do you dislike? (*if any)</label>
-                <select
-                    #favoriteCategories
-                    multiple
-                    [(ngModel)]="profile.favoriteCategories"
-                    id="favoriteCategories"
-                    class="form-control"
-                    name="favoriteCategories">
-                    <option *ngFor="let g of gameInfo?.categories" [value]="g">{{ g }}</option>
-                </select>
-            </div>
-
-            <div class="form-group col-md-6 mb-2">
-                <label for="favoriteCreators">What creators of games do you dislike? (*if any)</label>
-                <select
-                    #favoriteCreators
-                    multiple
-                    [(ngModel)]="profile.favoriteCreators"
-                    id="favoriteCreators"
-                    class="form-control"
-                    name="favoriteCreators">
-                    <option *ngFor="let g of gameInfo?.creators" [value]="g">{{ g }}</option>
-                </select>
-            </div>
-
-            <div class="form-group col-md-6 mb-2">
-                <label for="favoriteConsoleMakers">What console makers do you dislike? (*if any)</label>
-                <select
-                    #favoriteConsoleMakers
-                    multiple
-                    [(ngModel)]="profile.favoriteConsoleMakers"
-                    id="favoriteConsoleMakers"
-                    class="form-control"
-                    name="favoriteConsoleMakers">
-                    <option *ngFor="let g of gameInfo?.console_makers" [value]="g">{{ g }}</option>
-                </select>
-            </div> -->
-
-            <tdf-formgroup form="favorite" id="games" title="Favorite Games" type="multi-text"></tdf-formgroup>
+            <tdf-formgroup form="favorite" id="games" title="Favorite Games"></tdf-formgroup>
         
-            <tdf-formgroup form="favorite" id="consoles" title="Favorite Consoles" type="multi-text"></tdf-formgroup>
+            <tdf-formgroup form="favorite" id="consoles" title="Favorite Consoles"></tdf-formgroup>
         
             <tdf-formgroup form="favorite" id="categories" title="Favorite Categories of Games" type="select" [options]="gameInfo?.categories"></tdf-formgroup>      
 
@@ -193,198 +75,48 @@
         </zippy>
 
         <zippy class="row" title="Dislikes: ">
-            <div class="form-group col-md-6 mb-2">
-                <label for="dislikedGames">What games do you dislike? (*if any)</label>
-                <input
-                    #dislikedGames
-                    [(ngModel)]="profile.dislikedGames"
-                    id="dislikedGames"
-                    class="form-control"
-                    name="dislikedGames"
-                    type="text">
-            </div>
+            <tdf-formgroup form="dislikes" id="games" title="Disliked Games (*if any)"></tdf-formgroup>
+        
+            <tdf-formgroup form="dislikes" id="consoles" title="Disliked Consoles (*if any)"></tdf-formgroup>
+        
+            <tdf-formgroup form="dislikes" id="categories" title="Disliked Categories of Games" type="select" [options]="gameInfo?.categories"></tdf-formgroup>      
 
-            <div class="form-group col-md-6 mb-2">
-                <label for="dislikedConsoles">What consoles do you dislike? (*if any)</label>
-                <input
-                    #dislikedConsoles
-                    [(ngModel)]="profile.dislikedConsoles"
-                    id="dislikedConsoles"
-                    class="form-control"
-                    name="dislikedConsoles"
-                    type="text">
-            </div>
+            <tdf-formgroup form="dislikes" id="creators" title="Disliked Creators of Games" type="select" [options]="gameInfo?.creators"></tdf-formgroup>      
 
-            <div class="form-group col-md-6 mb-2">
-                <label for="dislikedCategories">What categories of games do you dislike? (*if any)</label>
-                <select
-                    #dislikedCategories
-                    multiple
-                    [(ngModel)]="profile.dislikedCategories"
-                    id="dislikedCategories"
-                    class="form-control"
-                    name="dislikedCategories">
-                    <option *ngFor="let g of gameInfo?.categories" [value]="g">{{ g }}</option>
-                </select>
-            </div>
-
-            <div class="form-group col-md-6 mb-2">
-                <label for="dislikedCreators">What creators of games do you dislike? (*if any)</label>
-                <select
-                    #dislikedCreators
-                    multiple
-                    [(ngModel)]="profile.dislikedCreators"
-                    id="dislikedCreators"
-                    class="form-control"
-                    name="dislikedCreators">
-                    <option *ngFor="let g of gameInfo?.creators" [value]="g">{{ g }}</option>
-                </select>
-            </div>
-
-            <div class="form-group col-md-6 mb-2">
-                <label for="dislikedConsoleMakers">What console makers do you dislike? (*if any)</label>
-                <select
-                    #dislikedConsoleMakers
-                    multiple
-                    [(ngModel)]="profile.dislikedConsoleMakers"
-                    id="dislikedConsoleMakers"
-                    class="form-control"
-                    name="dislikedConsoleMakers">
-                    <option *ngFor="let g of gameInfo?.console_makers" [value]="g">{{ g }}</option>
-                </select>
-            </div>
+            <tdf-formgroup form="dislikes" id="console_makers" title="Disliked Console Makers" type="select" [options]="gameInfo?.console_makers"></tdf-formgroup>      
         </zippy>
 
         <zippy title="Current: ">
             <!-- would be cool to
-                1) make this a two coloum table for games and consoles, populated by entries in gameInfo
-                2) users can tick off one or both checkboxes for own and playing in either column
-                3) maybe confusing to have a column with two rows, just use the table idea but make them seperate -->
 
-            <div class="checkbox">
-                <h3>What games do you currently own?</h3>
-                <ul>
-                    <li id="game" *ngFor="let g of games">
-                        <label for="currentlyOwnedGames">
-                            <input
-                                #currentlyOwnedGames
-                                [(ngModel)]="profile.currentlyOwnedGames"
-                                id="currentlyOwnedGames"
-                                name="currentlyOwnedGames"
-                                type="checkbox">{{ g.title }} <br>
-                        </label>
-                    </li>
-                </ul>
-            </div>
+            1) make this a two coloum table for games and consoles, populated by entries in gameInfo
+            2) users can tick off one or both checkboxes for own and playing in either column
+            3) maybe confusing to have a column with two rows, just use the table idea but make them seperate -->
+            <tdf-formgroup form="current" id="ownedGames" title="What games do you own currently?" type="checkbox" [options]="games"></tdf-formgroup>
+            
+            <tdf-formgroup form="current" id="playingGames" title="What games are you currently playing?" type="checkbox" [options]="games"></tdf-formgroup>
 
-            <div class="checkbox">
-                <h3>What games are you currently playing?</h3>
-                <ul>
-                    <li id="game" *ngFor="let g of games">
-                        <label  for="currentlyPlayingGames">
-                            <input
-                                #currentlyPlayingGames
-                                [(ngModel)]="profile.currentlyPlayingGames"
-                                id="currentlyPlayingGames"
-                                type="checkbox"
-                                name="currentlyPlayingGames">{{ g.title }} <br>
-                        </label>
-                    </li>
-                </ul>
-            </div>
-
-            <div class="form-group col-md-6 mb-2">
-                <label for="currentlyOwnedConsoles">What consoles do you currently own?</label>
-                <input
-                    #currentlyOwnedConsoles
-                    [(ngModel)]="profile.currentlyOwnedConsoles"
-                    id="currentlyOwnedConsoles"
-                    class="form-control"
-                    name="currentlyOwnedConsoles"
-                    type="text">
-            </div>
-
-            <div class="form-group col-md-6 mb-2">
-                <label for="currentlyUsingConsoles">What consoles are you currently using</label>
-                <input
-                    #currentlyUsingConsoles
-                    [(ngModel)]="profile.currentlyUsingConsoles"
-                    id="currentlyUsingConsoles"
-                    class="form-control"
-                    name="currentlyUsingConsoles"
-                    type="text">
-            </div>
+            <tdf-formgroup form="current" id="ownedConsoles" title="What consoles do you currently own?"></tdf-formgroup>
+            
+            <tdf-formgroup form="current" id="playingConsoles" title="What consoles are you playing?"></tdf-formgroup>
         </zippy>
 
         <zippy title="Historic: ">
-            <div class="form-group col-md-6 mb-2">
-                <label for="firstGame">What is the first game you ever played/had?</label>
-                <input
-                    #firstGame
-                    [(ngModel)]="profile.firstGame"
-                    id="firstGame"
-                    class="form-control"
-                    name="firstGame"
-                    type="text">
-            </div>
+            <tdf-formgroup form="historic" id="firstGame" title="What is the first game you ever played/had?"></tdf-formgroup>
+            
+            <tdf-formgroup form="historic" id="childhoodFavGame" title="What was your favorite game growing up?"></tdf-formgroup>
+            
+            <tdf-formgroup form="historic" id="firstConsole" title="What was the first console you ever played/had?"></tdf-formgroup>
 
-            <div class="form-group col-md-6 mb-2">
-                <label for="childhoodFavoriteGame">What was your favorite game growing up?</label>
-                <input
-                    #childhoodFavoriteGame
-                    [(ngModel)]="profile.childhoodFavoriteGame"
-                    id="childhoodFavoriteGame"
-                    class="form-control"
-                    name="childhoodFavoriteGame"
-                    type="text">
-            </div>
-
-            <div class="form-group col-md-6 mb-2">
-                <label for="firstConsole">What is the first console you ever played/had?</label>
-                <input
-                    #firstConsole
-                    [(ngModel)]="profile.firstConsole"
-                    id="firstConsole"
-                    class="form-control"
-                    name="firstConsole"
-                    type="text">
-            </div>
-
-            <div class="form-group col-md-6 mb-2">
-                <label for="childhoodFavoriteConsole">What was your favorite console growing up?</label>
-                <input
-                    #childhoodFavoriteConsole
-                    [(ngModel)]="profile.childhoodFavoriteConsole"
-                    id="childhoodFavoriteConsole"
-                    class="form-control"
-                    name="childhoodFavoriteConsole"
-                    type="text">
-            </div>
+            <tdf-formgroup form="historic" id="childhoodFavConsole" title="What was your favorite console growing up?"></tdf-formgroup>
         </zippy>
 
         
+        <!-- Redundant maybe- not sure how much different this is from current??!! -->
         <zippy title="Recently Purchased">
-            <div class="form-group col-md-6 mb-2">
-                <label for="recentlyPurchasedGames">What games have you purchased recently?</label>
-                <input
-                    #recentlyPurchasedGames
-                    [(ngModel)]="profile.recentlyPurchasedGames"
-                    id="recentlyPurchasedGames"
-                    class="form-control"
-                    name="recentlyPurchasedGames"
-                    type="text">
-            </div>
-
-            <div class="form-group col-md-6 mb-2">
-                <label for="recentlyPurchasedConsoles">What consoles have you purchased recently?</label>
-                <input
-                    #recentlyPurchasedConsoles
-                    [(ngModel)]="profile.recentlyPurchasedConsoles"
-                    id="recentlyPurchasedConsoles"
-                    class="form-control"
-                    name="recentlyPurchasedConsoles"
-                    type="text">
-            </div>
+            <tdf-formgroup form="recentlyPurchased" id="games" title="What games have you recently purchased?"></tdf-formgroup>
+        
+            <tdf-formgroup form="recentlyPurchased" id="consoles" title="What consoles have you recently Purchased?"></tdf-formgroup>
         </zippy>
 
 
@@ -393,34 +125,12 @@
         <zippy title="Display Settings: ">
             <!-- radio button- should we notify the user to complete their preferences 
             if they havent been filled out? -->
-
-            <div class="form-group radio">
-                <h3>completion preferences: complete your preferences now or later</h3>
-                <label for="completionPreferences">
-                    <!-- need to see pwm to see how to do radio buttons-->
-                    <input
-                        type="radio"
-                        name="now"
-                        id="now">Now
-                    <input
-                        type="radio"
-                        name="later"
-                        id="later">Later
-                </label>
-            </div>
-
+            <tdf-formgroup form="displaySettings" id='completionPreference' title="Would you like to complete youur preferences now or later?" type="radio" [options]="['Now', 'Later']"></tdf-formgroup>
+            
             <!-- radio button- show all preferences on public profile? -->
-            <div class="form-group radio">
-                <h3>Display Preferences: show all or custom</h3>
-                <label for="completionPreferences">
-                    <!-- need to see pwm to see how to do radio buttons-->
-                    <input
-                        type="radio">show all
-                    <input
-                        type="radio">Custom
-                </label>
-            </div>
-
+            <!-- feel like option needs to be a mapping for radio for the values. well see -->
+            <tdf-formgroup form="displaySettings" id="displayAll" title="Display all preferences on profile/ custom / none" type="radio" [options]="['Show', 'Show None', 'Show Custom']"></tdf-formgroup>
+            
            
             <!-- if above question.value is 'no'- checkbox for user to
             customize which preferences to show. populate with
@@ -432,15 +142,18 @@
 
         <!-- account settings -->
         <zippy title="Account Settings: ">
-            <!-- place to re enter/ edit account info
-            email
-            username
-            password
-            all these things should be required (user cant submit form if they are blank)
-            also perform input validation. make confirm field appear if any of them are edited.-->
+            <!-- place to re enter/ edit account info:
+
+            these fields should be disabled by default: user can click a button to choose to enable them
+            then they will get a prompt, reminding them that they will need to confirm the changes/asking if they wish to continue
+            if they select yes, then show a second input field for confirmation, both of which are invalid until they match and pass the pattern-->
+            <tdf-formgroup form="accountSettings" id="username" title="Username"></tdf-formgroup>
+
+            <tdf-formgroup form="accountSettings" id="email" title="Email"></tdf-formgroup>
+
+            <tdf-formgroup form="accountSettings" id="password" title="Password" type="password"></tdf-formgroup>
         </zippy>
         <button class="btn btn-primary" [disabled]="!finished.valid">Update Profile</button>
     </form>
     <p>{{ finished.value | json }}</p>
 </div>
-<fieldset></fieldset>

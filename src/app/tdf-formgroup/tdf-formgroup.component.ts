@@ -14,6 +14,8 @@ export class TdfFormgroupComponent implements OnInit {
     @Input('title') title : string;
     @Input('type') type : string = 'text';
     @Input('options') options;
+    radioSelected: any;
+    checkboxSelected: any;
 
     constructor() { }
 
