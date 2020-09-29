@@ -17,48 +17,10 @@
             <tdf-formgroup form="publicProfile" id="backgroundImg" title="Provide a background image for your account (optional)" type="select" [options]="['Banana', 'Sundae', 'Beachfront Estate', 'custom']"></tdf-formgroup>
 
             <tdf-formgroup form="publicProfile" id="bio" title="Provide a bio for your profile: " type="textarea"></tdf-formgroup>
+
+            <tdf-formgroup form="publicProfile" id="gamerTags" title="Enter any gamertags (*optional)" type="multi-text"></tdf-formgroup>
             
-            <div class="col-md-6 mb-2 form-group">
-                <label for="links">links: (press enter )</label>
-                <input
-                    (keydown.enter)="add_link(links)"
-                    #links
-                    [(ngModel)]="profile.links"
-                    id="links"
-                    class="form-control"
-                    name="links"
-                    type="text">
-            </div>
-
-            <!-- float to the right -->
-
-            <div id="container">
-                <ul> <h3>Links:</h3>
-                    <li *ngFor="let g of _links">{{ g }}</li>
-                </ul>
-            </div>
-            
-
-            <div class="col-md-6 mb-2 form-group">
-                <label for="gamerTags">Enter gamertags</label>
-                <input
-                    (keydown.enter)="add_gamerTag(gamerTags)"
-                    #gamerTags
-                    [(ngModel)]="profile.gamerTags"
-                    id="gamerTags"
-                    class="form-control"
-                    name="gamerTags"
-                    type="text">
-            </div>
-            
-            <!-- float to the right -->
-            <div id="container">
-                <ul> <h3>gamer tags: </h3>
-                    <li *ngFor="let g of _gamerTags">{{ g }}</li>
-                </ul>
-            </div>
-
-
+            <tdf-formgroup form="publicProfile" id="links" title="Enter any links (*optional)" type="multi-text"></tdf-formgroup>
         </zippy>
 
         <zippy class="row" title="Favorites: ">
