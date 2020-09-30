@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { TdfFormgroupComponent } from './tdf-formgroup.component';
+import { TdfFormControlComponent } from './tdf-form-control.component';
 
-describe('TdfFormgroupComponent', () => {
-  let component: TdfFormgroupComponent;
-  let fixture: ComponentFixture<TdfFormgroupComponent>;
+describe('TdfFormControlComponent', () => {
+  let component: TdfFormControlComponent;
+  let fixture: ComponentFixture<TdfFormControlComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ TdfFormgroupComponent ]
+      declarations: [ TdfFormControlComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(TdfFormgroupComponent);
+    fixture = TestBed.createComponent(TdfFormControlComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

@@ -18,8 +18,6 @@ import { GameService } from '../common/services/game.service';
   styleUrls: ['./create-profile.component.css']
 })
 export class CreateProfileComponent implements OnInit {
-    _links = [];
-    _gamerTags = [];
     form: any;
     user;
     games;
@@ -45,19 +43,15 @@ export class CreateProfileComponent implements OnInit {
 
             this.games = this.gameService.games.subscribe(resp => this.games = resp);
 
-            // 1) i think you shouldnt use username as primary key/ uid in implementation details,
-            //    but doing so in this context is acceptable: just grab uid and use it to get the username.
 
-            // 2) this inadvertently deals with the userAuth-guard problem, as only the logged in user will
-            //    be able to supply uid.
-
-            //commenting this one out until the above problem is resolved.
-            // i think this needs to be done with observables.
+            console.log("username here: " + this.user);
+            // youre rellying on the user name being provided within the url. when this may not always be the case!
+            
+            //this line certainly not working as intended.
             if (this.user) {
-                this.profile = this.profileService.get$(this.user).subscribe(next => this.profile = next);
-                // this.userService.get_profile(this.username).valueChanges().subscribe(resp => this.profile = resp);
-
-            //second line for how we retrieve the profile from user service or new profile service.
+                console.log("testing")
+                this.profile = this.profileService.get$(this.user).subscribe(resp => this.profile = resp);
+                console.log(this.profile)
             }
             this.gameInfo = gameInfoService.gameInfo$.subscribe(resp => this.gameInfo = resp)
         }
@@ -65,28 +59,13 @@ export class CreateProfileComponent implements OnInit {
     ngOnInit(): void {
     }
 
-    add_link(input : HTMLInputElement) {
-        if (input.value === '') return false;
 
-        this._links.push(input.value);
-        input.value = '';
-    }
 
-    add_gamerTag(input : HTMLInputElement) {
-        if (input.value === '') return false;
-
-        this._gamerTags.push(input.value);
-        input.value = '';
-    } 
 
     
     save(profile) {
-        //does the profile exist already- then update it 
-        if (this.user) this.profileService.update(profile);
-
-        //no? make a new one
-        else this.profileService.create(profile);
-        this.router.navigate(['/admin/game']);
+        this.profileService.update(profile, this.user)
+        this.router.navigate(['sign_in/profile/', this.user]);
     }
 
 

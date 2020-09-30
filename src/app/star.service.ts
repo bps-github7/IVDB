@@ -18,7 +18,7 @@ export class StarService {
     }
 
     getGameRating(userId :  string) {
-        const ratingRef = this.afs.collection('ratings', ref => ref.where('userId', '==', userId));
+        const ratingRef = this.afs.collection('ratings', (ref) => ref.where('userId', '==', userId));
         return ratingRef.valueChanges();
     }
 

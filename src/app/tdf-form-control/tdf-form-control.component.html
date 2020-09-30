@@ -1,6 +1,15 @@
 
 <!-- by default- assumes we are working with bootstrap form -->
-<div *ngIf="type == 'text' || type == 'null'" class="col-md-6 mb-2 form-group" [ngModelGroup]="form">
+<fieldset *ngIf="type == 'text' || type == 'null'" class="col-md-6 mb-2 form-group" [ngModelGroup]="form">
+    <!-- <generic-input 
+        [placeholder]="placeholder"
+        [isRequired]="isRequired"
+        [errorMsg]="errorMsg"
+        [label]="title"
+        [pattern]="pattern"
+        [(ngModel)]="form.id"
+        name="id">
+    </generic-input> -->
     <label [for]="id">{{ title }}: </label>
     <input
         #{{id}}
@@ -9,9 +18,15 @@
         [type]="type"
         [name]="id"
         [id]="id">
-</div>
+    <div *ngIf="id.touched && id.invalid" class="alert alert-danger">
+        {{ errorMsg }}    
+    </div>
+</fieldset>
 
-<div *ngIf="type == 'password'" class="col-md-6 mb-2 form-group">
+
+
+
+<fieldset *ngIf="type == 'password'" class="col-md-6 mb-2 form-group" [ngModelGroup]="form">
     <label for="id">Password: </label>
     <input
         #{{id}}
@@ -31,11 +46,8 @@
         [id]="confirmPassword">
     <div class="alert alert-danger" *ngIf="confirmPassword.touched && id.value != confirmPassword.value">
         Password and confirm password do not match
-    </div>
-
-
-    
-</div>
+    </div>    
+</fieldset>
 
 <!-- specialized-text entry formgroup -->
 <multi-input
@@ -44,17 +56,17 @@
     formControl="id" *ngIf="type == 'multi-text'"></multi-input>
 
 
-<div *ngIf="type == 'textarea'" class="col-md-6 mb-2 form-group">
+<fieldset *ngIf="type == 'textarea'" class="col-md-6 mb-2 form-group" [ngModelGroup]="form">
     <label [for]="id">{{ title }}: </label>
     <textarea
         #{{id}}
         [(ngModel)]="form.id"
         class="form-control"
         [name]="id"
-        [id]="id"></textarea>
-</div>
+        id="id"></textarea>
+</fieldset>
 
-<div *ngIf="type == 'select' && options" class="col-md-6 mb-2 form-group" [ngModelGroup]="form">
+<fieldset *ngIf="type == 'select' && options" class="col-md-6 mb-2 form-group" [ngModelGroup]="form">
     <label [for]="id">{{ title }}: </label>
     <select
         #{{id}}
@@ -65,10 +77,10 @@
         [id]="id">
         <option *ngFor="let o of options" [value]=o>{{ o }}</option>
     </select>
-</div>
+</fieldset>
 
 <!-- the choices are all appearing on the same line for radio and checkboxes -->
-<fieldset *ngIf="type == 'checkbox'">
+<fieldset *ngIf="type == 'checkbox'" [ngModelGroup]="form">
     <h3>{{ title }}:</h3>
     <div class="checkbox" *ngFor="let opt of options">
         <label for="{{ opt.name }}">
@@ -83,15 +95,16 @@
     </div>
 </fieldset>
 
-<fieldset *ngIf="type == 'radio'">
+<fieldset *ngIf="type == 'radio'" [ngModelGroup]="form">
     <h3>{{ title }}:</h3>
     <div class="radio" *ngFor="let opt of options">
         <label for="{{ opt.name }}">
-            <input 
+            <input
+                #{{opt.name}}
                 type="radio" 
                 name="id"
                 id="id_opt.name"
-                value="opt.name"
+                value="{{opt.name}}"
                 [(ngModel)]="radioSelected">
             {{ opt.name }}
         </label>

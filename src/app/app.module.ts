@@ -54,8 +54,10 @@ import { ViewConsoleComponent } from './view-console/view-console.component';
 
 //environment
 import { environment } from 'src/environments/environment';
-import { TdfFormgroupComponent } from './tdf-formgroup/tdf-formgroup.component';
+import { TdfFormControlComponent } from './tdf-form-control/tdf-form-control.component';
 import { MultiInputComponent } from './multi-input/multi-input.component';
+import { GenericInputComponent } from './generic-input/generic-input.component';
+import { ProfileService } from './common/services/profile.service';
 
 
 
@@ -89,8 +91,9 @@ import { MultiInputComponent } from './multi-input/multi-input.component';
     ViewRatingsComponent,
     PreferencesFormComponent,
     ViewConsoleComponent,
-    TdfFormgroupComponent,
-    MultiInputComponent
+    TdfFormControlComponent,
+    MultiInputComponent,
+    GenericInputComponent
     ],
   imports: [
     AngularFireModule.initializeApp(environment.firebase),
@@ -144,14 +147,15 @@ import { MultiInputComponent } from './multi-input/multi-input.component';
         { path: '**', component: NotFoundComponent }
     ])
   ],
-  providers: [
-      AuthService,
-      AuthGuard,
-//      UserService,
-      AdminAuthGuard,
-      GameInfoService,
-      GameService,
-      UserAuthGuard
+    providers: [
+        AuthService,
+        AuthGuard,
+        ProfileService,
+        UserService,
+        AdminAuthGuard,
+        GameInfoService,
+        GameService,
+        UserAuthGuard
   ],
   bootstrap: [AppComponent]
 })

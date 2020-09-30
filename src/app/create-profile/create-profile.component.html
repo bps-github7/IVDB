@@ -10,42 +10,44 @@
     </div>
     <form #finished="ngForm" (ngSubmit)="save(finished.value)">
         <zippy title="Public Profile: " class="row">
-            <tdf-formgroup form="publicProfile" id="nickname" title="Provide a nickname for your profile: (default is username)"></tdf-formgroup>
+            <tdf-form-control form="publicProfile" id="nickname" title="Provide a nickname for your profile: (default is username)"></tdf-form-control>
 
-            <tdf-formgroup form="publicProfile" id="image" title="Provide a profile Image:"></tdf-formgroup>
+            <tdf-form-control form="publicProfile" id="image" title="Provide a profile Image:"></tdf-form-control>
 
-            <tdf-formgroup form="publicProfile" id="backgroundImg" title="Provide a background image for your account (optional)" type="select" [options]="['Banana', 'Sundae', 'Beachfront Estate', 'custom']"></tdf-formgroup>
+            <tdf-form-control form="publicProfile" id="backgroundImg" title="Provide a background image for your account (optional)" type="select" [options]="['Banana', 'Sundae', 'Beachfront Estate', 'custom']"></tdf-form-control>
 
-            <tdf-formgroup form="publicProfile" id="bio" title="Provide a bio for your profile: " type="textarea"></tdf-formgroup>
 
-            <tdf-formgroup form="publicProfile" id="gamerTags" title="Enter any gamertags (*optional)" type="multi-text"></tdf-formgroup>
-            
-            <tdf-formgroup form="publicProfile" id="links" title="Enter any links (*optional)" type="multi-text"></tdf-formgroup>
+            <!-- not sure why, but bio wont group with the publicProfile formgroup. -->
+            <tdf-form-control form="publicProfile" id="bio" title="Provide a bio for your profile: " type="textarea">shitcones</tdf-form-control>
+
+            <tdf-form-control form="publicProfile" id="gamerTags" title="Enter any gamertags (*optional)"></tdf-form-control>
+           
+            <tdf-form-control form="publicProfile" id="links" title="Enter any links (*optional)"></tdf-form-control>
         </zippy>
 
         <zippy class="row" title="Favorites: ">
-            <tdf-formgroup form="favorite" id="games" title="Favorite Games"></tdf-formgroup>
+            <tdf-form-control form="favorite" id="games" title="Favorite Games"></tdf-form-control>
         
-            <tdf-formgroup form="favorite" id="consoles" title="Favorite Consoles"></tdf-formgroup>
+            <tdf-form-control form="favorite" id="consoles" title="Favorite Consoles"></tdf-form-control>
         
-            <tdf-formgroup form="favorite" id="categories" title="Favorite Categories of Games" type="select" [options]="gameInfo?.categories"></tdf-formgroup>      
+            <tdf-form-control form="favorite" id="categories" title="Favorite Categories of Games" type="select" [options]="gameInfo?.categories"></tdf-form-control>      
 
-            <tdf-formgroup form="favorite" id="creators" title="Favorite Creators of Games" type="select" [options]="gameInfo?.creators"></tdf-formgroup>      
+            <tdf-form-control form="favorite" id="creators" title="Favorite Creators of Games" type="select" [options]="gameInfo?.creators"></tdf-form-control>      
 
-            <tdf-formgroup form="favorite" id="console_makers" title="Favorite Console Makers" type="select" [options]="gameInfo?.console_makers"></tdf-formgroup>      
+            <tdf-form-control form="favorite" id="console_makers" title="Favorite Console Makers" type="select" [options]="gameInfo?.console_makers"></tdf-form-control>      
 
         </zippy>
 
         <zippy class="row" title="Dislikes: ">
-            <tdf-formgroup form="dislikes" id="games" title="Disliked Games (*if any)"></tdf-formgroup>
+            <tdf-form-control form="dislikes" id="games" title="Disliked Games (*if any)"></tdf-form-control>
         
-            <tdf-formgroup form="dislikes" id="consoles" title="Disliked Consoles (*if any)"></tdf-formgroup>
+            <tdf-form-control form="dislikes" id="consoles" title="Disliked Consoles (*if any)"></tdf-form-control>
         
-            <tdf-formgroup form="dislikes" id="categories" title="Disliked Categories of Games" type="select" [options]="gameInfo?.categories"></tdf-formgroup>      
+            <tdf-form-control form="dislikes" id="categories" title="Disliked Categories of Games" type="select" [options]="gameInfo?.categories"></tdf-form-control>      
 
-            <tdf-formgroup form="dislikes" id="creators" title="Disliked Creators of Games" type="select" [options]="gameInfo?.creators"></tdf-formgroup>      
+            <tdf-form-control form="dislikes" id="creators" title="Disliked Creators of Games" type="select" [options]="gameInfo?.creators"></tdf-form-control>      
 
-            <tdf-formgroup form="dislikes" id="console_makers" title="Disliked Console Makers" type="select" [options]="gameInfo?.console_makers"></tdf-formgroup>      
+            <tdf-form-control form="dislikes" id="console_makers" title="Disliked Console Makers" type="select" [options]="gameInfo?.console_makers"></tdf-form-control>      
         </zippy>
 
         <zippy title="Current: ">
@@ -54,31 +56,31 @@
             1) make this a two coloum table for games and consoles, populated by entries in gameInfo
             2) users can tick off one or both checkboxes for own and playing in either column
             3) maybe confusing to have a column with two rows, just use the table idea but make them seperate -->
-            <tdf-formgroup form="current" id="ownedGames" title="What games do you own currently?" type="checkbox" [options]="games"></tdf-formgroup>
+            <tdf-form-control form="current" id="ownedGames" title="What games do you own currently?" type="checkbox" [options]="games"></tdf-form-control>
             
-            <tdf-formgroup form="current" id="playingGames" title="What games are you currently playing?" type="checkbox" [options]="games"></tdf-formgroup>
+            <tdf-form-control form="current" id="playingGames" title="What games are you currently playing?" type="checkbox" [options]="games"></tdf-form-control>
 
-            <tdf-formgroup form="current" id="ownedConsoles" title="What consoles do you currently own?"></tdf-formgroup>
+            <tdf-form-control form="current" id="ownedConsoles" title="What consoles do you currently own?"></tdf-form-control>
             
-            <tdf-formgroup form="current" id="playingConsoles" title="What consoles are you playing?"></tdf-formgroup>
+            <tdf-form-control form="current" id="playingConsoles" title="What consoles are you playing?"></tdf-form-control>
         </zippy>
 
         <zippy title="Historic: ">
-            <tdf-formgroup form="historic" id="firstGame" title="What is the first game you ever played/had?"></tdf-formgroup>
+            <tdf-form-control form="historic" id="firstGame" title="What is the first game you ever played/had?"></tdf-form-control>
             
-            <tdf-formgroup form="historic" id="childhoodFavGame" title="What was your favorite game growing up?"></tdf-formgroup>
+            <tdf-form-control form="historic" id="childhoodFavGame" title="What was your favorite game growing up?"></tdf-form-control>
             
-            <tdf-formgroup form="historic" id="firstConsole" title="What was the first console you ever played/had?"></tdf-formgroup>
+            <tdf-form-control form="historic" id="firstConsole" title="What was the first console you ever played/had?"></tdf-form-control>
 
-            <tdf-formgroup form="historic" id="childhoodFavConsole" title="What was your favorite console growing up?"></tdf-formgroup>
+            <tdf-form-control form="historic" id="childhoodFavConsole" title="What was your favorite console growing up?"></tdf-form-control>
         </zippy>
 
         
         <!-- Redundant maybe- not sure how much different this is from current??!! -->
         <zippy title="Recently Purchased">
-            <tdf-formgroup form="recentlyPurchased" id="games" title="What games have you recently purchased?"></tdf-formgroup>
+            <tdf-form-control form="recentlyPurchased" id="games" title="What games have you recently purchased?"></tdf-form-control>
         
-            <tdf-formgroup form="recentlyPurchased" id="consoles" title="What consoles have you recently Purchased?"></tdf-formgroup>
+            <tdf-form-control form="recentlyPurchased" id="consoles" title="What consoles have you recently Purchased?"></tdf-form-control>
         </zippy>
 
 
@@ -87,11 +89,11 @@
         <zippy title="Display Settings: ">
             <!-- radio button- should we notify the user to complete their preferences 
             if they havent been filled out? -->
-            <tdf-formgroup form="displaySettings" id='completionPreference' title="Would you like to complete youur preferences now or later?" type="radio" [options]="['Now', 'Later']"></tdf-formgroup>
+            <tdf-form-control form="displaySettings" id="completionPreference" title="Would you like to complete youur preferences now or later?" type="radio" [options]="['Now', 'Later']"></tdf-form-control>
             
             <!-- radio button- show all preferences on public profile? -->
             <!-- feel like option needs to be a mapping for radio for the values. well see -->
-            <tdf-formgroup form="displaySettings" id="displayAll" title="Display all preferences on profile/ custom / none" type="radio" [options]="['Show', 'Show None', 'Show Custom']"></tdf-formgroup>
+            <tdf-form-control form="displaySettings" id="displayAll" title="Display all preferences on profile/ custom / none" type="radio" [options]="['Show', 'Show None', 'Show Custom']"></tdf-form-control>
             
            
             <!-- if above question.value is 'no'- checkbox for user to
@@ -109,11 +111,11 @@
             these fields should be disabled by default: user can click a button to choose to enable them
             then they will get a prompt, reminding them that they will need to confirm the changes/asking if they wish to continue
             if they select yes, then show a second input field for confirmation, both of which are invalid until they match and pass the pattern-->
-            <tdf-formgroup form="accountSettings" id="username" title="Username"></tdf-formgroup>
+            <tdf-form-control form="accountSettings" id="username" title="Username"></tdf-form-control>
 
-            <tdf-formgroup form="accountSettings" id="email" title="Email"></tdf-formgroup>
+            <tdf-form-control form="accountSettings" id="email" title="Email"></tdf-form-control>
 
-            <tdf-formgroup form="accountSettings" id="password" title="Password" type="password"></tdf-formgroup>
+            <tdf-form-control form="accountSettings" id="password" title="Password" type="password"></tdf-form-control>
         </zippy>
         <button class="btn btn-primary" [disabled]="!finished.valid">Update Profile</button>
     </form>

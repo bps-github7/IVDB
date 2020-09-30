@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { GameInfoService } from '../common/services/gameinfo.service';
-import { TdfFormgroupComponent } from '.././tdf-formgroup/tdf-formgroup.component';
 
 
 @Component({

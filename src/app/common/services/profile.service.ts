@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core';
-import { AngularFirestore } from '@angular/fire/firestore';
+import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from '@angular/fire/firestore';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 import { Profile } from 'src/app/models/profile';
 
 @Injectable({
@@ -7,25 +9,42 @@ import { Profile } from 'src/app/models/profile';
 })
 export class ProfileService {
 
-    constructor(private afs : AngularFirestore) { }
+
+    profileCollection : AngularFirestoreCollection<Profile>
+    profileDocument : AngularFirestoreDocument<Profile>
+    profiles : Observable<Profile []>
+    profile : Observable<Profile>
+
+    constructor(private afs : AngularFirestore) {
+        this.profileCollection = this.afs.collection('profiles');
+        this.profiles = this.profileCollection.valueChanges({idField : 'id'})
+
+     }
 
     get$(displayName : string) {
-        return this.afs.doc(`profiles/${displayName}`).valueChanges();
+        return this.afs.doc('profiles/' + displayName).valueChanges();
     }
 
-    update(profile) {
+    exists(displayName : string) {
+        return this.get$(displayName).subscribe(profile => {
+            if (profile) return true;
+        });
+    } 
 
+    update(profile, displayName) {
+        //techincally, the code is the same whether we are updating or creating new file
+        //could be mistaken/ and this is future problem area, but for now this seems right
+        this.profileCollection.doc(displayName).set(profile)
+
+        // if (this.exists(displayName)) {
+        //     this.profileCollection.doc(displayName).set(profile)
+        // }
+        // else this.create(profile, displayName)
+        
     }
 
 
-    create(
-        //user : firebase.User, 
-        //displayName : string,
-        profile : Profile) {
-        // BY DEFAULT: everyone has base permissions unless provided otherwise.
-        // this.afs.collection('profiles').doc(`${displayName}_${user.uid}`).set({
-            // nickname = profile.nickname;
-            //should all be optional except account settings stuff... 
-        // });
-    }
+    // create(profile : Profile, displayName : string) {
+    //     this.profileCollection.a
+    // }
 }
