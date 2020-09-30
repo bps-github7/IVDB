@@ -23,9 +23,6 @@ export class AppComponent {
     //would be helpful if this could cast to User.
     user: any;
     displayName;
-    private itemsCollection: AngularFirestoreCollection<Item>;
-    items: Observable<Item[]>;
-    
 
     constructor(
         private auth : AuthService,
@@ -35,8 +32,6 @@ export class AppComponent {
         private profileService : ProfileService,
         private afs : AngularFirestore
         ) {
-            this.itemsCollection = afs.collection<Item>('items');
-            this.items = this.itemsCollection.valueChanges();
         this.auth.user$.subscribe(user => {
             if (user) {
                 this.user = user;
