@@ -1,2 +1,9 @@
 <dropdown></dropdown>
+
+
+<ul>
+    <li *ngFor="let item of items | async">
+        Item name: {{ item.name }}
+    </li>
+</ul>
 <router-outlet></router-outlet>
