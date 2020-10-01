@@ -4,8 +4,6 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { UserService } from './common/services/user.service';
 import * as firebase from 'firebase';
 import { ProfileService } from './common/services/profile.service';
-import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from '@angular/fire/firestore';
-import { Observable } from 'rxjs';
 
 
 export interface Item { name: string, skone_id : number }
@@ -30,7 +28,6 @@ export class AppComponent {
         private userService : UserService,
         private route: ActivatedRoute,
         private profileService : ProfileService,
-        private afs : AngularFirestore
         ) {
         this.auth.user$.subscribe(user => {
             if (user) {

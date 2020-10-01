@@ -29,6 +29,7 @@ export class TdfFormControlComponent implements OnInit {
     //properties unique to tdf
     
     //mandatory properties- pairing of subcomponent to ngModel wont work if these are not provided.
+    @Input() dbObservable;
     @Input() form;
     @Input() id;
 

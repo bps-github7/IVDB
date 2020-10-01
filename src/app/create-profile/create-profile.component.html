@@ -1,114 +1,184 @@
 <div class="row mt-4">
     <div class="col-md-6">
         <div class="card" style="width: 18rem;">
-            <img class="card-img-top" [src]="profile.image" alt="profile card">
+            <img class="card-img-top" [src]="profile.publicProfile.image" alt="profile card">
             <div class="card-body">
-              <h5 class="card-title">{{ profile.nickname }}</h5>
-              <p class="card-text">{{ profile.bio }}</p>
+              <h5 class="card-title">{{ profile.publicProfile.nickname }}</h5>
+              <p class="card-text">{{ profile.publicProfile.bio }}</p>
             </div>
           </div>
     </div>
-    <form #finished="ngForm" (ngSubmit)="save(finished.value)">
-        <zippy title="Public Profile: " class="row">
-            <tdf-form-control form="publicProfile" id="nickname" title="Provide a nickname for your profile: (default is username)"></tdf-form-control>
-
-            <tdf-form-control form="publicProfile" id="image" title="Provide a profile Image:"></tdf-form-control>
-
-            <tdf-form-control form="publicProfile" id="backgroundImg" title="Provide a background image for your account (optional)" type="select" [options]="['Banana', 'Sundae', 'Beachfront Estate', 'custom']"></tdf-form-control>
-
-
-            <!-- not sure why, but bio wont group with the publicProfile formgroup. -->
-            <tdf-form-control form="publicProfile" id="bio" title="Provide a bio for your profile: " type="textarea">shitcones</tdf-form-control>
-
-            <tdf-form-control form="publicProfile" id="gamerTags" title="Enter any gamertags (*optional)"></tdf-form-control>
-           
-            <tdf-form-control form="publicProfile" id="links" title="Enter any links (*optional)"></tdf-form-control>
-        </zippy>
-
-        <zippy class="row" title="Favorites: ">
-            <tdf-form-control form="favorite" id="games" title="Favorite Games"></tdf-form-control>
+    <form [formGroup]="form" (ngSubmit)="save(form)">
+        <zippy title="Public Profile: " class="form-group" formGroupName="publicProfile">
+            <label for="nickname">nickname:
+                <input type="text" class="form-control" id="nickname" formControlName="nickname">
+            </label>        
         
-            <tdf-form-control form="favorite" id="consoles" title="Favorite Consoles"></tdf-form-control>
+            <label for="profileImg">Profile Image:
+                <input type="text" class="form-control" id="profileImg" formControlName="profileImg">
+            </label>
+
+            <label for="backgroundImg">Background Image (*optional):
+                <input type="text" class="form-control" id="backgroundImg" formControlName="backgroundImg">
+            </label>
+
+            <label for="bio">bio/player profile:
+                <input type="text" class="form-control" id="bio" formControlName="bio">
+            </label>
+
+            <label for="gamerTags">Gamer Tags:
+                <input type="text" class="form-control" id="gamerTags" formControlName="gamerTags">
+            </label>
+
+            <label for="links">Links:
+                <input type="text" class="form-control" id="links" formControlName="links">
+            </label>
+
+            <zippy title="display Preferences" class="form-group" formGroupName="displayPrefrences">
         
-            <tdf-form-control form="favorite" id="categories" title="Favorite Categories of Games" type="select" [options]="gameInfo?.categories"></tdf-form-control>      
+                <!-- cant figure out how to get these to render as radio/ checkboxes. -->
 
-            <tdf-form-control form="favorite" id="creators" title="Favorite Creators of Games" type="select" [options]="gameInfo?.creators"></tdf-form-control>      
-
-            <tdf-form-control form="favorite" id="console_makers" title="Favorite Console Makers" type="select" [options]="gameInfo?.console_makers"></tdf-form-control>      
-
-        </zippy>
-
-        <zippy class="row" title="Dislikes: ">
-            <tdf-form-control form="dislikes" id="games" title="Disliked Games (*if any)"></tdf-form-control>
+                <input type="radio" class="form-control"  formControlName="completionPrefrences" name="completionPrefrences" value="Now" id="completionPreference">Now
+            
+                <input type="radio" class="form-control"  formControlName="completionPrefrences" name="completionPrefrences" value="Later" id="completionPreference">Later
         
-            <tdf-form-control form="dislikes" id="consoles" title="Disliked Consoles (*if any)"></tdf-form-control>
+                <input type="checkbox" class="form-control"  formControlName="displayPrefrences" name="displayPrefrences" value="all" id="displayPreference">All
+            
+                <input type="checkbox" class="form-control"  formControlName="displayPrefrences" name="displayPrefrences" value="custom" id="displayPreference">Custom
+            </zippy>
+        </zippy>
+
+        <zippy title="prefrences" class="form-group" formGroupName="prefrences">
+            <zippy class="row" title="likes: ">
+                <label for="games">Liked Games:
+                    <input type="text" class="form-control" id="games" formControlName="games">
+                </label>
+
+                <label for="consoles">Liked Consoles:
+                    <input type="text" class="form-control" id="consoles" formControlName="consoles">
+                </label>
+
+                <label for="categories">Liked Categories:
+                    <select multiple class="form-control" name="categories" id="categories" formControlName="categories">
+                        <option value=""></option>
+                        <option *ngFor="let g of gameInfo?.categories" value="g">{{ g }}</option>
+                    </select>
+                </label>
+    
+                
+                <label for="creators">Liked Creators:
+                    <select multiple class="form-control" name="creators" id="creators" formControlName="creators">
+                        <option value=""></option>
+                        <option *ngFor="let g of gameInfo?.creators" value="g">{{ g }}</option>
+                    </select>
+                </label>
+
+                
+                <label for="consoleMakers">Liked Console Makers:
+                    <select multiple class="form-control" name="consoleMakers" id="consoleMakers" formControlName="consoleMakers">
+                        <option value=""></option>
+                        <option *ngFor="let g of gameInfo?.console_makers" value="g">{{ g }}</option>
+                    </select>
+                </label>
+            </zippy>
+    
+            <zippy class="form-group" formGroupName="dislikes" title="Dislikes: ">
+                <label for="games">Disliked Games:
+                    <input type="text" class="form-control" id="games" formControlName="games">
+                </label>
+
+                <label for="consoles">Disliked Consoles:
+                    <input type="text" class="form-control" id="consoles" formControlName="consoles">
+                </label>
+
+                <label for="categories">Disliked Categories:
+                    <select multiple class="form-control" name="categories" id="categories" formControlName="categories">
+                        <option value=""></option>
+                        <option *ngFor="let g of gameInfo?.categories" value="g">{{ g }}</option>
+                    </select>
+                </label>
+    
+                
+                <label for="creators">Disliked Creators:
+                    <select multiple class="form-control" name="creators" id="creators" formControlName="creators">
+                        <option value=""></option>
+                        <option *ngFor="let g of gameInfo?.creators" value="g">{{ g }}</option>
+                    </select>
+                </label>
+
+                
+                <label for="consoleMakers">Disliked Console Makers:
+                    <select multiple class="form-control" name="consoleMakers" id="consoleMakers" formControlName="consoleMakers">
+                        <option value=""></option>
+                        <option *ngFor="let g of gameInfo?.console_makers" value="g">{{ g }}</option>
+                    </select>
+                </label>
+            </zippy>
+
+            <zippy class="form-group" formGroupName="historic" title="Historic: ">
+                <label for="favoriteGame">All Time Favorite Game:
+                    <input type="text" class="form-control" id="favoriteGame" formControlName="favoriteGame">
+                </label>
+
+                <label for="favoriteConsole">All Time Favorite Console:
+                    <input type="text" class="form-control" id="favoriteConsole" formControlName="favoriteConsole">
+                </label>
+
+                <label for="firstGameEverPlayed">What was the first game you ever played?
+                    <input type="text" class="form-control" id="firstGameEverPlayed" formControlName="firstGameEverPlayed">
+                </label>
+
+                <label for="firstConsoleEverPlayed">What was the first console you ever played?
+                    <input type="text" class="form-control" id="firstConsoleEverPlayed" formControlName="firstConsoleEverPlayed">
+                </label>
+
+                <label for="childhoodFavoriteGames">What were your favorite games growing up?
+                    <input type="text" class="form-control" id="childhoodFavoriteGames" formControlName="childhoodFavoriteGames">
+                </label>
+
+
+            </zippy>
+
+            <zippy class="form-group" formGroupName="currentlyPlaying" title="Currently Playing: ">
+                <label for="games">What games are you currently playing?
+                    <input type="text" class="form-control" id="games" formControlName="games">
+                </label>
+
+                <label for="consoles">What consoles are you currently using?
+                    <input type="text" class="form-control" id="consoles" formControlName="consoles">
+                </label>
+            </zippy>
+    
+        </zippy>
+
         
-            <tdf-form-control form="dislikes" id="categories" title="Disliked Categories of Games" type="select" [options]="gameInfo?.categories"></tdf-form-control>      
+        <zippy class="form-group" formGroupName="accountSettings" title="Account Settings: ">
+            <label for="username">Username: 
+                <input type="text" class="form-control" formControlName="username" id="username">
+                <!-- <div *ngIf="username.errors.required" class="alert alert-danger">
+                    Username is required
+                </div> -->
+            </label>
 
-            <tdf-form-control form="dislikes" id="creators" title="Disliked Creators of Games" type="select" [options]="gameInfo?.creators"></tdf-form-control>      
+            <label for="email">email: 
+                <input type="text" class="form-control" formControlName="email" id="email">
+                <!-- <div *ngIf="email.errors.required" class="alert alert-danger">
+                    Username is required
+                </div> -->
+            </label>
 
-            <tdf-form-control form="dislikes" id="console_makers" title="Disliked Console Makers" type="select" [options]="gameInfo?.console_makers"></tdf-form-control>      
+            <label for="password">password
+                <input type="password" class="form-control" formControlName="password" id="password">
+            </label>
+
+            <p>make a special component for change password.</p>
+
+
+
         </zippy>
-
-        <zippy title="Current: ">
-            <!-- would be cool to
-
-            1) make this a two coloum table for games and consoles, populated by entries in gameInfo
-            2) users can tick off one or both checkboxes for own and playing in either column
-            3) maybe confusing to have a column with two rows, just use the table idea but make them seperate -->
-            <tdf-form-control form="current" id="ownedGames" title="What games do you own currently?" type="checkbox" [options]="games"></tdf-form-control>
-            
-            <tdf-form-control form="current" id="playingGames" title="What games are you currently playing?" type="checkbox" [options]="games"></tdf-form-control>
-
-            <tdf-form-control form="current" id="ownedConsoles" title="What consoles do you currently own?"></tdf-form-control>
-            
-            <tdf-form-control form="current" id="playingConsoles" title="What consoles are you playing?"></tdf-form-control>
-        </zippy>
-
-        <zippy title="Historic: ">
-            <tdf-form-control form="historic" id="firstGame" title="What is the first game you ever played/had?"></tdf-form-control>
-            
-            <tdf-form-control form="historic" id="childhoodFavGame" title="What was your favorite game growing up?"></tdf-form-control>
-            
-            <tdf-form-control form="historic" id="firstConsole" title="What was the first console you ever played/had?"></tdf-form-control>
-
-            <tdf-form-control form="historic" id="childhoodFavConsole" title="What was your favorite console growing up?"></tdf-form-control>
-        </zippy>
-
-
-        <!-- display settings -->
-        <zippy title="Display Settings: ">
-            <!-- radio button- should we notify the user to complete their preferences 
-            if they havent been filled out? -->
-            <tdf-form-control form="displaySettings" id="completionPreference" title="Would you like to complete youur preferences now or later?" type="radio" [options]="['Now', 'Later']"></tdf-form-control>
-            
-            <!-- radio button- show all preferences on public profile? -->
-            <!-- feel like option needs to be a mapping for radio for the values. well see -->
-            <tdf-form-control form="displaySettings" id="displayAll" title="Display all preferences on profile/ custom / none" type="radio" [options]="['Show', 'Show None', 'Show Custom']"></tdf-form-control>
-            
-           
-            <!-- if above question.value is 'no'- checkbox for user to
-            customize which preferences to show. populate with
-            what ever input fields have already been provided. -->
-            
-            <!-- top checkbox should be display none. if checked, dont show
-            the other preferences checkboxes -->
-        </zippy>
-
-        <!-- account settings -->
-        <zippy title="Account Settings: ">
-            <!-- place to re enter/ edit account info:
-
-            these fields should be disabled by default: user can click a button to choose to enable them
-            then they will get a prompt, reminding them that they will need to confirm the changes/asking if they wish to continue
-            if they select yes, then show a second input field for confirmation, both of which are invalid until they match and pass the pattern-->
-            <tdf-form-control form="accountSettings" id="username" title="Username"></tdf-form-control>
-
-            <tdf-form-control form="accountSettings" id="email" title="Email"></tdf-form-control>
-
-            <tdf-form-control form="accountSettings" id="password" title="Password" type="password"></tdf-form-control>
-        </zippy>
-        <button class="btn btn-primary" [disabled]="!finished.valid">Update Profile</button>
+        <button class="btn btn-primary" [disabled]="!form.valid">Update Profile</button>
     </form>
-    <p>{{ finished.value | json }}</p>
+    <p>{{ form.value | json }}</p>
+    <p>{{ profile | json }}</p>
+
 </div>

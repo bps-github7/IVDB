@@ -93,7 +93,7 @@ import { ProfileService } from './common/services/profile.service';
     ViewConsoleComponent,
     TdfFormControlComponent,
     MultiInputComponent,
-    GenericInputComponent
+    GenericInputComponent,
     ],
   imports: [
     AngularFireModule.initializeApp(environment.firebase),

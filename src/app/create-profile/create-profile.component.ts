@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularFireDatabase } from '@angular/fire/database';
-import { FormBuilder } from '@angular/forms';
+import { FormArray, FormBuilder, FormControl, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { GameInfoService } from '../common/services/gameinfo.service';
 import { ProfileService } from '../common/services/profile.service';
@@ -37,23 +37,60 @@ export class CreateProfileComponent implements OnInit {
         private route : ActivatedRoute,
         private userService : UserService,
         private profileService : ProfileService) {
-            //conflict here- should i use username or id as the query route param
-            //one hurts usability, increases practicallity, the other reverses this
             this.user = this.route.snapshot.paramMap.get('username')
-
             this.games = this.gameService.games.subscribe(resp => this.games = resp);
-
-
-            console.log("username here: " + this.user);
-            // youre rellying on the user name being provided within the url. when this may not always be the case!
-            
-            //this line certainly not working as intended.
             if (this.user) {
-                console.log("testing")
-                this.profile = this.profileService.get$(this.user).subscribe(resp => this.profile = resp);
-                console.log(this.profile)
+                this.profile = this.profileService.get$(this.user).subscribe(p => this.profile = p);
             }
             this.gameInfo = gameInfoService.gameInfo$.subscribe(resp => this.gameInfo = resp)
+            this.form = fb.group({
+            publicProfile : fb.group({
+                nickname : [''],
+                profileImg : [''],
+                backgroundImg : [''],
+                bio: [''],
+                gamerTags: [''],
+                links: [''],
+                displaySettings : fb.group({
+                    completionPrefrences : [''],
+                    displayPrefrences : fb.array([])
+                })
+            }),
+            prefrences : fb.group({
+                likes : fb.group({
+                    games : [''],
+                    consoles : [''],
+                    categories : [''],
+                    creators : [''],
+                    consoleMakers : ['']
+                }),
+                dislikes : fb.group({
+                    games : [''],
+                    consoles : [''],
+                    categories : [''],
+                    creators : [''],
+                    consoleMakers : ['']
+                }),
+                historic : fb.group({
+                    favoriteGame : [''],
+                    favoriteConsole : [''],
+                    firstGameEverPlayed : [''],
+                    firstConsoleEverPlayed : [''], //stretch to say theres anything to be learned by having this data? maybe maybe not
+                    //this is a multi answer
+                    childhoodFavoriteGames : ['']
+                }),
+                currentlyPlaying : fb.group({
+                    games : [''],
+                    consoles : ['']
+                })
+            }),
+            accountSettings : fb.group({
+                username : ['', Validators.required],
+                email : ['', Validators.required],
+                password : ['', Validators.required]
+            })
+        })
+
         }
 
     ngOnInit(): void {
@@ -67,6 +104,25 @@ export class CreateProfileComponent implements OnInit {
         this.profileService.update(profile, this.user)
         this.router.navigate(['sign_in/profile/', this.user]);
     }
+
+    // onCheckboxChange(e, controlName) {
+
+    //     //dont lke this persons code. ugly. weh...
+    //     const checkArray: FormArray = this.form.get(controlName) as FormArray;
+      
+    //     if (e.target.checked) {
+    //       checkArray.push(new FormControl(e.target.value));
+    //     } else {
+    //       let i: number = 0;
+    //       checkArray.controls.forEach((item: FormControl) => {
+    //         if (item.value == e.target.value) {
+    //           checkArray.removeAt(i);
+    //           return;
+    //         }
+    //         i++;
+    //       });
+    //     }
+    //   }
 
 
 
