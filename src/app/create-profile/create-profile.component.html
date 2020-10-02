@@ -1,7 +1,7 @@
 <div class="row mt-4">
     <div class="col-md-6">
         <div class="card" style="width: 18rem;">
-            <img class="card-img-top" [src]="profile.publicProfile.image" alt="profile card">
+            <img class="card-img-top" [src]="profile.publicProfile.profileImg" alt="profile card">
             <div class="card-body">
               <h5 class="card-title">{{ profile.publicProfile.nickname }}</h5>
               <p class="card-text">{{ profile.publicProfile.bio }}</p>
@@ -9,55 +9,42 @@
           </div>
     </div>
     <form [formGroup]="form" (ngSubmit)="save(form)">
-        <zippy title="Public Profile: " class="form-group" formGroupName="publicProfile">
-            <label for="nickname">nickname:
-                <input type="text" class="form-control" id="nickname" formControlName="nickname">
-            </label>        
-        
-            <label for="profileImg">Profile Image:
-                <input type="text" class="form-control" id="profileImg" formControlName="profileImg">
-            </label>
+        <!-- <zippy title="Public Profile: " class="form-group" formGroupName="publicProfile">
+            <reactive-default-form-control label="Provide a nickname: (*default is username)" formControlName="nickname"></reactive-default-form-control>
+            
+            <reactive-default-form-control label="Profile Picture:" formControlName="profileImg"></reactive-default-form-control>
 
             <label for="backgroundImg">Background Image (*optional):
-                <input type="text" class="form-control" id="backgroundImg" formControlName="backgroundImg">
-            </label>
+                <select multiple class="form-control" id="backgroundImg" formControlName="backgroundImg">
+                    <option value="">Sundae</option>
+                    <option value="">Snow Cone</option>
+                    <option value="">Pudding</option>
+                    <option value="">Custom</option>
+                </select>
+                </label>
 
             <label for="bio">bio/player profile:
                 <input type="text" class="form-control" id="bio" formControlName="bio">
             </label>
 
-            <label for="gamerTags">Gamer Tags:
-                <input type="text" class="form-control" id="gamerTags" formControlName="gamerTags">
-            </label>
+            <reactive-default-form-control label="provide any gamer tags (*optional):" formControlName="gamerTags"></reactive-default-form-control>
 
-            <label for="links">Links:
-                <input type="text" class="form-control" id="links" formControlName="links">
-            </label>
+            <reactive-default-form-control label="provide any links (*optional):" formControlName="links"></reactive-default-form-control>
 
-            <zippy title="display Preferences" class="form-group" formGroupName="displayPrefrences">
+            <zippy title="display Preferences" class="form-group" formGroupName="displaySettings">
         
-                <!-- cant figure out how to get these to render as radio/ checkboxes. -->
+                
 
-                <input type="radio" class="form-control"  formControlName="completionPrefrences" name="completionPrefrences" value="Now" id="completionPreference">Now
-            
-                <input type="radio" class="form-control"  formControlName="completionPrefrences" name="completionPrefrences" value="Later" id="completionPreference">Later
-        
-                <input type="checkbox" class="form-control"  formControlName="displayPrefrences" name="displayPrefrences" value="all" id="displayPreference">All
-            
-                <input type="checkbox" class="form-control"  formControlName="displayPrefrences" name="displayPrefrences" value="custom" id="displayPreference">Custom
+
             </zippy>
         </zippy>
 
-        <zippy title="prefrences" class="form-group" formGroupName="prefrences">
-            <zippy class="row" title="likes: ">
-                <label for="games">Liked Games:
-                    <input type="text" class="form-control" id="games" formControlName="games">
-                </label>
-
-                <label for="consoles">Liked Consoles:
-                    <input type="text" class="form-control" id="consoles" formControlName="consoles">
-                </label>
-
+        <zippy title="Preferences" class="form-group" formGroupName="preferences">
+            <zippy class="form-group" formGroupName="likes" title="likes">
+                <reactive-default-form-control label="Liked games: " formControlName="games"></reactive-default-form-control>
+                
+                <reactive-default-form-control label="Liked consoles: " formControlName="consoles"></reactive-default-form-control>
+                
                 <label for="categories">Liked Categories:
                     <select multiple class="form-control" name="categories" id="categories" formControlName="categories">
                         <option value=""></option>
@@ -83,14 +70,10 @@
             </zippy>
     
             <zippy class="form-group" formGroupName="dislikes" title="Dislikes: ">
-                <label for="games">Disliked Games:
-                    <input type="text" class="form-control" id="games" formControlName="games">
-                </label>
-
-                <label for="consoles">Disliked Consoles:
-                    <input type="text" class="form-control" id="consoles" formControlName="consoles">
-                </label>
-
+                <reactive-default-form-control label="Disliked games: " formControlName="games"></reactive-default-form-control>
+                
+                <reactive-default-form-control label="Disliked consoles: " formControlName="consoles"></reactive-default-form-control>
+                
                 <label for="categories">Disliked Categories:
                     <select multiple class="form-control" name="categories" id="categories" formControlName="categories">
                         <option value=""></option>
@@ -116,41 +99,25 @@
             </zippy>
 
             <zippy class="form-group" formGroupName="historic" title="Historic: ">
-                <label for="favoriteGame">All Time Favorite Game:
-                    <input type="text" class="form-control" id="favoriteGame" formControlName="favoriteGame">
-                </label>
-
-                <label for="favoriteConsole">All Time Favorite Console:
-                    <input type="text" class="form-control" id="favoriteConsole" formControlName="favoriteConsole">
-                </label>
-
-                <label for="firstGameEverPlayed">What was the first game you ever played?
-                    <input type="text" class="form-control" id="firstGameEverPlayed" formControlName="firstGameEverPlayed">
-                </label>
-
-                <label for="firstConsoleEverPlayed">What was the first console you ever played?
-                    <input type="text" class="form-control" id="firstConsoleEverPlayed" formControlName="firstConsoleEverPlayed">
-                </label>
-
-                <label for="childhoodFavoriteGames">What were your favorite games growing up?
-                    <input type="text" class="form-control" id="childhoodFavoriteGames" formControlName="childhoodFavoriteGames">
-                </label>
-
-
+                <reactive-default-form-control label="All time favorite games: " formControlName="favoriteGame"></reactive-default-form-control>
+                
+                <reactive-default-form-control label="All time favorite consoles: " formControlName="favoriteConsole"></reactive-default-form-control>
+                
+                <reactive-default-form-control label="First game ever played: " formControlName="firstGameEverPlayed"></reactive-default-form-control>
+                
+                <reactive-default-form-control label="First console ever played: " formControlName="firstConsoleEverPlayed"></reactive-default-form-control>
+                
+                <reactive-default-form-control label="What were your favorite games growing up?" formControlName="childhoodFavoriteGames"></reactive-default-form-control>
             </zippy>
 
             <zippy class="form-group" formGroupName="currentlyPlaying" title="Currently Playing: ">
-                <label for="games">What games are you currently playing?
-                    <input type="text" class="form-control" id="games" formControlName="games">
-                </label>
-
-                <label for="consoles">What consoles are you currently using?
-                    <input type="text" class="form-control" id="consoles" formControlName="consoles">
-                </label>
+                <reactive-default-form-control label="What games are you currently Playing?" formControlName="games"></reactive-default-form-control>
+                
+                <reactive-default-form-control label="What consoles are you currently using? " formControlName="consoles"></reactive-default-form-control>                
             </zippy>
     
         </zippy>
-
+ -->
         
         <zippy class="form-group" formGroupName="accountSettings" title="Account Settings: ">
             <label for="username">Username: 

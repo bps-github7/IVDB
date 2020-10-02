@@ -56,7 +56,7 @@ export class CreateProfileComponent implements OnInit {
                     displayPrefrences : fb.array([])
                 })
             }),
-            prefrences : fb.group({
+            preferences : fb.group({
                 likes : fb.group({
                     games : [''],
                     consoles : [''],
@@ -101,7 +101,8 @@ export class CreateProfileComponent implements OnInit {
 
     
     save(profile) {
-        this.profileService.update(profile, this.user)
+        this.profileService.save(profile, this.user)
+        console.log("something happened");
         this.router.navigate(['sign_in/profile/', this.user]);
     }
 

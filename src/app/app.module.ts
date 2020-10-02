@@ -54,10 +54,8 @@ import { ViewConsoleComponent } from './view-console/view-console.component';
 
 //environment
 import { environment } from 'src/environments/environment';
-import { TdfFormControlComponent } from './tdf-form-control/tdf-form-control.component';
-import { MultiInputComponent } from './multi-input/multi-input.component';
-import { GenericInputComponent } from './generic-input/generic-input.component';
 import { ProfileService } from './common/services/profile.service';
+import { ReactiveDefaultFormControlComponent } from './form-controls/reactive-default-form-control/reactive-default-form-control.component';
 
 
 
@@ -91,9 +89,7 @@ import { ProfileService } from './common/services/profile.service';
     ViewRatingsComponent,
     PreferencesFormComponent,
     ViewConsoleComponent,
-    TdfFormControlComponent,
-    MultiInputComponent,
-    GenericInputComponent,
+    ReactiveDefaultFormControlComponent
     ],
   imports: [
     AngularFireModule.initializeApp(environment.firebase),
