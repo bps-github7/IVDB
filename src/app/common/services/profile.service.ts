@@ -39,12 +39,12 @@ export class ProfileService {
     create(profile) {
         this.profileCollection.add({
             publicProfile : {
-                nickname: " " || profile.publicProfile.nickname,
-                profileImg : " " || profile.publicProfile.profileImg,
-                backgroundImg : " " || profile.publicProfile.backgroundImg,
-                bio : " " || profile.publicProfile.bio,
-                gamerTags : " " || profile.publicProfile.gamerTags,
-                links : " " || profile.publicProfile.links,
+                nickname: profile.publicProfile.nickname,
+                profileImg : profile.publicProfile.profileImg,
+                backgroundImg : profile.publicProfile.backgroundImg,
+                bio : profile.publicProfile.bio,
+                gamerTags : profile.publicProfile.gamerTags,
+                links : profile.publicProfile.links,
                 displaySettings : {
                     completionPreferences : false,
                     displayPreferences : true
@@ -53,28 +53,28 @@ export class ProfileService {
             },
             preferences : {
                 likes : {
-                    games : " " || profile.preferences.likes.games,
-                    consoles : " " || profile.preferences.likes.consoles,
-                    categories : " " || profile.preferences.likes.categories,
-                    creators : " " || profile.preferences.likes.creators,
-                    consoleMakers : " " || profile.preferences.likes.consoleMakers
+                    games : profile.preferences.likes.games,
+                    consoles : profile.preferences.likes.consoles,
+                    categories : profile.preferences.likes.categories,
+                    creators : profile.preferences.likes.creators,
+                    consoleMakers : profile.preferences.likes.consoleMakers
                 },
                 dislikes : {
-                    games : " " || profile.preferences.dislikes.games,
-                    consoles : " " || profile.preferences.dislikes.consoles,
-                    categories : " " || profile.preferences.dislikes.categories,
-                    creators : " " || profile.preferences.dislikes.creators,
-                    consoleMakers : " " || profile.preferences.dislikes.consoleMakers},
+                    games : profile.preferences.dislikes.games,
+                    consoles : profile.preferences.dislikes.consoles,
+                    categories : profile.preferences.dislikes.categories,
+                    creators : profile.preferences.dislikes.creators,
+                    consoleMakers : profile.preferences.dislikes.consoleMakers},
                 historic : {
-                    favoriteGame : " " || profile.preferences.historic.favoriteGame,
-                    favoriteConsole : " " || profile.preferences.historic.favoriteConsole,
-                    firstGameEverPlayed : " " || profile.preferences.historic.firstGameEverPlayed,
-                    firstConsoleEverPlayed : " " || profile.preferences.historic.firstConsoleEverPlayed,
-                    childhoodFavoriteGames : " " || profile.preferences.historic.childhoodFavoriteGames
+                    favoriteGame : profile.preferences.historic.favoriteGame,
+                    favoriteConsole : profile.preferences.historic.favoriteConsole,
+                    firstGameEverPlayed : profile.preferences.historic.firstGameEverPlayed,
+                    firstConsoleEverPlayed : profile.preferences.historic.firstConsoleEverPlayed,
+                    childhoodFavoriteGames : profile.preferences.historic.childhoodFavoriteGames
                 },
-                current : {
-                    games : " " || profile.preferences.current.games,
-                    consoles : " " || profile.preferences.current.consoles
+                currentlyPlaying : {
+                    games : profile.preferences.currentlyPlaying.games,
+                    consoles : profile.preferences.currentlyPlaying.consoles
                 }
             },
             accountSettings : {
@@ -99,12 +99,12 @@ export class ProfileService {
         //THIS IS the clunkiest way to make fields optional. look into alternatives PLEASE!
         this.profileCollection.doc(displayName).update({
             publicProfile : {
-                nickname: " " || profile.publicProfile.nickname,
-                profileImg : " " || profile.publicProfile.profileImg,
-                backgroundImg : " " || profile.publicProfile.backgroundImg,
-                bio : " " || profile.publicProfile.bio,
-                gamerTags : " " || profile.publicProfile.gamerTags,
-                links : " " || profile.publicProfile.links,
+                nickname: profile.publicProfile.nickname,
+                profileImg : profile.publicProfile.profileImg,
+                backgroundImg : profile.publicProfile.backgroundImg,
+                bio : profile.publicProfile.bio,
+                gamerTags : profile.publicProfile.gamerTags,
+                links : profile.publicProfile.links,
                 displaySettings : {
                     completionPreferences : false,
                     displayPreferences : true
@@ -113,28 +113,28 @@ export class ProfileService {
             },
             preferences : {
                 likes : {
-                    games : " " || profile.preferences.likes.games,
-                    consoles : " " || profile.preferences.likes.consoles,
-                    categories : " " || profile.preferences.likes.categories,
-                    creators : " " || profile.preferences.likes.creators,
-                    consoleMakers : " " || profile.preferences.likes.consoleMakers
+                    games : profile.preferences.likes.games,
+                    consoles : profile.preferences.likes.consoles,
+                    categories : profile.preferences.likes.categories,
+                    creators : profile.preferences.likes.creators,
+                    consoleMakers : profile.preferences.likes.consoleMakers
                 },
                 dislikes : {
-                    games : " " || profile.preferences.dislikes.games,
-                    consoles : " " || profile.preferences.dislikes.consoles,
-                    categories : " " || profile.preferences.dislikes.categories,
-                    creators : " " || profile.preferences.dislikes.creators,
-                    consoleMakers : " " || profile.preferences.dislikes.consoleMakers},
+                    games : profile.preferences.dislikes.games,
+                    consoles : profile.preferences.dislikes.consoles,
+                    categories : profile.preferences.dislikes.categories,
+                    creators : profile.preferences.dislikes.creators,
+                    consoleMakers : profile.preferences.dislikes.consoleMakers},
                 historic : {
-                    favoriteGame : " " || profile.preferences.historic.favoriteGame,
-                    favoriteConsole : " " || profile.preferences.historic.favoriteConsole,
-                    firstGameEverPlayed : " " || profile.preferences.historic.firstGameEverPlayed,
-                    firstConsoleEverPlayed : " " || profile.preferences.historic.firstConsoleEverPlayed,
-                    childhoodFavoriteGames : " " || profile.preferences.historic.childhoodFavoriteGames
+                    favoriteGame : profile.preferences.historic.favoriteGame,
+                    favoriteConsole : profile.preferences.historic.favoriteConsole,
+                    firstGameEverPlayed : profile.preferences.historic.firstGameEverPlayed,
+                    firstConsoleEverPlayed : profile.preferences.historic.firstConsoleEverPlayed,
+                    childhoodFavoriteGames : profile.preferences.historic.childhoodFavoriteGames
                 },
-                current : {
-                    games : " " || profile.preferences.current.games,
-                    consoles : " " || profile.preferences.current.consoles
+                currentlyPlaying : {
+                    games : profile.preferences.currentlyPlaying.games,
+                    consoles : profile.preferences.currentlyPlaying.consoles
                 }
             },
             accountSettings : {

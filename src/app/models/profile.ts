@@ -34,7 +34,7 @@ export interface Profile {
             creators?: string,
             consoleMakers?: string
         },
-        current?: {
+        currentlyPlaying?: {
             games?: Game | string,
             consoles?: gameConsole | string
         },

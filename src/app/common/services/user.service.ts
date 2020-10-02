@@ -4,6 +4,7 @@ import * as firebase from 'firebase';
 import { User } from 'src/app/models/user';
 import { Profile } from 'src/app/models/profile';
 import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 
 @Injectable({
@@ -11,6 +12,7 @@ import { Observable } from 'rxjs';
 })
 
 export class UserService {    
+    permissions : boolean;
 
     constructor(private afs: AngularFirestore) { }
 
@@ -37,14 +39,9 @@ export class UserService {
     getPermissions(user : firebase.User) : boolean {
         //gets a specific attribute (the isAdmin field)
         //to check whether the logged in user is admin or not
-
-        // getting an error about permissions being undefined
-        // cant add initiailization without breaking this function.
-        let permissions : any;
-        let current_user = this.get(user.uid).valueChanges();
-        //dont need this but try..
-        current_user.subscribe((doc) => {permissions = doc})
-        if (permissions.isAdmin) return true
+        this.get(user.uid).valueChanges().pipe(
+            map(appUser => this.permissions = appUser.isAdmin));
+        if (this.permissions) return true
     }
 
     get(uid : string): AngularFirestoreDocument<User>{
@@ -54,7 +51,7 @@ export class UserService {
     create(user : firebase.User) {
         // BY DEFAULT: everyone has base permissions unless provided otherwise.
         this.afs.collection('users').doc(user.uid).set({
-            displayName : user.displayName,
+            username : user.displayName,
             email : user.email,
             isAdmin : false,
             uid : user.uid

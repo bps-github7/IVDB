@@ -45,43 +45,44 @@ export class CreateProfileComponent implements OnInit {
             this.gameInfo = gameInfoService.gameInfo$.subscribe(resp => this.gameInfo = resp)
             this.form = fb.group({
             publicProfile : fb.group({
-                nickname : [''],
-                profileImg : [''],
-                backgroundImg : [''],
-                bio: [''],
-                gamerTags: [''],
-                links: [''],
+                nickname : [this.profile.nickname],
+                profileImg : [' '],
+                backgroundImg : [' '],
+                bio: [' '],
+                gamerTags: [' '],
+                links: [' '],
                 displaySettings : fb.group({
-                    completionPrefrences : [''],
-                    displayPrefrences : fb.array([])
+                    completionPrefrences : [' '],
+                    displayPrefrences : [' '] 
+                    // fb.array([])
                 })
             }),
             preferences : fb.group({
                 likes : fb.group({
-                    games : [''],
-                    consoles : [''],
-                    categories : [''],
-                    creators : [''],
-                    consoleMakers : ['']
+                    games : [' '],
+                    consoles : [' '],
+                    categories : [' '],
+                    creators : [' '],
+                    consoleMakers : [' ']
                 }),
                 dislikes : fb.group({
-                    games : [''],
-                    consoles : [''],
-                    categories : [''],
-                    creators : [''],
-                    consoleMakers : ['']
+                    games : [' '],
+                    consoles : [' '],
+                    categories : [' '],
+                    creators : [' '],
+                    consoleMakers : [' ']
                 }),
                 historic : fb.group({
-                    favoriteGame : [''],
-                    favoriteConsole : [''],
-                    firstGameEverPlayed : [''],
-                    firstConsoleEverPlayed : [''], //stretch to say theres anything to be learned by having this data? maybe maybe not
+                    favoriteGame : [' '],
+                    favoriteConsole : [' '],
+                    firstGameEverPlayed : [' '],
+                    firstConsoleEverPlayed : [' '], //stretch to say theres anything to be learned by having this data? maybe maybe not
                     //this is a multi answer
-                    childhoodFavoriteGames : ['']
+                    childhoodFavoriteGames : [' ']
                 }),
                 currentlyPlaying : fb.group({
-                    games : [''],
-                    consoles : ['']
+                    games : [' '],
+                    consoles : [' ']
                 })
             }),
             accountSettings : fb.group({
@@ -96,12 +97,26 @@ export class CreateProfileComponent implements OnInit {
     ngOnInit(): void {
     }
 
+    get publicProfile() {
+        return this.form.get('publicProfile')
+    }
 
+    get preferences() {
+        return this.form.get('preferences')
+    }
+
+    get accountSettings() {
+        return this.form.get('accountSettings')
+    }
 
 
     
     save(profile) {
-        this.profileService.save(profile, this.user)
+        this.profileService.save({
+            publicProfile : this.publicProfile.value,
+            preferences : this.preferences.value, 
+            accountSettings : this.accountSettings.value
+        }, this.user)
         console.log("something happened");
         this.router.navigate(['sign_in/profile/', this.user]);
     }
