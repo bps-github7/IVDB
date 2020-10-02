@@ -8,6 +8,8 @@
             </div>
           </div>
     </div>
+    <!-- for another time: probably dont need that argument for save fn. rewrite that signiture and get rid of it.a
+    you acceess the form value thru getters in this components ts file -->
     <form [formGroup]="form" (ngSubmit)="save(form.value)">
         <zippy title="Public Profile: " class="form-group" formGroupName="publicProfile">
             <reactive-default-form-control label="Provide a nickname: (*default is username)" formControlName="nickname"></reactive-default-form-control>
