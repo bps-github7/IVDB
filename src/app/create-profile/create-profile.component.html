@@ -16,18 +16,9 @@
             
             <reactive-default-form-control label="Profile Picture:" formControlName="profileImg"></reactive-default-form-control>
 
-            <label for="backgroundImg">Background Image (*optional):
-                <select multiple class="form-control" id="backgroundImg" formControlName="backgroundImg">
-                    <option value="">Sundae</option>
-                    <option value="">Snow Cone</option>
-                    <option value="">Pudding</option>
-                    <option value="">Custom</option>
-                </select>
-                </label>
+            <reactive-select-form-control label="Background Picture:" formControlName="backgroundImg" [options]="['Sunday', 'Banana', 'AppleSauce', 'Coins', 'Custom']"></reactive-select-form-control>
 
-            <label for="bio">bio/player profile:
-                <input type="text" class="form-control" id="bio" formControlName="bio">
-            </label>
+            <reactive-textarea-form-control label="bio/player profile" formControlName="bio"></reactive-textarea-form-control>
 
             <reactive-default-form-control label="provide any gamer tags (*optional):" formControlName="gamerTags"></reactive-default-form-control>
 
@@ -47,28 +38,12 @@
                 
                 <reactive-default-form-control label="Liked consoles: " formControlName="consoles"></reactive-default-form-control>
                 
-                <label for="categories">Liked Categories:
-                    <select multiple class="form-control" name="categories" id="categories" formControlName="categories">
-                        <option value=""></option>
-                        <option *ngFor="let g of gameInfo?.categories" value="g">{{ g }}</option>
-                    </select>
-                </label>
-    
-                
-                <label for="creators">Liked Creators:
-                    <select multiple class="form-control" name="creators" id="creators" formControlName="creators">
-                        <option value=""></option>
-                        <option *ngFor="let g of gameInfo?.creators" value="g">{{ g }}</option>
-                    </select>
-                </label>
+                <reactive-select-form-control label="Liked Categories: " formControlName="categories" [options]="gameInfo.categories"></reactive-select-form-control>
 
+                <reactive-select-form-control label="Liked creators: " formControlName="creators" [options]="gameInfo.creators"></reactive-select-form-control>
                 
-                <label for="consoleMakers">Liked Console Makers:
-                    <select multiple class="form-control" name="consoleMakers" id="consoleMakers" formControlName="consoleMakers">
-                        <option value=""></option>
-                        <option *ngFor="let g of gameInfo?.console_makers" value="g">{{ g }}</option>
-                    </select>
-                </label>
+                <reactive-select-form-control label="Liked Console Makers: " formControlName="consoleMakers" [options]="gameInfo.console_makers"></reactive-select-form-control>
+
             </zippy>
     
             <zippy class="form-group" formGroupName="dislikes" title="Dislikes: ">
@@ -76,28 +51,12 @@
                 
                 <reactive-default-form-control label="Disliked consoles: " formControlName="consoles"></reactive-default-form-control>
                 
-                <label for="categories">Disliked Categories:
-                    <select multiple class="form-control" name="categories" id="categories" formControlName="categories">
-                        <option value=""></option>
-                        <option *ngFor="let g of gameInfo?.categories" value="g">{{ g }}</option>
-                    </select>
-                </label>
-    
-                
-                <label for="creators">Disliked Creators:
-                    <select multiple class="form-control" name="creators" id="creators" formControlName="creators">
-                        <option value=""></option>
-                        <option *ngFor="let g of gameInfo?.creators" value="g">{{ g }}</option>
-                    </select>
-                </label>
+                <reactive-select-form-control label="Disliked Categories: " formControlName="categories" [options]="gameInfo.categories"></reactive-select-form-control>
 
+                <reactive-select-form-control label="Disliked creators: " formControlName="creators" [options]="gameInfo.creators"></reactive-select-form-control>
                 
-                <label for="consoleMakers">Disliked Console Makers:
-                    <select multiple class="form-control" name="consoleMakers" id="consoleMakers" formControlName="consoleMakers">
-                        <option value=""></option>
-                        <option *ngFor="let g of gameInfo?.console_makers" value="g">{{ g }}</option>
-                    </select>
-                </label>
+                <reactive-select-form-control label="Disliked Console Makers: " formControlName="consoleMakers" [options]="gameInfo.console_makers"></reactive-select-form-control>
+
             </zippy>
 
             <zippy class="form-group" formGroupName="historic" title="Historic: ">
@@ -138,6 +97,7 @@
 
             <label for="password">password
                 <input type="password" class="form-control" formControlName="password" id="password">
+                <!-- <change-password></change-password> -->
             </label>
 
             <p>make a special component for change password.</p>
@@ -147,4 +107,5 @@
         </zippy>
         <button class="btn btn-primary" [disabled]="!form.valid">Update Profile</button>
     </form>
+    <p>{{ form.value | json }}</p>
 </div>

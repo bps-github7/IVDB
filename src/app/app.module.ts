@@ -56,6 +56,8 @@ import { ViewConsoleComponent } from './view-console/view-console.component';
 import { environment } from 'src/environments/environment';
 import { ProfileService } from './common/services/profile.service';
 import { ReactiveDefaultFormControlComponent } from './form-controls/reactive-default-form-control/reactive-default-form-control.component';
+import { ReactiveSelectFormControlComponent } from './form-controls/reactive-select-form-control/reactive-select-form-control.component';
+import { ReactiveTextareaFormControlComponent } from './form-controls/reactive-textarea-form-control/reactive-textarea-form-control.component';
 
 
 
@@ -89,7 +91,9 @@ import { ReactiveDefaultFormControlComponent } from './form-controls/reactive-de
     ViewRatingsComponent,
     PreferencesFormComponent,
     ViewConsoleComponent,
-    ReactiveDefaultFormControlComponent
+    ReactiveDefaultFormControlComponent,
+    ReactiveSelectFormControlComponent,
+    ReactiveTextareaFormControlComponent,
     ],
   imports: [
     AngularFireModule.initializeApp(environment.firebase),

@@ -45,15 +45,15 @@ export class CreateProfileComponent implements OnInit {
             this.gameInfo = gameInfoService.gameInfo$.subscribe(resp => this.gameInfo = resp)
             this.form = fb.group({
             publicProfile : fb.group({
-                nickname : [this.profile.nickname],
-                profileImg : [' '],
-                backgroundImg : [' '],
-                bio: [' '],
-                gamerTags: [' '],
-                links: [' '],
+                nickname : [''],
+                profileImg : [''],
+                backgroundImg : [''],
+                bio: [''],
+                gamerTags: [''],
+                links: [''],
                 displaySettings : fb.group({
-                    completionPrefrences : [' '],
-                    displayPrefrences : [' '] 
+                    completionPrefrences : [''],
+                    displayPrefrences : [''] 
                     // fb.array([])
                 })
             }),

@@ -1,26 +1,18 @@
 import { Component, Input, OnInit, ViewChild } from '@angular/core';
-import { ControlContainer, ControlValueAccessor, FormControl, FormControlDirective, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { ControlContainer, ControlValueAccessor, FormControl, FormControlDirective } from '@angular/forms';
 
 @Component({
-    selector: 'reactive-default-form-control',
-    template: `
-        <label [for]="formControl">{{ label }}
-            <input type="text" [formControl]="control" class="form-control">
-            <button (click)="clearInput()">clear</button><br/>
-        </label>`,
-    styleUrls: ['./reactive-default-form-control.component.css'],
-    providers: [
-        {provide: NG_VALUE_ACCESSOR,
-        useExisting: ReactiveDefaultFormControlComponent,
-        multi: true}]
-    })
-export class ReactiveDefaultFormControlComponent implements ControlValueAccessor {
+  selector: 'reactive-textarea-form-control',
+  template: `
+    <label [for]="formControl">{{ label }}
+        <textarea [formControl]="control" class="form-control" col="30" row="20"></textarea>
+        <button (click)="clearInput()">clear</button><br/>
+    </label>
+  `,
+  styleUrls: ['./reactive-textarea-form-control.component.css']
+})
+export class ReactiveTextareaFormControlComponent implements ControlValueAccessor{
 
-
-    // @Input() control;
-    //@Input() group;
-    //@Input() dbObservable;
-    
     @Input() label;
     @Input() placeHolder;
     @Input() required;
@@ -55,4 +47,4 @@ export class ReactiveDefaultFormControlComponent implements ControlValueAccessor
     setDisabledState(isDisabled: boolean): void {
       this.formControlDirective.valueAccessor.setDisabledState(isDisabled);
     }
-  }
+}

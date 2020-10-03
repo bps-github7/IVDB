@@ -3,7 +3,7 @@ import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms'
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'forgotPassword',
+  selector: 'change-password',
   template: `
   name: <input type="text" [formControl]="name">
   `,
