@@ -2,22 +2,22 @@ import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { ControlContainer, ControlValueAccessor, FormControl, FormControlDirective } from '@angular/forms';
 
 @Component({
-  selector: 'reactive-textarea-form-control',
+  selector: 'reactive-radio-form-control',
   template: `
-    <label [for]="formControl">{{ label }}
-        <textarea [formControl]="control" class="form-control" col="30" row="20"></textarea>
-        <button (click)="clearInput()">clear</button><br/>
-    </label>
+  <div class="form-control form-radio">
+    <input type="radio" [formControl]="formControl" [value]="formControl"/>&nbsp;{{ label }}
+  </div>
   `,
   styleUrls: ['./../reactive-form-control.component.css']
 })
-export class ReactiveTextareaFormControlComponent implements ControlValueAccessor{
+export class ReactiveRadioFormControlComponent implements ControlValueAccessor{
 
     @Input() label;
     @Input() placeHolder;
     @Input() required;
     @Input() errorMsg;
-    @Input() type;
+    @Input() options;
+
     @ViewChild(FormControlDirective, {static: true}) formControlDirective: FormControlDirective;
     @Input() formControl: FormControl;
     @Input() formControlName: string;  /* get hold of FormControl instance no matter formControl or    formControlName is given. If formControlName is given, then this.controlContainer.control is the parent FormGroup (or FormArray) instance. */

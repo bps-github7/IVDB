@@ -8,7 +8,7 @@ import { ControlContainer, ControlValueAccessor, FormControl, FormControlDirecti
             <input type="text" [formControl]="control" class="form-control">
             <button (click)="clearInput()">clear</button><br/>
         </label>`,
-    styleUrls: ['./reactive-default-form-control.component.css'],
+    styleUrls: ['./../reactive-form-control.component.css'],
     providers: [
         {provide: NG_VALUE_ACCESSOR,
         useExisting: ReactiveDefaultFormControlComponent,

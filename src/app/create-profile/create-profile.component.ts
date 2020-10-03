@@ -52,6 +52,7 @@ export class CreateProfileComponent implements OnInit {
                 gamerTags: [''],
                 links: [''],
                 displaySettings : fb.group({
+                    //same as const completionPreferences = new FormControl();
                     completionPrefrences : [''],
                     displayPrefrences : [''] 
                     // fb.array([])

@@ -12,7 +12,7 @@ import { ControlContainer, FormControl, FormControlDirective, NG_VALUE_ACCESSOR 
     </label>
 `
   ,
-  styleUrls: ['./reactive-select-form-control.component.css'],
+  styleUrls: ['./../reactive-form-control.component.css'],
   providers: [
     {provide: NG_VALUE_ACCESSOR,
     useExisting: ReactiveSelectFormControlComponent,
