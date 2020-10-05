@@ -12,6 +12,7 @@
     you acceess the form value thru getters in this components ts file -->
     <form [formGroup]="form" (ngSubmit)="save(form.value)">
         <zippy title="Public Profile: " class="form-group" formGroupName="publicProfile">
+
             <reactive-default-form-control label="Provide a nickname: (*default is username)" formControlName="nickname"></reactive-default-form-control>
             
             <reactive-default-form-control label="Profile Picture:" formControlName="profileImg"></reactive-default-form-control>
@@ -26,9 +27,9 @@
 
             <zippy title="Display Settings" class="form-group" formGroupName="displaySettings">
         
-                <reactive-radio-form-control label="completion preferences" formControlName="completionPreferences" options="['yes','no']"></reactive-radio-form-control>
+                <reactive-radio-form-control label="completion preferences:" formControlName="completionPreferences" [options]="['yes','no']"></reactive-radio-form-control>
 
-                <reactive-checkbox-form-control label="display settings:" formControlName="displayPreferences" options="['pinecone', 'hedgehog', 'all']"></reactive-checkbox-form-control>
+                <reactive-checkbox-form-control label="display settings:" formControlName="displayPreferences" [options]="['pinecone', 'hedgehog', 'all']"></reactive-checkbox-form-control>
 
             </zippy>
         </zippy>

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularFireDatabase } from '@angular/fire/database';
-import { FormArray, FormBuilder, FormControl, Validators } from '@angular/forms';
+import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { GameInfoService } from '../common/services/gameinfo.service';
 import { ProfileService } from '../common/services/profile.service';
@@ -17,18 +17,13 @@ import { GameService } from '../common/services/game.service';
   templateUrl: './create-profile.component.html',
   styleUrls: ['./create-profile.component.css']
 })
-export class CreateProfileComponent implements OnInit {
+export class CreateProfileComponent {
     form: any;
     user;
     games;
     gameInfo;
     profile : any={};
 
-    //just a quick point- see game-form and its use of template driven form
-    //that likely will simplify things a great bit. think about it.
-    //reactive forms are better for smaller/customizable things yeah?
-
-    // use a service to log profile info to db
     constructor(
         private fb: FormBuilder,
         private gameInfoService : GameInfoService,
@@ -53,9 +48,8 @@ export class CreateProfileComponent implements OnInit {
                 links: [''],
                 displaySettings : fb.group({
                     //same as const completionPreferences = new FormControl();
-                    completionPrefrences : [''],
-                    displayPrefrences : [''] 
-                    // fb.array([])
+                    completionPreferences : [''],
+                    displayPreferences : [''] 
                 })
             }),
             preferences : fb.group({
@@ -94,9 +88,6 @@ export class CreateProfileComponent implements OnInit {
         })
 
         }
-
-    ngOnInit(): void {
-    }
 
     get publicProfile() {
         return this.form.get('publicProfile')

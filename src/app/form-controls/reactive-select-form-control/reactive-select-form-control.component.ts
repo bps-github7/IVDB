@@ -2,22 +2,21 @@ import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { ControlContainer, FormControl, FormControlDirective, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 @Component({
-  selector: 'reactive-select-form-control',
-  template: `
+    selector: 'reactive-select-form-control',
+    template: `
     <label [for]="formControl">{{ label }}:
-        <select multiple class="form-control" [id]="formControl" [formControl]="formControl">
+        <select multiple class="form-control" [id]="formControl" [formControl]="control">
             <option [value]=" "></option>
             <option *ngFor="let option of options" [ngValue]="option">{{ option }}</option>
         </select>
     </label>
-`
-  ,
-  styleUrls: ['./../reactive-form-control.component.css'],
-  providers: [
-    {provide: NG_VALUE_ACCESSOR,
-    useExisting: ReactiveSelectFormControlComponent,
-    multi: true}]
-})
+    `,
+    styleUrls: ['./../reactive-form-control.component.css'],
+    providers: [
+        {provide: NG_VALUE_ACCESSOR,
+        useExisting: ReactiveSelectFormControlComponent,
+        multi: true}]
+    })
 export class ReactiveSelectFormControlComponent implements OnInit {
 
     //pretty much just copy pasted this from reactive-default-controller

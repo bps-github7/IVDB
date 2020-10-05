@@ -1,5 +1,5 @@
 import { Component, Input, OnInit, ViewChild } from '@angular/core';
-import { ControlContainer, ControlValueAccessor, FormControl, FormControlDirective } from '@angular/forms';
+import { ControlContainer, ControlValueAccessor, FormControl, FormControlDirective, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 @Component({
   selector: 'reactive-textarea-form-control',
@@ -9,7 +9,12 @@ import { ControlContainer, ControlValueAccessor, FormControl, FormControlDirecti
         <button (click)="clearInput()">clear</button><br/>
     </label>
   `,
-  styleUrls: ['./../reactive-form-control.component.css']
+  styleUrls: ['./../reactive-form-control.component.css'],
+  providers: [
+    {provide: NG_VALUE_ACCESSOR,
+    useExisting: ReactiveTextareaFormControlComponent,
+    multi: true}]
+
 })
 export class ReactiveTextareaFormControlComponent implements ControlValueAccessor{
 

@@ -4,8 +4,9 @@ import { ControlContainer, ControlValueAccessor, FormControl, FormControlDirecti
 @Component({
   selector: 'reactive-checkbox-form-control',
   template: `
+  {{ label }}
   <div *ngFor="let option of options"  class="form-control form-check">
-    <input type="checkbox" [formControl]="formControl" [value]="option"/>&nbsp;{{ label }}
+    <input type="checkbox" [formControl]="control" [value]="option"/>&nbsp;{{ option }}
   </div>`,
   styleUrls: ['./../reactive-form-control.component.css'],
   providers: [

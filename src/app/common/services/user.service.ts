@@ -41,7 +41,8 @@ export class UserService {
         //to check whether the logged in user is admin or not
         this.get(user.uid).valueChanges().pipe(
             map(appUser => this.permissions = appUser.isAdmin));
-        if (this.permissions) return true
+        // if (this.permissions) return true
+        return this.permissions ? false : true;
     }
 
     get(uid : string): AngularFirestoreDocument<User>{
