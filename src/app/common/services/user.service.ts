@@ -27,8 +27,12 @@ export class UserService {
     update(user: firebase.User) {
         const userRef: AngularFirestoreDocument<User> = this.afs.doc(`users/${user.uid}`); 
 
+        //we have to get seperate displayname from user doc because ours cant have spaces but googles can.
+        let displayName;
+        userRef.valueChanges().pipe(map(appUser => displayName = appUser.username));
+
         const data = {
-            username : user.displayName,
+            username : displayName,
             email : user.email,
             isAdmin: this.getPermissions(user),
             uid: user.uid

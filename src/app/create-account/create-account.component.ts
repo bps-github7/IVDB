@@ -1,5 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormControl, ControlContainer } from '@angular/forms';
+import { UsernameValidator } from '../common/validators/username.validators';
 import { PasswordValidators } from '../common/validators/password.validators';
 import { Router } from '@angular/router';
 import { User } from '../models/user';
@@ -33,7 +34,7 @@ export class CreateAccountComponent implements OnInit {
             */
             email: ['', Validators.required],
             //need to produce warning if this username already exists
-            username: ['', Validators.required],
+            username: ['', [Validators.required, UsernameValidator.cannotContainSpace] ],
             password: ['',
                 Validators.required,
                 Validators.minLength(12)
@@ -44,6 +45,7 @@ export class CreateAccountComponent implements OnInit {
             ]
         },
         {
+            //there is some kind of async error coming from this guy
             validators: PasswordValidators.accountPasswordsShouldMatch
         })
     }
