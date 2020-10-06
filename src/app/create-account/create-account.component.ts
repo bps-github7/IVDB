@@ -27,21 +27,20 @@ export class CreateAccountComponent implements OnInit {
         private auth: AuthService,
         private router : Router) {
         this.form = fb.group({
-            //need to validate email- does it have @, domain & tld? are characters used in body valid?            
-            /*
-            Regex for email validation: \b[\w.!#$%&’*+\/=?^`{|}~-]+@[\w-]+(?:\.[\w-]+)*\b
-            Maybe there already is a Validator which does this. shoudl be at least
-            */
-            email: ['', Validators.required],
+            email: ['', 
+                [Validators.required,
+                Validators.email,
+                UsernameValidator.cannotContainSpace]
+            ],
             //need to produce warning if this username already exists
             username: ['', [Validators.required, UsernameValidator.cannotContainSpace] ],
             password: ['',
-                Validators.required,
-                Validators.minLength(12)
+                [Validators.required,
+                Validators.minLength(12)]
             ],
             confirmPassword: ['',
-                Validators.required,
-                Validators.minLength(12)
+                [Validators.required,
+                Validators.minLength(12)]
             ]
         },
         {

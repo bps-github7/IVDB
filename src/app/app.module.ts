@@ -120,7 +120,7 @@ import { ReactiveTextareaFormControlComponent } from './form-controls/reactive-t
         //try username/new instead of this first one.
         { path: 'sign_in/create_profile/:username', component: CreateProfileComponent, canActivate: [AuthGuard]},
         { path: 'sign_in/create_profile/:username/update', component: CreateProfileComponent, canActivate: [AuthGuard, UserAuthGuard] },
-        { path: 'sign_in/profile/:username', component: ProfileComponent, canActivate: [AuthGuard] },
+        { path: 'profile/:username', component: ProfileComponent, canActivate: [AuthGuard] },
 
         //you'll see more on these pages if youre signed in, but can view as anonymous user.
         { path: 'forum', component: ForumComponent },

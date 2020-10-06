@@ -6,14 +6,15 @@
                 <h4>User Registration</h4>
             </div>
 
-            <!-- if account creation fails, prevent routing and show this message -->
-            <!-- <div class="col-md-6 mb-2">
+            <!-- if account creation fails, prevent routing and show this message 
+            It shows up oddly, to the side of the rest of the divs-->
+            <div class="col-md-6 mb-2">
                 <div class="row" *ngIf="authError">
                     <div class="col-12 alert alert-danger">
                         {{ authError?.message }}
                     </div>
                 </div>
-            </div> -->
+            </div>
 
         </div>    
         <!-- email address formgroup -->
@@ -28,7 +29,9 @@
                 id="email"
                 type="text">
                 <div *ngIf="email.touched && email.invalid" class="alert alert-danger">
-                    Email address is required.
+                    <div *ngIf="email.errors.required">Email Address is required</div>
+                    <div *ngIf="email.errors.email">Email address must be properly formated (ie. validEmail@yahoo.com)</div>
+                    <div *ngIf="email.errors.cannotContainSpace">Email address cannot contain spaces</div>
                 </div>
             </div>
         </div>
@@ -84,10 +87,9 @@
                     type="password">
                 <div *ngIf="confirmPassword.touched && confirmPassword.invalid" class="alert alert-danger">
                     <div *ngIf="confirmPassword.errors.required">confirm Password is required.</div>
+                    <div *ngIf="form.errors.passwordsShouldMatch">Passwords do not match.</div>
                 </div>
-                <div class="alert alert-danger" *ngIf="confirmPassword.valid && form.invalid && form.errors.passwordsShouldMatch">
-                    Passwords do not match.
-                </div>
+                
                 <!-- need to implement this w javascript -->
                 <input type="checkbox" (click)="showPassword()">&nbsp;Show password
                 </div>
