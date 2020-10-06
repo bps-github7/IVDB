@@ -27,9 +27,50 @@
 
             <zippy title="Display Settings" class="form-group" formGroupName="displaySettings">
         
-                <reactive-radio-form-control label="completion preferences:" formControlName="completionPreferences" [options]="['yes','no']"></reactive-radio-form-control>
+                <div class="form-control form-radio">
 
-                <reactive-checkbox-form-control label="display settings:" formControlName="displayPreferences" [options]="['pinecone', 'hedgehog', 'all']"></reactive-checkbox-form-control>
+                    <label for="completionPreferences">
+                        <h5>How soon do you want to complete your profile?</h5>
+                        <input type="radio" formControlName="completionPreferences" value="now">
+                        Now
+                    </label>
+
+                    <label for="completionPreferences">
+                        <input type="radio" formControlName="completionPreferences" value="later">
+                        Later
+                    </label>
+                </div>
+
+                <div class="form-control form-radio">
+
+                    <label for="displayPreferences">
+                        <h5>Show preferences on public profile?</h5>
+                        <input type="radio" formControlName="displayPreferences" value="yes">
+                        Yes
+                    </label>
+
+
+                    <label for="displayPreferences">
+                        <input type="radio" formControlName="displayPreferences" value="no">
+                        No
+                    </label>
+
+                    <label for="displayPreferences">
+                        <input type="radio" formControlName="displayPreferences" value="some">
+                        Some
+                    </label>
+                </div>
+
+
+<!-- 
+                <div class="form-control form-check">
+                    <label for="displayPreferences" *ngFor="let option of form.publicProfile.displaySettings.displayPreferences; let i=index">
+                        <input type="checkbox" formControlName="displayPreferences">
+                        {{ option }}
+
+                    </label>
+                </div> -->
+
 
             </zippy>
         </zippy>

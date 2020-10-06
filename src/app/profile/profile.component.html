@@ -4,8 +4,12 @@
     <zippy [title]=
     'user?.username'>
         <zippy title="Preferences">
-            fill out with stuff submitted through create-profile form
-            can have nested zippies EVERYWHEREEEE!!!!
+            <h3>Likes</h3>
+            <ul>
+                <li *ngFor="let o of profile.preferences.likes">
+                    {{ o }}
+                </li>
+            </ul>
         </zippy>   
         <hr><br>
         <zippy title="Account Configuration">

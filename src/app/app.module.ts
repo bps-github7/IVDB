@@ -58,9 +58,6 @@ import { ProfileService } from './common/services/profile.service';
 import { ReactiveDefaultFormControlComponent } from './form-controls/reactive-default-form-control/reactive-default-form-control.component';
 import { ReactiveSelectFormControlComponent } from './form-controls/reactive-select-form-control/reactive-select-form-control.component';
 import { ReactiveTextareaFormControlComponent } from './form-controls/reactive-textarea-form-control/reactive-textarea-form-control.component';
-import { ReactiveCheckboxFormControlComponent } from './form-controls/reactive-checkbox-form-control/reactive-checkbox-form-control.component';
-import { ReactiveRadioFormControlComponent } from './form-controls/reactive-radio-form-control/reactive-radio-form-control.component';
-
 
 
 @NgModule({
@@ -95,9 +92,7 @@ import { ReactiveRadioFormControlComponent } from './form-controls/reactive-radi
     ViewConsoleComponent,
     ReactiveDefaultFormControlComponent,
     ReactiveSelectFormControlComponent,
-    ReactiveTextareaFormControlComponent,
-    ReactiveCheckboxFormControlComponent,
-    ReactiveRadioFormControlComponent,
+    ReactiveTextareaFormControlComponent
     ],
   imports: [
     AngularFireModule.initializeApp(environment.firebase),

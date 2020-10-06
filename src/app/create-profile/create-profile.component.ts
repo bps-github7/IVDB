@@ -23,6 +23,7 @@ export class CreateProfileComponent {
     games;
     gameInfo;
     profile : any={};
+    options: { name: string; value: string; }[];
 
     constructor(
         private fb: FormBuilder,
@@ -49,7 +50,19 @@ export class CreateProfileComponent {
                 displaySettings : fb.group({
                     //same as const completionPreferences = new FormControl();
                     completionPreferences : [''],
-                    displayPreferences : [''] 
+                    displayPreferences : fb.array([
+                        {
+                            name: 'All',
+                            value : 'all'
+                        },
+                        {
+                            name: 'Some',
+                            value: 'some'
+                        },
+                        {
+                            name: 'None',
+                            value: 'none'
+                        }])
                 })
             }),
             preferences : fb.group({
@@ -86,8 +99,7 @@ export class CreateProfileComponent {
                 password : ['', Validators.required]
             })
         })
-
-        }
+    }
 
     get publicProfile() {
         return this.form.get('publicProfile')
@@ -101,15 +113,12 @@ export class CreateProfileComponent {
         return this.form.get('accountSettings')
     }
 
-
-    
     save(profile) {
         this.profileService.save({
             publicProfile : this.publicProfile.value,
             preferences : this.preferences.value, 
             accountSettings : this.accountSettings.value
         }, this.user)
-        console.log("something happened");
         this.router.navigate(['sign_in/profile/', this.user]);
     }
 

@@ -10,6 +10,9 @@ import { Profile } from 'src/app/models/profile';
 export class ProfileService {
 
 
+    //consider switching to user uid for profile document id. username is messy- could have spaces.
+    //relys on user to give their username valid id, could limit what a valid username could contain.
+
     profileCollection : AngularFirestoreCollection<Profile>
     profileDocument : AngularFirestoreDocument<Profile>
     profiles : Observable<Profile []>
