@@ -1,30 +1,136 @@
 <div>
-    <!-- <img [src]="profile.publicProfile.profileImg" alt="Default user image"> -->
+    <img [src]="profile.publicProfile.profileImg" alt="Default user image">
     <!-- zippy may decrease accessability here.. -->
-    <zippy [title]=
-    'user?.username'>
+    <zippy [title]='profile.publicProfile.nickname'>
         <zippy title="Preferences">
-            <h3>Likes</h3>
-            <ul>
-                <li *ngFor="let o of profile.preferences.likes">
-                    {{ o }}
-                </li>
-            </ul>
+            <zippy title="Likes: ">
+                these two are currently strings but will need to be arrays in the future so loop over them
+
+                <div class="block-content">
+                    <h3>Games: </h3>
+                    <span class="left-content">{{ profile.preferences.likes.games }}</span>
+                </div>
+
+                <div class="block-content">
+                    <h3>Consoles</h3>
+                    <span class="left-content">{{ profile.preferences.likes.consoles }}</span>
+                </div>
+
+                <div class="block-content">
+                    <h3>Categories: </h3><ul class="left-content">
+                    <li *ngFor="let p of profile.preferences.likes.categories">
+                        {{ p }}
+                    </li></ul>
+                </div>
+
+                <div class="block-content">
+                    <h3>Creators: </h3><ul class="left-content">
+                    <li *ngFor="let p of profile.preferences.likes.creators">
+                        {{ p }}
+                    </li></ul>
+                </div>
+
+                <div class="block-content">
+                    <h3>console Makers: </h3><ul class="left-content">
+                    <li *ngFor="let p of profile.preferences.likes.consoleMakers">
+                        {{ p }}
+                    </li></ul>
+                </div>
+
+            </zippy>
+            <zippy title="Disikes: ">
+                <div class="block-content">
+                    <h3>Games: </h3>
+                    <span class="left-content">{{ profile.preferences.dislikes.games }}</span>
+                </div>
+
+                <div class="block-content">
+                    <h3>Consoles</h3>
+                    <span class="left-content">{{ profile.preferences.dislikes.consoles }}</span>
+                </div>
+
+                <div class="block-content">
+                    <h3>Categories: </h3><ul class="left-content">
+                    <li *ngFor="let p of profile.preferences.dislikes.categories">
+                        {{ p }}
+                    </li></ul>
+                </div>
+
+                <div class="block-content">
+                    <h3>Creators: </h3><ul class="left-content">
+                    <li *ngFor="let p of profile.preferences.dislikes.creators">
+                        {{ p }}
+                    </li></ul>
+                </div>
+
+                <div class="block-content">
+                    <h3>console Makers: </h3><ul class="left-content">
+                    <li *ngFor="let p of profile.preferences.dislikes.consoleMakers">
+                        {{ p }}
+                    </li></ul>
+                </div>
+                
+            </zippy>
+            <zippy title="Historical: ">
+
+                <div class="block-content">
+                    <h3>Childhood Favorite Game(s): </h3>
+                    <span class="left-content">{{ profile.preferences.historic.childhoodFavoriteGames }}</span>
+                </div>
+
+                <div class="block-content">
+                    <h3>Favorite Game (of all time):</h3>
+                    <span class="left-content">{{ profile.preferences.historic.favoriteGame }}</span>
+                </div>
+
+                
+                <div class="block-content">
+                    <h3>Favorite console(s) (of all time): </h3>
+                    <span class="left-content">{{ profile.preferences.historic.favoriteConsole }}</span>
+                </div>
+
+                <div class="block-content">
+                    <h3>First Game ever played:</h3>
+                    <span class="left-content">{{ profile.preferences.historic.firstGameEverPlayed }}</span>
+                </div>
+                
+                <div class="block-content">
+                    <h3>First Console ever used:</h3>
+                    <span class="left-content">{{ profile.preferences.historic.firstConsoleEverPlayed }}</span>
+                </div>
+            </zippy>
+
+            <zippy title="Currently Playing: ">
+                <div class="block-content">
+                    <h3>Games Currently Playing:</h3>
+                    <span class="left-content">{{ profile.preferences.currentlyPlaying.games }}</span>
+                </div>
+
+                <div class="block-content">
+                    <h3>Consoles Currently Using:</h3>
+                    <span class="left-content">{{ profile.preferences.currentlyPlaying.consoles }}</span>
+                </div>
+            </zippy>
+
+
+
+            
+            
         </zippy>   
         <hr><br>
         <zippy title="Account Configuration">
-            Account #: {{ user.uid }}<br>
-            email: {{ user.email }}<br>
+            this isnt up-to-date data from user document!
+            Account #: {{ profile.accountSettings.username }}<br>
+            email: {{ profile.accountSettings.email }}<br>
             <hr><br>
-            <a href="#">change password</a>
+            <a href="#">Change Password</a>
             <hr><br>
         </zippy>
         <zippy title="Ratings & Reviews">
-            <a href="">see all ratings</a>
-            <a href="">see all reviews</a>
-            <a href="">Favorites, dislikes and more</a>
+            <a href="">see all ratings</a><hr><br>
+            <a href="">see all reviews</a><hr><br>
         </zippy>
-        <!-- need to do some route/ activated route manipulation to get this working -->
-        <a [routerLink]="['sign_in/create-profile/',user.username,'/update']">Edit profile</a>
+        <a [routerLink]="['../../sign_in/create_profile/'+ username +'/update']">Edit profile</a>
     </zippy>
 </div>
+

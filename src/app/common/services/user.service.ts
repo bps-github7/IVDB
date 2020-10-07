@@ -4,7 +4,7 @@ import * as firebase from 'firebase';
 import { User } from 'src/app/models/user';
 import { Profile } from 'src/app/models/profile';
 import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { map, pluck } from 'rxjs/operators';
 
 
 @Injectable({
@@ -13,6 +13,7 @@ import { map } from 'rxjs/operators';
 
 export class UserService {    
     permissions : boolean;
+    user : any ;
 
     constructor(private afs: AngularFirestore) { }
 
@@ -24,15 +25,14 @@ export class UserService {
             })
     }
 
+    
+
     update(user: firebase.User) {
         const userRef: AngularFirestoreDocument<User> = this.afs.doc(`users/${user.uid}`); 
-
-        //we have to get seperate displayname from user doc because ours cant have spaces but googles can.
-        let displayName;
-        userRef.valueChanges().pipe(map(appUser => displayName = appUser.username));
-
+        //this is a big mess but maybe will resolve this issue
+        userRef.valueChanges().subscribe(doc => this.user = doc)
         const data = {
-            username : displayName,
+            username : this.user.username,
             email : user.email,
             isAdmin: this.getPermissions(user),
             uid: user.uid

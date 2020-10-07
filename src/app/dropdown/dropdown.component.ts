@@ -12,12 +12,15 @@ import { User } from '../models/user';
   templateUrl: './dropdown.component.html',
   styleUrls: ['./dropdown.component.css']
 })
-export class DropdownComponent {
+export class DropdownComponent implements OnInit {
     appUser : User;
 
     constructor(private auth : AuthService) { 
-        auth.appUser$
-            .subscribe(appUser => this.appUser = appUser);
+        this.auth.appUser$.subscribe(appUser => this.appUser = appUser);
+    }
+
+    ngOnInit() {
+        
     }
 
     logout() { this.auth.logout(); }

@@ -6,6 +6,7 @@ import * as firebase from 'firebase';
 import { switchMap } from 'rxjs/operators';
 import { UserService } from './user.service';
 import { of } from 'rxjs';
+import { FirebaseApp } from '@angular/fire';
 
 @Injectable({
   providedIn: 'root'
@@ -13,11 +14,13 @@ import { of } from 'rxjs';
 export class AuthService {
 
     user$: Observable<firebase.User>
+    user : firebase.User;
     private eventAuthError = new BehaviorSubject<string>("");
     public eventAuthError$ = this.eventAuthError.asObservable();
 
     constructor(private afAuth : AngularFireAuth, private userService : UserService) {
       this.user$ = afAuth.authState;
+      this.user$.subscribe((resp) => this.user = resp)
     }
 
     google_login() {
@@ -41,13 +44,16 @@ export class AuthService {
         .then(userCredential => {
             userCredential.user.updateProfile({
                 displayName: name
-            })
+            }
+            )
         }).catch(error => {
             console.log(error);
             this.eventAuthError.next(error);
         }
 
         )
+        //experimental cheaptrick NOTE that this sets isAdmin to false for ALL new users.! works for now 
+        this.userService.create(this.user)
     }
 
     get appUser$(): Observable<any> {

@@ -19,7 +19,7 @@ import { GameService } from '../common/services/game.service';
 })
 export class CreateProfileComponent {
     form: any;
-    user;
+    username;
     games;
     gameInfo;
     profile : any={};
@@ -33,10 +33,10 @@ export class CreateProfileComponent {
         private route : ActivatedRoute,
         private userService : UserService,
         private profileService : ProfileService) {
-            this.user = this.route.snapshot.paramMap.get('username')
+            this.username = this.route.snapshot.paramMap.get('username')
             this.games = this.gameService.games.subscribe(resp => this.games = resp);
-            if (this.user) {
-                this.profile = this.profileService.get$(this.user).subscribe(p => this.profile = p);
+            if (this.username) {
+                this.profile = this.profileService.get$(this.username).subscribe(p => this.profile = p);
             }
             this.gameInfo = gameInfoService.gameInfo$.subscribe(resp => this.gameInfo = resp)
             this.form = fb.group({
@@ -118,8 +118,8 @@ export class CreateProfileComponent {
             publicProfile : this.publicProfile.value,
             preferences : this.preferences.value, 
             accountSettings : this.accountSettings.value
-        }, this.user)
-        this.router.navigate(['sign_in/profile/', this.user]);
+        }, this.username)
+        this.router.navigate(['sign_in/profile/', this.username]);
     }
 
     // onCheckboxChange(e, controlName) {
