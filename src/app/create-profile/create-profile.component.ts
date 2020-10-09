@@ -9,6 +9,8 @@ import { UserService } from '../common/services/user.service';
 // import { TdfFormgroupComponent } from '.././tdf-formgroup/tdf-formgroup.component';
 // import { CustomInputComponent } from '.././custom-input/custom-input.component';
 import { GameService } from '../common/services/game.service';
+import { UsernameValidator } from '../common/validators/username.validators';
+import { PasswordValidators } from '../common/validators/password.validators';
 
 
 
@@ -94,9 +96,9 @@ export class CreateProfileComponent {
                 })
             }),
             accountSettings : fb.group({
-                username : ['', Validators.required],
-                email : ['', Validators.required],
-                password : ['', Validators.required]
+                username : [{value: '', disabled: true}, [Validators.required, UsernameValidator.cannotContainSpace]],
+                email : [{value: '', disabled: true}, [Validators.required, Validators.email]],
+                password : [{value: '', disabled: true}, [Validators.required]]
             })
         })
     }
