@@ -27,6 +27,9 @@ export class CredentialFormControlComponent implements ControlValueAccessor {
     @ViewChild(FormControlDirective, {static: true}) formControlDirective: FormControlDirective;
     @Input() formControl: FormControl;
     @Input() formControlName: string;  /* get hold of FormControl instance no matter formControl or    formControlName is given. If formControlName is given, then this.controlContainer.control is the parent FormGroup (or FormArray) instance. */
+    
+    //this is a racket- you set it by deafult in create-profile.
+    disable = false;
 
     constructor(private controlContainer: ControlContainer) { }
 
@@ -37,7 +40,7 @@ export class CredentialFormControlComponent implements ControlValueAccessor {
     engage() {
         if (confirm("are you sure you want to change the value of " + this.label)) {
             // console.log("shit on a bisk")
-            this.setDisabledState(false);
+            this.disable = !this.disable;
         }
     }
   

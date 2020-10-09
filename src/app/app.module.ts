@@ -59,6 +59,7 @@ import { ReactiveDefaultFormControlComponent } from './form-controls/reactive-de
 import { ReactiveSelectFormControlComponent } from './form-controls/reactive-select-form-control/reactive-select-form-control.component';
 import { ReactiveTextareaFormControlComponent } from './form-controls/reactive-textarea-form-control/reactive-textarea-form-control.component';
 import { CredentialFormControlComponent } from './form-controls/credential-form-control/credential-form-control.component';
+import { DisableControlDirective } from './common/directives/disable-control.directive';
 
 
 @NgModule({
@@ -94,7 +95,8 @@ import { CredentialFormControlComponent } from './form-controls/credential-form-
     ReactiveDefaultFormControlComponent,
     ReactiveSelectFormControlComponent,
     ReactiveTextareaFormControlComponent,
-    CredentialFormControlComponent
+    CredentialFormControlComponent,
+    DisableControlDirective
     ],
   imports: [
     AngularFireModule.initializeApp(environment.firebase),

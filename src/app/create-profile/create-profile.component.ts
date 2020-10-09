@@ -25,7 +25,19 @@ export class CreateProfileComponent {
     games;
     gameInfo;
     profile : any={};
-    options: { name: string; value: string; }[];
+    displayChoices = [
+        {
+            name: 'Public Profile',
+            value : 'publicProfile'
+        },
+        {
+            name: 'Preferences',
+            value: 'preferences'
+        },
+        {
+            name: 'Email',
+            value: 'email'
+        }]
 
     constructor(
         private fb: FormBuilder,
@@ -52,19 +64,8 @@ export class CreateProfileComponent {
                 displaySettings : fb.group({
                     //same as const completionPreferences = new FormControl();
                     completionPreferences : [''],
-                    displayPreferences : fb.array([
-                        {
-                            name: 'All',
-                            value : 'all'
-                        },
-                        {
-                            name: 'Some',
-                            value: 'some'
-                        },
-                        {
-                            name: 'None',
-                            value: 'none'
-                        }])
+                    displayPreferences : [''],
+                    displays: fb.array([])
                 })
             }),
             preferences : fb.group({
@@ -124,25 +125,31 @@ export class CreateProfileComponent {
         this.router.navigate(['sign_in/profile/', this.username]);
     }
 
-    // onCheckboxChange(e, controlName) {
+   
 
-    //     //dont lke this persons code. ugly. weh...
-    //     const checkArray: FormArray = this.form.get(controlName) as FormArray;
+    onCheckChange(event) {
+        const formArray: FormArray = this.form.get('publicProfile.displaySettings.displays') as FormArray;
       
-    //     if (e.target.checked) {
-    //       checkArray.push(new FormControl(e.target.value));
-    //     } else {
-    //       let i: number = 0;
-    //       checkArray.controls.forEach((item: FormControl) => {
-    //         if (item.value == e.target.value) {
-    //           checkArray.removeAt(i);
-    //           return;
-    //         }
-    //         i++;
-    //       });
-    //     }
-    //   }
-
-
+        /* Selected */
+        if(event.target.checked){
+          // Add a new control in the arrayForm
+          formArray.push(new FormControl(event.target.value));
+        }
+        /* unselected */
+        else{
+          // find the unselected element
+          let i: number = 0;
+      
+          formArray.controls.forEach((ctrl: FormControl) => {
+            if(ctrl.value == event.target.value) {
+              // Remove the unselected element from the arrayForm
+              formArray.removeAt(i);
+              return;
+            }
+      
+            i++;
+          });
+        }
+    }
 
 }

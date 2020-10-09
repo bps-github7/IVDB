@@ -45,14 +45,14 @@
 
                     <label for="displayPreferences">
                         <h5>Show preferences on public profile?</h5>
-                        <input type="radio" formControlName="displayPreferences" value="yes">
-                        Yes
+                        <input type="radio" formControlName="displayPreferences" value="all">
+                        All
                     </label>
 
 
                     <label for="displayPreferences">
-                        <input type="radio" formControlName="displayPreferences" value="no">
-                        No
+                        <input type="radio" formControlName="displayPreferences" value="none">
+                        None
                     </label>
 
                     <label for="displayPreferences">
@@ -62,14 +62,16 @@
                 </div>
 
 
-<!-- 
-                <div class="form-control form-check">
-                    <label for="displayPreferences" *ngFor="let option of form.publicProfile.displaySettings.displayPreferences; let i=index">
-                        <input type="checkbox" formControlName="displayPreferences">
-                        {{ option }}
 
-                    </label>
-                </div> -->
+                <div *ngIf="form.get('publicProfile.displaySettings.displayPreferences').value == 'some'" class="form-control form-check">
+                  
+                    <div *ngFor="let choice of displayChoices; let i=index" class="col-md-2">
+                        <label for="displays">
+                          <input type="checkbox" [value]="choice.value" (change)="onCheckChange($event)" formControlName="displays">
+                          {{ choice.name }}
+                        </label>
+                      </div>
+                </div>
 
 
             </zippy>
