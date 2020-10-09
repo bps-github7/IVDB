@@ -2,19 +2,17 @@ import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { ControlContainer, ControlValueAccessor, FormControl, FormControlDirective, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 @Component({
-    selector: 'reactive-default-form-control',
-    template: `
-        <label [for]="formControl">{{ label }}
-            <input type="text" [formControl]="control" class="form-control">
-            <button type="button" (click)="clearInput()">clear</button><br/>
-        </label>`,
-    styleUrls: ['./../reactive-form-control.component.css'],
-    providers: [
-        {provide: NG_VALUE_ACCESSOR,
-        useExisting: ReactiveDefaultFormControlComponent,
-        multi: true}]
-    })
-export class ReactiveDefaultFormControlComponent implements ControlValueAccessor {
+  selector: 'credential-form-control',
+  templateUrl: './credential-form-control.component.html',
+  styleUrls: ['.././reactive-form-control.component.css'],
+  providers: [
+    {provide: NG_VALUE_ACCESSOR,
+    useExisting: CredentialFormControlComponent,
+    multi: true}]
+
+})
+export class CredentialFormControlComponent implements ControlValueAccessor {
+
 
 
     // @Input() control;
@@ -34,6 +32,12 @@ export class ReactiveDefaultFormControlComponent implements ControlValueAccessor
 
     get control() {
       return this.formControl || this.controlContainer.control.get(this.formControlName);
+    }
+
+    engage() {
+        if (confirm("are you sure you want to change the value of " + this.label)) {
+            this.setDisabledState(false);
+        }
     }
   
     clearInput() {
@@ -55,4 +59,5 @@ export class ReactiveDefaultFormControlComponent implements ControlValueAccessor
     setDisabledState(isDisabled: boolean): void {
       this.formControlDirective.valueAccessor.setDisabledState(isDisabled);
     }
-  }
+
+}

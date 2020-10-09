@@ -6,7 +6,7 @@ import { ControlContainer, ControlValueAccessor, FormControl, FormControlDirecti
   template: `
     <label [for]="formControl">{{ label }}
         <textarea [formControl]="control" class="form-control" col="30" row="20"></textarea>
-        <button (click)="clearInput()">clear</button><br/>
+        <button type="button" (click)="clearInput()">clear</button><br/>
     </label>
   `,
   styleUrls: ['./../reactive-form-control.component.css'],

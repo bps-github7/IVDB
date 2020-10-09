@@ -124,31 +124,19 @@
 
         
         <zippy class="form-group" formGroupName="accountSettings" title="Account Settings: ">
-            <label for="username">Username: 
-                <input type="text" class="form-control" formControlName="username" id="username">
-                <!-- <div *ngIf="username.errors.required" class="alert alert-danger">
-                    Username is required
-                </div> -->
-            </label>
+            
+            
+            <credential-form-control type="text" label="Username" formControlName="username"></credential-form-control>
+            
+            <credential-form-control type="text" label="Email Address" formControlName="email"></credential-form-control>
 
-            <label for="email">email: 
-                <input type="text" class="form-control" formControlName="email" id="email">
-                <!-- <div *ngIf="email.errors.required" class="alert alert-danger">
-                    Username is required
-                </div> -->
-            </label>
+            <credential-form-control type="password" label="Password" formControlName="password"></credential-form-control>
 
-            <label for="password">password
-                <input type="password" class="form-control" formControlName="password" id="password">
-                <!-- <change-password></change-password> -->
-            </label>
-
-            <p>make a special component for change password.</p>
 
 
 
         </zippy>
-        <button class="btn btn-primary" [disabled]="!form.valid">Update Profile</button>
+        <button class="btn btn-primary" [disabled]="!form.valid" >Update Profile</button>
     </form>
     <p>{{ form.value | json }}</p>
 </div>
