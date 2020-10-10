@@ -1,7 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { RatingService } from '../common/services/rating.service';
 import { Observable, from } from 'rxjs';
-import { User } from '../models/user';
+import { User } from '../models/user_datamodel/user';
 import { StarService } from '../star.service';
 import { map } from 'rxjs/operators';
 

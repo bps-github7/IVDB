@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { GameService } from 'src/app/common/services/game.service';
 import { Subscription } from 'rxjs';
-import { Game } from 'src/app/models/game';
+import { Game } from 'src/app/models/content_datamodel/game';
 
 @Component({
   selector: 'app-game',

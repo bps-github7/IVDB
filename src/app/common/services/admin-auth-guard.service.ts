@@ -4,7 +4,7 @@ import { AuthService } from './auth.service';
 // import { UserService } from './user.service';
 import { Observable } from 'rxjs';
 import { switchMap, map } from 'rxjs/operators';
-import { User } from '../../models/user';
+import { User } from '../../models/user_datamodel/user';
 import { UserService } from './user.service';
 
 export class AdminAuthGuard implements CanActivate {

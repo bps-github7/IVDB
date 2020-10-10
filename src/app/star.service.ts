@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
-import { Rating } from './models/rating';
+import { Rating } from './models/content_datamodel/rating';
 
 
 @Injectable({

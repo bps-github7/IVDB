@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from '@angular/fire/firestore';
 import * as firebase from 'firebase';
-import { User } from 'src/app/models/user';
-import { Profile } from 'src/app/models/profile';
+import { User } from 'src/app/models/user_datamodel/user';
+import { Profile } from 'src/app/models/user_datamodel/profile';
 import { Observable } from 'rxjs';
 import { map, pluck } from 'rxjs/operators';
 
@@ -33,6 +33,14 @@ export class UserService {
         userRef.valueChanges().subscribe(doc => this.user = doc)
         const data = {
             username : this.user.username,
+            profile : {
+                publicProfile : {},
+                preferences : {
+                    likes : {
+                        games : []
+                    }
+                }
+            },
             email : user.email,
             isAdmin: this.getPermissions(user),
             uid: user.uid
@@ -49,8 +57,10 @@ export class UserService {
         return this.permissions ? false : true;
     }
 
-    get(uid : string): AngularFirestoreDocument<User>{
+    get(uid : string, profile : string = ""): AngularFirestoreDocument<User>{
         return this.afs.doc(`users/${uid}`);
+        // if (profile = "") { return this.afs.doc(`users/${uid}`); }
+        // else return this.afs.doc(`users/${uid}/profile`)
     }
 
     create(user : firebase.User) {

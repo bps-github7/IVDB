@@ -3,7 +3,7 @@ import { FormGroup, FormBuilder, Validators, FormControl, ControlContainer } fro
 import { UsernameValidator } from '../common/validators/username.validators';
 import { PasswordValidators } from '../common/validators/password.validators';
 import { Router } from '@angular/router';
-import { User } from '../models/user';
+import { User } from '../models/user_datamodel/user';
 import { AuthService } from '../common/services/auth.service';
 
 

@@ -31,7 +31,6 @@ import { ZippyComponent } from './zippy/zippy.component';
 import { HomeComponent } from './home/home.component';
 import { SignInComponent } from './sign-in/sign-in.component';
 import { CreateAccountComponent } from './create-account/create-account.component';
-import { ProfileComponent } from './profile/profile.component';
 import { ForumComponent } from './forum/forum.component';
 import { GamesComponent } from './games/games.component';
 import { StreamingComponent } from './streaming/streaming.component';
@@ -46,25 +45,29 @@ import { CommentComponent } from './comment/comment.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { GameComponent } from './admin/game/game.component';
 import { GameFormComponent } from './admin/game-form/game-form.component';
-import { CreateProfileComponent } from './create-profile/create-profile.component';
 import { ViewGameComponent } from './view-game/view-game.component';
 import { ViewRatingsComponent } from './view-ratings/view-ratings.component';
-import { PreferencesFormComponent } from './preferences-form/preferences-form.component';
 import { ViewConsoleComponent } from './view-console/view-console.component';
-
-//environment
-import { environment } from 'src/environments/environment';
 import { ProfileService } from './common/services/profile.service';
 import { ReactiveDefaultFormControlComponent } from './form-controls/reactive-default-form-control/reactive-default-form-control.component';
 import { ReactiveSelectFormControlComponent } from './form-controls/reactive-select-form-control/reactive-select-form-control.component';
 import { ReactiveTextareaFormControlComponent } from './form-controls/reactive-textarea-form-control/reactive-textarea-form-control.component';
 import { CredentialFormControlComponent } from './form-controls/credential-form-control/credential-form-control.component';
 import { DisableControlDirective } from './common/directives/disable-control.directive';
+import { ViewProfileComponent } from './view-profile/view-profile.component';
+import { EditProfileComponent } from './edit-profile/edit-profile.component';
+
+
+//environment
+import { environment } from 'src/environments/environment';
+
 
 
 @NgModule({
   declarations: [
     AppComponent,
+    EditProfileComponent,
+    ViewProfileComponent,
     DropdownComponent,
     FavoriteComponent,
     PanelComponent,
@@ -72,7 +75,6 @@ import { DisableControlDirective } from './common/directives/disable-control.dir
     HomeComponent,
     SignInComponent,
     CreateAccountComponent,
-    ProfileComponent,
     ForumComponent,
     GamesComponent,
     StreamingComponent,
@@ -87,10 +89,8 @@ import { DisableControlDirective } from './common/directives/disable-control.dir
     NotFoundComponent,
     GameComponent,
     GameFormComponent,
-    CreateProfileComponent,
     ViewGameComponent,
     ViewRatingsComponent,
-    PreferencesFormComponent,
     ViewConsoleComponent,
     ReactiveDefaultFormControlComponent,
     ReactiveSelectFormControlComponent,
@@ -122,9 +122,9 @@ import { DisableControlDirective } from './common/directives/disable-control.dir
         { path: 'search', component: SearchComponent },
         //maybe rethink these paths, they are needlessly elaborate.
         //try username/new instead of this first one.
-        { path: 'sign_in/create_profile/:username', component: CreateProfileComponent, canActivate: [AuthGuard]},
-        { path: 'sign_in/create_profile/:username/update', component: CreateProfileComponent, canActivate: [AuthGuard, UserAuthGuard] },
-        { path: 'profile/:username', component: ProfileComponent, canActivate: [AuthGuard] },
+        { path: 'sign_in/create_profile/:username', component: EditProfileComponent, canActivate: [AuthGuard]},
+        { path: 'sign_in/create_profile/:username/update', component: EditProfileComponent, canActivate: [AuthGuard, UserAuthGuard] },
+        { path: 'profile/:username', component: ViewProfileComponent, canActivate: [AuthGuard] },
 
         //you'll see more on these pages if youre signed in, but can view as anonymous user.
         { path: 'forum', component: ForumComponent },

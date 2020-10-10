@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore, AngularFirestoreDocument, AngularFirestoreCollection } from '@angular/fire/firestore';
-import { User } from 'src/app/models/user';
-import { Game } from 'src/app/models/game';
+import { User } from 'src/app/models/user_datamodel/user';
+import { Game } from 'src/app/models/content_datamodel/game';
 import { Observable } from 'rxjs';
 import { UserService } from './user.service';
 import { AuthService } from './auth.service';
@@ -23,8 +23,8 @@ export class RatingService {
 
     }
 
-    //probably dont need either of these
-    // get userId() { return this.userDoc.ref.id }
+    // probably dont need either of these
+    get userId() { return this.userDoc.ref.id }
 
-    // get gameId() { return this.gameDoc.ref.id }
+    get gameId() { return this.gameDoc.ref.id }
 }

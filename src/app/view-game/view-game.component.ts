@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { GameService } from '../common/services/game.service';
 import { Router, ActivatedRoute } from '@angular/router';
-import { Game } from '../models/game';
+import { Game } from '../models/content_datamodel/game';
 
 @Component({
   selector: 'view-game',

@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { PreferencesFormComponent } from './preferences-form.component';
+import { ViewProfileComponent } from './view-profile.component';
 
-describe('PreferencesFormComponent', () => {
-  let component: PreferencesFormComponent;
-  let fixture: ComponentFixture<PreferencesFormComponent>;
+describe('ViewProfileComponent', () => {
+  let component: ViewProfileComponent;
+  let fixture: ComponentFixture<ViewProfileComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ PreferencesFormComponent ]
+      declarations: [ ViewProfileComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(PreferencesFormComponent);
+    fixture = TestBed.createComponent(ViewProfileComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
