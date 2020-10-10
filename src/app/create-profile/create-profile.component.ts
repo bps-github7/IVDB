@@ -145,8 +145,7 @@ export class CreateProfileComponent {
               // Remove the unselected element from the arrayForm
               formArray.removeAt(i);
               return;
-            }
-      
+            }      
             i++;
           });
         }
