@@ -120,11 +120,10 @@ import { environment } from 'src/environments/environment';
         { path: 'sign_in/createAccount', component: CreateAccountComponent},
         { path: 'sign_in', component: SignInComponent },
         { path: 'search', component: SearchComponent },
-        //maybe rethink these paths, they are needlessly elaborate.
-        //try username/new instead of this first one.
-        { path: 'sign_in/create_profile/:username', component: EditProfileComponent, canActivate: [AuthGuard]},
-        { path: 'sign_in/create_profile/:username/update', component: EditProfileComponent, canActivate: [AuthGuard, UserAuthGuard] },
-        { path: 'profile/:username', component: ViewProfileComponent, canActivate: [AuthGuard] },
+        // These paths are uid based- but maybe u want to amke them username based upon deployment!
+        { path: 'sign_in/create_profile/:uid', component: EditProfileComponent, canActivate: [AuthGuard]},
+        { path: 'sign_in/create_profile/:uid/update', component: EditProfileComponent, canActivate: [AuthGuard, UserAuthGuard] },
+        { path: 'profile/:uid', component: ViewProfileComponent, canActivate: [AuthGuard] },
 
         //you'll see more on these pages if youre signed in, but can view as anonymous user.
         { path: 'forum', component: ForumComponent },

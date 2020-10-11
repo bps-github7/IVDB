@@ -11,10 +11,12 @@
                     <a [routerLink]="['/profile/', appUser?.username]">
                         {{ appUser?.username }}
                     </a>
+                    
                 </button>
+                <!-- can non admin users access this? -->
                 <ul class="sub-menu">
                     <li *ngIf="appUser.isAdmin"><a routerLink="/admin/game">Adminster Games</a></li>
-                    <li><a [routerLink]="['/sign_in/create_profile/', appUser?.username]">settings</a></li>
+                    <li><a [routerLink]="['/sign_in/create_profile/', appUser?.uid]">settings</a></li>
                     <li><a href="#" (click)="logout()">logout</a></li>
                 </ul>
             </li>

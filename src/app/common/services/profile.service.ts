@@ -24,8 +24,8 @@ export class ProfileService {
 
      }
 
-    get$(displayName : string) : Observable<any> {
-        return this.profileCollection.doc(displayName).valueChanges(); 
+    get$(uid : string) : Observable<any> {
+        return this.profileCollection.doc(uid).valueChanges(); 
     }
 
     getAll$() {
