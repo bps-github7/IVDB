@@ -32,21 +32,30 @@ export class ProfileService {
         return this.profiles
     }
 
-    exists(displayName : string) {
-        return this.get$(displayName).subscribe(profile => {
+    exists(uid : string) {
+        return this.get$(uid).subscribe(profile => {
             if (profile) return true;
         });
     } 
 
-    create(profile) {
-        // this.profileCollection.add(profile)
+    create(profile, uid) {
+        this.profileCollection.doc(uid).set({
+            nickname : profile.nickname,
+            profileImg : profile.profileImg,
+            backgroundImg : profile.backgroundImg,
+            bio : profile.bio,
+            gamerTags : profile.gamerTags,
+            links : profile.links,
+            displayPreferences : profile.displayPreferences,
+            // displays : profile.displays
+        })
     }
 
-    save(profile, displayName) {
-        if (this.exists(displayName)) this.update(profile, displayName)
-        else this.create(profile);
-    }
+    // save(profile, displayName) {
+    //     if (this.exists(displayName)) this.update(profile, displayName)
+    //     else this.create(profile);
+    // }
 
-    update(profile, displayName) {
-    }
+    // update(profile, displayName) {
+    // }
 }

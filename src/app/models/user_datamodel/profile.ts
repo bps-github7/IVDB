@@ -12,5 +12,5 @@ export interface Profile {
     displayPreferences? : boolean,
 
     //this one is informed by choice of the previous field- displayPreferences
-    displays? : []
+    // displays? : []
 }

@@ -2,117 +2,14 @@
 
     <div class="col-md-6">
         <form #finished="ngForm" (ngSubmit)="save(finished.value)">
-
-            <!-- nickname form-group -->
-            <div class="form-group">
-                <label for="nickname">nickname</label>
-                    <input
-                    #nickname="ngModel"
-                    [(ngModel)]="profile.nickname"
-                    name="nickname"
-                    id="nickname"
-                    class="form-control"
-                    required
-                    type="text"
-                    >
-            </div>
-
-            <div class="form-group">
-                <label for="profileImg">Profile Image :</label>
-                    <input
-                    #profileImg="ngModel"
-                    [(ngModel)]="profile.profileImg"
-                    name="profileImg"
-                    id="profileImg"
-                    class="form-control"
-                    required
-                    type="text"
-                    >
-            </div>
-
-            <div class="form-group">
-                <label for="backgroundImg">Background Image </label> 
-                    <input
-                    #backgroundImg="ngModel"
-                    [(ngModel)]="profile.backgroundImg"
-                    name="backgroundImg"
-                    id="backgroundImg"
-                    class="form-control"
-                    required
-                    type="text"
-                >
-            </div>
-
-            <div class="form-group">
-                <label for="bio">Biography/ Usser Profile : </label>
-                    <input
-                    #bio="ngModel"
-                    [(ngModel)]="profile.bio"
-                    name="bio"
-                    id="bio"
-                    class="form-control"
-                    required
-                    type="text"
-                >
-            </div>
-
-            <div class="form-group">
-                <label for="gamerTags">Gamer Tags: </label>
-                    <input
-                    #gamerTags="ngModel"
-                    [(ngModel)]="profile.gamerTags"
-                    name="gamerTags"
-                    id="gamerTags"
-                    class="form-control"
-                    required
-                    type="text"
-                >
-            </div>
-
             
-            <div class="form-group">
-                <label for="links">Links</label>
-                    <input
-                    #links="ngModel"
-                    [(ngModel)]="profile.links"
-                    name="links"
-                    id="links"
-                    class="form-control"
-                    required
-                    type="text"
-                >
-            </div>
+            <div>{{ profile.nickname }}</div>
 
-            
-            <!-- is this right- form group radio or JUST radio? -->
-            <div class="form-group radio">
-                <label for="displayPreferences">Display Preferences </label>
-                    <input
-                    #displayPreferences="ngModel"
-                    [(ngModel)]="profile.displayPreferences"
-                    name="displayPreferences"
-                    id="displayPreferences"
-                    class="form-control"
-                    required
-                    type="text"
-                >
-            </div>
-
-            
-            <div class="form-group checkbox">
-                <label for="displays">Displays: </label>
-                    <input
-                    #displays="ngModel"
-                    [(ngModel)]="profile.displays"
-                    name="displays"
-                    id="displays"
-                    class="form-control"
-                    required
-                    type="text"
-                >
-            </div>
+            <img [src]="profile.profileImg" alt="">
 
             <button class="btn btn-primary" [disabled]="!finished.valid">Create or update profile</button>
         </form>
     </div>
+
+    <p> Piss in a weasel carriage:  {{ finished.value | json }}</p>
 </div>

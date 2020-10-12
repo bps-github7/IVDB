@@ -5,6 +5,7 @@ import { PasswordValidators } from '../common/validators/password.validators';
 import { Router } from '@angular/router';
 import { User } from '../models/user_datamodel/user';
 import { AuthService } from '../common/services/auth.service';
+import { UserService } from '../common/services/user.service';
 
 
 @Component({
@@ -16,6 +17,7 @@ export class CreateAccountComponent implements OnInit {
     form;
     user : User;
     authError: any;
+    uid: any;
 
     ngOnInit() {
         this.auth.eventAuthError$.subscribe(data => this.authError = data);
@@ -25,7 +27,10 @@ export class CreateAccountComponent implements OnInit {
     constructor(
         fb: FormBuilder,
         private auth: AuthService,
-        private router : Router) {
+        private router : Router,
+        private userService : UserService) {
+        this.auth.appUser$.subscribe((appUser) => this.uid = appUser.uid);
+
         this.form = fb.group({
             email: ['', 
                 [Validators.required,
@@ -59,7 +64,12 @@ export class CreateAccountComponent implements OnInit {
     get confirmPassword() { return this.form.get('confirmPassword'); }
 
     createAccount() {
-        this.auth.createUser(this.email.value, this.password.value, this.username.value)
+        this.auth.createUser(this.email.value, this.password.value, this.username.value);
+        this.createUser();
+    }
+
+    createUser() {
+        this.userService.create(this.email.value, this.username.value, this.uid);
     }
 
     showPassword() {

@@ -14,12 +14,9 @@ import { Profile } from '../models/user_datamodel/profile';
 export class EditProfileComponent implements OnInit {
 
     uid : string;
-    profile : any;
+    profile : Profile;
 
     constructor(
-        private afAuth : AngularFireAuth,
-        private userService : UserService,
-        private authService : AuthService,
         private profileService : ProfileService,
         private router : Router,
         private route : ActivatedRoute
@@ -38,7 +35,7 @@ export class EditProfileComponent implements OnInit {
   }
 
 
-  save(profile) {
-      //pass for now
-  }
+    save(profile) {
+        this.profileService.create(profile, this.uid)
+    }
 }

@@ -24,7 +24,6 @@ interface gameInfo {
 
 export class GameInfoService {
 
-    //has to be an array because reasons...
     gameInfoCollection : AngularFirestoreCollection<gameInfo>;
     gameInfoDocument : AngularFirestoreDocument<gameInfo>;
     doc_id = 'KZX1GyjNGtwUzHsyICBO';

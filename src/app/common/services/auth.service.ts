@@ -52,16 +52,17 @@ export class AuthService {
         }
 
         )
-        //experimental cheaptrick NOTE that this sets isAdmin to false for ALL new users.! works for now 
-        this.userService.create(this.user)
     }
 
     get appUser$(): Observable<any> {
         // uid is the property of the 'user' object -> the user represented by firebase as part of authentication and not the user object stored in the database
         // We need to get the firebase 'user' object to read the actual application 'user' object from the database
-        return this.user$.pipe(switchMap(user => { 
-            if (user) { return this.userService.get(user.uid).valueChanges(); }
-            return of(null);
+        return this.user$.pipe(
+            switchMap((user) => { 
+                if (user) { 
+                    return this.userService.get(user.uid).valueChanges();
+                }
+                return of(null);
         }));
     }
 }

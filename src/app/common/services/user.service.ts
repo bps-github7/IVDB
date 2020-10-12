@@ -5,6 +5,7 @@ import { User } from 'src/app/models/user_datamodel/user';
 import { Profile } from 'src/app/models/user_datamodel/profile';
 import { Observable } from 'rxjs';
 import { map, pluck } from 'rxjs/operators';
+import { AngularFireAuth } from '@angular/fire/auth';
 
 
 @Injectable({
@@ -15,13 +16,23 @@ export class UserService {
     permissions : boolean;
     user : any ;
 
-    constructor(private afs: AngularFirestore) { }
+    constructor(private afs: AngularFirestore) {
+     }
+
+
+     //I think u need to come back to here and really re think some of the decisions u made with 
+     //something is over complicating things back here
+
+     //keep getting hung up on bugs= uncaught in promise- this.user is undefined
+     // this is inhibiting progress all over the project.
+
+     
+
 
     save(user : firebase.User) {
         this.afs.firestore.doc(`users/${user.uid}`).get()
             .then(doc => {
-                if(doc.exists) { this.update(user) }
-                else this.create(user)
+                this.update(user)
             })
     }
 
@@ -63,13 +74,12 @@ export class UserService {
         // else return this.afs.doc(`users/${uid}/profile`)
     }
 
-    create(user : firebase.User) {
-        // BY DEFAULT: everyone has base permissions unless provided otherwise.
-        this.afs.collection('users').doc(user.uid).set({
-            username : user.displayName,
-            email : user.email,
+    create(email : string, username : string, uid : string) {
+        this.afs.collection('users').doc(uid).set({
+            username : username,
+            email : email,
             isAdmin : false,
-            uid : user.uid
+            uid : uid
         });
     }
 
