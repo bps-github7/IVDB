@@ -31,7 +31,7 @@ export class AppComponent {
         ) {
         this.auth.user$.subscribe(user => {
             if (user) {
-                // this.user = user;
+                this.user = user;
                 //saves the most recent user date to db
                 this.userService.save(user);
                 let returnUrl = localStorage.getItem('returnUrl');

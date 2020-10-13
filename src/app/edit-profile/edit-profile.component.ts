@@ -37,5 +37,6 @@ export class EditProfileComponent implements OnInit {
 
     save(profile) {
         this.profileService.create(profile, this.uid)
+        this.router.navigate(['/']);
     }
 }

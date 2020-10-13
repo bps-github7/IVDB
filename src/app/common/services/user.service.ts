@@ -32,7 +32,11 @@ export class UserService {
     save(user : firebase.User) {
         this.afs.firestore.doc(`users/${user.uid}`).get()
             .then(doc => {
-                this.update(user)
+                if (doc.exists) {
+                    this.update(user)
+
+                }
+                else { this.create(user) }
             })
     }
 
@@ -44,14 +48,6 @@ export class UserService {
         userRef.valueChanges().subscribe(doc => this.user = doc)
         const data = {
             username : this.user.username,
-            profile : {
-                publicProfile : {},
-                preferences : {
-                    likes : {
-                        games : []
-                    }
-                }
-            },
             email : user.email,
             isAdmin: this.getPermissions(user),
             uid: user.uid
@@ -74,9 +70,9 @@ export class UserService {
         // else return this.afs.doc(`users/${uid}/profile`)
     }
 
-    create(email : string, username : string, uid : string) {
+    create( {displayName, email, uid}) {
         this.afs.collection('users').doc(uid).set({
-            username : username,
+            username : displayName,
             email : email,
             isAdmin : false,
             uid : uid

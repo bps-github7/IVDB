@@ -48,7 +48,7 @@ export class ProfileService {
             links : profile.links,
             displayPreferences : profile.displayPreferences,
             // displays : profile.displays
-        })
+        }, {merge : true})
     }
 
     // save(profile, displayName) {
