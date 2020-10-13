@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from '@angular/fire/firestore';
 import * as firebase from 'firebase';
-import { User } from 'src/app/models/user_datamodel/user';
-import { Profile } from 'src/app/models/user_datamodel/profile';
+import { User } from 'src/app/models/user/user';
+import { Profile } from 'src/app/models/user/profile';
 import { Observable } from 'rxjs';
 import { map, pluck } from 'rxjs/operators';
 import { AngularFireAuth } from '@angular/fire/auth';

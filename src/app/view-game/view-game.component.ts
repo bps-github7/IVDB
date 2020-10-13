@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { GameService } from '../common/services/game.service';
 import { Router, ActivatedRoute } from '@angular/router';
-import { Game } from '../models/content_datamodel/game';
+import { Game } from '../models/content/game';
 
 @Component({
   selector: 'view-game',
@@ -19,7 +19,7 @@ export class ViewGameComponent implements OnInit {
         this.id = this.route.snapshot.paramMap.get('id');
         console.log(this.id)
         if (this.id)
-        this.gameService.get$(this.id).subscribe(g =>this.game = g);
+        this.gameService.get$(this.id).subscribe(g => this.game = g);
 
 }
 

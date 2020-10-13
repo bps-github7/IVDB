@@ -3,8 +3,9 @@ import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument 
 // import 'rxjs/add/operator/map';
 import { Observable } from 'rxjs';
 
+
+
 interface gameInfo {
-    //dont like how the console types are capitalized. bah..
     microsoft?: string [],
     sony?: string [],
     nintendo?: string [],

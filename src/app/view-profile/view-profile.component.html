@@ -1,1 +1,39 @@
-<p>view-profile works!</p>
+<img [src]="profile?.profileImg" alt="Users profile picture">
+
+<h5>
+    Nickname: {{ profile?.nickname }}
+</h5>
+
+<zippy title="Profile">
+<h5>Bio / Player Profile: </h5>
+<p>
+    {{ profile?.bio }}
+</p>
+
+<!-- <article *ngIf="profile?.gamerTags">
+    <h5>GamerTags: </h5>
+    <ul>
+        <li *ngFor="let g of profile?.gamerTags">{{ g }}</li>
+    </ul>
+</article>
+
+<article *ngIf="profile?.links">
+    <h5>Links: </h5>
+    <ul>
+        <li *ngFor="let g of profile?.links">{{ g }}</li>
+    </ul>
+</article> -->
+
+<!-- If the user is the owner of this profile
+
+    <a [router-link]="/sign_in"> Edit your profile </a>
+
+
+
+-->
+
+<a [routerLink]="['/preferences/', uid]">Edit your preferences
+    
+</a>
+
+</zippy>

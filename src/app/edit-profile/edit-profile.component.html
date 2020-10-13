@@ -84,26 +84,6 @@
                     >
             </div>
 
-            <div class="form-group radio">
-                <label for="displayPreferences"> Display what on profile? <br>
-                    <input type="radio" ngModel value="All" name="displayPreferences" class="form-control"> All <br>
-
-                    <input type="radio" ngModel name="displayPreferences" class="form-control" value="some"> Some <br>
-
-                    <input type="radio" ngModel name="displayPrefences" class="form-control" value="none"> None <br>
-                </label>
-            </div>
-
-            <div class="form-group checkbox">
-                <label for="displays"> What do you want displayed on your public profile? 
-                    <input type="checkbox" ngModel name="displays" class="form-control" value="stuff"> stuff
-                </label>
-            </div>
-
-
-
-            
-
             <button class="btn btn-primary" [disabled]="!finished.valid">Create or update profile</button>
         </form>
     </div>

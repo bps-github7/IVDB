@@ -4,7 +4,7 @@ import * as firebase from 'firebase';
 import { Observable } from 'rxjs';
 import { AuthService } from '../common/services/auth.service';
 
-import { User } from '../models/user_datamodel/user';
+import { User } from '../models/user/user';
 
 
 @Component({

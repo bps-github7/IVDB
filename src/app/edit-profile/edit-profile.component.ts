@@ -4,7 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from '../common/services/auth.service';
 import { ProfileService } from '../common/services/profile.service';
 import { UserService } from '../common/services/user.service';
-import { Profile } from '../models/user_datamodel/profile';
+import { Profile } from '../models/user/profile';
 
 @Component({
   selector: 'edit-profile',
@@ -24,7 +24,6 @@ export class EditProfileComponent implements OnInit {
         {
             this.uid = this.route.snapshot.paramMap.get('uid');
             console.log(this.uid);
-            //this should work- get me dough!!!
             this.profileService.get$(this.uid).subscribe((doc) => {this.profile = doc});
     }
 

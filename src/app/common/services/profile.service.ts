@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { Profile } from 'src/app/models/user_datamodel/profile';
+import { Profile } from 'src/app/models/user/profile';
 
 @Injectable({
   providedIn: 'root'
@@ -19,6 +19,7 @@ export class ProfileService {
     profile : Observable<any>
 
     constructor(private afs : AngularFirestore) {
+        
         this.profileCollection = this.afs.collection('profiles');
         this.profiles = this.profileCollection.valueChanges()
 
@@ -45,10 +46,7 @@ export class ProfileService {
             backgroundImg : profile.backgroundImg,
             bio : profile.bio,
             gamerTags : profile.gamerTags,
-            links : profile.links,
-            displayPreferences : profile.displayPreferences,
-            // displays : profile.displays
-        }, {merge : true})
+            links : profile.links}, {merge : true})
     }
 
     // save(profile, displayName) {

@@ -60,6 +60,7 @@ import { EditProfileComponent } from './edit-profile/edit-profile.component';
 
 //environment
 import { environment } from 'src/environments/environment';
+import { EditPreferencesComponent } from './edit-preferences/edit-preferences.component';
 
 
 
@@ -68,6 +69,7 @@ import { environment } from 'src/environments/environment';
     AppComponent,
     EditProfileComponent,
     ViewProfileComponent,
+    EditPreferencesComponent,
     DropdownComponent,
     FavoriteComponent,
     PanelComponent,
@@ -115,15 +117,17 @@ import { environment } from 'src/environments/environment';
         { path: 'console/:company/:name', component: ViewConsoleComponent },
         
 
+
+        //note all the inconsistencies in your routing- camel case here, pascal case there. NOOO!
         
         { path: 'sign_in/createAccount/forgotPassword', component: ForgotPasswordComponent },
         { path: 'sign_in/createAccount', component: CreateAccountComponent},
         { path: 'sign_in', component: SignInComponent },
         { path: 'search', component: SearchComponent },
-        // These paths are uid based- but maybe u want to amke them username based upon deployment!
+        // On deployment, change uid here to displayname to be user and search friendlier
         { path: 'sign_in/create_profile/:uid', component: EditProfileComponent, canActivate: [AuthGuard]},
-        { path: 'sign_in/create_profile/:uid/update', component: EditProfileComponent, canActivate: [AuthGuard, UserAuthGuard] },
         { path: 'profile/:uid', component: ViewProfileComponent, canActivate: [AuthGuard] },
+        { path: 'preferences/:uid', component: EditPreferencesComponent},
 
         //you'll see more on these pages if youre signed in, but can view as anonymous user.
         { path: 'forum', component: ForumComponent },
