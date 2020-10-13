@@ -65,11 +65,6 @@ export class CreateAccountComponent implements OnInit {
 
     createAccount() {
         this.auth.createUser(this.email.value, this.password.value, this.username.value);
-        this.createUser();
-    }
-
-    createUser() {
-        this.userService.create(this.email.value, this.username.value, this.uid);
     }
 
     showPassword() {
