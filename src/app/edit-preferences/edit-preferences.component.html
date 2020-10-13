@@ -1,1 +1,173 @@
-<p>edit-preferences works!</p>
+<div class="row">
+    <div class="col-md-6">
+        <form #finished="ngForm" (ngSubmit)="save(finished.value)">
+            <zippy title="Likes" ngModelGroup="likes">
+            
+                <div class="form-group" >
+                    <label for="games">Games you like : 
+                        <input
+                            ngModel
+                            id="games"
+                            name="games"
+                            class="form-control"
+                            type="text">
+                    </label>
+                </div>
+
+                <div class="form-group">
+                    <label for="consoles">Consoles you like: 
+                        <input
+                            ngModel
+                            id="consoles"
+                            name="consoles"
+                            class="form-control"
+                            type="text">
+                    </label>
+                </div>
+
+
+                <div class="form-group">
+                    <label for="categories">Categories: </label>
+                    <select
+                        ngModel
+                        multiple
+                        required
+                        #categories="ngModel"
+                        name="categories"
+                        id="categories"
+                        class="form-control"
+                        >
+                        <option value=""></option>
+                        <option *ngFor="let g of gameInfo?.categories" [value]="g">
+                            {{ g }}
+                        </option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="creators">Creators: </label>
+                    <select
+                        ngModel
+                        multiple
+                        #creators="ngModel"
+                        name="creators"
+                        id="creators"
+                        class="form-control"
+                        >
+                        <option value=""></option>
+                        <option *ngFor="let g of gameInfo?.creators" [value]="g">
+                            {{ g }}
+                        </option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="console_makers">Console Makers: </label>
+                    <select
+                        ngModel
+                        multiple
+                        #console_makers="ngModel"
+                        name="console_makers"
+                        id="console_makers"
+                        class="form-control"
+                        >
+                        <option value=""></option>
+                        <option *ngFor="let g of gameInfo?.console_makers" [value]="g">
+                            {{ g }}
+                        </option>
+                    </select>
+                </div>
+            </zippy>
+
+            <zippy title="Dislikes" ngModelGroup="dislikes">
+
+                <div class="form-group">
+                    <label for="games">Games you dislike (or disliked): 
+                        <input
+                            ngModel
+                            id="games"
+                            name="games"
+                            class="form-control"
+                            type="text">
+                    </label>
+                </div>
+
+                <div class="form-group">
+                    <label for="consoles">Consoles you dislike (or disliked): 
+                        <input
+                            ngModel
+                            id="consoles"
+                            name="consoles"
+                            class="form-control"
+                            type="text">
+                    </label>
+                </div>
+
+                <div class="form-group">
+                    <label for="categories">Categories: </label>
+                    <select
+                        ngModel
+                        multiple
+                        required
+                        #categories="ngModel"
+                        name="categories"
+                        id="categories"
+                        class="form-control"
+                        >
+                        <option value=""></option>
+                        <option *ngFor="let g of gameInfo?.categories" [value]="g">
+                            {{ g }}
+                        </option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="creators">Creators: </label>
+                    <select
+                        ngModel
+                        multiple
+                        #creators="ngModel"
+                        name="creators"
+                        id="creators"
+                        class="form-control"
+                        >
+                        <option value=""></option>
+                        <option *ngFor="let g of gameInfo?.creators" [value]="g">
+                            {{ g }}
+                        </option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="console_makers">Console Makers: </label>
+                    <select
+                        ngModel
+                        multiple
+                        #console_makers="ngModel"
+                        name="console_makers"
+                        id="console_makers"
+                        class="form-control"
+                        >
+                        <option value=""></option>
+                        <option *ngFor="let g of gameInfo?.console_makers" [value]="g">
+                            {{ g }}
+                        </option>
+                    </select>
+                </div>
+            </zippy>
+
+            <zippy title="Historic">
+
+                Diddle my diddy kong god cock
+            </zippy>
+
+            <zippy title="Currently Playing">
+                Spearmint ass-glass wet fart sucker
+            </zippy>
+
+            <button class="btn btn-primary" [disabled]="!finished.valid">Create or update profile</button>
+        </form>
+    </div>
+
+    <p> {{ finished.value | json }}</p>
+</div>

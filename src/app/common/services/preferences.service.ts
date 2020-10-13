@@ -30,13 +30,35 @@ exists(uid : string) {
     });
 } 
 
-create(profile, uid) {
+create(p, uid) {
     this.afs.doc(`preferences/${uid}`).set({
-        nickname : profile.nickname,
-        profileImg : profile.profileImg,
-        backgroundImg : profile.backgroundImg,
-        bio : profile.bio,
-        gamerTags : profile.gamerTags,
-        links : profile.links}, {merge : true})
+        likes : {
+            games: p.likes.games,
+            consoles: p.likes.consoles,
+            categories: p.likes.categories,
+            creators: p.likes.creators,
+            console_makers : p.likes.console_makers
+        },
+        dislikes : {
+            games: p.dislikes.games,
+            consoles: p.dislikes.consoles,
+            categories: p.dislikes.categories,
+            creators: p.dislikes.creators,
+            console_makers : p.dislikes.console_makers
+        },
+        historic: {
+            favoriteGames : p.historic.favoriteGames,
+            favoriteConsoles : p.historic.favoriteConsoles,
+            childhoodFavoriteGame : p.historic.childhoodFavoriteGame,
+            firstGame : p.historic.firstGame
+        },
+        currentlyPlaying: {
+            games : p.currentlyPlaying.games,
+            consoles : p.currentlyPlaying.consoles
+
+        }
+
+    
+    }, {merge : true})
 }
 }
