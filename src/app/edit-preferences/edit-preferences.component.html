@@ -2,6 +2,10 @@
     <div class="col-md-6">
         <form #finished="ngForm" (ngSubmit)="save(finished.value)">
             <zippy title="Likes" ngModelGroup="likes">
+
+                <tdf-multi-form-control [(ngModel)]="test" formControlName="smeldon" label="I am an arctic pinecone"></tdf-multi-form-control>
+
+
                 <div class="form-group" >
                     <label for="games">Games you like : 
                         <input
@@ -246,8 +250,7 @@
                 <h6>Historic</h6>
                 <p class="card-text"></p>
                 <h6>Currently Playing</h6>
-                <p class="card-text"></p>
-
+                <p class="card-text"></p>                
             </div>
           </div>
     </div>

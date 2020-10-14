@@ -15,6 +15,7 @@ export class EditPreferencesComponent implements OnInit {
     uid : any;
     preferences : any;
     gameInfo: any;
+    test;
 
     constructor(private preferencesService : PreferencesService, private router : Router, private route : ActivatedRoute, private gameInfoService : GameInfoService) {
         this.uid = this.route.snapshot.paramMap.get('uid');
