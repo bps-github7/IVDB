@@ -61,6 +61,7 @@ import { EditProfileComponent } from './edit-profile/edit-profile.component';
 //environment
 import { environment } from 'src/environments/environment';
 import { EditPreferencesComponent } from './edit-preferences/edit-preferences.component';
+import { TdfMultiFormControlComponent } from './form-controls/tdf-multi-form-control/tdf-multi-form-control.component';
 
 
 
@@ -98,7 +99,8 @@ import { EditPreferencesComponent } from './edit-preferences/edit-preferences.co
     ReactiveSelectFormControlComponent,
     ReactiveTextareaFormControlComponent,
     CredentialFormControlComponent,
-    DisableControlDirective
+    DisableControlDirective,
+    TdfMultiFormControlComponent
     ],
   imports: [
     AngularFireModule.initializeApp(environment.firebase),

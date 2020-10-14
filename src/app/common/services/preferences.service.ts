@@ -47,8 +47,8 @@ create(p, uid) {
             console_makers : p.dislikes.console_makers
         },
         historic: {
-            favoriteGames : p.historic.favoriteGames,
-            favoriteConsoles : p.historic.favoriteConsoles,
+            favoriteGames : p.historic.favoriteGame,
+            favoriteConsoles : p.historic.favoriteConsole,
             childhoodFavoriteGame : p.historic.childhoodFavoriteGame,
             firstGame : p.historic.firstGame
         },

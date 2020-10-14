@@ -1,3 +1,6 @@
+<img [src]="profile?.backgroundImg" alt="Users background img">
+
+<!-- how do i nest one image inside the other -->
 <img [src]="profile?.profileImg" alt="Users profile picture">
 
 <h5>
@@ -32,8 +35,23 @@
 
 -->
 
-<a [routerLink]="['/preferences/', uid]">Edit your preferences
-    
-</a>
 
+</zippy>
+
+<zippy title="preferences">
+    How can a user customize their display of preferences? <br>
+<a [routerLink]="['/preferences/', uid]">Edit your preferences</a>
+
+
+</zippy>
+
+<zippy title="contributions">
+    here you can see what a user contributes to the site
+    <ul>
+        <li>rates</li>
+        <li>Reviews</li>
+        <li>threads</li>
+        <li>comments</li>
+        <li>articles they liked</li>
+    </ul>
 </zippy>
