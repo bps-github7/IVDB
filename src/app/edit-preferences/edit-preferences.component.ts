@@ -60,11 +60,19 @@ export class EditPreferencesComponent implements OnInit {
    }
 
    add(entry : HTMLInputElement, formControl : string) {
+        console.log(entry.value);
+    
        (this.form.get(formControl) as FormArray).push(new FormControl(entry.value));
        entry.value = '';
    }
 
   ngOnInit(): void {
   }
+
+  get games() {
+    return this.form.get('likes.games') as FormArray
+  }
+
+
 
 }

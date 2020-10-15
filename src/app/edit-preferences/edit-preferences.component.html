@@ -4,14 +4,18 @@
         
         <!-- For testing     -->
         <form [formGroup]="form">
-            <zippy title="Likes" formGroupName="likes" class="form-group">
+
+            <zippy class="form-group" title="likes" formGroupName="likes">
+
                 <div class="form-control">
-                    <label for="games">Games: </label>
+                    <label for="games">Liked Games: </label>
                     <input
                         formControlName="games"
                         type="text"
-                        #games
-                        (keyup.enter)="add(games, 'likes.games')">
+                        name="games"
+                        id="games"
+                        #entry
+                        (keyup.enter)="add(entry, 'likes.games')">
                     <ul class="list-group">
                         <li 
                             class="list-group-item"
@@ -22,10 +26,70 @@
                 </div>
 
 
+                <div class="form-control">
+                    <label for="consoles">liked Consoles: </label>
+                    <input
+                        formControlName="consoles"
+                        type="text"
+                        #consoles
+                        (keyup.enter)="add(consoles, 'likes.consoles')">
+                    <ul class="list-group">
+                        <li 
+                            class="list-group-item"
+                            *ngFor="let game of form.get('likes.consoles').controls">
+                            {{ game.value }}
+                        </li>
+                    </ul>
+                </div>
+
+                <reactive-select-form-control label="Liked Categories: " formControlName="categories" [options]="gameInfo.categories"></reactive-select-form-control>
+            
+                <reactive-select-form-control label="Liked creators: " formControlName="creators" [options]="gameInfo.creators"></reactive-select-form-control>
+
+                <reactive-select-form-control label="Liked Console Makers: " formControlName="console_makers" [options]="gameInfo.console_makers"></reactive-select-form-control>
             </zippy>
+
 
             <zippy class="form-group" title="Dislikes" formGroupName="dislikes">
 
+                <div class="form-control">
+                    <label for="games">Disiked Games: </label>
+                    <input
+                        formControlName="games"
+                        type="text"
+                        #entry
+                        (keyup.enter)="add(entry, 'dislikes.games')">
+                    <ul class="list-group">
+                        <li 
+                            class="list-group-item"
+                            *ngFor="let game of form.get('dislikes.games').controls">
+                            {{ game.value }}
+                        </li>
+                    </ul>
+                </div>
+
+
+                <div class="form-control">
+                    <label for="consoles">Disliked Consoles: </label>
+                    <input
+                        formControlName="consoles"
+                        type="text"
+                        #consoles
+                        (keyup.enter)="add(consoles, 'dislikes.consoles')">
+                    <ul class="list-group">
+                        <li 
+                            class="list-group-item"
+                            *ngFor="let game of form.get('dislikes.consoles').controls">
+                            {{ game.value }}
+                        </li>
+                    </ul>
+                </div>
+
+                <reactive-select-form-control label="Disliked Categories: " formControlName="categories" [options]="gameInfo.categories"></reactive-select-form-control>
+            
+                <reactive-select-form-control label="Disliked creators: " formControlName="creators" [options]="gameInfo.creators"></reactive-select-form-control>
+
+                <reactive-select-form-control label="Disliked Console Makers: " formControlName="console_makers" [options]="gameInfo.console_makers"></reactive-select-form-control>
             </zippy>
 
             <zippy class="form-group" title="Historic" formGroupName="historic">
