@@ -1,240 +1,43 @@
 <div class="row">
     <div class="col-md-6">
-        <form #finished="ngForm" (ngSubmit)="save(finished.value)">
-            <zippy title="Likes" ngModelGroup="likes">
-
-                <tdf-multi-form-control [(ngModel)]="test" formControlName="smeldon" label="I am an arctic pinecone"></tdf-multi-form-control>
-
-
-                <div class="form-group" >
-                    <label for="games">Games you like : 
-                        <input
-                            ngModel
-                            id="games"
-                            name="games"
-                            class="form-control"
-                            type="text">
-                    </label>
-                </div>
-
-                <div class="form-group">
-                    <label for="consoles">Consoles you like: 
-                        <input
-                            ngModel
-                            id="consoles"
-                            name="consoles"
-                            class="form-control"
-                            type="text">
-                    </label>
+        <!-- <form [formGroup]="form" (ngSubmit)="save(form.value)"> -->
+        
+        <!-- For testing     -->
+        <form [formGroup]="form">
+            <zippy title="Likes" formGroupName="likes" class="form-group">
+                <div class="form-control">
+                    <label for="games">Games: </label>
+                    <input
+                        formControlName="games"
+                        type="text"
+                        #games
+                        (keyup.enter)="add(games, 'likes.games')">
+                    <ul class="list-group">
+                        <li 
+                            class="list-group-item"
+                            *ngFor="let game of form.get('likes.games').controls">
+                            {{ game.value }}
+                        </li>
+                    </ul>
                 </div>
 
 
-                <div class="form-group">
-                    <label for="categories">Categories: </label>
-                    <select
-                        ngModel
-                        multiple
-                        required
-                        #categories="ngModel"
-                        name="categories"
-                        id="categories"
-                        class="form-control"
-                        >
-                        <option value=""></option>
-                        <option *ngFor="let g of gameInfo?.categories" [value]="g">
-                            {{ g }}
-                        </option>
-                    </select>
-                </div>
-
-                <div class="form-group">
-                    <label for="creators">Creators: </label>
-                    <select
-                        ngModel
-                        multiple
-                        #creators="ngModel"
-                        name="creators"
-                        id="creators"
-                        class="form-control"
-                        >
-                        <option value=""></option>
-                        <option *ngFor="let g of gameInfo?.creators" [value]="g">
-                            {{ g }}
-                        </option>
-                    </select>
-                </div>
-
-                <div class="form-group">
-                    <label for="console_makers">Console Makers: </label>
-                    <select
-                        ngModel
-                        multiple
-                        #console_makers="ngModel"
-                        name="console_makers"
-                        id="console_makers"
-                        class="form-control"
-                        >
-                        <option value=""></option>
-                        <option *ngFor="let g of gameInfo?.console_makers" [value]="g">
-                            {{ g }}
-                        </option>
-                    </select>
-                </div>
             </zippy>
 
-            <zippy title="Dislikes" ngModelGroup="dislikes">
+            <zippy class="form-group" title="Dislikes" formGroupName="dislikes">
 
-                <div class="form-group">
-                    <label for="games">Games you dislike (or disliked): 
-                        <input
-                            ngModel
-                            id="games"
-                            name="games"
-                            class="form-control"
-                            type="text">
-                    </label>
-                </div>
-
-                <div class="form-group">
-                    <label for="consoles">Consoles you dislike (or disliked): 
-                        <input
-                            ngModel
-                            id="consoles"
-                            name="consoles"
-                            class="form-control"
-                            type="text">
-                    </label>
-                </div>
-
-                <div class="form-group">
-                    <label for="categories">Categories: </label>
-                    <select
-                        ngModel
-                        multiple
-                        required
-                        #categories="ngModel"
-                        name="categories"
-                        id="categories"
-                        class="form-control"
-                        >
-                        <option value=""></option>
-                        <option *ngFor="let g of gameInfo?.categories" [value]="g">
-                            {{ g }}
-                        </option>
-                    </select>
-                </div>
-
-                <div class="form-group">
-                    <label for="creators">Creators: </label>
-                    <select
-                        ngModel
-                        multiple
-                        #creators="ngModel"
-                        name="creators"
-                        id="creators"
-                        class="form-control"
-                        >
-                        <option value=""></option>
-                        <option *ngFor="let g of gameInfo?.creators" [value]="g">
-                            {{ g }}
-                        </option>
-                    </select>
-                </div>
-
-                <div class="form-group">
-                    <label for="console_makers">Console Makers: </label>
-                    <select
-                        ngModel
-                        multiple
-                        #console_makers="ngModel"
-                        name="console_makers"
-                        id="console_makers"
-                        class="form-control"
-                        >
-                        <option value=""></option>
-                        <option *ngFor="let g of gameInfo?.console_makers" [value]="g">
-                            {{ g }}
-                        </option>
-                    </select>
-                </div>
             </zippy>
 
-            <zippy title="Historic" ngModelGroup="historic">
+            <zippy class="form-group" title="Historic" formGroupName="historic">
 
-                <div class="form-group" >
-                    <label for="favoriteGame">Your favorite game of all time: 
-                        <input
-                            ngModel
-                            id="favoriteGame"
-                            name="favoriteGame"
-                            class="form-control"
-                            type="text">
-                    </label>
-                </div>
+            </zippy>
 
-                <div class="form-group">
-                    <label for="favoriteConsole">Your favorite Console of All time: 
-                        <input
-                            ngModel
-                            id="favoriteConsole"
-                            name="favoriteConsole"
-                            class="form-control"
-                            type="text">
-                    </label>
-                </div>
-
-
-                <div class="form-group" >
-                    <label for="childhoodFavoriteGame">Childhood Favorite Game: 
-                        <input
-                            ngModel
-                            id="childhoodFavoriteGame"
-                            name="childhoodFavoriteGame"
-                            class="form-control"
-                            type="text">
-                    </label>
-                </div>
-
+            <zippy class="form-group" title="Currently Playing" formGroupName="currentlyPlaying">
                 
-                <div class="form-group" >
-                    <label for="firstGame">First game you ever played: 
-                        <input
-                            ngModel
-                            id="firstGame"
-                            name="firstGame"
-                            class="form-control"
-                            type="text">
-                    </label>
-                </div>
-            </zippy>
-
-            <zippy title="Currently Playing" ngModelGroup="currentlyPlaying">
                 
-                <div class="form-group" >
-                    <label for="games">Games you are currently playing: 
-                        <input
-                            ngModel
-                            id="games"
-                            name="games"
-                            class="form-control"
-                            type="text">
-                    </label>
-                </div>
-
-                <div class="form-group">
-                    <label for="consoles">Consoles you are currently using: 
-                        <input
-                            ngModel
-                            id="consoles"
-                            name="consoles"
-                            class="form-control"
-                            type="text">
-                    </label>
-                </div>
-
             </zippy>
 
-            <button class="btn btn-primary" [disabled]="!finished.valid">Create or update profile</button>
+            <button class="btn btn-primary" [disabled]="!form.valid">Create or update profile</button>
         </form>
     </div>
     <div class="col-md-6">
@@ -242,8 +45,6 @@
             <div class="card-body">
                 <h6>Likes</h6>
                 <p class="card-text">
-                    {{ finished.value.likes.games }} <br>
-                    {{ finished.value.likes.consoles }}
                 </p>
                 <h6>Dislikes</h6>
                 <p class="card-text"></p>
@@ -255,5 +56,5 @@
           </div>
     </div>
 
-    <p> {{ finished.value | json }}</p>
+    <p> {{ form.value | json }}</p>
 </div>

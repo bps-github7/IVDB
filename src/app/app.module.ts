@@ -100,7 +100,7 @@ import { TdfMultiFormControlComponent } from './form-controls/tdf-multi-form-con
     ReactiveTextareaFormControlComponent,
     CredentialFormControlComponent,
     DisableControlDirective,
-    TdfMultiFormControlComponent
+    TdfMultiFormControlComponent,
     ],
   imports: [
     AngularFireModule.initializeApp(environment.firebase),
