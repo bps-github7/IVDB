@@ -28,7 +28,7 @@ export class EditPreferencesComponent implements OnInit {
         this.form = this.fb.group({
             likes : fb.group({
                 games : fb.array([]),
-                consoles : fb.array([]),
+                onsoles : fb.array([]),
                 categories : [''],
                 creators : [''],
                 console_makers : ['']
@@ -43,12 +43,12 @@ export class EditPreferencesComponent implements OnInit {
             historic : fb.group({
                 favoriteGame : [''],
                 favoriteConsole : [''],
-                childhoodFavoriteGames : fb.array([]),
+                childhoodFavoriteGame : [''],
                 firstGame : ['']
             }),
             currentlyPlaying : fb.group({
-                games : [''],
-                consoles : ['']
+                cp_games : fb.array([]),
+                cp_consoles : fb.array([])
             })
         })
    

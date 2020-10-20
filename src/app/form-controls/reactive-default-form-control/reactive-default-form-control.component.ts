@@ -6,7 +6,6 @@ import { ControlContainer, ControlValueAccessor, FormControl, FormControlDirecti
     template: `
         <label [for]="formControl">{{ label }}
             <input type="text" [formControl]="control" class="form-control">
-            <button type="button" (click)="clearInput()">clear</button><br/>
         </label>`,
     styleUrls: ['./../reactive-form-control.component.css'],
     providers: [
