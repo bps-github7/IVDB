@@ -9,15 +9,15 @@ import { News } from 'src/app/models/content/news';
 export class NewsService {
 
     newsCollection : AngularFirestoreCollection<News>;
+    news$ : Observable<News []>
 
 
     constructor(private afs : AngularFirestore) {
-        this.newsCollection = this.afs.collection("news");
+        this.newsCollection = this.afs.collection<News>("news");
+        this.news$ = this.newsCollection.valueChanges();
+
     }
 
-    get news() : Observable<News[]> {
-        return this.newsCollection.valueChanges();
-    }
 
     // get_news_post(id : string)
 }

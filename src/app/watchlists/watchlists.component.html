@@ -1,5 +1,5 @@
 <ul>
-    <li *ngFor="let n of news$ | async as news">
-        <post [content]="news"></post>
+    <li *ngFor="let n of news$">
+        <post [content]="n"></post>
     </li>
 </ul>

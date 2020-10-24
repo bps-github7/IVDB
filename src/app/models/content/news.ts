@@ -6,7 +6,7 @@ export interface News {
         text: string,
         images? : string,
         links? : string,
-        additional? :(string | string[])
+        misc? :(string | string[])
     };
     metaData: {
         datePosted : string;

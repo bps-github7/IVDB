@@ -1,5 +1,4 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { NewsService } from '../common/services/news.service';
 
 @Component({
   selector: 'post',
@@ -8,11 +7,10 @@ import { NewsService } from '../common/services/news.service';
 })
 export class PostComponent implements OnInit {
  
-    @Input()content;
+    @Input() content;
     news$;
 
-    constructor(private newsService : NewsService) {
-        this.newsService.news.subscribe(doc => this.news$ = doc)
+    constructor() {
     }
 
     ngOnInit(): void {

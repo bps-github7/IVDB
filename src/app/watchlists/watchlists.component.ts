@@ -14,7 +14,7 @@ export class WatchlistsComponent implements OnInit {
     news$ : any;
 
     constructor(private newsService : NewsService) {
-        this.newsService.news.subscribe(doc => this.news$ = doc)
+        this.newsService.news$.subscribe(doc => this.news$ = doc)
     }
 
     ngOnInit(): void {
