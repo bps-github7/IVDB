@@ -1,4 +1,4 @@
-export interface reccomendation {
+export interface Reccomendation {
     user: string,
     game : string,
     content : string,
