@@ -34,7 +34,6 @@ create(p, uid) {
     this.afs.doc(`preferences/${uid}`).set({
         likes : {
             games: p.likes.games,
-            consoles: p.likes.onsoles,
             categories: p.likes.categories,
             creators: p.likes.creators,
             console_makers : p.likes.console_makers

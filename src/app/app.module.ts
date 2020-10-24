@@ -39,9 +39,7 @@ import { WatchlistsComponent } from './watchlists/watchlists.component';
 import { RateComponent } from './rate/rate.component';
 import { SearchComponent } from './search/search.component';
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
-import { PostsComponent } from './posts/posts.component';
 import { CreateThreadComponent } from './create-thread/create-thread.component';
-import { CommentComponent } from './comment/comment.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { GameComponent } from './admin/game/game.component';
 import { GameFormComponent } from './admin/game-form/game-form.component';
@@ -62,6 +60,7 @@ import { EditProfileComponent } from './edit-profile/edit-profile.component';
 import { environment } from 'src/environments/environment';
 import { EditPreferencesComponent } from './edit-preferences/edit-preferences.component';
 import { TdfMultiFormControlComponent } from './form-controls/tdf-multi-form-control/tdf-multi-form-control.component';
+import { PostComponent } from './post/post.component';
 
 
 
@@ -86,9 +85,7 @@ import { TdfMultiFormControlComponent } from './form-controls/tdf-multi-form-con
     RateComponent,
     SearchComponent,
     ForgotPasswordComponent,
-    PostsComponent,
     CreateThreadComponent,
-    CommentComponent,
     NotFoundComponent,
     GameComponent,
     GameFormComponent,
@@ -101,6 +98,7 @@ import { TdfMultiFormControlComponent } from './form-controls/tdf-multi-form-con
     CredentialFormControlComponent,
     DisableControlDirective,
     TdfMultiFormControlComponent,
+    PostComponent,
     ],
   imports: [
     AngularFireModule.initializeApp(environment.firebase),
