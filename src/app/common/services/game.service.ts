@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from '@angular/fire/firestore';
 // import { AngularFireDatabase } from '@angular/fire/database';
 // import { map, take } from 'rxjs/operators';
-import { Game } from '../../models/content/game';
+import { Game } from '../../models/content/Game';
 import { Observable } from 'rxjs';
 
 @Injectable({

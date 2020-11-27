@@ -1,18 +1,9 @@
+import { Content } from '@angular/compiler/src/render3/r3_ast';
 import { User } from 'firebase';
+import { Metadata } from './Metadata';
 
 export interface News {
     title : string;
-    content : {
-        text: string,
-        images? : string,
-        links? : string,
-        misc? :(string | string[])
-    };
-    metaData: {
-        datePosted : string;
-        lastUpdated : string;
-        author : User; //think this should be admin or mod once thats a interface too...
-    };
-
-
+    content : Content,
+    metadata: Metadata
 }

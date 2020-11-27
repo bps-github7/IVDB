@@ -1,3 +1,5 @@
+import { VG_Console } from './VG_Console';
+
 export interface Game {
     title?: string,
     price?: string | number,
@@ -6,6 +8,6 @@ export interface Game {
     creators?: string,
     categories?: string,
     console_Makers?: string,
-    console?: Console;
+    console?: VG_Console;
 
 }

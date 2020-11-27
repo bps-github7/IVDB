@@ -1,6 +1,4 @@
-import { Timestamp } from 'rxjs/internal/operators/timestamp';
-
-export interface Console {
+export interface VG_Console {
     generation : number,
     name : string,
     qualifiedName : string,
