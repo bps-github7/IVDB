@@ -1,0 +1,71 @@
+<h3>
+    Welcome to the gaming index!
+</h3>
+
+<p> Come here to learn about released and anticipated games, consoles, console makers, creators, categories and more</p>
+
+
+<h5>Creators: </h5>
+<ul>
+    <li *ngFor="let c of gameInfo?.creators">
+        <a [routerLink]="['creators/', c]" [title]="c">{{ c }}</a>
+    </li>
+</ul>
+<h5>Categories: </h5>
+<ul>
+    <li *ngFor="let c of gameInfo?.categories">
+        <a [routerLink]="['categories/', c]" [title]="c">{{ c }}</a>
+    </li>
+</ul>
+<h5>Console-Makers: </h5>
+<ul>
+    <li *ngFor="let c of gameInfo?.console_makers">
+        <a [routerLink]="['console-makers/', c]" [title]="c">{{ c }}</a>
+    </li>
+</ul>
+
+<h5>Nintendo Consoles: </h5>
+
+<ul>
+    <li *ngFor="let n of gameInfo?.nintendo ">
+                <a [routerLink]="['../../../gaming-index/console-maker/',  n.name]" title="n?.qualifiedName">
+                    {{ n.name }}
+                </a>
+    </li>
+</ul>
+
+
+<h5>Sony Consoles: </h5>
+
+<ul>
+    <li *ngFor="let n of gameInfo?.sony ">
+                <a [routerLink]="['../../../gaming-index/console-maker/',  n.name]" title="n?.qualifiedName">
+                    {{ n }}
+                </a>
+    </li>
+</ul>
+
+
+
+<h5>Microsoft Consoles: </h5>
+
+<ul>
+    <li *ngFor="let n of gameInfo?.microsoft ">
+                <a [routerLink]="['../../../gaming-index/console-maker/',  n.name]" title="n?.qualifiedName">
+                    {{ n.qualifiedName }}
+                </a>
+    </li>
+</ul>
+
+<span>this one reallky is nt a thing but included foir now for completions sake</span>
+
+<h5>PC Consoles: </h5>
+
+<ul>
+    <li *ngFor="let n of gameInfo?.pc">
+        {{n.name}}
+                <a [routerLink]="['../../../gaming-index/console-maker/',  n.name]" title="n?.qualifiedName">
+                    {{ n }}
+                </a>
+    </li>
+</ul>

@@ -61,6 +61,10 @@ import { environment } from 'src/environments/environment';
 import { EditPreferencesComponent } from './edit-preferences/edit-preferences.component';
 import { TdfMultiFormControlComponent } from './form-controls/tdf-multi-form-control/tdf-multi-form-control.component';
 import { PostComponent } from './post/post.component';
+import { ViewConsoleMakerComponent } from './view-console-maker/view-console-maker.component';
+import { GamingIndexComponent } from './gaming-index/gaming-index.component';
+import { CategoriesComponent } from './categories/categories.component';
+import { CreatorsComponent } from './creators/creators.component';
 
 
 @NgModule({
@@ -98,6 +102,10 @@ import { PostComponent } from './post/post.component';
     DisableControlDirective,
     TdfMultiFormControlComponent,
     PostComponent,
+    ViewConsoleMakerComponent,
+    GamingIndexComponent,
+    CategoriesComponent,
+    CreatorsComponent,
     ],
   imports: [
     AngularFireModule.initializeApp(environment.firebase),
@@ -111,11 +119,6 @@ import { PostComponent } from './post/post.component';
     RouterModule.forRoot([
         //routes asscesible to annoymous users
         { path: '', component: HomeComponent },
-    
-        //trying something new here
-        { path: 'console/:company/:name', component: ViewConsoleComponent },
-        
-
 
         //note all the inconsistencies in your routing- camel case here, pascal case there. NOOO!
         
@@ -133,10 +136,17 @@ import { PostComponent } from './post/post.component';
         { path: 'games', component: GamesComponent },
         { path: 'games/:id', component: ViewGameComponent },
         { path: 'streaming', component: StreamingComponent },
-        { path: 'reccomendations', component: ReccomendationsComponent },
+        { path: 'gaming-index', component: GamingIndexComponent },
+        { path: 'gaming-index/creators/:creator', component: CreatorsComponent },
+        { path: 'gaming-index/creators', component: CreatorsComponent },
+        { path: 'gaming-index/categories/:category', component: CategoriesComponent },
+        { path: 'gaming-index/categories', component: CategoriesComponent },
+        { path: 'gaming-index/console-makers/:name', component: ViewConsoleMakerComponent },
+        { path: 'gaming-index/console-makers/:name/:qualified_name', component: ViewConsoleComponent },
+        { path: 'gaming-index/console-makers', component: ViewConsoleMakerComponent },
+
         { path: 'watchlists', component: WatchlistsComponent },
         
-
         //routes for logged in users
         // { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard] },
         { path: 'forum/create-thread', component: CreateThreadComponent, canActivate: [AuthGuard] },

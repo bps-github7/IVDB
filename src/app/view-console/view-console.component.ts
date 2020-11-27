@@ -19,8 +19,8 @@ export class ViewConsoleComponent implements OnInit {
     private route : ActivatedRoute,
     private gameInfoService : GameInfoService) {
 
-        this.console_maker = this.route.snapshot.paramMap.get('company');
-        this.name = this.route.snapshot.paramMap.get('name');
+        this.console_maker = this.route.snapshot.paramMap.get('name');
+        this.name = this.route.snapshot.paramMap.get('qualified_name');
 
         console.log('comapny : ' + this.console_maker);
         console.log('console : '+ this.name);

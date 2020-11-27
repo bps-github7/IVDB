@@ -48,19 +48,22 @@
                 <li><a href="#">Admin Favorites</a></li>     
             </ul>
         </li>
-        <li><a routerLink="/reccomendations">Reccomendations</a>
+        <li><a routerLink="/gaming-index">Gaming Index</a>
             <ul class="sub-menu">
                 <!-- sub sub menu here -->
-                <li><a href="#">This Week's Select Games</a>
+                <li><a routerLink="/gaming-index/console-makers">Console Makers</a>
                     <ul class="sub sub-menu"> 
-                        <li><a href="##">Action/platform</a></li>
-                        <li><a href="##">RPG</a></li>
-                        <li><a href="##">Sports</a></li>
+                        <li><a routerLink="/gaming-index/console-makers/sony">Sony</a></li>
+                        <li><a routerLink="/gaming-index/console-makers/nintendo">Nintendo</a></li>
+                        <li><a routerLink="/gaming-index/console-makers/microsoft">Microsoft</a></li>
+                        <li><a routerLink="/gaming-index/console-makers/pc">PC</a></li>
+
                     </ul>
                 </li>
-                <li><a href="#">Browse Topics</a></li>
-                <li><a href="#">Well Traveled Reviews</a></li>
-                <li><a href="#">This Month's Top Reccomendations</a></li>          
+                <li><a routerLink="/gaming-index/creators">Creators</a></li>
+                <li><a routerLink="/gaming-index/categories">Categories</a></li>
+                <!-- would be cool to add this detail later- for gizmos and trivia that does not fit into the above categories 
+                    <li><a href="#">Misc & historical</a></li>           -->
             </ul>
         </li>
         <li><a routerLink="/games">Games</a>
@@ -87,6 +90,3 @@
         </li>
     </ul>
 </nav>
-<!-- need to 
-1)add routing to these links,
-2) integrate search bar/ login panel-->
