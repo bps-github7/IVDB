@@ -7,7 +7,9 @@
     </p>
     <ul>
         <li *ngFor="let c of gameInfo.console_makers">
-            <a [routerLink]="['gaming-index/console-makers/',c.name]" title="c"></a>
+            <a [routerLink]="c.title" title="c">
+                {{ c.title }}
+            </a>
 
         </li>
     </ul>
@@ -15,5 +17,7 @@
 </div>
 
 <div *ngIf="console_maker">
-    Stuff goes here about the specific console maker navigated to
+    <h3>{{ gameInfo.console_maker.title }}</h3>
+
+    <p>{{ gameInfo.console_maker.description }}</p>
 </div>

@@ -51,7 +51,7 @@
                     >
                     <option value=""></option>
                     <option *ngFor="let g of gameInfo?.categories" [value]="g">
-                        {{ g }}
+                        {{ g.title }}
                     </option>
                 </select>
                 <div *ngIf="categories.touched && categories.invalid" class="alert alert-danger">
@@ -73,7 +73,7 @@
                     >
                     <option value=""></option>
                     <option *ngFor="let g of gameInfo?.creators" [value]="g">
-                        {{ g }}
+                        {{ g.title }}
                     </option>
                 </select>
                 <div *ngIf="creators.touched && creators.invalid" class="alert alert-danger">
@@ -97,8 +97,8 @@
                     >
                     <!-- bug here: console label still appears even if blank option is selected -->
                     <option value=""></option>
-                    <option *ngFor="let g of gameInfo?.console_makers" [value]="g">
-                        {{ g }}
+                    <option *ngFor="let g of gameInfo?.console_makers" [value]="g.title">
+                        {{ g.title }}
                     </option>
                 </select>
                 <!-- does checkbox input need to be in some form control  element? -->

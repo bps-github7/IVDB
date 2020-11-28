@@ -6,7 +6,7 @@
 
 <p>Click on a creator below to learn more about it:</p>
 <ul>
-    <li>
-        creators go here
+    <li *ngFor="let g of gameInfo?.creators">
+        <a [routerLink]="g.title">{{ g.title }}</a>
     </li>
 </ul>

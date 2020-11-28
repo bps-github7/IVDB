@@ -6,7 +6,7 @@
 
 <p>Click on a category below to learn more about it:</p>
 <ul>
-    <li>
-        categories go here
+    <li *ngFor="let g of gameInfo?.categories">
+        <a [routerLink]="g.title">{{ g.title }}</a>
     </li>
 </ul>

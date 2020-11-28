@@ -8,19 +8,19 @@
 <h5>Creators: </h5>
 <ul>
     <li *ngFor="let c of gameInfo?.creators">
-        <a [routerLink]="['creators/', c]" [title]="c">{{ c }}</a>
+        <a [routerLink]="['creators/', c.title]" [title]="c.title">{{ c.title }}</a>
     </li>
 </ul>
 <h5>Categories: </h5>
 <ul>
     <li *ngFor="let c of gameInfo?.categories">
-        <a [routerLink]="['categories/', c]" [title]="c">{{ c }}</a>
+        <a [routerLink]="['categories/', c.title]" [title]="c.title">{{ c.title }}</a>
     </li>
 </ul>
 <h5>Console-Makers: </h5>
 <ul>
     <li *ngFor="let c of gameInfo?.console_makers">
-        <a [routerLink]="['console-makers/', c]" [title]="c">{{ c }}</a>
+        <a [routerLink]="['console-makers/', c.title]" [title]="c.title">{{ c.title }}</a>
     </li>
 </ul>
 

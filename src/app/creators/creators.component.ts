@@ -10,7 +10,7 @@ import { GameInfoService } from '../common/services/gameinfo.service';
 export class CreatorsComponent implements OnInit {
 
     creator : any;
-    creatorInfo : any;
+    gameInfo : any;
 
     constructor(private router : Router,
         private route : ActivatedRoute,
@@ -19,8 +19,10 @@ export class CreatorsComponent implements OnInit {
             if (this.creator)
                 console.log("got this creator rah hurre " + this.creator)
             //should really consider getting the specific thing you need from gameinfo service rather than the whole badumpadump as ovservable.
-            // this.gameInfoService.get$(this.category).subscribe(g => this.game = g);
-        }  ngOnInit(): void {
-  }
+            this.gameInfoService.gameInfo$.subscribe(g => this.gameInfo = g);
+        }  
+        
+    ngOnInit(): void {
+    }
 
 }

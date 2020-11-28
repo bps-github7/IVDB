@@ -7,7 +7,7 @@ import { ControlContainer, FormControl, FormControlDirective, NG_VALUE_ACCESSOR 
     <label [for]="formControl">{{ label }}:
         <select multiple class="form-control" [id]="formControl" [formControl]="control">
             <option [value]=" "></option>
-            <option *ngFor="let option of options" [ngValue]="option">{{ option }}</option>
+            <option *ngFor="let option of options" [ngValue]="option">{{ option.title }}</option>
         </select>
     </label>
     `,
