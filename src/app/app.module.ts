@@ -65,6 +65,8 @@ import { ViewConsoleMakerComponent } from './view-console-maker/view-console-mak
 import { GamingIndexComponent } from './gaming-index/gaming-index.component';
 import { CategoriesComponent } from './categories/categories.component';
 import { CreatorsComponent } from './creators/creators.component';
+import { ConsolesComponent } from './consoles/consoles.component';
+import { ConsoleMakersComponent } from './console-makers/console-makers.component';
 
 
 @NgModule({
@@ -106,6 +108,8 @@ import { CreatorsComponent } from './creators/creators.component';
     GamingIndexComponent,
     CategoriesComponent,
     CreatorsComponent,
+    ConsolesComponent,
+    ConsoleMakersComponent,
     ],
   imports: [
     AngularFireModule.initializeApp(environment.firebase),
@@ -141,8 +145,8 @@ import { CreatorsComponent } from './creators/creators.component';
         { path: 'gaming-index/creators', component: CreatorsComponent },
         { path: 'gaming-index/categories/:category', component: CategoriesComponent },
         { path: 'gaming-index/categories', component: CategoriesComponent },
-        { path: 'gaming-index/console-makers/:name', component: ViewConsoleMakerComponent },
-        { path: 'gaming-index/console-makers/:name/:qualified_name', component: ViewConsoleComponent },
+        { path: 'gaming-index/console-makers/:name', component: ConsoleMakersComponent },
+        { path: 'gaming-index/console-makers/:name/:qualified_name', component: ConsolesComponent },
         { path: 'gaming-index/console-makers', component: ViewConsoleMakerComponent },
 
         { path: 'watchlists', component: WatchlistsComponent },

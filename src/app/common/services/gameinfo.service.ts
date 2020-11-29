@@ -39,8 +39,15 @@ export class GameInfoService {
      }
 
     get_console(company : string, name : string) {
-        this.gameInfoCollection.doc('KZX1GyjNGtwUzHsyICBO').ref.get().then((doc) => this.info = doc.data().compamy)
-        return this.info
+        var info;
+        this.gameInfoCollection.doc(this.doc_id).ref.get().then((doc) => info = doc.data().compamy)
+        return info;
+    }
+
+    get_creator(creator : string) {
+        var info;
+        // this.gameInfoCollection.doc(this.doc_id).ref.get().then((doc) => info = doc.data()creator)
+        return info
     }
 
 }

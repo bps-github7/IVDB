@@ -1,0 +1,15 @@
+<div *ngIf="console">
+</div>
+
+<ng-template>
+    <h3>{{ console?.name }}</h3>
+
+    <!-- note that this approach does not utalize observables. may want to rethink that.. -->
+
+    <p>
+        make/model : {{ console?.qualifiedName }} <br>
+        released : {{ console?.released }} <br>
+        type : {{ console?.type }} <br>
+        generation : {{ console?.generation }} <br>
+    </p>
+</ng-template>
