@@ -5,19 +5,19 @@
 <p> Come here to learn about released and anticipated games, consoles, console makers, creators, categories and more</p>
 
 
-<h5>Creators: </h5>
+<h5> <a routerLink="creators">Creators:</a></h5>
 <ul>
     <li *ngFor="let c of gameInfo?.creators">
         <a [routerLink]="['creators/', c.title]" [title]="c.title">{{ c.title }}</a>
     </li>
 </ul>
-<h5>Categories: </h5>
+<h5><a routerLink="categories">Categories:</a></h5>
 <ul>
     <li *ngFor="let c of gameInfo?.categories">
         <a [routerLink]="['categories/', c.title]" [title]="c.title">{{ c.title }}</a>
     </li>
 </ul>
-<h5>Console-Makers: </h5>
+<h5><a routerLink="console-makers">Console Makers:</a></h5>
 <ul>
     <li *ngFor="let c of gameInfo?.console_makers">
         <a [routerLink]="['console-makers/', c.title]" [title]="c.title">{{ c.title }}</a>

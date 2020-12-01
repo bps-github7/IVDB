@@ -10,6 +10,7 @@ import { GameInfoService } from '../common/services/gameinfo.service';
 export class CategoriesComponent implements OnInit {
 
     category: any;
+    categories$: any;
     gameInfo : any;
 
   constructor(private router : Router,
@@ -20,6 +21,7 @@ export class CategoriesComponent implements OnInit {
             console.log("got this category rah hurre " + this.category)
         //should really consider getting the specific thing you need from gameinfo service rather than the whole badumpadump as ovservable.
         this.gameInfoService.gameInfo$.subscribe(g => this.gameInfo = g);
+        this.categories$ = this.gameInfoService.categories;
     }
 
   ngOnInit(): void {

@@ -2,26 +2,28 @@ import { Injectable } from '@angular/core';
 import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from '@angular/fire/firestore';
 // import 'rxjs/add/operator/map';
 import { Observable } from 'rxjs';
-
-
-
-interface gameInfo {
-    microsoft?: string [],
-    sony?: string [],
-    nintendo?: string [],
-    pc?: string [],
-    categories?:  string | string [],
-    creators?: string | string [],
-    console_makers?: string | string []
-
-}
+import { map } from 'rxjs/operators';
+import { Game } from 'src/app/models/content/Game';
+import { gameInfo } from 'src/app/models/content/GameInfo';
+import { Game_Descriptor } from 'src/app/models/content/Game_Descriptor';
+import { VG_Console } from 'src/app/models/content/VG_Console';
 
 @Injectable({
   providedIn: 'root'
 })
 
+class GameInfo implements gameInfo {
+    categories: Game_Descriptor [];
+    console_makers: Game_Descriptor [];
+    creators: Game_Descriptor [];
+    microsoft: VG_Console [];
+    nintendo: VG_Console [];
+    pc: VG_Console []
+    sony: VG_Console [];
+    
 
 
+}
 
 export class GameInfoService {
 
@@ -29,25 +31,54 @@ export class GameInfoService {
     gameInfoDocument : AngularFirestoreDocument<gameInfo>;
     doc_id = 'KZX1GyjNGtwUzHsyICBO';
     gameInfo$;
-    info : any;
 
     constructor(private afs : AngularFirestore) {
-        this.gameInfoCollection = this.afs.collection('game_info');
+        this.gameInfoCollection = this.afs.collection<GameInfo>('game_info');
         this.gameInfo$ = this.gameInfoCollection.doc(this.doc_id).valueChanges();
-        //LETS get rid of this line, figure out how to get observable of db doc to work instead.
-        // this.gameInfoCollection.doc('KZX1GyjNGtwUzHsyICBO').ref.get().then((doc) => this.info = doc.data());
-     }
+        }
+/* 
+    get categories$() {
+        return this.gameInfoCollection.valueChanges().pipe(map(doc => {
+            return doc.map(g => {
+                var categories : Game_Descriptor [];
+                // let gameInfo = new GameInfo();
+                categories = g.categories;
+                return categories;
+            })
 
-    get_console(company : string, name : string) {
-        var info;
-        this.gameInfoCollection.doc(this.doc_id).ref.get().then((doc) => info = doc.data().compamy)
-        return info;
+        }));
+
+    } */
+
+    get categories() {
+        return this.gameInfoCollection.doc('/categories')
+        .valueChanges();
     }
 
-    get_creator(creator : string) {
-        var info;
-        // this.gameInfoCollection.doc(this.doc_id).ref.get().then((doc) => info = doc.data()creator)
-        return info
+    get creators() {
+        return this.gameInfoCollection.doc('/creators')
+        .valueChanges();
+    }
+
+    get console_makers() {
+        return this.gameInfoCollection.doc('/console-makers')
+        .valueChanges();
+    }    
+
+    get sony() : Array<VG_Console> {
+        return [];
+    }
+
+    get nintendo() : Array<VG_Console> {
+        return [];
+    }
+
+    get microsoft() : Array<VG_Console> {
+        return [];
+    }
+
+    get pc() : Array<VG_Console> {
+        return [];
     }
 
 }

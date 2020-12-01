@@ -14,13 +14,15 @@ export class CreatorsComponent implements OnInit {
 
     constructor(private router : Router,
         private route : ActivatedRoute,
-        private gameInfoService : GameInfoService) {
+        public gameInfoService : GameInfoService) {
             this.creator = this.route.snapshot.paramMap.get('creator');
             if (this.creator)
                 console.log("got this creator rah hurre " + this.creator)
             //should really consider getting the specific thing you need from gameinfo service rather than the whole badumpadump as ovservable.
             this.gameInfoService.gameInfo$.subscribe(g => this.gameInfo = g);
-        }  
+        }
+
+    
         
     ngOnInit(): void {
     }

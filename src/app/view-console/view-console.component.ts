@@ -25,9 +25,9 @@ export class ViewConsoleComponent implements OnInit {
         console.log('comapny : ' + this.console_maker);
         console.log('console : '+ this.name);
         
-        if (this.name)
-            console = this.gameInfoService.get_console(this.console_maker, this.name);
-            console.log(console);
+        // if (this.name)
+        //     console = this.gameInfoService.get_console(this.console_maker, this.name);
+        //     console.log(console);
         }
 
 

@@ -6,7 +6,9 @@
 
 <p>Click on a category below to learn more about it:</p>
 <ul>
-    <li *ngFor="let g of gameInfo?.categories">
+    <li *ngFor="let g of (categories$ | async)">
         <a [routerLink]="g.title">{{ g.title }}</a>
     </li>
 </ul>
+
+<!-- <p>{{ categories | json }}</p> -->
