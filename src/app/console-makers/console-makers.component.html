@@ -6,18 +6,16 @@
         Choose one below to continue
     </p>
     <ul>
-        <li *ngFor="let c of gameInfo.console_makers">
-            <a [routerLink]="c.title" title="c">
-                {{ c.title }}
-            </a>
-
+        <li *ngFor="let g of console_makers">
+            <a [routerLink]="g.title">{{ g.title }}</a>
         </li>
     </ul>
-
 </div>
 
-<ng-template *ngIf="console_maker">
-    <h3>{{ gameInfo.console_maker.title }}</h3>
+<div *ngIf="console_maker">
 
-    <p>{{ gameInfo.console_maker.description }}</p>
-</ng-template>
+    <p>Kitty kat go meow meow!</p>
+    <h3>{{ console_maker.title }}</h3>
+
+    <p>{{ console_maker.description }}</p>
+</div>

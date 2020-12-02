@@ -10,6 +10,8 @@ import { GameInfoService } from '../common/services/gameinfo.service';
 export class ConsoleMakersComponent implements OnInit {
 
  
+    //the list of all console_makers
+    console_makers: any = [];
     console_maker: any;
     gameInfo : any;
 
@@ -17,21 +19,19 @@ export class ConsoleMakersComponent implements OnInit {
         private router : Router,
         private route : ActivatedRoute,
         private gameInfoService : GameInfoService) { 
-        this.gameInfo = gameInfoService.gameInfo$.subscribe(resp => this.gameInfo = resp)
-        
-        
-        this.console_maker = this.route.snapshot.paramMap.get('name');
-        
-        if (this.console_maker)
-            console.log(this.console_maker);
-
-            //you assigned this twice here- is that nessecary/ non-problematic?
-            // this.game = this.gameService.get$(this.id).subscribe(g =>this.game = g);
-
+            this.console_maker = this.route.snapshot.paramMap.get('name');
+            this.console_makers = this.gameInfoService.get_console_makers_array();
+            // console.log("from within console-maker component: " + this.console_makers);
+            //executes if the route parameter is provided.
+            if (this.console_maker) {
+                console.log("before fn call : " + this.console_maker);
+                this.console_maker = this.gameInfoService.find_console_maker(this.console_maker);
+                // console.log(this.gameInfoService.find_console_maker(this.console_maker));
+                console.log("after fn call: " + this.console_maker);
+            }
     }
 
-
-  ngOnInit(): void {
-  }
+    ngOnInit(): void {
+    }
 
 }

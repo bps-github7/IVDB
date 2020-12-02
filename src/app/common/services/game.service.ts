@@ -12,12 +12,12 @@ export class GameService {
 
         gamesCollection : AngularFirestoreCollection<Game>;
         gameDocument : AngularFirestoreDocument<Game>;
-        games : Observable<Game[]>;
+        games$ : Observable<Game[]>;
     
 
     constructor(private db: AngularFirestore) {
         this.gamesCollection = this.db.collection('games');
-        this.games = this.gamesCollection.valueChanges({idField : 'id'});
+        this.games$ = this.gamesCollection.valueChanges({idField : 'id'});
     }
 
     //two seperate get methods for returning either firestoreDocument or Observable
@@ -45,6 +45,6 @@ export class GameService {
     }
 
     getAll$() {
-        return this.games;
+        return this.games$;
     }
 }

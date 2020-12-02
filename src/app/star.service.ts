@@ -13,6 +13,8 @@ export class StarService {
    }
 
     getUserStars(userId : string) {
+        /* I think this first line is wrong- shouldnt u be querying a different collection?
+         */
         const ratingRef = this.afs.collection('ratings', (ref) => ref.where('userId', '==', userId));
         return ratingRef.valueChanges();
     }

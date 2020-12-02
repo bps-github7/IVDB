@@ -145,9 +145,9 @@ import { ConsoleMakersComponent } from './console-makers/console-makers.componen
         { path: 'gaming-index/creators', component: CreatorsComponent },
         { path: 'gaming-index/categories/:category', component: CategoriesComponent },
         { path: 'gaming-index/categories', component: CategoriesComponent },
-        { path: 'gaming-index/console-makers/:name', component: ConsoleMakersComponent },
         { path: 'gaming-index/console-makers/:name/:qualified_name', component: ConsolesComponent },
-        { path: 'gaming-index/console-makers', component: ViewConsoleMakerComponent },
+        { path: 'gaming-index/console-makers/:name', component: ConsoleMakersComponent },
+        { path: 'gaming-index/console-makers', component: ConsoleMakersComponent },
 
         { path: 'watchlists', component: WatchlistsComponent },
         

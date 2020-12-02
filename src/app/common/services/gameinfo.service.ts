@@ -31,54 +31,97 @@ export class GameInfoService {
     gameInfoDocument : AngularFirestoreDocument<gameInfo>;
     doc_id = 'KZX1GyjNGtwUzHsyICBO';
     gameInfo$;
+    gameInfo = new GameInfo();
 
     constructor(private afs : AngularFirestore) {
         this.gameInfoCollection = this.afs.collection<GameInfo>('game_info');
         this.gameInfo$ = this.gameInfoCollection.doc(this.doc_id).valueChanges();
-        }
-/* 
-    get categories$() {
-        return this.gameInfoCollection.valueChanges().pipe(map(doc => {
-            return doc.map(g => {
-                var categories : Game_Descriptor [];
-                // let gameInfo = new GameInfo();
-                categories = g.categories;
-                return categories;
-            })
-
-        }));
-
-    } */
-
-    get categories() {
-        return this.gameInfoCollection.doc('/categories')
-        .valueChanges();
     }
 
-    get creators() {
-        return this.gameInfoCollection.doc('/creators')
-        .valueChanges();
+    /* Would it be easier to just get all the different attributes  
+    of gameInfo object filled out in the begginning, then return single attribute
+    on need-to-know basis? Sort of, yes. Definitely less code than this! (and less tight coupling)
+     */
+
+    get categories$() : Observable <Game_Descriptor []> {
+        return this.gameInfoCollection
+        .doc<Game_Descriptor []>('/categories').valueChanges();
     }
 
-    get console_makers() {
-        return this.gameInfoCollection.doc('/console-makers')
-        .valueChanges();
+    get_categories_array() : Game_Descriptor [] {
+        this.categories$.subscribe(arr => {
+            this.gameInfo.categories = Object.keys(arr).map(categoryTitle => {
+                return arr[categoryTitle]
+            });            
+        });
+        return this.gameInfo.categories;
+    }
+
+    find_category(category : string) : Game_Descriptor {
+        let foundCategory = this.get_categories_array().filter(arr => arr.title.toLowerCase() == category.toLowerCase());
+        return foundCategory[0];
+    }
+
+    get creators$() : Observable <Game_Descriptor []> {
+        return this.gameInfoCollection
+        .doc<Game_Descriptor []>('/creators').valueChanges();
+    }
+
+    
+    get_creators_array() : Game_Descriptor [] {
+        this.creators$.subscribe(arr => {
+            this.gameInfo.creators = Object.keys(arr).map(categoryTitle => {
+                return arr[categoryTitle]
+            });            
+        });
+        return this.gameInfo.creators;
+    }
+
+    find_creator(creator : string) : Game_Descriptor {
+        let foundCreator = this.get_creators_array().filter(arr => arr.title.toLowerCase() == creator.toLowerCase());
+        return foundCreator[0];
+    }
+
+    get console_makers$() : Observable<Game_Descriptor []> {
+        return this.gameInfoCollection
+        .doc<Game_Descriptor []>('/console-makers').valueChanges();
     }    
 
-    get sony() : Array<VG_Console> {
-        return [];
+    
+    get_console_makers_array() : Game_Descriptor [] {
+        this.console_makers$.subscribe(arr => {
+            this.gameInfo.console_makers = Object.keys(arr).map(console_maker_title => {
+                return arr[console_maker_title]
+            });            
+        });
+        return this.gameInfo.console_makers;
     }
 
-    get nintendo() : Array<VG_Console> {
-        return [];
+    find_console_maker(console_maker : string) : Game_Descriptor {
+        let found_console_maker = this.get_console_makers_array().filter(arr => arr.title.toLowerCase() == console_maker.toLowerCase());
+        return found_console_maker[0];
     }
 
-    get microsoft() : Array<VG_Console> {
-        return [];
+    //implement these after you fix up their db entries.
+
+    get sony$() : Observable<VG_Console []> {
+        return this.gameInfoCollection
+        .doc<VG_Console []>('/sony').valueChanges();;
     }
 
-    get pc() : Array<VG_Console> {
-        return [];
+    get nintendo$() : Observable<VG_Console []> {
+        return this.gameInfoCollection
+        .doc<VG_Console []>('/nintendo').valueChanges();;
+    }
+
+    
+    get microsoft$() : Observable<VG_Console []> {
+        return this.gameInfoCollection
+        .doc<VG_Console []>('/microsoft').valueChanges();;
+    }
+
+    get pc() : Observable<VG_Console []> {
+        return this.gameInfoCollection.doc<VG_Console []>('/pc').valueChanges();;
     }
 
 }
