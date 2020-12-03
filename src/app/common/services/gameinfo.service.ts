@@ -41,7 +41,10 @@ export class GameInfoService {
     /* Would it be easier to just get all the different attributes  
     of gameInfo object filled out in the begginning, then return single attribute
     on need-to-know basis? Sort of, yes. Definitely less code than this! (and less tight coupling)
-     */
+     
+    DEV notes Wednesday 11/3/2020 11:03am EST- FW this ^^, tons of boilerplate code in this service,
+    not to mention its gonna get much much worse once you add the capability for admins to add, edit and delete gameInfo! 
+    */
 
     get categories$() : Observable <Game_Descriptor []> {
         return this.gameInfoCollection
@@ -109,19 +112,79 @@ export class GameInfoService {
         .doc<VG_Console []>('/sony').valueChanges();;
     }
 
+    
+    get_sony_array() : VG_Console [] {
+        this.sony$.subscribe(arr => {
+            this.gameInfo.sony = Object.keys(arr).map(console_title => {
+                return arr[console_title]
+            });            
+        });
+        return this.gameInfo.sony;
+    }
+
+    find_sony(console_name : string) : VG_Console {
+        let found_console = this.get_sony_array().filter(arr => arr.name.toLowerCase() == console_name.toLowerCase());
+        return found_console[0];
+    }
+
+
     get nintendo$() : Observable<VG_Console []> {
         return this.gameInfoCollection
         .doc<VG_Console []>('/nintendo').valueChanges();;
     }
 
-    
+    get_nintendo_array() : VG_Console [] {
+        this.nintendo$.subscribe(arr => {
+            this.gameInfo.nintendo = Object.keys(arr).map(console_title => {
+                return arr[console_title]
+            });            
+        });
+        return this.gameInfo.nintendo;
+    }
+
+    find_nintendo(console_name : string) : VG_Console {
+        let found_console = this.get_nintendo_array().filter(arr => arr.name.toLowerCase() == console_name.toLowerCase());
+        return found_console[0];
+    }
+
     get microsoft$() : Observable<VG_Console []> {
         return this.gameInfoCollection
         .doc<VG_Console []>('/microsoft').valueChanges();;
     }
 
-    get pc() : Observable<VG_Console []> {
+    get_microsoft_array() : VG_Console [] {
+        this.microsoft$.subscribe(arr => {
+            this.gameInfo.microsoft = Object.keys(arr).map(console_title => {
+                return arr[console_title]
+            });            
+        });
+        return this.gameInfo.microsoft;
+    }
+
+    find_microsoft(console_name : string) : VG_Console {
+        let found_console = this.get_microsoft_array().filter(arr => arr.name.toLowerCase() == console_name.toLowerCase());
+        return found_console[0];
+    }
+
+
+
+    get pc$() : Observable<VG_Console []> {
         return this.gameInfoCollection.doc<VG_Console []>('/pc').valueChanges();;
     }
+
+    get_pc_array() : VG_Console [] {
+        this.pc$.subscribe(arr => {
+            this.gameInfo.pc = Object.keys(arr).map(console_title => {
+                return arr[console_title]
+            });            
+        });
+        return this.gameInfo.pc;
+    }
+
+    find_pc(console_name : string) : VG_Console {
+        let found_console = this.get_pc_array().filter(arr => arr.name.toLowerCase() == console_name.toLowerCase());
+        return found_console[0];
+    }
+
 
 }

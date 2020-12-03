@@ -14,8 +14,20 @@
 
 <div *ngIf="console_maker">
 
-    <p>Kitty kat go meow meow!</p>
     <h3>{{ console_maker.title }}</h3>
 
     <p>{{ console_maker.description }}</p>
+
+
+
+    <a routerLink="">Click here for games playable on {{ console_maker.title }} consoles</a>
+    <!-- should link to games with route parameter console_maker = (sony | nintendo | microsoft | pc) -->
+    <br><hr>
+    <h4>Consoles by {{console_maker.title}}:</h4>
+    <ul>
+        <li *ngFor="let c of console_list">
+            <a [routerLink]="c.name">{{ c.name }}</a>
+        </li>
+    </ul>
+
 </div>

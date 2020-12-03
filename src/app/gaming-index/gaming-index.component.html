@@ -28,7 +28,7 @@
 
 <ul>
     <li *ngFor="let n of gameInfo?.nintendo ">
-                <a [routerLink]="['../../../gaming-index/console-maker/',  n.name]" title="n?.qualifiedName">
+                <a [routerLink]="['console-maker/',  n.name]" title="n?.qualifiedName">
                     {{ n.name }}
                 </a>
     </li>
@@ -39,7 +39,7 @@
 
 <ul>
     <li *ngFor="let n of gameInfo?.sony ">
-                <a [routerLink]="['../../../gaming-index/console-maker/',  n.name]" title="n?.qualifiedName">
+                <a [routerLink]="['console-maker/',  n.name]" title="n?.qualifiedName">
                     {{ n }}
                 </a>
     </li>
@@ -51,7 +51,7 @@
 
 <ul>
     <li *ngFor="let n of gameInfo?.microsoft ">
-                <a [routerLink]="['../../../gaming-index/console-maker/',  n.name]" title="n?.qualifiedName">
+                <a [routerLink]="['console-maker/',  n.name]" title="n?.qualifiedName">
                     {{ n.qualifiedName }}
                 </a>
     </li>
@@ -63,9 +63,8 @@
 
 <ul>
     <li *ngFor="let n of gameInfo?.pc">
-        {{n.name}}
-                <a [routerLink]="['../../../gaming-index/console-maker/',  n.name]" title="n?.qualifiedName">
-                    {{ n }}
+                <a [routerLink]="['console-maker/',  n.name]" title="n?.qualifiedName">
+                    {{ n.qualifiedName }}
                 </a>
     </li>
 </ul>

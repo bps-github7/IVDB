@@ -45,7 +45,6 @@ import { GameComponent } from './admin/game/game.component';
 import { GameFormComponent } from './admin/game-form/game-form.component';
 import { ViewGameComponent } from './view-game/view-game.component';
 import { ViewRatingsComponent } from './view-ratings/view-ratings.component';
-import { ViewConsoleComponent } from './view-console/view-console.component';
 import { ProfileService } from './common/services/profile.service';
 import { ReactiveDefaultFormControlComponent } from './form-controls/reactive-default-form-control/reactive-default-form-control.component';
 import { ReactiveSelectFormControlComponent } from './form-controls/reactive-select-form-control/reactive-select-form-control.component';
@@ -61,11 +60,10 @@ import { environment } from 'src/environments/environment';
 import { EditPreferencesComponent } from './edit-preferences/edit-preferences.component';
 import { TdfMultiFormControlComponent } from './form-controls/tdf-multi-form-control/tdf-multi-form-control.component';
 import { PostComponent } from './post/post.component';
-import { ViewConsoleMakerComponent } from './view-console-maker/view-console-maker.component';
 import { GamingIndexComponent } from './gaming-index/gaming-index.component';
 import { CategoriesComponent } from './categories/categories.component';
 import { CreatorsComponent } from './creators/creators.component';
-import { ConsolesComponent } from './consoles/consoles.component';
+import { ConsoleComponent } from './console/console.component';
 import { ConsoleMakersComponent } from './console-makers/console-makers.component';
 
 
@@ -96,7 +94,6 @@ import { ConsoleMakersComponent } from './console-makers/console-makers.componen
     GameFormComponent,
     ViewGameComponent,
     ViewRatingsComponent,
-    ViewConsoleComponent,
     ReactiveDefaultFormControlComponent,
     ReactiveSelectFormControlComponent,
     ReactiveTextareaFormControlComponent,
@@ -104,12 +101,11 @@ import { ConsoleMakersComponent } from './console-makers/console-makers.componen
     DisableControlDirective,
     TdfMultiFormControlComponent,
     PostComponent,
-    ViewConsoleMakerComponent,
     GamingIndexComponent,
     CategoriesComponent,
     CreatorsComponent,
-    ConsolesComponent,
     ConsoleMakersComponent,
+    ConsoleComponent,
     ],
   imports: [
     AngularFireModule.initializeApp(environment.firebase),
@@ -145,7 +141,7 @@ import { ConsoleMakersComponent } from './console-makers/console-makers.componen
         { path: 'gaming-index/creators', component: CreatorsComponent },
         { path: 'gaming-index/categories/:category', component: CategoriesComponent },
         { path: 'gaming-index/categories', component: CategoriesComponent },
-        { path: 'gaming-index/console-makers/:name/:qualified_name', component: ConsolesComponent },
+        { path: 'gaming-index/console-makers/:name/:qualified_name', component: ConsoleComponent },
         { path: 'gaming-index/console-makers/:name', component: ConsoleMakersComponent },
         { path: 'gaming-index/console-makers', component: ConsoleMakersComponent },
 

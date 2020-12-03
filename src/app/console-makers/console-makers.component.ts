@@ -12,7 +12,12 @@ export class ConsoleMakersComponent implements OnInit {
  
     //the list of all console_makers
     console_makers: any = [];
+    // a specific console_maker currently selected by the user
     console_maker: any;
+
+    //the list of consoles made by this specific console_maker
+    console_list: any = [];
+
     gameInfo : any;
 
     constructor(
@@ -24,10 +29,21 @@ export class ConsoleMakersComponent implements OnInit {
             // console.log("from within console-maker component: " + this.console_makers);
             //executes if the route parameter is provided.
             if (this.console_maker) {
-                console.log("before fn call : " + this.console_maker);
                 this.console_maker = this.gameInfoService.find_console_maker(this.console_maker);
-                // console.log(this.gameInfoService.find_console_maker(this.console_maker));
-                console.log("after fn call: " + this.console_maker);
+                console.log("What were searching for : " + this.console_maker.title);
+                if (this.console_maker.title.toLowerCase() === 'sony') {
+                    this.console_list = this.gameInfoService.get_sony_array();
+                }
+                else if (this.console_maker.title.toLowerCase() === 'nintendo') {
+                    this.console_list = this.gameInfoService.get_nintendo_array();
+                }
+                else if (this.console_maker.title.toLowerCase() === 'microsoft') {
+                    this.console_list = this.gameInfoService.get_microsoft_array();
+                }
+                else if (this.console_maker.title.toLowerCase() === 'pc') {
+                    this.console_list = this.gameInfoService.get_pc_array();
+                }
+    
             }
     }
 

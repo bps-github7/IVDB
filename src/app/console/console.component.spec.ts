@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ViewConsoleMakerComponent } from './view-console-maker.component';
+import { ConsoleComponent } from './console.component';
 
-describe('ViewConsoleMakerComponent', () => {
-  let component: ViewConsoleMakerComponent;
-  let fixture: ComponentFixture<ViewConsoleMakerComponent>;
+describe('ConsoleComponent', () => {
+  let component: ConsoleComponent;
+  let fixture: ComponentFixture<ConsoleComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ViewConsoleMakerComponent ]
+      declarations: [ ConsoleComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ViewConsoleMakerComponent);
+    fixture = TestBed.createComponent(ConsoleComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
