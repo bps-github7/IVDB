@@ -128,12 +128,19 @@ import { ConsoleMakersComponent } from './console-makers/console-makers.componen
         { path: 'search', component: SearchComponent },
         // On deployment, change uid here to displayname to be user and search friendlier
         { path: 'sign_in/create_profile/:uid', component: EditProfileComponent, canActivate: [AuthGuard]},
+        { path: 'profile/:uid/:username', component: ViewProfileComponent, canActivate: [AuthGuard] },
+        //should delete this at somepoint- for now its a fail safe mechanism.
         { path: 'profile/:uid', component: ViewProfileComponent, canActivate: [AuthGuard] },
+        
+        { path: 'preferences/:uid/:username', component: EditPreferencesComponent},
         { path: 'preferences/:uid', component: EditPreferencesComponent},
+
 
         //you'll see more on these pages if youre signed in, but can view as anonymous user.
         { path: 'forum', component: ForumComponent },
         { path: 'games', component: GamesComponent },
+        
+        
         { path: 'games/:id', component: ViewGameComponent },
         { path: 'streaming', component: StreamingComponent },
         { path: 'gaming-index', component: GamingIndexComponent },

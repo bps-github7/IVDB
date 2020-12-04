@@ -18,7 +18,9 @@ export class CreatorsComponent implements OnInit {
     constructor(private router : Router,
         private route : ActivatedRoute,
         public gameInfoService : GameInfoService) {
-            this.creator = this.route.snapshot.paramMap.get('creator');
+            this.route.paramMap.subscribe(params => {
+                this.creator = params.get('creator');
+            })
             this.creators = this.gameInfoService.get_creators_array();
             if (this.creator) {
                 this.creator = this.gameInfoService.find_creator(this.creator);

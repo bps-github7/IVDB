@@ -36,15 +36,42 @@ export class GameInfoService {
     constructor(private afs : AngularFirestore) {
         this.gameInfoCollection = this.afs.collection<GameInfo>('game_info');
         this.gameInfo$ = this.gameInfoCollection.doc(this.doc_id).valueChanges();
+        this.categories$.subscribe(arr => {
+            this.gameInfo.categories = Object.keys(arr).map(categoryTitle => {
+                return arr[categoryTitle]
+            });            
+        });
+        this.creators$.subscribe(arr => {
+            this.gameInfo.creators = Object.keys(arr).map(categoryTitle => {
+                return arr[categoryTitle]
+            });            
+        });
+        this.console_makers$.subscribe(arr => {
+            this.gameInfo.console_makers = Object.keys(arr).map(console_maker_title => {
+                return arr[console_maker_title]
+            });            
+        });
+        this.sony$.subscribe(arr => {
+            this.gameInfo.sony = Object.keys(arr).map(console_title => {
+                return arr[console_title]
+            });            
+        });
+        this.nintendo$.subscribe(arr => {
+            this.gameInfo.nintendo = Object.keys(arr).map(console_title => {
+                return arr[console_title]
+            });            
+        });
+        this.microsoft$.subscribe(arr => {
+            this.gameInfo.microsoft = Object.keys(arr).map(console_title => {
+                return arr[console_title]
+            });            
+        });
+        this.pc$.subscribe(arr => {
+            this.gameInfo.pc = Object.keys(arr).map(console_title => {
+                return arr[console_title]
+            });            
+        });
     }
-
-    /* Would it be easier to just get all the different attributes  
-    of gameInfo object filled out in the begginning, then return single attribute
-    on need-to-know basis? Sort of, yes. Definitely less code than this! (and less tight coupling)
-     
-    DEV notes Wednesday 11/3/2020 11:03am EST- FW this ^^, tons of boilerplate code in this service,
-    not to mention its gonna get much much worse once you add the capability for admins to add, edit and delete gameInfo! 
-    */
 
     get categories$() : Observable <Game_Descriptor []> {
         return this.gameInfoCollection
@@ -52,17 +79,12 @@ export class GameInfoService {
     }
 
     get_categories_array() : Game_Descriptor [] {
-        this.categories$.subscribe(arr => {
-            this.gameInfo.categories = Object.keys(arr).map(categoryTitle => {
-                return arr[categoryTitle]
-            });            
-        });
         return this.gameInfo.categories;
     }
 
     find_category(category : string) : Game_Descriptor {
-        let foundCategory = this.get_categories_array().filter(arr => arr.title.toLowerCase() == category.toLowerCase());
-        return foundCategory[0];
+        return this.get_categories_array().filter(arr => arr.title.toLowerCase() == category.toLowerCase())[0];
+        
     }
 
     get creators$() : Observable <Game_Descriptor []> {
@@ -72,11 +94,6 @@ export class GameInfoService {
 
     
     get_creators_array() : Game_Descriptor [] {
-        this.creators$.subscribe(arr => {
-            this.gameInfo.creators = Object.keys(arr).map(categoryTitle => {
-                return arr[categoryTitle]
-            });            
-        });
         return this.gameInfo.creators;
     }
 
@@ -92,11 +109,6 @@ export class GameInfoService {
 
     
     get_console_makers_array() : Game_Descriptor [] {
-        this.console_makers$.subscribe(arr => {
-            this.gameInfo.console_makers = Object.keys(arr).map(console_maker_title => {
-                return arr[console_maker_title]
-            });            
-        });
         return this.gameInfo.console_makers;
     }
 
@@ -114,11 +126,6 @@ export class GameInfoService {
 
     
     get_sony_array() : VG_Console [] {
-        this.sony$.subscribe(arr => {
-            this.gameInfo.sony = Object.keys(arr).map(console_title => {
-                return arr[console_title]
-            });            
-        });
         return this.gameInfo.sony;
     }
 
@@ -134,11 +141,6 @@ export class GameInfoService {
     }
 
     get_nintendo_array() : VG_Console [] {
-        this.nintendo$.subscribe(arr => {
-            this.gameInfo.nintendo = Object.keys(arr).map(console_title => {
-                return arr[console_title]
-            });            
-        });
         return this.gameInfo.nintendo;
     }
 
@@ -153,11 +155,6 @@ export class GameInfoService {
     }
 
     get_microsoft_array() : VG_Console [] {
-        this.microsoft$.subscribe(arr => {
-            this.gameInfo.microsoft = Object.keys(arr).map(console_title => {
-                return arr[console_title]
-            });            
-        });
         return this.gameInfo.microsoft;
     }
 
@@ -173,11 +170,6 @@ export class GameInfoService {
     }
 
     get_pc_array() : VG_Console [] {
-        this.pc$.subscribe(arr => {
-            this.gameInfo.pc = Object.keys(arr).map(console_title => {
-                return arr[console_title]
-            });            
-        });
         return this.gameInfo.pc;
     }
 

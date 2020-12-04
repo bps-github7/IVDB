@@ -8,7 +8,7 @@
             <li *ngIf="appUser; else anonymousUser" id="profile-nub">
                 <button id="dd-btn">
                     <!-- url prob cant have spaces in it/ making username bad choice    -->
-                    <a [routerLink]="['/profile/', appUser?.uid]">
+                    <a [routerLink]="['/profile/', appUser?.uid, appUser?.username]">
                         {{ appUser?.username }}
                     </a>
                     

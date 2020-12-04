@@ -20,7 +20,9 @@ export class CategoriesComponent implements OnInit {
   constructor(private router : Router,
     private route : ActivatedRoute,
     private gameInfoService : GameInfoService) {
-        this.category = this.route.snapshot.paramMap.get('category');
+        this.route.paramMap.subscribe(params => {
+            this.category = params.get('category');
+        })
         this.gameInfoService.gameInfo$.subscribe(g => this.gameInfo = g);
         this.categories = this.gameInfoService.get_categories_array();
         if (this.category) {

@@ -1,5 +1,8 @@
 <div *ngIf="!creator">    
 
+    <a routerLink="../">Go back to gaming-index</a>
+
+
     <h3>A place to learn about game creators</h3>
 
     <p>Creators are the studios/ development firms that create the games we love and play</p>
@@ -16,6 +19,9 @@
 
 
 <div *ngIf="creator">
+    <a routerLink="../">Go back to creator list</a>
+
+
     <h3>{{ creator.title }}:</h3>
     <p>
         {{ creator.description }}

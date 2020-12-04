@@ -1,4 +1,8 @@
 <div *ngIf="!console_maker">
+
+    <a routerLink="../">Go back to gaming-index</a>
+
+
     <h3>Welcome to consoles homepage</h3>
 
     <p>
@@ -13,6 +17,8 @@
 </div>
 
 <div *ngIf="console_maker">
+
+    <a routerLink="../">Go back to console-maker list</a>
 
     <h3>{{ console_maker.title }}</h3>
 

@@ -24,13 +24,14 @@ export class ConsoleMakersComponent implements OnInit {
         private router : Router,
         private route : ActivatedRoute,
         private gameInfoService : GameInfoService) { 
-            this.console_maker = this.route.snapshot.paramMap.get('name');
+            this.route.paramMap.subscribe(params => {
+                this.console_maker = params.get('name');
+            })
             this.console_makers = this.gameInfoService.get_console_makers_array();
             // console.log("from within console-maker component: " + this.console_makers);
             //executes if the route parameter is provided.
             if (this.console_maker) {
                 this.console_maker = this.gameInfoService.find_console_maker(this.console_maker);
-                console.log("What were searching for : " + this.console_maker.title);
                 if (this.console_maker.title.toLowerCase() === 'sony') {
                     this.console_list = this.gameInfoService.get_sony_array();
                 }

@@ -1,4 +1,7 @@
 <div *ngIf="!category">
+    <a routerLink="../">Go back to gaming-index</a>
+
+
     <h3>A place to learn about game categories</h3>
 
     <p>Categories is how we classify games, and sort them according to your preferences</p>
@@ -16,6 +19,10 @@
 
 
 <div *ngIf="category">
+
+    <a routerLink="../">Go back to category list</a>
+    
+
     <h3>{{ category.title }}:</h3>
     <p>
         {{ category.description }}
