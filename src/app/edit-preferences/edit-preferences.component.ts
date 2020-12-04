@@ -3,8 +3,17 @@ import { FormArray, FormBuilder, FormControl } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { GameInfoService } from '../common/services/gameinfo.service';
 import { PreferencesService } from '../common/services/preferences.service';
+import { Game } from '../models/content/Game';
 import { Preferences } from '../models/user/preferences';
 
+class UserPreferences implements Preferences {
+    wouldYouPlay?: (string | Game)[];
+    likes: { games: (string | Game)[]; consoles: string[]; categories: string | string[]; creators: string | string[]; console_makers: string | string[]; };
+    dislikes: { games: (string | Game)[]; consoles: string[]; categories: string | string[]; creators: string | string[]; console_makers: string | string[]; };
+    historic: { favoriteGames: string | string[]; favoriteConsoles: string | string[]; childhoodFavoriteGame: string | string[]; firstGame: string | string[]; };
+    currentlyPlaying: { games: string | string[]; consoles: string | string[]; };
+
+}
 
 @Component({
   selector: 'app-edit-preferences',
@@ -55,10 +64,11 @@ export class EditPreferencesComponent implements OnInit {
     }
 
    save(preferences) {
-        this.preferencesService.create(preferences, this.uid)
+        this.preferencesService.save(preferences, this.uid)
         this.router.navigate(['/profile/',this.uid]);
    }
 
+   //faciliates the multi input text field. Should export this to its own component at some point
    add(entry : HTMLInputElement, formControl : string) {
         console.log(entry.value);
     
@@ -66,13 +76,15 @@ export class EditPreferencesComponent implements OnInit {
        entry.value = '';
    }
 
-  ngOnInit(): void {
-  }
+    ngOnInit(): void {
+        if (!this.preferencesService.exists(this.uid)) {
+            this.preferences = new UserPreferences();
+        }
+    }
 
-  get games() {
+    // What is this for? why implement only a single getter?
+    get games() {
     return this.form.get('likes.games') as FormArray
   }
-
-
 
 }

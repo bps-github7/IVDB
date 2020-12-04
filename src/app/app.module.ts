@@ -4,7 +4,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule, HttpClient } from '@angular/common/http';
+import { HttpClientModule, HttpClient, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AngularFireModule } from '@angular/fire';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { CustomFormsModule } from 'ng2-validation';
@@ -65,6 +65,7 @@ import { CategoriesComponent } from './categories/categories.component';
 import { CreatorsComponent } from './creators/creators.component';
 import { ConsoleComponent } from './console/console.component';
 import { ConsoleMakersComponent } from './console-makers/console-makers.component';
+import { LoadingScreenComponent } from './loading-screen/loading-screen.component';
 
 
 @NgModule({
@@ -106,6 +107,7 @@ import { ConsoleMakersComponent } from './console-makers/console-makers.componen
     CreatorsComponent,
     ConsoleMakersComponent,
     ConsoleComponent,
+    LoadingScreenComponent,
     ],
   imports: [
     AngularFireModule.initializeApp(environment.firebase),
@@ -177,7 +179,7 @@ import { ConsoleMakersComponent } from './console-makers/console-makers.componen
         AdminAuthGuard,
         GameInfoService,
         GameService,
-        UserAuthGuard
+        UserAuthGuard,
   ],
   bootstrap: [AppComponent]
 })

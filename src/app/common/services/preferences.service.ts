@@ -20,44 +20,47 @@ export class PreferencesService {
         return this.afs.doc(`preferences/${uid}`).valueChanges(); 
     }
 
-// getAll$() {
-//     return this.profiles
-// }
 
-exists(uid : string) {
-    return this.get$(uid).subscribe(preferences => {
-        if (preferences) return true;
-    });
-} 
+    exists(uid : string) {
+        let exists = false;
+        this.get$(uid).subscribe(preferences => {
+            if (preferences) exists = true;
+        });
+        return exists;
+    } 
 
-create(p, uid) {
-    this.afs.doc(`preferences/${uid}`).set({
-        likes : {
-            games: p.likes.games,
-            categories: p.likes.categories,
-            creators: p.likes.creators,
-            console_makers : p.likes.console_makers
-        },
-        dislikes : {
-            games: p.dislikes.games,
-            consoles: p.dislikes.consoles,
-            categories: p.dislikes.categories,
-            creators: p.dislikes.creators,
-            console_makers : p.dislikes.console_makers
-        },
-        historic: {
-            favoriteGames : p.historic.favoriteGame,
-            favoriteConsoles : p.historic.favoriteConsole,
-            childhoodFavoriteGame : p.historic.childhoodFavoriteGame,
-            firstGame : p.historic.firstGame
-        },
-        currentlyPlaying: {
-            games : p.currentlyPlaying.games,
-            consoles : p.currentlyPlaying.consoles
+    save(p, uid) {
+        this.afs.doc(`preferences/${uid}`).set({
+            likes : {
+                games: p.likes.games,
+                categories: p.likes.categories,
+                creators: p.likes.creators,
+                console_makers : p.likes.console_makers
+            },
+            dislikes : {
+                games: p.dislikes.games,
+                consoles: p.dislikes.consoles,
+                categories: p.dislikes.categories,
+                creators: p.dislikes.creators,
+                console_makers : p.dislikes.console_makers
+            },
+            historic: {
+                favoriteGames : p.historic.favoriteGame,
+                favoriteConsoles : p.historic.favoriteConsole,
+                childhoodFavoriteGame : p.historic.childhoodFavoriteGame,
+                firstGame : p.historic.firstGame
+            },
+            currentlyPlaying: {
+                games : p.currentlyPlaying.games,
+                consoles : p.currentlyPlaying.consoles
 
-        }
-
-    
-    }, {merge : true})
-}
+            }
+        }, {merge : true})
+        .then(() => {
+            console.log("Preferences document successfully written to!");
+        })
+        .catch((err) => {
+            console.log("Error while writing document: " + err);
+        })
+    }
 }

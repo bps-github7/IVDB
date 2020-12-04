@@ -9,10 +9,6 @@ import { Profile } from 'src/app/models/user/profile';
 })
 export class ProfileService {
 
-
-    //consider switching to user uid for profile document id. username is messy- could have spaces.
-    //relys on user to give their username valid id, could limit what a valid username could contain.
-
     profileCollection : AngularFirestoreCollection<Profile>
     profileDocument : AngularFirestoreDocument<Profile>
     profiles : Observable<Profile []>
@@ -34,26 +30,31 @@ export class ProfileService {
     }
 
     exists(uid : string) {
-        return this.get$(uid).subscribe(profile => {
-            if (profile) return true;
+        let exists = false;
+        this.get$(uid).subscribe(profile => {
+            if (profile) {
+                console.log("document exists!");
+                exists = true;
+            } 
         });
+        return exists
     } 
-
-    create(profile, uid) {
+    /* I'm renaming this to save- will create the doc if none exists, overwrite otherwise.
+    So there is no point to writing seperate method for updating */
+    save(profile, uid) {
         this.profileCollection.doc(uid).set({
             nickname : profile.nickname,
             profileImg : profile.profileImg,
             backgroundImg : profile.backgroundImg,
             bio : profile.bio,
             gamerTags : profile.gamerTags,
-            links : profile.links}, {merge : true})
+            links : profile.links},
+        {merge : true})
+        .then(() => {
+            console.log("Document successfully written!");
+        })
+        .catch((err) => {
+            console.log("error writting to document: " + err);
+        })
     }
-
-    // save(profile, displayName) {
-    //     if (this.exists(displayName)) this.update(profile, displayName)
-    //     else this.create(profile);
-    // }
-
-    // update(profile, displayName) {
-    // }
 }
