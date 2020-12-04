@@ -27,4 +27,10 @@
     <p>
         {{ category.description }}
     </p>
+
+    <!-- Had to abbreviate console-maker to cm in queryParam because of name clash with existing variable -->
+    <a routerLink="../../../games" [queryParams]="{ category : (category.title | lowercase ) }">Click here for {{ category.title }} games.</a>
+    
+    <!-- in the future, should just get game recommendations below -->
+
 </div>

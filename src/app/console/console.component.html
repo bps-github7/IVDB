@@ -1,1 +1,13 @@
-<p>console works!</p>
+<div>
+    <img [src]="console.image" alt="a picture of a videogame console">
+
+    <h3>{{console.qualifiedName | titlecase}}</h3>
+
+    <p>{{console.description}}</p>
+
+    <ul>
+        <li>type: {{ console.type }}</li>
+        <li>generation: {{ console.generation }}</li>
+        <li>released: {{ console.released | date  }}</li>
+    </ul>
+</div>

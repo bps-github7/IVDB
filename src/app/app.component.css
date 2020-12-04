@@ -1,6 +1,3 @@
-/* overridden by bootstrap it seems...
-
-form {
-    margin: auto;
-    max-width: 800px;
-} */
+body {
+    background-color: teal;
+}

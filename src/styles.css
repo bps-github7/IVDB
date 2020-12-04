@@ -8,3 +8,9 @@
 .form-control.ng-touched.ng-invalid {
     border: 2px solid red;
 }
+
+body {
+    padding-left: 12rem;
+    padding-right: 12rem;
+}
+

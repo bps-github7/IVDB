@@ -26,8 +26,12 @@
 
 
 
-    <a routerLink="">Click here for games playable on {{ console_maker.title }} consoles</a>
-    <!-- should link to games with route parameter console_maker = (sony | nintendo | microsoft | pc) -->
+    <!-- Had to abbreviate console-maker to cm in queryParam because of name clash with existing variable -->
+    <a routerLink="../../../games" [queryParams]="{ console_maker : (console_maker.title | lowercase ) }">Click here for games playable on {{ console_maker.title }} consoles</a>
+    
+    <!-- in the future, should just get game recommendations below -->
+
+
     <br><hr>
     <h4>Consoles by {{console_maker.title}}:</h4>
     <ul>

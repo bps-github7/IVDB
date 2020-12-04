@@ -21,9 +21,14 @@
 <div *ngIf="creator">
     <a routerLink="../">Go back to creator list</a>
 
-
     <h3>{{ creator.title }}:</h3>
     <p>
         {{ creator.description }}
     </p>
+
+    <!-- Had to abbreviate console-maker to cm in queryParam because of name clash with existing variable -->
+    <a routerLink="../../../games" [queryParams]="{ creator : (creator.title | lowercase ) }">Click here for games made by {{ creator.title }}.</a>
+    
+    <!-- in the future, should just get game recommendations below -->
+
 </div>

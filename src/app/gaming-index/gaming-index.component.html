@@ -28,7 +28,7 @@
 
 <ul>
     <li *ngFor="let n of nintendo ">
-            <a [routerLink]="['console-maker/nintendo/',  n.name]" title="n?.qualifiedName">
+            <a [routerLink]="['console-makers/nintendo/',  n.name]" title="n?.qualifiedName">
                 {{ n.name }}
             </a>
     </li>
@@ -39,7 +39,7 @@
 
 <ul>
     <li *ngFor="let n of sony ">
-            <a [routerLink]="['console-maker/sony/',  n.name]" title="n?.qualifiedName">
+            <a [routerLink]="['console-makers/sony/',  n.name]" title="n?.qualifiedName">
                 {{ n.name }}
             </a>
     </li>
@@ -51,7 +51,7 @@
 
 <ul>
     <li *ngFor="let n of microsoft ">
-            <a [routerLink]="['console-maker/microsoft',  n.name]" title="n?.qualifiedName">
+            <a [routerLink]="['console-makers/microsoft',  n.name]" title="n?.qualifiedName">
                 {{ n.name }}
             </a>
     </li>

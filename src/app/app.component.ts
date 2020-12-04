@@ -5,8 +5,6 @@ import { UserService } from './common/services/user.service';
 import * as firebase from 'firebase';
 import { ProfileService } from './common/services/profile.service';
 
-export interface Item { name : string; value : string }
-
 
 @Component({
   selector: 'app-root',

@@ -5,7 +5,7 @@
         <input id="searchbar" type="text">
         <a routerLink="/search"><button>Search</button></a>
         <ul class="dd-menu">
-            <li *ngIf="appUser; else anonymousUser" id="profile-nub">
+            <li class="dd-menu-trigger" *ngIf="appUser; else anonymousUser" id="profile-nub">
                 <button id="dd-btn">
                     <!-- url prob cant have spaces in it/ making username bad choice    -->
                     <a [routerLink]="['/profile/', appUser?.uid, appUser?.username]">
@@ -15,9 +15,9 @@
                 </button>
                 <!-- can non admin users access this? -->
                 <ul class="sub-menu">
-                    <li *ngIf="appUser.isAdmin"><a routerLink="/admin/game">Adminster Games</a></li>
-                    <li><a [routerLink]="['/sign_in/create_profile/', appUser?.uid]">settings</a></li>
-                    <li><a href="#" (click)="logout()">logout</a></li>
+                    <li *ngIf="appUser.isAdmin"><a class="btn-dd" routerLink="/admin/game">Adminster</a></li>
+                    <li><a class="btn-dd" [routerLink]="['/sign_in/create_profile/', appUser?.uid]">settings</a></li>
+                    <li class="btn-dd-danger"><a href="#" class="btn-dd-danger" (click)="logout()">logout</a></li>
                 </ul>
             </li>
         </ul>
@@ -26,34 +26,42 @@
         </ng-template>
     </header>
     <ul class="dd-menu">
-        <li><a routerLink="/watchlists">Watchlist</a>
+        <li class="dd-menu-trigger"><a routerLink="/watchlists">Find content</a>
             <ul class="sub-menu">
                 <li><a href="#">New Releases</a></li>
                 <li><a href="#">Popular Games</a></li>
                 <li><a href="#">Highly Rated</a></li>
                 <!-- Submenu here -->
-                <li><a href="#">Recent</a>
-                    <ul class="sub sub-menu">
-                        <li><a href="#">Recently Posted</a></li>
-                        <li><a href="#">Recently Reviewed</a></li>
-                        <li><a href="#">Recently Released</a></li>
+                <li class="sub-sub-menu-trigger"><a href="#">Recent</a>
+                    <ul class="sub-sub-menu">
+                        <li class="sub-sub-top"><a href="#">Posts</a></li>
+                        <li><a href="#">Ratings</a></li>
+                        <li><a href="#">Reviews</a></li>
                     </ul>
                 </li>          
             </ul>
         </li>
-        <li><a routerLink="/forum">Forum</a>
+        <li class="dd-menu-trigger"><a routerLink="/forum">Forum</a>
             <ul class="sub-menu">
                 <li><a href="#">Just Posted</a></li>
                 <li><a href="#">Hot Threads</a></li>
                 <li><a href="#">Admin Favorites</a></li>     
             </ul>
         </li>
-        <li><a routerLink="/gaming-index">Gaming Index</a>
+        <li class="dd-menu-trigger"><a routerLink="/gaming-index">Gaming Index</a>
             <ul class="sub-menu">
                 <!-- sub sub menu here -->
-                <li><a routerLink="/gaming-index/console-makers">Console Makers</a>
-                    <ul class="sub sub-menu"> 
-                        <li><a routerLink="/gaming-index/console-makers/sony">Sony</a></li>
+                <li class="sub-sub-menu-trigger"><a routerLink="/games">Browse Games</a>
+                    <ul class="sub-sub-menu"> 
+                        <li class="sub-sub-top"><a href="#">Platformer</a></li>
+                        <li><a href="#">RPG</a></li>
+                        <li><a href="#">Combat</a></li>
+                        <li><a href="#">Sports</a></li>        
+                    </ul>
+                </li>
+                <li class="sub-sub-menu-trigger"><a routerLink="/gaming-index/console-makers">Console Makers</a>
+                    <ul class="sub-sub-menu"> 
+                        <li class="sub-sub-top"><a routerLink="/gaming-index/console-makers/sony">Sony</a></li>
                         <li><a routerLink="/gaming-index/console-makers/nintendo">Nintendo</a></li>
                         <li><a routerLink="/gaming-index/console-makers/microsoft">Microsoft</a></li>
                         <li><a routerLink="/gaming-index/console-makers/pc">PC</a></li>
@@ -66,25 +74,10 @@
                     <li><a href="#">Misc & historical</a></li>           -->
             </ul>
         </li>
-        <li><a routerLink="/games">Games</a>
+        <li class="dd-menu-trigger"><a routerLink="/rate">Rate it!</a>
             <ul class="sub-menu">
-                <li><a href="#">Platformer</a></li>
-                <li><a href="#">RPG</a></li>
-                <li><a href="#">Combat</a></li>
-                <li><a href="#">Sports</a></li>          
-            </ul>
-        </li>
-        <li><a routerLink="/streaming">Streaming</a>
-            <ul class="sub-menu">
-                <li><a href="#">What To Watch</a></li>
-                <li><a href="#">Playing Now</a></li>
-                <li><a href="#">Competitions</a></li>
-                <li><a href="#">Speed Running</a></li>          
-            </ul>
-        </li>
-        <li><a routerLink="/rate">Rate it!</a>
-            <ul class="sub-menu">
-                <li><a href="#">Submit a rating or review</a></li>
+                <li><a href="#">Rate</a></li>
+                <li><a href="#">Review</a></li>
                 <li><a href="#">Search existing</a></li>          
             </ul>
         </li>
