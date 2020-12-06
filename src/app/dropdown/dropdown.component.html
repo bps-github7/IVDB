@@ -2,35 +2,14 @@
 <nav>
     <header>
         <a class="logo" alt="Internet Video-game Database" routerLink=''>IVDB</a>
-        <input id="searchbar" type="text">
-        <a routerLink="/search"><button>Search</button></a>
-        <ul class="dd-menu">
-            <li class="dd-menu-trigger" *ngIf="appUser; else anonymousUser" id="profile-nub">
-                <button id="dd-btn">
-                    <!-- url prob cant have spaces in it/ making username bad choice    -->
-                    <a [routerLink]="['/profile/', appUser?.uid, appUser?.username]">
-                        {{ appUser?.username }}
-                    </a>
-                    
-                </button>
-                <!-- can non admin users access this? -->
-                <ul class="sub-menu">
-                    <li *ngIf="appUser.isAdmin"><a class="btn-dd" routerLink="/admin/game">Adminster</a></li>
-                    <li><a class="btn-dd" [routerLink]="['/sign_in/create_profile/', appUser?.uid]">settings</a></li>
-                    <li class="btn-dd-danger"><a href="#" class="btn-dd-danger" (click)="logout()">logout</a></li>
-                </ul>
-            </li>
-        </ul>
-        <ng-template #anonymousUser>
-            <a routerLink="/sign_in"><button>Sign in</button></a>
-        </ng-template>
+        <input id="searchbar" type="text" placeholder="Search IVDB">
     </header>
     <ul class="dd-menu">
-        <li class="dd-menu-trigger"><a routerLink="/watchlists">Find content</a>
+        <li class="dd-menu-trigger"><a routerLink="/watchlists">New Content</a>
             <ul class="sub-menu">
-                <li><a href="#">New Releases</a></li>
-                <li><a href="#">Popular Games</a></li>
-                <li><a href="#">Highly Rated</a></li>
+                <li><a href="#">Watchlists</a></li>
+                <li><a href="#">Streams</a></li>
+                <li><a href="#">News</a></li>
                 <!-- Submenu here -->
                 <li class="sub-sub-menu-trigger"><a href="#">Recent</a>
                     <ul class="sub-sub-menu">
@@ -43,9 +22,15 @@
         </li>
         <li class="dd-menu-trigger"><a routerLink="/forum">Forum</a>
             <ul class="sub-menu">
-                <li><a href="#">Just Posted</a></li>
-                <li><a href="#">Hot Threads</a></li>
-                <li><a href="#">Admin Favorites</a></li>     
+                <li><a href="#">View Threads</a></li>
+                <li><a href="#">Create a Thread</a></li>
+                <li class="sub-sub-menu-trigger"><a href="#">My posts</a>
+                    <ul class="sub-sub-menu">
+                        <li class="sub-sub-top"><a href="#">Post 1</a></li>
+                        <li><a href="#">Post 2</a></li>
+                        <li><a href="#">Post 3</a></li>
+                    </ul>
+                </li>     
             </ul>
         </li>
         <li class="dd-menu-trigger"><a routerLink="/gaming-index">Gaming Index</a>
@@ -74,12 +59,32 @@
                     <li><a href="#">Misc & historical</a></li>           -->
             </ul>
         </li>
-        <li class="dd-menu-trigger"><a routerLink="/rate">Rate it!</a>
+        <li class="dd-menu-trigger" *ngIf="appUser; else anonymousUser" id="profile-nub">
+            <a [routerLink]="['/profile/', appUser?.uid, appUser?.username]">
+                {{ appUser?.username }}
+            </a>
+            <!-- can non admin users access this? -->
             <ul class="sub-menu">
-                <li><a href="#">Rate</a></li>
-                <li><a href="#">Review</a></li>
-                <li><a href="#">Search existing</a></li>          
+                <li *ngIf="appUser.isAdmin"><a class="btn-dd" routerLink="/admin/game">Adminster</a></li>
+
+                <li class="dd-menu-trigger"><a routerLink="/rate">Edit</a>
+                    <ul class="sub-menu">
+                        <li class="sub-sub-top"><a href="#" [routerLink]="['/sign_in/create_profile/', appUser?.uid]">Profile</a></li>
+                        <li><a href="#" [routerLink]="['/preferences', appUser?.uid, appUser?.username]">Preferences</a></li>
+                        <li><a href="#" [routerLink]="['/contributions', appUser?.uid, appUser?.username]">Contributions</a></li>          
+                    </ul>
+                </li> 
+                <li class="dd-menu-trigger"><a routerLink="/contrib-dashboard">Contribute</a>
+                    <ul class="sub-menu">
+                        <li class="sub-sub-top"><a href="">Rate</a></li>
+                        <li><a href="">Review</a></li>
+                    </ul>
+                </li>
+                <li class="btn-dd-danger"><a href="#" class="btn-dd-danger" (click)="logout()">logout</a></li>
             </ul>
         </li>
+        <ng-template #anonymousUser>
+            <a routerLink="/sign_in"><button>Sign in</button></a>
+        </ng-template>
     </ul>
 </nav>

@@ -66,6 +66,8 @@ import { CreatorsComponent } from './creators/creators.component';
 import { ConsoleComponent } from './console/console.component';
 import { ConsoleMakersComponent } from './console-makers/console-makers.component';
 import { LoadingScreenComponent } from './loading-screen/loading-screen.component';
+import { ContribDashboardComponent } from './contrib-dashboard/contrib-dashboard.component';
+import { EditContributionsComponent } from './edit-contributions/edit-contributions.component';
 
 
 @NgModule({
@@ -108,6 +110,8 @@ import { LoadingScreenComponent } from './loading-screen/loading-screen.componen
     ConsoleMakersComponent,
     ConsoleComponent,
     LoadingScreenComponent,
+    ContribDashboardComponent,
+    EditContributionsComponent,
     ],
   imports: [
     AngularFireModule.initializeApp(environment.firebase),
@@ -120,6 +124,8 @@ import { LoadingScreenComponent } from './loading-screen/loading-screen.componen
     CustomFormsModule,
     RouterModule.forRoot([
         //routes asscesible to annoymous users
+
+        //temporarily swapped this for learning css. conveninece.
         { path: '', component: HomeComponent },
 
         //note all the inconsistencies in your routing- camel case here, pascal case there. NOOO!
@@ -134,8 +140,11 @@ import { LoadingScreenComponent } from './loading-screen/loading-screen.componen
         //should delete this at somepoint- for now its a fail safe mechanism.
         { path: 'profile/:uid', component: ViewProfileComponent, canActivate: [AuthGuard] },
         
-        { path: 'preferences/:uid/:username', component: EditPreferencesComponent},
-        { path: 'preferences/:uid', component: EditPreferencesComponent},
+        { path: 'preferences/:uid/:username', component: EditPreferencesComponent, canActivate: [AuthGuard]},
+        { path: 'preferences/:uid', component: EditPreferencesComponent, canActivate: [AuthGuard]},
+        { path: 'contributions/:uid/:username', component: EditContributionsComponent, canActivate: [AuthGuard]},
+
+
 
 
         //you'll see more on these pages if youre signed in, but can view as anonymous user.
@@ -159,6 +168,7 @@ import { LoadingScreenComponent } from './loading-screen/loading-screen.componen
         //routes for logged in users
         // { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard] },
         { path: 'forum/create-thread', component: CreateThreadComponent, canActivate: [AuthGuard] },
+        { path: 'contrib-dashboard', component: ContribDashboardComponent,  canActivate: [AuthGuard]  },
         { path: 'rate', component: ViewRatingsComponent,  canActivate: [AuthGuard]  },
 
         // admin-only routes: probably dont need admin/home TBT
