@@ -5,7 +5,7 @@
             <div class="card-body">
               <h5 class="card-title">{{ game.title }}</h5>
               <p class="card-text">{{ game.price | currency:'USD':true }}</p>
-              rating aparatus goes here
+                <stars [gameId]="id" [userId]="appUser.uid"></stars>
             </div>
         </div>
     </div>

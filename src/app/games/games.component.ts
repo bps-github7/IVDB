@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { GameService } from '../common/services/game.service';
 import { GameInfoService } from '../common/services/gameinfo.service';
 import { AuthService } from '../common/services/auth.service';
-import { RateComponent } from '../rate/rate.component';
 import { Router } from '@angular/router';
 
 @Component({
@@ -27,6 +26,12 @@ export class GamesComponent {
         this.categories = this.gameinfoService.get_categories_array();
         this.creators = this.gameinfoService.get_creators_array();
         this.console_makers = this.gameinfoService.get_console_makers_array();
-        this.auth.user$.subscribe(user => this.userId = user.uid);
+        if (this.auth.appUser$) {
+            //should this be appUser?
+            this.auth.user$.subscribe(user => this.userId = user.uid);
+        }
+        else {
+            this.userId = "guest";
+        }
     }
 }

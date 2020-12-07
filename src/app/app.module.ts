@@ -36,7 +36,6 @@ import { GamesComponent } from './games/games.component';
 import { StreamingComponent } from './streaming/streaming.component';
 import { ReccomendationsComponent } from './reccomendations/reccomendations.component';
 import { WatchlistsComponent } from './watchlists/watchlists.component';
-import { RateComponent } from './rate/rate.component';
 import { SearchComponent } from './search/search.component';
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
 import { CreateThreadComponent } from './create-thread/create-thread.component';
@@ -65,9 +64,9 @@ import { CategoriesComponent } from './categories/categories.component';
 import { CreatorsComponent } from './creators/creators.component';
 import { ConsoleComponent } from './console/console.component';
 import { ConsoleMakersComponent } from './console-makers/console-makers.component';
-import { LoadingScreenComponent } from './loading-screen/loading-screen.component';
 import { ContribDashboardComponent } from './contrib-dashboard/contrib-dashboard.component';
 import { EditContributionsComponent } from './edit-contributions/edit-contributions.component';
+import { StarsComponent } from './stars/stars.component';
 
 
 @NgModule({
@@ -88,7 +87,6 @@ import { EditContributionsComponent } from './edit-contributions/edit-contributi
     StreamingComponent,
     ReccomendationsComponent,
     WatchlistsComponent,
-    RateComponent,
     SearchComponent,
     ForgotPasswordComponent,
     CreateThreadComponent,
@@ -109,9 +107,9 @@ import { EditContributionsComponent } from './edit-contributions/edit-contributi
     CreatorsComponent,
     ConsoleMakersComponent,
     ConsoleComponent,
-    LoadingScreenComponent,
     ContribDashboardComponent,
     EditContributionsComponent,
+    StarsComponent,
     ],
   imports: [
     AngularFireModule.initializeApp(environment.firebase),
