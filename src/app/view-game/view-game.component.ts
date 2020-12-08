@@ -21,17 +21,20 @@ export class ViewGameComponent implements OnInit {
     private gameService : GameService,
     private router : Router,
     private route : ActivatedRoute) {
-
         //need to be changed from snapshot to query
-        this.id = this.route.snapshot.paramMap.get('id');
-        console.log(this.id)
+        this.route.paramMap.subscribe(params => {
+            this.id = params.get('id');
+        })
         if (this.id)
             this.gameService.get$(this.id).subscribe(g => this.game = g);
-        this.auth.appUser$.subscribe(appUser => this.appUser = appUser);        
 
+        // we need this data but this line makes the app crash because we already subscribed to appUSer
+        // in dropdown menu and app.component. 
+        // this.auth.appUser$.subscribe(appUser => this.appUser = appUser);
 }
 
 ngOnInit(): void {
+                
 }
 
 }

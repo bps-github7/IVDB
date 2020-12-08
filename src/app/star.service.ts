@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { AngularFirestore } from '@angular/fire/firestore';
+import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
 import { Rating } from './models/content/rating';
 
@@ -9,14 +9,26 @@ import { Rating } from './models/content/rating';
 })
 export class StarService {
 
-  constructor(private afs : AngularFirestore) {
+    gamesCollection : AngularFirestoreCollection<Rating []>;
+    gameDocument : AngularFirestoreDocument<Rating>;
 
-   }
 
-   rating_exists(userId : string, gameId :  string) {
-        const docRef = this.afs.collection('ratings').doc(`${userId}_${gameId}`);
-        docRef.get().then()
-   }
+    constructor(private afs : AngularFirestore) {
+        this.gamesCollection = this.afs.collection('ratings');
+    }
+
+    rating_exists(userId : string, gameId :  string) : Boolean {
+        let exists: boolean = false;
+        const docRef = this.afs.firestore.collection('ratings').doc(`${userId}_${gameId}`);
+        docRef.get()
+        .then(docSnapshot => {
+            if(docSnapshot.exists){
+                exists = true;
+            }
+        });
+        return exists;
+    }
+
 
     getUserStars(userId : string) {
         const ratingRef = this.afs.collection('ratings', (ref) => ref.where('userId', '==', userId));

@@ -5,7 +5,13 @@
             <div class="card-body">
               <h5 class="card-title">{{ game.title }}</h5>
               <p class="card-text">{{ game.price | currency:'USD':true }}</p>
-                <stars [gameId]="id" [userId]="appUser.uid"></stars>
+                <div *ngIf="appUser; else anonymousUser">
+                    <stars [gameId]="id" [userId]="appUser.uid"></stars>
+                </div>
+                <ng-template #anonymousUser> 
+                    Please create an account and sign in to rate or review
+                </ng-template>
+              
             </div>
         </div>
     </div>

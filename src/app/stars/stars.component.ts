@@ -19,17 +19,17 @@ export class StarsComponent implements OnInit {
     @Input() gameId;
 
   constructor(private starsService : StarService) { 
+    if(!this.starsService.rating_exists(this.userId, this.gameId)) {
+        this.starsService.setRating(this.userId, this.gameId, 0)
+    }
+    this.starsService.getGameRating(this.userId, this.gameId)
+    .subscribe(doc => this.stars = doc);
 
   }
 
 
     ngOnInit(): void {
-        /* if(!starService.rating_exists()) {
-            this.starService.setRating(this.userId, this.gameId, 0)
-        } */
-        this.starsService.getGameRating(this.userId, this.gameId)
-        .subscribe(doc => this.stars = doc);
-    }
+      }
 
     starHandler(value) {
         this.starsService.setRating(this.userId, this.gameId, value);
