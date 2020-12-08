@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
+import { Rating } from '../models/content/rating';
 import { StarService } from '../star.service';
 
 @Component({
@@ -9,19 +10,25 @@ import { StarService } from '../star.service';
 })
 export class StarsComponent implements OnInit {
     user: any;
-    stars: Observable<any>;
+    stars: Rating;
     avgRating: Observable<any>;
 
+    
 
     @Input() userId;
     @Input() gameId;
 
-  constructor(private starsService : StarService) { }
+  constructor(private starsService : StarService) { 
 
+  }
 
 
     ngOnInit(): void {
-        this.stars = this.starsService.getGameRating(this.gameId);
+        /* if(!starService.rating_exists()) {
+            this.starService.setRating(this.userId, this.gameId, 0)
+        } */
+        this.starsService.getGameRating(this.userId, this.gameId)
+        .subscribe(doc => this.stars = doc);
     }
 
     starHandler(value) {

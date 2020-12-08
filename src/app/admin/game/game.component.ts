@@ -11,7 +11,7 @@ import { Game } from 'src/app/models/content/Game';
 export class GameComponent implements OnInit, OnDestroy {
     // trying this out for size
     // games: Game;
-    games: any[];
+    games: Game [];
     games$;
     filteredGames: any[];
     subscription: Subscription;

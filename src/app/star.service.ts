@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
+import { Observable } from 'rxjs';
 import { Rating } from './models/content/rating';
 
 
@@ -12,14 +13,18 @@ export class StarService {
 
    }
 
+   rating_exists(userId : string, gameId :  string) {
+        const docRef = this.afs.collection('ratings').doc(`${userId}_${gameId}`);
+        docRef.get().then()
+   }
+
     getUserStars(userId : string) {
         const ratingRef = this.afs.collection('ratings', (ref) => ref.where('userId', '==', userId));
         return ratingRef.valueChanges();
     }
 
-    getGameRating(userId :  string) {
-        const ratingRef = this.afs.collection('ratings', (ref) => ref.where('userId', '==', userId));
-        return ratingRef.valueChanges();
+    getGameRating(userId :  string, gameId : string) : Observable<Rating> {
+        return this.afs.collection('ratings').doc<Rating>(`${userId}_${gameId}`).valueChanges();
     }
 
     setRating(userId : string, gameId : string, value : number) {

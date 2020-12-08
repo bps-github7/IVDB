@@ -67,6 +67,7 @@ import { ConsoleMakersComponent } from './console-makers/console-makers.componen
 import { ContribDashboardComponent } from './contrib-dashboard/contrib-dashboard.component';
 import { EditContributionsComponent } from './edit-contributions/edit-contributions.component';
 import { StarsComponent } from './stars/stars.component';
+import { ServicesModule } from './common/services/services.module';
 
 
 @NgModule({
@@ -120,6 +121,7 @@ import { StarsComponent } from './stars/stars.component';
     FormsModule,
     ReactiveFormsModule,
     CustomFormsModule,
+    ServicesModule.forRoot(),
     RouterModule.forRoot([
         //routes asscesible to annoymous users
 
@@ -180,15 +182,7 @@ import { StarsComponent } from './stars/stars.component';
     ])
   ],
     providers: [
-        AuthService,
-        AuthGuard,
-        ProfileService,
-        UserService,
-        AdminAuthGuard,
-        GameInfoService,
-        GameService,
-        UserAuthGuard,
-  ],
+    ],
   bootstrap: [AppComponent]
 })
 export class AppModule {
