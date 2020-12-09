@@ -37,7 +37,6 @@ export class AppComponent {
                 this.router.navigateByUrl(returnUrl);
             }
         });
-        //how can we make this.user accessible to the rest of the application?
     }
 
     // This does not do what you want it to do!!

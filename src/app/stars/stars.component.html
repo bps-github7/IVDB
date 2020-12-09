@@ -1,18 +1,21 @@
-<!-- There is nothing here that checks if user rating
-already exists for a paticular game. hence it will always look
-like the game is unrated when you pull it up -->
+<div *ngIf="userId; else anonymousUser">
+    <form class="rating">
+        <ng-container *ngFor="let num of [5, 4, 3, 2, 1]">
+            <input (click)="starHandler(num)" [(ngModel)]="stars.value" [id]="'star'+num" [value]="num" name="rating"
+                type="radio" />
+            <label class="full" [for]="'star'+num"></label>
+        </ng-container>
+    </form>
+</div>
 
-<form class="rating">
-    <ng-container *ngFor="let num of [5, 4, 3, 2, 1]">
-        <!-- full star -->
-        <input
-            [(ngModel)]="stars.value"
-            (click)="starHandler(num)"
-            [id]="'star'+num"
-            [value]="num"
-            name="rating"
-            type="radio" />
+<ng-template #anonymousUser>
 
-        <label class="full" [for]="'star'+num"></label>
-    </ng-container>
-</form>
+    <form class="rating">
+        <ng-container *ngFor="let num of [5, 4, 3, 2, 1]">
+            <!-- allows guest users to try to submit rating -->
+            <input (click)="fakeStarHandler()" [id]="'star'+num" [value]="num" name="rating" type="radio" />
+
+            <label class="full" [for]="'star'+num"></label>
+        </ng-container>
+    </form>
+</ng-template>

@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from '@angular/fire/firestore';
+import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
+import { take } from 'rxjs/operators';
 import { Rating } from './models/content/rating';
 
 
@@ -13,20 +15,21 @@ export class StarService {
     gameDocument : AngularFirestoreDocument<Rating>;
 
 
-    constructor(private afs : AngularFirestore) {
+    constructor(private afs : AngularFirestore, private router : Router) {
         this.gamesCollection = this.afs.collection('ratings');
     }
 
-    rating_exists(userId : string, gameId :  string) : Boolean {
-        const docRef = this.afs.collection('ratings').doc(`${userId}_${gameId}`).snapshotChanges()
-        .subscribe(x => this.exists = x.payload.exists);
-        return this.exists;
-
+    getRatingAsPromise(userId : string, gameId :  string) : Promise<Rating> {
+        /* This will allow us to get the value from observable 
+        to check whether or not rating exists, in component logic.
+         */
+        return this.getGameRating(userId, gameId).pipe(take(1))
+        .toPromise();
     }
 
 
-    getUserStars(userId : string) {
-        const ratingRef = this.afs.collection('ratings', (ref) => ref.where('userId', '==', userId));
+    getUserStars(userId : string) : Observable<Rating []> {
+        const ratingRef = this.afs.collection<Rating>('ratings', (ref) => ref.where('userId', '==', userId));
         return ratingRef.valueChanges();
     }
 
@@ -35,7 +38,6 @@ export class StarService {
     }
 
     setRating(userId : string, gameId : string, value : number) {
-
         //rating document data
         const rating : Rating = {userId, gameId, value};
 

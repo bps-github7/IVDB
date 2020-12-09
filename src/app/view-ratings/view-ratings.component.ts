@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Rating } from '../models/content/rating';
+import { StarService } from '../star.service';
 
 @Component({
   selector: 'app-view-ratings',
@@ -7,9 +9,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ViewRatingsComponent implements OnInit {
 
-  constructor() { }
-
-  ngOnInit(): void {
-  }
+    constructor() { }
+    
+    ngOnInit(): void { }
 
 }

@@ -69,6 +69,15 @@ import { EditContributionsComponent } from './edit-contributions/edit-contributi
 import { StarsComponent } from './stars/stars.component';
 import { ServicesModule } from './common/services/services.module';
 import { EditReviewComponent } from './edit-review/edit-review.component';
+import { NewsComponent } from './news/news.component';
+import { ContentDashboardComponent } from './content-dashboard/content-dashboard.component';
+import { ViewReviewsComponent } from './view-reviews/view-reviews.component';
+import { ViewPostsComponent } from './view-posts/view-posts.component';
+import { RecentlyPostedComponent } from './recently-posted/recently-posted.component';
+import { ViewAllRatingsComponent } from './view-all-ratings/view-all-ratings.component';
+import { ViewAllReviewsComponent } from './view-all-reviews/view-all-reviews.component';
+import { ViewAllPostsComponent } from './view-all-posts/view-all-posts.component';
+import { ViewThreadsComponent } from './view-threads/view-threads.component';
 
 
 @NgModule({
@@ -113,6 +122,15 @@ import { EditReviewComponent } from './edit-review/edit-review.component';
     EditContributionsComponent,
     StarsComponent,
     EditReviewComponent,
+    NewsComponent,
+    ContentDashboardComponent,
+    ViewReviewsComponent,
+    ViewPostsComponent,
+    RecentlyPostedComponent,
+    ViewAllRatingsComponent,
+    ViewAllReviewsComponent,
+    ViewAllPostsComponent,
+    ViewThreadsComponent,
     ],
   imports: [
     AngularFireModule.initializeApp(environment.firebase),
@@ -151,11 +169,19 @@ import { EditReviewComponent } from './edit-review/edit-review.component';
 
         //you'll see more on these pages if youre signed in, but can view as anonymous user.
         { path: 'forum', component: ForumComponent },
-        { path: 'games', component: GamesComponent },
+        { path: 'forum/view-threads/:thread-name', component: ViewThreadsComponent },
+        { path: 'forum/view-threads', component: ViewThreadsComponent },
+        { path: 'forum/create-thread', component: CreateThreadComponent },
+        //should we break it down even more? create post, view post? probably not, at least in router.
         
-        
+        //should use a query param, pull up view-all-posts but with search term as current user.
+        { path: 'forum/my-posts/:id', component: ViewAllPostsComponent },
+
+
+
+        { path: 'games', component: GamesComponent },        
         { path: 'games/:id', component: ViewGameComponent },
-        { path: 'streaming', component: StreamingComponent },
+
         { path: 'gaming-index', component: GamingIndexComponent },
         { path: 'gaming-index/creators/:creator', component: CreatorsComponent },
         { path: 'gaming-index/creators', component: CreatorsComponent },
@@ -165,15 +191,31 @@ import { EditReviewComponent } from './edit-review/edit-review.component';
         { path: 'gaming-index/console-makers/:name', component: ConsoleMakersComponent },
         { path: 'gaming-index/console-makers', component: ConsoleMakersComponent },
 
-        { path: 'watchlists', component: WatchlistsComponent },
-        
         //routes for logged in users
         // { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard] },
         { path: 'forum/create-thread', component: CreateThreadComponent, canActivate: [AuthGuard] },
-        { path: 'contrib-dashboard', component: ContribDashboardComponent,  canActivate: [AuthGuard]  },
-        { path: 'rate', component: ViewRatingsComponent,  canActivate: [AuthGuard]  },
-        { path: 'review/:id', component: EditReviewComponent, canActivate: [AuthGuard] },
+        { path: 'contrib-dashboard/:id/:username', component: ContribDashboardComponent,  canActivate: [AuthGuard]  },
+        { path: 'contrib-dashboard/ratings/:id/:username', component: ViewRatingsComponent,  canActivate: [AuthGuard]  },
+        { path: 'contrib-dashboard/reviews/:id/:username', component: ViewReviewsComponent, canActivate: [AuthGuard] },
+        
+        // where id refers to review-id
+        { path: 'contrib-dashboard/reviews/:id', component: EditReviewComponent, canActivate: [AuthGuard] },
 
+        
+
+        
+        { path: 'content-dashboard', component: ContentDashboardComponent },
+        { path: 'content-dashboard/watchlists', component: WatchlistsComponent },
+        { path: 'content-dashboard/streams', component: StreamingComponent },
+        { path: 'content-dashboard/news', component: NewsComponent },
+        { path: 'content-dashboard/recently-posted', component: RecentlyPostedComponent },
+        { path: 'content-dashboard/recently-posted/ratings', component: ViewAllRatingsComponent },
+        { path: 'content-dashboard/recently-posted/reviews', component: ViewAllReviewsComponent },
+        { path: 'content-dashboard/recently-posted/posts', component: ViewAllPostsComponent },
+
+
+        
+       
         // admin-only routes: probably dont need admin/home TBT
         { path: 'admin/game/new', component: GameFormComponent, canActivate: [AuthGuard, AdminAuthGuard]},
         { path: 'admin/game/:id', component: GameFormComponent, canActivate: [AuthGuard, AdminAuthGuard]},

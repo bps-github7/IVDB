@@ -5,47 +5,49 @@
         <input id="searchbar" type="text" placeholder="Search IVDB">
     </header>
     <ul class="dd-menu">
-        <li class="dd-menu-trigger"><a routerLink="/watchlists">New Content</a>
+        <li class="dd-menu-trigger"><a routerLink="/content-dashboard">New Content</a>
             <ul class="sub-menu">
-                <li><a href="#">Watchlists</a></li>
-                <li><a href="#">Streams</a></li>
-                <li><a href="#">News</a></li>
+                <li><a routerLink="/content-dashboard/watchlists">Watchlists</a></li>
+                <li><a routerLink="/content-dashboard/streams">Streams</a></li>
+                <li><a routerLink="/content-dashboard/news">News</a></li>
                 <!-- Submenu here -->
-                <li class="sub-sub-menu-trigger"><a href="#">Recent</a>
+                <li class="sub-sub-menu-trigger"><a routerLink="/content-dashboard/recently-posted">Recent</a>
                     <ul class="sub-sub-menu">
-                        <li class="sub-sub-top"><a href="#">Posts</a></li>
-                        <li><a href="#">Ratings</a></li>
-                        <li><a href="#">Reviews</a></li>
+                        <li class="sub-sub-top"><a routerLink="/content-dashboard/recently-posted/posts">Posts</a>
+                        </li>
+                        <li><a routerLink="/content-dashboard/recently-posted/ratings">Ratings</a></li>
+                        <li><a routerLink="/content-dashboard/recently-posted/reviews">Reviews</a></li>
                     </ul>
-                </li>          
+                </li>
             </ul>
         </li>
         <li class="dd-menu-trigger"><a routerLink="/forum">Forum</a>
             <ul class="sub-menu">
-                <li><a href="#">View Threads</a></li>
-                <li><a href="#">Create a Thread</a></li>
-                <li class="sub-sub-menu-trigger"><a href="#">My posts</a>
+                <li><a routerLink="/forum/view-threads">View Threads</a></li>
+                <li><a routerLink="/forum/create-thread">Create a Thread</a></li>
+                <li class="sub-sub-menu-trigger"><a [routerLink]="['forum/my-posts/', appUser.username]">My posts</a>
                     <ul class="sub-sub-menu">
-                        <li class="sub-sub-top"><a href="#">Post 1</a></li>
-                        <li><a href="#">Post 2</a></li>
-                        <li><a href="#">Post 3</a></li>
+                        <!--  -->
+                        <li class="sub-sub-top"><a href="#">Thread 1</a></li>
+                        <li><a href="#">Thread 2</a></li>
+                        <li><a href="#">Thread 3</a></li>
                     </ul>
-                </li>     
+                </li>
             </ul>
         </li>
         <li class="dd-menu-trigger"><a routerLink="/gaming-index">Gaming Index</a>
             <ul class="sub-menu">
                 <!-- sub sub menu here -->
                 <li class="sub-sub-menu-trigger"><a routerLink="/games">Browse Games</a>
-                    <ul class="sub-sub-menu"> 
+                    <ul class="sub-sub-menu">
                         <li class="sub-sub-top"><a href="#">Platformer</a></li>
                         <li><a href="#">RPG</a></li>
                         <li><a href="#">Combat</a></li>
-                        <li><a href="#">Sports</a></li>        
+                        <li><a href="#">Sports</a></li>
                     </ul>
                 </li>
                 <li class="sub-sub-menu-trigger"><a routerLink="/gaming-index/console-makers">Console Makers</a>
-                    <ul class="sub-sub-menu"> 
+                    <ul class="sub-sub-menu">
                         <li class="sub-sub-top"><a routerLink="/gaming-index/console-makers/sony">Sony</a></li>
                         <li><a routerLink="/gaming-index/console-makers/nintendo">Nintendo</a></li>
                         <li><a routerLink="/gaming-index/console-makers/microsoft">Microsoft</a></li>
@@ -69,15 +71,23 @@
 
                 <li class="dd-menu-trigger"><a routerLink="/rate">Edit</a>
                     <ul class="sub-menu">
-                        <li class="sub-sub-top"><a href="#" [routerLink]="['/sign_in/create_profile/', appUser?.uid]">Profile</a></li>
-                        <li><a href="#" [routerLink]="['/preferences', appUser?.uid, appUser?.username]">Preferences</a></li>
-                        <li><a href="#" [routerLink]="['/contributions', appUser?.uid, appUser?.username]">Contributions</a></li>          
+                        <li class="sub-sub-top"><a href="#"
+                                [routerLink]="['/sign_in/create_profile/', appUser?.uid]">Profile</a></li>
+                        <li><a href="#" [routerLink]="['/preferences', appUser?.uid, appUser?.username]">Preferences</a>
+                        </li>
+                        <li><a href="#"
+                                [routerLink]="['/contributions', appUser?.uid, appUser?.username]">Contributions</a>
+                        </li>
                     </ul>
-                </li> 
-                <li class="dd-menu-trigger"><a routerLink="/contrib-dashboard">Contribute</a>
+                </li>
+                <li class="dd-menu-trigger"><a
+                        [routerLink]="['/contrib-dashboard/', appUser?.uid, appUser?.username]">Contribute</a>
                     <ul class="sub-menu">
-                        <li class="sub-sub-top"><a href="">Rate</a></li>
-                        <li><a href="">Review</a></li>
+                        <li class="sub-sub-top"><a
+                                [routerLink]="['/contrib-dashboard/ratings',appUser?.uid, appUser?.username]">Rate</a>
+                        </li>
+                        <li><a [routerLink]="['/contrib-dashboard/reviews',appUser?.uid, appUser?.username]">Review</a>
+                        </li>
                     </ul>
                 </li>
                 <li class="btn-dd-danger"><a href="#" class="btn-dd-danger" (click)="logout()">logout</a></li>

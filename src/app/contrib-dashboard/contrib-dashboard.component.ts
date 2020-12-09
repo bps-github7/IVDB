@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Rating } from '../models/content/rating';
+import { Review } from '../models/content/Review';
+import { StarService } from '../star.service';
 
 @Component({
   selector: 'app-contrib-dashboard',
@@ -7,7 +10,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ContribDashboardComponent implements OnInit {
 
-  constructor() { }
+    ratings: Rating [];
+    reviews: Review [];
+    
+    constructor(private starService : StarService) {
+        this.starService.getUserStars(localStorage.getItem("user_id")).subscribe(p => this.ratings = p);
+    }
+
 
   ngOnInit(): void {
   }
