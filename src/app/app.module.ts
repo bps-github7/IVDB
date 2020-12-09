@@ -68,6 +68,7 @@ import { ContribDashboardComponent } from './contrib-dashboard/contrib-dashboard
 import { EditContributionsComponent } from './edit-contributions/edit-contributions.component';
 import { StarsComponent } from './stars/stars.component';
 import { ServicesModule } from './common/services/services.module';
+import { EditReviewComponent } from './edit-review/edit-review.component';
 
 
 @NgModule({
@@ -111,6 +112,7 @@ import { ServicesModule } from './common/services/services.module';
     ContribDashboardComponent,
     EditContributionsComponent,
     StarsComponent,
+    EditReviewComponent,
     ],
   imports: [
     AngularFireModule.initializeApp(environment.firebase),
@@ -170,6 +172,7 @@ import { ServicesModule } from './common/services/services.module';
         { path: 'forum/create-thread', component: CreateThreadComponent, canActivate: [AuthGuard] },
         { path: 'contrib-dashboard', component: ContribDashboardComponent,  canActivate: [AuthGuard]  },
         { path: 'rate', component: ViewRatingsComponent,  canActivate: [AuthGuard]  },
+        { path: 'review/:id', component: EditReviewComponent, canActivate: [AuthGuard] },
 
         // admin-only routes: probably dont need admin/home TBT
         { path: 'admin/game/new', component: GameFormComponent, canActivate: [AuthGuard, AdminAuthGuard]},

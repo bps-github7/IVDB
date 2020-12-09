@@ -8,7 +8,7 @@ import { Rating } from './models/content/rating';
   providedIn: 'root'
 })
 export class StarService {
-
+    exists : boolean = false;;
     gamesCollection : AngularFirestoreCollection<Rating []>;
     gameDocument : AngularFirestoreDocument<Rating>;
 
@@ -18,15 +18,10 @@ export class StarService {
     }
 
     rating_exists(userId : string, gameId :  string) : Boolean {
-        let exists: boolean = false;
-        const docRef = this.afs.firestore.collection('ratings').doc(`${userId}_${gameId}`);
-        docRef.get()
-        .then(docSnapshot => {
-            if(docSnapshot.exists){
-                exists = true;
-            }
-        });
-        return exists;
+        const docRef = this.afs.collection('ratings').doc(`${userId}_${gameId}`).snapshotChanges()
+        .subscribe(x => this.exists = x.payload.exists);
+        return this.exists;
+
     }
 
 

@@ -26,12 +26,5 @@ export class GamesComponent {
         this.categories = this.gameinfoService.get_categories_array();
         this.creators = this.gameinfoService.get_creators_array();
         this.console_makers = this.gameinfoService.get_console_makers_array();
-        if (this.auth.appUser$) {
-            //should this be appUser?
-            this.auth.user$.subscribe(user => this.userId = user.uid);
-        }
-        else {
-            this.userId = "guest";
-        }
     }
 }

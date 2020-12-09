@@ -12,8 +12,8 @@ import { User } from '../models/user/user';
   styleUrls: ['./view-game.component.css']
 })
 export class ViewGameComponent implements OnInit {
-    id;
-    appUser: User;
+    game_id;
+    user_id;
     game: Game; 
 
     constructor(
@@ -22,16 +22,12 @@ export class ViewGameComponent implements OnInit {
     private router : Router,
     private route : ActivatedRoute) {
         //need to be changed from snapshot to query
-        this.route.paramMap.subscribe(params => {
-            this.id = params.get('id');
-        })
-        if (this.id)
-            this.gameService.get$(this.id).subscribe(g => this.game = g);
-
-        // we need this data but this line makes the app crash because we already subscribed to appUSer
-        // in dropdown menu and app.component. 
-        // this.auth.appUser$.subscribe(appUser => this.appUser = appUser);
-}
+        this.game_id = this.route.snapshot.paramMap.get('id');
+        if (this.game_id)
+            this.gameService.get$(this.game_id).subscribe(g => this.game = g);
+        this.user_id = localStorage.getItem("user_id"); 
+        
+        }
 
 ngOnInit(): void {
                 

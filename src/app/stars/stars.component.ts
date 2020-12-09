@@ -9,7 +9,6 @@ import { StarService } from '../star.service';
   styleUrls: ['./stars.component.css']
 })
 export class StarsComponent implements OnInit {
-    user: any;
     stars: Rating;
     avgRating: Observable<any>;
 
@@ -18,18 +17,18 @@ export class StarsComponent implements OnInit {
     @Input() userId;
     @Input() gameId;
 
-  constructor(private starsService : StarService) { 
-    if(!this.starsService.rating_exists(this.userId, this.gameId)) {
-        this.starsService.setRating(this.userId, this.gameId, 0)
-    }
-    this.starsService.getGameRating(this.userId, this.gameId)
-    .subscribe(doc => this.stars = doc);
-
+  constructor(private starsService : StarService) {
   }
 
 
     ngOnInit(): void {
-      }
+        if(!this.starsService.rating_exists(this.userId, this.gameId)) {
+            console.log("this happened- conditional dont work son!");
+            this.starsService.setRating(this.userId, this.gameId, 0)
+        }
+        this.starsService.getGameRating(this.userId, this.gameId)
+        .subscribe(doc => this.stars = doc);    
+    }
 
     starHandler(value) {
         this.starsService.setRating(this.userId, this.gameId, value);
