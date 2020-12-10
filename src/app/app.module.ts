@@ -182,6 +182,11 @@ import { ViewThreadsComponent } from './view-threads/view-threads.component';
         { path: 'games', component: GamesComponent },        
         { path: 'games/:id', component: ViewGameComponent },
 
+        // where id refers to review-id
+        { path: 'games/:game_title/review', component: EditReviewComponent, canActivate: [AuthGuard] },
+
+
+
         { path: 'gaming-index', component: GamingIndexComponent },
         { path: 'gaming-index/creators/:creator', component: CreatorsComponent },
         { path: 'gaming-index/creators', component: CreatorsComponent },
@@ -197,11 +202,6 @@ import { ViewThreadsComponent } from './view-threads/view-threads.component';
         { path: 'contrib-dashboard/:id/:username', component: ContribDashboardComponent,  canActivate: [AuthGuard]  },
         { path: 'contrib-dashboard/ratings/:id/:username', component: ViewRatingsComponent,  canActivate: [AuthGuard]  },
         { path: 'contrib-dashboard/reviews/:id/:username', component: ViewReviewsComponent, canActivate: [AuthGuard] },
-        
-        // where id refers to review-id
-        { path: 'contrib-dashboard/reviews/:id', component: EditReviewComponent, canActivate: [AuthGuard] },
-
-        
 
         
         { path: 'content-dashboard', component: ContentDashboardComponent },

@@ -1,1 +1,116 @@
-<p>edit-review works!</p>
+<div class="row">
+    <div class="col-md-6">
+        <div class="col-md-6 mb-2">
+            <div class="row" *ngIf="warning_flag">
+                <div class="col-12 alert alert-danger">
+                    Warning: Users can only submit one review per game<br>
+                    <a [routerLink]="['../../../contrib-dashboard', username, user_id]">Click here manage reviews</a>
+                </div>
+            </div>
+        </div>
+        <form #finished="ngForm" (ngSubmit)="reviewHandler(finished.value)">
+            <!-- Text review formgroup -->
+            <div class="form-group">
+                <label for="body">Review Body: </label>
+                <textarea #body="ngModel" [(ngModel)]="game_review.body"
+                    placeholder="Tell us your overall thoughts about the game" name="body" id="body"
+                    class="form-control" required type="text"></textarea>
+
+
+                <div *ngIf="body.touched && body.invalid" class="alert alert-danger">
+                    <div *ngIf="body.errors.required">Review body is required</div>
+                </div>
+            </div>
+
+
+
+            <div class="form-control">
+                <label for="playability">Playability: </label>
+                <input #playability="ngModel" [(ngModel)]="game_review.playability" name="playability" id="playability"
+                    class="form-control" type="range" min="0" max="10">
+            </div>
+
+            <div class="form-control">
+                <label for="replayability">Replayability: </label>
+                <input #replayability="ngModel" [(ngModel)]="game_review.replayability" name="replayability"
+                    id="playability" class="form-control" type="range" min="0" max="10">
+            </div>
+
+            <div class="form-control">
+                <label for="graphics">Graphics: </label>
+                <input #graphics="ngModel" [(ngModel)]="game_review.graphics" name="graphics" id="graphics"
+                    class="form-control" type="range" min="0" max="10">
+            </div>
+
+
+
+            <div class="form-control">
+                <label for="audio">Audio: </label>
+                <input #audio="ngModel" [(ngModel)]="game_review.audio" name="audio" id="audio" class="form-control"
+                    type="range" min="0" max="10">
+            </div>
+
+
+            <div class="form-control">
+                <label for="story">story: </label>
+                <input #story="ngModel" [(ngModel)]="game_review.story" name="story" id="story" class="form-control"
+                    type="range" min="0" max="10">
+            </div>
+
+
+            <div class="form-control">
+                <label for="settings">settings: </label>
+                <input #settings="ngModel" [(ngModel)]="game_review.settings" name="settings" id="settings"
+                    class="form-control" type="range" min="0" max="10">
+            </div>
+
+
+            <div class="form-control">
+                <label for="characters">characters: </label>
+                <input #characters="ngModel" [(ngModel)]="game_review.characters" name="characters" id="characters"
+                    class="form-control" type="range" min="0" max="10">
+            </div>
+
+            <div class="form-group">
+                <label for="favorite_parts">What were your favorite parts of the game? </label>
+                <textarea #favorite_parts="ngModel" [(ngModel)]="game_review.favorite_parts"
+                    placeholder="The sound made when mario jumps on goombah heads and squishes them"
+                    name="favorite_parts" id="favorite_parts" class="form-control" required type="text">
+                </textarea>
+
+            </div>
+
+            <div class="form-group">
+                <label for="least_favorite_parts">What were your least favorite parts of the game? </label>
+                <textarea #least_favorite_parts="ngModel" [(ngModel)]="game_review.least_favorite_parts"
+                    placeholder="uncreative or difficult red coin levels" name="least_favorite_parts"
+                    id="least_favorite_parts" class="form-control" required type="text">
+                </textarea>
+            </div>
+
+
+            <div class="form-group">
+                <label for="improvable">What could be improved about the game? </label>
+                <textarea #improvable="ngModel" [(ngModel)]="game_review.improvable"
+                    placeholder="more things to do in the levels" name="improvable" id="improvable" class="form-control"
+                    required type="text">
+                </textarea>
+            </div>
+
+            <div class="form-group">
+
+                <label for="comments">Any other comments? </label>
+                <textarea #comments="ngModel" [(ngModel)]="game_review.comments"
+                    placeholder="This is the best game of all times!!!" name="comments" id="comments"
+                    class="form-control" required type="text">
+                </textarea>
+            </div>
+
+
+            <button class="btn btn-primary" [disabled]="!finished.valid">Save/update review</button>
+            <button type="button" class="btn btn-danger" (click)="delete()">Delete review</button>
+
+        </form>
+
+    </div>
+</div>

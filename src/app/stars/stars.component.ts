@@ -8,8 +8,8 @@ import { StarService } from '../star.service';
 
 //default object for filling in prior to users providing a rating...
 class Star implements Rating {
-    userId = null;
-    gameId = null;
+    username = null;
+    game_title = null;
     value = 0;
 }
 
@@ -24,8 +24,8 @@ export class StarsComponent implements OnInit {
     avgRating: Observable<any>;
     
 
-    @Input() userId;
-    @Input() gameId;
+    @Input() username;
+    @Input() game_title;
 
     constructor(private starsService : StarService, private router : Router) {
     }
@@ -33,14 +33,14 @@ export class StarsComponent implements OnInit {
 
     ngOnInit(): void {
         //to prevent rating documents being created if user is not logged in.
-        if(!this.userId) { return; }
-        this.starsService.getRatingAsPromise(this.userId, this.gameId).then((rating : Rating) => {
+        if(!this.username) { return; }
+        this.starsService.getRatingAsPromise(this.username, this.game_title).then((rating : Rating) => {
             //adding return so that this method exits. ratings were getting stuck on zero
             if (rating) {
                 this.stars = rating;
-                return; 
             } else {
                 console.log("rating does not exist for this game...")
+                //provides a proxy, so stars isnt undefined in the view, without having to make a db record for blank rating.
                 this.stars = new Star();
             }
         }).catch((err) => {
@@ -49,6 +49,8 @@ export class StarsComponent implements OnInit {
     }
 
     fakeStarHandler() {
+        /* Invoked when a non-signed-in user tries to submit a rating.
+         */
         if (confirm("you must log in or create an account to rate games. \nDo you want to log in to account?")) {
             this.router.navigate(['../../sign_in']);
         }
@@ -56,7 +58,7 @@ export class StarsComponent implements OnInit {
     }
 
     starHandler(value) {
-        this.starsService.setRating(this.userId, this.gameId, value)
+        this.starsService.setRating(this.username, this.game_title, value)
         .then(() => console.log("rating succesfully created with value: " + value))
         .catch((err) => console.log("error when creating rating: " + err));
     }

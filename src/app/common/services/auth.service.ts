@@ -38,6 +38,7 @@ export class AuthService {
     logout() {
        this.afAuth.signOut();
        localStorage.removeItem("user_id");
+       localStorage.removeItem("username");
     }
 
     createUser(email : string, password : string, name : string) {

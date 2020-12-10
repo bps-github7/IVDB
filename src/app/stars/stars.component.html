@@ -1,4 +1,4 @@
-<div *ngIf="userId; else anonymousUser">
+<div *ngIf="username; else anonymousUser">
     <form class="rating">
         <ng-container *ngFor="let num of [5, 4, 3, 2, 1]">
             <input (click)="starHandler(num)" [(ngModel)]="stars.value" [id]="'star'+num" [value]="num" name="rating"

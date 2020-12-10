@@ -33,6 +33,7 @@ export class AppComponent {
                 //saves the most recent user date to db
                 this.userService.save(user);
                 localStorage.setItem("user_id", user.uid);
+                localStorage.setItem("username", user.displayName);
                 let returnUrl = localStorage.getItem('returnUrl');
                 this.router.navigateByUrl(returnUrl);
             }

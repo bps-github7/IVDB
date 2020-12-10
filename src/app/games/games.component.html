@@ -37,7 +37,7 @@
                             </a>
                             <p class="card-text">{{ g.price | currency:'USD': 'symbol' }}</p>
                             <a [href]="g.purchase_link" class="btn btn-primary" id="buy">Buy</a>
-                            <a [routerLink]="['/review/', g?.id]" class="btn btn-primary">Review</a>
+                            <a [routerLink]="[g?.title, 'review']" class="btn btn-primary">Review</a>
                             <!-- rating here is default mode so we don't need to pass in any additional arguments -->
                         </div>
                     </div>

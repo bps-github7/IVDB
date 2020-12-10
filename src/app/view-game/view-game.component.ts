@@ -13,7 +13,7 @@ import { User } from '../models/user/user';
 })
 export class ViewGameComponent implements OnInit {
     game_id;
-    user_id;
+    username;
     game: Game; 
 
     constructor(
@@ -25,7 +25,7 @@ export class ViewGameComponent implements OnInit {
         this.game_id = this.route.snapshot.paramMap.get('id');
         if (this.game_id)
             this.gameService.get$(this.game_id).subscribe(g => this.game = g);
-        this.user_id = localStorage.getItem("user_id"); 
+        this.username = localStorage.getItem("username"); 
         
         }
 

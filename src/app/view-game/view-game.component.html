@@ -3,8 +3,8 @@
         <div class="card" style="width: 18rem;">
             <img class="card-img-top" [src]="game.imageUrl" alt="the game in question">
             <div class="card-body">
-              <h5 class="card-title">{{ game.title }}</h5>
-              <p class="card-text">{{ game.price | currency:'USD':true }}</p>
+                <h5 class="card-title">{{ game.title }}</h5>
+                <p class="card-text">{{ game.price | currency:'USD':true }}</p>
                 <!-- <div *ngIf="appUser; else anonymousUser">
                     
                 </div>
@@ -12,7 +12,7 @@
                     Please create an account and sign in to rate or review
                 </ng-template>
                -->
-               <stars [gameId]="game_id" [userId]="user_id"></stars>
+                <stars [game_title]="game.title" [username]="username"></stars>
             </div>
         </div>
     </div>
@@ -20,9 +20,16 @@
         {{ game.description }}
     </div>
     <footer>
-        <!-- unclear what needs to happen- ngFor likely but not all cases 
-        {{ game.categories }}
-        {{ game.creators }}
-        {{ game.console_makers }} -->
+        <!-- Note we need to make Game attribute console_maker more specific, console_makers is simply a way to categorize games-->
+        <ul>
+
+            <li>Categories: {{ game.categories }}</li>
+            <li>Creators: {{ game.creators }}</li>
+            <li>consoles: {{ game.console_makers }}</li>
+        </ul>
+        <a routerLink="../">Go back to game list</a>
+
+
+
     </footer>
 </div>

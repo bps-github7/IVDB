@@ -7,7 +7,7 @@ export interface Game {
     description?: string,
     creators?: string,
     categories?: string,
-    console_Makers?: string,
+    console_makers?: string,
     console?: VG_Console;
 
 }
