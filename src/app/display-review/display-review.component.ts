@@ -20,8 +20,9 @@ export class DisplayReviewComponent implements OnInit {
         private route : ActivatedRoute) { 
         this.username = this.route.snapshot.paramMap.get("username");
         this.game_title = this.route.snapshot.paramMap.get("game_title");
-        this.reviewService.getGameReview(this.username, this.game_title).subscribe(res => {
-            this.review = res;
+        this.reviewService.getGameReview(this.username, this.game_title).subscribe((review : Review) => {
+            console.log("from w/in observable: " + review);
+            this.review = review;
         }
         )
     }

@@ -38,7 +38,7 @@ export class ReviewService {
                 this.exists = true;
             }
         });
-        console.log("review exists returns this : " + this.exists)
+        console.log("review_exists returns this : " + this.exists)
         return this.exists;
     }
 
@@ -46,7 +46,6 @@ export class ReviewService {
         /* Prevents users from accidentally overwriting existing ratings.
          */    
         if (this.review_exists(review)) {
-            console.log("got to this point (within setReviewHandler");
             if (confirm("users can only submit one review per game.\nSubmitting the current review will overwrite existing review. proceed anyways?")) {
                 return this.setReview(review);
             } 

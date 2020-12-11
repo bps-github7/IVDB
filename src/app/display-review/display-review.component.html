@@ -1,18 +1,18 @@
-<h3>{{ review.game_title | titlecase }}</h3>
+<h3>Review: {{ review.game_title | titlecase }}</h3>
 <p> {{ review.body }} </p>
 <h5>Game scores: </h5>
 <ul>
-    <li>Playability: {{review.playability}}</li>
-    <li>Replayability: {{review.replayability}}</li>
-    <li>Graphics: {{review.graphics}}</li>
-    <li>Audio: {{review.audio}}</li>
-    <li>Settings: {{review.settings}}</li>
-    <li>Characters: {{review.characters}}</li>
+    <li ngIf="review?.playability">Playability: {{review.playability}}</li>
+    <li ngIf="review?.replayability">Replayability: {{review.replayability}}</li>
+    <li ngIf="review?.graphics">Graphics: {{review.graphics}}</li>
+    <li ngIf="review?.audio">Audio: {{review.audio}}</li>
+    <li ngIf="review?.settings">Settings: {{review.settings}}</li>
+    <li ngIf="review?.characters">Characters: {{review.characters}}</li>
 </ul>
 <h5>Qualitative scores: </h5>
 <ul>
-    <li>Favorite parts: {{review.favorite_parts}}</li>
-    <li>Least favorite parts: {{review.least_favorite_parts}}</li>
-    <li>What could be improved: {{review.improvable}}</li>
-    <li>Comments: {{review.comments}}</li>
+    <li ngIf="review?.favorite_parts">Favorite parts: {{review.favorite_parts}}</li>
+    <li ngIf="review?.least_favorite_parts">Least favorite parts: {{review.least_favorite_parts}}</li>
+    <li ngIf="review?.improvable">What could be improved: {{review.improvable}}</li>
+    <li ngIf="review?.comments">Comments: {{review.comments}}</li>
 </ul>

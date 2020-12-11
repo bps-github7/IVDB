@@ -1,11 +1,8 @@
 import { Injectable } from '@angular/core';
-import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from '@angular/fire/firestore';
+import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
 import * as firebase from 'firebase';
 import { User } from 'src/app/models/user/user';
-import { Profile } from 'src/app/models/user/profile';
-import { Observable } from 'rxjs';
-import { map, pluck } from 'rxjs/operators';
-import { AngularFireAuth } from '@angular/fire/auth';
+import { map } from 'rxjs/operators';
 
 
 @Injectable({
@@ -18,16 +15,6 @@ export class UserService {
 
     constructor(private afs: AngularFirestore) {
      }
-
-
-     //I think u need to come back to here and really re think some of the decisions u made with 
-     //something is over complicating things back here
-
-     //keep getting hung up on bugs= uncaught in promise- this.user is undefined
-     // this is inhibiting progress all over the project.
-
-     
-
 
     save(user : firebase.User) {
         this.afs.firestore.doc(`users/${user.uid}`).get()
@@ -47,7 +34,9 @@ export class UserService {
         //this is a big mess but maybe will resolve this issue
         userRef.valueChanges().subscribe(doc => this.user = doc)
         const data = {
-            username : this.user.username,
+            displayName : this.user.username,
+            // if username comes from google/facebook or contains spaces, we need to strip these out
+            username : (this.user.username.includes(' ') ? this.user.username.split(' ').join('') : this.user.username),
             email : user.email,
             isAdmin: this.getPermissions(user),
             uid: user.uid
