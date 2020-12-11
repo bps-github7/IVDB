@@ -1,1 +1,10 @@
-<p>View-Ratings works!</p>
+<h3>Ratings by {{ username }}</h3>
+<p>sort by release date (asc/desc), rating amout, game category, game creator, game console</p>
+<input type="text" placeholder="filter by game title, categories, creators, consoles, console makers">
+<div>Search hints</div>
+<ul>
+    <li *ngFor="let s of stars">
+        <!-- star component mode="display" value="s.value" maybe redundant -->
+        {{s.game_title}} rating of {{ s.value | number }}
+    </li>
+</ul>

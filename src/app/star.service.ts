@@ -3,8 +3,10 @@ import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument 
 import { Observable } from 'rxjs';
 import { take } from 'rxjs/operators';
 import { Rating } from './models/content/rating';
-
-
+/* I'm not sure its pertinent that this service is in the root module anymore, since
+we found a new way to get username and gameotitle, and this is handled by the component logic
+anyhow...
+ */
 @Injectable({
   providedIn: 'root'
 })

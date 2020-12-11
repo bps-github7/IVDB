@@ -78,6 +78,7 @@ import { ViewAllRatingsComponent } from './view-all-ratings/view-all-ratings.com
 import { ViewAllReviewsComponent } from './view-all-reviews/view-all-reviews.component';
 import { ViewAllPostsComponent } from './view-all-posts/view-all-posts.component';
 import { ViewThreadsComponent } from './view-threads/view-threads.component';
+import { DisplayReviewComponent } from './display-review/display-review.component';
 
 
 @NgModule({
@@ -131,6 +132,7 @@ import { ViewThreadsComponent } from './view-threads/view-threads.component';
     ViewAllReviewsComponent,
     ViewAllPostsComponent,
     ViewThreadsComponent,
+    DisplayReviewComponent,
     ],
   imports: [
     AngularFireModule.initializeApp(environment.firebase),
@@ -184,6 +186,7 @@ import { ViewThreadsComponent } from './view-threads/view-threads.component';
 
         // where id refers to review-id
         { path: 'games/:game_title/review', component: EditReviewComponent, canActivate: [AuthGuard] },
+        { path: 'games/:game_title/:username/review', component: DisplayReviewComponent, canActivate: [AuthGuard] },
 
 
 

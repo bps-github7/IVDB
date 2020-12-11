@@ -1,0 +1,18 @@
+<h3>{{ review.game_title | titlecase }}</h3>
+<p> {{ review.body }} </p>
+<h5>Game scores: </h5>
+<ul>
+    <li>Playability: {{review.playability}}</li>
+    <li>Replayability: {{review.replayability}}</li>
+    <li>Graphics: {{review.graphics}}</li>
+    <li>Audio: {{review.audio}}</li>
+    <li>Settings: {{review.settings}}</li>
+    <li>Characters: {{review.characters}}</li>
+</ul>
+<h5>Qualitative scores: </h5>
+<ul>
+    <li>Favorite parts: {{review.favorite_parts}}</li>
+    <li>Least favorite parts: {{review.least_favorite_parts}}</li>
+    <li>What could be improved: {{review.improvable}}</li>
+    <li>Comments: {{review.comments}}</li>
+</ul>

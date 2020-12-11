@@ -1,1 +1,11 @@
-<p>view-reviews works!</p>
+<h3>Ratings by {{ username }}</h3>
+<p>sort by release date (asc/desc), rating amout, game category, game creator, game console</p>
+<input type="text" placeholder="filter by game title, categories, creators, consoles, console makers">
+<div>Search hints</div>
+<ul>
+    <li *ngFor="let s of reviews">
+        <!-- link to - display-review component-->
+        <a [routerLink]="['../../../../games/',s.username, s.game_title, 'review']">{{s.username}} review of
+            {{ s.game_title}}</a>
+    </li>
+</ul>
