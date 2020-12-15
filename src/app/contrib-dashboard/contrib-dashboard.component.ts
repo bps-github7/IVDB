@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Rating } from '../models/content/rating';
 import { Review } from '../models/content/Review';
-import { StarService } from '../star.service';
+import { RatingService } from '../common/services/rating.service';
 
 @Component({
   selector: 'app-contrib-dashboard',
@@ -17,8 +17,8 @@ export class ContribDashboardComponent implements OnInit {
 
     reviews: Review [];
     
-    constructor(private starService : StarService, private route : ActivatedRoute) {
-        this.starService.getUserStars(localStorage.getItem("user_id")).subscribe(p => this.ratings = p);
+    constructor(private ratingService : RatingService, private route : ActivatedRoute) {
+        this.ratingService.getUserStars(localStorage.getItem("user_id")).subscribe(p => this.ratings = p);
         this.user_id = route.snapshot.paramMap.get('id');
         this.username = route.snapshot.paramMap.get('username');
 

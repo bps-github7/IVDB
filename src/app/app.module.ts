@@ -8,17 +8,8 @@ import { HttpClientModule, HttpClient, HTTP_INTERCEPTORS } from '@angular/common
 import { AngularFireModule } from '@angular/fire';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { CustomFormsModule } from 'ng2-validation';
-// import { AngularFireDatabase } from '@angular/fire/database';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 
-//services AKA providers
-import { AuthService } from './common/services/auth.service';
-import { AuthGuard } from './common/services/auth-guard.service';
-import { AdminAuthGuard } from './common/services/admin-auth-guard.service';
-import { GameInfoService } from './common/services/gameinfo.service';
-import { GameService } from './common/services/game.service';
-import { UserAuthGuard } from './common/services/user-auth-guard.service';
-import { UserService } from './common/services/user.service';
 
 
 
@@ -52,10 +43,6 @@ import { CredentialFormControlComponent } from './form-controls/credential-form-
 import { DisableControlDirective } from './common/directives/disable-control.directive';
 import { ViewProfileComponent } from './view-profile/view-profile.component';
 import { EditProfileComponent } from './edit-profile/edit-profile.component';
-
-
-//environment
-import { environment } from 'src/environments/environment';
 import { EditPreferencesComponent } from './edit-preferences/edit-preferences.component';
 import { TdfMultiFormControlComponent } from './form-controls/tdf-multi-form-control/tdf-multi-form-control.component';
 import { PostComponent } from './post/post.component';
@@ -66,7 +53,6 @@ import { ConsoleComponent } from './console/console.component';
 import { ConsoleMakersComponent } from './console-makers/console-makers.component';
 import { ContribDashboardComponent } from './contrib-dashboard/contrib-dashboard.component';
 import { EditContributionsComponent } from './edit-contributions/edit-contributions.component';
-import { StarsComponent } from './stars/stars.component';
 import { ServicesModule } from './common/services/services.module';
 import { EditReviewComponent } from './edit-review/edit-review.component';
 import { NewsComponent } from './news/news.component';
@@ -79,6 +65,17 @@ import { ViewAllReviewsComponent } from './view-all-reviews/view-all-reviews.com
 import { ViewAllPostsComponent } from './view-all-posts/view-all-posts.component';
 import { ViewThreadsComponent } from './view-threads/view-threads.component';
 import { DisplayReviewComponent } from './display-review/display-review.component';
+import { DisplayRatingComponent } from './display-rating/display-rating.component';
+
+
+//environment
+import { environment } from 'src/environments/environment';
+
+//not sure why, but these are not getting detected from our service main module.
+import { AdminAuthGuard } from './common/services/admin-auth-guard.service';
+import { AuthGuard } from './common/services/auth-guard.service';
+import { ProvideRatingComponent } from './provide-rating/provide-rating.component';
+import { DisplayAverageRatingComponent } from './display-average-rating/display-average-rating.component';
 
 
 @NgModule({
@@ -121,7 +118,6 @@ import { DisplayReviewComponent } from './display-review/display-review.componen
     ConsoleComponent,
     ContribDashboardComponent,
     EditContributionsComponent,
-    StarsComponent,
     EditReviewComponent,
     NewsComponent,
     ContentDashboardComponent,
@@ -133,6 +129,9 @@ import { DisplayReviewComponent } from './display-review/display-review.componen
     ViewAllPostsComponent,
     ViewThreadsComponent,
     DisplayReviewComponent,
+    DisplayRatingComponent,
+    ProvideRatingComponent,
+    DisplayAverageRatingComponent,
     ],
   imports: [
     AngularFireModule.initializeApp(environment.firebase),

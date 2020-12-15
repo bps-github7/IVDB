@@ -2,9 +2,32 @@
 <p>sort by release date (asc/desc), rating amout, game category, game creator, game console</p>
 <input type="text" placeholder="filter by game title, categories, creators, consoles, console makers">
 <div>Search hints</div>
-<ul>
+<!-- <ul>
     <li *ngFor="let s of stars">
-        <!-- star component mode="display" value="s.value" maybe redundant -->
         {{s.game_title}} rating of {{ s.value | number }}
     </li>
-</ul>
+</ul> -->
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Game title</th>
+            <th>your rating</th>
+            <th>Average rating</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let s of stars">
+            <td>{{ s?.game_title }}</td>
+            <td>
+                <display-rating [value]="s.value"></display-rating>
+                <!-- {{ s?.value }} -->
+            </td>
+            <td>
+                <!-- <rate mode="avg" game_title="s.game_title"></rate> -->
+            </td>
+            <td (click)="deleteRating(username, s.game_title)"><a>Delete rating</a></td>
+        </tr>
+    </tbody>
+</table>

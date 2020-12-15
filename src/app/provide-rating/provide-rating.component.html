@@ -1,4 +1,5 @@
 <div *ngIf="username; else anonymousUser">
+    <!-- if user signed in, and mode set to provide- allow them to provide/ edit rating -->
     <form class="rating">
         <ng-container *ngFor="let num of [5, 4, 3, 2, 1]">
             <input (click)="starHandler(num)" [(ngModel)]="stars.value" [id]="'star'+num" [value]="num" name="rating"
@@ -9,7 +10,6 @@
 </div>
 
 <ng-template #anonymousUser>
-
     <form class="rating">
         <ng-container *ngFor="let num of [5, 4, 3, 2, 1]">
             <!-- allows guest users to try to submit rating -->
@@ -19,3 +19,4 @@
         </ng-container>
     </form>
 </ng-template>
+

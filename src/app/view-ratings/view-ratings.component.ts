@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Rating } from '../models/content/rating';
-import { StarService } from '../star.service';
+import { RatingService } from '../common/services/rating.service';
 
 @Component({
   selector: 'app-view-ratings',
@@ -14,13 +14,19 @@ export class ViewRatingsComponent implements OnInit {
     stars : Rating [];
 
 
-    constructor(private starService : StarService, private router : Router, private route : ActivatedRoute) {
-        this.starService.getUserStars(this.username).subscribe(res => {
+    constructor(private ratingService : RatingService, private router : Router, private route : ActivatedRoute) {
+        this.ratingService.getUserStars(this.username).subscribe(res => {
             this.stars = res;
         });
 
     }
     
     ngOnInit(): void { }
+
+    deleteRating(username :  string, game_title : string) {
+        /* Event handler for allowing users to delete a rating.
+         */
+        this.ratingService.deleteRating(username, game_title)
+    }
 
 }

@@ -1,5 +1,4 @@
 import { ModuleWithProviders, NgModule } from '@angular/core';
-import { StarService } from 'src/app/star.service';
 import { AdminAuthGuard } from './admin-auth-guard.service';
 import { AuthGuard } from './auth-guard.service';
 import { AuthService } from './auth.service';
@@ -9,6 +8,7 @@ import { NewsService } from './news.service';
 import { PreferencesService } from './preferences.service';
 import { ProfileService } from './profile.service';
 import { RatingService } from './rating.service';
+import { ReviewService } from './review.service';
 import { ThreadsService } from './threads.service';
 import { UserAuthGuard } from './user-auth-guard.service';
 import { UserService } from './user.service';
@@ -40,8 +40,8 @@ export class ServicesModule {
                 // app wide resource services
                 ThreadsService,
                 RatingService,
+                ReviewService,
                 NewsService,
-                StarService, // perhaps this is an issue because its provided in root module?
                 GameInfoService,
                 GameService,
     
