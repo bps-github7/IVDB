@@ -30,6 +30,10 @@ export class GameService {
 
     }
 
+    get_by_title(game_title : string) {
+        return this.db.collection('games', (ref) => ref.where('title', '==', game_title))
+    }
+
     update(gameId, game) {
         return this.get(gameId).update(game);
     }

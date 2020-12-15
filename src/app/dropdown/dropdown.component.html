@@ -75,18 +75,16 @@
                                 [routerLink]="['/sign_in/create_profile/', appUser?.uid]">Profile</a></li>
                         <li><a href="#" [routerLink]="['/preferences', appUser?.uid, appUser?.username]">Preferences</a>
                         </li>
-                        <li><a href="#"
-                                [routerLink]="['/contributions', appUser?.uid, appUser?.username]">Contributions</a>
+                        <li><a href="#" [routerLink]="['/contributions', appUser?.username]">Contributions</a>
                         </li>
                     </ul>
                 </li>
-                <li class="dd-menu-trigger"><a
-                        [routerLink]="['/contrib-dashboard/', appUser?.uid, appUser?.username]">Contribute</a>
+                <li class="dd-menu-trigger"><a [routerLink]="['/contrib-dashboard/',  appUser?.username]">Contribute</a>
                     <ul class="sub-menu">
                         <li class="sub-sub-top"><a
-                                [routerLink]="['/contrib-dashboard/ratings',appUser?.uid, appUser?.username]">Rate</a>
+                                [routerLink]="['/contrib-dashboard/ratings', appUser?.username]">Rate</a>
                         </li>
-                        <li><a [routerLink]="['/contrib-dashboard/reviews',appUser?.uid, appUser?.username]">Review</a>
+                        <li><a [routerLink]="['/contrib-dashboard/reviews', appUser?.username]">Review</a>
                         </li>
                     </ul>
                 </li>

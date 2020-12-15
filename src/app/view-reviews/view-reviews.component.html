@@ -11,7 +11,8 @@
 <ul>
     <li *ngFor="let s of reviews">
         <!-- link to - display-review component-->
-        <a [routerLink]="['../../../../games/',s.username, s.game_title, 'review']">{{s.username}}'s review of
+        <!-- contrib-dashboard/reviews/:username/:game_title -->
+        <a [routerLink]="s.game_title">{{s.username}}'s review of
             {{ s.game_title}}</a>
     </li>
 </ul>

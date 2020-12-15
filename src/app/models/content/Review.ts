@@ -2,8 +2,7 @@
 other than that, string value fields are for reference to other users, where as number value fields
 are for that and informing user reccomendations. 
  */
-export interface Review {
-    
+export interface Review {   
     username : string,
     game_title : string,
     body?: string,

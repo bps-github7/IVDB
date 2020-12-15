@@ -186,7 +186,6 @@ import { DisplayReviewComponent } from './display-review/display-review.componen
 
         // where id refers to review-id
         { path: 'games/:game_title/review', component: EditReviewComponent, canActivate: [AuthGuard] },
-        { path: 'games/:game_title/:username/review', component: DisplayReviewComponent, canActivate: [AuthGuard] },
 
 
 
@@ -202,9 +201,10 @@ import { DisplayReviewComponent } from './display-review/display-review.componen
         //routes for logged in users
         // { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard] },
         { path: 'forum/create-thread', component: CreateThreadComponent, canActivate: [AuthGuard] },
-        { path: 'contrib-dashboard/:id/:username', component: ContribDashboardComponent,  canActivate: [AuthGuard]  },
-        { path: 'contrib-dashboard/ratings/:id/:username', component: ViewRatingsComponent,  canActivate: [AuthGuard]  },
-        { path: 'contrib-dashboard/reviews/:id/:username', component: ViewReviewsComponent, canActivate: [AuthGuard] },
+        { path: 'contrib-dashboard/ratings/:username', component: ViewRatingsComponent,  canActivate: [AuthGuard]  },
+        { path: 'contrib-dashboard/reviews/:username/:game_title', component: DisplayReviewComponent, canActivate: [AuthGuard] },
+        { path: 'contrib-dashboard/reviews/:username', component: ViewReviewsComponent, canActivate: [AuthGuard] },
+        { path: 'contrib-dashboard/:username', component: ContribDashboardComponent,  canActivate: [AuthGuard]  },
 
         
         { path: 'content-dashboard', component: ContentDashboardComponent },

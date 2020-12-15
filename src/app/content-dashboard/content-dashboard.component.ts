@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-content-dashboard',
@@ -8,9 +9,11 @@ import { Component, OnInit } from '@angular/core';
 export class ContentDashboardComponent implements OnInit {
 
     user_id: any;
+    username : string;
 
-    constructor() {
-        this.user_id = localStorage.getItem("user_id")
+    constructor(private route : ActivatedRoute) {
+        this.user_id = route.snapshot.paramMap.get('id');
+        this.username = route.snapshot.paramMap.get('username');
     }
 
   ngOnInit(): void {
