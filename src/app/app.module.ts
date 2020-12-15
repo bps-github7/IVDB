@@ -76,6 +76,7 @@ import { AdminAuthGuard } from './common/services/admin-auth-guard.service';
 import { AuthGuard } from './common/services/auth-guard.service';
 import { ProvideRatingComponent } from './provide-rating/provide-rating.component';
 import { DisplayAverageRatingComponent } from './display-average-rating/display-average-rating.component';
+import { GameCardComponent } from './game-card/game-card.component';
 
 
 @NgModule({
@@ -132,6 +133,7 @@ import { DisplayAverageRatingComponent } from './display-average-rating/display-
     DisplayRatingComponent,
     ProvideRatingComponent,
     DisplayAverageRatingComponent,
+    GameCardComponent,
     ],
   imports: [
     AngularFireModule.initializeApp(environment.firebase),

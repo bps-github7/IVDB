@@ -1,0 +1,21 @@
+<!-- what goes in all these routerlink really depends on where the user looks at this from... tricky -->
+<div class="card-body">
+    <img [src]="game.imageUrl" alt=`picture of the cover of ${game.title}`>
+    <h3><a [routerLink]="">{{game.title}}</a></h3>
+    <p>{{game.description}}</p>
+    <span>Show more info</span>
+    <ul class="game-info">
+        <li>Average Rating: </li>
+        <li>Average Review Score: </li>
+        <li>Average price: </li>
+        <li>Categories: {{ game.categories }}</li>
+        <li>Creators: {{ game.creators }}</li>
+        <li>consoles: {{ game.console_makers }}</li>
+        <li> <a routerLink="">Buy link</a></li>
+        <li> <a routerLink="">Review link</a></li>
+    </ul>
+</div>
+
+<!-- Note- to get live server extension to help you troubleshoot
+component css, just treat the file like a true html file rather than 
+a piece of the component: add html, head and body tags, link the style sheet, etc... -->

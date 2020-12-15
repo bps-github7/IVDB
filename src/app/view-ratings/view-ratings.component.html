@@ -25,9 +25,9 @@
                 <!-- {{ s?.value }} -->
             </td>
             <td>
-                <!-- <rate mode="avg" game_title="s.game_title"></rate> -->
+                <display-average-rating [game_title]='s.game_title'></display-average-rating>
             </td>
-            <td (click)="deleteRating(username, s.game_title)"><a>Delete rating</a></td>
+            <td (click)="deleteRating(username, s.game_title)"><button>Delete rating</button></td>
         </tr>
     </tbody>
 </table>

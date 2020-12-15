@@ -1,4 +1,4 @@
-<!-- if mode is set to display- disable rating, just show the rating already provided -->
+<!--Customized version of rating component where new ratings can't be placed--->
 <form class="rating">
     <ng-container *ngFor="let num of [5, 4, 3, 2, 1]">
         <input disabled [(ngModel)]="value" [id]="'star'+num" [value]="num" name="rating" type="radio" />

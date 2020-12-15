@@ -29,10 +29,10 @@ export class RatingService {
     }
 
 
-    getAll$(game_title : string) : Observable<Rating []> {
+    getAll$(game_title : string) {
         /* Given a game_title, returns an observable of all ratings for the specific game
         in the ratings collection of our firestore db */
-        const ratingRef = this.afs.collection<Rating>('ratings', (ref) => ref.where('game_title', '==', game_title));
+        const ratingRef = this.afs.collection('ratings', (ref) => ref.where('game_title', '==', game_title));
         return ratingRef.valueChanges();
     }
 
