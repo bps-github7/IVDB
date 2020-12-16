@@ -1,5 +1,26 @@
-div .card-body {
+.card-body {
+    display: none;
     border: 2px solid black;
-    height: 500px;
-    width: 800px;
+    height: 300px;
+    width: 400px;
 }
+
+.card-trigger:hover+.card-body {
+    display: block;
+    position: relative;
+    top: 0px;
+    right: 15px;
+}
+
+.card-body:hover {
+    display: block;
+}
+
+.card-body .game-info {
+    display: none;
+}
+
+.card-body .dd-trigger:hover + .game-info {
+    display: block;
+}
+
