@@ -25,7 +25,7 @@
             <ul class="sub-menu">
                 <li><a routerLink="/forum/view-threads">View Threads</a></li>
                 <li><a routerLink="/forum/create-thread">Create a Thread</a></li>
-                <li class="sub-sub-menu-trigger"><a [routerLink]="['forum/my-posts/', appUser.username]">My posts</a>
+                <li class="sub-sub-menu-trigger"><a [routerLink]="['forum/my-posts/', appUser?.username]">My posts</a>
                     <ul class="sub-sub-menu">
                         <!--  -->
                         <li class="sub-sub-top"><a href="#">Thread 1</a></li>

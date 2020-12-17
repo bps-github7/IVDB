@@ -4,6 +4,7 @@ import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument 
 // import { map, take } from 'rxjs/operators';
 import { Game } from '../../models/content/Game';
 import { Observable } from 'rxjs';
+import { take } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -30,8 +31,10 @@ export class GameService {
 
     }
 
-    get_by_title(game_title : string) {
-        return this.db.collection('games', (ref) => ref.where('title', '==', game_title))
+    get_by_title$(game_title : string) : Observable<Game []> {
+        /* Not sure why i cant do Observable<Game> 
+        */
+        return this.db.collection<Game>('games', (ref) => ref.where('title', '==', game_title)).valueChanges();
     }
 
     update(gameId, game) {

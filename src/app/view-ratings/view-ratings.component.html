@@ -19,7 +19,8 @@
     </thead>
     <tbody>
         <tr *ngFor="let s of stars">
-            <td>{{ s?.game_title }}</td>
+            <td><game-card game_title="s.game_title"></game-card>></td>
+            
             <td>
                 <display-rating [value]="s.value"></display-rating>
                 <!-- {{ s?.value }} -->

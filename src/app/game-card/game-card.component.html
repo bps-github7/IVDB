@@ -1,55 +1,15 @@
-<!-- what goes in all these routerlink really depends on where the user looks at this from... tricky -->
-<html>
-
-    <head>
-        <link rel="stylesheet" href="game-card.component.css">
-    </head>
-
-    <body>
-        <a class="card-trigger" href="#">Click here for content</a>
-        <div class="card-body">
-            <img [src]="game.imageUrl" alt=`picture of the cover of ${game.title}`>
-            <h3><a [routerLink]="">{{game.title}}</a></h3>
-            <p>{{game.description}}</p>
-            <span class="dd-trigger">Show more info</span>
-            <ul class="game-info">
-                <li>Average Rating: </li>
-                <li>Average Review Score: </li>
-                <li>Categories: {{ game.categories }}</li>
-                <li>Creators: {{ game.creators }}</li>
-                <li>consoles: {{ game.console_makers }}</li>
-            </ul>
-        </div>
-
-    </body>
-
-</html>
-<!-- <!DOCTYPE html>
-<html lang="en">
-
-    <head>
-        <title>Bootstrap Example</title>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-    </head>
-
-    <body>
-
-        <div class="container">
-            <a href="#" title="Header" data-toggle="popover" data-placement="left" data-content="Content">Left</a>
-            <a href="#" title="Header" data-toggle="popover" data-placement="right" data-content="Content">Right</a>
-        </div>
-
-        <script>
-            $(document).ready(function () {
-                $('[data-toggle="popover"]').popover();
-            });
-        </script>
-
-    </body>
-
-</html> -->
+<a class="card-trigger" href="#">{{ game.title }}</a>
+<div class="card-body">
+    <img [src]="game.imageUrl" alt=`picture of the cover of ${game.title}`>
+    <h3><a [routerLink]="">{{game.title}}</a></h3>
+    <p>{{game.description}}</p>
+    <span class="dd-trigger">Show more info</span>
+    <ul class="game-info">
+        <!-- Should include these datapoints in the game document -->
+        <li>Average Rating: </li>
+        <li>Average Review Score: </li>
+        <li>Categories: {{ game.categories }}</li>
+        <li>Creators: {{ game.creators }}</li>
+        <li>consoles: {{ game.console_makers }}</li>
+    </ul>
+</div>
