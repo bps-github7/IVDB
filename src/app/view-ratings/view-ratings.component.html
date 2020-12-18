@@ -19,8 +19,11 @@
     </thead>
     <tbody>
         <tr *ngFor="let s of stars">
-            <td><game-card game_title="s.game_title"></game-card>></td>
-            
+            <td>
+                <!-- {{s.game_title}} -->
+                <game-card [game_title]='s.game_title'></game-card>
+            </td>
+
             <td>
                 <display-rating [value]="s.value"></display-rating>
                 <!-- {{ s?.value }} -->

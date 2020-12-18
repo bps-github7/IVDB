@@ -6,29 +6,29 @@ import { Game } from '../models/content/Game';
 import { Review } from '../models/content/Review';
 
 @Component({
-  selector: 'app-display-review',
-  templateUrl: './display-review.component.html',
-  styleUrls: ['./display-review.component.css']
+    selector: 'app-display-review',
+    templateUrl: './display-review.component.html',
+    styleUrls: ['./display-review.component.css']
 })
 export class DisplayReviewComponent implements OnInit {
 
     username: string;
     game_title: string;
-    review : Review;
-    game : Game;
+    review: Review;
+    game: Game;
 
     constructor(
-        private reviewService : ReviewService,
-        private router : Router,
-        private route : ActivatedRoute,
-        private gameService : GameService) { 
+        private reviewService: ReviewService,
+        private router: Router,
+        private route: ActivatedRoute,
+        private gameService: GameService) {
 
-            this.username = this.route.snapshot.paramMap.get("username");
+        this.username = this.route.snapshot.paramMap.get("username");
         this.game_title = this.route.snapshot.paramMap.get("game_title");
-        this.gameService.get_by_title$(this.game_title).subscribe((game : any) => {
-            this.game = game;
-        });
-        this.reviewService.getGameReview(this.username, this.game_title).subscribe((review : Review) => {
+        // this.gameService.get_by_title$(this.game_title).subscribe((game : any) => {
+        //     this.game = game;
+        // });
+        this.reviewService.getGameReview(this.username, this.game_title).subscribe((review: Review) => {
             this.review = review;
         }
         )

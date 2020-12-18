@@ -1,26 +1,26 @@
 .card-body {
-    display: none;
-    border: 2px solid black;
-    height: 300px;
-    width: 400px;
+  display: none;
+  border: 2px solid black;
+  height: 300px;
+  width: 400px;
+  z-index: 2;
 }
 
 .card-trigger:hover+.card-body {
-    display: block;
-    position: relative;
-    top: 0px;
-    right: 15px;
+  display: block;
+  position: relative;
+  top: 0px;
+  right: 15px;
 }
 
 .card-body:hover {
-    display: block;
+  display: block;
 }
 
 .card-body .game-info {
-    display: none;
+  display: none;
 }
 
-.card-body .dd-trigger:hover + .game-info {
-    display: block;
+.card-body .dd-trigger:hover+.game-info {
+  display: block;
 }
-

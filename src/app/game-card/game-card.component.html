@@ -1,15 +1,29 @@
-<a class="card-trigger" href="#">{{ game.title }}</a>
+<!-- Can use attribute binding to inject game.title into alt attribute via component logic -->
+
+<!-- <a class="card-trigger" href="#">{{ game.title }}</a>
 <div class="card-body">
-    <img [src]="game.imageUrl" alt=`picture of the cover of ${game.title}`>
+    <img [src]="game.imageUrl" alt="picture of the game in question">
     <h3><a [routerLink]="">{{game.title}}</a></h3>
     <p>{{game.description}}</p>
     <span class="dd-trigger">Show more info</span>
     <ul class="game-info">
-        <!-- Should include these datapoints in the game document -->
         <li>Average Rating: </li>
         <li>Average Review Score: </li>
         <li>Categories: {{ game.categories }}</li>
         <li>Creators: {{ game.creators }}</li>
         <li>consoles: {{ game.console_makers }}</li>
+    </ul>
+</div> -->
+
+<a class="card-trigger" href="#">{{ game_title }}</a>
+<div class="card-body">
+
+    <img src="#" alt="picture of the game in question" />
+    <h3><a [routerLink]="">{{game_title}}</a></h3>
+    <p>Some stuff happens and you have fun</p>
+    <span class="dd-trigger">Show more info</span>
+    <ul class="game-info">
+        <li>Average Rating: </li>
+        <li>Average Review Score: </li>
     </ul>
 </div>

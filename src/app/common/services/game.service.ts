@@ -7,34 +7,34 @@ import { Observable } from 'rxjs';
 import { take } from 'rxjs/operators';
 
 @Injectable({
-  providedIn: 'root'
+    providedIn: 'root'
 })
 export class GameService {
 
-        gamesCollection : AngularFirestoreCollection<Game>;
-        gameDocument : AngularFirestoreDocument<Game>;
-        games$ : Observable<Game[]>;
-    
+    gamesCollection: AngularFirestoreCollection<Game>;
+    gameDocument: AngularFirestoreDocument<Game>;
+    games$: Observable<Game[]>;
+
 
     constructor(private db: AngularFirestore) {
         this.gamesCollection = this.db.collection('games');
-        this.games$ = this.gamesCollection.valueChanges({idField : 'id'});
+        this.games$ = this.gamesCollection.valueChanges({ idField: 'id' });
     }
 
     //two seperate get methods for returning either firestoreDocument or Observable
-    get(gameId) : AngularFirestoreDocument<Game> {
-         return this.db.doc('games/' + gameId);
+    get(gameId): AngularFirestoreDocument<Game> {
+        return this.db.doc('games/' + gameId);
     }
 
-    get$(gameId) : Observable<Game> {
+    get$(gameId): Observable<Game> {
         return this.db.doc('games/' + gameId).valueChanges();
 
     }
 
-    get_by_title$(game_title : string) : Observable<Game []> {
-        /* Not sure why i cant do Observable<Game> 
+    get_id_by_title(game_title: string) {
+        /* takes a game_title and returns a title  
         */
-        return this.db.collection<Game>('games', (ref) => ref.where('title', '==', game_title)).valueChanges();
+        return this.db.collection<Game>('games', (ref) => ref.where('title', '==', game_title)).valueChanges({ idField: 'id' });
     }
 
     update(gameId, game) {
