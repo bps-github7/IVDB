@@ -13,7 +13,7 @@ import { take } from 'rxjs/operators';
 export class GameFormComponent implements OnInit {
     game: any={};
     gameInfo;
-    id;
+    game_title;
 
     constructor(
         private gameInfoService: GameInfoService,
@@ -23,11 +23,11 @@ export class GameFormComponent implements OnInit {
         this.gameInfo = gameInfoService.gameInfo$.subscribe(resp => this.gameInfo = resp)
         
         
-        this.id = this.route.snapshot.paramMap.get('id');
+        this.game_title = this.route.snapshot.paramMap.get('game-title');
         
-        if (this.id)
+        if (this.game_title)
             //you assigned this twice here- is that nessecary/ non-problematic?
-            this.game = this.gameService.get$(this.id).subscribe(g =>this.game = g);
+            this.game = this.gameService.get$(this.game_title).subscribe(g =>this.game = g);
 
     }
 
@@ -35,7 +35,7 @@ export class GameFormComponent implements OnInit {
     }
 
     save(game) {
-        if(this.id) this.gameService.update(this.id, game);
+        if(this.game_title) this.gameService.update(this.game_title, game);
         else this.gameService.create(game);
         this.router.navigate(['/admin/game']);
     }
@@ -43,7 +43,7 @@ export class GameFormComponent implements OnInit {
     delete() {
         if (!confirm('Are you sure that you want to delete this game?')) return;
         
-        this.gameService.delete(this.id);
+        this.gameService.delete(this.game_title);
         this.router.navigate(['/admin/game']);
     }
 

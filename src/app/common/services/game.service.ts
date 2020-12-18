@@ -18,37 +18,33 @@ export class GameService {
 
     constructor(private db: AngularFirestore) {
         this.gamesCollection = this.db.collection('games');
-        this.games$ = this.gamesCollection.valueChanges({idField : 'id'});
+        this.games$ = this.gamesCollection.valueChanges();
     }
 
     //two seperate get methods for returning either firestoreDocument or Observable
-    get(gameId) : AngularFirestoreDocument<Game> {
-         return this.db.doc('games/' + gameId);
+    get(game_title) : AngularFirestoreDocument<Game> {
+         return this.db.doc('games/' + game_title);
     }
 
-    get$(gameId) : Observable<Game> {
-        return this.db.doc('games/' + gameId).valueChanges();
+    get$(game_title) : Observable<Game> {
+        return this.db.doc('games/' + game_title).valueChanges();
 
     }
 
-    get_by_title$(game_title : string) : Observable<Game []> {
-        /* Not sure why i cant do Observable<Game> 
-        */
-        return this.db.collection<Game>('games', (ref) => ref.where('title', '==', game_title)).valueChanges();
-    }
 
-    update(gameId, game) {
-        return this.get(gameId).update(game);
+    update(game_title, game) {
+        return this.get(game_title).update(game);
     }
 
     create(game) {
-        // return this.db.list('/games').push(game);
-        return this.gamesCollection.add(game);
+        const docPath = `games/${game.title}`;
+        
+        return this.gamesCollection.doc(docPath).set(game);
     }
 
-    delete(gameId) {
-        // this.db.object('/games/' + gameId).remove();
-        return this.get(gameId).delete();
+    delete(game_title) {
+        // this.db.object('/games/' + game_title).remove();
+        return this.get(game_title).delete();
     }
 
     getAll$() {

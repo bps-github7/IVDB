@@ -28,7 +28,6 @@ export class GameComponent implements OnInit, OnDestroy {
         this.filteredGames = (query) ?
             this.games.filter(p => p.title.toLowerCase().includes(query.toLowerCase())) :
             this.games;
-        console.log(query);
     }
 
     ngOnDestroy(): void {

@@ -25,7 +25,7 @@ export class DisplayReviewComponent implements OnInit {
 
             this.username = this.route.snapshot.paramMap.get("username");
         this.game_title = this.route.snapshot.paramMap.get("game_title");
-        this.gameService.get_by_title$(this.game_title).subscribe((game : any) => {
+        this.gameService.get$(this.game_title).subscribe((game : any) => {
             this.game = game;
         });
         this.reviewService.getGameReview(this.username, this.game_title).subscribe((review : Review) => {
