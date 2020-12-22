@@ -14,16 +14,17 @@
         <li>consoles: {{ game.console_makers }}</li>
     </ul>
 </div> -->
+<div class="container">
+    <a class="card-trigger" href="#">{{ game_title }}</a>
+    <div class="card-body">
 
-<a class="card-trigger" href="#">{{ game_title }}</a>
-<div class="card-body">
-
-    <img src="#" alt="picture of the game in question" />
-    <h3><a [routerLink]="">{{game_title}}</a></h3>
-    <p>Some stuff happens and you have fun</p>
-    <span class="dd-trigger">Show more info</span>
-    <ul class="game-info">
-        <li>Average Rating: </li>
-        <li>Average Review Score: </li>
-    </ul>
+        <img src="#" alt="picture of the game in question" />
+        <h3><a [routerLink]="">{{game_title}}</a></h3>
+        <p>Some stuff happens and you have fun</p>
+        <span class="dd-trigger">Show more info</span>
+        <ul class="game-info">
+            <li>Average Rating: </li>
+            <li>Average Review Score: </li>
+        </ul>
+    </div>
 </div>
