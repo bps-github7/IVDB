@@ -1,17 +1,22 @@
 <h3>{{username}}'s contribution dashboard</h3>
 
+<h2> user_id hjere: {{user_id}} </h2>
+
 <zippy title="Ratings">
     <ul>
         <li *ngFor="let r of ratings">
-            <!-- /maybe we should use username_gameName as path to docs? -->
-            {{ r.value }}
+            <!-- {{r.game_title}} : {{ r.value }} -->
+            {{r.game_title}} : <display-rating [value]="r.value"></display-rating>
+            <!-- <br> -->
         </li>
     </ul>
 </zippy>
 
 <zippy title="Reviews">
     <ul>
-        <li>Some content</li>
+        <li *ngFor="let r of reviews">
+            <a routerLink="">{{r.game_title}}</a>
+        </li>
     </ul>
 </zippy>
 

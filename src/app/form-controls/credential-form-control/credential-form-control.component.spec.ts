@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { CredentialFormControlComponent } from './credential-form-control.component';
 
@@ -6,7 +6,7 @@ describe('CredentialFormControlComponent', () => {
   let component: CredentialFormControlComponent;
   let fixture: ComponentFixture<CredentialFormControlComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ CredentialFormControlComponent ]
     })

@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { ConsoleMakersComponent } from './console-makers.component';
 
@@ -6,7 +6,7 @@ describe('ConsoleMakersComponent', () => {
   let component: ConsoleMakersComponent;
   let fixture: ComponentFixture<ConsoleMakersComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ ConsoleMakersComponent ]
     })

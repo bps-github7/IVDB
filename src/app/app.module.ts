@@ -78,6 +78,7 @@ import { ProvideRatingComponent } from './provide-rating/provide-rating.componen
 import { DisplayAverageRatingComponent } from './display-average-rating/display-average-rating.component';
 import { GameCardComponent } from './game-card/game-card.component';
 import { CarouselComponent } from './carousel/carousel.component';
+import { CommentSectionComponent } from './comment-section/comment-section.component';
 
 
 @NgModule({
@@ -136,6 +137,7 @@ import { CarouselComponent } from './carousel/carousel.component';
     DisplayAverageRatingComponent,
     GameCardComponent,
     CarouselComponent,
+    CommentSectionComponent,
     ],
   imports: [
     AngularFireModule.initializeApp(environment.firebase),
@@ -148,89 +150,64 @@ import { CarouselComponent } from './carousel/carousel.component';
     CustomFormsModule,
     ServicesModule.forRoot(),
     RouterModule.forRoot([
-        //routes asscesible to annoymous users
-
-        //temporarily swapped this for learning css. conveninece.
-        { path: '', component: HomeComponent },
-
-        //note all the inconsistencies in your routing- camel case here, pascal case there. NOOO!
-        
-        { path: 'sign_in/createAccount/forgotPassword', component: ForgotPasswordComponent },
-        { path: 'sign_in/createAccount', component: CreateAccountComponent},
-        { path: 'sign_in', component: SignInComponent },
-        { path: 'search', component: SearchComponent },
-        // On deployment, change uid here to displayname to be user and search friendlier
-        { path: 'sign_in/create_profile/:uid', component: EditProfileComponent, canActivate: [AuthGuard]},
-        { path: 'profile/:uid/:username', component: ViewProfileComponent, canActivate: [AuthGuard] },
-        //should delete this at somepoint- for now its a fail safe mechanism.
-        { path: 'profile/:uid', component: ViewProfileComponent, canActivate: [AuthGuard] },
-        
-        { path: 'preferences/:uid/:username', component: EditPreferencesComponent, canActivate: [AuthGuard]},
-        { path: 'preferences/:uid', component: EditPreferencesComponent, canActivate: [AuthGuard]},
-        { path: 'contributions/:uid/:username', component: EditContributionsComponent, canActivate: [AuthGuard]},
-
-
-
-
-        //you'll see more on these pages if youre signed in, but can view as anonymous user.
-        { path: 'forum', component: ForumComponent },
-        { path: 'forum/view-threads/:thread-name', component: ViewThreadsComponent },
-        { path: 'forum/view-threads', component: ViewThreadsComponent },
-        { path: 'forum/create-thread', component: CreateThreadComponent },
-        //should we break it down even more? create post, view post? probably not, at least in router.
-        
-        //should use a query param, pull up view-all-posts but with search term as current user.
-        { path: 'forum/my-posts/:id', component: ViewAllPostsComponent },
-
-
-
-        { path: 'games', component: GamesComponent },        
-        { path: 'games/:id', component: ViewGameComponent },
-
-        // where id refers to review-id
-        { path: 'games/:game_title/review', component: EditReviewComponent, canActivate: [AuthGuard] },
-
-
-
-        { path: 'gaming-index', component: GamingIndexComponent },
-        { path: 'gaming-index/creators/:creator', component: CreatorsComponent },
-        { path: 'gaming-index/creators', component: CreatorsComponent },
-        { path: 'gaming-index/categories/:category', component: CategoriesComponent },
-        { path: 'gaming-index/categories', component: CategoriesComponent },
-        { path: 'gaming-index/console-makers/:name/:qualified_name', component: ConsoleComponent },
-        { path: 'gaming-index/console-makers/:name', component: ConsoleMakersComponent },
-        { path: 'gaming-index/console-makers', component: ConsoleMakersComponent },
-
-        //routes for logged in users
-        // { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard] },
-        { path: 'forum/create-thread', component: CreateThreadComponent, canActivate: [AuthGuard] },
-        { path: 'contrib-dashboard/ratings/:username', component: ViewRatingsComponent,  canActivate: [AuthGuard]  },
-        { path: 'contrib-dashboard/reviews/:username/:game_title', component: DisplayReviewComponent, canActivate: [AuthGuard] },
-        { path: 'contrib-dashboard/reviews/:username', component: ViewReviewsComponent, canActivate: [AuthGuard] },
-        { path: 'contrib-dashboard/:username', component: ContribDashboardComponent,  canActivate: [AuthGuard]  },
-
-        
-        { path: 'content-dashboard', component: ContentDashboardComponent },
-        { path: 'content-dashboard/watchlists', component: WatchlistsComponent },
-        { path: 'content-dashboard/streams', component: StreamingComponent },
-        { path: 'content-dashboard/news', component: NewsComponent },
-        { path: 'content-dashboard/recently-posted', component: RecentlyPostedComponent },
-        { path: 'content-dashboard/recently-posted/ratings', component: ViewAllRatingsComponent },
-        { path: 'content-dashboard/recently-posted/reviews', component: ViewAllReviewsComponent },
-        { path: 'content-dashboard/recently-posted/posts', component: ViewAllPostsComponent },
-
-
-        
-       
-        // admin-only routes: probably dont need admin/home TBT
-        { path: 'admin/game/new', component: GameFormComponent, canActivate: [AuthGuard, AdminAuthGuard]},
-        { path: 'admin/game/:id', component: GameFormComponent, canActivate: [AuthGuard, AdminAuthGuard]},
-        { path: 'admin/game', component: GameComponent,  canActivate: [AuthGuard, AdminAuthGuard]},
-
-
-        //wildcard for fallthrough cases.
-        { path: '**', component: NotFoundComponent }
-    ])
+    //routes asscesible to annoymous users
+    //temporarily swapped this for learning css. conveninece.
+    { path: '', component: HomeComponent },
+    //note all the inconsistencies in your routing- camel case here, pascal case there. NOOO!
+    { path: 'sign_in/createAccount/forgotPassword', component: ForgotPasswordComponent },
+    { path: 'sign_in/createAccount', component: CreateAccountComponent },
+    { path: 'sign_in', component: SignInComponent },
+    { path: 'search', component: SearchComponent },
+    // On deployment, change uid here to displayname to be user and search friendlier
+    { path: 'sign_in/create_profile/:uid', component: EditProfileComponent, canActivate: [AuthGuard] },
+    { path: 'profile/:uid/:username', component: ViewProfileComponent, canActivate: [AuthGuard] },
+    //should delete this at somepoint- for now its a fail safe mechanism.
+    { path: 'profile/:uid', component: ViewProfileComponent, canActivate: [AuthGuard] },
+    { path: 'preferences/:uid/:username', component: EditPreferencesComponent, canActivate: [AuthGuard] },
+    { path: 'preferences/:uid', component: EditPreferencesComponent, canActivate: [AuthGuard] },
+    { path: 'contributions/:uid/:username', component: EditContributionsComponent, canActivate: [AuthGuard] },
+    //you'll see more on these pages if youre signed in, but can view as anonymous user.
+    { path: 'forum', component: ForumComponent },
+    { path: 'forum/view-threads/:thread-name', component: ViewThreadsComponent },
+    { path: 'forum/view-threads', component: ViewThreadsComponent },
+    { path: 'forum/create-thread', component: CreateThreadComponent },
+    //should we break it down even more? create post, view post? probably not, at least in router.
+    //should use a query param, pull up view-all-posts but with search term as current user.
+    { path: 'forum/my-posts/:id', component: ViewAllPostsComponent },
+    { path: 'games', component: GamesComponent },
+    { path: 'games/:id', component: ViewGameComponent },
+    // where id refers to review-id
+    { path: 'games/:game_title/review', component: EditReviewComponent, canActivate: [AuthGuard] },
+    { path: 'gaming-index', component: GamingIndexComponent },
+    { path: 'gaming-index/creators/:creator', component: CreatorsComponent },
+    { path: 'gaming-index/creators', component: CreatorsComponent },
+    { path: 'gaming-index/categories/:category', component: CategoriesComponent },
+    { path: 'gaming-index/categories', component: CategoriesComponent },
+    { path: 'gaming-index/console-makers/:name/:qualified_name', component: ConsoleComponent },
+    { path: 'gaming-index/console-makers/:name', component: ConsoleMakersComponent },
+    { path: 'gaming-index/console-makers', component: ConsoleMakersComponent },
+    //routes for logged in users
+    // { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard] },
+    { path: 'forum/create-thread', component: CreateThreadComponent, canActivate: [AuthGuard] },
+    { path: 'contrib-dashboard/ratings/:username', component: ViewRatingsComponent, canActivate: [AuthGuard] },
+    { path: 'contrib-dashboard/reviews/:username/:game_title', component: DisplayReviewComponent, canActivate: [AuthGuard] },
+    { path: 'contrib-dashboard/reviews/:username', component: ViewReviewsComponent, canActivate: [AuthGuard] },
+    { path: 'contrib-dashboard/:username', component: ContribDashboardComponent, canActivate: [AuthGuard] },
+    { path: 'content-dashboard', component: ContentDashboardComponent },
+    { path: 'content-dashboard/watchlists', component: WatchlistsComponent },
+    { path: 'content-dashboard/streams', component: StreamingComponent },
+    { path: 'content-dashboard/news', component: NewsComponent },
+    { path: 'content-dashboard/recently-posted', component: RecentlyPostedComponent },
+    { path: 'content-dashboard/recently-posted/ratings', component: ViewAllRatingsComponent },
+    { path: 'content-dashboard/recently-posted/reviews', component: ViewAllReviewsComponent },
+    { path: 'content-dashboard/recently-posted/posts', component: ViewAllPostsComponent },
+    // admin-only routes: probably dont need admin/home TBT
+    { path: 'admin/game/new', component: GameFormComponent, canActivate: [AuthGuard, AdminAuthGuard] },
+    { path: 'admin/game/:id', component: GameFormComponent, canActivate: [AuthGuard, AdminAuthGuard] },
+    { path: 'admin/game', component: GameComponent, canActivate: [AuthGuard, AdminAuthGuard] },
+    //wildcard for fallthrough cases.
+    { path: '**', component: NotFoundComponent }
+], { relativeLinkResolution: 'legacy' })
   ],
     providers: [
     ],

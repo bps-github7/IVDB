@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { ReactiveTextareaFormControlComponent } from './reactive-textarea-form-control.component';
 
@@ -6,7 +6,7 @@ describe('ReactiveTextareaFormControlComponent', () => {
   let component: ReactiveTextareaFormControlComponent;
   let fixture: ComponentFixture<ReactiveTextareaFormControlComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ ReactiveTextareaFormControlComponent ]
     })

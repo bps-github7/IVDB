@@ -4,7 +4,10 @@ h1 { font-size: 1.5em; margin: 10px; }
 
 .rating { 
   border: none;
-  float: left;
+
+  /* This fixes the float problem in contrib-dashboard but
+  unaligns it from the heading in view-ratings component. */
+  /* float: left; */
 }
 
 .rating > input { display: none; } 

@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { TdfMultiFormControlComponent } from './tdf-multi-form-control.component';
 
@@ -6,7 +6,7 @@ describe('TdfMultiFormControlComponent', () => {
   let component: TdfMultiFormControlComponent;
   let fixture: ComponentFixture<TdfMultiFormControlComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ TdfMultiFormControlComponent ]
     })

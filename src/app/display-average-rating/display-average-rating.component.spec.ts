@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { DisplayAverageRatingComponent } from './display-average-rating.component';
 
@@ -6,7 +6,7 @@ describe('DisplayAverageRatingComponent', () => {
   let component: DisplayAverageRatingComponent;
   let fixture: ComponentFixture<DisplayAverageRatingComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ DisplayAverageRatingComponent ]
     })

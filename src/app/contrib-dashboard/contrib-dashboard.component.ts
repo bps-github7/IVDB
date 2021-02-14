@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Rating } from '../models/content/rating';
 import { Review } from '../models/content/Review';
 import { RatingService } from '../common/services/rating.service';
+import { ReviewService } from '../common/services/review.service';
 
 @Component({
   selector: 'app-contrib-dashboard',
@@ -31,15 +32,19 @@ export class ContribDashboardComponent implements OnInit {
     // threads: Thread [];
     // replies: Reply [];
     
-    constructor(private ratingService : RatingService, private route : ActivatedRoute) {
+    constructor(
+        private ratingService : RatingService,
+        private reviewService : ReviewService,
+        private route : ActivatedRoute
+        ) {
         
         // Very confusing how you have two names for the same value!! user_id is older version of username
-        console.log("Wrong user id? here it is: " + this.user_id);
+        // console.log("Wrong user id? here it is: " + this.user_id);
 
-        this.ratingService.getUserStars(localStorage.getItem("user_id")).subscribe(p => this.ratings = p);
-        this.user_id = route.snapshot.paramMap.get('id');
+        // this.user_id = route.snapshot.paramMap.get('user_id');
         this.username = route.snapshot.paramMap.get('username');
-
+        this.ratingService.getUserStars(this.username).subscribe(p => this.ratings = p);
+        this.reviewService.getUserReviews(this.username).subscribe(p => this.reviews = p);
     }
 
 
