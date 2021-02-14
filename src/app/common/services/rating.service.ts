@@ -24,6 +24,9 @@ export class RatingService {
 
 
     getUserStars(username : string) : Observable<Rating []> {
+        /* Returns all the ratings belonging to a specific user as an observable
+        Takes a string, username, as the sole argument.
+         */
         const ratingRef = this.afs.collection<Rating>('ratings', (ref) => ref.where('username', '==', username));
         return ratingRef.valueChanges();
     }
