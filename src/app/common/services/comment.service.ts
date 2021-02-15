@@ -16,7 +16,7 @@ export class CommentService {
 
   constructor(private afs : AngularFirestore) { }
 
-    getContentComments$(contentId : string) :  Observable<any []> {
+    getContentComments$(contentId : string) :  Observable<Comment []> {
         /* returns all comments tagged to a piece of content
         as an observable of type comment []
         */

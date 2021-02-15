@@ -31,7 +31,7 @@ export class CommentSectionComponent implements OnInit {
 
     constructor(private commentService: CommentService) {
         this.commentService.getContentComments$(this.contentId).subscribe(response => {
-            this.comments = response;
+            console.log(response);
         });
     }
 
