@@ -8,6 +8,19 @@ import { Review } from 'src/app/models/content/Review';
   providedIn: 'root'
 })
 export class ReviewService {
+
+    /*
+    Service for communicating with review collection in our cloud db. 
+    
+    TODO: need to update this entire service so that we have a better,
+    more routable (important part) way of accessing reviews like so:
+    `contentID_userid`
+
+    then route to the id differently, like
+
+    `contentID/username`
+    */
+
     exists: boolean = false;
 
 
