@@ -1,32 +1,15 @@
-<div class="row">
-    <div class="col-md-6">
-        <form #finished="ngForm" (keydown.enter)="add_new_comment(finished.value)">
-            <!-- Seems that zippy component does not work with tdf
-            lets figure out why. If you really cant do it, you can always
-            accomplish the same thing in this component with css or animations. -->
-            
-            <!-- <zippy title="click to see comments below!">
-                <input type="text" placeholder="Add a new comment:">
-            </zippy> -->
-
-            <div class="form-group">
-
-                <!-- is the label nesc? if we use a placeholder it accomplishes the same thing -->
-                <!-- <label for="new_comment">New Comment:</label> -->
-                <input
-                    ngModel 
-                    type="text"
-                    name="new_comment"
-                    id="new_comment"
-                    class="form-control"
-                    >
-                <ul>
-                    <li *ngFor="let comment of comments">
-                        {{comment.username}} : {{comment.text}}
-                    </li>
-                </ul>
-            </div>
-
-        </form>
-    </div>
-</div>
+<input
+    (keyup.enter)="addNewComment(text)"
+    #text
+    ngModel 
+    type="text"
+    name="new_comment"
+    id="new_comment"
+    class="form-control"
+    >
+<ul class="list-group">
+    <!-- comments not being occupied -->
+    <li *ngFor="let comment of comments" class="list-group-item">
+        {{comment.username}} {{comment.text}}
+    </li>
+</ul>

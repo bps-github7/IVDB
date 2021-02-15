@@ -8,7 +8,8 @@ class UserComment {
     contentId: string;
     text: string;
 
-    constructor(username, text) {
+    constructor(contentId, username, text) {
+        this.contentId = contentId;
         this.username = username;
         this.text = text;
     }
@@ -26,18 +27,27 @@ export class CommentSectionComponent implements OnInit {
 
     // If username is null, set commenter username to 'guest'
     @Input() username : string = 'guest';
-    @Input() contentId : string;
+    @Input() contentId : string = null;
 
     constructor(private commentService: CommentService) {
-        // this.commentService.getAll$(this.contentId).subscribe(p => this.comments = p)
+        this.commentService.getContentComments$(this.contentId).subscribe(response => {
+            this.comments = response;
+        });
     }
 
     ngOnInit(): void {
     }
 
-    add_new_comment(content) {
-        this.comments.push(new UserComment(this.username, content.new_comment));
-        // See Programming with Mosh for explanation of how to do this.
+    addNewComment(content : HTMLInputElement) {
+        if (this.contentId === null) {
+            alert('cannot comment without a comment subject!');
+            return 0;
+        }
+        let comment = new UserComment(this.contentId, this.username, content.value)
+        this.commentService.save(comment);
+
+        /* reset the prompt so its blank for next comment*/
+        content.value = '';
     }
 
     edit(commentId : string) {
