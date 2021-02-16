@@ -8,8 +8,10 @@
     class="form-control"
     >
 <ul class="list-group">
-    <!-- comments not being occupied -->
     <li *ngFor="let comment of comments" class="list-group-item">
-        {{comment.username}} {{comment.text}}
+        <strong>{{comment.username}} :</strong> {{comment.text}}
+        <br>
+        <a (click)="delete(comment.uid)">Delete</a>
+        <a (click)="edit(comment.uid)">Edit</a>
     </li>
 </ul>

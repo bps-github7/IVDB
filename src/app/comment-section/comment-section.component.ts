@@ -27,15 +27,19 @@ export class CommentSectionComponent implements OnInit {
 
     // If username is null, set commenter username to 'guest'
     @Input() username : string = 'guest';
-    @Input() contentId : string = null;
+    @Input() contentId = null;
 
     constructor(private commentService: CommentService) {
-        this.commentService.getContentComments$(this.contentId).subscribe(response => {
-            console.log(response);
-        });
     }
 
     ngOnInit(): void {
+        /* All we had to do to get obs as an array was put these lines in ngOnInit
+            psst- input properties havent been read when object is constructed i guess.
+        */
+        this.commentService.getContentComments$(this.contentId).subscribe(response => {
+            this.comments = response;
+        });
+    
     }
 
     addNewComment(content : HTMLInputElement) {
@@ -55,6 +59,7 @@ export class CommentSectionComponent implements OnInit {
     }
 
     delete(commentId : string) {
+        this.commentService.delete(commentId);
 
     }
 

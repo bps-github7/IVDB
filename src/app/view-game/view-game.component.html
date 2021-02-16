@@ -30,6 +30,15 @@
         <a routerLink="../">Go back to game list</a>
 
 
+        <!-- the way you look the comments up will need to be more rigerous since 
+        two types of content could have the same content id. -->
+        <comment-section contentId="" username=""></comment-section>
+
+        <!-- Realizing now you can simplify the bagooberz out of this whole
+        app by making every observable in document identifieable with its uid with
+        valueChanges({idField : 'uid'}) => {{ game.uid }}
+            this helps with routing and stirage wutg firestore. yiperoo! get coding son
+        -->
 
     </footer>
 </div>

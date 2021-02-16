@@ -14,19 +14,19 @@ export class CommentService {
         userName_contentId
     */
 
-  constructor(private afs : AngularFirestore) { }
+    constructor(private afs : AngularFirestore) { }
 
-    getContentComments$(contentId : string) :  Observable<Comment []> {
+    getContentComments$(contentId : string) {
         /* returns all comments tagged to a piece of content
         as an observable of type comment []
         */
-        const commentRef = this.afs.collection<Comment>('comments', (ref) => ref.where('contentId', '==', contentId));
-        return commentRef.valueChanges();
+        const commentRef = this.afs.collection('comments', (ref) => ref.where('contentId', '==', contentId));
+        return commentRef.valueChanges({idField : 'uid'});
     }
 
     getUserComments$(username : string) {
         const userComments = this.afs.collection<Comment>('comments', (ref) => ref.where('username', '==', username));
-        return userComments.valueChanges();
+        return userComments.valueChanges({idField : 'uid'});
     }
 
     save(content : Comment) {
@@ -44,5 +44,10 @@ export class CommentService {
         .catch((err) => {
             console.log("error writting to document: " + err);
         })
+    }
+
+    delete(uid : string) {
+        if (!confirm('Are you sure you want to delete this comment (cannot be undone)?')) return;
+        this.afs.collection('comments').doc(uid).delete();
     }
 }
