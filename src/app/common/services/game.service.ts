@@ -32,7 +32,7 @@ export class GameService {
     }
 
     get_id_by_title(game_title: string) {
-        /* takes a game_title and returns a title  
+        /* takes a game_title and returns an id  
         */
         return this.db.collection<Game>('games', (ref) => ref.where('title', '==', game_title)).valueChanges({ idField: 'id' });
     }

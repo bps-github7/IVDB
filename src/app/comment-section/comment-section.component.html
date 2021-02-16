@@ -1,5 +1,14 @@
-<input
-    (keyup.enter)="addNewComment(text)"
+<zippy title="Comments...">
+    <ul class="list-group">
+        <li *ngFor="let comment of comments" class="list-group-item">
+            <strong>{{comment.username}} :</strong> {{comment.text}}
+            <br>
+            <button (click)="delete(comment.uid)">Delete</button>
+            <button (click)="update(comment)">Edit</button>
+        </li>
+    </ul>
+    <input
+    (keyup.enter)="create(text)"
     #text
     ngModel 
     type="text"
@@ -7,11 +16,5 @@
     id="new_comment"
     class="form-control"
     >
-<ul class="list-group">
-    <li *ngFor="let comment of comments" class="list-group-item">
-        <strong>{{comment.username}} :</strong> {{comment.text}}
-        <br>
-        <a (click)="delete(comment.uid)">Delete</a>
-        <a (click)="edit(comment.uid)">Edit</a>
-    </li>
-</ul>
+</zippy>
+

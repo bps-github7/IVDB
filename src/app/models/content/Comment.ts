@@ -5,6 +5,7 @@ import { Metadata } from "./Metadata";
 /* An interface for a users' cmments regarding a piece of content
  */
 export interface Comment {
+    uid?: string;
     username: string;
     contentId: string;
     text: string;

@@ -29,7 +29,7 @@ export class CommentService {
         return userComments.valueChanges({idField : 'uid'});
     }
 
-    save(content : Comment) {
+    create(content : Comment) {
         /* Can be used for both creating and editing comments */
         this.afs.collection<Comment>('comments')
         .add({
@@ -45,6 +45,25 @@ export class CommentService {
             console.log("error writting to document: " + err);
         })
     }
+
+    update(content : Comment) {
+            /* Can be used for both creating and editing comments */
+            this.afs.collection<Comment>('comments').doc(content.uid)
+            .set({
+                contentId : content.contentId,
+                username : content.username,
+                text : content.text,
+                media : content.media ? content.media : null,
+                metadata : content.metadata ? content.metadata : null},
+                {merge: true})
+            .then(() => {
+                console.log("Document successfully written!");
+            })
+            .catch((err) => {
+                console.log("error writting to document: " + err);
+            })
+    }
+
 
     delete(uid : string) {
         if (!confirm('Are you sure you want to delete this comment (cannot be undone)?')) return;

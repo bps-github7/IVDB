@@ -42,20 +42,22 @@ export class CommentSectionComponent implements OnInit {
     
     }
 
-    addNewComment(content : HTMLInputElement) {
+    create(content : HTMLInputElement) {
         if (this.contentId === null) {
             alert('cannot comment without a comment subject!');
             return 0;
         }
         let comment = new UserComment(this.contentId, this.username, content.value)
-        this.commentService.save(comment);
+        this.commentService.create(comment);
 
         /* reset the prompt so its blank for next comment*/
         content.value = '';
     }
 
-    edit(commentId : string) {
-    
+    update(comment) {
+        let edited = prompt('enter text for your new comment:');
+        comment.text = edited;
+        this.commentService.update(comment);
     }
 
     delete(commentId : string) {
