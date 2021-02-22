@@ -3,14 +3,14 @@
 
 1. DB schemas
     [] rate and review documents should be identified with `gamePK_username`
-    [] update ALL FIREBASE COLLECTIONS/ RXJS bridges so that the uid of a document is stored in that document. simplifies all things pertaining to routes and accessing observables. obs.valueChanges({idField : 'uid'}) this override only works when the ovs is not being emitted as return balue.
+    [] update ALL FIREBASE COLLECTIONS/ RXJS bridges so that the uid of a document is stored in that document. simplifies all things pertaining to routes and accessing observables. obs.valueChanges({idField : 'uid'}) this override only works when the ovs is not being emitted as return value.
 
 2. finish comment section- 
     [] media insert option 
     [] automatic meta data collection- saying at least the time and date of comment when created or edited last.
 
 3. get comment-section working across the site.
-    [X] View game component
+    [X] View game component - we still dont have it so that the signed in user doesnt have access to other users accounts.
     [] view Reviews
     [] streams
     [] watchlists
