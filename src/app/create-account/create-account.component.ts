@@ -17,7 +17,7 @@ export class CreateAccountComponent implements OnInit {
     form;
     user : User;
     authError: any;
-    uid: any;
+    // uid: any;
 
     ngOnInit() {
         this.auth.eventAuthError$.subscribe(data => this.authError = data);
@@ -29,7 +29,7 @@ export class CreateAccountComponent implements OnInit {
         private auth: AuthService,
         private router : Router,
         private userService : UserService) {
-        this.auth.appUser$.subscribe((appUser) => this.uid = appUser.uid);
+        // this.auth.appUser$.subscribe((appUser) => this.uid = appUser.uid);
 
         this.form = fb.group({
             email: ['', 

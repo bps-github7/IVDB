@@ -3,8 +3,8 @@
         <li *ngFor="let comment of comments" class="list-group-item">
             <strong>{{comment.username}} :</strong> {{comment.text}}
             <br>
-            <button (click)="delete(comment.uid)">Delete</button>
-            <button (click)="update(comment)">Edit</button>
+            <button *ngIf="comment.username == username" (click)="delete(comment.uid)">Delete</button>
+            <button *ngIf="comment.username == username" (click)="update(comment)">Edit</button>
         </li>
     </ul>
     <input
