@@ -1,9 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { GameInfoService } from 'src/app/common/services/gameinfo.service';
+import { CategoriesService } from '../../common/services/categories.service';
+import { CreatorsService } from '../../common/services/creators.service';
+import { ConsoleMakersService } from '../../common/services/console-makers.service';
 import { GameService } from 'src/app/common/services/game.service';
 import { Route } from '@angular/compiler/src/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { take } from 'rxjs/operators';
+
+
 
 @Component({
   selector: 'app-game-form',
@@ -14,13 +19,22 @@ export class GameFormComponent implements OnInit {
     game: any={};
     gameInfo;
     id;
+    categories;
+    creators;
+    console_makers;
 
     constructor(
-        private gameInfoService: GameInfoService,
+        // private gameInfoService: GameInfoService,
         private gameService : GameService,
+        private categoriesService : CategoriesService,
+        private creatorsService : CreatorsService,
+        private console_makersService: ConsoleMakersService,
         private router : Router,
         private route : ActivatedRoute) { 
-        this.gameInfo = gameInfoService.gameInfo$.subscribe(resp => this.gameInfo = resp)
+        this.categories = this.categoriesService.getAll$();
+        this.creators = this.creatorsService.getAll$();
+        this.console_makers = this.console_makers.getAll$();
+            // this.gameInfo = gameInfoService.gameInfo$.subscribe(resp => this.gameInfo = resp)
         
         
         this.id = this.route.snapshot.paramMap.get('id');
