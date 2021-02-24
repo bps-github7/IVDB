@@ -35,6 +35,7 @@ export class AppComponent {
                 localStorage.setItem("user_id", user.uid);
                 //wish there was a less ham-fisted way to do this but works for now.
                 localStorage.setItem("username", (user.displayName.includes(' ') ? user.displayName.split(' ').join('') : user.displayName));
+                // localStorage.setItem("", user.isAdmin);
                 let returnUrl = localStorage.getItem('returnUrl');
                 this.router.navigateByUrl(returnUrl);
             }
