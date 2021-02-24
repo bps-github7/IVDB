@@ -23,8 +23,7 @@ export class GamesComponent {
         private gameinfoService : GameInfoService,
         private auth: AuthService) { 
         this.games$ = this.gameService.getAll$();
-        // this.categories = this.gameinfoService.get('categories');
-        // this.creators = this.gameinfoService.get('creatr');
-        // this.console_makers = this.gameinfoService.get_console_makers_array();
+        this.gameInfo = this.gameinfoService.getAll$()
+        // this.gameInfo.categories$().subscribe(c => this.categories = c);
     }
 }
