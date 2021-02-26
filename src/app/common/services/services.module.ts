@@ -10,7 +10,7 @@ import { PreferencesService } from './preferences.service';
 import { ProfileService } from './profile.service';
 import { RatingService } from './rating.service';
 import { ReviewService } from './review.service';
-import { ThreadsService } from './threads.service';
+import { ThreadService } from './thread.service';
 import { UserAuthGuard } from './user-auth-guard.service';
 import { UserService } from './user.service';
 
@@ -39,7 +39,7 @@ export class ServicesModule {
                 UserAuthGuard,
                 
                 // app wide resource services
-                ThreadsService,
+                ThreadService,
                 RatingService,
                 ReviewService,
                 NewsService,

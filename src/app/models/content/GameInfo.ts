@@ -1,7 +1,7 @@
 import { Game_Descriptor } from './Game_Descriptor';
 import { VG_Console } from './VG_Console';
 
-export interface gameInfo {
+export interface GameInfo {
     microsoft?: VG_Console [],
     sony?: VG_Console [],
     nintendo?: VG_Console [],

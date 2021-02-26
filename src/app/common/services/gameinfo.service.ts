@@ -4,7 +4,7 @@ import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument 
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Game } from 'src/app/models/content/Game';
-import { gameInfo } from 'src/app/models/content/GameInfo';
+import { GameInfo } from 'src/app/models/content/GameInfo';
 import { Game_Descriptor } from 'src/app/models/content/Game_Descriptor';
 import { VG_Console } from 'src/app/models/content/VG_Console';
 
@@ -12,7 +12,7 @@ import { VG_Console } from 'src/app/models/content/VG_Console';
   providedIn: 'root'
 })
 
-class GameInfo implements gameInfo {
+class videogame_Info implements GameInfo {
     categories: Game_Descriptor [];
     console_makers: Game_Descriptor [];
     creators: Game_Descriptor [];
@@ -27,11 +27,12 @@ class GameInfo implements gameInfo {
 
 export class GameInfoService {
 
-    gameInfoCollection : AngularFirestoreCollection<gameInfo>;
-    gameInfoDocument : AngularFirestoreDocument<gameInfo>;
+    // shouldnt it be <game info []>?
+    gameInfoCollection : AngularFirestoreCollection<GameInfo>;
+    gameInfoDocument : AngularFirestoreDocument<GameInfo>;
     doc_id = 'KZX1GyjNGtwUzHsyICBO';
     gameInfo$;
-    gameInfo = new GameInfo();
+    gameInfo = new videogame_Info();
 
     constructor(private afs : AngularFirestore) {
         this.gameInfoCollection = this.afs.collection<GameInfo>('game_info');

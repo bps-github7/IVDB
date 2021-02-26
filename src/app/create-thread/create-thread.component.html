@@ -1,17 +1,64 @@
-<!-- <form>
-    <label for="Select topic">Select Topic:</label>
-    <select name="" id="">
-        <option value="option 1">Opt 1</option>
-        <option value="option 2">Opt 2</option>
-        <option value="option 3">Opt 3</option>
-        <option value="option 4">Opt 4</option>
-    </select>
-    <br><br>
-    <label for="Thread Title">Thread Title: </label>
-    <input type="text">
-    <br>
-    <label for="Content">Content: </label>
-    <textarea name="" id="" cols="30" rows="10"></textarea><br>
-    <Button>Submit</Button>
-</form> -->
-<p>Create-thread works</p>
+<h3>Create a new Thread</h3>
+<div class="row">
+    <div class="col-md-6">        
+        <form #finished="ngForm" (ngSubmit)="save(finished.value)">
+
+            <div class="form-group">
+                <label for="topic">Select Topic:</label>
+                <select
+                    #topic
+                    [(ngModel)] = "thread.topic" 
+                    name="topic"
+                    id="topic">
+                    <option value="option 1">Opt 1</option>
+                    <option value="option 2">Opt 2</option>
+                    <option value="option 3">Opt 3</option>
+                    <option value="option 4">Opt 4</option>
+                </select>
+            </div>
+            
+        
+
+            <!-- title form group -->
+            <div class="form-group">
+                <label for="title">Title: </label>
+                <input
+                    #title
+                    [(ngModel)] = 'thread.title'
+                    name="title"
+                    id="title"
+                    class="form-control"
+                    required
+                    type="text"
+                    >
+                <div *ngIf="title.touched && title.invalid" class="alert alert-danger">
+                    <div *ngIf="title.errors.required">Title is required</div>
+                </div>
+            </div>
+
+
+            <!-- title form group -->
+            <div class="form-group">
+                <label for="description">Description: </label>
+                <textarea
+                    #description
+                    [(ngModel)] = 'thread.description'
+                    name="description"
+                    id="description"
+                    class="form-control"
+                    required
+                    type="text"
+                    ></textarea>
+                <div *ngIf="description.touched && description.invalid" class="alert alert-danger">
+                    <div *ngIf="description.errors.required">description is required</div>
+                </div>
+            </div>
+
+            <button class="btn btn-primary" [disabled]="!finished.valid">Save/update game</button>
+            <button type="button" class="btn btn-danger" (click)="delete()">Delete game</button>
+        </form>
+    </div>
+<a routerLink="../">Go back to forum</a>
+
+</div>
+    

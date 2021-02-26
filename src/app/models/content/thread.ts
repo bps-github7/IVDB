@@ -1,4 +1,4 @@
-export interface thread {
+export interface Thread {
     title: string;
     topics: string;
     description: string;
