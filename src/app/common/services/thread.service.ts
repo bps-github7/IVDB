@@ -19,6 +19,7 @@ export class ThreadService {
         return this.afs.doc('threads/' + id).valueChanges();
     }
 
+    // what is a thread? no object made for it  not typecasted to anything
     create(thread) {
         /*Create a thread 
          */
