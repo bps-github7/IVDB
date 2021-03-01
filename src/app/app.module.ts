@@ -168,12 +168,16 @@ import { CommentSectionComponent } from './comment-section/comment-section.compo
     { path: 'contributions/:uid/:username', component: EditContributionsComponent, canActivate: [AuthGuard] },
     //you'll see more on these pages if youre signed in, but can view as anonymous user.
     { path: 'forum', component: ForumComponent },
-    { path: 'forum/view-threads/:thread-name', component: ViewThreadsComponent },
+    { path: 'forum/view-threads/:id', component: ViewThreadsComponent },
     { path: 'forum/view-threads', component: ViewThreadsComponent },
-    { path: 'forum/create-thread', component: CreateThreadComponent },
-    //should we break it down even more? create post, view post? probably not, at least in router.
-    //should use a query param, pull up view-all-posts but with search term as current user.
+    
+    //how you edit a forum
+    //TODO: need a second auth guard for preventing non author user from editing forums.
+    { path: 'forum/create-thread/:id', component: CreateThreadComponent, canActivate: [AuthGuard] },
+    { path: 'forum/create-thread', component: CreateThreadComponent, canActivate: [AuthGuard] },
     { path: 'forum/my-posts/:id', component: ViewAllPostsComponent },
+    
+    
     { path: 'games', component: GamesComponent },
     { path: 'games/:id', component: ViewGameComponent },
     // where id refers to review-id

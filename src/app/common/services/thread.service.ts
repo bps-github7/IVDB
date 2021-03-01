@@ -16,7 +16,16 @@ export class ThreadService {
     }
 
     get$(id : string) : Observable<any> {
+        // const threadRef = this.afs.doc('threads/' + id);
+        // return threadRef.valueChanges({idField : 'uid'});
         return this.afs.doc('threads/' + id).valueChanges();
+    
+        // cant have uid on document, cant have a 2 piece path on an object like 'collection/documentID'. consult SE
+    }
+
+    get_threads_by_topic(option : string) {
+        const threadRef = this.afs.collection<Thread>('threads', (ref) => ref.where('topic', '==', option));
+        return threadRef.valueChanges({idField: 'uid'});
     }
 
     // what is a thread? no object made for it  not typecasted to anything

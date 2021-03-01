@@ -6,14 +6,13 @@
             <div class="form-group">
                 <label for="topic">Select Topic:</label>
                 <select
-                    #topic
-                    [(ngModel)] = "thread.topic" 
+                    #topic="ngModel"
+                    [(ngModel)]="thread.topic"
                     name="topic"
                     id="topic">
                     <option value="option 1">Opt 1</option>
                     <option value="option 2">Opt 2</option>
                     <option value="option 3">Opt 3</option>
-                    <option value="option 4">Opt 4</option>
                 </select>
             </div>
             
@@ -23,8 +22,8 @@
             <div class="form-group">
                 <label for="title">Title: </label>
                 <input
-                    #title
-                    [(ngModel)] = 'thread.title'
+                    #title="ngModel"
+                    [(ngModel)]="thread.title"
                     name="title"
                     id="title"
                     class="form-control"
@@ -41,8 +40,9 @@
             <div class="form-group">
                 <label for="description">Description: </label>
                 <textarea
-                    #description
-                    [(ngModel)] = 'thread.description'
+                    
+                    #description="ngModel"
+                    [(ngModel)]="thread.description"
                     name="description"
                     id="description"
                     class="form-control"
@@ -59,6 +59,6 @@
         </form>
     </div>
 <a routerLink="../">Go back to forum</a>
-
 </div>
+<p> {{ finished.value | json }}</p>
     
