@@ -36,15 +36,16 @@ export class ThreadService {
 
     }
 
-    update() {
+    update(id, thread) {
         /* edit a thread
         */
+       this.thread_collection.doc(id).set(thread)
     }
 
-    delete() {
+    delete(id) {
         /* used to delete a thread 
         */
-    //    this.thread_collection.delete()
+        this.thread_collection.doc(id).delete();
     }
 
 

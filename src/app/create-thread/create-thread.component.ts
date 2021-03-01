@@ -14,35 +14,27 @@ export class CreateThreadComponent implements OnInit {
 
     constructor(private threadService : ThreadService,
         private router : Router,
-        private route : ActivatedRoute) {
-
-            
-        this.id = this.route.snapshot.paramMap.get('id');
-        
-        if (this.id)
-            //testing- removed the unnesc first assignment?
-            this.threadService.get$(this.id).subscribe(g => this.thread = g);
-    }
+        private route : ActivatedRoute) {    }
 
   ngOnInit(): void {
+    this.id = this.route.snapshot.paramMap.get('id');
+    console.log("id here ! " +  this.id);
+    
+    if (this.id)
+        //testing- removed the unnesc first assignment?
+        this.threadService.get$(this.id).subscribe(g => this.thread = g);
+
   }
 
     save(thread) {
-        // if(this.id) this.gameService.update(this.id, game);
-        // else this.gameService.create(game);
-        // this.router.navigate(['/admin/game']);
-
-        //above code sample strategy is nesc. right now
-        //you are creating numerous documents when updating
-        // rather than updating a single one.
-
-        this.threadService.create(thread);
+        if(this.id) this.threadService.update(this.id, thread);
+        else this.threadService.create(thread);
         this.router.navigate(['/forum/view-threads'])
     }
 
-  delete() {
-      console.log("does nothing atm");
-  }  
+    delete(id) {
+        this.threadService.delete(id);
+    }  
 
 
 

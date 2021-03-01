@@ -55,7 +55,7 @@
             </div>
 
             <button class="btn btn-primary" [disabled]="!finished.valid">Save/update game</button>
-            <button type="button" class="btn btn-danger" (click)="delete()">Delete game</button>
+            <button [disabled]="id === null" type="button" class="btn btn-danger" (click)="delete(id)">Delete game</button>
         </form>
     </div>
 <a routerLink="../">Go back to forum</a>
