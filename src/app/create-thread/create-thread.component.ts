@@ -27,13 +27,18 @@ export class CreateThreadComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  save(thread) {
+    save(thread) {
         // if(this.id) this.gameService.update(this.id, game);
         // else this.gameService.create(game);
         // this.router.navigate(['/admin/game']);
-    
-    this.threadService.create(thread);
-  }
+
+        //above code sample strategy is nesc. right now
+        //you are creating numerous documents when updating
+        // rather than updating a single one.
+
+        this.threadService.create(thread);
+        this.router.navigate(['/forum/view-threads'])
+    }
 
   delete() {
       console.log("does nothing atm");
