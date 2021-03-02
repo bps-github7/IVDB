@@ -35,6 +35,7 @@ export class ThreadService {
     
     save(thread, uid) {
         this.threadCollection.doc(uid).set({
+            // author : thread.author,
             title : thread.title,
             description : thread.description,
             topic : thread.topic    

@@ -1,20 +1,23 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, Validators } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { ThreadService } from '../common/services/thread.service';
 import { Thread } from '../models/content/Thread';
 
 class UserThread implements Thread {
-    author;
+    creator;
     title;
     description;
     topics;
+    invitees;
 
     
     constructor() {
-        this.author = localStorage.getItem("username");
+        this.creator = localStorage.getItem("username");
         this.title = '';
         this.description = '';
         this.topics = '';
+        this.invitees = '';
     }
 }
 
@@ -31,19 +34,47 @@ export class CreateThreadComponent implements OnInit {
     // thread;
     id;
 
+    // reactive form stuff
+    form;
+
     constructor(private threadService : ThreadService,
         private router : Router,
-        private route : ActivatedRoute) {    }
-
-  ngOnInit(): void {
-    this.id = this.route.snapshot.paramMap.get('id');
-    console.log("id here ! " +  this.id);
+        private route : ActivatedRoute,
+        private fb: FormBuilder) {
+    
+            this.id = this.route.snapshot.paramMap.get('id');
     
     if (this.id)
         //testing- removed the unnesc first assignment?
         this.threadService.get$(this.id).subscribe(g => this.thread = g);
 
-  }
+    //seems that we dont have access to the observable at time of this
+    console.log('a thread object field:'+this.thread.title );
+
+    this.form = this.fb.group({
+            creator: [this.thread.creator,Validators.required],
+            title: [this.thread.title,Validators.required],
+            description : [this.thread.description, Validators.required],
+            topics: [this.thread.topics],
+            invitees : [this.thread.invitees]
+        })
+
+        
+    }
+
+    // getters for reactive form impl.
+    get creator() { return this.form.get('creator'); }
+
+    get title() { return this.form.get('title'); }
+
+    get description() { return this.form.get('description'); }
+
+    get topics() { return this.form.get('topics') }
+
+    get invitees() { return this.form.get('invitees'); }
+
+  ngOnInit(): void {
+      }
 
     save(thread, uid=null) {
         if (uid) {

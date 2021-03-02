@@ -1,7 +1,7 @@
 export interface Thread {
-    author: string;
+    creator: string;
     title: string;
     topics: string;
     description: string;
-    
+    invitees?: string [];
 }

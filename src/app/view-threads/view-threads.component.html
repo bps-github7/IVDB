@@ -1,7 +1,7 @@
 <div *ngIf="thread; else view_all">
     <h3>{{ thread.title }}</h3>
     <p>{{thread.description}}</p>
-    <a *ngIf="username == thread.author" [routerLink]="['/forum/create-thread', id]">edit this thread</a>
+    <a *ngIf="username == thread.creator" [routerLink]="['/forum/create-thread', id]">edit this thread</a>
 </div>
 
 <ng-template #view_all>

@@ -1,19 +1,84 @@
-<h3>Create a new Thread</h3>
 <div class="row">
     <div class="col-md-6">        
-        <form #finished="ngForm" (ngSubmit)="save(finished.value)">
+        
+        <!-- Reactive form implementation -->
+        <form >
+            <div class="col-md-6 mb-2">
+                <h4>Create a New Thread</h4>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6 mb-2 form-group" [formGroup]="form">
+                    <label for="email">Thread Creator: </label>
+                    <input formControlName="creator" class="form-control" id="creator" type="text">
+                    <!--Dont need validation for this one because user cant modify it. 
+                        
+                        <div *ngIf="creator.touched && creator.invalid" class="alert alert-danger">
+                        <div *ngIf="creator.errors.required">creator is required</div>
+                        <div *ngIf="creator.errors.creator">creator must be properly formated (ie. validcreator@yahoo.com)
+                        </div>
+                        <div *ngIf="creator.errors.cannotContainSpace">creator address cannot contain spaces</div>
+                    </div> -->
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6 mb-2 form-group" [formGroup]="form">
+                    <label for="topics">Select Topics (optional): </label>
+                    
+                    <!-- this was originally a select but a drop down input
+                    like seen in preferences would make more sense -->
+                    
+                    <input formControlName="topics" class="form-control" id="topics" type="text">
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6 mb-2 form-group" [formGroup]="form">
+                    <label for="email">Thread Title: </label>
+                    <input formControlName="title" class="form-control" id="title" type="text">
+                </div>
+            </div>
+
+            
+            <div class="row">
+                <div class="col-md-6 mb-2 form-group" [formGroup]="form">
+                    <label for="description">Thread Description: </label>
+                    <input formControlName="description" class="form-control" id="description" type="text">
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6 mb-2 form-group" [formGroup]="form">
+                    <label for="invitees">Inivite users to join in discussion:</label>
+                    <input formControlName="invitees" class="form-control" id="invitees" type="text">
+                </div>
+                <div id="invited">invited</div>
+
+            </div>
+
+
+
+        </form>
+
+
+        <!-- <form #finished="ngForm" (ngSubmit)="save(finished.value)">
+
+            <div class="col-md-6 mb-2">
+                <h4>Create a New Thread</h4>
+            </div>
+
             <div class="form-group">
                 <label for="author">Author of thread:</label>
                 <input
                     #author="ngModel"
+        
                     [(ngModel)]="thread.author"
                     name="author"
                     id="author"
                     class="form-control"
                     required
-                    type="text"
-                    disabled
-                    >                
+                    type="text">                
             </div>
 
 
@@ -69,10 +134,10 @@
 
             <button class="btn btn-primary" [disabled]="!finished.valid">Save/update thread</button>
             <button [disabled]="!id" type="button" class="btn btn-danger" (click)="delete(id)">Delete thread</button>
-        </form>
+        </form> -->
     
     </div>
 <a routerLink="../">Go back to forum</a>
 </div>
-<p> {{ finished.value | json }}</p>
+<!-- <p> {{ finished.value | json }}</p> -->
     
