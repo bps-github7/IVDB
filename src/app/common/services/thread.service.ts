@@ -17,11 +17,7 @@ export class ThreadService {
     }
 
     get$(id : string) : Observable<any> {
-        // const threadRef = this.afs.doc('threads/' + id);
-        // return threadRef.valueChanges({idField : 'uid'});
         return this.afs.doc('threads/' + id).valueChanges();
-    
-        // cant have uid on document, cant have a 2 piece path on an object like 'collection/documentID'. consult SE
     }
 
     get_threads_by_topic(option : string) {
@@ -35,10 +31,10 @@ export class ThreadService {
     
     save(thread, uid) {
         this.threadCollection.doc(uid).set({
-            // author : thread.author,
+            creator : thread.creator,
             title : thread.title,
             description : thread.description,
-            topic : thread.topic    
+            topics : thread.topics   
         },
         {merge : true})
         .then(() => {

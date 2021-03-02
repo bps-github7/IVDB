@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
+import { switchMap } from 'rxjs/operators';
 import { ThreadService } from '../common/services/thread.service';
 import { Thread } from '../models/content/Thread';
 
@@ -14,10 +15,10 @@ class UserThread implements Thread {
     
     constructor() {
         this.creator = localStorage.getItem("username");
-        this.title = '';
-        this.description = '';
-        this.topics = '';
-        this.invitees = '';
+        this.title='';
+        this.description='';
+        this.topics='';
+        this.invitees='';
     }
 }
 
@@ -29,58 +30,64 @@ class UserThread implements Thread {
 })
 export class CreateThreadComponent implements OnInit {
 
-    username = localStorage.getItem("username");
     thread = new UserThread();
-    // thread;
     id;
 
     // reactive form stuff
-    form;
+    // form: FormGroup;
 
     constructor(private threadService : ThreadService,
         private router : Router,
         private route : ActivatedRoute,
-        private fb: FormBuilder) {
-    
-            this.id = this.route.snapshot.paramMap.get('id');
-    
-    if (this.id)
-        //testing- removed the unnesc first assignment?
-        this.threadService.get$(this.id).subscribe(g => this.thread = g);
-
-    //seems that we dont have access to the observable at time of this
-    console.log('a thread object field:'+this.thread.title );
-
-    this.form = this.fb.group({
-            creator: [this.thread.creator,Validators.required],
-            title: [this.thread.title,Validators.required],
-            description : [this.thread.description, Validators.required],
-            topics: [this.thread.topics],
-            invitees : [this.thread.invitees]
-        })
-
-        
-    }
-
-    // getters for reactive form impl.
-    get creator() { return this.form.get('creator'); }
-
-    get title() { return this.form.get('title'); }
-
-    get description() { return this.form.get('description'); }
-
-    get topics() { return this.form.get('topics') }
-
-    get invitees() { return this.form.get('invitees'); }
+        private fb: FormBuilder) {  }
 
   ngOnInit(): void {
-      }
+    this.id = this.route.snapshot.paramMap.get('id');
+    
+    if (this.id){
+        this.threadService.get$(this.id).subscribe(g => this.thread = g);
+    }
+
+    console.log(this.thread);
+
+    
+    // this.form = this.fb.group({
+    //         // creator: [this.thread.creator,Validators.required],
+    //         // title: [this.thread.title, Validators.required],
+    //         // description : [this.thread.description, Validators.required],
+    //         // topics: [this.thread.topics],
+    //         // invitees : [this.thread.invitees]
+        
+    //         creator: ['',Validators.required],
+    //         title: ['', Validators.required],
+    //         description : ['', Validators.required],
+    //         topics: [''],
+    //         invitees : ['']
+
+    //     })
+
+        
+
+    }
+
+    
+    // getters for reactive form impl.
+    // get creator() { return this.form.get('creator'); }
+
+    // get title() { return this.form.get('title'); }
+
+    // get description() { return this.form.get('description'); }
+
+    // get topics() { return this.form.get('topics') }
+
+    // get invitees() { return this.form.get('invitees'); }
+
+
 
     save(thread, uid=null) {
         if (uid) {
             this.threadService.save(thread, uid);
         } else {
-            console.log("this executed")
             //could have this method return the uid and then cache it somehow
             this.threadService.add(thread);
         }

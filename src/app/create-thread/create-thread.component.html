@@ -2,7 +2,7 @@
     <div class="col-md-6">        
         
         <!-- Reactive form implementation -->
-        <form >
+        <!-- <form >
             <div class="col-md-6 mb-2">
                 <h4>Create a New Thread</h4>
             </div>
@@ -11,24 +11,12 @@
                 <div class="col-md-6 mb-2 form-group" [formGroup]="form">
                     <label for="email">Thread Creator: </label>
                     <input formControlName="creator" class="form-control" id="creator" type="text">
-                    <!--Dont need validation for this one because user cant modify it. 
-                        
-                        <div *ngIf="creator.touched && creator.invalid" class="alert alert-danger">
-                        <div *ngIf="creator.errors.required">creator is required</div>
-                        <div *ngIf="creator.errors.creator">creator must be properly formated (ie. validcreator@yahoo.com)
-                        </div>
-                        <div *ngIf="creator.errors.cannotContainSpace">creator address cannot contain spaces</div>
-                    </div> -->
                 </div>
             </div>
 
             <div class="row">
                 <div class="col-md-6 mb-2 form-group" [formGroup]="form">
-                    <label for="topics">Select Topics (optional): </label>
-                    
-                    <!-- this was originally a select but a drop down input
-                    like seen in preferences would make more sense -->
-                    
+                    <label for="topics">Select Topics (optional): </label>                    
                     <input formControlName="topics" class="form-control" id="topics" type="text">
                 </div>
             </div>
@@ -59,23 +47,23 @@
 
 
 
-        </form>
+        </form> -->
 
-
-        <!-- <form #finished="ngForm" (ngSubmit)="save(finished.value)">
+        <!-- tdf impl -->
+        <form #finished="ngForm" (ngSubmit)="save(finished.value)">
 
             <div class="col-md-6 mb-2">
                 <h4>Create a New Thread</h4>
             </div>
 
             <div class="form-group">
-                <label for="author">Author of thread:</label>
+                <label for="creator">Creator of thread:</label>
                 <input
-                    #author="ngModel"
+                    #creator="ngModel"
         
-                    [(ngModel)]="thread.author"
-                    name="author"
-                    id="author"
+                    [(ngModel)]="thread.creator"
+                    name="creator"
+                    id="creator"
                     class="form-control"
                     required
                     type="text">                
@@ -83,12 +71,12 @@
 
 
             <div class="form-group">
-                <label for="topic">Select Topic:</label>
+                <label for="topics">Select Topic:</label>
                 <select
                     #topic="ngModel"
                     [(ngModel)]="thread.topics"
-                    name="topic"
-                    id="topic">
+                    name="topics"
+                    id="topics">
                     <option value="option 1">Opt 1</option>
                     <option value="option 2">Opt 2</option>
                     <option value="option 3">Opt 3</option>
@@ -134,7 +122,7 @@
 
             <button class="btn btn-primary" [disabled]="!finished.valid">Save/update thread</button>
             <button [disabled]="!id" type="button" class="btn btn-danger" (click)="delete(id)">Delete thread</button>
-        </form> -->
+        </form>
     
     </div>
 <a routerLink="../">Go back to forum</a>
