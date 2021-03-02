@@ -79,6 +79,8 @@ import { DisplayAverageRatingComponent } from './display-average-rating/display-
 import { GameCardComponent } from './game-card/game-card.component';
 import { CarouselComponent } from './carousel/carousel.component';
 import { CommentSectionComponent } from './comment-section/comment-section.component';
+import { GameInfoComponent } from './admin/game-info/game-info.component';
+import { GameInfoFormComponent } from './admin/game-info-form/game-info-form.component';
 
 
 @NgModule({
@@ -138,6 +140,8 @@ import { CommentSectionComponent } from './comment-section/comment-section.compo
     GameCardComponent,
     CarouselComponent,
     CommentSectionComponent,
+    GameInfoComponent,
+    GameInfoFormComponent,
     ],
   imports: [
     AngularFireModule.initializeApp(environment.firebase),
@@ -206,9 +210,14 @@ import { CommentSectionComponent } from './comment-section/comment-section.compo
     { path: 'content-dashboard/recently-posted/reviews', component: ViewAllReviewsComponent },
     { path: 'content-dashboard/recently-posted/posts', component: ViewAllPostsComponent },
     // admin-only routes: probably dont need admin/home TBT
+    { path: 'admin/game/info/new', component: GameInfoFormComponent, canActivate: [AuthGuard, AdminAuthGuard] },
+    { path: 'admin/game/info', component: GameInfoComponent, canActivate: [AuthGuard, AdminAuthGuard] },
+
     { path: 'admin/game/new', component: GameFormComponent, canActivate: [AuthGuard, AdminAuthGuard] },
+    
     { path: 'admin/game/:id', component: GameFormComponent, canActivate: [AuthGuard, AdminAuthGuard] },
     { path: 'admin/game', component: GameComponent, canActivate: [AuthGuard, AdminAuthGuard] },
+    
     //wildcard for fallthrough cases.
     { path: '**', component: NotFoundComponent }
 ], { relativeLinkResolution: 'legacy' })
