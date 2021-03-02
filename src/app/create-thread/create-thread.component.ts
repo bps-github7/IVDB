@@ -1,6 +1,23 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { ThreadService } from '../common/services/thread.service';
+import { Thread } from '../models/content/Thread';
+
+class UserThread implements Thread {
+    author;
+    title;
+    description;
+    topics;
+
+    
+    constructor() {
+        this.author = localStorage.getItem("username");
+        this.title = '';
+        this.description = '';
+        this.topics = '';
+    }
+}
+
 
 @Component({
   selector: 'app-create-thread',
@@ -9,7 +26,9 @@ import { ThreadService } from '../common/services/thread.service';
 })
 export class CreateThreadComponent implements OnInit {
 
-    thread;
+    username = localStorage.getItem("username");
+    thread = new UserThread();
+    // thread;
     id;
 
     constructor(private threadService : ThreadService,
@@ -30,6 +49,7 @@ export class CreateThreadComponent implements OnInit {
         if (uid) {
             this.threadService.save(thread, uid);
         } else {
+            console.log("this executed")
             //could have this method return the uid and then cache it somehow
             this.threadService.add(thread);
         }

@@ -2,12 +2,26 @@
 <div class="row">
     <div class="col-md-6">        
         <form #finished="ngForm" (ngSubmit)="save(finished.value)">
+            <div class="form-group">
+                <label for="author">Author of thread:</label>
+                <input
+                    #author="ngModel"
+                    [(ngModel)]="thread.author"
+                    name="author"
+                    id="author"
+                    class="form-control"
+                    required
+                    type="text"
+                    disabled
+                    >                
+            </div>
+
 
             <div class="form-group">
                 <label for="topic">Select Topic:</label>
                 <select
                     #topic="ngModel"
-                    [(ngModel)]="thread.topic"
+                    [(ngModel)]="thread.topics"
                     name="topic"
                     id="topic">
                     <option value="option 1">Opt 1</option>
@@ -18,7 +32,7 @@
             
         
 
-            <!-- title form group -->
+     
             <div class="form-group">
                 <label for="title">Title: </label>
                 <input
@@ -36,7 +50,6 @@
             </div>
 
 
-            <!-- title form group -->
             <div class="form-group">
                 <label for="description">Description: </label>
                 <textarea
@@ -57,6 +70,7 @@
             <button class="btn btn-primary" [disabled]="!finished.valid">Save/update thread</button>
             <button [disabled]="!id" type="button" class="btn btn-danger" (click)="delete(id)">Delete thread</button>
         </form>
+    
     </div>
 <a routerLink="../">Go back to forum</a>
 </div>

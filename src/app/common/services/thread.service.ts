@@ -6,6 +6,7 @@ import { Thread } from 'src/app/models/content/Thread';
 @Injectable({
   providedIn: 'root'
 })
+
 export class ThreadService {
 
     threadCollection : AngularFirestoreCollection<Thread []>
@@ -34,7 +35,6 @@ export class ThreadService {
     
     save(thread, uid) {
         this.threadCollection.doc(uid).set({
-            author : thread.author,
             title : thread.title,
             description : thread.description,
             topic : thread.topic    
