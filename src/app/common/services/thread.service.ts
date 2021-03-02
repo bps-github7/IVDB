@@ -8,11 +8,11 @@ import { Thread } from 'src/app/models/content/Thread';
 })
 export class ThreadService {
 
-    thread_collection : AngularFirestoreCollection<Thread []>
+    threadCollection : AngularFirestoreCollection<Thread []>
 
 
     constructor(private afs : AngularFirestore) {
-        this.thread_collection = this.afs.collection('threads');
+        this.threadCollection = this.afs.collection('threads');
     }
 
     get$(id : string) : Observable<any> {
@@ -28,24 +28,30 @@ export class ThreadService {
         return threadRef.valueChanges({idField: 'uid'});
     }
 
-    // what is a thread? no object made for it  not typecasted to anything
-    create(thread) {
-        /*Create a thread 
-         */
-        this.thread_collection.add(thread);
-
+    add(thread) {
+        this.threadCollection.add(thread);
     }
-
-    update(id, thread) {
-        /* edit a thread
-        */
-       this.thread_collection.doc(id).set(thread)
-    }
+    
+    save(thread, uid) {
+        this.threadCollection.doc(uid).set({
+            author : thread.author,
+            title : thread.title,
+            description : thread.description,
+            topic : thread.topic    
+        },
+        {merge : true})
+        .then(() => {
+            console.log("Document successfully written!");
+        })
+        .catch((err) => {
+            console.log("error writting to document: " + err);
+        })
+        }
 
     delete(id) {
         /* used to delete a thread 
         */
-        this.thread_collection.doc(id).delete();
+        this.threadCollection.doc(id).delete();
     }
 
 

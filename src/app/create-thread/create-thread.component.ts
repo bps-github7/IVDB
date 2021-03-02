@@ -26,14 +26,22 @@ export class CreateThreadComponent implements OnInit {
 
   }
 
-    save(thread) {
-        if(this.id) this.threadService.update(this.id, thread);
-        else this.threadService.create(thread);
-        this.router.navigate(['/forum/view-threads'])
+    save(thread, uid=null) {
+        if (uid) {
+            this.threadService.save(thread, uid);
+        } else {
+            //could have this method return the uid and then cache it somehow
+            this.threadService.add(thread);
+        }
+        
+        this.router.navigate(['/forum/view-threads']);
     }
 
     delete(id) {
-        this.threadService.delete(id);
+        if (confirm("Are you sure you want to delete this thread? (cannot be undone)")){
+            this.threadService.delete(id);
+            this.router.navigate(['/forum/view-threads']);}
+        else return 0;
     }  
 
 
