@@ -1,0 +1,52 @@
+<zippy title="suggest new... ">
+    <form #finished="ngForm" ngSubmit="submitRequest(finished.value)">
+        <!-- type - select or radio? options are mutually exclusive- game or game info -->
+        <div class="form-group">
+            <label for="type">Choose the type of suggestion:</label>
+            <input
+                #type
+                id="type"
+                name="type"
+                ngModel
+                class="form-control">
+        </div>
+
+
+        <!-- title -->
+        <div class="form-group">
+            <label for="title">title of suggestion:</label>
+            <input
+                #title
+                id="title"
+                name="title"
+                ngModel
+                class="form-control">
+        </div>
+
+
+        <!-- description (optional) -->
+        <div class="form-group">
+            <label for="description">Provide a description for your suggestion (optional):</label>
+            <textarea
+                #description
+                id="description"
+                name="description"
+                ngModel
+                class="form-control"></textarea>
+        </div>
+
+
+        <!-- Links/ references (optional) -->
+        <!-- maybe make this a multi text input -->
+        <div class="form-group">
+            <label for="links">any links or references- for helping admins do research about the suggestion (optional):</label>
+            <input
+                #links
+                id="links"
+                name="links"
+                ngModel
+                class="form-control">
+        </div>
+
+
+    </form>

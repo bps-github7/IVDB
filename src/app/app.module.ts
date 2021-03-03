@@ -81,6 +81,7 @@ import { CarouselComponent } from './carousel/carousel.component';
 import { CommentSectionComponent } from './comment-section/comment-section.component';
 import { GameInfoComponent } from './admin/game-info/game-info.component';
 import { GameInfoFormComponent } from './admin/game-info-form/game-info-form.component';
+import { SuggestNewComponent } from './suggest-new/suggest-new.component';
 
 
 @NgModule({
@@ -142,6 +143,7 @@ import { GameInfoFormComponent } from './admin/game-info-form/game-info-form.com
     CommentSectionComponent,
     GameInfoComponent,
     GameInfoFormComponent,
+    SuggestNewComponent,
     ],
   imports: [
     AngularFireModule.initializeApp(environment.firebase),
