@@ -3,13 +3,19 @@
         <!-- type - select or radio? options are mutually exclusive- game or game info -->
         <div class="form-group">
             <label for="type">Choose the type of suggestion:</label>
-            <input
-                #type
-                id="type"
-                name="type"
-                ngModel
-                class="form-control">
+            <div *ngFor="let item of options">
+                <label for="{{item}}">{{item}}</label>
+                <input
+                    type="radio"
+                    id="{{item}}"
+                    value="{{item}}"
+                    [(ngModel)]="selectedOption"
+                    name="type"
+                    >
+            </div>
         </div>
+
+        
 
 
         <!-- title -->

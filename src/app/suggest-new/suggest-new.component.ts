@@ -2,19 +2,23 @@ import { Component, OnInit } from '@angular/core';
 import { SuggestionService } from '../common/services/suggestion.service';
 
 @Component({
-  selector: 'app-suggest-new',
+  selector: 'suggest-new',
   templateUrl: './suggest-new.component.html',
   styleUrls: ['./suggest-new.component.css']
 })
 export class SuggestNewComponent implements OnInit {
 
-  constructor(private suggestionService : SuggestionService) { }
+    // or should it be game, game-info, with a nested drop down for game info?
+    options = ['game', 'category', 'creator', 'console-maker', 'console'];
+    selectedOption: any;
 
-  ngOnInit(): void {
-  }
+    constructor(private suggestionService : SuggestionService) { }
 
-  submitRequest(request) {
-      this.suggestionService.submit(request)
-  }
+    ngOnInit(): void {
+    }
+
+    submitRequest(request) {
+        this.suggestionService.submit(request)
+    }
 
 }

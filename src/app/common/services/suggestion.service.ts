@@ -8,6 +8,8 @@ export class SuggestionService {
 
     suggestionsCollection : AngularFirestoreCollection;
 
+
+
   constructor(private afs : AngularFirestore) {
       this.suggestionsCollection = this.afs.collection('suggestions');
    }
