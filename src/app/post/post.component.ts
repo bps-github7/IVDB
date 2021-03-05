@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
 @Component({
   selector: 'post',
@@ -6,11 +6,38 @@ import { Component, Input, OnInit } from '@angular/core';
   styleUrls: ['./post.component.css']
 })
 export class PostComponent implements OnInit {
- 
-    @Input() content;
-    news$;
 
+    /* Simple, reusable component for listing collected information
+    type something at the top, press enter and it will be added to list.
+    The list can be exported as an array and used as a form control (future iters.) 
+    */
+
+    @Input() title : string
+    @Input() posts: any = [];
+    
+
+    // @Output() post: string;
+    @Output() newPostEvent = new EventEmitter<string>();
+    @Output() deletePostEvent = new EventEmitter();
+    @Output() editPostEvent = new EventEmitter<string>();
+    
     constructor() {
+    }
+
+    edit() {
+        let newValue = prompt("provide new value for entry:");
+        this.editPostEvent.emit(newValue);
+    }
+
+    delete() {
+        if (confirm("are you sure you want to delete this entry (cannot undo)?"))
+        this.deletePostEvent.emit();
+    }
+
+    addPost(post : HTMLInputElement) {
+        this.newPostEvent.emit(post.value);
+        post.value = '';
+        
     }
 
     ngOnInit(): void {

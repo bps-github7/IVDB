@@ -5,21 +5,21 @@ import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Game } from 'src/app/models/content/Game';
 import { GameInfo } from 'src/app/models/content/GameInfo';
-import { Game_Descriptor } from 'src/app/models/content/Game_Descriptor';
-import { VG_Console } from 'src/app/models/content/VG_Console';
+import { GameDescriptor } from 'src/app/models/content/GameDescriptor';
+import { VgConsole } from 'src/app/models/content/VgConsole';
 
 @Injectable({
   providedIn: 'root'
 })
 
 class videogame_Info implements GameInfo {
-    categories: Game_Descriptor [];
-    console_makers: Game_Descriptor [];
-    creators: Game_Descriptor [];
-    microsoft: VG_Console [];
-    nintendo: VG_Console [];
-    pc: VG_Console []
-    sony: VG_Console [];
+    categories: GameDescriptor [];
+    console_makers: GameDescriptor [];
+    creators: GameDescriptor [];
+    microsoft: VgConsole [];
+    nintendo: VgConsole [];
+    pc: VgConsole []
+    sony: VgConsole [];
     
 
 
@@ -74,107 +74,107 @@ export class GameInfoService {
         });
     }
 
-    get categories$() : Observable <Game_Descriptor []> {
+    get categories$() : Observable <GameDescriptor []> {
         return this.gameInfoCollection
-        .doc<Game_Descriptor []>('/categories').valueChanges();
+        .doc<GameDescriptor []>('/categories').valueChanges();
     }
 
-    get_categories_array() : Game_Descriptor [] {
+    get_categories_array() : GameDescriptor [] {
         return this.gameInfo.categories;
     }
 
-    find_category(category : string) : Game_Descriptor {
+    find_category(category : string) : GameDescriptor {
         return this.get_categories_array().filter(arr => arr.title.toLowerCase() == category.toLowerCase())[0];
         
     }
 
-    get creators$() : Observable <Game_Descriptor []> {
+    get creators$() : Observable <GameDescriptor []> {
         return this.gameInfoCollection
-        .doc<Game_Descriptor []>('/creators').valueChanges();
+        .doc<GameDescriptor []>('/creators').valueChanges();
     }
 
     
-    get_creators_array() : Game_Descriptor [] {
+    get_creators_array() : GameDescriptor [] {
         return this.gameInfo.creators;
     }
 
-    find_creator(creator : string) : Game_Descriptor {
+    find_creator(creator : string) : GameDescriptor {
         let foundCreator = this.get_creators_array().filter(arr => arr.title.toLowerCase() == creator.toLowerCase());
         return foundCreator[0];
     }
 
-    get console_makers$() : Observable<Game_Descriptor []> {
+    get console_makers$() : Observable<GameDescriptor []> {
         return this.gameInfoCollection
-        .doc<Game_Descriptor []>('/console-makers').valueChanges();
+        .doc<GameDescriptor []>('/console-makers').valueChanges();
     }    
 
     
-    get_console_makers_array() : Game_Descriptor [] {
+    get_console_makers_array() : GameDescriptor [] {
         return this.gameInfo.console_makers;
     }
 
-    find_console_maker(console_maker : string) : Game_Descriptor {
+    find_console_maker(console_maker : string) : GameDescriptor {
         let found_console_maker = this.get_console_makers_array().filter(arr => arr.title.toLowerCase() == console_maker.toLowerCase());
         return found_console_maker[0];
     }
 
     //implement these after you fix up their db entries.
 
-    get sony$() : Observable<VG_Console []> {
+    get sony$() : Observable<VgConsole []> {
         return this.gameInfoCollection
-        .doc<VG_Console []>('/sony').valueChanges();;
+        .doc<VgConsole []>('/sony').valueChanges();;
     }
 
     
-    get_sony_array() : VG_Console [] {
+    get_sony_array() : VgConsole [] {
         return this.gameInfo.sony;
     }
 
-    find_sony(console_name : string) : VG_Console {
+    find_sony(console_name : string) : VgConsole {
         let found_console = this.get_sony_array().filter(arr => arr.name.toLowerCase() == console_name.toLowerCase());
         return found_console[0];
     }
 
 
-    get nintendo$() : Observable<VG_Console []> {
+    get nintendo$() : Observable<VgConsole []> {
         return this.gameInfoCollection
-        .doc<VG_Console []>('/nintendo').valueChanges();;
+        .doc<VgConsole []>('/nintendo').valueChanges();;
     }
 
-    get_nintendo_array() : VG_Console [] {
+    get_nintendo_array() : VgConsole [] {
         return this.gameInfo.nintendo;
     }
 
-    find_nintendo(console_name : string) : VG_Console {
+    find_nintendo(console_name : string) : VgConsole {
         let found_console = this.get_nintendo_array().filter(arr => arr.name.toLowerCase() == console_name.toLowerCase());
         return found_console[0];
     }
 
-    get microsoft$() : Observable<VG_Console []> {
+    get microsoft$() : Observable<VgConsole []> {
         return this.gameInfoCollection
-        .doc<VG_Console []>('/microsoft').valueChanges();;
+        .doc<VgConsole []>('/microsoft').valueChanges();;
     }
 
-    get_microsoft_array() : VG_Console [] {
+    get_microsoft_array() : VgConsole [] {
         return this.gameInfo.microsoft;
     }
 
-    find_microsoft(console_name : string) : VG_Console {
+    find_microsoft(console_name : string) : VgConsole {
         let found_console = this.get_microsoft_array().filter(arr => arr.name.toLowerCase() == console_name.toLowerCase());
         return found_console[0];
     }
 
 
 
-    get pc$() : Observable<VG_Console []> {
-        return this.gameInfoCollection.doc<VG_Console []>('/pc').valueChanges();;
+    get pc$() : Observable<VgConsole []> {
+        return this.gameInfoCollection.doc<VgConsole []>('/pc').valueChanges();;
     }
 
-    get_pc_array() : VG_Console [] {
+    get_pc_array() : VgConsole [] {
         return this.gameInfo.pc;
     }
 
-    find_pc(console_name : string) : VG_Console {
+    find_pc(console_name : string) : VgConsole {
         let found_console = this.get_pc_array().filter(arr => arr.name.toLowerCase() == console_name.toLowerCase());
         return found_console[0];
     }

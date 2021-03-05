@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { GameInfoService } from '../common/services/gameinfo.service';
-import { Game_Descriptor } from '../models/content/Game_Descriptor';
+import { GameDescriptor } from '../models/content/GameDescriptor';
 
 @Component({
   selector: 'app-categories',

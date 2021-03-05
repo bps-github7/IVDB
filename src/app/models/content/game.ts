@@ -1,4 +1,4 @@
-import { VG_Console } from './VG_Console';
+import { VgConsole } from './VgConsole';
 
 export interface Game {
     uid ?: string,
@@ -10,6 +10,6 @@ export interface Game {
     creators?: string,
     categories?: string,
     console_makers?: string,
-    console?: VG_Console;
+    console?: VgConsole;
 
 }

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { GameInfoService } from '../common/services/gameinfo.service';
-import { Game_Descriptor } from '../models/content/Game_Descriptor';
-import { VG_Console } from '../models/content/VG_Console';
+import { GameDescriptor } from '../models/content/GameDescriptor';
+import { VgConsole } from '../models/content/VgConsole';
 
 @Component({
   selector: 'app-gaming-index',
@@ -10,14 +10,14 @@ import { VG_Console } from '../models/content/VG_Console';
 })
 export class GamingIndexComponent implements OnInit {
 
-    categories: Game_Descriptor [];
-    creators: Game_Descriptor [];
-    console_makers: Game_Descriptor [];
+    categories: GameDescriptor [];
+    creators: GameDescriptor [];
+    console_makers: GameDescriptor [];
     //you could just get the name string value from VG_Console for this, save some loading...
-    sony : VG_Console [];
-    nintendo: VG_Console [];
-    microsoft: VG_Console [];
-    pc: VG_Console [];
+    sony : VgConsole [];
+    nintendo: VgConsole [];
+    microsoft: VgConsole [];
+    pc: VgConsole [];
 
 
     constructor(private gameInfoService : GameInfoService) {

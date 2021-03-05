@@ -1,31 +1,10 @@
-<div class="container">
-    <div class="row">
-        <h4 class="md-4">{{ content.title | titlecase }}</h4>
-        <!-- post meta-data -->
-        <ul class="col-sm" id="meta-data">
-            <!-- <li *ngFor="let m of post.metadata"> {{ m }}</li> -->
-            <li *ngIf="content.metaData.datePosted">Posted: {{ content.metaData.datePosted }}</li>
-            <li *ngIf="content.metaData.lastUpdated">Last Updated: {{ content.metaData.lastUpdated }}</li>
-            <li *ngIf="content.metaData.author">Posted by: {{ content.metaData.author }}</li>
-        </ul>
-        
-        <!-- post body -->
-        <p class="col">
-            {{ content.contents.text }}
-<!--     
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi quis consequat mi, porta pellentesque erat. <br>
-            Sed odio nibh, pellentesque ut elit eget, laoreet auctor nunc. Vestibulum ante ipsum primis in faucibus <br>
-            orci luctus et ultrices posuere cubilia curae; Duis nec quam a dolor iaculis tincidunt. Phasellus mauris <br>
-            quam, sodales ut condimentum eget, aliquam ac mi. Pellentesque quis tellus nulla. Nam vel elit scelerisque, <br>
-            viverra enim a, ornare nunc. Nunc accumsan a magna at consectetur. Vivamus sit amet sapien sapien. <br>
-            Aliquam lacinia in risus nec tincidunt. Vestibulum erat turpis, tincidunt et augue eget, auctor fermentum lacus. <br>
-            Suspendisse tincidunt aliquam sem lacinia mollis. Aliquam erat volutpat. Pellentesque habitant morbi tristique <br>
-            senectus et netus et malesuada fames ac turpis egestas. Maecenas id sollicitudin risus.  -->
-
-            <span *ngIf="content.contents.link">Link : {{ content.contents.link }}</span>
-            <img [src]="content.conents.image"/>
-            
-            <!-- for the misc thing= what type of element goes here -->
-        </p>
-    </div>    
-</div>
+<label for="{{title}}">{{title}}</label>
+<ul class="list-group">
+    <input class="list-group-item" type="text" #newPost (keyup.enter)="addPost(newPost)">
+    <li class="list-group-item" 
+        *ngFor="let p of posts">
+            {{p}} <br>
+            <span (click)="edit()">edit</span>&nbsp;&nbsp;
+            <span (click)="delete()">delete</span>
+        </li>
+</ul>

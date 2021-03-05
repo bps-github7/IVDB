@@ -1,4 +1,4 @@
-export interface VG_Console {
+export interface VgConsole {
     generation : number,
     name : string,
     qualifiedName : string,

@@ -1,6 +1,6 @@
 /* an interface for game descriptors - categories, creators, console makers... 
  */
-export interface Game_Descriptor{
+export interface GameDescriptor{
     title: string,
     description: string
 }

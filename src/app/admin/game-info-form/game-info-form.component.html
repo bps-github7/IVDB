@@ -1,12 +1,30 @@
 <div class="row">
     <div class="col-md-6">        
-        <form #finished="ngForm" (ngSubmit)="save(finished.value)">
-            <!-- categories form group -->
+
+        <!-- <form #finished="ngForm" (ngSubmit)="save(finished.value)"> -->
+        <form #finished>
+
+          <post 
+            [posts]="categories" 
+            [title]="gameInfo[0]" 
+            (newPostEvent)="addNewDescriptor($event, 'categories')" 
+            (editPostEvent)="editDescriptor($event)"
+            (deletePostEvent)="deleteDescriptor()"></post>
+
+          <!-- <post [posts]="categories" [title]="gameInfo[0]" (newPostEvent)="test($event)"></post> -->
+
+
+          <post 
+            [posts]="creators" 
+            [title]="gameInfo[1]" 
+            (newPostEvent)="addNewDescriptor($event, 'creators')"
+            (editPostEvent)="editDescriptor($event)"
+            (deletePostEvent)="deleteDescriptor()"></post>
+
+          <!-- 
             <div class="form-group">
                 <label for="categories">Categories: </label>
                 <input
-                    #categories="ngModel"
-                    [(ngModel)]="gameInfo.categories"
                     name="categories"
                     id="categories"
                     class="form-control"
@@ -15,12 +33,9 @@
                     >
             </div>
             
-            <!-- creators form group -->
             <div class="form-group">
                 <label for="creators">Creators: </label>
                 <input
-                    #creators="ngModel"
-                    [(ngModel)]="gameInfo.creators"
                     name="creators"
                     id="creators"
                     class="form-control"
@@ -29,26 +44,9 @@
                     >
             </div>
 
-            <!-- consoleMakers form group -->
-            <div class="form-group">
-                <label for="consoleMakers">ConsoleMakers: </label>
-                <input
-                    #consoleMakers="ngModel"
-                    [(ngModel)]="gameInfo.consoleMakers"
-                    name="consoleMakers"
-                    id="consoleMakers"
-                    class="form-control"
-                    required
-                    type="text"
-                    >
-            </div>
-
-            <!-- nintendo form group -->
             <div class="form-group">
                 <label for="nintendo">nintendo: </label>
                 <input
-                    #nintendo="ngModel"
-                    [(ngModel)]="gameInfo.nintendo"
                     name="nintendo"
                     id="nintendo"
                     class="form-control"
@@ -57,12 +55,9 @@
                     >
             </div>
 
-            <!-- sony form group -->
             <div class="form-group">
                 <label for="sony">Sony: </label>
                 <input
-                    #sony="ngModel"
-                    [(ngModel)]="gameInfo.sony"
                     name="sony"
                     id="sony"
                     class="form-control"
@@ -71,12 +66,9 @@
                     >
             </div>
 
-            <!-- microsoft form group -->
             <div class="form-group">
                 <label for="microsoft">Microsoft: </label>
                 <input
-                    #microsoft="ngModel"
-                    [(ngModel)]="gameInfo.microsoft"
                     name="microsoft"
                     id="microsoft"
                     class="form-control"
@@ -85,12 +77,9 @@
                     >
             </div>
 
-            <!-- pc form group -->
             <div class="form-group">
                 <label for="pc">pc: </label>
                 <input
-                    #pc="ngModel"
-                    [(ngModel)]="gameInfo.pc"
                     name="pc"
                     id="pc"
                     class="form-control"
@@ -99,19 +88,16 @@
                     >
             </div>
 
-            <!-- mobile form group -->
             <div class="form-group">
                 <label for="mobile">mobile: </label>
                 <input
-                    #mobile="ngModel"
-                    [(ngModel)]="gameInfo.mobile"
                     name="mobile"
                     id="mobile"
                     class="form-control"
                     required
                     type="text"
                     >
-            </div>
+            </div> -->
             
             <button class="btn btn-primary" [disabled]="!finished.valid">Save/update game</button>
             <button type="button" class="btn btn-danger" (click)="delete()">Delete game</button>
@@ -120,4 +106,4 @@
     
 </div>
 
-<p> {{ finished.value | json }}</p>
+<p (click)="test()"> click here to see the completed form</p>
