@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
+import { CategoriesService } from 'src/app/common/services/categories.service';
 import { TestingService } from 'src/app/common/services/testing.service';
 import { GameDescriptor } from 'src/app/models/content/GameDescriptor';
 // import { GameDescriptor } from 'src/app/models/content/GameDescriptor';
@@ -38,9 +39,12 @@ export class GameInfoFormComponent implements OnInit {
 
     constructor(
         fb : FormBuilder,
-        private testingService : TestingService) {
+        private testingService : TestingService,
+        private categoriesService : CategoriesService) {
 
-        this.testingService.categories.subscribe(p => this.categories = p);
+        this.categoriesService.getAll$().subscribe(p => {
+            console.log("categories service getAll$() ->" + p);
+            this.categories = p});
         // this.testingService.creators.subscribe(p => this.creators = p);
         // this.testingService.nintendo.subscribe(p => this.nintendo = p);
         // this.testingService.sony.subscribe(p => this.sony = p);
