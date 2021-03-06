@@ -34,10 +34,22 @@ export class GameInfoService {
     gameInfo$;
     gameInfo = new videogame_Info();
 
+    get_array(type : string) {
+        /* generalized builder function for reducing boilerplate within the constructor.
+            returns an array of all the objects - (title : descr) keyvalue pair within a document*/
+
+
+    }
+
     constructor(private afs : AngularFirestore) {
         this.gameInfoCollection = this.afs.collection<GameInfo>('game_info');
         this.gameInfo$ = this.gameInfoCollection.doc(this.doc_id).valueChanges();
+        
+        
+        //this.categories$ : valueChanges from the cloud db observable specific document
         this.categories$.subscribe(arr => {
+            
+            //assigning 
             this.gameInfo.categories = Object.keys(arr).map(categoryTitle => {
                 return arr[categoryTitle]
             });            
