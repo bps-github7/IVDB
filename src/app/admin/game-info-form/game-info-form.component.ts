@@ -7,10 +7,10 @@ import { GameDescriptor } from 'src/app/models/content/GameDescriptor';
 // import { GameInfo } from 'src/app/models/content/GameInfo';
 // import { VgConsole } from 'src/app/models/content/VgConsole';
 
-class VideoGameDescriptor implements GameDescriptor {
-    title;
-    description;
-}
+// class VideoGameDescriptor implements GameDescriptor {
+//     title;
+//     description;
+// }
 
 @Component({
   selector: 'app-game-info-form',
@@ -26,7 +26,7 @@ export class GameInfoFormComponent implements OnInit {
     //tracking different types of gameInfo
     gameInfo = ["categories", "creators", "nintendo","sony", "microsoft", "pc", "web", "mobile"];
 
-    categories: GameDescriptor [];
+    categories: GameDescriptor [][];
     // categories = new VideoGameDescriptor();
     creators;
 
@@ -42,7 +42,7 @@ export class GameInfoFormComponent implements OnInit {
         private testingService : TestingService,
         private categoriesService : CategoriesService) {
 
-        this.categoriesService.getAll$().subscribe(p => {
+        this.testingService.get_type('category').subscribe(p => {
             console.log("categories service getAll$() ->" + p);
             this.categories = p});
         // this.testingService.creators.subscribe(p => this.creators = p);
@@ -147,7 +147,8 @@ export class GameInfoFormComponent implements OnInit {
   addNewDescriptor(newDescriptor : string, infoType : string) {
     switch(infoType) {
         case "categories": {
-            this.categories.push({ title : newDescriptor, description : ''});
+            console.log("im a furry puppy!")
+            // this.categories.push({ title : newDescriptor, description : ''});
             break;
             } 
         case "creators": {

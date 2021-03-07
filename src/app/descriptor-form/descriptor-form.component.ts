@@ -33,6 +33,8 @@ export class DescriptorFormComponent implements OnInit {
 
     submit(newTitle, newDescription) {
         const newDescriptor = {
+            uid : '',
+            type: '',
             title : newTitle,
             description : newDescription
         }
