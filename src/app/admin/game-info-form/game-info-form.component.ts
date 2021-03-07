@@ -78,11 +78,38 @@ export class GameInfoFormComponent implements OnInit {
     console.log(this.form.value);
   }
 
-  editDescriptor(newValue) {
-    //   find the item we want to replace
-    // assign 
-    console.log("editing!");
-  }
+    editDescriptor(newObject : any, 
+        descriptorType : string) {
+        switch (descriptorType) {
+            case "categories": {
+                this.categoriesService
+                //You can just pass in newObject
+                .setSpecificCategory(newObject);
+                break;
+                } 
+            case "creators": {
+                break
+                } 
+            case "nintendo": {
+                break;
+                }
+            case "sony": {
+                break;
+                } 
+            case "microsoft": {
+                break;
+                } 
+            case "pc": {
+                break;
+                }
+            case "mobile": {
+                break;
+                }
+            case "web": {
+                break;
+                }
+        }
+    } 
 
   deleteDescriptor() {
       // find the item in question

@@ -19,14 +19,22 @@ export class PostComponent implements OnInit {
     // @Output() post: string;
     @Output() newPostEvent = new EventEmitter<string>();
     @Output() deletePostEvent = new EventEmitter();
-    @Output() editPostEvent = new EventEmitter<string>();
+    @Output() editPostEvent = new EventEmitter<any>();
     
     constructor() {
     }
 
-    edit() {
-        let newValue = prompt("provide new value for entry:");
-        this.editPostEvent.emit(newValue);
+    edit(uid) {
+        // lets just use a dropdown form in the future
+        let newTitle = prompt("provide new title for update:");
+        let newDescription = prompt("Provide new description for update (optional):")
+        console.log(`post component, edit method has: ${uid}`)
+        const newDescriptor = {
+            docUid : uid,
+            title : newTitle,
+            description : newDescription 
+        }
+        this.editPostEvent.emit(newDescriptor);
     }
 
     delete() {

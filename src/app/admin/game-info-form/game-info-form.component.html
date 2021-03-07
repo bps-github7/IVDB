@@ -8,7 +8,7 @@
             [posts]="categories" 
             [title]="gameInfo[0]" 
             (newPostEvent)="addNewDescriptor($event, 'categories')" 
-            (editPostEvent)="editDescriptor($event)"
+            (editPostEvent)="editDescriptor($event, 'categories')"
             (deletePostEvent)="deleteDescriptor()">
         </post>
 
