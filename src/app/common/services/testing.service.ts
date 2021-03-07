@@ -2,10 +2,18 @@ import { Injectable } from '@angular/core';
 import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
 import { GameDescriptor } from 'src/app/models/content/GameDescriptor';
+interface NewGameDescriptor {
+    uid : string;
+    type : string;
+    title : string;
+    description : string;
+}
 
 @Injectable({
   providedIn: 'root'
 })
+
+
 export class TestingService {
 
     gameInfoCollection : AngularFirestoreCollection <GameDescriptor>;
@@ -17,6 +25,9 @@ export class TestingService {
 
     get categories() : Observable <GameDescriptor []> {
         return this.gameInfoCollection.doc<GameDescriptor[]>('categories').valueChanges();
+    }
+
+    updateCategory(newCategory : NewGameDescriptor) {
     }
 
 

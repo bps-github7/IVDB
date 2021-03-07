@@ -111,11 +111,38 @@ export class GameInfoFormComponent implements OnInit {
         }
     } 
 
-  deleteDescriptor() {
-      // find the item in question
-      // delete it
-      console.log("delete!");
-  }
+    deleteDescriptor(uid, descriptorType) {
+        switch (descriptorType) {
+            case "categories": {
+                this.categoriesService
+                //You can just pass in newObject
+                .deleteCategory(uid);
+                break;
+                } 
+            case "creators": {
+                break
+                } 
+            case "nintendo": {
+                break;
+                }
+            case "sony": {
+                break;
+                } 
+            case "microsoft": {
+                break;
+                } 
+            case "pc": {
+                break;
+                }
+            case "mobile": {
+                break;
+                }
+            case "web": {
+                break;
+                }
+        }
+
+    }
 
   addNewDescriptor(newDescriptor : string, infoType : string) {
     switch(infoType) {

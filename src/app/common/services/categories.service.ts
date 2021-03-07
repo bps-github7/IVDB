@@ -32,8 +32,14 @@ export class CategoriesService {
             });
     }
 
-    setCategories() {
+    setCategories(newCategoryArray) {
+        /* for updating the whole document.
+        should only be called when the game-info form is submitted.
+         */
+    }
 
+    deleteCategory(uid) {
+        this.categoriesCollection.doc(uid).delete();
     }
 
     getAll$() : Observable <GameDescriptor[]> {

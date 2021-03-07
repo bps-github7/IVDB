@@ -21,25 +21,24 @@ export class PostComponent implements OnInit {
     @Output() deletePostEvent = new EventEmitter();
     @Output() editPostEvent = new EventEmitter<any>();
     
+    showSubForm : boolean;
+
     constructor() {
     }
 
-    edit(uid) {
+    edit(docUid, newTitle='', newDescription='') {
         // lets just use a dropdown form in the future
-        let newTitle = prompt("provide new title for update:");
-        let newDescription = prompt("Provide new description for update (optional):")
-        console.log(`post component, edit method has: ${uid}`)
         const newDescriptor = {
-            docUid : uid,
+            uid : docUid,
             title : newTitle,
             description : newDescription 
         }
         this.editPostEvent.emit(newDescriptor);
     }
 
-    delete() {
+    delete(uid) {
         if (confirm("are you sure you want to delete this entry (cannot undo)?"))
-        this.deletePostEvent.emit();
+        this.deletePostEvent.emit(uid);
     }
 
     addPost(post : HTMLInputElement) {
