@@ -2,14 +2,16 @@
     <div class="col-md-6">        
 
         <!-- <form #finished="ngForm" (ngSubmit)="save(finished.value)"> -->
+            <!-- Keeping this messy double argument thing cuz cant conveintly gurantee uniformity among event return values.
+            each emmiter method has different job at hand -->
         <form #finished>
 
           <post 
             [posts]="categories" 
             [title]="gameInfo[0]" 
             (newPostEvent)="addNewDescriptor($event, 'categories')" 
-            (editPostEvent)="editDescriptor($event)"
-            (deletePostEvent)="deleteDescriptor()">
+            (editPostEvent)="editDescriptor($event, 'categories')"
+            (deletePostEvent)="deleteDescriptor($event, 'categories')">
         </post>
 
           <!-- <post 
