@@ -21,14 +21,15 @@ export class GameInfoFormComponent implements OnInit {
 
     form: any;
 
-    // consoles is a aggregate of all the different possible consoles in lists below
-    //so we will include it when categorizing a game, but not here where we are just
-    //tracking different types of gameInfo
-    gameInfo = ["categories", "creators", "nintendo","sony", "microsoft", "pc", "web", "mobile"];
+    gameInfo : string [] = ["categories", "creators", "console_makers"];
+    vgConsoles : string [] = ["nintendo","sony", "microsoft", "pc", "web", "mobile"];
 
-    categories: GameDescriptor [][];
+
+
+    // categories: GameDescriptor [];
+    categories = [];
     // categories = new VideoGameDescriptor();
-    creators;
+    creators = [];
 
     nintendo;
     sony;
@@ -83,7 +84,6 @@ export class GameInfoFormComponent implements OnInit {
         switch (descriptorType) {
             case "categories": {
                 this.categoriesService
-                //You can just pass in newObject
                 .setSpecificCategory(newObject);
                 break;
                 } 
@@ -147,8 +147,7 @@ export class GameInfoFormComponent implements OnInit {
   addNewDescriptor(newDescriptor : string, infoType : string) {
     switch(infoType) {
         case "categories": {
-            console.log("im a furry puppy!")
-            // this.categories.push({ title : newDescriptor, description : ''});
+            this.categories.push({ title : newDescriptor, description : ''});
             break;
             } 
         case "creators": {

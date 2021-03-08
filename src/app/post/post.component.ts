@@ -23,11 +23,13 @@ export class PostComponent implements OnInit {
     
     showSubForm : boolean;
 
+
+
     constructor() {
     }
 
     edit(docUid, newTitle='', newDescription='') {
-        // lets just use a dropdown form in the future
+        // easier to add type after the event is emmited.
         const newDescriptor = {
             uid : docUid,
             title : newTitle,

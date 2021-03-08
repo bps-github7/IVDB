@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { GameInfoService } from '../common/services/gameinfo.service';
+import { TestingService } from '../common/services/testing.service';
 import { GameDescriptor } from '../models/content/GameDescriptor';
 
 @Component({
@@ -19,14 +20,25 @@ export class CategoriesComponent implements OnInit {
 
   constructor(private router : Router,
     private route : ActivatedRoute,
+
+    //testing only!
+    private testingService : TestingService,
+
     private gameInfoService : GameInfoService) {
         this.route.paramMap.subscribe(params => {
             this.category = params.get('category');
         })
+        this.testingService.get_type('category').subscribe(p => this.categories = p);
+
         this.gameInfoService.gameInfo$.subscribe(g => this.gameInfo = g);
-        this.categories = this.gameInfoService.get_categories_array();
+        // this.categories = this.gameInfoService.get_categories_array();
+        
         if (this.category) {
-            this.category = this.gameInfoService.find_category(this.category);
+            console.log(`searching for ${this.category}`);
+            this.testingService.get_document(this.category, 'category')
+            .subscribe(p => {
+                // pipe(take(1)) didnt work so just subscripting it to get first value for now.                
+                this.category = p[0]});
         }
     }
 

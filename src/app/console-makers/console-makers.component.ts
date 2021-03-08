@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { GameInfoService } from '../common/services/gameinfo.service';
+import { TestingService } from '../common/services/testing.service';
 
 @Component({
   selector: 'app-console-makers',
@@ -23,12 +24,19 @@ export class ConsoleMakersComponent implements OnInit {
     constructor(
         private router : Router,
         private route : ActivatedRoute,
+
+        //testing only!!!
+        private testingService : TestingService,
+
         private gameInfoService : GameInfoService) { 
             this.route.paramMap.subscribe(params => {
                 this.console_maker = params.get('name');
             })
-            this.console_makers = this.gameInfoService.get_console_makers_array();
-            // console.log("from within console-maker component: " + this.console_makers);
+            // this.console_makers = this.gameInfoService.get_console_makers_array();
+            
+            this.testingService.get_type('console_maker').subscribe(p => this.console_makers = p);
+
+            
             //executes if the route parameter is provided.
             if (this.console_maker) {
                 this.console_maker = this.gameInfoService.find_console_maker(this.console_maker);

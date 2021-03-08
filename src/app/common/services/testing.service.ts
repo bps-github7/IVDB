@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
+import { take } from 'rxjs/operators';
 import { GameDescriptor } from 'src/app/models/content/GameDescriptor';
 interface NewGameDescriptor {
     uid : string;
@@ -19,49 +20,34 @@ export class TestingService {
     // gameInfoCollection : AngularFirestoreCollection <GameDescriptor>;
 
 
-  constructor(private afs: AngularFirestore) { 
-    // this.gameInfoCollection = this.afs.collection('testing');
-  }
+    constructor(private afs: AngularFirestore) { 
+    }
 
     get_type(type : string) {
         const typeRef = this.afs.collection<GameDescriptor[]>('testing', (ref) => ref.where('type','==', type));
         return typeRef.valueChanges();
     }
 
-    updateCategory(newCategory : NewGameDescriptor) {
+    get_document(title : string, type : string) {
+        const docRef = this.afs.collection<GameDescriptor[]>('testing', (ref) => 
+            ref.where('type','==', type).where('title', '==', title));
+        return docRef.valueChanges().pipe(take(1));
+    }
+
+    update() {
     }
 
 
-    // get creators() {
-    //     return this.gameInfoCollection.doc('creators').valueChanges();
-    // }
+    add_new() {
 
-    
-    // get nintendo() {
-    //     return this.gameInfoCollection.doc('nintendo').valueChanges();
-    // }
+    }
 
-    
-    // get sony() {
-    //     return this.gameInfoCollection.doc('sony').valueChanges();
-    // }
+    set() {
 
-    // get microsoft() {
-    //     return this.gameInfoCollection.doc('microsoft').valueChanges();
-    // }
-    
+    }
 
-    // get pc() {
-    //     return this.gameInfoCollection.doc('pc').valueChanges();
-    // }
+    delete() {
 
-    
-    // get web() {
-    //     return this.gameInfoCollection.doc('web').valueChanges();
-    // }
+    }
 
-    
-    // get mobile() {
-    //     return this.gameInfoCollection.doc('mobile').valueChanges();
-    // }
 }

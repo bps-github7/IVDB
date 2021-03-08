@@ -1,8 +1,9 @@
 <label for="{{title}}">{{title | titlecase}} :</label>
 <ul class="list-group">
-    <descriptor-form></descriptor-form>
+    <!-- <descriptor-form></descriptor-form> -->
     <!-- <input class="list-group-item" type="text" #newPost (keyup.enter)="showSubForm = true"> -->
-
+    <input class="list-group-item" type="text" #newPost (keyup.enter)="addPost(newPost)">
+    
     <li class="list-group-item" 
         *ngFor="let p of posts">
             {{p.title}}<br>
