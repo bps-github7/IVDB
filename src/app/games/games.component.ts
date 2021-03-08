@@ -3,7 +3,6 @@ import { GameService } from '../common/services/game.service';
 import { GameInfoService } from '../common/services/gameinfo.service';
 import { AuthService } from '../common/services/auth.service';
 import { Router } from '@angular/router';
-import { TestingService } from '../common/services/testing.service';
 
 @Component({
   selector: 'app-games',
@@ -19,18 +18,16 @@ export class GamesComponent {
     console_makers: any=[];
 
     constructor(
-        //testing only! replace with gameInfoService when testing is complete!
-        private testingService : TestingService,
 
         private router : Router, 
         private gameService : GameService,
-        private gameinfoService : GameInfoService,
+        private gameInfoService : GameInfoService,
         private auth: AuthService) { 
         this.games$ = this.gameService.getAll$();
 
-        this.testingService.getType$('category').subscribe(p => this.categories = p);
-        this.testingService.getType$('creator').subscribe(p => this.creators = p);
-        this.testingService.getType$('console_maker').subscribe(p => this.console_makers = p);
+        this.gameInfoService.getType$('category').subscribe(p => this.categories = p);
+        this.gameInfoService.getType$('creator').subscribe(p => this.creators = p);
+        this.gameInfoService.getType$('console_maker').subscribe(p => this.console_makers = p);
                 
         // this.categories = this.gameinfoService.get_categories_array();
         // this.creators = this.gameinfoService.get_creators_array();

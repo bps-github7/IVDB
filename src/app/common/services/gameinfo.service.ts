@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from '@angular/fire/firestore';
 // import 'rxjs/add/operator/map';
 import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { map, take } from 'rxjs/operators';
 import { Game } from 'src/app/models/content/Game';
 import { GameInfo } from 'src/app/models/content/GameInfo';
 import { GameDescriptor } from 'src/app/models/content/GameDescriptor';
@@ -12,184 +12,63 @@ import { VgConsole } from 'src/app/models/content/VgConsole';
   providedIn: 'root'
 })
 
-class videogame_Info implements GameInfo {
-    categories: GameDescriptor [];
-    console_makers: GameDescriptor [];
-    creators: GameDescriptor [];
-    microsoft: VgConsole [];
-    nintendo: VgConsole [];
-    pc: VgConsole []
-    sony: VgConsole [];
-    
-
-
-}
-
 export class GameInfoService {
-
-    // shouldnt it be <game info []>?
-    gameInfoCollection : AngularFirestoreCollection<GameInfo>;
-    gameInfoDocument : AngularFirestoreDocument<GameInfo>;
-    doc_id = 'KZX1GyjNGtwUzHsyICBO';
-    gameInfo$;
-    gameInfo = new videogame_Info();
-
-    get_array(type : string) {
-        /* generalized builder function for reducing boilerplate within the constructor.
-            returns an array of all the objects - (title : descr) keyvalue pair within a document*/
+    // gameInfoCollection : AngularFirestoreCollection <GameDescriptor>;
 
 
+    constructor(private afs: AngularFirestore) { 
     }
 
-    constructor(private afs : AngularFirestore) {
-        this.gameInfoCollection = this.afs.collection<GameInfo>('game_info');
-        this.gameInfo$ = this.gameInfoCollection.doc(this.doc_id).valueChanges();
+    getAll$() {
+        return this.afs.collection('game_info').valueChanges()
+    }
+
+    setAll$() {
+        // called when you submit the list of categories, creators, console_makers for update
+        // in game-info-form. 
+    }
+
+    getType$(type : string) {
+        const typeRef = this.afs.collection<GameDescriptor[]>('game_info', (ref) => ref.where('type','==', type));
+        return typeRef.valueChanges();
+    }
+
+    getDocument$(title : string, type : string) {
+        const docRef = this.afs.collection<GameDescriptor>('game_info', (ref) => 
+            ref.where('type','==', type).where('title', '==', title));
         
+        // the take(1) isnt working as
+        return docRef.valueChanges().pipe(take(1));
+    }
+
+
+
+    add(descriptor : GameDescriptor) {
+        this.afs.collection('game_info').add(descriptor)
+        .then(()=> console.log("Documet succesfully written to"))
+        .catch((err) => console.log(`Error while writing to doc ${err}`));
+    }
+
+    update(descriptor, patch=true) {
+        /* for updating a single document.
+
+        descriptor- the updated object you want to push to the game-info collection
         
-        //this.categories$ : valueChanges from the cloud db observable specific document
-        this.categories$.subscribe(arr => {
-            
-            //assigning 
-            this.gameInfo.categories = Object.keys(arr).map(categoryTitle => {
-                return arr[categoryTitle]
-            });            
-        });
-        this.creators$.subscribe(arr => {
-            this.gameInfo.creators = Object.keys(arr).map(categoryTitle => {
-                return arr[categoryTitle]
-            });            
-        });
-        this.console_makers$.subscribe(arr => {
-            this.gameInfo.console_makers = Object.keys(arr).map(console_maker_title => {
-                return arr[console_maker_title]
-            });            
-        });
-        this.sony$.subscribe(arr => {
-            this.gameInfo.sony = Object.keys(arr).map(console_title => {
-                return arr[console_title]
-            });            
-        });
-        this.nintendo$.subscribe(arr => {
-            this.gameInfo.nintendo = Object.keys(arr).map(console_title => {
-                return arr[console_title]
-            });            
-        });
-        this.microsoft$.subscribe(arr => {
-            this.gameInfo.microsoft = Object.keys(arr).map(console_title => {
-                return arr[console_title]
-            });            
-        });
-        this.pc$.subscribe(arr => {
-            this.gameInfo.pc = Object.keys(arr).map(console_title => {
-                return arr[console_title]
-            });            
-        });
+        set patch to false to perform http PUT- complete overwrite of existing data.
+        (no known use cases yet).
+        */
+       this.afs.doc(`game_info/${descriptor.uid}`).set({
+            uid : descriptor.uid,
+            type : descriptor.type,
+            title : descriptor.title,
+            description : descriptor.description
+       },{merge : patch})
+       .then(() => console.log("document succesfully updated"))
+       .catch((err) => console.log(`Error while updating document: ${err}`));
     }
-
-    get categories$() : Observable <GameDescriptor []> {
-        return this.gameInfoCollection
-        .doc<GameDescriptor []>('/categories').valueChanges();
-    }
-
-    get_categories_array() : GameDescriptor [] {
-        return this.gameInfo.categories;
-    }
-
-    find_category(category : string) : GameDescriptor {
-        return this.get_categories_array().filter(arr => arr.title.toLowerCase() == category.toLowerCase())[0];
-        
-    }
-
-    get creators$() : Observable <GameDescriptor []> {
-        return this.gameInfoCollection
-        .doc<GameDescriptor []>('/creators').valueChanges();
-    }
-
     
-    get_creators_array() : GameDescriptor [] {
-        return this.gameInfo.creators;
+    delete(uid) {
+        this.afs.collection('game_info').doc(uid).delete();
     }
-
-    find_creator(creator : string) : GameDescriptor {
-        let foundCreator = this.get_creators_array().filter(arr => arr.title.toLowerCase() == creator.toLowerCase());
-        return foundCreator[0];
-    }
-
-    get console_makers$() : Observable<GameDescriptor []> {
-        return this.gameInfoCollection
-        .doc<GameDescriptor []>('/console-makers').valueChanges();
-    }    
-
-    
-    get_console_makers_array() : GameDescriptor [] {
-        return this.gameInfo.console_makers;
-    }
-
-    find_console_maker(console_maker : string) : GameDescriptor {
-        let found_console_maker = this.get_console_makers_array().filter(arr => arr.title.toLowerCase() == console_maker.toLowerCase());
-        return found_console_maker[0];
-    }
-
-    //implement these after you fix up their db entries.
-
-    get sony$() : Observable<VgConsole []> {
-        return this.gameInfoCollection
-        .doc<VgConsole []>('/sony').valueChanges();;
-    }
-
-    
-    get_sony_array() : VgConsole [] {
-        return this.gameInfo.sony;
-    }
-
-    find_sony(console_name : string) : VgConsole {
-        let found_console = this.get_sony_array().filter(arr => arr.name.toLowerCase() == console_name.toLowerCase());
-        return found_console[0];
-    }
-
-
-    get nintendo$() : Observable<VgConsole []> {
-        return this.gameInfoCollection
-        .doc<VgConsole []>('/nintendo').valueChanges();;
-    }
-
-    get_nintendo_array() : VgConsole [] {
-        return this.gameInfo.nintendo;
-    }
-
-    find_nintendo(console_name : string) : VgConsole {
-        let found_console = this.get_nintendo_array().filter(arr => arr.name.toLowerCase() == console_name.toLowerCase());
-        return found_console[0];
-    }
-
-    get microsoft$() : Observable<VgConsole []> {
-        return this.gameInfoCollection
-        .doc<VgConsole []>('/microsoft').valueChanges();;
-    }
-
-    get_microsoft_array() : VgConsole [] {
-        return this.gameInfo.microsoft;
-    }
-
-    find_microsoft(console_name : string) : VgConsole {
-        let found_console = this.get_microsoft_array().filter(arr => arr.name.toLowerCase() == console_name.toLowerCase());
-        return found_console[0];
-    }
-
-
-
-    get pc$() : Observable<VgConsole []> {
-        return this.gameInfoCollection.doc<VgConsole []>('/pc').valueChanges();;
-    }
-
-    get_pc_array() : VgConsole [] {
-        return this.gameInfo.pc;
-    }
-
-    find_pc(console_name : string) : VgConsole {
-        let found_console = this.get_pc_array().filter(arr => arr.name.toLowerCase() == console_name.toLowerCase());
-        return found_console[0];
-    }
-
 
 }

@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { GameInfoService } from '../common/services/gameinfo.service';
-import { TestingService } from '../common/services/testing.service';
 
 @Component({
   selector: 'app-console-makers',
@@ -25,35 +24,32 @@ export class ConsoleMakersComponent implements OnInit {
         private router : Router,
         private route : ActivatedRoute,
 
-        //testing only!!!
-        private testingService : TestingService,
 
         private gameInfoService : GameInfoService) { 
             this.route.paramMap.subscribe(params => {
                 this.console_maker = params.get('name');
             })
-            // this.console_makers = this.gameInfoService.get_console_makers_array();
             
-            this.testingService.getType$('console_maker').subscribe(p => this.console_makers = p);
+            this.gameInfoService.getType$('console_maker').subscribe(p => this.console_makers = p);
 
             
             //executes if the route parameter is provided.
-            if (this.console_maker) {
-                this.console_maker = this.gameInfoService.find_console_maker(this.console_maker);
-                if (this.console_maker.title.toLowerCase() === 'sony') {
-                    this.console_list = this.gameInfoService.get_sony_array();
-                }
-                else if (this.console_maker.title.toLowerCase() === 'nintendo') {
-                    this.console_list = this.gameInfoService.get_nintendo_array();
-                }
-                else if (this.console_maker.title.toLowerCase() === 'microsoft') {
-                    this.console_list = this.gameInfoService.get_microsoft_array();
-                }
-                else if (this.console_maker.title.toLowerCase() === 'pc') {
-                    this.console_list = this.gameInfoService.get_pc_array();
-                }
+            // if (this.console_maker) {
+            //     this.console_maker = this.gameInfoService.find_console_maker(this.console_maker);
+            //     if (this.console_maker.title.toLowerCase() === 'sony') {
+            //         this.console_list = this.gameInfoService.get_sony_array();
+            //     }
+            //     else if (this.console_maker.title.toLowerCase() === 'nintendo') {
+            //         this.console_list = this.gameInfoService.get_nintendo_array();
+            //     }
+            //     else if (this.console_maker.title.toLowerCase() === 'microsoft') {
+            //         this.console_list = this.gameInfoService.get_microsoft_array();
+            //     }
+            //     else if (this.console_maker.title.toLowerCase() === 'pc') {
+            //         this.console_list = this.gameInfoService.get_pc_array();
+            //     }
     
-            }
+            // }
     }
 
     ngOnInit(): void {

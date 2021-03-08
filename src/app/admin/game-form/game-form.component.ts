@@ -4,7 +4,6 @@ import { GameService } from 'src/app/common/services/game.service';
 import { Route } from '@angular/compiler/src/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { take } from 'rxjs/operators';
-import { TestingService } from 'src/app/common/services/testing.service';
 
 @Component({
   selector: 'app-game-form',
@@ -21,9 +20,6 @@ export class GameFormComponent implements OnInit {
 
     constructor(
         
-        //testing only! replace with gameInfoService when testing is finished
-        private testingService : TestingService,
-
         private gameInfoService: GameInfoService,
         private gameService : GameService,
         private router : Router,
@@ -32,9 +28,9 @@ export class GameFormComponent implements OnInit {
         
         
             // feel like taking game_ out of the variables would be better- another time...
-            this.testingService.getType$('category').subscribe(p => this.game_categories = p);
-            this.testingService.getType$('creator').subscribe(p => this.game_creators = p);
-            this.testingService.getType$('console_maker').subscribe(p => this.game_console_makers = p);
+            this.gameInfoService.getType$('category').subscribe(p => this.game_categories = p);
+            this.gameInfoService.getType$('creator').subscribe(p => this.game_creators = p);
+            this.gameInfoService.getType$('console_maker').subscribe(p => this.game_console_makers = p);
                 
             // this.game_categories = this.gameInfo.get_categories_array();
             // this.game_creators = this.gameInfo.get_creators_array();

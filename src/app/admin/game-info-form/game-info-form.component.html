@@ -6,7 +6,8 @@
             each emmiter method has different job at hand -->
         <form #finished>
 
-          <post 
+        <!-- Feel like the categories and creators args should be singular not plural -->
+        <post 
             [posts]="categories" 
             [title]="gameInfo[0]" 
             (newPostEvent)="addNewDescriptor($event, 'categories')" 
@@ -14,16 +15,26 @@
             (deletePostEvent)="deleteDescriptor($event, 'categories')">
         </post>
 
-          <!-- <post 
+        <post 
             [posts]="creators" 
             [title]="gameInfo[1]" 
             (newPostEvent)="addNewDescriptor($event, 'creators')"
-            (editPostEvent)="editDescriptor($event)"
-            (deletePostEvent)="deleteDescriptor()">
+            (editPostEvent)="editDescriptor($event, 'creators')"
+            (deletePostEvent)="deleteDescriptor($event, 'creators')">
         </post>
+        <!-- Think maybe the moves would be to simply pass in the up to date array of values as input,
+        then do all calls to the service inside post component, maybe... -->
 
-        
+
         <post 
+            [posts]="console_makers" 
+            [title]="gameInfo[2]" 
+            (newPostEvent)="addNewDescriptor($event, 'console_makers')"
+            (editPostEvent)="editDescriptor($event, 'console_makers')"
+            (deletePostEvent)="deleteDescriptor($event, 'console_makers')">
+        </post>
+        
+        <!---<post 
             [posts]="nintendo" 
             [title]="gameInfo[2]" 
             (newPostEvent)="addNewDescriptor($event, 'nintendo')" 
