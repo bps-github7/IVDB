@@ -4,6 +4,7 @@ import { GameService } from 'src/app/common/services/game.service';
 import { Route } from '@angular/compiler/src/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { take } from 'rxjs/operators';
+import { TestingService } from 'src/app/common/services/testing.service';
 
 @Component({
   selector: 'app-game-form',
@@ -19,23 +20,35 @@ export class GameFormComponent implements OnInit {
     id;
 
     constructor(
+        
+        //testing only! replace with gameInfoService when testing is finished
+        private testingService : TestingService,
+
         private gameInfoService: GameInfoService,
         private gameService : GameService,
         private router : Router,
         private route : ActivatedRoute) { 
-        this.gameInfo = this.gameInfoService;
+        // this.gameInfo = this.gameInfoService;
         
-        this.game_categories = this.gameInfo.get_categories_array();
-        this.game_creators = this.gameInfo.get_creators_array();
-        this.game_console_makers = this.gameInfo.get_console_makers_array();
+        
+            // feel like taking game_ out of the variables would be better- another time...
+            this.testingService.getType$('category').subscribe(p => this.game_categories = p);
+            this.testingService.getType$('creator').subscribe(p => this.game_creators = p);
+            this.testingService.getType$('console_maker').subscribe(p => this.game_console_makers = p);
+                
+            // this.game_categories = this.gameInfo.get_categories_array();
+            // this.game_creators = this.gameInfo.get_creators_array();
+            // this.game_console_makers = this.gameInfo.get_console_makers_array();
 
 
         
-        this.id = this.route.snapshot.paramMap.get('id');
-        
-        if (this.id)
-            //you assigned this twice here- is that nessecary/ non-problematic?
-            this.game = this.gameService.get$(this.id).subscribe(g =>this.game = g);
+
+            
+            this.id = this.route.snapshot.paramMap.get('id');
+            
+            if (this.id)
+                //you assigned this twice here- is that nessecary/ non-problematic?
+                this.game = this.gameService.get$(this.id).subscribe(g =>this.game = g);
 
     }
 

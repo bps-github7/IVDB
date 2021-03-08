@@ -21,6 +21,11 @@ export class TestingService {
         return this.afs.collection('testing').valueChanges()
     }
 
+    setAll$() {
+        // called when you submit the list of categories, creators, console_makers for update
+        // in game-info-form. 
+    }
+
     getType$(type : string) {
         const typeRef = this.afs.collection<GameDescriptor[]>('testing', (ref) => ref.where('type','==', type));
         return typeRef.valueChanges();
@@ -41,8 +46,12 @@ export class TestingService {
     }
 
     update(descriptor, patch=true) {
-        /* change patch to false to make 
-        updates to document overwrite the existing data 
+        /* for updating a single document.
+
+        descriptor- the updated object you want to push to the game-info collection
+        
+        set patch to false to perform http PUT- complete overwrite of existing data.
+        (no known use cases yet).
         */
        this.afs.doc(`testing/${descriptor.uid}`).set({
             uid : descriptor.uid,
