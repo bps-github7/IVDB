@@ -28,14 +28,13 @@ export class CategoriesComponent implements OnInit {
         this.route.paramMap.subscribe(params => {
             this.category = params.get('category');
         })
-        this.testingService.get_type('category').subscribe(p => this.categories = p);
+        this.testingService.getType$('category').subscribe(p => this.categories = p);
 
         this.gameInfoService.gameInfo$.subscribe(g => this.gameInfo = g);
         // this.categories = this.gameInfoService.get_categories_array();
         
         if (this.category) {
-            console.log(`searching for ${this.category}`);
-            this.testingService.get_document(this.category, 'category')
+            this.testingService.getDocument$(this.category, 'category')
             .subscribe(p => {
                 // pipe(take(1)) didnt work so just subscripting it to get first value for now.                
                 this.category = p[0]});

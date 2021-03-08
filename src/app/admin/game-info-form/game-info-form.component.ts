@@ -43,7 +43,7 @@ export class GameInfoFormComponent implements OnInit {
         private testingService : TestingService,
         private categoriesService : CategoriesService) {
 
-        this.testingService.get_type('category').subscribe(p => {
+        this.testingService.getType$('category').subscribe(p => {
             console.log("categories service getAll$() ->" + p);
             this.categories = p});
         // this.testingService.creators.subscribe(p => this.creators = p);

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { take } from 'rxjs/operators';
 import { GameInfoService } from '../common/services/gameinfo.service';
 import { TestingService } from '../common/services/testing.service';
 
@@ -27,10 +28,12 @@ export class CreatorsComponent implements OnInit {
                 this.creator = params.get('creator');
             })
             // this.creators = this.gameInfoService.get_creators_array();
-            this.testingService.get_type('creator').subscribe(p => this.creators = p);
+            this.testingService.getType$('creator').subscribe(p => this.creators = p);
 
             if (this.creator) {
-                this.creator = this.gameInfoService.find_creator(this.creator);
+                this.testingService.getDocument$(this.creator, 'creator')
+                .pipe(take(1))
+                .subscribe(p => this.creator = p);
             }
         }
 

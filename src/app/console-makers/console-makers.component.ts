@@ -34,7 +34,7 @@ export class ConsoleMakersComponent implements OnInit {
             })
             // this.console_makers = this.gameInfoService.get_console_makers_array();
             
-            this.testingService.get_type('console_maker').subscribe(p => this.console_makers = p);
+            this.testingService.getType$('console_maker').subscribe(p => this.console_makers = p);
 
             
             //executes if the route parameter is provided.
