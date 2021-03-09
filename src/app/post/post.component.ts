@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { GameInfoService } from '../common/services/gameinfo.service';
 
 @Component({
   selector: 'post',
@@ -28,18 +29,29 @@ export class PostComponent implements OnInit {
     formReady : boolean = false;
 
 
+    // gets populated with title and desc of entry we want to edit
+    // then sent to descriptor form.
+    selected : any;
 
-    constructor() {
+    constructor(private gameInfoService : GameInfoService) {
     }
 
-    edit(docUid, newTitle='', newDescription='') {
-        // easier to add type after the event is emmited.
-        const newDescriptor = {
-            uid : docUid,
-            title : newTitle,
-            description : newDescription 
-        }
-        this.editPostEvent.emit(newDescriptor);
+    edit(docUid) {
+        console.log(`searching with ${docUid}`);
+        this.gameInfoService.getDocument$(docUid, 'category').subscribe(p => {
+            
+            // like it if we could get rid of that subscript syntax.
+            this.selected = p;
+        })
+        console.log(`${this.selected.title}`);
+
+
+    
+        // Need to get the item that was selected.
+        
+
+
+        // this.editPostEvent.emit(newDescriptor);
     }
 
     completionCheck(newTitle = '', newDescription = '') {
@@ -50,9 +62,9 @@ export class PostComponent implements OnInit {
         if (newTitle && newDescription) {
             if (newTitle == this.currentTitle)
                 alert('new title and old title are the same.');
-            else if (newDescription == this.currentDescription) 
+            if (newDescription == this.currentDescription) 
                 alert('new description and old description are the same.');
-
+            // this.edit()
         } else {
             if (newTitle == '' || newTitle == ' ') {
                 if (this.currentTitle == '')
@@ -83,9 +95,9 @@ export class PostComponent implements OnInit {
         
     }
 
-    update(post : any) {
-        this.editPostEvent.emit(post)
-    }
+    // update(post : any) {
+    //     this.editPostEvent.emit(post)
+    // }
 
     ngOnInit(): void {
     }

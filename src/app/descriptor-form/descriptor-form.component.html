@@ -1,4 +1,24 @@
-<div formGroupName="descriptor">
+<!-- <div *ngIf=""> -->
+
+    <!-- poor choice of variable name me thinks? -->
+<div *ngIf="addMode">
+    For Adding new shit
+
+    title : {{editingTitle}}
+    description : {{editingDescription}}
+</div>
+
+<div *ngIf="!addMode">
+    For editing old shit
+
+    title : {{editingTitle}}
+    description : {{editingDescription}}
+</div>
+
+
+
+
+<!-- <div formGroupName="descriptor">
     <input 
     #title
     formControlName="title"
@@ -15,4 +35,4 @@
 
 </div>
 
-<button class="btn btn-primary" (keyup.enter)="submit(title, description)">Add new Game-Descriptor</button>
+<button class="btn btn-primary" (keyup.enter)="submit()">Add new Game-Descriptor</button> -->

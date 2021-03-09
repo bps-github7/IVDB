@@ -97,7 +97,6 @@ export class GameInfoFormComponent implements OnInit {
     editDescriptor(newTitle : any, 
         descriptorType : string) {
         
-        console.log("got to this point you ugly slut")
         //temporary shortcut! do better in production !!!
         const newObject = {
             uid : '3gyqwF9lencFwInCfHjx',
@@ -105,108 +104,16 @@ export class GameInfoFormComponent implements OnInit {
             title : newTitle,
             description : 'abcdefg'
         }
-
-        switch (descriptorType) {
-            case "category": {
-                this.gameInfoService.update(newObject);
+        this.gameInfoService.update(newObject);
     
-                // this.categoriesService
-                // .setSpecificCategory(newObject);
-                // break;
-                } 
-            case "creators": {
-                break
-                } 
-            case "nintendo": {
-                break;
-                }
-            case "sony": {
-                break;
-                } 
-            case "microsoft": {
-                break;
-                } 
-            case "pc": {
-                break;
-                }
-            case "mobile": {
-                break;
-                }
-            case "web": {
-                break;
-                }
-        }
     } 
 
     deleteDescriptor(uid, descriptorType) {
-        switch (descriptorType) {
-            case "categories": {
-                this.gameInfoService.delete(uid);
-                // this.categoriesService
-                // //You can just pass in newObject
-                // .deleteCategory(uid);
-                break;
-                } 
-            case "creators": {
-                break
-                } 
-            case "nintendo": {
-                break;
-                }
-            case "sony": {
-                break;
-                } 
-            case "microsoft": {
-                break;
-                } 
-            case "pc": {
-                break;
-                }
-            case "mobile": {
-                break;
-                }
-            case "web": {
-                break;
-                }
-        }
-
+        this.gameInfoService.delete(uid);
     }
 
-  addNewDescriptor(newDescriptor : string, infoType : string) {
-    switch(infoType) {
-        case "categories": {
-            this.categories.push({ title : newDescriptor, description : ''});
-            break;
-            } 
-        case "creators": {
-            this.creators.push(newDescriptor);
-            break
-            } 
-        case "nintendo": {
-            this.nintendo.push(newDescriptor);
-            break;
-            }
-        case "sony": {
-            this.sony.push(newDescriptor);
-            break;
-            } 
-        case "microsoft": {
-            this.microsoft.push(newDescriptor);
-            break;
-            } 
-        case "pc": {
-            this.pc.push(newDescriptor);
-            break;
-            }
-        case "mobile": {
-            this.mobile.push(newDescriptor);
-            break;
-            }
-        case "web": {
-            this.web.push(newDescriptor);
-            break;
-            }
-        }
+    addNewDescriptor(newDescriptor : string, infoType : string) {
+        this.categories.push({ title : newDescriptor, description : ''});
     }
 
 

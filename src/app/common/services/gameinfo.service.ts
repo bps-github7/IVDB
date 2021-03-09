@@ -32,9 +32,9 @@ export class GameInfoService {
         const typeRef = this.afs.collection<GameDescriptor[]>('game_info', (ref) => ref.where('type','==', type));
         return typeRef.valueChanges();
     }
-
     getDocument$(title : string, type : string) {
-        const docRef = this.afs.collection<GameDescriptor>('game_info', (ref) => 
+    // getDocument$(title : string, type : string = 'category') {
+        const docRef = this.afs.collection('game_info', (ref) => 
             ref.where('type','==', type).where('title', '==', title));
         
         // the take(1) isnt working as

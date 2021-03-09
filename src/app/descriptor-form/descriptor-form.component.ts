@@ -16,6 +16,9 @@ export class DescriptorFormComponent implements OnInit {
 
     @Output() editDescriptorEvent = new EventEmitter<GameDescriptor>();
 
+    // not sure best way to toggel this.
+    addMode = true;
+
 
     showSubForm : boolean = false;
     form : any;
@@ -31,12 +34,12 @@ export class DescriptorFormComponent implements OnInit {
     ngOnInit(): void {
     }
 
-    submit(newTitle, newDescription) {
+    submit() {
         const newDescriptor = {
             uid : '',
             type: '',
-            title : newTitle,
-            description : newDescription
+            title : this.form.title,
+            description : this.form.description
         }
         this.editDescriptorEvent.emit(newDescriptor);
     }

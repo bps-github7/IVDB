@@ -33,8 +33,8 @@ export class CategoriesComponent implements OnInit {
             this.gameInfoService.getDocument$(this.category, 'category')
             .subscribe(p => {
                 // pipe(take(1)) didnt work so just subscripting it to get first value for now.                
-                // this.category = p[0]});
-                this.category = p});
+                this.category = p[0]});
+                // this.category = p});
             }
     }
 

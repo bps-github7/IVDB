@@ -1,12 +1,11 @@
 <label for="{{title}}">{{title | titlecase}} :</label>
 <ul class="list-group">
-    <!-- <descriptor-form></descriptor-form> -->
-    <!-- <input class="list-group-item" type="text" #newPost (keyup.enter)="showSubForm = true"> -->
-    <input [placeholder]="currentTitle" class="list-group-item" type="text" #newTitle (keyup.enter)="showRest = true">
-    <div>
-        <textarea #newDescription [placeholder]="currentDescription"></textarea>
-        <button [disabled]="formReady" class="btn btn-primary" (click)="completionCheck(newTitle, newDescription)">Update this entry</button>
-    </div>
+
+    <!-- <descriptor-form [editingTitle]="selected.title" [editingDescription]="selected.description"></descriptor-form> -->
+
+    <!-- Trigger will be a different event  -->
+    <!-- <input class="list-group-item" type="text" #newPost>
+    <descriptor-form *ngIf="showRest"></descriptor-form> -->
     
     <li class="list-group-item" 
         *ngFor="let p of posts">
