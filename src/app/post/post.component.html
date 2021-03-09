@@ -2,7 +2,11 @@
 <ul class="list-group">
     <!-- <descriptor-form></descriptor-form> -->
     <!-- <input class="list-group-item" type="text" #newPost (keyup.enter)="showSubForm = true"> -->
-    <input class="list-group-item" type="text" #newPost (keyup.enter)="addPost(newPost)">
+    <input [placeholder]="currentTitle" class="list-group-item" type="text" #newTitle (keyup.enter)="showRest = true">
+    <div>
+        <textarea #newDescription [placeholder]="currentDescription"></textarea>
+        <button [disabled]="formReady" class="btn btn-primary" (click)="completionCheck(newTitle, newDescription)">Update this entry</button>
+    </div>
     
     <li class="list-group-item" 
         *ngFor="let p of posts">

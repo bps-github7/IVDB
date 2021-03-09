@@ -12,6 +12,9 @@ export class PostComponent implements OnInit {
     The list can be exported as an array and used as a form control (future iters.) 
     */
 
+    @Input() currentTitle : string;
+    @Input() currentDescription : string;
+
     @Input() title : string
     @Input() posts: any = [];
     
@@ -21,7 +24,8 @@ export class PostComponent implements OnInit {
     @Output() deletePostEvent = new EventEmitter();
     @Output() editPostEvent = new EventEmitter<any>();
     
-    showSubForm : boolean;
+    showRest : boolean = false;
+    formReady : boolean = false;
 
 
 
@@ -38,6 +42,36 @@ export class PostComponent implements OnInit {
         this.editPostEvent.emit(newDescriptor);
     }
 
+    completionCheck(newTitle = '', newDescription = '') {
+        /* No return value or actions taken by this method yet
+        it needs to call update method if the right tests are
+        passed. 
+         */
+        if (newTitle && newDescription) {
+            if (newTitle == this.currentTitle)
+                alert('new title and old title are the same.');
+            else if (newDescription == this.currentDescription) 
+                alert('new description and old description are the same.');
+
+        } else {
+            if (newTitle == '' || newTitle == ' ') {
+                if (this.currentTitle == '')
+                    console.log("then nothing changed")
+                if (confirm("are you sure you want to delete the existing title for this entry?"))
+                    console.log("pancake grease")}
+            else if (newDescription == '' || newDescription == ' ') {
+                if (this.currentDescription == '')
+                    console.log("then nothing changed")
+                if (confirm("are you sure you want to delete the existing description for this entry?"))
+                    console.log("pancake grease")}
+        }
+        
+        // const  newPost = { title : newTitle, description : newDescription }
+        //  this.update(newPost);
+
+    }
+
+
     delete(uid) {
         if (confirm("are you sure you want to delete this entry (cannot undo)?"))
         this.deletePostEvent.emit(uid);
@@ -47,6 +81,10 @@ export class PostComponent implements OnInit {
         this.newPostEvent.emit(post.value);
         post.value = '';
         
+    }
+
+    update(post : any) {
+        this.editPostEvent.emit(post)
     }
 
     ngOnInit(): void {
