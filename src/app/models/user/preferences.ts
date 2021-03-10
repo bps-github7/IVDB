@@ -8,14 +8,14 @@ export interface Preferences {
         consoles : string [],
         categories : string | string [],
         creators : string | string [],
-        console_makers : string | string []
+        platforms : string | string []
     },
     dislikes : {
         games : (Game | string ) [],
         consoles : string [],
         categories : string | string [],
         creators : string | string [],
-        console_makers : string | string []
+        platforms : string | string []
     },
     historic : {
         favoriteGames: string | string [],

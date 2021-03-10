@@ -21,7 +21,7 @@ export class GameInfoFormComponent implements OnInit {
 
     form: any;
 
-    gameInfo : string [] = ["categories", "creators", "console_makers"];
+    gameInfo : string [] = ["categories", "creators", "platforms"];
     vgConsoles : string [] = ["nintendo","sony", "microsoft", "pc", "web", "mobile"];
 
 
@@ -30,7 +30,7 @@ export class GameInfoFormComponent implements OnInit {
     categories = [];
     // categories = new VideoGameDescriptor();
     creators = [];
-    console_makers = [];
+    platforms = [];
 
 
     nintendo;
@@ -61,7 +61,7 @@ export class GameInfoFormComponent implements OnInit {
 
         categories : [this.categories],
         creators : [this.creators],
-        console_makers : [this.console_makers]
+        platforms : [this.platforms]
 
         // nintendo : [this.nintendo],
         // sony : [this.sony],
@@ -80,7 +80,7 @@ export class GameInfoFormComponent implements OnInit {
     this.gameInfoService.getType$('creator').subscribe(p => {
         this.creators = p});
     
-        this.gameInfoService.getType$('console_maker').subscribe(p => this.console_makers = p);
+        this.gameInfoService.getType$('platform').subscribe(p => this.platforms = p);
     
    }
 
@@ -102,7 +102,7 @@ export class GameInfoFormComponent implements OnInit {
         // another bad solution, revise later.
         if (infoType == 'categories') infoType = 'category';
         else if (infoType == 'creators') infoType = 'creator';
-        else if (infoType == 'console_makers') infoType = 'console_maker';
+        else if (infoType == 'platforms') infoType = 'platform';
         const newObject = {
             uid : newValue.uid,
             type: infoType,
@@ -122,7 +122,7 @@ export class GameInfoFormComponent implements OnInit {
         // another bad solution, revise later.
         if (infoType == 'categories') infoType = 'category';
         else if (infoType == 'creators') infoType = 'creator';
-        else if (infoType == 'console_makers') infoType = 'console_maker';
+        else if (infoType == 'platforms') infoType = 'platform';
         const newEntry = {
             type : infoType,
             title : newValue.title,

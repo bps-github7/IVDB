@@ -8,16 +8,19 @@
 <p>Game info is organizational/categorical data associated with videogames of all types, including:</p>
 <ul class="list-group">
     <li class="list-group-item"><zippy title="Categories: What broad family or familes of games does the game in question belong to?">
-        list of all categories <br>
-        <a href="">Search for a category</a>
+    <ul class="list-group">
+        <li class="list-group-item" *ngFor="let p of categories | async">{{p}}</li>
+    </ul>
     </zippy></li>
     <li class="list-group-item"><zippy title="Creators: What game development studio(s) created the game">
-        list of all creators <br>
-        <a href="">Search for a creator</a>
+    <ul class="list-group">
+        <li class="list-group-item" *ngFor="let p of creators | async">{{p.title}}</li>
+    </ul>
     </zippy></li>
-    <li class="list-group-item"><zippy title="Console Makers: What line of consoles can the game be played on?">
-        list of all conzole makers <br>
-        <a href="">Search for a console maker</a>
+    <li class="list-group-item"><zippy title="Platforms: What types of consoles can the game be played on?">
+    <ul class="list-group">
+        <li class="list-group-item" *ngFor="let p of platforms | async">{{p.title}}</li>
+    </ul>
     </zippy></li>
     <li class="list-group-item">
         <zippy title="Console: What consoles in paticularly can the game be played on?">

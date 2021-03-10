@@ -15,7 +15,7 @@ export class GameFormComponent implements OnInit {
     gameInfo;
     game_categories;
     game_creators;
-    game_console_makers;
+    game_platforms;
     id;
 
     constructor(
@@ -30,7 +30,7 @@ export class GameFormComponent implements OnInit {
             // feel like taking game_ out of the variables would be better- another time...
             this.gameInfoService.getType$('category').subscribe(p => this.game_categories = p);
             this.gameInfoService.getType$('creator').subscribe(p => this.game_creators = p);
-            this.gameInfoService.getType$('console_maker').subscribe(p => this.game_console_makers = p);
+            this.gameInfoService.getType$('platform').subscribe(p => this.game_platforms = p);
                 
             // this.game_categories = this.gameInfo.get_categories_array();
             // this.game_creators = this.gameInfo.get_creators_array();

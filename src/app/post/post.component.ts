@@ -37,8 +37,6 @@ export class PostComponent {
 
     addPost(post) {
         this.newPostEvent.emit(post);
-        post.value = '';
-        
     }
 
     triggerDescriptorForm(title, uid) {

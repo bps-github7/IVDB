@@ -8,8 +8,8 @@ import { Preferences } from '../models/user/preferences';
 
 class UserPreferences implements Preferences {
     wouldYouPlay?: (string | Game)[];
-    likes: { games: (string | Game)[]; consoles: string[]; categories: string | string[]; creators: string | string[]; console_makers: string | string[]; };
-    dislikes: { games: (string | Game)[]; consoles: string[]; categories: string | string[]; creators: string | string[]; console_makers: string | string[]; };
+    likes: { games: (string | Game)[]; consoles: string[]; categories: string | string[]; creators: string | string[]; platforms: string | string[]; };
+    dislikes: { games: (string | Game)[]; consoles: string[]; categories: string | string[]; creators: string | string[]; platforms: string | string[]; };
     historic: { favoriteGames: string | string[]; favoriteConsoles: string | string[]; childhoodFavoriteGame: string | string[]; firstGame: string | string[]; };
     currentlyPlaying: { games: string | string[]; consoles: string | string[]; };
 
@@ -27,7 +27,7 @@ export class EditPreferencesComponent implements OnInit {
     
     categories: any[];
     creators: any[];
-    console_makers: any[];
+    platforms: any[];
 
 
     
@@ -48,7 +48,7 @@ export class EditPreferencesComponent implements OnInit {
         
         this.gameInfoService.getType$('category').subscribe(p => this.categories = p);
         this.gameInfoService.getType$('creator').subscribe(p => this.creators = p);
-        this.gameInfoService.getType$('console_maker').subscribe(p => this.console_makers = p);
+        this.gameInfoService.getType$('platform').subscribe(p => this.platforms = p);
         
         this.form = this.fb.group({
             likes : fb.group({
@@ -56,14 +56,14 @@ export class EditPreferencesComponent implements OnInit {
                 onsoles : fb.array([]),
                 categories : [''],
                 creators : [''],
-                console_makers : ['']
+                platforms : ['']
             }),
             dislikes : fb.group({
                 games : fb.array([]),
                 consoles : fb.array([]),
                 categories : [''],
                 creators : [''],
-                console_makers : ['']
+                platforms : ['']
             }),
             historic : fb.group({
                 favoriteGame : [''],
