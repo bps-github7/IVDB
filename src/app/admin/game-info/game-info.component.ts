@@ -9,11 +9,15 @@ import { GameInfoService } from 'src/app/common/services/gameinfo.service';
 export class GameInfoComponent implements OnInit {
 
 
-    categories: any;
-    creators : any;
-    platforms : any;
+    categories: any = [];
+    creators : any = [];
+    platforms : any = [];
 
-    constructor(private gameInfoService : GameInfoService) { }
+    constructor(private gameInfoService : GameInfoService) {
+
+        // Hillarious, you forgot to call this, hence their undefined...
+        this.getAll();
+     }
 
     ngOnInit(): void {
     }

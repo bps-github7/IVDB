@@ -41,6 +41,47 @@ export class GameInfoService {
         return docRef.valueChanges({idField : 'uid'});
     }
 
+    //violating encapsulation (sort of) by looking into two database with the same service
+    // but consoles are just a more complicated, specific form of game info, with their own collection
+    // for accesibility/ simplicity sake.
+
+    getConsoles$() {
+        return this.afs.collection('consoles').valueChanges({idField : 'uid'});
+    }
+
+    getConsole$(uid : string) {
+        return this.afs.doc(`consoles/${uid}`).valueChanges();
+
+    }
+
+    getConsoleMaker$(maker : string) {
+        return this.afs.collection('consoles', (ref) => ref.where('maker','==',maker))
+        .valueChanges({idField : 'uid'})
+    }
+
+    addConsole(newConsole : VgConsole) {
+        this.afs.collection<VgConsole>('consoles').add(newConsole)
+        .then(() => console.log("document succesfully written to!"))
+        .catch((err) => console.log(`Error while writing to document : ${err}`));
+    }
+
+    editConsole(newConsole : VgConsole) {
+        this.afs.doc<VgConsole>(`consoles/${newConsole.uid}`).set({
+            generation : newConsole.generation,
+            name : newConsole.name,
+            qualifiedName : newConsole.qualifiedName,
+            released : newConsole.released,
+            type : newConsole.type,
+            maker : newConsole.maker
+        }).then(() => console.log("Document succesfully updated!"))
+        .catch((err) => console.log(`Error while writing to document: ${err}`));
+
+    }
+
+    deleteConsole(uid) {
+        this.afs.doc(`consoles/${uid}`).delete();
+
+    }
 
 
     add(descriptor : any) {

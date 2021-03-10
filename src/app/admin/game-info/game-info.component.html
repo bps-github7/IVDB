@@ -5,21 +5,27 @@
 </p>
 
 
+
+
+
 <p>Game info is organizational/categorical data associated with videogames of all types, including:</p>
 <ul class="list-group">
+
+    <!-- Should make a tool tip so you can see description when hovering over these -->
+
     <li class="list-group-item"><zippy title="Categories: What broad family or familes of games does the game in question belong to?">
-    <ul class="list-group">
-        <li class="list-group-item" *ngFor="let p of categories | async">{{p}}</li>
-    </ul>
+        <ul class="list-group">
+            <li class="list-group-item" *ngFor="let p of categories">{{p.title}}</li>
+        </ul>    
     </zippy></li>
     <li class="list-group-item"><zippy title="Creators: What game development studio(s) created the game">
     <ul class="list-group">
-        <li class="list-group-item" *ngFor="let p of creators | async">{{p.title}}</li>
+        <li class="list-group-item" *ngFor="let p of creators">{{p.title}}</li>
     </ul>
     </zippy></li>
     <li class="list-group-item"><zippy title="Platforms: What types of consoles can the game be played on?">
     <ul class="list-group">
-        <li class="list-group-item" *ngFor="let p of platforms | async">{{p.title}}</li>
+        <li class="list-group-item" *ngFor="let p of platforms">{{p.title}}</li>
     </ul>
     </zippy></li>
     <li class="list-group-item">

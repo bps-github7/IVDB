@@ -4,5 +4,6 @@ export interface VgConsole {
     qualifiedName : string,
     released : string,
     type : string,
-    maker : string
+    maker : string,
+    uid?: string
 }

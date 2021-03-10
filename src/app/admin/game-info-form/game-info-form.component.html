@@ -1,172 +1,40 @@
 <div class="row">
     <div class="col-md-6">        
-
-        <!-- <form #finished="ngForm" (ngSubmit)="save(finished.value)"> -->
-            <!-- Keeping this messy double argument thing cuz cant conveintly gurantee uniformity among event return values.
-            each emmiter method has different job at hand -->
         <form #finished>
 
-        <!-- Feel like the categories and creators args should be singular not plural -->
-        <post 
-            [posts]="categories" 
-            [title]="gameInfo[0]" 
-            (newPostEvent)="addNewDescriptor($event, 'categories')" 
-            (editPostEvent)="editDescriptor($event, 'categories')"
-            (deletePostEvent)="deleteDescriptor($event)">
-        </post>
+
+            <post 
+                [posts]="categories" 
+                [title]="gameInfo[0]" 
+                (newPostEvent)="addNewDescriptor($event, 'categories')" 
+                (editPostEvent)="editDescriptor($event, 'categories')"
+                (deletePostEvent)="deleteDescriptor($event)">
+            </post>
 
 
-        <!-- temporarily removed editDescriptionEvent event listener as it was repurposed
-            to instruct child component, and was causing unwanted event propogation.-->
+            <!-- temporarily removed editDescriptionEvent event listener as it was repurposed
+                to instruct child component, and was causing unwanted event propogation.-->
 
-        <post 
-            [posts]="creators" 
-            [title]="gameInfo[1]" 
-            (newPostEvent)="addNewDescriptor($event, 'creators')"
-            (editPostEvent)="editDescriptor($event, 'creators')"
-            (deletePostEvent)="deleteDescriptor($event)">
-        </post>
-        <!-- Think maybe the moves would be to simply pass in the up to date array of values as input,
-        then do all calls to the service inside post component, maybe... -->
-
-
-        <post 
-            [posts]="platforms" 
-            [title]="gameInfo[2]" 
-            (newPostEvent)="addNewDescriptor($event, 'platforms')"
-            (editPostEvent)="editDescriptor($event, 'platforms')"
-            (deletePostEvent)="deleteDescriptor($event)">
-        </post>
-        
-        <!---<post 
-            [posts]="nintendo" 
-            [title]="gameInfo[2]" 
-            (newPostEvent)="addNewDescriptor($event, 'nintendo')" 
-            (deletePostEvent)="deleteDescriptor()">
-        </post>
-
-        
-        <post 
-            [posts]="sony" 
-            [title]="gameInfo[3]" 
-            (newPostEvent)="addNewDescriptor($event, 'sony')" 
-            (deletePostEvent)="deleteDescriptor()">
-        </post>
-
-        
-        <post 
-            [posts]="microsoft" 
-            [title]="gameInfo[4]" 
-            (newPostEvent)="addNewDescriptor($event, 'microsoft')" 
-            (deletePostEvent)="deleteDescriptor()">
-        </post>
-
-        
-        <post 
-            [posts]="pc" 
-            [title]="gameInfo[5]" 
-            (newPostEvent)="addNewDescriptor($event, 'pc')" 
-            (deletePostEvent)="deleteDescriptor()">
-        </post>
-
-        
-        <post 
-            [posts]="web" 
-            [title]="gameInfo[6]" 
-            (newPostEvent)="addNewDescriptor($event, 'web')" 
-            (deletePostEvent)="deleteDescriptor()">
-        </post>
+            <post 
+                [posts]="creators" 
+                [title]="gameInfo[1]" 
+                (newPostEvent)="addNewDescriptor($event, 'creators')"
+                (editPostEvent)="editDescriptor($event, 'creators')"
+                (deletePostEvent)="deleteDescriptor($event)">
+            </post>
+            <!-- Think maybe the moves would be to simply pass in the up to date array of values as input,
+            then do all calls to the service inside post component, maybe... -->
 
 
-        <post 
-            [posts]="mobile" 
-            [title]="gameInfo[7]" 
-            (newPostEvent)="addNewDescriptor($event, 'mobile')" 
-            (deletePostEvent)="deleteDescriptor()">
-        </post> -->
-
-
-
-          <!-- 
-            <div class="form-group">
-                <label for="categories">Categories: </label>
-                <input
-                    name="categories"
-                    id="categories"
-                    class="form-control"
-                    required
-                    type="text"
-                    >
-            </div>
-            
-            <div class="form-group">
-                <label for="creators">Creators: </label>
-                <input
-                    name="creators"
-                    id="creators"
-                    class="form-control"
-                    required
-                    type="text"
-                    >
-            </div>
-
-            <div class="form-group">
-                <label for="nintendo">nintendo: </label>
-                <input
-                    name="nintendo"
-                    id="nintendo"
-                    class="form-control"
-                    required
-                    type="text"
-                    >
-            </div>
-
-            <div class="form-group">
-                <label for="sony">Sony: </label>
-                <input
-                    name="sony"
-                    id="sony"
-                    class="form-control"
-                    required
-                    type="text"
-                    >
-            </div>
-
-            <div class="form-group">
-                <label for="microsoft">Microsoft: </label>
-                <input
-                    name="microsoft"
-                    id="microsoft"
-                    class="form-control"
-                    required
-                    type="text"
-                    >
-            </div>
-
-            <div class="form-group">
-                <label for="pc">pc: </label>
-                <input
-                    name="pc"
-                    id="pc"
-                    class="form-control"
-                    required
-                    type="text"
-                    >
-            </div>
-
-            <div class="form-group">
-                <label for="mobile">mobile: </label>
-                <input
-                    name="mobile"
-                    id="mobile"
-                    class="form-control"
-                    required
-                    type="text"
-                    >
-            </div> -->
-<!--             
-            <button class="btn btn-primary" [disabled]="!finished.valid">Save/update game</button>
-            <button type="button" class="btn btn-danger" (click)="delete()">Delete game</button> -->
+            <post 
+                [posts]="platforms" 
+                [title]="gameInfo[2]" 
+                (newPostEvent)="addNewDescriptor($event, 'platforms')"
+                (editPostEvent)="editDescriptor($event, 'platforms')"
+                (deletePostEvent)="deleteDescriptor($event)">
+            </post>
         </form>
+
+        <console-post></console-post>
     </div>
 </div>
