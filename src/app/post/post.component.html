@@ -14,7 +14,7 @@
     <li class="list-group-item" 
         *ngFor="let p of posts">
             {{p.title}}<br>
-            <span (click)="edit(p.title)">edit</span>&nbsp;&nbsp;
+            <span (click)="triggerDescriptorForm(p.title, p.uid)">edit</span>&nbsp;&nbsp;
             
             
             <span (click)="delete(p.uid)">delete</span>

@@ -1,6 +1,6 @@
 <div class="form-group" [formGroup]="form">
     <input 
-        placeholder="Enter a new title" 
+        placeholder="Enter title" 
         type="text" 
         formControlName="title" 
         id="title" 
@@ -8,13 +8,14 @@
         (click)="showSubForm = true">
     <div *ngIf="showSubForm">
         <textarea
-            placeholder="Enter a new description" 
+            placeholder="Enter description" 
             name="description" 
             id="description"
             class="form-control"
             formControlName="description"
             cols="18" rows="10"></textarea>
-        <button class="btn btn-primary" (click)="submitForm()">Submit changes</button>
+        <!-- submitForm method is untested but should perform basic validation.-->
+        <button class="btn btn-primary" (click)="submitForm()">{{submitMessage}}</button>
         <button class="btn btn-danger" (click)="resetForm()">Reset entry fields</button>
     </div>
 </div>

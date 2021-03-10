@@ -44,14 +44,6 @@ export class GameInfoFormComponent implements OnInit {
         fb : FormBuilder,
         private gameInfoService : GameInfoService) {
 
-        this.gameInfoService.getType$('category').subscribe(p => {
-            this.categories = p});
-
-        this.gameInfoService.getType$('creator').subscribe(p => {
-            this.creators = p});
-        
-            this.gameInfoService.getType$('console_maker').subscribe(p => this.console_makers = p);
-        
         // this.testingService.creators.subscribe(p => this.creators = p);
         // this.testingService.nintendo.subscribe(p => this.nintendo = p);
         // this.testingService.sony.subscribe(p => this.sony = p);
@@ -61,7 +53,8 @@ export class GameInfoFormComponent implements OnInit {
         // this.testingService.web.subscribe(p => this.web = p);
 
     
-
+            // fetches the array of each game-info as observable subscription
+            this.getAll();
 
 
     this.form = fb.group({
@@ -80,6 +73,17 @@ export class GameInfoFormComponent implements OnInit {
 
    }
 
+   getAll() {   
+    this.gameInfoService.getType$('category').subscribe(p => {
+        this.categories = p});
+
+    this.gameInfoService.getType$('creator').subscribe(p => {
+        this.creators = p});
+    
+        this.gameInfoService.getType$('console_maker').subscribe(p => this.console_makers = p);
+    
+   }
+
   ngOnInit(): void {
   }
 
@@ -93,37 +97,38 @@ export class GameInfoFormComponent implements OnInit {
    */
 
 
-    editDescriptor(newTitle : any, 
-        descriptorType : string) {
-        
-        //temporary shortcut! do better in production !!!
+    editDescriptor(newValue : any, 
+        infoType : string) {
+        // another bad solution, revise later.
+        if (infoType == 'categories') infoType = 'category';
+        else if (infoType == 'creators') infoType = 'creator';
+        else if (infoType == 'console_makers') infoType = 'console_maker';
         const newObject = {
-            uid : '3gyqwF9lencFwInCfHjx',
-            type: 'category',
-            title : newTitle,
-            description : 'abcdefg'
+            uid : newValue.uid,
+            type: infoType,
+            title : newValue.title,
+            description : newValue.description
         }
+        // console.log(`uid : ${newObject.uid} \ntype : ${newObject.type}\ntitle : ${newObject.title}\ndescription : ${newObject.description}`)
         this.gameInfoService.update(newObject);
-    
+        this.getAll();
     } 
 
-    deleteDescriptor(uid, descriptorType) {
+    deleteDescriptor(uid) {
         this.gameInfoService.delete(uid);
     }
 
-    addNewDescriptor(newDescriptor : string, infoType : string) {
-        this.categories.push({ title : newDescriptor, description : ''});
+    addNewDescriptor(newValue, infoType : string) {
+        // another bad solution, revise later.
+        if (infoType == 'categories') infoType = 'category';
+        else if (infoType == 'creators') infoType = 'creator';
+        else if (infoType == 'console_makers') infoType = 'console_maker';
+        const newEntry = {
+            type : infoType,
+            title : newValue.title,
+            description : newValue.description
+        }
+        this.gameInfoService.add(newEntry);
+        this.getAll();
     }
-
-
-
-  save(gameInfo) {
-      console.log("save");
-  }
-
-  delete() {
-      // will need to take an argument
-      console.log("delete");
-  }
-
 }

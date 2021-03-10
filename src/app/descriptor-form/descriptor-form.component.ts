@@ -11,8 +11,14 @@ import { GameDescriptor } from '../models/content/GameDescriptor';
 export class DescriptorFormComponent implements OnInit, OnChanges {
 
     @Input() editing : string = "";
-    editingMode : boolean = false;
     oldValues: any = "";
+
+    
+
+    editingMode : boolean = false;
+    submitMessage : string = this.editingMode ? "Submit changes" : "Add new entry"    
+    
+    
     
     // Need to check if the old doc exists before updating
     oldDoc : any;
@@ -21,12 +27,21 @@ export class DescriptorFormComponent implements OnInit, OnChanges {
     @Output() addNewDescriptorEvent = new EventEmitter<any>();
 
 
+
+
     showSubForm : boolean = false;
     form : FormGroup;
 
 
     constructor(fb : FormBuilder, 
         private gameInfoService : GameInfoService) {
+        
+        
+
+        // this.gameInfoService.getDocument$(this.oldValues.title)
+        // .subscribe(p => this.oldDoc = p[0]);
+        // if (this.oldDoc.title) this.editingMode = true;
+
         this.form = fb.group({
             title : ['', Validators.required],
             description : ['']
@@ -42,9 +57,9 @@ export class DescriptorFormComponent implements OnInit, OnChanges {
         this.editingMode = true;
     }
 
-    get title() { return this.form.get("title"); }
+    get title() { return this.form.get("title").value; }
 
-    get description() { return this.form.get("description"); }
+    get description() { return this.form.get("description").value; }
 
     ngOnInit(): void {
     }
@@ -54,28 +69,29 @@ export class DescriptorFormComponent implements OnInit, OnChanges {
         this.editingMode = false;
     }
 
+    addEntry() {
+        const newEntry = {title : this.title, description : this.description }
+        this.addNewDescriptorEvent.emit(newEntry);
+        this.resetForm();
+    }
+
+    updateEntry() {
+        const newEntry = {uid : this.oldValues.uid, title : this.title, description : this.description }
+        this.editDescriptorEvent.emit(newEntry);
+        this.resetForm();
+    }
+
     submitForm() {
         /* Handles potential nuance(s) of submit button with
         two different functions, update or add new. 
          */
+
+        // bad test but it will have to do for now
         if (this.editingMode) {
             // check if document exists first
-            this.gameInfoService.getDocument$(this.oldValues.title)
-            .subscribe(p => {this.oldDoc = p});
-            if (this.oldDoc.title) {
-                const newDescriptor = {title : this.title, description : this.description }
-                this.editDescriptorEvent.emit(newDescriptor)
-            }
-            else {
-                // Can't really think of circumstance where this conditionn would execute but just in case.
-                if (confirm("Note: No entry in game-info for this title. Do you want to create it? (currently you are trying to update an entry)")) {
-                    const newDescriptor = {title : this.form.get('title'), description : this.form.get('description')}
-                    this.addNewDescriptorEvent.emit(newDescriptor);
-                } else {this.resetForm()}
-            }
+                this.updateEntry();
         } else {
-            const newDescriptor = {title : this.form.get('title'), description : this.form.get('description')}
-            this.addNewDescriptorEvent.emit(newDescriptor);
+            this.addEntry();
         }
         
 

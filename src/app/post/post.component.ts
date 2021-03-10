@@ -25,9 +25,8 @@ export class PostComponent {
     @Output() deletePostEvent = new EventEmitter();
     @Output() editPostEvent = new EventEmitter<any>();
     
-    showRest : boolean = false;
-    formReady : boolean = false;
 
+    
 
     // gets populated with title and desc of entry we want to edit
     // then sent to descriptor form.
@@ -36,17 +35,20 @@ export class PostComponent {
     constructor(private gameInfoService : GameInfoService) {
     }
 
-    addPost(post : HTMLInputElement) {
-        this.newPostEvent.emit(post.value);
+    addPost(post) {
+        this.newPostEvent.emit(post);
         post.value = '';
         
     }
 
+    triggerDescriptorForm(title, uid) {
+        this.gameInfoService.getDocument$(title).subscribe(p => {
+            this.selected = {'uid' : uid, 'title' : p[0].title, 'description' : p[0].description };        
+        })
+    }
+
     edit(newEntry) {
-        // this.gameInfoService.getDocument$(docUid).subscribe(p => {
-        //     this.selected = {'title' : p[0].title, 'description' : p[0].description };        
-        // })
-        this.editPostEvent.emit(this.selected);
+        this.editPostEvent.emit(newEntry);
     }
 
 

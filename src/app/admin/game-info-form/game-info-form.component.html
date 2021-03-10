@@ -11,7 +11,8 @@
             [posts]="categories" 
             [title]="gameInfo[0]" 
             (newPostEvent)="addNewDescriptor($event, 'categories')" 
-            (deletePostEvent)="deleteDescriptor($event, 'categories')">
+            (editPostEvent)="editDescriptor($event, 'categories')"
+            (deletePostEvent)="deleteDescriptor($event)">
         </post>
 
 
@@ -22,7 +23,8 @@
             [posts]="creators" 
             [title]="gameInfo[1]" 
             (newPostEvent)="addNewDescriptor($event, 'creators')"
-            (deletePostEvent)="deleteDescriptor($event, 'creators')">
+            (editPostEvent)="editDescriptor($event, 'creators')"
+            (deletePostEvent)="deleteDescriptor($event)">
         </post>
         <!-- Think maybe the moves would be to simply pass in the up to date array of values as input,
         then do all calls to the service inside post component, maybe... -->
@@ -32,7 +34,8 @@
             [posts]="console_makers" 
             [title]="gameInfo[2]" 
             (newPostEvent)="addNewDescriptor($event, 'console_makers')"
-            (deletePostEvent)="deleteDescriptor($event, 'console_makers')">
+            (editPostEvent)="editDescriptor($event, 'console_makers')"
+            (deletePostEvent)="deleteDescriptor($event)">
         </post>
         
         <!---<post 
@@ -161,12 +164,9 @@
                     type="text"
                     >
             </div> -->
-            
+<!--             
             <button class="btn btn-primary" [disabled]="!finished.valid">Save/update game</button>
-            <button type="button" class="btn btn-danger" (click)="delete()">Delete game</button>
+            <button type="button" class="btn btn-danger" (click)="delete()">Delete game</button> -->
         </form>
     </div>
-    
 </div>
-
-<p (click)="test()"> click here to see the completed form</p>

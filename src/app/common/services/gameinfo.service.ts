@@ -30,7 +30,7 @@ export class GameInfoService {
 
     getType$(type : string) {
         const typeRef = this.afs.collection<GameDescriptor[]>('game_info', (ref) => ref.where('type','==', type));
-        return typeRef.valueChanges();
+        return typeRef.valueChanges({idField : 'uid'});
     }
 
     
@@ -38,13 +38,17 @@ export class GameInfoService {
     // getDocument$(title : string, type : string = 'category') {
         const docRef = this.afs.collection<GameDescriptor>('game_info', (ref) => 
             ref.where('title', '==', title));
-        return docRef.valueChanges();
+        return docRef.valueChanges({idField : 'uid'});
     }
 
 
 
-    add(descriptor : GameDescriptor) {
-        this.afs.collection('game_info').add(descriptor)
+    add(descriptor : any) {
+        this.afs.collection('game_info').add({
+            title : descriptor.title,
+            type : descriptor.type,
+            description : descriptor.description
+        })
         .then(()=> console.log("Documet succesfully written to"))
         .catch((err) => console.log(`Error while writing to doc ${err}`));
     }
