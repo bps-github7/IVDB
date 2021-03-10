@@ -11,15 +11,17 @@
             [posts]="categories" 
             [title]="gameInfo[0]" 
             (newPostEvent)="addNewDescriptor($event, 'categories')" 
-            (editPostEvent)="editDescriptor($event, 'categories')"
             (deletePostEvent)="deleteDescriptor($event, 'categories')">
         </post>
+
+
+        <!-- temporarily removed editDescriptionEvent event listener as it was repurposed
+            to instruct child component, and was causing unwanted event propogation.-->
 
         <post 
             [posts]="creators" 
             [title]="gameInfo[1]" 
             (newPostEvent)="addNewDescriptor($event, 'creators')"
-            (editPostEvent)="editDescriptor($event, 'creators')"
             (deletePostEvent)="deleteDescriptor($event, 'creators')">
         </post>
         <!-- Think maybe the moves would be to simply pass in the up to date array of values as input,
@@ -30,7 +32,6 @@
             [posts]="console_makers" 
             [title]="gameInfo[2]" 
             (newPostEvent)="addNewDescriptor($event, 'console_makers')"
-            (editPostEvent)="editDescriptor($event, 'console_makers')"
             (deletePostEvent)="deleteDescriptor($event, 'console_makers')">
         </post>
         
@@ -38,7 +39,6 @@
             [posts]="nintendo" 
             [title]="gameInfo[2]" 
             (newPostEvent)="addNewDescriptor($event, 'nintendo')" 
-            (editPostEvent)="editDescriptor($event)"
             (deletePostEvent)="deleteDescriptor()">
         </post>
 
@@ -47,7 +47,6 @@
             [posts]="sony" 
             [title]="gameInfo[3]" 
             (newPostEvent)="addNewDescriptor($event, 'sony')" 
-            (editPostEvent)="editDescriptor($event)"
             (deletePostEvent)="deleteDescriptor()">
         </post>
 
@@ -56,7 +55,6 @@
             [posts]="microsoft" 
             [title]="gameInfo[4]" 
             (newPostEvent)="addNewDescriptor($event, 'microsoft')" 
-            (editPostEvent)="editDescriptor($event)"
             (deletePostEvent)="deleteDescriptor()">
         </post>
 
@@ -65,7 +63,6 @@
             [posts]="pc" 
             [title]="gameInfo[5]" 
             (newPostEvent)="addNewDescriptor($event, 'pc')" 
-            (editPostEvent)="editDescriptor($event)"
             (deletePostEvent)="deleteDescriptor()">
         </post>
 
@@ -74,7 +71,6 @@
             [posts]="web" 
             [title]="gameInfo[6]" 
             (newPostEvent)="addNewDescriptor($event, 'web')" 
-            (editPostEvent)="editDescriptor($event)"
             (deletePostEvent)="deleteDescriptor()">
         </post>
 
@@ -83,7 +79,6 @@
             [posts]="mobile" 
             [title]="gameInfo[7]" 
             (newPostEvent)="addNewDescriptor($event, 'mobile')" 
-            (editPostEvent)="editDescriptor($event)"
             (deletePostEvent)="deleteDescriptor()">
         </post> -->
 

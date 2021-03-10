@@ -1,7 +1,11 @@
 <label for="{{title}}">{{title | titlecase}} :</label>
 <ul class="list-group">
 
-    <!-- <descriptor-form [editingTitle]="selected.title" [editingDescription]="selected.description"></descriptor-form> -->
+    <descriptor-form 
+        [editing]="selected"
+        (addNewDescriptorEvent)="addPost($event)"
+        (editDescriptorEvent)="edit($event)"
+        ></descriptor-form>
 
     <!-- Trigger will be a different event  -->
     <!-- <input class="list-group-item" type="text" #newPost>
@@ -10,7 +14,7 @@
     <li class="list-group-item" 
         *ngFor="let p of posts">
             {{p.title}}<br>
-            <span (click)="edit(p.uid)">edit</span>&nbsp;&nbsp;
+            <span (click)="edit(p.title)">edit</span>&nbsp;&nbsp;
             
             
             <span (click)="delete(p.uid)">delete</span>

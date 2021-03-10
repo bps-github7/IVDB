@@ -32,10 +32,6 @@ export class GameInfoFormComponent implements OnInit {
     creators = [];
     console_makers = [];
 
-    some_category;
-    some_creator;
-    some_creator_id;
-
 
     nintendo;
     sony;
@@ -50,10 +46,12 @@ export class GameInfoFormComponent implements OnInit {
 
         this.gameInfoService.getType$('category').subscribe(p => {
             this.categories = p});
-        this.gameInfoService.getDocument$('adventure','category').subscribe(p => this.some_category = p[0]);
+
         this.gameInfoService.getType$('creator').subscribe(p => {
             this.creators = p});
-        this.gameInfoService.getType$('console_maker').subscribe(p => this.console_makers = p);
+        
+            this.gameInfoService.getType$('console_maker').subscribe(p => this.console_makers = p);
+        
         // this.testingService.creators.subscribe(p => this.creators = p);
         // this.testingService.nintendo.subscribe(p => this.nintendo = p);
         // this.testingService.sony.subscribe(p => this.sony = p);
@@ -70,6 +68,7 @@ export class GameInfoFormComponent implements OnInit {
 
         categories : [this.categories],
         creators : [this.creators],
+        console_makers : [this.console_makers]
 
         // nintendo : [this.nintendo],
         // sony : [this.sony],

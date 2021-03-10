@@ -67,13 +67,32 @@
             </a>
             <!-- can non admin users access this? -->
             <ul class="sub-menu">
-                <li *ngIf="appUser.isAdmin"><a class="btn-dd" routerLink="/admin/game">Adminster</a></li>
+                <li *ngIf="appUser.isAdmin" class="sub-sub-menu-trigger"><a routerLink="/admin/game">Adminster</a>
+                    <ul class=sub-sub-menu>
+                        <li class="sub-sub-top">
+                            <a routerLink="admin/game/new">Add new Game</a>
+                        </li>
+                        <li>
+                            <a routerLink="admin/game/info/new">Edit Game Info</a>
+                        </li>
+                        <li>
+                            <a href="#">Threads</a>
+                        </li>
+                        <li>
+                            <a href="#">Content</a>
+                        </li>
+                        <li>
+                            <a href="#">Contributions</a>
+                        </li>
+                        
+                    </ul>
+                </li>
 
                 <li class="dd-menu-trigger"><a routerLink="/rate">Edit</a>
                     <ul class="sub-menu">
-                        <li class="sub-sub-top"><a href="#"
+                        <li class="sub-sub-top"><a
                                 [routerLink]="['/sign_in/create_profile/', appUser?.uid]">Profile</a></li>
-                        <li><a href="#" [routerLink]="['/preferences', appUser?.uid, appUser?.username]">Preferences</a>
+                        <li><a [routerLink]="['/preferences', appUser?.uid, appUser?.username]">Preferences</a>
                         </li>
                         <li><a href="#" [routerLink]="['/contributions', appUser?.username]">Contributions</a>
                         </li>

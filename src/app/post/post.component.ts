@@ -6,7 +6,7 @@ import { GameInfoService } from '../common/services/gameinfo.service';
   templateUrl: './post.component.html',
   styleUrls: ['./post.component.css']
 })
-export class PostComponent implements OnInit {
+export class PostComponent {
 
     /* Simple, reusable component for listing collected information
     type something at the top, press enter and it will be added to list.
@@ -36,70 +36,23 @@ export class PostComponent implements OnInit {
     constructor(private gameInfoService : GameInfoService) {
     }
 
-    edit(docUid) {
-        console.log(`searching with ${docUid}`);
-        this.gameInfoService.getDocument$(docUid, 'category').subscribe(p => {
-            
-            // like it if we could get rid of that subscript syntax.
-            this.selected = p;
-        })
-        console.log(`${this.selected.title}`);
-
-
-    
-        // Need to get the item that was selected.
-        
-
-
-        // this.editPostEvent.emit(newDescriptor);
-    }
-
-    completionCheck(newTitle = '', newDescription = '') {
-        /* No return value or actions taken by this method yet
-        it needs to call update method if the right tests are
-        passed. 
-         */
-        if (newTitle && newDescription) {
-            if (newTitle == this.currentTitle)
-                alert('new title and old title are the same.');
-            if (newDescription == this.currentDescription) 
-                alert('new description and old description are the same.');
-            // this.edit()
-        } else {
-            if (newTitle == '' || newTitle == ' ') {
-                if (this.currentTitle == '')
-                    console.log("then nothing changed")
-                if (confirm("are you sure you want to delete the existing title for this entry?"))
-                    console.log("pancake grease")}
-            else if (newDescription == '' || newDescription == ' ') {
-                if (this.currentDescription == '')
-                    console.log("then nothing changed")
-                if (confirm("are you sure you want to delete the existing description for this entry?"))
-                    console.log("pancake grease")}
-        }
-        
-        // const  newPost = { title : newTitle, description : newDescription }
-        //  this.update(newPost);
-
-    }
-
-
-    delete(uid) {
-        if (confirm("are you sure you want to delete this entry (cannot undo)?"))
-        this.deletePostEvent.emit(uid);
-    }
-
     addPost(post : HTMLInputElement) {
         this.newPostEvent.emit(post.value);
         post.value = '';
         
     }
 
-    // update(post : any) {
-    //     this.editPostEvent.emit(post)
-    // }
+    edit(newEntry) {
+        // this.gameInfoService.getDocument$(docUid).subscribe(p => {
+        //     this.selected = {'title' : p[0].title, 'description' : p[0].description };        
+        // })
+        this.editPostEvent.emit(this.selected);
+    }
 
-    ngOnInit(): void {
+
+    delete(uid) {
+        if (confirm("are you sure you want to delete this entry (cannot undo)?"))
+        this.deletePostEvent.emit(uid);
     }
 
 }

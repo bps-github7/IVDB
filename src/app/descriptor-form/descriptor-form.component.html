@@ -1,38 +1,20 @@
-<!-- <div *ngIf=""> -->
-
-    <!-- poor choice of variable name me thinks? -->
-<div *ngIf="addMode">
-    For Adding new shit
-
-    title : {{editingTitle}}
-    description : {{editingDescription}}
-</div>
-
-<div *ngIf="!addMode">
-    For editing old shit
-
-    title : {{editingTitle}}
-    description : {{editingDescription}}
-</div>
-
-
-
-
-<!-- <div formGroupName="descriptor">
+<div class="form-group" [formGroup]="form">
     <input 
-    #title
-    formControlName="title"
-    placeholder="enter new title (required)"
-    type="text"
-    (keyup.enter)="showSubForm = true">    
-<textarea 
-    *ngIf="showSubForm" 
-    #description
-    formControlName="description"
-    placeholder="enter new description (optional)"
-    cols="50"
-    rows="10"></textarea>    
-
+        placeholder="Enter a new title" 
+        type="text" 
+        formControlName="title" 
+        id="title" 
+        class="form-control" 
+        (click)="showSubForm = true">
+    <div *ngIf="showSubForm">
+        <textarea
+            placeholder="Enter a new description" 
+            name="description" 
+            id="description"
+            class="form-control"
+            formControlName="description"
+            cols="18" rows="10"></textarea>
+        <button class="btn btn-primary" (click)="submitForm()">Submit changes</button>
+        <button class="btn btn-danger" (click)="resetForm()">Reset entry fields</button>
+    </div>
 </div>
-
-<button class="btn btn-primary" (keyup.enter)="submit()">Add new Game-Descriptor</button> -->

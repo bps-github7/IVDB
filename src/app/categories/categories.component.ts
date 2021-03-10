@@ -30,7 +30,7 @@ export class CategoriesComponent implements OnInit {
         // this.categories = this.gameInfoService.get_categories_array();
         
         if (this.category) {
-            this.gameInfoService.getDocument$(this.category, 'category')
+            this.gameInfoService.getDocument$(this.category)
             .subscribe(p => {
                 // pipe(take(1)) didnt work so just subscripting it to get first value for now.                
                 this.category = p[0]});

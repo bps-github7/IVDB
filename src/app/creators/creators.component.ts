@@ -27,8 +27,7 @@ export class CreatorsComponent implements OnInit {
             this.gameInfoService.getType$('creator').subscribe(p => this.creators = p);
 
             if (this.creator) {
-                this.gameInfoService.getDocument$(this.creator, 'creator')
-                .pipe(take(1))
+                this.gameInfoService.getDocument$(this.creator)
                 .subscribe(p => this.creator = p[0]);
             }
         }
