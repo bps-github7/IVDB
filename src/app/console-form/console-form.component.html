@@ -1,0 +1,55 @@
+<input placeholder="Click to enter a new console" type="text" (click)="showRest = true">
+<div *ngIf="showRest">
+
+    <div class="form-group" formGroupName="name">
+        <label for="name">Name:</label>
+        <input type="text" id="name" class="form-control" formControlName="name">
+    </div>
+
+    <div class="form-group" formGroupName="qualifiedName">
+        <label for="qualifiedName">Qualified Name (full name):</label>
+        <input type="text" id="qualifiedName" class="form-control" formControlName="qualifiedName">
+        <a > Info </a>
+    </div>
+
+    <div class="form-group" formGroupName="generation">
+        <label for="generation">Generation</label>
+        <select name="generation" id="generation" class="form-control" formControlName="generation">
+            <option value="{g}" *ngFor="let g of generations"></option>
+        </select>
+    </div>
+
+    <div class="form-group" formGroupName="released">
+        <label for="released">Release Date:</label>
+        <input type="date" id="released" class="form-control" formControlName="released">
+    </div>
+
+    <div class="form-group" formGroupName="type">
+        <label for="type">Console Type:</label>
+        <select name="type" id="type" class="form-control" formControlName="type">
+            <option value="{g}" *ngFor="let g of type">{{g}}</option>
+        </select>
+    </div>
+
+    <div class="form-group" formGroupName="maker">
+        <label for="maker">Console Maker:</label>
+        <select name="maker" id="maker" class="form-control" formControlName="maker">
+            <option value="{g}" *ngFor="let g of platforms">{{ g.title}}</option>
+        </select>
+    </div>
+    
+    
+    
+
+
+
+
+
+    
+    
+
+    
+
+
+
+</div>

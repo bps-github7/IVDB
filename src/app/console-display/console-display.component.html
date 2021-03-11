@@ -1,0 +1,7 @@
+<h3>{{ title | titlecase }}:</h3>
+<ul class="list-group">
+    <console-form></console-form>
+    <li class="list-group-item" *ngFor="let n of posts">
+        {{ n.qualifiedName }}
+    </li>
+</ul>
