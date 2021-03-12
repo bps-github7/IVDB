@@ -1,46 +1,53 @@
 <input placeholder="Click to enter a new console" type="text" (click)="showRest = true">
 <div *ngIf="showRest">
-
-    <div class="form-group" formGroupName="name">
+<!-- 
+    <div class="form-group">
         <label for="name">Name:</label>
-        <input type="text" id="name" class="form-control" formControlName="name">
+        <input type="text" id="name">
     </div>
 
-    <div class="form-group" formGroupName="qualifiedName">
+    <div class="form-group">
         <label for="qualifiedName">Qualified Name (full name):</label>
         <input type="text" id="qualifiedName" class="form-control" formControlName="qualifiedName">
-        <a > Info </a>
+        <a (click)="test()"> Info </a>
     </div>
 
-    <div class="form-group" formGroupName="generation">
+    <div class="form-group">
         <label for="generation">Generation</label>
-        <select name="generation" id="generation" class="form-control" formControlName="generation">
-            <option value="{g}" *ngFor="let g of generations"></option>
+        <select id="generation" >
+            <option value=""></option>
+            <option [value]="g" *ngFor="let g of generations">{{g | number}}</option>
         </select>
     </div>
 
-    <div class="form-group" formGroupName="released">
+    <div class="form-group">
         <label for="released">Release Date:</label>
         <input type="date" id="released" class="form-control" formControlName="released">
     </div>
 
-    <div class="form-group" formGroupName="type">
+    <div class="form-group">
         <label for="type">Console Type:</label>
         <select name="type" id="type" class="form-control" formControlName="type">
-            <option value="{g}" *ngFor="let g of type">{{g}}</option>
+            <option [value]="g" *ngFor="let g of types">{{g}}</option>
         </select>
     </div>
 
-    <div class="form-group" formGroupName="maker">
+    <div class="form-group">
         <label for="maker">Console Maker:</label>
         <select name="maker" id="maker" class="form-control" formControlName="maker">
-            <option value="{g}" *ngFor="let g of platforms">{{ g.title}}</option>
+            <option [value]="g" *ngFor="let g of platforms">{{ g.title}}</option>
         </select>
     </div>
+     -->
     
-    
-    
-
+    <div class="form-group">
+        <label for="">Choose console type:</label>
+        <select name="" id="">
+            <option value=""></option>
+            <option value="" *ngFor="let type of types">{{type}}</option>
+        </select>
+    </div>
+     
 
 
 

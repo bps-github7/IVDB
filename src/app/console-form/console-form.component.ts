@@ -32,7 +32,13 @@ export class ConsoleFormComponent implements OnInit {
         })
     }
 
-    get name() { return this.form.get('name').value; }
+    test() {
+        for (let i = 0; i < this.types.length; i++) {
+            console.log(this.types[i]);
+        }
+    }
+
+     get name() { return this.form.get('name').value; }
 
     get qualifiedName() { return this.form.get('qualifiedName').value; }
 
