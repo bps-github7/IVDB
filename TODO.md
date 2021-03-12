@@ -1,8 +1,13 @@
 ### TODO for internet videogame db
 
+##### timelines:
+1. the great form shift- make all site forms reactive, utalizing the reusable, ````tested```` 'reactive-_____-form-control'
+    may need to make more of these so that there are enough for every time, including your custom multi-text and other misc.
+2. db schema shift- rate and review documents should be identified with `gamePK_username`  
+
+
 
 1. DB schemas
-    [] rate and review documents should be identified with `gamePK_username`
     [] update ALL FIREBASE COLLECTIONS/ RXJS bridges so that the uid of a document is stored in that document. simplifies all things pertaining to routes and accessing observables. obs.valueChanges({idField : 'uid'}) this override only works when the ovs is not being emitted as return value.
 
 2. finish comment section- 
