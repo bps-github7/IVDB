@@ -31,13 +31,16 @@ export class ConsolePostComponent implements OnInit {
     // editConsole(uid, newConsole) {
         // this. gameInfoService.editConsole(uid, newConsole);
     editConsole() {
-        console.log('edit!')
+        this.
     }
 
-    //deleteConsole(uid) {
-    deleteConsole() {
+    deleteConsole(uid) {
+    // deleteConsole() {
         console.log("delete!")
-        // this.gameInfoService.deleteConsole(uid);
+        this.gameInfoService.deleteConsole(uid);
+
+        //horribly inefficient!
+        this.getAll();
     }
 
   ngOnInit(): void {

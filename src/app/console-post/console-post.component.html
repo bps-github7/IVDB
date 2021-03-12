@@ -2,14 +2,14 @@
     title="Nintendo" 
     [posts]="nintendo"
     (editEvent)="editConsole()"
-    (deleteEvent)="deleteConsole()"    
+    (deleteEvent)="deleteConsole($event)"    
     ></console-display>
-
+<!-- 
 <console-display
     title="Sony"
     [posts]="sony"
-    (editEvent)="editConsole()"
-    (deleteEvent)="deleteConsole()"
+    (editEvent)="editConsole($event)"
+    (deleteEvent)="deleteConsole($event)"
     ></console-display>
 
 <console-display
@@ -38,4 +38,4 @@
     [posts]="web"
     (editEvent)="editConsole()"
     (deleteEvent)="deleteConsole()"
-    ></console-display>
+    ></console-display> -->

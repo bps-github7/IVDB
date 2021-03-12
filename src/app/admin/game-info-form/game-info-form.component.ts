@@ -111,6 +111,8 @@ export class GameInfoFormComponent implements OnInit {
         }
         // console.log(`uid : ${newObject.uid} \ntype : ${newObject.type}\ntitle : ${newObject.title}\ndescription : ${newObject.description}`)
         this.gameInfoService.update(newObject);
+        
+        
         this.getAll();
     } 
 
