@@ -1,11 +1,41 @@
-<console-display title="Nintendo" [posts]="nintendo"></console-display>
+<console-display 
+    title="Nintendo" 
+    [posts]="nintendo"
+    (editEvent)="editConsole()"
+    (deleteEvent)="deleteConsole()"    
+    ></console-display>
 
-<console-display title="Sony" [posts]="sony"></console-display>
+<console-display
+    title="Sony"
+    [posts]="sony"
+    (editEvent)="editConsole()"
+    (deleteEvent)="deleteConsole()"
+    ></console-display>
 
-<console-display title="microsoft" [posts]="microsoft"></console-display>
+<console-display
+    title="microsoft"
+    [posts]="microsoft"
+    (editEvent)="editConsole()"
+    (deleteEvent)="deleteConsole()"
+    ></console-display>
 
-<console-display title="pc" [posts]="pc"></console-display>
+<console-display
+    title="pc"
+    [posts]="pc"
+(editEvent)="editConsole()"
+(deleteEvent)="deleteConsole()"
+    ></console-display>
 
-<console-display title="mobile" [posts]="mobile"></console-display>
+<console-display
+    title="mobile"
+    [posts]="mobile"
+    (editEvent)="editConsole()"
+    (deleteEvent)="deleteConsole()"
+    ></console-display>
 
-<console-display title="web" [posts]="web"></console-display>
+<console-display
+    title="web"
+    [posts]="web"
+    (editEvent)="editConsole()"
+    (deleteEvent)="deleteConsole()"
+    ></console-display>

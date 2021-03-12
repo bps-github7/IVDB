@@ -1,8 +1,26 @@
-<input placeholder="Click to enter a new console" type="text" (click)="showRest = true">
+<button *ngIf="!showRest" (click)="showRest = true">Enter a new console</button>
 <div *ngIf="showRest">
-
     <form>
-        
+        <zippy title="help with nickname vs name">
+            <strong>Nickname:</strong> <span>Common parlance for the name of the system. Often made by abbreviating words in the console name and not including the maker/company name (ie. playstation 2 = PS2)</span><br>
+
+            <strong>Name:</strong><span>The fully spelled out name for the system, effectivly the opposite of nickname. (ie PS2 becomes playstation 2)</span>
+
+            <strong>Qualified Name:</strong><span>The full name with maker and name put together (ie. Sony Playstation 2). No need to provide this one, as name and maker provided is sufficient.</span>
+        </zippy>
+
+        <div class="form-group" [formGroup]="form">
+            <label for="nickname">Nickname:
+                <input 
+                    type="text"
+                    id="nickname"
+                    name="nickname"
+                    class="form-control"
+                    formControlName="nickname">
+            </label>
+        </div>
+
+
         <div class="form-group" [formGroup]="form">
             <label for="name">Name:
                 <input 
@@ -13,35 +31,40 @@
                     formControlName="name">
             </label>
         </div>
-
+        
         <div class="form-group" [formGroup]="form">
-            <label for="qualifiedName">Qualified (full) name: 
-                <input 
-                    type="text"
-                    id="qualifiedName"
-                    name="qualifiedName"
-                    class="form-control"
-                    formControlName="qualifiedName">
+            <label for="maker">Maker:
+                <select name="maker" id="maker" class="form-control" formControlName="maker">
+                    <option [value]="g.title" *ngFor="let g of platforms">{{ g.title}}</option>
+                </select>
             </label>
         </div>
-        <!-- TODO -->
-        <a href="">Info (put a tooltip here)</a>
-        
-        
-        
-        <div class="form-group" formGroup="generation">
 
-            <!-- TODO: todo timeline- the great form-shift appears our reusable 'reactive-select-form-control' isnt working. values arent displaying, even though
-            we replaced our number array with objects that have a title instance.  -->
-            <!-- <reactive-select-form-control label="generation:" [options]="generations" formControlName="generation"></reactive-select-form-control> -->
-        
-            <!-- <label for="generation">Generation:
-                <select id="generation" name="generation" formControlName="generation" class="form-control">
-                    <option value=""></option>
-                    <option [value]="g" *ngFor="let g of generations">{{g}}</option>
-                </select>
-            </label> -->
+        <div>
+            Qualified Name : {{ maker }} {{ name }}
         </div>
+
+        <!-- TODO: what we can do instead of name vs qualifiedNAme is have a nickname field like : playstation 2 = ps2, playstation portable = psp -->
+        
+        <div class="form-group" [formGroup]="form">
+            <label for="generation">Generation:
+
+                <!-- TODO: id like this to be a reactive-select-form-control  -->              
+                <input class="form-control" formControlName="generation" type="number" name="generation" id="generation" min=1 max=10>
+
+            </label>
+        </div>
+
+
+        <div class="form-group" [formGroup]="form">
+            <label for="type">Type:
+                <select name="type" id="type" class="form-control" formControlName="type">
+                    <option [value]="g" *ngFor="let g of types">{{g}}</option>
+                </select>
+            </label>
+        </div>
+
+        <!-- vvv optional inputs are below vvv -->
 
         <div class="form-group" [formGroup]="form">
             <label for="released">Release Date:
@@ -49,20 +72,25 @@
             </label>
         </div>
 
-        <!--
-        <div class="form-group">
-            <label for="type">Console Type:</label>
-            <select name="type" id="type" class="form-control" formControlName="type">
-                <option [value]="g" *ngFor="let g of types">{{g}}</option>
-            </select>
+        <div class="form-group" [formGroup]="form">
+            <label for="image">Image URL:
+                <input type="text" url id="image" name="image" class="form-control" formControlName="image">
+            </label>
         </div>
 
-        <div class="form-group">
-            <label for="maker">Console Maker:</label>
-            <select name="maker" id="maker" class="form-control" formControlName="maker">
-                <option [value]="g" *ngFor="let g of platforms">{{ g.title}}</option>
-            </select>
-        </div> -->
+        <div class="form-group" [formGroup]="form">
+            <label for="description">Description of console:
+                <textarea name="description" id="description" class="form-control" formControlName="description" id="" cols="30" rows="10"></textarea>
+            </label>
+        </div>
+
+
+        <!-- TODO: one thing missing- image url -->
+
+        <!-- TODO: optional description -->
+
+        <button class="btn btn-primary" (click)="save()">Submit New Console</button>
+        <button class="btn btn-danger" (click)="reset()">Reset form</button>
 
         <p>{{ form.value | json }}</p>
         

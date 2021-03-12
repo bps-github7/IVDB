@@ -65,14 +65,24 @@ export class GameInfoService {
         .catch((err) => console.log(`Error while writing to document : ${err}`));
     }
 
-    editConsole(newConsole : VgConsole) {
-        this.afs.doc<VgConsole>(`consoles/${newConsole.uid}`).set({
-            generation : newConsole.generation,
+    editConsole(uid : string, newConsole : VgConsole) {
+        this.afs.doc<VgConsole>(`consoles/${uid}`).set({
+            nickname : newConsole.nickname,
             name : newConsole.name,
             qualifiedName : newConsole.qualifiedName,
-            released : newConsole.released,
+
+            generation : newConsole.generation,
+            maker : newConsole.maker,
             type : newConsole.type,
-            maker : newConsole.maker
+
+            released: newConsole?.released,
+            image: newConsole?.image,
+            description: newConsole?.description,
+            uid: newConsole?.uid
+
+            // released : newConsole.released,
+            // type : newConsole.type,
+            // maker : newConsole.maker
         }).then(() => console.log("Document succesfully updated!"))
         .catch((err) => console.log(`Error while writing to document: ${err}`));
 

@@ -28,6 +28,18 @@ export class ConsolePostComponent implements OnInit {
         this.gameInfoService.getConsoleMaker$('web').subscribe(p => this.web = p);
     }
 
+    // editConsole(uid, newConsole) {
+        // this. gameInfoService.editConsole(uid, newConsole);
+    editConsole() {
+        console.log('edit!')
+    }
+
+    //deleteConsole(uid) {
+    deleteConsole() {
+        console.log("delete!")
+        // this.gameInfoService.deleteConsole(uid);
+    }
+
   ngOnInit(): void {
   }
 

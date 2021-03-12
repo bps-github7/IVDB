@@ -2,6 +2,7 @@
 <ul class="list-group">
     <console-form></console-form>
     <li class="list-group-item" *ngFor="let n of posts">
-        {{ n.qualifiedName }}
+        {{ n.qualifiedName | titlecase }} <br>
+        <span (click)="edit('12345')">Edit</span>&nbsp;&nbsp;<span (click)="delete('12345')">Delete</span>
     </li>
 </ul>
