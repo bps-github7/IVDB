@@ -84,8 +84,8 @@ import { GameInfoFormComponent } from './admin/game-info-form/game-info-form.com
 import { SuggestNewComponent } from './suggest-new/suggest-new.component';
 import { DescriptorFormComponent } from './descriptor-form/descriptor-form.component';
 import { ConsolePostComponent } from './console-post/console-post.component';
-import { ConsoleDisplayComponent } from './console-display/console-display.component';
 import { ConsoleFormComponent } from './console-form/console-form.component';
+import { ConsoleInfoFormComponent } from './console-info-form/console-info-form.component';
 
 
 @NgModule({
@@ -150,8 +150,8 @@ import { ConsoleFormComponent } from './console-form/console-form.component';
     SuggestNewComponent,
     DescriptorFormComponent,
     ConsolePostComponent,
-    ConsoleDisplayComponent,
     ConsoleFormComponent,
+    ConsoleInfoFormComponent,
     ],
   imports: [
     AngularFireModule.initializeApp(environment.firebase),

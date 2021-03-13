@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 import { GameInfoService } from '../common/services/gameinfo.service';
 
 @Component({
@@ -8,42 +8,35 @@ import { GameInfoService } from '../common/services/gameinfo.service';
 })
 export class ConsolePostComponent implements OnInit {
 
-    nintendo : any = [];
-    sony : any = [];
-    microsoft : any = [];
-    mobile : any = [];
-    pc : any = [];
-    web : any = [];
 
-    constructor(private gameInfoService : GameInfoService) {
-        this.getAll()
+    @Input() title : string;
+    @Input() posts : any = [];
+
+    @Output() editEvent = new EventEmitter<string>();
+    @Output() deleteEvent = new EventEmitter<string>();
+    selected: unknown;
+
+
+    constructor(private gameInfoService : GameInfoService) { }
+
+    ngOnInit(): void {
     }
 
-    getAll() {
-        this.gameInfoService.getConsoleMaker$('nintendo').subscribe(p => this.nintendo = p);
-        this.gameInfoService.getConsoleMaker$('sony').subscribe(p => this.sony = p);
-        this.gameInfoService.getConsoleMaker$('microsoft').subscribe(p => this.microsoft = p);
-        this.gameInfoService.getConsoleMaker$('mobile').subscribe(p => this.mobile = p);
-        this.gameInfoService.getConsoleMaker$('pc').subscribe(p => this.pc = p);
-        this.gameInfoService.getConsoleMaker$('web').subscribe(p => this.web = p);
+    edit(uid : string) {
+        this.editEvent.emit(uid);
     }
 
-    // editConsole(uid, newConsole) {
-        // this. gameInfoService.editConsole(uid, newConsole);
-    editConsole() {
-        this.
+    triggerEditEvent(uid){
+        //curious if this works rather than the very complicated alternative.
+        this.gameInfoService.getConsole$(uid).subscribe(p => this.selected = p);
+            // this.selected = { uid : uid, nickname : p.nickname, name : p[0].name,  } )
     }
 
-    deleteConsole(uid) {
-    // deleteConsole() {
-        console.log("delete!")
-        this.gameInfoService.deleteConsole(uid);
 
-        //horribly inefficient!
-        this.getAll();
+
+    delete(uid : string) {
+        if (confirm("are you sure you want to delete this console? (cannot be undone)"))
+            this.deleteEvent.emit(uid);
     }
-
-  ngOnInit(): void {
-  }
 
 }

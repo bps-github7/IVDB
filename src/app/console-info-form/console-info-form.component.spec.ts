@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ConsoleDisplayComponent } from './console-display.component';
+import { ConsoleInfoFormComponent } from './console-info-form.component';
 
-describe('ConsoleDisplayComponent', () => {
-  let component: ConsoleDisplayComponent;
-  let fixture: ComponentFixture<ConsoleDisplayComponent>;
+describe('ConsoleInfoFormComponent', () => {
+  let component: ConsoleInfoFormComponent;
+  let fixture: ComponentFixture<ConsoleInfoFormComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ConsoleDisplayComponent ]
+      declarations: [ ConsoleInfoFormComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ConsoleDisplayComponent);
+    fixture = TestBed.createComponent(ConsoleInfoFormComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

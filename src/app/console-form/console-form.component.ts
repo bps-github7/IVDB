@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnChanges, EventEmitter, SimpleChanges, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Timestamp } from 'rxjs/internal/operators/timestamp';
 import { GameInfoService } from '../common/services/gameinfo.service';
@@ -8,7 +8,7 @@ import { GameInfoService } from '../common/services/gameinfo.service';
   templateUrl: './console-form.component.html',
   styleUrls: ['./console-form.component.css']
 })
-export class ConsoleFormComponent implements OnInit {
+export class ConsoleFormComponent implements OnChanges {
 
     // generations : any = [1,2,3,4,5,6,7,8,9,10];
     generations : any [] = [
@@ -28,6 +28,12 @@ export class ConsoleFormComponent implements OnInit {
 
     showRest : boolean = false;
     form : FormGroup;
+    oldValues: any;
+
+    @Input() editing;
+    @Output() editConsoleEvent = new EventEmitter<any>();
+
+    editingMode: boolean = false;
 
 
     constructor(fb : FormBuilder, private gameInfoServce : GameInfoService) {
@@ -48,6 +54,21 @@ export class ConsoleFormComponent implements OnInit {
             image: [''],
             description: ['']
         })
+    }
+
+    ngOnChanges(changes: SimpleChanges): void {
+        this.oldValues = changes['editing'].currentValue;
+        this.form.patchValue({
+            nickname : this.oldValues.nickname,
+            name: this.oldValues.name,
+            qualifiedName : this.oldValues.qualifiedName,
+            maker : this.oldValues.maker,
+            generation : this.oldValues.generatiom,
+            type : this.oldValues.type,
+            released : this.oldValues.released,
+            description : this.oldValues.description});
+        this.editingMode = true;
+        this.showRest = true;
     }
 
     test() {
@@ -89,7 +110,41 @@ export class ConsoleFormComponent implements OnInit {
     //     this.generation.setValue(e.target.value);
     // }
 
-    save() {
+    submitForm() {
+        if (this.editingMode) {
+            this.updateConsole()
+            
+        } else this.addNewConsole();
+    }
+
+    updateConsole() {
+        const newEntry = {
+            uid : this.oldValues.uid,
+            nickname : this.nickname,
+            name : this.name,
+            //this is going to be null unless we do some behinf the scenes jiggling
+            qualifiedName : this.qualifiedName,
+            maker : this.maker,
+            generation : this.generation,
+            type : this.type,
+            released : this.released,
+            image : this.image,
+            description : this.description 
+        
+        
+        }
+        this.editConsoleEvent.emit(newEntry);
+        this.cleanUpEditing();
+    }
+
+    cleanUpEditing() {
+        this.reset();
+        this.editingMode = !this.editingMode
+    }
+
+
+    addNewConsole() {
+        console.log("adding new console!")
         this.gameInfoServce.addConsole({
             nickname: this.nickname,
             name: this.name,
@@ -110,11 +165,4 @@ export class ConsoleFormComponent implements OnInit {
         this.form.reset();
 
     }
-
-
-
-
-  ngOnInit(): void {
-  }
-
 }

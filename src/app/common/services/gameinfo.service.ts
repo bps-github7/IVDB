@@ -35,6 +35,7 @@ export class GameInfoService {
 
     
     getDocument$(title : string) {
+        //TODO why arent we using doc(`game_info/${uid}`) instead???!!!! so much better! no more p[0] bullshit
     // getDocument$(title : string, type : string = 'category') {
         const docRef = this.afs.collection<GameDescriptor>('game_info', (ref) => 
             ref.where('title', '==', title));

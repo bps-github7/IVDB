@@ -79,6 +79,7 @@ export class DescriptorFormComponent implements OnInit, OnChanges {
         const newEntry = {uid : this.oldValues.uid, title : this.title, description : this.description }
         this.editDescriptorEvent.emit(newEntry);
         this.resetForm();
+        this.editingMode = !this.editingMode;
     }
 
     submitForm() {

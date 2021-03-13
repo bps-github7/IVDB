@@ -1,41 +1,10 @@
-<console-display 
-    title="Nintendo" 
-    [posts]="nintendo"
-    (editEvent)="editConsole()"
-    (deleteEvent)="deleteConsole($event)"    
-    ></console-display>
-<!-- 
-<console-display
-    title="Sony"
-    [posts]="sony"
-    (editEvent)="editConsole($event)"
-    (deleteEvent)="deleteConsole($event)"
-    ></console-display>
-
-<console-display
-    title="microsoft"
-    [posts]="microsoft"
-    (editEvent)="editConsole()"
-    (deleteEvent)="deleteConsole()"
-    ></console-display>
-
-<console-display
-    title="pc"
-    [posts]="pc"
-(editEvent)="editConsole()"
-(deleteEvent)="deleteConsole()"
-    ></console-display>
-
-<console-display
-    title="mobile"
-    [posts]="mobile"
-    (editEvent)="editConsole()"
-    (deleteEvent)="deleteConsole()"
-    ></console-display>
-
-<console-display
-    title="web"
-    [posts]="web"
-    (editEvent)="editConsole()"
-    (deleteEvent)="deleteConsole()"
-    ></console-display> -->
+<h3>{{ title | titlecase }}:</h3>
+<ul class="list-group">
+    <console-form
+       [editing]="selected" 
+    ></console-form>
+    <li class="list-group-item" *ngFor="let n of posts">
+        {{ n.qualifiedName | titlecase }} <br>
+        <span (click)="triggerEditEvent(n.uid)">Edit</span>&nbsp;&nbsp;<span (click)="delete(n.uid)">Delete</span>
+    </li>
+</ul>

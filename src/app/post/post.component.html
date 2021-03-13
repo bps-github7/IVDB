@@ -4,7 +4,7 @@
     <descriptor-form 
         [editing]="selected"
         (addNewDescriptorEvent)="addPost($event)"
-        (editDescriptorEvent)="edit($event)"
+        (editDescriptorEvent)="editPost($event)"
         ></descriptor-form>
 
     <!-- Trigger will be a different event  -->
@@ -17,7 +17,7 @@
             <span (click)="triggerDescriptorForm(p.title, p.uid)">edit</span>&nbsp;&nbsp;
             
             
-            <span (click)="delete(p.uid)">delete</span>
+            <span (click)="deletePost(p.uid)">delete</span>
 
         </li>
 </ul>

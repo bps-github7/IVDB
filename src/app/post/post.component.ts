@@ -45,12 +45,13 @@ export class PostComponent {
         })
     }
 
-    edit(newEntry) {
+    //is this fn in use anymore?
+    editPost(newEntry) {
         this.editPostEvent.emit(newEntry);
     }
 
 
-    delete(uid) {
+    deletePost(uid) {
         if (confirm("are you sure you want to delete this entry (cannot undo)?"))
         this.deletePostEvent.emit(uid);
     }
