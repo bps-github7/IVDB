@@ -29,9 +29,9 @@ export class ConsoleInfoFormComponent {
     }
 
     // editConsole(uid, newConsole) {
-        // this. gameInfoService.editConsole(uid, newConsole);
-    editConsole() {
-        // this.
+        // 
+    editConsole(newConsole) {
+        this.gameInfoService.editConsole(newConsole.uid, newConsole);
         console.log("edit!");
     }
 

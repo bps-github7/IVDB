@@ -1,10 +1,10 @@
 <console-post 
     title="Nintendo" 
     [posts]="nintendo"
-    (editEvent)="editConsole()"
+    (editEvent)="editConsole($event)"
     (deleteEvent)="deleteConsole($event)"    
     ></console-post>
-<!-- 
+
 <console-post
     title="Sony"
     [posts]="sony"
@@ -15,27 +15,27 @@
 <console-post
     title="microsoft"
     [posts]="microsoft"
-    (editEvent)="editConsole()"
-    (deleteEvent)="deleteConsole()"
+    (editEvent)="editConsole($event)"
+    (deleteEvent)="deleteConsole($event)"
     ></console-post>
 
 <console-post
     title="pc"
     [posts]="pc"
-(editEvent)="editConsole()"
-(deleteEvent)="deleteConsole()"
+(editEvent)="editConsole($event)"
+(deleteEvent)="deleteConsole($event)"
     ></console-post>
 
 <console-post
     title="mobile"
     [posts]="mobile"
-    (editEvent)="editConsole()"
-    (deleteEvent)="deleteConsole()"
+    (editEvent)="editConsole($event)"
+    (deleteEvent)="deleteConsole($event)"
     ></console-post>
 
 <console-post
     title="web"
     [posts]="web"
-    (editEvent)="editConsole()"
-    (deleteEvent)="deleteConsole()"
-    ></console-post> -->
+    (editEvent)="editConsole($event)"
+    (deleteEvent)="deleteConsole($event)"
+    ></console-post>

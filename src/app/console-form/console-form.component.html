@@ -5,7 +5,7 @@
             <strong>Nickname:</strong> <span>Common parlance for the name of the system. Often made by abbreviating words in the console name and not including the maker/company name (ie. playstation 2 = PS2)</span><br>
 
             <strong>Name:</strong><span>The fully spelled out name for the system, effectivly the opposite of nickname. (ie PS2 becomes playstation 2)</span>
-
+<br>
             <strong>Qualified Name:</strong><span>The full name with maker and name put together (ie. Sony Playstation 2). No need to provide this one, as name and maker provided is sufficient.</span>
         </zippy>
 
@@ -80,16 +80,11 @@
 
         <div class="form-group" [formGroup]="form">
             <label for="description">Description of console:
-                <textarea name="description" id="description" class="form-control" formControlName="description" id="" cols="30" rows="10"></textarea>
+                <textarea name="description" id="description" class="form-control" formControlName="description" cols="30" rows="10"></textarea>
             </label>
         </div>
 
-
-        <!-- TODO: one thing missing- image url -->
-
-        <!-- TODO: optional description -->
-
-        <button class="btn btn-primary" (click)="submitForm()">Submit New Console</button>
+        <button class="btn btn-primary" (click)="submitForm()">{{submitMessage}}</button>
         <button class="btn btn-danger" (click)="reset()">Reset form</button>
 
         <p>{{ form.value | json }}</p>

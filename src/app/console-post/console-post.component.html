@@ -1,7 +1,8 @@
 <h3>{{ title | titlecase }}:</h3>
 <ul class="list-group">
     <console-form
-       [editing]="selected" 
+       [editing]="selected"
+       (editConsoleEvent)="edit($event)" 
     ></console-form>
     <li class="list-group-item" *ngFor="let n of posts">
         {{ n.qualifiedName | titlecase }} <br>

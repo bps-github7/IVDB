@@ -34,7 +34,7 @@ export class ConsoleFormComponent implements OnChanges {
     @Output() editConsoleEvent = new EventEmitter<any>();
 
     editingMode: boolean = false;
-
+    submitMessage = "add new console";
 
     constructor(fb : FormBuilder, private gameInfoServce : GameInfoService) {
 
@@ -46,7 +46,7 @@ export class ConsoleFormComponent implements OnChanges {
             name : ['', Validators.required],
             qualifiedName : [''],
             maker : ['', Validators.required],
-            generation : ['', Validators.required, Validators.min(1), Validators.max(10)],
+            generation : ['', Validators.required],
             type : ['', Validators.required],
 
             //validator : valid date if this exists
@@ -57,26 +57,25 @@ export class ConsoleFormComponent implements OnChanges {
     }
 
     ngOnChanges(changes: SimpleChanges): void {
-        this.oldValues = changes['editing'].currentValue;
+        this.editingMode = true;
+        //TODO: ternary op at top instead of this, doing it manually. bad looks.
+        this.submitMessage = 'edit console'
+        this.oldValues = changes['editing'].currentValue
+        
+        
         this.form.patchValue({
             nickname : this.oldValues.nickname,
             name: this.oldValues.name,
             qualifiedName : this.oldValues.qualifiedName,
             maker : this.oldValues.maker,
-            generation : this.oldValues.generatiom,
+            generation : this.oldValues.generation,
             type : this.oldValues.type,
             released : this.oldValues.released,
+            image : this.oldValues.image,
             description : this.oldValues.description});
-        this.editingMode = true;
+        
         this.showRest = true;
     }
-
-    test() {
-        for (let i = 0; i < this.types.length; i++) {
-            console.log(this.generations[i]);
-        }
-    }
-
 
     get nickname() { return this.form.get('nickname').value; }
     get name() { return this.form.get('name').value; }
@@ -84,7 +83,9 @@ export class ConsoleFormComponent implements OnChanges {
     get maker() { return this.form.get('maker').value; }
     get generation() { return this.form.get('generation').value; }
     get type() { return this.form.get('type').value; }
-
+    // get released() { return this.form.get('released').value; }
+    // get image() { return this.form.get('image').value; }
+    // get description() { return this.form.get('description').value; }
 
     // Trying to prevent form getting submitted with bad values should user leave optional fields blank.
     get released() { 
@@ -113,7 +114,6 @@ export class ConsoleFormComponent implements OnChanges {
     submitForm() {
         if (this.editingMode) {
             this.updateConsole()
-            
         } else this.addNewConsole();
     }
 
@@ -122,19 +122,16 @@ export class ConsoleFormComponent implements OnChanges {
             uid : this.oldValues.uid,
             nickname : this.nickname,
             name : this.name,
-            //this is going to be null unless we do some behinf the scenes jiggling
-            qualifiedName : this.qualifiedName,
+            qualifiedName : `${this.maker} ${this.name}`,
             maker : this.maker,
             generation : this.generation,
             type : this.type,
             released : this.released,
             image : this.image,
             description : this.description 
-        
-        
         }
-        this.editConsoleEvent.emit(newEntry);
         this.cleanUpEditing();
+        this.editConsoleEvent.emit(newEntry);
     }
 
     cleanUpEditing() {
@@ -152,9 +149,10 @@ export class ConsoleFormComponent implements OnChanges {
             maker: this.maker,
             generation : this.generation,
             type: this.type,
-
-            // how will you handle default args?
             released: this.released,
+            image : this.image,
+            description: this.description,
+
 
         });
         this.reset();
@@ -163,6 +161,7 @@ export class ConsoleFormComponent implements OnChanges {
 
     reset() {
         this.form.reset();
+        this.submitMessage = "Add New Console";
 
     }
 }

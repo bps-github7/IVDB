@@ -51,7 +51,7 @@ export class GameInfoService {
     }
 
     getConsole$(uid : string) {
-        return this.afs.doc(`consoles/${uid}`).valueChanges();
+        return this.afs.doc<VgConsole>(`consoles/${uid}`).valueChanges();
 
     }
 
