@@ -93,7 +93,11 @@
         <div class="card" style="width: 18rem;">
             <img *ngIf="image" class="card-img-top" [src]="oldValues.image" alt="Cover of the console being created or edited">
             <div class="card-body">
-                <h3 class="card-title">{{ maker }} {{ name }}</h3>
+                <h3 class="card-title">
+                    <a [routerLink]="['../../../../gaming-index/platforms', maker, '/', name]">
+                        {{ maker }} {{ name }}
+                    </a>
+                </h3>
                 <p class="card-text">
                     <!-- <strong>released: </strong> {{released}} <br>
                     <strong>type: </strong> {{type}} -->
@@ -101,4 +105,5 @@
             </div>
           </div>
     </div>
+    
 </div>
