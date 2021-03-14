@@ -52,7 +52,13 @@ export class GameInfoService {
 
     getConsole$(uid : string) {
         return this.afs.doc<VgConsole>(`consoles/${uid}`).valueChanges();
+    }
 
+    getConsoleWithName$(name : string) {
+        /* We will have to use the p[0] goofy ass syntax 
+        since this returns an array of possible matches. */
+        return this.afs.collection('consoles', (ref) => ref.where("name","==", name))
+        .valueChanges();
     }
 
     getConsoleMaker$(maker : string) {

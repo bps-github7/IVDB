@@ -50,7 +50,6 @@ import { GamingIndexComponent } from './gaming-index/gaming-index.component';
 import { CategoriesComponent } from './categories/categories.component';
 import { CreatorsComponent } from './creators/creators.component';
 import { ConsoleComponent } from './console/console.component';
-import { ConsoleMakersComponent } from './console-makers/console-makers.component';
 import { ContribDashboardComponent } from './contrib-dashboard/contrib-dashboard.component';
 import { EditContributionsComponent } from './edit-contributions/edit-contributions.component';
 import { ServicesModule } from './common/services/services.module';
@@ -86,6 +85,7 @@ import { DescriptorFormComponent } from './descriptor-form/descriptor-form.compo
 import { ConsolePostComponent } from './console-post/console-post.component';
 import { ConsoleFormComponent } from './console-form/console-form.component';
 import { ConsoleInfoFormComponent } from './console-info-form/console-info-form.component';
+import { PlatformsComponent } from './platforms/platforms.component';
 
 
 @NgModule({
@@ -124,7 +124,6 @@ import { ConsoleInfoFormComponent } from './console-info-form/console-info-form.
     GamingIndexComponent,
     CategoriesComponent,
     CreatorsComponent,
-    ConsoleMakersComponent,
     ConsoleComponent,
     ContribDashboardComponent,
     EditContributionsComponent,
@@ -152,6 +151,7 @@ import { ConsoleInfoFormComponent } from './console-info-form/console-info-form.
     ConsolePostComponent,
     ConsoleFormComponent,
     ConsoleInfoFormComponent,
+    PlatformsComponent,
     ],
   imports: [
     AngularFireModule.initializeApp(environment.firebase),
@@ -201,9 +201,9 @@ import { ConsoleInfoFormComponent } from './console-info-form/console-info-form.
     { path: 'gaming-index/creators', component: CreatorsComponent },
     { path: 'gaming-index/categories/:category', component: CategoriesComponent },
     { path: 'gaming-index/categories', component: CategoriesComponent },
-    { path: 'gaming-index/console-makers/:name/:qualified_name', component: ConsoleComponent },
-    { path: 'gaming-index/console-makers/:name', component: ConsoleMakersComponent },
-    { path: 'gaming-index/console-makers', component: ConsoleMakersComponent },
+    { path: 'gaming-index/platforms/:platform_name/:console_name', component: ConsoleComponent },
+    { path: 'gaming-index/platforms/:platform_name', component: PlatformsComponent },
+    { path: 'gaming-index/platforms', component: PlatformsComponent },
     //routes for logged in users
     // { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard] },
     { path: 'forum/create-thread', component: CreateThreadComponent, canActivate: [AuthGuard] },
