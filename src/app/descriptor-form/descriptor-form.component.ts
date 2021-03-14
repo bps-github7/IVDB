@@ -16,7 +16,7 @@ export class DescriptorFormComponent implements OnInit, OnChanges {
     
 
     editingMode : boolean = false;
-    submitMessage : string = this.editingMode ? "Submit changes" : "Add new entry"    
+    submitMessage : string;    
     
     
     
@@ -48,13 +48,19 @@ export class DescriptorFormComponent implements OnInit, OnChanges {
         })
     }
 
+    checkStatus() {
+        this.submitMessage = this.editingMode ? "Submit changes" : "Add new entry";
+    }
+
     ngOnChanges(changes: SimpleChanges): void {
         //Called before any other lifecycle hook. Use it to inject dependencies, but avoid any serious work here.
         //Add '${implements OnChanges}' to the class.
         this.oldValues = changes['editing'].currentValue;
         this.form.patchValue({title : this.oldValues.title, description : this.oldValues.description});
-        // Shitty way of knowing whether the user is providing update or entering new values.
         this.editingMode = true;
+        
+        // had this idea and had to leave it quick. update tommorow.
+        this.checkStatus();
     }
 
     get title() { return this.form.get("title").value; }
