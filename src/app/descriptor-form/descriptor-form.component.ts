@@ -8,15 +8,13 @@ import { GameDescriptor } from '../models/content/GameDescriptor';
   templateUrl: './descriptor-form.component.html',
   styleUrls: ['./descriptor-form.component.css']
 })
-export class DescriptorFormComponent implements OnInit, OnChanges {
+export class DescriptorFormComponent implements OnChanges {
 
     @Input() editing : string = "";
+    @Input() editingMode : boolean = false;
+
     oldValues: any = "";
-
-    
-
-    editingMode : boolean = false;
-    submitMessage : string;    
+    submitMessage : string = "Add new";    
     
     
     
@@ -48,44 +46,40 @@ export class DescriptorFormComponent implements OnInit, OnChanges {
         })
     }
 
-    checkStatus() {
-        this.submitMessage = this.editingMode ? "Submit changes" : "Add new entry";
-    }
 
     ngOnChanges(changes: SimpleChanges): void {
-        //Called before any other lifecycle hook. Use it to inject dependencies, but avoid any serious work here.
-        //Add '${implements OnChanges}' to the class.
-        this.oldValues = changes['editing'].currentValue;
-        this.form.patchValue({title : this.oldValues.title, description : this.oldValues.description});
-        this.editingMode = true;
-        
-        // had this idea and had to leave it quick. update tommorow.
-        this.checkStatus();
+        if (this.editingMode) {
+            this.checkStatus();
+            this.oldValues = changes['editing'].currentValue;
+            this.form.patchValue({title : this.oldValues.title, description : this.oldValues.description});
+        }
     }
 
     get title() { return this.form.get("title").value; }
 
     get description() { return this.form.get("description").value; }
 
-    ngOnInit(): void {
+    checkStatus() {
+        this.submitMessage = this.editingMode ? "Submit changes" : "Add new entry";
     }
 
     resetForm() {
         this.form.reset();
-        this.editingMode = false;
+        this.editingMode = !this.editingMode;
+        this.checkStatus();
     }
 
     addEntry() {
         const newEntry = {title : this.title, description : this.description }
         this.addNewDescriptorEvent.emit(newEntry);
-        this.resetForm();
+        this.form.reset();
     }
 
     updateEntry() {
         const newEntry = {uid : this.oldValues.uid, title : this.title, description : this.description }
-        this.editDescriptorEvent.emit(newEntry);
         this.resetForm();
-        this.editingMode = !this.editingMode;
+        this.editDescriptorEvent.emit(newEntry);
+        
     }
 
     submitForm() {
@@ -97,7 +91,9 @@ export class DescriptorFormComponent implements OnInit, OnChanges {
         if (this.editingMode) {
             // check if document exists first
                 this.updateEntry();
-        } else {
+        
+        
+            } else {
             this.addEntry();
         }
         

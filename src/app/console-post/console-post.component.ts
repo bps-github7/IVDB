@@ -14,8 +14,9 @@ export class ConsolePostComponent implements OnInit {
 
     @Output() editEvent = new EventEmitter<string>();
     @Output() deleteEvent = new EventEmitter<string>();
-    selected: any;
 
+    selected: any;
+    editingConsole: boolean = false;
 
     constructor(private gameInfoService : GameInfoService) { }
 
@@ -24,10 +25,10 @@ export class ConsolePostComponent implements OnInit {
 
     edit(uid : string) {
         this.editEvent.emit(uid);
+        this.editingConsole = false;
     }
 
     triggerEditEvent(uid){
-        //curious if this works rather than the very complicated alternative.
         this.gameInfoService.getConsole$(uid).subscribe(p => this.selected = 
             this.selected = { 
                 uid : uid,
@@ -40,6 +41,7 @@ export class ConsolePostComponent implements OnInit {
                 image : p.image,
                 description : p.description
             });
+        this.editingConsole = true;
     }
 
 

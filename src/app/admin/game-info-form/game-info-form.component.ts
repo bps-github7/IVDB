@@ -92,10 +92,6 @@ export class GameInfoFormComponent implements OnInit {
   }
 
 
-  /* Suggest you make two methods for editing both title and description. then prompt the user if they want to replace it.
-  no need to ever change type or uid, just delete it and start in a different type form. tf no need for PUT support 
-   */
-
 
     editDescriptor(newValue : any, 
         infoType : string) {

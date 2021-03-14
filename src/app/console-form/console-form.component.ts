@@ -33,7 +33,7 @@ export class ConsoleFormComponent implements OnChanges {
     @Input() editing;
     @Output() editConsoleEvent = new EventEmitter<any>();
 
-    editingMode: boolean = false;
+    @Input() editingMode: boolean = false;
     submitMessage = "add new console";
 
     constructor(fb : FormBuilder, private gameInfoServce : GameInfoService) {
@@ -57,24 +57,24 @@ export class ConsoleFormComponent implements OnChanges {
     }
 
     ngOnChanges(changes: SimpleChanges): void {
-        this.editingMode = true;
-        //TODO: ternary op at top instead of this, doing it manually. bad looks.
-        this.submitMessage = 'edit console'
-        this.oldValues = changes['editing'].currentValue
+        if (this.editingMode) {
+            //TODO: ternary op at top instead of this, doing it manually. bad looks.
+            this.submitMessage = 'edit console'
+            this.oldValues = changes['editing'].currentValue    
+            this.form.patchValue({
+                nickname : this.oldValues.nickname,
+                name: this.oldValues.name,
+                qualifiedName : this.oldValues.qualifiedName,
+                maker : this.oldValues.maker,
+                generation : this.oldValues.generation,
+                type : this.oldValues.type,
+                released : this.oldValues.released,
+                image : this.oldValues.image,
+                description : this.oldValues.description});
+            
+            this.showRest = true;
+        }
         
-        
-        this.form.patchValue({
-            nickname : this.oldValues.nickname,
-            name: this.oldValues.name,
-            qualifiedName : this.oldValues.qualifiedName,
-            maker : this.oldValues.maker,
-            generation : this.oldValues.generation,
-            type : this.oldValues.type,
-            released : this.oldValues.released,
-            image : this.oldValues.image,
-            description : this.oldValues.description});
-        
-        this.showRest = true;
     }
 
     get nickname() { return this.form.get('nickname').value; }
@@ -114,7 +114,12 @@ export class ConsoleFormComponent implements OnChanges {
     submitForm() {
         if (this.editingMode) {
             this.updateConsole()
-        } else this.addNewConsole();
+            this.showRest = false;
+        } else { 
+            this.addNewConsole();
+            this.showRest = false;
+        }
+
     }
 
     updateConsole() {
@@ -134,14 +139,21 @@ export class ConsoleFormComponent implements OnChanges {
         this.editConsoleEvent.emit(newEntry);
     }
 
+
+
+    
+    checkStatus() {
+        this.submitMessage = this.editingMode ? "Submit Console" : "Add New Console";
+    }
+
     cleanUpEditing() {
-        this.reset();
-        this.editingMode = !this.editingMode
+        this.form.reset();
+        this.checkStatus();
     }
 
 
+
     addNewConsole() {
-        console.log("adding new console!")
         this.gameInfoServce.addConsole({
             nickname: this.nickname,
             name: this.name,

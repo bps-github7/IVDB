@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { GameInfoService } from '../common/services/gameinfo.service';
 
 @Component({
@@ -19,6 +19,9 @@ export class PostComponent {
     @Input() title : string
     @Input() posts: any = [];
     
+
+    // need a way to tell the child 'descriptor-form' that its editing and not adding 
+    descriptorEditingMode : boolean = false;
 
     // @Output() post: string;
     @Output() newPostEvent = new EventEmitter<string>();
@@ -43,10 +46,12 @@ export class PostComponent {
         this.gameInfoService.getDocument$(title).subscribe(p => {
             this.selected = {'uid' : uid, 'title' : p[0].title, 'description' : p[0].description };        
         })
+        this.descriptorEditingMode = true;
     }
 
     //is this fn in use anymore?
     editPost(newEntry) {
+        this.descriptorEditingMode = false;
         this.editPostEvent.emit(newEntry);
     }
 
