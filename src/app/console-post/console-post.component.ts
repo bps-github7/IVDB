@@ -28,6 +28,10 @@ export class ConsolePostComponent implements OnInit {
         this.editingConsole = false;
     }
 
+    /*  TODO: two errors here/ in console-form 
+    1. edit => reset causes overwrite of whatever you were trying to previously edit
+    2. wrong image is shown in console-card if you view two consoles in edit consequetively.
+     */
     triggerEditEvent(uid){
         this.gameInfoService.getConsole$(uid).subscribe(p => this.selected = 
             this.selected = { 

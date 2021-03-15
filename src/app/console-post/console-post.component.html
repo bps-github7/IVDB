@@ -6,7 +6,7 @@
        (editConsoleEvent)="edit($event)" 
     ></console-form>
     <li class="list-group-item" *ngFor="let n of posts">
-        {{ n.qualifiedName | titlecase }} <br>
+        {{ n.qualifiedName | titlecase }} <br> 
         <span (click)="triggerEditEvent(n.uid)">Edit</span>&nbsp;&nbsp;<span (click)="delete(n.uid)">Delete</span>
     </li>
 </ul>
