@@ -49,11 +49,15 @@ export class DescriptorFormComponent implements OnChanges {
 
     ngOnChanges(changes: SimpleChanges): void {
         console.log("On changes in descriptor form!");
-        console.log(`editing mode : ${this.editingMode}`);
         if (this.editingMode) {
             this.checkStatus();
             this.oldValues = changes['editing'].currentValue;
             this.form.patchValue({title : this.oldValues.title, description : this.oldValues.description});
+        }
+        else {
+            this.editingMode = false;
+            this.resetForm();
+            this.checkStatus();
         }
     }
 
@@ -69,15 +73,18 @@ export class DescriptorFormComponent implements OnChanges {
     }
 
     resetForm() {
+        /* gets called when user clicks to clear the form
+        does that, but also checks status- which dynamically adjusts
+        the text in the submit button based on whether users are trying
+        to submit new entry or update an existing one.
+        */
         this.form.reset();
-        this.editingMode = !this.editingMode;
         this.checkStatus();
     }
 
     addEntry() {
         const newEntry = {title : this.title, description : this.description }
         this.form.reset();
-        this.editingMode = false;
         this.addNewDescriptorEvent.emit(newEntry);
     }
 
@@ -93,7 +100,12 @@ export class DescriptorFormComponent implements OnChanges {
         two different functions, update or add new. 
          */
 
-        // bad test but it will have to do for now
+        // TODO: needs manually validation- dont allow
+        // form submission if the title value is blank
+
+        //NOTE: there is no form prompt (except red outline) if title is not provided.
+
+
         if (this.editingMode) {
             // check if document exists first
                 this.updateEntry();
