@@ -18,7 +18,8 @@ export class PlatformsComponent implements OnInit {
         private router : Router,
         private route : ActivatedRoute,  
         private gameInfoService : GameInfoService) {
-        this.gameInfoService.getType$('platforms')
+        
+            this.gameInfoService.getType$('platform')
         .subscribe(p => this.platforms = p)
 
         this.route.paramMap.subscribe(params => {

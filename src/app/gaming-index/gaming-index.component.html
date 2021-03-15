@@ -19,29 +19,30 @@
         <a [routerLink]="['categories/', c.title]" [title]="c.title">{{ c.title }}</a>
     </li>
 </ul>
-<h5><a routerLink="console-makers">Console Makers:</a></h5>
+<h5><a routerLink="platforms">Console Makers:</a></h5>
 <ul>
-    <li *ngFor="let c of console_makers">
-        <a [routerLink]="['console-makers/', c.title]" [title]="c.title">{{ c.title }}</a>
+    <li *ngFor="let c of platforms">
+        <a [routerLink]="['platforms/', c.title]" [title]="c.title">{{ c.title }}</a>
     </li>
 </ul>
 
-<h5><a routerLink="console-makers/nintendo">Nintendo Consoles: </a></h5>
+<!-- TODO: hard coded the platforms again- fix -->
+<h5><a routerLink="platforms/nintendo">Nintendo Consoles: </a></h5>
 
 <ul>
     <li *ngFor="let n of nintendo ">
-            <a [routerLink]="['console-makers/nintendo/',  n.name]" title="n?.qualifiedName">
+            <a [routerLink]="['platforms/nintendo/',  n.name]">
                 {{ n.name }}
             </a>
     </li>
 </ul>
 
 
-<h5><a routerLink="console-makers/sony">Sony Consoles:</a></h5>
+<h5><a routerLink="platforms/sony">Sony Consoles:</a></h5>
 
 <ul>
     <li *ngFor="let n of sony ">
-            <a [routerLink]="['console-makers/sony/',  n.name]" title="n?.qualifiedName">
+            <a [routerLink]="['platforms/sony/',  n.name]">
                 {{ n.name }}
             </a>
     </li>
@@ -49,21 +50,41 @@
 
 
 
-<h5><a routerLink="console-makers/microsoft">Microsoft Consoles:</a></h5>
+<h5><a routerLink="platforms/microsoft">Microsoft Consoles:</a></h5>
 
 <ul>
     <li *ngFor="let n of microsoft ">
-            <a [routerLink]="['console-makers/microsoft',  n.name]" title="n?.qualifiedName">
+            <a [routerLink]="['platforms/microsoft',  n.name]">
                 {{ n.name }}
             </a>
     </li>
 </ul>
 
-<h5><a routerLink="console-makers/pc">PC Consoles:</a></h5>
+<h5><a routerLink="platforms/pc">PC Consoles:</a></h5>
 
 <ul>
     <li *ngFor="let n of pc">
-                <a [routerLink]="['console-maker/',  n.name]" title="n?.qualifiedName">
+                <a [routerLink]="['console-maker/',  n.name]">
+                    {{ n.name }}
+                </a>
+    </li>
+</ul>
+
+<h5><a routerLink="platforms/web">web Consoles:</a></h5>
+
+<ul>
+    <li *ngFor="let n of web">
+                <a [routerLink]="['console-maker/',  n.name]">
+                    {{ n.name }}
+                </a>
+    </li>
+</ul>
+
+<h5><a routerLink="platforms/mobile">mobile Consoles:</a></h5>
+
+<ul>
+    <li *ngFor="let n of mobile">
+                <a [routerLink]="['console-maker/',  n.name]">
                     {{ n.name }}
                 </a>
     </li>
