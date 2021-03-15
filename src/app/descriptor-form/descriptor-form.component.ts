@@ -48,6 +48,8 @@ export class DescriptorFormComponent implements OnChanges {
 
 
     ngOnChanges(changes: SimpleChanges): void {
+        console.log("On changes in descriptor form!");
+        console.log(`editing mode : ${this.editingMode}`);
         if (this.editingMode) {
             this.checkStatus();
             this.oldValues = changes['editing'].currentValue;
@@ -60,6 +62,9 @@ export class DescriptorFormComponent implements OnChanges {
     get description() { return this.form.get("description").value; }
 
     checkStatus() {
+        /* Wish we had a more precise means of toggeling the mode
+        and   
+        */
         this.submitMessage = this.editingMode ? "Submit changes" : "Add new entry";
     }
 
@@ -71,8 +76,9 @@ export class DescriptorFormComponent implements OnChanges {
 
     addEntry() {
         const newEntry = {title : this.title, description : this.description }
-        this.addNewDescriptorEvent.emit(newEntry);
         this.form.reset();
+        this.editingMode = false;
+        this.addNewDescriptorEvent.emit(newEntry);
     }
 
     updateEntry() {
@@ -94,7 +100,7 @@ export class DescriptorFormComponent implements OnChanges {
         
         
             } else {
-            this.addEntry();
+                this.addEntry();
         }
         
 

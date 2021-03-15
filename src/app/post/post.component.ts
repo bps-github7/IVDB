@@ -40,6 +40,7 @@ export class PostComponent {
 
     addPost(post) {
         this.newPostEvent.emit(post);
+        this.descriptorEditingMode = false;
     }
 
     triggerDescriptorForm(title, uid) {
@@ -51,7 +52,6 @@ export class PostComponent {
 
     //is this fn in use anymore?
     editPost(newEntry) {
-        this.descriptorEditingMode = false;
         this.editPostEvent.emit(newEntry);
     }
 
@@ -59,6 +59,9 @@ export class PostComponent {
     deletePost(uid) {
         if (confirm("are you sure you want to delete this entry (cannot undo)?"))
         this.deletePostEvent.emit(uid);
+        
+        // these are arguably unnessecary but to keep edit vs add mode clean
+        this.descriptorEditingMode = false;
     }
 
 }
