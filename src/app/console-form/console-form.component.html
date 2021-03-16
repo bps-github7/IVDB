@@ -1,4 +1,5 @@
 <div class="row">
+    <p>{{editingMode}}</p>
     <button *ngIf="!showRest" (click)="showRest = true">Enter a new console</button>
     <div class="col-md-6">
         <form *ngIf="showRest">
@@ -85,13 +86,13 @@
                 </label>
             </div>
     
-            <button class="btn btn-primary" (click)="submitForm()">{{submitMessage}}</button>
+            <button class="btn btn-primary" [disabled]="!form.valid" (click)="submitForm()">{{submitMessage}}</button>
             <button class="btn btn-danger" (click)="reset()">Reset form</button>
         </form>             
     </div>
     <div class="col-md-6" *ngIf="showRest">
         <div class="card" style="width: 18rem;">
-            <img *ngIf="image" class="card-img-top" [src]="oldValues.image" alt="Cover of the console being created or edited">
+            <img *ngIf="image" class="card-img-top" [src]="image" alt="Cover of the console being created or edited">
             <div class="card-body">
                 <h3 class="card-title">
                     <a [routerLink]="['../../../../gaming-index/platforms', maker, '/', name]">

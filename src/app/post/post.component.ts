@@ -52,6 +52,7 @@ export class PostComponent {
 
     //is this fn in use anymore?
     editPost(newEntry) {
+        this.descriptorEditingMode = false;
         this.editPostEvent.emit(newEntry);
     }
 

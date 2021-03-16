@@ -74,12 +74,12 @@ export class GameInfoService {
 
     editConsole(uid : string, newConsole : VgConsole) {
         this.afs.doc<VgConsole>(`consoles/${uid}`).set({
-            nickname : newConsole.nickname,
-            name : newConsole.name,
-            qualifiedName : newConsole.qualifiedName,
+            nickname : newConsole.nickname.toLowerCase(),
+            name : newConsole.name.toLowerCase(),
+            qualifiedName : newConsole.qualifiedName.toLowerCase(),
 
             generation : newConsole.generation,
-            maker : newConsole.maker,
+            maker : newConsole.maker.toLowerCase(),
             type : newConsole.type,
 
             released: newConsole?.released,
@@ -103,7 +103,7 @@ export class GameInfoService {
 
     add(descriptor : any) {
         this.afs.collection('game_info').add({
-            title : descriptor.title,
+            title : descriptor.title.toLowerCase(),
             type : descriptor.type,
             description : descriptor.description
         })
@@ -122,7 +122,7 @@ export class GameInfoService {
        this.afs.doc(`game_info/${descriptor.uid}`).set({
             uid : descriptor.uid,
             type : descriptor.type,
-            title : descriptor.title,
+            title : descriptor.title.toLowerCase(),
             description : descriptor.description
        },{merge : patch})
        .then(() => console.log("document succesfully updated"))

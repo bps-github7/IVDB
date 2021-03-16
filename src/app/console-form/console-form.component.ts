@@ -73,6 +73,12 @@ export class ConsoleFormComponent implements OnChanges {
                 description : this.oldValues.description});
             
             this.showRest = true;
+        } 
+        // not quite sure this is what you want to do here.
+        else {
+            this.editingMode = false;
+            this.resetForm();
+            this.checkStatus();
         }
         
     }
@@ -112,13 +118,14 @@ export class ConsoleFormComponent implements OnChanges {
     // }
 
     submitForm() {
+        this.showRest = false;
         if (this.editingMode) {
             this.updateConsole()
-            this.showRest = false;
+
         } else { 
             this.addNewConsole();
-            this.showRest = false;
         }
+
 
     }
 
@@ -135,7 +142,7 @@ export class ConsoleFormComponent implements OnChanges {
             image : this.image,
             description : this.description 
         }
-        this.cleanUpEditing();
+        this.resetForm();
         this.editConsoleEvent.emit(newEntry);
     }
 
@@ -146,7 +153,8 @@ export class ConsoleFormComponent implements OnChanges {
         this.submitMessage = this.editingMode ? "Submit Console" : "Add New Console";
     }
 
-    cleanUpEditing() {
+    resetForm() {
+        this.editingMode = false;
         this.form.reset();
         this.checkStatus();
     }
@@ -167,13 +175,10 @@ export class ConsoleFormComponent implements OnChanges {
 
 
         });
-        this.reset();
-        this.showRest = !this.showRest;
+        this.resetForm();
     }
 
     reset() {
         this.form.reset();
-        this.submitMessage = "Add New Console";
-
     }
 }

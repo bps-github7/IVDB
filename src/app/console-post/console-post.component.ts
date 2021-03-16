@@ -24,8 +24,8 @@ export class ConsolePostComponent implements OnInit {
     }
 
     edit(uid : string) {
-        this.editEvent.emit(uid);
         this.editingConsole = false;
+        this.editEvent.emit(uid);
     }
 
     /*  TODO: two errors here/ in console-form 

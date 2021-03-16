@@ -7,6 +7,10 @@
         id="title" 
         class="form-control" 
         (click)="showSubForm = true">
+    <!-- <div *ngIf="title.touched && title.invalid" class="alert alert-danger">
+        Im afraid of the bisk aliens!
+    </div> -->
+
     <div *ngIf="showSubForm">
         <textarea
             placeholder="Enter description" 
@@ -15,7 +19,7 @@
             class="form-control"
             formControlName="description"
             cols="18" rows="10"></textarea>
-        <button class="btn btn-primary" (click)="submitForm()">{{submitMessage}}</button>
+        <button class="btn btn-primary" [disabled]="!form.valid" (click)="submitForm()">{{submitMessage}}</button>
         <button class="btn btn-danger" (click)="resetForm()">Reset entry fields</button>
     </div>
 </div>

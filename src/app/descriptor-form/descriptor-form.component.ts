@@ -77,14 +77,19 @@ export class DescriptorFormComponent implements OnChanges {
         does that, but also checks status- which dynamically adjusts
         the text in the submit button based on whether users are trying
         to submit new entry or update an existing one.
+        
+        Needs to get called rather often because the editingMode state needs
+        to be closely monitored and controlled, failure to do so could result
+        in serious errors.
         */
+        this.editingMode = false;
         this.form.reset();
         this.checkStatus();
     }
 
     addEntry() {
         const newEntry = {title : this.title, description : this.description }
-        this.form.reset();
+        this.resetForm();
         this.addNewDescriptorEvent.emit(newEntry);
     }
 
@@ -104,8 +109,6 @@ export class DescriptorFormComponent implements OnChanges {
         // form submission if the title value is blank
 
         //NOTE: there is no form prompt (except red outline) if title is not provided.
-
-
         if (this.editingMode) {
             // check if document exists first
                 this.updateEntry();
@@ -114,8 +117,6 @@ export class DescriptorFormComponent implements OnChanges {
             } else {
                 this.addEntry();
         }
-        
-
     }
  
     // submit() {
