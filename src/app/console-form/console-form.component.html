@@ -1,5 +1,6 @@
 <div class="row">
-    <p>{{editingMode}}</p>
+    <!-- For debugging purposes: -->
+    <!-- <p>{{editingMode}}</p> -->
     <button *ngIf="!showRest" (click)="showRest = true">Enter a new console</button>
     <div class="col-md-6">
         <form *ngIf="showRest">
@@ -43,7 +44,7 @@
             </div>
     
             <div>
-                Qualified Name : {{ maker }} {{ name }}
+                Qualified Name : {{ maker | titlecase }} {{ name | titlecase }}
             </div>
     
             <!-- TODO: what we can do instead of name vs qualifiedNAme is have a nickname field like : playstation 2 = ps2, playstation portable = psp -->
@@ -87,7 +88,7 @@
             </div>
     
             <button class="btn btn-primary" [disabled]="!form.valid" (click)="submitForm()">{{submitMessage}}</button>
-            <button class="btn btn-danger" (click)="reset()">Reset form</button>
+            <button class="btn btn-danger" (click)="resetForm()">Reset form</button>
         </form>             
     </div>
     <div class="col-md-6" *ngIf="showRest">
@@ -95,8 +96,8 @@
             <img *ngIf="image" class="card-img-top" [src]="image" alt="Cover of the console being created or edited">
             <div class="card-body">
                 <h3 class="card-title">
-                    <a [routerLink]="['../../../../gaming-index/platforms', maker, '/', name]">
-                        {{ maker }} {{ name }}
+                    <a [routerLink]="['../../../../gaming-index/platforms', maker, name]">
+                        {{ maker | titlecase }} {{ name | titlecase }}
                     </a>
                 </h3>
                 <p class="card-text">

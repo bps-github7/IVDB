@@ -2,41 +2,32 @@
     rather than hard coding each one like you have. also wouldnt advise having console-info as a component in the markup below.-->
 <div class="row">
     <div class="col-md-6">        
-        <form #finished>
+        <post 
+            [posts]="categories" 
+            [title]="gameInfo[0]" 
+            (newPostEvent)="addNewDescriptor($event, 'categories')" 
+            (editPostEvent)="editDescriptor($event, 'categories')"
+            (deletePostEvent)="deleteDescriptor($event)">
+        </post>
 
 
-            <post 
-                [posts]="categories" 
-                [title]="gameInfo[0]" 
-                (newPostEvent)="addNewDescriptor($event, 'categories')" 
-                (editPostEvent)="editDescriptor($event, 'categories')"
-                (deletePostEvent)="deleteDescriptor($event)">
-            </post>
+        
+        <post 
+            [posts]="creators" 
+            [title]="gameInfo[1]" 
+            (newPostEvent)="addNewDescriptor($event, 'creators')"
+            (editPostEvent)="editDescriptor($event, 'creators')"
+            (deletePostEvent)="deleteDescriptor($event)">
+        </post>
 
-
-            <!-- temporarily removed editDescriptionEvent event listener as it was repurposed
-                to instruct child component, and was causing unwanted event propogation.-->
-
-            <post 
-                [posts]="creators" 
-                [title]="gameInfo[1]" 
-                (newPostEvent)="addNewDescriptor($event, 'creators')"
-                (editPostEvent)="editDescriptor($event, 'creators')"
-                (deletePostEvent)="deleteDescriptor($event)">
-            </post>
-            <!-- Think maybe the moves would be to simply pass in the up to date array of values as input,
-            then do all calls to the service inside post component, maybe... -->
-
-
-            <post 
-                [posts]="platforms" 
-                [title]="gameInfo[2]" 
-                (newPostEvent)="addNewDescriptor($event, 'platforms')"
-                (editPostEvent)="editDescriptor($event, 'platforms')"
-                (deletePostEvent)="deleteDescriptor($event)">
-            </post>
-        </form>
-
+        <post 
+            [posts]="platforms" 
+            [title]="gameInfo[2]" 
+            (newPostEvent)="addNewDescriptor($event, 'platforms')"
+            (editPostEvent)="editDescriptor($event, 'platforms')"
+            (deletePostEvent)="deleteDescriptor($event)">
+        </post>
+    
         <console-info-form></console-info-form>
     </div>
 </div>

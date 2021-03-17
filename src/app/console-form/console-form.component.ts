@@ -134,7 +134,7 @@ export class ConsoleFormComponent implements OnChanges {
             uid : this.oldValues.uid,
             nickname : this.nickname,
             name : this.name,
-            qualifiedName : `${this.maker} ${this.name}`,
+            qualifiedName : `${this.maker.toLowerCase()} ${this.name.toLowerCase()}`,
             maker : this.maker,
             generation : this.generation,
             type : this.type,
@@ -165,7 +165,7 @@ export class ConsoleFormComponent implements OnChanges {
         this.gameInfoServce.addConsole({
             nickname: this.nickname,
             name: this.name,
-            qualifiedName: `${this.maker} ${this.name}`,
+            qualifiedName: `${this.maker.toLowerCase()} ${this.name.toLowerCase()}`,
             maker: this.maker,
             generation : this.generation,
             type: this.type,

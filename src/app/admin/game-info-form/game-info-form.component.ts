@@ -22,7 +22,6 @@ export class GameInfoFormComponent implements OnInit {
     form: any;
 
     gameInfo : string [] = ["categories", "creators", "platforms"];
-    vgConsoles : string [] = ["nintendo","sony", "microsoft", "pc", "web", "mobile"];
 
 
 
@@ -32,7 +31,6 @@ export class GameInfoFormComponent implements OnInit {
     creators = [];
     platforms = [];
 
-
     nintendo;
     sony;
     microsoft;
@@ -41,7 +39,6 @@ export class GameInfoFormComponent implements OnInit {
     web;
 
     constructor(
-        fb : FormBuilder,
         private gameInfoService : GameInfoService) {
 
         // this.testingService.creators.subscribe(p => this.creators = p);
@@ -55,25 +52,12 @@ export class GameInfoFormComponent implements OnInit {
     
             // fetches the array of each game-info as observable subscription
             this.getAll();
-
-
-    this.form = fb.group({
-
-        categories : [this.categories],
-        creators : [this.creators],
-        platforms : [this.platforms]
-
-        // nintendo : [this.nintendo],
-        // sony : [this.sony],
-        // microsoft : [this.microsoft],
-        // pc : [this.pc],
-        // mobile : [this.mobile],
-        // web : [this.web]
-    })
-
    }
 
-   getAll() {   
+
+
+//    V1
+  getAll() {   
     this.gameInfoService.getType$('category').subscribe(p => {
         this.categories = p});
 
