@@ -1,22 +1,14 @@
 ### TODO for internet videogame db
 
+##### Css:
+1. app.component.css- max width 800px centered- img ignore this rule for some reason- need to fix that. something im misunderstanding about css, i suspect (once again- css weakness).
+
+
 ##### timelines:
 1. the great form shift- make all site forms reactive, utalizing the reusable, ````tested```` 'reactive-_____-form-control'
     may need to make more of these so that there are enough for every time, including your custom multi-text and other misc.
 2. db schema shift- rate and review documents should be identified with `gamePK_username`  
 3. should really pacckage components and parts of the site together, like 
-`admin folder:
--admin-home
--game
--game-info
--game-form
--game-info-form
--console-info-form
--manage-threads
--manage-content
--manage-contribs
--dashboard`
-but you know that will be suuuch a pain to do and debug the project. is it worth it- to have better organization???
 
 
 [] - game-info-form and console-info-form have a persistent bug- edit button doesnt work after something was already edited before.

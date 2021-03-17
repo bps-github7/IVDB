@@ -14,7 +14,7 @@ import { VgConsole } from 'src/app/models/content/VgConsole';
 
 export class GameInfoService {
     // gameInfoCollection : AngularFirestoreCollection <GameDescriptor>;
-
+    metadata : string [];
 
     constructor(private afs: AngularFirestore) { 
     }
@@ -26,6 +26,13 @@ export class GameInfoService {
     setAll$() {
         // called when you submit the list of categories, creators, console_makers for update
         // in game-info-form. 
+    }
+
+    getMetadata$(type:string) {
+        /* method returns the description for a certain type of game info
+        pass in 'category','creator','console','category' to get a GameDescriptor
+        which defines the type of gameInfo */
+        return this.afs.collection(`game_info/${type}`).valueChanges();
     }
 
     getType$(type : string) {

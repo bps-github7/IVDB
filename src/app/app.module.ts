@@ -4,88 +4,111 @@ import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule, HttpClient, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { HttpClientModule } from '@angular/common/http';
 import { AngularFireModule } from '@angular/fire';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { CustomFormsModule } from 'ng2-validation';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 
-
-
-
 //declarations/ bootstraps
-import { AppComponent } from './app.component';
-import { DropdownComponent } from './dropdown/dropdown.component';
-import { FavoriteComponent } from './favorite/favorite.component';
-import { PanelComponent } from './panel/panel.component';
-import { ZippyComponent } from './zippy/zippy.component';
-import { HomeComponent } from './home/home.component';
-import { SignInComponent } from './sign-in/sign-in.component';
-import { CreateAccountComponent } from './create-account/create-account.component';
-import { ForumComponent } from './forum/forum.component';
-import { GamesComponent } from './games/games.component';
-import { StreamingComponent } from './streaming/streaming.component';
-import { ReccomendationsComponent } from './reccomendations/reccomendations.component';
-import { WatchlistsComponent } from './watchlists/watchlists.component';
-import { SearchComponent } from './search/search.component';
-import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
-import { CreateThreadComponent } from './create-thread/create-thread.component';
-import { NotFoundComponent } from './not-found/not-found.component';
-import { GameComponent } from './admin/game/game.component';
-import { GameFormComponent } from './admin/game-form/game-form.component';
-import { ViewGameComponent } from './view-game/view-game.component';
-import { ViewRatingsComponent } from './view-ratings/view-ratings.component';
-import { ProfileService } from './common/services/profile.service';
-import { ReactiveDefaultFormControlComponent } from './form-controls/reactive-default-form-control/reactive-default-form-control.component';
-import { ReactiveSelectFormControlComponent } from './form-controls/reactive-select-form-control/reactive-select-form-control.component';
-import { ReactiveTextareaFormControlComponent } from './form-controls/reactive-textarea-form-control/reactive-textarea-form-control.component';
-import { CredentialFormControlComponent } from './form-controls/credential-form-control/credential-form-control.component';
+/* We created our own organizational schema - 
+src/app is divided into common (services, validators, form-controls, etc),
+components and models (interfaces)
+
+the component folder is further divided into logical groups:
+-admin
+-content
+-contributions
+-forum
+-gaming-index
+-misc
+-profile
+-sign-in
+
+NOTE: that the routing doesnt exactly follow this organization, but you will find similaries
+as a general rule, do not use the directory structuring to design the routes, but instead organize them logically.
+*/
+
+//components/admin
+import { PostComponent } from './components/admin/post/post.component';
+import { GameComponent } from './components/admin/game/game.component';
+import { GameFormComponent } from './components/admin/game-form/game-form.component';
+import { DescriptorFormComponent } from './components/admin/descriptor-form/descriptor-form.component';
+import { ConsolePostComponent } from './components/admin/console-post/console-post.component';
+import { ConsoleFormComponent } from './components/admin/console-form/console-form.component';
+import { ConsoleInfoFormComponent } from './components/admin/console-info-form/console-info-form.component';
+import { GameInfoComponent } from './components/admin/game-info/game-info.component';
+import { GameInfoFormComponent } from './components/admin/game-info-form/game-info-form.component';
+//components/content
+import { StreamingComponent } from './components/content/streaming/streaming.component';
+import { ReccomendationsComponent } from './components/content/reccomendations/reccomendations.component';
+import { NewsComponent } from './components/content/news/news.component';
+import { ContentDashboardComponent } from './components/content/content-dashboard/content-dashboard.component';
+import { WatchlistsComponent } from './components/content/watchlists/watchlists.component';
+import { RecentlyPostedComponent } from './components/content/recently-posted/recently-posted.component';
+//components/contributions
+import { ProvideRatingComponent } from './components/contributions/provide-rating/provide-rating.component';
+import { DisplayAverageRatingComponent } from './components/contributions/display-average-rating/display-average-rating.component';
+import { CommentSectionComponent } from './components/contributions/comment-section/comment-section.component';
+import { SuggestNewComponent } from './components/contributions/suggest-new/suggest-new.component';
+import { ViewRatingsComponent } from './components/contributions/view-ratings/view-ratings.component';
+import { ContribDashboardComponent } from './components/contributions/contrib-dashboard/contrib-dashboard.component';
+import { EditReviewComponent } from './components/contributions/edit-review/edit-review.component';
+import { ViewReviewsComponent } from './components/contributions/view-reviews/view-reviews.component';
+import { ViewPostsComponent } from './components/contributions/view-posts/view-posts.component';
+import { ViewAllRatingsComponent } from './components/contributions/view-all-ratings/view-all-ratings.component';
+import { ViewAllReviewsComponent } from './components/contributions/view-all-reviews/view-all-reviews.component';
+import { ViewAllPostsComponent } from './components/contributions/view-all-posts/view-all-posts.component';
+import { DisplayReviewComponent } from './components/contributions/display-review/display-review.component';
+import { DisplayRatingComponent } from './components/contributions/display-rating/display-rating.component';
+//components/forum
+import { ForumComponent } from './components/forum/forum/forum.component';
+import { CreateThreadComponent } from './components/forum/create-thread/create-thread.component';
+import { ViewThreadsComponent } from './components/forum/view-threads/view-threads.component';
+//components/gaming-index
+import { GameCardComponent } from './components/gaming-index/game-card/game-card.component';
+import { PlatformsComponent } from './components/gaming-index/platforms/platforms.component';
+import { GamingIndexComponent } from './components/gaming-index/gaming-index/gaming-index.component';
+import { CategoriesComponent } from './components/gaming-index/categories/categories.component';
+import { CreatorsComponent } from './components/gaming-index/creators/creators.component';
+import { ConsoleComponent } from './components/gaming-index/console/console.component';
+import { GamesComponent } from './components/gaming-index/games/games.component';
+import { ViewGameComponent } from './components/gaming-index/view-game/view-game.component';
+//components/misc
+import { CarouselComponent } from './components/misc/carousel/carousel.component';
+import { DropdownComponent } from './components/misc/dropdown/dropdown.component';
+import { FavoriteComponent } from './components/misc/favorite/favorite.component';
+import { ZippyComponent } from './components/misc/zippy/zippy.component';
+import { HomeComponent } from './components/misc/home/home.component';
+import { SearchComponent } from './components/misc/search/search.component';
+import { NotFoundComponent } from './components/misc/not-found/not-found.component';
+//components/profile
+import { ViewProfileComponent } from './components/profile/view-profile/view-profile.component';
+import { EditProfileComponent } from './components/profile/edit-profile/edit-profile.component';
+import { EditPreferencesComponent } from './components/profile/edit-preferences/edit-preferences.component';
+import { EditContributionsComponent } from './components/profile/edit-contributions/edit-contributions.component';
+//components/sign-in
+import { SignInComponent } from './components/sign-in/sign-in/sign-in.component';
+import { CreateAccountComponent } from './components/sign-in/create-account/create-account.component';
+import { ForgotPasswordComponent } from './components/sign-in/forgot-password/forgot-password.component';
+//common/form-controls - should this get imported in sep module.asRoot() ?
+import { ReactiveDefaultFormControlComponent } from './common/form-controls/reactive-default-form-control/reactive-default-form-control.component';
+import { ReactiveSelectFormControlComponent } from './common/form-controls/reactive-select-form-control/reactive-select-form-control.component';
+import { ReactiveTextareaFormControlComponent } from './common/form-controls/reactive-textarea-form-control/reactive-textarea-form-control.component';
+import { CredentialFormControlComponent } from './common/form-controls/credential-form-control/credential-form-control.component';
 import { DisableControlDirective } from './common/directives/disable-control.directive';
-import { ViewProfileComponent } from './view-profile/view-profile.component';
-import { EditProfileComponent } from './edit-profile/edit-profile.component';
-import { EditPreferencesComponent } from './edit-preferences/edit-preferences.component';
-import { TdfMultiFormControlComponent } from './form-controls/tdf-multi-form-control/tdf-multi-form-control.component';
-import { PostComponent } from './post/post.component';
-import { GamingIndexComponent } from './gaming-index/gaming-index.component';
-import { CategoriesComponent } from './categories/categories.component';
-import { CreatorsComponent } from './creators/creators.component';
-import { ConsoleComponent } from './console/console.component';
-import { ContribDashboardComponent } from './contrib-dashboard/contrib-dashboard.component';
-import { EditContributionsComponent } from './edit-contributions/edit-contributions.component';
-import { ServicesModule } from './common/services/services.module';
-import { EditReviewComponent } from './edit-review/edit-review.component';
-import { NewsComponent } from './news/news.component';
-import { ContentDashboardComponent } from './content-dashboard/content-dashboard.component';
-import { ViewReviewsComponent } from './view-reviews/view-reviews.component';
-import { ViewPostsComponent } from './view-posts/view-posts.component';
-import { RecentlyPostedComponent } from './recently-posted/recently-posted.component';
-import { ViewAllRatingsComponent } from './view-all-ratings/view-all-ratings.component';
-import { ViewAllReviewsComponent } from './view-all-reviews/view-all-reviews.component';
-import { ViewAllPostsComponent } from './view-all-posts/view-all-posts.component';
-import { ViewThreadsComponent } from './view-threads/view-threads.component';
-import { DisplayReviewComponent } from './display-review/display-review.component';
-import { DisplayRatingComponent } from './display-rating/display-rating.component';
+import { TdfMultiFormControlComponent } from './common/form-controls/tdf-multi-form-control/tdf-multi-form-control.component';
+
 
 
 //environment
 import { environment } from 'src/environments/environment';
+import { AppComponent } from './app.component';
+import { ServicesModule } from './common/services/services.module';
 
 //not sure why, but these are not getting detected from our service main module.
 import { AdminAuthGuard } from './common/services/admin-auth-guard.service';
 import { AuthGuard } from './common/services/auth-guard.service';
-import { ProvideRatingComponent } from './provide-rating/provide-rating.component';
-import { DisplayAverageRatingComponent } from './display-average-rating/display-average-rating.component';
-import { GameCardComponent } from './game-card/game-card.component';
-import { CarouselComponent } from './carousel/carousel.component';
-import { CommentSectionComponent } from './comment-section/comment-section.component';
-import { GameInfoComponent } from './admin/game-info/game-info.component';
-import { GameInfoFormComponent } from './admin/game-info-form/game-info-form.component';
-import { SuggestNewComponent } from './suggest-new/suggest-new.component';
-import { DescriptorFormComponent } from './descriptor-form/descriptor-form.component';
-import { ConsolePostComponent } from './console-post/console-post.component';
-import { ConsoleFormComponent } from './console-form/console-form.component';
-import { ConsoleInfoFormComponent } from './console-info-form/console-info-form.component';
-import { PlatformsComponent } from './platforms/platforms.component';
 
 
 @NgModule({
@@ -96,7 +119,6 @@ import { PlatformsComponent } from './platforms/platforms.component';
     EditPreferencesComponent,
     DropdownComponent,
     FavoriteComponent,
-    PanelComponent,
     ZippyComponent,
     HomeComponent,
     SignInComponent,

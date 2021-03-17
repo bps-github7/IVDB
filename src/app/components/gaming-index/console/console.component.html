@@ -1,0 +1,16 @@
+<div>
+    <h1>{{console.qualifiedName | titlecase}}</h1>
+
+    <div class="img-box">
+        <img class="center-fit" [src]="console.image" alt="a picture of a videogame console">
+    </div>
+
+
+    <p>{{console.description}}</p>
+
+    <ul>
+        <li>type: {{ console.type }}</li>
+        <li>generation: {{ console.generation }}</li>
+        <li>released: {{ console.released | date  }}</li>
+    </ul>
+</div>
