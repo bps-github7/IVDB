@@ -10,11 +10,23 @@ import { VgConsole } from '../../../models/content/VgConsole';
   styleUrls: ['./platforms.component.css']
 })
 export class PlatformsComponent implements OnInit {
+    
+    // list of all the possible platforms
     platforms: any []; 
+    
+    //information about the gameinfo type 'platform'
     metadata : any;
-    console_name: string;
-    console: any;
+
+    // name of the platform user wants to look at
+    platform_name: string;
+
+
+    // the platform user wants to look at
     platform: any;
+
+    //list of consoles associated with the platform
+    consoles: any;
+
 
     constructor(
         private router : Router,
@@ -25,11 +37,14 @@ export class PlatformsComponent implements OnInit {
                 .subscribe(p => this.platforms = p)
 
             this.route.paramMap.subscribe(params => {
-                this.console_name = params.get('platform_name');
-                console.log(this.console_name);
+                this.platform_name = params.get('platform_name');
+                console.log(this.platform_name);
             })
 
-            this.gameInfoService.getDocument$(this.console_name)
+            this.gameInfoService.getConsoleMaker$(this.platform_name)
+                .subscribe(p => this.consoles = p);
+
+            this.gameInfoService.getDocument$(this.platform_name)
                 .subscribe(p=> this.platform = p[0]);
 
 

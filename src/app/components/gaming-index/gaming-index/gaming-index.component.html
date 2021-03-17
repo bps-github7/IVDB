@@ -19,7 +19,10 @@
         <a [routerLink]="['categories/', c.title]" [title]="c.title">{{ c.title }}</a>
     </li>
 </ul>
-<h5><a routerLink="platforms">Console Makers:</a></h5>
+<h5><a routerLink="platforms">Platforms:</a></h5>
+
+<!-- TODO: lets add a tooltip so users can learn about a game info type without having to click -->
+
 <ul>
     <li *ngFor="let c of platforms">
         <a [routerLink]="['platforms/', c.title]" [title]="c.title">{{ c.title }}</a>
