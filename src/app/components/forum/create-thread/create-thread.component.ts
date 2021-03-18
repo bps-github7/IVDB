@@ -5,24 +5,6 @@ import { switchMap } from 'rxjs/operators';
 import { ThreadService } from '../../../common/services/thread.service';
 import { Thread } from '../../../models/content/Thread';
 
-class UserThread implements Thread {
-    creator;
-    title;
-    description;
-    topics;
-    invitees;
-
-    
-    constructor() {
-        this.creator = localStorage.getItem("username");
-        this.title='';
-        this.description='';
-        this.topics='';
-        this.invitees='';
-    }
-}
-
-
 @Component({
   selector: 'app-create-thread',
   templateUrl: './create-thread.component.html',
@@ -30,78 +12,61 @@ class UserThread implements Thread {
 })
 export class CreateThreadComponent implements OnInit {
 
-    thread = new UserThread();
-    id;
+    topic_options = ["about", "hint", "discussion", "argument", "conjecture"];
+    family_options = ["general", "walkthrough", "cheats", "debate", "upcomming"];
 
-    // reactive form stuff
-    // form: FormGroup;
+    form: FormGroup;
+    thread_id: string;
+    thread: any;
+    username: string;
 
-    constructor(private threadService : ThreadService,
+    constructor(
+        private threadService : ThreadService,
         private router : Router,
         private route : ActivatedRoute,
-        private fb: FormBuilder) {  }
+        private fb: FormBuilder) {
 
-  ngOnInit(): void {
-    this.id = this.route.snapshot.paramMap.get('id');
-    
-    if (this.id){
-        this.threadService.get$(this.id).subscribe(g => this.thread = g);
+            //get the post id if present in route
+            this.thread_id = this.route.snapshot.paramMap.get('id');
+            if (this.thread_id)
+                this.threadService.get$(this.thread_id).subscribe(g => this.thread = g);
+            
+            // username stored in localstorage is used as author- formcontrol should not be editable (at least for regular users)
+            this.username = localStorage.getItem("username"); 
+
+
+
+            // Initialize the form
+            this.form = fb.group({
+                creator : [this.username, Validators.required],
+                title : ['', Validators.required],
+                description : [''],
+                family : ['', Validators.required],
+                topics : [''],
+            })
+
+                
+          }
+
+          get creator() { return this.form.get('creator').value; }
+
+          get title() { return this.form.get('title').value; }
+
+          get description() { return this.form.get('description').value; }
+
+          get family() { return this.form.get('family').value; }
+
+          get topics() { return this.form.get('topics').value; }
+
+
+
+    ngOnInit(): void {
     }
 
-    console.log(this.thread);
-
-    
-    // this.form = this.fb.group({
-    //         // creator: [this.thread.creator,Validators.required],
-    //         // title: [this.thread.title, Validators.required],
-    //         // description : [this.thread.description, Validators.required],
-    //         // topics: [this.thread.topics],
-    //         // invitees : [this.thread.invitees]
-        
-    //         creator: ['',Validators.required],
-    //         title: ['', Validators.required],
-    //         description : ['', Validators.required],
-    //         topics: [''],
-    //         invitees : ['']
-
-    //     })
-
-        
-
+    submit() {
+        console.log("submitting the form!")
+        // if (this.thread)
+        //     this.threadService.save({creator})
     }
-
-    
-    // getters for reactive form impl.
-    // get creator() { return this.form.get('creator'); }
-
-    // get title() { return this.form.get('title'); }
-
-    // get description() { return this.form.get('description'); }
-
-    // get topics() { return this.form.get('topics') }
-
-    // get invitees() { return this.form.get('invitees'); }
-
-
-
-    save(thread, uid=null) {
-        if (uid) {
-            this.threadService.save(thread, uid);
-        } else {
-            //could have this method return the uid and then cache it somehow
-            this.threadService.add(thread);
-        }
-        
-        this.router.navigate(['/forum/view-threads']);
-    }
-
-    delete(id) {
-        if (confirm("Are you sure you want to delete this thread? (cannot be undone)")){
-            this.threadService.delete(id);
-            this.router.navigate(['/forum/view-threads']);}
-        else return 0;
-    }  
-
-
 
 }
