@@ -1,30 +1,20 @@
-<form action="">
-    <div class="form-group" formGroupName="form">
-        <label for="creator">Creator:</label>
-        <input
-            type="text"
-            class="form-control"
-            id="creator"
-            name="creator"
-            formControlName="creator">
-    </div>
+<form class="form-group" [formGroup]="form">
+        <!-- 
+            family, creator : default values, should not be modifiable to usser
+            isActive, moderators, posts : values only modifiable by moderators.
+        -->
 
-    <div class="form-group" formGroupName="form">
-        <label for="title">Title:</label>
-        <input 
-            type="text"
-            class="form-control"
-            id="title"
-            name="title"
-            formControlName="title">
-    </div>
+    <reactive-default-form-control label="Title" formControlName="title"></reactive-default-form-control>
 
-    <div class="form-group" formGroupName="form">
-        <label for="description">Description: </label>
-        <textarea
-            class="form-control"
-            id="description"
-            name="description"
-            formControlName="description"></textarea>
-    </div>
+    <reactive-textarea-form-control label="Description" formControlName="description"></reactive-textarea-form-control>
+
+    <!-- formcontrol for tags -->
+
+    <!-- formcontrol for invitees -->
+    
+
+    <button (click)="submit()"></button>
+
+    <p>{{ form.value | json }}</p>
+
 </form>

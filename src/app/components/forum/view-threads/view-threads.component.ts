@@ -9,8 +9,10 @@ import { ThreadService } from '../../../common/services/thread.service';
 })
 export class ViewThreadsComponent implements OnInit {
 
+    allThreads;
+
     constructor(private threadService: ThreadService, private router: Router, private route : ActivatedRoute) {
-        
+        this.threadService.getAll$().subscribe(p => this.allThreads = p);
     }
 
     ngOnInit(): void {

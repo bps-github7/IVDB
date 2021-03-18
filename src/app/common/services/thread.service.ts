@@ -16,8 +16,12 @@ export class ThreadService {
         this.threadCollection = this.afs.collection('threads');
     }
 
+    getAll$() {
+        return this.threadCollection.valueChanges({idField : 'uid'});
+    }
+
     get$(id : string) : Observable<any> {
-        return this.afs.doc('threads/' + id).valueChanges();
+        return this.afs.doc(`threads/${id}`).valueChanges();
     }
 
     get_threads_by_topic(option : string) {
