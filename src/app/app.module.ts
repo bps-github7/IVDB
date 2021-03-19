@@ -39,6 +39,14 @@ import { ConsoleFormComponent } from './components/admin/console-form/console-fo
 import { ConsoleInfoFormComponent } from './components/admin/console-info-form/console-info-form.component';
 import { GameInfoComponent } from './components/admin/game-info/game-info.component';
 import { GameInfoFormComponent } from './components/admin/game-info-form/game-info-form.component';
+
+    //components/admin/forum
+    import { ForumInfoFormComponent } from './components/admin/forum/forum-info-form/forum-info-form.component';
+
+
+
+
+
 //components/content
 import { StreamingComponent } from './components/content/streaming/streaming.component';
 import { ReccomendationsComponent } from './components/content/reccomendations/reccomendations.component';
@@ -174,6 +182,7 @@ import { AuthGuard } from './common/services/auth-guard.service';
     ConsoleFormComponent,
     ConsoleInfoFormComponent,
     PlatformsComponent,
+    ForumInfoFormComponent,
     ],
   imports: [
     AngularFireModule.initializeApp(environment.firebase),
@@ -190,6 +199,8 @@ import { AuthGuard } from './common/services/auth-guard.service';
     //temporarily swapped this for learning css. conveninece.
     { path: '', component: HomeComponent },
     //note all the inconsistencies in your routing- camel case here, pascal case there. NOOO!
+
+
     { path: 'sign_in/createAccount/forgotPassword', component: ForgotPasswordComponent },
     { path: 'sign_in/createAccount', component: CreateAccountComponent },
     { path: 'sign_in', component: SignInComponent },
@@ -242,13 +253,16 @@ import { AuthGuard } from './common/services/auth-guard.service';
     { path: 'content-dashboard/recently-posted/reviews', component: ViewAllReviewsComponent },
     { path: 'content-dashboard/recently-posted/posts', component: ViewAllPostsComponent },
     // admin-only routes: probably dont need admin/home TBT
+    { path: 'admin/forum/info/new', component: ForumInfoFormComponent, canActivate: [AuthGuard, AdminAuthGuard] },
     { path: 'admin/game/info/new', component: GameInfoFormComponent, canActivate: [AuthGuard, AdminAuthGuard] },
     { path: 'admin/game/info', component: GameInfoComponent, canActivate: [AuthGuard, AdminAuthGuard] },
 
     { path: 'admin/game/new', component: GameFormComponent, canActivate: [AuthGuard, AdminAuthGuard] },
     
     { path: 'admin/game/:id', component: GameFormComponent, canActivate: [AuthGuard, AdminAuthGuard] },
+
     { path: 'admin/game', component: GameComponent, canActivate: [AuthGuard, AdminAuthGuard] },
+
     
     //wildcard for fallthrough cases.
     { path: '**', component: NotFoundComponent }

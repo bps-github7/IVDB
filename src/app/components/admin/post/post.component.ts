@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { ForumInfoService } from 'src/app/common/services/forum-info.service';
 import { GameInfoService } from '../../../common/services/gameinfo.service';
 
 @Component({
@@ -35,7 +36,8 @@ export class PostComponent {
     // then sent to descriptor form.
     selected : any;
 
-    constructor(private gameInfoService : GameInfoService) {
+    constructor(private gameInfoService : GameInfoService,
+        private forumInfoService : ForumInfoService) {
     }
 
     addPost(post) {
@@ -43,10 +45,24 @@ export class PostComponent {
         this.descriptorEditingMode = false;
     }
 
-    triggerDescriptorForm(title, uid) {
-        this.gameInfoService.getDocument$(title).subscribe(p => {
-            this.selected = {'uid' : uid, 'title' : p[0].title, 'description' : p[0].description };        
-        })
+    triggerDescriptorForm(title, uid, type = "game") {
+        if (type == "game") {
+            this.forumInfoService.getDocument$(title)
+            .subscribe(p => { this.selected = {
+                'uid' : uid,
+                'title' : p[0].title,
+                'description' : p[0].description
+                }        
+            })
+        } else {
+            this.gameInfoService.getDocument$(title)
+            .subscribe(p => { this.selected = {
+                'uid' : uid, 
+                'title' : p[0].title,
+                'description' : p[0].description 
+                }        
+            });
+        }
         this.descriptorEditingMode = true;
     }
 

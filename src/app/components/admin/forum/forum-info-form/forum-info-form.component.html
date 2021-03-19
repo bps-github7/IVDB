@@ -1,0 +1,41 @@
+<h3>Edit Forum Info Below:</h3>
+<div class="row">
+    <div class="col-md-6">        
+
+        <zippy title="Help with terms">
+            <ul>
+                <li *ngFor="let g of allMetadata">
+                    <strong>{{ g.plural }}:&nbsp;&nbsp;</strong> {{ g.description }} <br> <br>
+                </li>
+            </ul>
+        </zippy>
+        
+
+        <post 
+            [posts]="categories" 
+            title="Categories" 
+            (newPostEvent)="addNewDescriptor($event, 'category')" 
+            (editPostEvent)="editDescriptor($event, 'category')"
+            (deletePostEvent)="deleteDescriptor($event)">
+        </post>
+
+
+        
+        <post 
+            [posts]="prefixes" 
+            title="Prefixes" 
+            (newPostEvent)="addNewDescriptor($event, 'prefix')"
+            (editPostEvent)="editDescriptor($event, 'prefix')"
+            (deletePostEvent)="deleteDescriptor($event)">
+        </post>
+
+        <post 
+            [posts]="types" 
+            title="types" 
+            (newPostEvent)="addNewDescriptor($event, 'type')"
+            (editPostEvent)="editDescriptor($event, 'type')"
+            (deletePostEvent)="deleteDescriptor($event)">
+        </post>
+    
+    </div>
+</div>

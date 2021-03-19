@@ -67,12 +67,7 @@ export class CreateThreadComponent implements OnInit {
             //get the post id if present in route
             this.thread_id = this.route.snapshot.paramMap.get('id');
             if (this.thread_id) {
-                this.threadService.get$(this.thread_id).subscribe(g => this.thread = {
-                    title  : g.title,
-                    description : g.description,
-                    creator : g.creator,
-                    uid : g.uid
-                });   
+                this.threadService.get$(this.thread_id).subscribe(g => this.thread = g);   
                 console.log(this.thread.title);
                 
                 // this.form.patchValue({creator : this.username, title : this.thread.title, description : this.thread.description});
