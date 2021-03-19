@@ -45,6 +45,10 @@ export class PostComponent {
         this.descriptorEditingMode = false;
     }
 
+    resetForm() {
+        this.descriptorEditingMode = false;
+    }
+
     triggerDescriptorForm(title, uid, type = "game") {
         if (type == "game") {
             this.forumInfoService.getDocument$(title)

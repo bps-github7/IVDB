@@ -37,7 +37,6 @@ export class ForumInfoService {
     update(newDescriptor) {
         this.afs.doc(`forum_info/${newDescriptor.uid}`).set({
             title : newDescriptor.title,
-            plural : newDescriptor.plural,
             description : newDescriptor.description,
             type : newDescriptor.type,
             uid : newDescriptor.uid

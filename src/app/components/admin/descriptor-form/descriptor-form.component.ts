@@ -23,6 +23,7 @@ export class DescriptorFormComponent implements OnChanges {
 
     @Output() editDescriptorEvent = new EventEmitter<any>();
     @Output() addNewDescriptorEvent = new EventEmitter<any>();
+    @Output() resetEvent = new EventEmitter<any>();
 
 
 
@@ -85,6 +86,7 @@ export class DescriptorFormComponent implements OnChanges {
         this.editingMode = false;
         this.form.reset();
         this.checkStatus();
+        this.resetEvent.emit();
     }
 
     addEntry() {

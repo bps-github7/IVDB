@@ -1,11 +1,12 @@
 <h3>{{title | titlecase}} :</h3>
+<!-- <p>post component: {{descriptorEditingMode}}</p> -->
 <ul class="list-group">
-
     <descriptor-form 
         [editing]="selected"
         [editingMode]="descriptorEditingMode"
         (addNewDescriptorEvent)="addPost($event)"
         (editDescriptorEvent)="editPost($event)"
+        (resetEvent)="resetForm()"
         ></descriptor-form>
 
     <!-- Trigger will be a different event  -->
