@@ -27,9 +27,9 @@ export class ForumInfoFormComponent implements OnInit {
     }
 
     getAll() {
-        this.forumInfoService.categories$.subscribe(p => this.categories = p);
-        this.forumInfoService.prefixes$.subscribe(p => this.prefixes = p);
-        this.forumInfoService.types$.subscribe(p => this.types = p);
+        this.forumInfoService.getType$('category').subscribe(p => this.categories = p);
+        this.forumInfoService.getType$('prefix').subscribe(p => this.prefixes = p);
+        this.forumInfoService.getType$('type').subscribe(p => this.types = p);
     }
 
 

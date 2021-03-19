@@ -29,18 +29,13 @@
     </nav>    
 </div>
 <main class="thread-body">
-    <div class="thread-groups">
-        <zippy title="thread family #1">
-            some links and stuff go in here
-        </zippy>
-    
-        <zippy title="thread family #2">
-            some links and stuff go in here
-        </zippy>
-    
-        <zippy title="thread family #3">
-            some links and stuff go in here
-        </zippy>
+    <div class="thread-groups" *ngFor="let category of allCategories">
+        <h3>{{category.title}}</h3>
+        <forums-list [category]="category.title"></forums-list>
+        <!-- <zippy [title]="category.title">
+        </zippy> -->
+
+    <!-- <forums-list category="gaming"></forums-list> -->
     </div>
     <aside class="side-panel">
         <p>Forum meta data</p>

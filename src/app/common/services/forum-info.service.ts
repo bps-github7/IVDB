@@ -24,17 +24,22 @@ export class ForumInfoService {
         return docRef.valueChanges({idField : 'uid'});    }
 
     getType$(type : string) {
+        /* Pass in a type to get an array of observables containing all  documents of that type
+        pass in values as a singluar noun - 'category','prefix', etc.. not 'prefixes', 'categories'  
+        */
         return this.afs.collection('forum_info', (ref) => ref.where('type','==',type))
         .valueChanges({idField : 'uid'});
     } 
 
     add(descriptor) {
+        /* Use to add a descriptor to forum info- should contain at least -title, description,type */
         this.afs.collection('forum_info').add(descriptor)
         .then(() => { console.log("successfully added document!"); })
         .catch((err) => { console.log(`Error while creating doc ${err}`); })
     }
 
     update(newDescriptor) {
+        /* requires the complete descriptor object WITH UID, to update that document  */
         this.afs.doc(`forum_info/${newDescriptor.uid}`).set({
             title : newDescriptor.title,
             description : newDescriptor.description,
@@ -46,25 +51,7 @@ export class ForumInfoService {
     }
 
     delete(uid) {
+        /* pass in doc uid to delete that doc from forum info collection */
         this.afs.doc(`forum_info/${uid}`).delete();
     }
- 
-    get categories$() {
-        return this.afs.collection('forum_info',
-        (ref) => ref.where('type', '==', 'category'))
-        .valueChanges({idField : 'uid'});
-    }
-
-    get prefixes$() {
-        return this.afs.collection('forum_info',
-        (ref) => ref.where('type', '==', 'prefix'))
-        .valueChanges({idField : 'uid'});
-    }
-
-    get types$() {
-        return this.afs.collection('forum_info',
-        (ref) => ref.where('type', '==', 'type'))
-        .valueChanges({idField : 'uid'});
-    }
-
 }

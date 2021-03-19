@@ -71,8 +71,9 @@ import { DisplayReviewComponent } from './components/contributions/display-revie
 import { DisplayRatingComponent } from './components/contributions/display-rating/display-rating.component';
 //components/forum
 import { ForumComponent } from './components/forum/forum/forum.component';
-import { CreateThreadComponent } from './components/forum/create-thread/create-thread.component';
-import { ViewThreadsComponent } from './components/forum/view-threads/view-threads.component';
+import { ForumsListComponent } from './components/forum/forums-list/forums-list.component';
+
+
 //components/gaming-index
 import { GameCardComponent } from './components/gaming-index/game-card/game-card.component';
 import { PlatformsComponent } from './components/gaming-index/platforms/platforms.component';
@@ -117,6 +118,9 @@ import { ServicesModule } from './common/services/services.module';
 //not sure why, but these are not getting detected from our service main module.
 import { AdminAuthGuard } from './common/services/admin-auth-guard.service';
 import { AuthGuard } from './common/services/auth-guard.service';
+import { ManageForumsComponent } from './components/admin/forum/manage-forums/manage-forums.component';
+import { ManageThreadsComponent } from './components/admin/forum/manage-threads/manage-threads.component';
+import { ManageUsersComponent } from './components/admin/forum/manage-users/manage-users.component';
 
 
 @NgModule({
@@ -138,7 +142,6 @@ import { AuthGuard } from './common/services/auth-guard.service';
     WatchlistsComponent,
     SearchComponent,
     ForgotPasswordComponent,
-    CreateThreadComponent,
     NotFoundComponent,
     GameComponent,
     GameFormComponent,
@@ -166,7 +169,6 @@ import { AuthGuard } from './common/services/auth-guard.service';
     ViewAllRatingsComponent,
     ViewAllReviewsComponent,
     ViewAllPostsComponent,
-    ViewThreadsComponent,
     DisplayReviewComponent,
     DisplayRatingComponent,
     ProvideRatingComponent,
@@ -183,6 +185,10 @@ import { AuthGuard } from './common/services/auth-guard.service';
     ConsoleInfoFormComponent,
     PlatformsComponent,
     ForumInfoFormComponent,
+    ForumsListComponent,
+    ManageForumsComponent,
+    ManageThreadsComponent,
+    ManageUsersComponent,
     ],
   imports: [
     AngularFireModule.initializeApp(environment.firebase),
@@ -215,13 +221,13 @@ import { AuthGuard } from './common/services/auth-guard.service';
     { path: 'contributions/:uid/:username', component: EditContributionsComponent, canActivate: [AuthGuard] },
     //you'll see more on these pages if youre signed in, but can view as anonymous user.
     { path: 'forum', component: ForumComponent },
-    { path: 'forum/view-threads/:id', component: ViewThreadsComponent },
-    { path: 'forum/view-threads', component: ViewThreadsComponent },
+    // { path: 'forum/view-threads/:id', component: ViewThreadsComponent },
+    // { path: 'forum/view-threads', component: ViewThreadsComponent },
     
     //how you edit a forum
     //TODO: need a second auth guard for preventing non author user from editing forums.
-    { path: 'forum/create-thread/:id', component: CreateThreadComponent, canActivate: [AuthGuard] },
-    { path: 'forum/create-thread', component: CreateThreadComponent, canActivate: [AuthGuard] },
+    // { path: 'forum/create-thread/:id', component: CreateThreadComponent, canActivate: [AuthGuard] },
+    // { path: 'forum/create-thread', component: CreateThreadComponent, canActivate: [AuthGuard] },
     { path: 'forum/my-posts/:id', component: ViewAllPostsComponent },
     
     
@@ -239,7 +245,6 @@ import { AuthGuard } from './common/services/auth-guard.service';
     { path: 'gaming-index/platforms', component: PlatformsComponent },
     //routes for logged in users
     // { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard] },
-    { path: 'forum/create-thread', component: CreateThreadComponent, canActivate: [AuthGuard] },
     { path: 'contrib-dashboard/ratings/:username', component: ViewRatingsComponent, canActivate: [AuthGuard] },
     { path: 'contrib-dashboard/reviews/:username/:game_title', component: DisplayReviewComponent, canActivate: [AuthGuard] },
     { path: 'contrib-dashboard/reviews/:username', component: ViewReviewsComponent, canActivate: [AuthGuard] },
