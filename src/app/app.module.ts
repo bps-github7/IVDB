@@ -232,13 +232,12 @@ import { CreatePostComponent } from './components/forum/create-post/create-post.
 
     // in order: create a post, edit a post, edit a thread,
     // create a thread, view a thread, view a forum, forum homepage
-    { path: 'forum/:title/thread/:title/post/new', component: CreatePostComponent },
-    { path: 'forum/:title/thread/:title/post/:id', component: CreatePostComponent },
-    { path: 'forum/:title/thread/edit', component: CreateThreadComponent },
-    { path: 'forum/:title/thread/edit/:id', component: CreateThreadComponent },
-    { path: 'forum/:title/thread/:title', component: ViewThreadComponent },
-    { path: 'forum/:title/thread/', component: ViewThreadComponent },
-    { path: 'forum/:title', component: ViewForumComponent },
+    { path: 'forum/:forum/thread/:thread/post/new', component: CreatePostComponent },
+    { path: 'forum/:forum/thread/:thread/post/:id', component: CreatePostComponent },
+    { path: 'forum/:forum/thread/edit/:id', component: CreateThreadComponent },
+    { path: 'forum/:forum/thread/:thread', component: ViewThreadComponent },
+    { path: 'forum/:forum/thread/edit', component: CreateThreadComponent },
+    { path: 'forum/:forum', component: ViewForumComponent },
     { path: 'forum', component: ForumComponent },
     //how you edit a forum
     //TODO: need a second auth guard for preventing non author user from editing forums.
