@@ -3,8 +3,27 @@ so that you dont have to repeat the template on each page. -->
 
 <!-- thread should have a forum, that attaches it to the forum- not an attr in forum -->
 <!-- get threads by forum.title -->
+<h3>{{threadTitle}}</h3>
 
+<a routerLink="../">Back to thread selection menu</a>
 
 <ul class="list-group">
-    <li class="list-group-item">for each thread in thread.where(forum === this fourm)</li>
+    <!-- how to get the first post to appear first? -->
+    <li 
+        class="list-group-item"
+        *ngFor="let p of posts">
+            {{p.text}}
+
+
+            <!-- component- display all user forum account info - picture, status, motto, empjis wehhever -->
+            {{p.creator}}
+
+            reply/ quote this post
+    </li>
 </ul>
+
+<a routerLink="post/new">
+    <button>
+        Click to post to the thread
+    </button>
+</a>

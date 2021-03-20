@@ -11,6 +11,11 @@ export class ForumsService {
 
    }
 
+   getForum$(uid : string) {
+       return this.afs.doc<Forum>(`forums/${uid}`)
+       .valueChanges();
+   }
+
     getAll$() {
         return this.afs.collection<Forum>('forums')
         .valueChanges({idField : 'uid'})

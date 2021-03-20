@@ -3,8 +3,7 @@
         class="list-group-item" 
         *ngFor="let forum of forums">
         <div>
-            <a [routerLink]="['view-forum',forum.title]"></a>
-            {{ forum.title }}
+            <a [routerLink]="forum.title.split(' ').join('-')">{{ forum.title }}</a>
             <!-- {{forum.recent }}
             {{ forum.recent_poster }} -->
         </div>

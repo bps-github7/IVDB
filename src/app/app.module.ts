@@ -122,6 +122,9 @@ import { ManageForumsComponent } from './components/admin/forum/manage-forums/ma
 import { ManageThreadsComponent } from './components/admin/forum/manage-threads/manage-threads.component';
 import { ManageUsersComponent } from './components/admin/forum/manage-users/manage-users.component';
 import { ViewThreadComponent } from './components/forum/view-thread/view-thread.component';
+import { ViewForumComponent } from './components/forum/view-forum/view-forum.component';
+import { CreateThreadComponent } from './components/forum/create-thread/create-thread.component';
+import { CreatePostComponent } from './components/forum/create-post/create-post.component';
 
 
 @NgModule({
@@ -191,6 +194,9 @@ import { ViewThreadComponent } from './components/forum/view-thread/view-thread.
     ManageThreadsComponent,
     ManageUsersComponent,
     ViewThreadComponent,
+    ViewForumComponent,
+    CreateThreadComponent,
+    CreatePostComponent,
     ],
   imports: [
     AngularFireModule.initializeApp(environment.firebase),
@@ -224,11 +230,15 @@ import { ViewThreadComponent } from './components/forum/view-thread/view-thread.
     //you'll see more on these pages if youre signed in, but can view as anonymous user.
     
 
-    // maybe want to redesign the url routing here...
-    { path: 'forum/view-forum/:id/view-thread/:id', component: ViewThreadComponent },
-    { path: 'forum/view-forum/:id/view-thread/', component: ViewThreadComponent },
-    { path: 'forum/view-forum/:id', component: ViewThreadComponent },
-    { path: 'forum/view-forum', component: ViewThreadComponent },
+    // in order: create a post, edit a post, edit a thread,
+    // create a thread, view a thread, view a forum, forum homepage
+    { path: 'forum/:title/thread/:title/post/new', component: CreatePostComponent },
+    { path: 'forum/:title/thread/:title/post/:id', component: CreatePostComponent },
+    { path: 'forum/:title/thread/edit', component: CreateThreadComponent },
+    { path: 'forum/:title/thread/edit/:id', component: CreateThreadComponent },
+    { path: 'forum/:title/thread/:title', component: ViewThreadComponent },
+    { path: 'forum/:title/thread/', component: ViewThreadComponent },
+    { path: 'forum/:title', component: ViewForumComponent },
     { path: 'forum', component: ForumComponent },
     //how you edit a forum
     //TODO: need a second auth guard for preventing non author user from editing forums.

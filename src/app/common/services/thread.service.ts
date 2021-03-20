@@ -20,14 +20,24 @@ export class ThreadService {
         return this.threadCollection.valueChanges({idField : 'uid'});
     }
 
+    getThread$(uid) {
+        const threadRef = this.afs.doc<Thread>(`thread/${uid}`)
+        return threadRef.valueChanges();
+    }
+
+    getThreadsByForum$(forumTitle) {
+        const forumRef = this.afs.collection<Thread>('threads', (ref) => ref.where('forum','==',forumTitle));
+        return forumRef.valueChanges({idField : 'uid'});
+    }
+
     get$(id : string) : Observable<any> {
         return this.afs.doc(`threads/${id}`).valueChanges();
     }
 
-    get_threads_by_topic(option : string) {
-        const threadRef = this.afs.collection<Thread>('threads', (ref) => ref.where('topic', '==', option));
-        return threadRef.valueChanges({idField: 'uid'});
-    }
+    // get_threads_by_topic(option : string) {
+    //     const threadRef = this.afs.collection<Thread>('threads', (ref) => ref.where('topic', '==', option));
+    //     return threadRef.valueChanges({idField: 'uid'});
+    // }
 
     add(thread) {
         this.threadCollection.add(thread);
