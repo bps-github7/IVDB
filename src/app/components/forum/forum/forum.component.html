@@ -28,8 +28,8 @@
         </ul>   
     </nav>    
 </div>
-<main class="thread-body">
-    <div class="thread-groups" *ngFor="let category of allCategories">
+<main class="row">
+    <div class="col-md-8" *ngFor="let category of allCategories">
         <h3>{{category.title}}</h3>
         <forums-list [category]="category.title"></forums-list>
         <!-- <zippy [title]="category.title">
@@ -37,7 +37,7 @@
 
     <!-- <forums-list category="gaming"></forums-list> -->
     </div>
-    <aside class="side-panel">
+    <aside class="col-md-4">
         <p>Forum meta data</p>
     
         <div>

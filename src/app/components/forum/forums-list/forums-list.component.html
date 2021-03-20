@@ -3,6 +3,7 @@
         class="list-group-item" 
         *ngFor="let forum of forums">
         <div>
+            <a [routerLink]="['view-forum',forum.title]"></a>
             {{ forum.title }}
             <!-- {{forum.recent }}
             {{ forum.recent_poster }} -->

@@ -121,6 +121,7 @@ import { AuthGuard } from './common/services/auth-guard.service';
 import { ManageForumsComponent } from './components/admin/forum/manage-forums/manage-forums.component';
 import { ManageThreadsComponent } from './components/admin/forum/manage-threads/manage-threads.component';
 import { ManageUsersComponent } from './components/admin/forum/manage-users/manage-users.component';
+import { ViewThreadComponent } from './components/forum/view-thread/view-thread.component';
 
 
 @NgModule({
@@ -189,6 +190,7 @@ import { ManageUsersComponent } from './components/admin/forum/manage-users/mana
     ManageForumsComponent,
     ManageThreadsComponent,
     ManageUsersComponent,
+    ViewThreadComponent,
     ],
   imports: [
     AngularFireModule.initializeApp(environment.firebase),
@@ -220,10 +222,14 @@ import { ManageUsersComponent } from './components/admin/forum/manage-users/mana
     { path: 'preferences/:uid', component: EditPreferencesComponent, canActivate: [AuthGuard] },
     { path: 'contributions/:uid/:username', component: EditContributionsComponent, canActivate: [AuthGuard] },
     //you'll see more on these pages if youre signed in, but can view as anonymous user.
-    { path: 'forum', component: ForumComponent },
-    // { path: 'forum/view-threads/:id', component: ViewThreadsComponent },
-    // { path: 'forum/view-threads', component: ViewThreadsComponent },
     
+
+    // maybe want to redesign the url routing here...
+    { path: 'forum/view-forum/:id/view-thread/:id', component: ViewThreadComponent },
+    { path: 'forum/view-forum/:id/view-thread/', component: ViewThreadComponent },
+    { path: 'forum/view-forum/:id', component: ViewThreadComponent },
+    { path: 'forum/view-forum', component: ViewThreadComponent },
+    { path: 'forum', component: ForumComponent },
     //how you edit a forum
     //TODO: need a second auth guard for preventing non author user from editing forums.
     // { path: 'forum/create-thread/:id', component: CreateThreadComponent, canActivate: [AuthGuard] },
@@ -259,14 +265,18 @@ import { ManageUsersComponent } from './components/admin/forum/manage-users/mana
     { path: 'content-dashboard/recently-posted/posts', component: ViewAllPostsComponent },
     // admin-only routes: probably dont need admin/home TBT
     { path: 'admin/forum/info/new', component: ForumInfoFormComponent, canActivate: [AuthGuard, AdminAuthGuard] },
+    
     { path: 'admin/game/info/new', component: GameInfoFormComponent, canActivate: [AuthGuard, AdminAuthGuard] },
     { path: 'admin/game/info', component: GameInfoComponent, canActivate: [AuthGuard, AdminAuthGuard] },
 
     { path: 'admin/game/new', component: GameFormComponent, canActivate: [AuthGuard, AdminAuthGuard] },
+    { path: 'admin/forum/threads', component: ManageThreadsComponent, canActivate: [AuthGuard, AdminAuthGuard] },
+    { path: 'admin/forum/users', component: ManageUsersComponent, canActivate: [AuthGuard, AdminAuthGuard] },
     
     { path: 'admin/game/:id', component: GameFormComponent, canActivate: [AuthGuard, AdminAuthGuard] },
 
     { path: 'admin/game', component: GameComponent, canActivate: [AuthGuard, AdminAuthGuard] },
+    { path: 'admin/forum', component: ManageForumsComponent, canActivate: [AuthGuard, AdminAuthGuard] },
 
     
     //wildcard for fallthrough cases.
