@@ -10,6 +10,10 @@ import { AngularFireAuthModule } from '@angular/fire/auth';
 import { CustomFormsModule } from 'ng2-validation';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 
+// Custom / user modules
+import { ForumModule } from './forum/forum.module';
+
+
 //declarations/ bootstraps
 /* We created our own organizational schema - 
 src/app is divided into common (services, validators, form-controls, etc),
@@ -28,6 +32,9 @@ the component folder is further divided into logical groups:
 NOTE: that the routing doesnt exactly follow this organization, but you will find similaries
 as a general rule, do not use the directory structuring to design the routes, but instead organize them logically.
 */
+
+
+
 
 //components/admin
 import { PostComponent } from './components/admin/post/post.component';
@@ -70,8 +77,6 @@ import { ViewAllPostsComponent } from './components/contributions/view-all-posts
 import { DisplayReviewComponent } from './components/contributions/display-review/display-review.component';
 import { DisplayRatingComponent } from './components/contributions/display-rating/display-rating.component';
 //components/forum
-import { ForumComponent } from './components/forum/forum/forum.component';
-import { ForumsListComponent } from './components/forum/forums-list/forums-list.component';
 
 
 //components/gaming-index
@@ -121,11 +126,6 @@ import { AuthGuard } from './common/services/auth-guard.service';
 import { ManageForumsComponent } from './components/admin/forum/manage-forums/manage-forums.component';
 import { ManageThreadsComponent } from './components/admin/forum/manage-threads/manage-threads.component';
 import { ManageUsersComponent } from './components/admin/forum/manage-users/manage-users.component';
-import { ViewThreadComponent } from './components/forum/view-thread/view-thread.component';
-import { ViewForumComponent } from './components/forum/view-forum/view-forum.component';
-import { CreateThreadComponent } from './components/forum/create-thread/create-thread.component';
-import { CreatePostComponent } from './components/forum/create-post/create-post.component';
-
 
 @NgModule({
   declarations: [
@@ -139,7 +139,6 @@ import { CreatePostComponent } from './components/forum/create-post/create-post.
     HomeComponent,
     SignInComponent,
     CreateAccountComponent,
-    ForumComponent,
     GamesComponent,
     StreamingComponent,
     ReccomendationsComponent,
@@ -189,16 +188,12 @@ import { CreatePostComponent } from './components/forum/create-post/create-post.
     ConsoleInfoFormComponent,
     PlatformsComponent,
     ForumInfoFormComponent,
-    ForumsListComponent,
     ManageForumsComponent,
     ManageThreadsComponent,
     ManageUsersComponent,
-    ViewThreadComponent,
-    ViewForumComponent,
-    CreateThreadComponent,
-    CreatePostComponent,
     ],
   imports: [
+    ForumModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireAuthModule,
     AngularFirestoreModule,
@@ -214,6 +209,7 @@ import { CreatePostComponent } from './components/forum/create-post/create-post.
     { path: '', component: HomeComponent },
     //note all the inconsistencies in your routing- camel case here, pascal case there. NOOO!
 
+    
 
     { path: 'sign_in/createAccount/forgotPassword', component: ForgotPasswordComponent },
     { path: 'sign_in/createAccount', component: CreateAccountComponent },
@@ -232,18 +228,6 @@ import { CreatePostComponent } from './components/forum/create-post/create-post.
 
     // in order: create a post, edit a post, edit a thread,
     // create a thread, view a thread, view a forum, forum homepage
-    { path: 'forum/:forum/thread/:thread/post/new', component: CreatePostComponent },
-    { path: 'forum/:forum/thread/:thread/post/:id', component: CreatePostComponent },
-    { path: 'forum/:forum/thread/edit/:id', component: CreateThreadComponent },
-    { path: 'forum/:forum/thread/:thread', component: ViewThreadComponent },
-    { path: 'forum/:forum/thread/edit', component: CreateThreadComponent },
-    { path: 'forum/:forum', component: ViewForumComponent },
-    { path: 'forum', component: ForumComponent },
-    //how you edit a forum
-    //TODO: need a second auth guard for preventing non author user from editing forums.
-    // { path: 'forum/create-thread/:id', component: CreateThreadComponent, canActivate: [AuthGuard] },
-    // { path: 'forum/create-thread', component: CreateThreadComponent, canActivate: [AuthGuard] },
-    { path: 'forum/my-posts/:id', component: ViewAllPostsComponent },
     
     
     { path: 'games', component: GamesComponent },
