@@ -203,78 +203,7 @@ import { ManageUsersComponent } from './components/admin/forum/manage-users/mana
     ReactiveFormsModule,
     CustomFormsModule,
     ServicesModule.forRoot(),
-    RouterModule.forRoot([
-    //routes asscesible to annoymous users
-    //temporarily swapped this for learning css. conveninece.
-    { path: '', component: HomeComponent },
-    //note all the inconsistencies in your routing- camel case here, pascal case there. NOOO!
-
-    
-
-    { path: 'sign_in/createAccount/forgotPassword', component: ForgotPasswordComponent },
-    { path: 'sign_in/createAccount', component: CreateAccountComponent },
-    { path: 'sign_in', component: SignInComponent },
-    { path: 'search', component: SearchComponent },
-    // On deployment, change uid here to displayname to be user and search friendlier
-    { path: 'sign_in/create_profile/:uid', component: EditProfileComponent, canActivate: [AuthGuard] },
-    { path: 'profile/:uid/:username', component: ViewProfileComponent, canActivate: [AuthGuard] },
-    //should delete this at somepoint- for now its a fail safe mechanism.
-    { path: 'profile/:uid', component: ViewProfileComponent, canActivate: [AuthGuard] },
-    { path: 'preferences/:uid/:username', component: EditPreferencesComponent, canActivate: [AuthGuard] },
-    { path: 'preferences/:uid', component: EditPreferencesComponent, canActivate: [AuthGuard] },
-    { path: 'contributions/:uid/:username', component: EditContributionsComponent, canActivate: [AuthGuard] },
-    //you'll see more on these pages if youre signed in, but can view as anonymous user.
-    
-
-    // in order: create a post, edit a post, edit a thread,
-    // create a thread, view a thread, view a forum, forum homepage
-    
-    
-    { path: 'games', component: GamesComponent },
-    { path: 'games/:id', component: ViewGameComponent },
-    // where id refers to review-id
-    { path: 'games/:game_title/review', component: EditReviewComponent, canActivate: [AuthGuard] },
-    { path: 'gaming-index', component: GamingIndexComponent },
-    { path: 'gaming-index/creators/:creator', component: CreatorsComponent },
-    { path: 'gaming-index/creators', component: CreatorsComponent },
-    { path: 'gaming-index/categories/:category', component: CategoriesComponent },
-    { path: 'gaming-index/categories', component: CategoriesComponent },
-    { path: 'gaming-index/platforms/:platform_name/:console_name', component: ConsoleComponent },
-    { path: 'gaming-index/platforms/:platform_name', component: PlatformsComponent },
-    { path: 'gaming-index/platforms', component: PlatformsComponent },
-    //routes for logged in users
-    // { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard] },
-    { path: 'contrib-dashboard/ratings/:username', component: ViewRatingsComponent, canActivate: [AuthGuard] },
-    { path: 'contrib-dashboard/reviews/:username/:game_title', component: DisplayReviewComponent, canActivate: [AuthGuard] },
-    { path: 'contrib-dashboard/reviews/:username', component: ViewReviewsComponent, canActivate: [AuthGuard] },
-    { path: 'contrib-dashboard/:username', component: ContribDashboardComponent, canActivate: [AuthGuard] },
-    { path: 'content-dashboard', component: ContentDashboardComponent },
-    { path: 'content-dashboard/watchlists', component: WatchlistsComponent },
-    { path: 'content-dashboard/streams', component: StreamingComponent },
-    { path: 'content-dashboard/news', component: NewsComponent },
-    { path: 'content-dashboard/recently-posted', component: RecentlyPostedComponent },
-    { path: 'content-dashboard/recently-posted/ratings', component: ViewAllRatingsComponent },
-    { path: 'content-dashboard/recently-posted/reviews', component: ViewAllReviewsComponent },
-    { path: 'content-dashboard/recently-posted/posts', component: ViewAllPostsComponent },
-    // admin-only routes: probably dont need admin/home TBT
-    { path: 'admin/forum/info/new', component: ForumInfoFormComponent, canActivate: [AuthGuard, AdminAuthGuard] },
-    
-    { path: 'admin/game/info/new', component: GameInfoFormComponent, canActivate: [AuthGuard, AdminAuthGuard] },
-    { path: 'admin/game/info', component: GameInfoComponent, canActivate: [AuthGuard, AdminAuthGuard] },
-
-    { path: 'admin/game/new', component: GameFormComponent, canActivate: [AuthGuard, AdminAuthGuard] },
-    { path: 'admin/forum/threads', component: ManageThreadsComponent, canActivate: [AuthGuard, AdminAuthGuard] },
-    { path: 'admin/forum/users', component: ManageUsersComponent, canActivate: [AuthGuard, AdminAuthGuard] },
-    
-    { path: 'admin/game/:id', component: GameFormComponent, canActivate: [AuthGuard, AdminAuthGuard] },
-
-    { path: 'admin/game', component: GameComponent, canActivate: [AuthGuard, AdminAuthGuard] },
-    { path: 'admin/forum', component: ManageForumsComponent, canActivate: [AuthGuard, AdminAuthGuard] },
-
-    
-    //wildcard for fallthrough cases.
-    { path: '**', component: NotFoundComponent }
-], { relativeLinkResolution: 'legacy' })
+    RouterModule.forRoot([], { relativeLinkResolution: 'legacy' })
   ],
     providers: [
     ],
