@@ -40,6 +40,8 @@ import { ViewProfileComponent } from './components/profile/view-profile/view-pro
 import { CreateAccountComponent } from './components/sign-in/create-account/create-account.component';
 import { ForgotPasswordComponent } from './components/sign-in/forgot-password/forgot-password.component';
 import { SignInComponent } from './components/sign-in/sign-in/sign-in.component';
+import { DropdownComponent } from './components/misc/dropdown/dropdown.component';
+import { PostComponent } from './components/admin/post/post.component';
 
 
 const routes: Routes = [ 
@@ -94,21 +96,7 @@ const routes: Routes = [
     { path: 'content-dashboard/recently-posted/ratings', component: ViewAllRatingsComponent },
     { path: 'content-dashboard/recently-posted/reviews', component: ViewAllReviewsComponent },
     { path: 'content-dashboard/recently-posted/posts', component: ViewAllPostsComponent },
-    // admin-only routes: probably dont need admin/home TBT
-    { path: 'admin/forum/info/new', component: ForumInfoFormComponent, canActivate: [AuthGuard, AdminAuthGuard] },
     
-    { path: 'admin/game/info/new', component: GameInfoFormComponent, canActivate: [AuthGuard, AdminAuthGuard] },
-    { path: 'admin/game/info', component: GameInfoComponent, canActivate: [AuthGuard, AdminAuthGuard] },
-
-    { path: 'admin/game/new', component: GameFormComponent, canActivate: [AuthGuard, AdminAuthGuard] },
-    { path: 'admin/forum/threads', component: ManageThreadsComponent, canActivate: [AuthGuard, AdminAuthGuard] },
-    { path: 'admin/forum/users', component: ManageUsersComponent, canActivate: [AuthGuard, AdminAuthGuard] },
-    
-    { path: 'admin/game/:id', component: GameFormComponent, canActivate: [AuthGuard, AdminAuthGuard] },
-
-    { path: 'admin/game', component: GameComponent, canActivate: [AuthGuard, AdminAuthGuard] },
-    { path: 'admin/forum', component: ManageForumsComponent, canActivate: [AuthGuard, AdminAuthGuard] },
-
     
     //wildcard for fallthrough cases.
     { path: '**', component: NotFoundComponent }
@@ -119,5 +107,47 @@ const routes: Routes = [
    imports: [RouterModule.forRoot(routes)], 
    exports: [RouterModule] 
 })
-export class AppRoutingModule { } export const
-RoutingComponent = [HomeComponent, ]
+export class AppRoutingModule { } 
+export const RoutingComponents = [
+    AdminAuthGuard,
+    AuthGuard,
+    ForumInfoFormComponent,
+    ManageForumsComponent,
+    ManageThreadsComponent,
+    ManageUsersComponent,
+    GameFormComponent,
+    GameInfoFormComponent,
+    GameInfoComponent,
+    GameComponent,
+    ContentDashboardComponent,
+    NewsComponent,
+    RecentlyPostedComponent,
+    StreamingComponent,
+    WatchlistsComponent,
+    ContribDashboardComponent,
+    DisplayReviewComponent,
+    EditReviewComponent,
+    ViewAllPostsComponent,
+    ViewAllRatingsComponent,
+    ViewAllReviewsComponent,
+    ViewRatingsComponent,
+    ViewReviewsComponent,
+    CategoriesComponent,
+    ConsoleComponent,
+    CreatorsComponent,
+    GamesComponent,
+    GamingIndexComponent,
+    PlatformsComponent,
+    ViewGameComponent,
+    HomeComponent,
+    NotFoundComponent,
+    SearchComponent,
+    EditContributionsComponent,
+    EditPreferencesComponent,
+    EditProfileComponent,
+    ViewProfileComponent,
+    CreateAccountComponent,
+    ForgotPasswordComponent,
+    SignInComponent,
+    DropdownComponent
+]

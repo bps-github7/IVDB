@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core'; 
 import { Routes, RouterModule } from '@angular/router'; 
 //this one prolly belongs in contributions!
-import { ViewAllPostsComponent } from '../components/contributions/view-all-posts/view-all-posts.component';
 import { CreatePostComponent } from './create-post/create-post.component';
 import { CreateThreadComponent } from './create-thread/create-thread.component';
 import { ForumComponent } from './forum.component';
@@ -20,7 +19,7 @@ const routes: Routes = [
     //TODO: need a second auth guard for preventing non author user from editing forums.
     // { path: 'forum/create-thread/:id', component: CreateThreadComponent, canActivate: [AuthGuard] },
     // { path: 'forum/create-thread', component: CreateThreadComponent, canActivate: [AuthGuard] },
-    { path: 'forum/my-posts/:id', component: ViewAllPostsComponent },
+    // { path: 'forum/my-posts/:id', component: ViewAllPostsComponent },
     
 
 //    {path:"home", component:HomeComponent}, 
@@ -30,4 +29,10 @@ const routes: Routes = [
    imports: [RouterModule.forRoot(routes)], 
    exports: [RouterModule] 
 })
-export class AppRoutingModule { }
+export class AppRoutingModule { } export const ForumComponents = [
+    CreatePostComponent,
+    CreateThreadComponent,
+    ForumComponent,
+    ViewForumComponent,
+    ViewThreadComponent   
+];
