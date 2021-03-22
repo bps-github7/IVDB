@@ -1,0 +1,94 @@
+
+
+<h3>
+    Welcome to the gaming index!
+</h3>
+
+<p> Come here to learn about released and anticipated games, consoles, console makers, creators, categories and more</p>
+
+
+<h5> <a routerLink="creators">Creators:</a></h5>
+<ul>
+    <li *ngFor="let c of creators">
+        <a [routerLink]="['creators/', c.title]" [title]="c.title">{{ c.title }}</a>
+    </li>
+</ul>
+<h5><a routerLink="categories">Categories:</a></h5>
+<ul>
+    <li *ngFor="let c of categories">
+        <a [routerLink]="['categories/', c.title]" [title]="c.title">{{ c.title }}</a>
+    </li>
+</ul>
+<h5><a routerLink="platforms">Platforms:</a></h5>
+
+<!-- TODO: lets add a tooltip so users can learn about a game info type without having to click -->
+
+<ul>
+    <li *ngFor="let c of platforms">
+        <a [routerLink]="['platforms/', c.title]" [title]="c.title">{{ c.title }}</a>
+    </li>
+</ul>
+
+<!-- TODO: hard coded the platforms again- fix -->
+<h5><a routerLink="platforms/nintendo">Nintendo Consoles: </a></h5>
+
+<ul>
+    <li *ngFor="let n of nintendo ">
+            <a [routerLink]="['platforms/nintendo/',  n.name]">
+                {{ n.name }}
+            </a>
+    </li>
+</ul>
+
+
+<h5><a routerLink="platforms/sony">Sony Consoles:</a></h5>
+
+<ul>
+    <li *ngFor="let n of sony ">
+            <a [routerLink]="['platforms/sony/',  n.name]">
+                {{ n.name }}
+            </a>
+    </li>
+</ul>
+
+
+
+<h5><a routerLink="platforms/microsoft">Microsoft Consoles:</a></h5>
+
+<ul>
+    <li *ngFor="let n of microsoft ">
+            <a [routerLink]="['platforms/microsoft',  n.name]">
+                {{ n.name }}
+            </a>
+    </li>
+</ul>
+
+<h5><a routerLink="platforms/pc">PC Consoles:</a></h5>
+
+<ul>
+    <li *ngFor="let n of pc">
+                <a [routerLink]="['platforms/',  n.name]">
+                    {{ n.name }}
+                </a>
+    </li>
+</ul>
+<!-- Got rid of this platform cuzitso WEH?!
+<h5><a routerLink="platforms/web">web Consoles:</a></h5>
+
+<ul>
+    <li *ngFor="let n of web">
+                <a [routerLink]="['platforms/',  n.name]">
+                    {{ n.name }}
+                </a>
+    </li>
+</ul> -->
+
+<h5><a routerLink="platforms/mobile">mobile Consoles:</a></h5>
+
+<ul>
+    <li *ngFor="let n of mobile">
+                <a [routerLink]="['platforms/',  n.name]">
+                    {{ n.name }}
+                </a>
+    </li>
+</ul>

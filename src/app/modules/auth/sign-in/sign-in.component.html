@@ -1,0 +1,54 @@
+<form [formGroup]="form" (ngSubmit)="login()">
+
+    <!---Form validation errors--->
+    <div *ngIf="form.errors" class="alert alert-danger">
+        Email or Password is invalid.
+    </div>
+
+    <!-- email formgroup -->
+    <div class="form-group">
+        <label for="email">Email: </label>
+        <input 
+            formControlName="email"
+            class="form-control"
+            id="email"
+            type="text">
+            <div *ngIf="email.touched && email.invalid" class="alert alert-danger">
+                Email is Required
+            </div>
+    </div>
+
+    <!-- password formgroup -->
+    <div class="form-group">
+        <label for="password">Password: </label>
+        <input 
+            formControlName="password"
+            class="form-control"
+            id="password"
+            type="password">
+            <div *ngIf="password.touched && password.invalid" class="alert alert-danger">
+                Password is required
+            </div>
+    </div>
+
+
+    <div class="form-extras">
+        <button class="btn btn-primary" (click)="login()">Log-in</button><br>
+            <br>
+        <button
+            (click)="google_login()" 
+            class="btn btn-primary">
+            Log in with Google
+        </button><br><br>
+
+        <button
+            (click)="facebook_login()"
+            class="btn btn-primary">
+            Log in with Facebook
+        </button><br>
+        <hr>
+        Don't have a Account? <a routerLink="/sign_in/createAccount">Sign up here</a><br>
+        <a>Forgot your password?</a>
+    </div>
+        
+</form>

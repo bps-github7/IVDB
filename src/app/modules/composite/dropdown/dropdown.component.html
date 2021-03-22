@@ -1,0 +1,119 @@
+<!---navbar/drop down menu--->
+<nav>
+    <header>
+        <a class="logo" alt="Internet Video-game Database" routerLink=''>IVDB</a>
+        <input id="searchbar" type="text" placeholder="Search IVDB">
+    </header>
+    <ul class="dd-menu">
+        <li class="dd-menu-trigger"><a routerLink="/content-dashboard">New Content</a>
+            <ul class="sub-menu">
+                <li><a routerLink="/content-dashboard/watchlists">Watchlists</a></li>
+                <li><a routerLink="/content-dashboard/streams">Streams</a></li>
+                <li><a routerLink="/content-dashboard/news">News</a></li>
+                <!-- Submenu here -->
+                <li class="sub-sub-menu-trigger"><a routerLink="/content-dashboard/recently-posted">Recent</a>
+                    <ul class="sub-sub-menu">
+                        <li class="sub-sub-top"><a routerLink="/content-dashboard/recently-posted/posts">Posts</a>
+                        </li>
+                        <li><a routerLink="/content-dashboard/recently-posted/ratings">Ratings</a></li>
+                        <li><a routerLink="/content-dashboard/recently-posted/reviews">Reviews</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </li>
+        <li class="dd-menu-trigger"><a routerLink="/forum">Forum</a>
+            <ul class="sub-menu">
+                <li><a routerLink="/forum/view-threads">View Threads</a></li>
+                <li><a routerLink="/forum/create-thread">Create a Thread</a></li>
+                <li class="sub-sub-menu-trigger"><a [routerLink]="['forum/my-posts/', appUser?.username]">My posts</a>
+                    <ul class="sub-sub-menu">
+                        <!--  -->
+                        <li class="sub-sub-top"><a href="#">Thread 1</a></li>
+                        <li><a href="#">Thread 2</a></li>
+                        <li><a href="#">Thread 3</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </li>
+        <li class="dd-menu-trigger"><a routerLink="/gaming-index">Gaming Index</a>
+            <ul class="sub-menu">
+                <!-- sub sub menu here -->
+                <li class="sub-sub-menu-trigger"><a routerLink="/games">Browse Games</a>
+                    <ul class="sub-sub-menu">
+                        <li class="sub-sub-top"><a href="#">Platformer</a></li>
+                        <li><a href="#">RPG</a></li>
+                        <li><a href="#">Combat</a></li>
+                        <li><a href="#">Sports</a></li>
+                    </ul>
+                </li>
+                <li class="sub-sub-menu-trigger"><a routerLink="/gaming-index/platforms">Platforms</a>
+                    <ul class="sub-sub-menu">
+                        <li class="sub-sub-top"><a routerLink="/gaming-index/platforms/sony">Sony</a></li>
+                        <li><a routerLink="/gaming-index/platforms/nintendo">Nintendo</a></li>
+                        <li><a routerLink="/gaming-index/platforms/microsoft">Microsoft</a></li>
+                        <li><a routerLink="/gaming-index/platforms/pc">PC</a></li>
+
+                    </ul>
+                </li>
+                <li><a routerLink="/gaming-index/creators">Creators</a></li>
+                <li><a routerLink="/gaming-index/categories">Categories</a></li>
+                <!-- would be cool to add this detail later- for gizmos and trivia that does not fit into the above categories likadis...
+                    <li><a href="#">Misc & historical</a></li>           -->
+            </ul>
+        </li>
+        <li class="dd-menu-trigger" *ngIf="appUser; else anonymousUser" id="profile-nub">
+            <a [routerLink]="['/profile/', appUser?.uid, appUser?.username]">
+                {{ appUser?.username }}
+            </a>
+            <!-- can non admin users access this? -->
+            <ul class="sub-menu">
+                <li *ngIf="appUser.isAdmin" class="sub-sub-menu-trigger"><a routerLink="/admin/game">Adminster</a>
+                    <ul class=sub-sub-menu>
+                        <li class="sub-sub-top">
+                            <a routerLink="admin/game/new">Add new Game</a>
+                        </li>
+                        <li>
+                            <a routerLink="admin/game/info/new">Edit Game Info</a>
+                        </li>
+                        <li>
+                            <!-- This is the right path but too specific (for now) for us to debug -->
+                            <a routerLink="admin/forum/info/new">Forums</a>
+
+                        </li>
+                        <li>
+                            <a routerLink="#">Content</a>
+                        </li>
+                        <li>
+                            <a routerLink="#">Contributions</a>
+                        </li>
+                        
+                    </ul>
+                </li>
+
+                <li class="dd-menu-trigger"><a routerLink="/rate">Edit</a>
+                    <ul class="sub-menu">
+                        <li class="sub-sub-top"><a
+                                [routerLink]="['/sign_in/create_profile/', appUser?.uid]">Profile</a></li>
+                        <li><a [routerLink]="['/preferences', appUser?.uid, appUser?.username]">Preferences</a>
+                        </li>
+                        <li><a href="#" [routerLink]="['/contributions', appUser?.username]">Contributions</a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="dd-menu-trigger"><a [routerLink]="['/contrib-dashboard/',  appUser?.username]">Contribute</a>
+                    <ul class="sub-menu">
+                        <li class="sub-sub-top"><a
+                                [routerLink]="['/contrib-dashboard/ratings', appUser?.username]">Rate</a>
+                        </li>
+                        <li><a [routerLink]="['/contrib-dashboard/reviews', appUser?.username]">Review</a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="btn-dd-danger"><a href="#" class="btn-dd-danger" (click)="logout()">logout</a></li>
+            </ul>
+        </li>
+        <ng-template #anonymousUser>
+            <a routerLink="/sign_in">Sign in</a>
+        </ng-template>
+    </ul>
+</nav>

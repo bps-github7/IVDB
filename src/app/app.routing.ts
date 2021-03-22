@@ -70,18 +70,6 @@ const routes: Routes = [
     // how does forum.routing get imported    
     
     
-    { path: 'games', component: GamesComponent },
-    { path: 'games/:id', component: ViewGameComponent },
-    // where id refers to review-id
-    { path: 'games/:game_title/review', component: EditReviewComponent, canActivate: [AuthGuard] },
-    { path: 'gaming-index', component: GamingIndexComponent },
-    { path: 'gaming-index/creators/:creator', component: CreatorsComponent },
-    { path: 'gaming-index/creators', component: CreatorsComponent },
-    { path: 'gaming-index/categories/:category', component: CategoriesComponent },
-    { path: 'gaming-index/categories', component: CategoriesComponent },
-    { path: 'gaming-index/platforms/:platform_name/:console_name', component: ConsoleComponent },
-    { path: 'gaming-index/platforms/:platform_name', component: PlatformsComponent },
-    { path: 'gaming-index/platforms', component: PlatformsComponent },
     //routes for logged in users
     // { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard] },
     { path: 'contrib-dashboard/ratings/:username', component: ViewRatingsComponent, canActivate: [AuthGuard] },

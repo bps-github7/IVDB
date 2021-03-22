@@ -1,0 +1,37 @@
+
+<div *ngIf="!category">
+    <a routerLink="../">Go back to gaming-index</a>
+
+
+    <h3>A place to learn about game categories</h3>
+
+    <p>Categories is how we classify games, and sort them according to your preferences</p>
+    
+    <p> By giving us specific info about which categories of games you like or dislike, we can better serve you accurate and timely reccomendations...</p>
+    
+    <p>Click on a category below to learn more about it:</p> 
+    
+    <ul>
+        <li *ngFor="let g of categories">
+            <a [routerLink]="g.title">{{ g.title }}</a>
+        </li>
+    </ul>    
+</div>
+
+
+<div *ngIf="category">
+
+    <a routerLink="../">Go back to category list</a>
+    
+
+    <h3>{{ category.title }}:</h3>
+    <p>
+        {{ category.description }}
+    </p>
+
+    <!-- Had to abbreviate console-maker to cm in queryParam because of name clash with existing variable -->
+    <a routerLink="../../../games" [queryParams]="{ category : (category.title | lowercase ) }">Click here for {{ category.title }} games.</a>
+    
+    <!-- in the future, should just get game recommendations below -->
+
+</div>

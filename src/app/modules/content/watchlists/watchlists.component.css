@@ -1,0 +1,17 @@
+div {
+    width: 50%;
+    height: 100%;
+    background-color: black;
+    display: inline-block;
+    margin: 0;
+    padding: 0;
+
+}
+
+#red {
+    background-color: red;
+}
+
+#blue {
+    background-color: blue;
+}

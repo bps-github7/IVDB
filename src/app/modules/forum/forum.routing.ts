@@ -29,7 +29,7 @@ const routes: Routes = [
    imports: [RouterModule.forRoot(routes)], 
    exports: [RouterModule] 
 })
-export class AppRoutingModule { } export const ForumComponents = [
+export class ForumRoutingModule { } export const ForumComponents = [
     CreatePostComponent,
     CreateThreadComponent,
     ForumComponent,

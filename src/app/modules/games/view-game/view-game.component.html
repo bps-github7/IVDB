@@ -1,0 +1,36 @@
+<div class="row">
+    <div class="col-md-6">
+        <div class="card" style="width: 18rem;">
+            <img class="card-img-top" [src]="game.imageUrl" alt="the game in question">
+            <div class="card-body">
+                <h5 class="card-title">{{ game.title }}</h5>
+                <p class="card-text">{{ game.price | currency:'USD':true }}</p>
+                <!-- <div *ngIf="appUser; else anonymousUser">
+                    
+                </div>
+                <ng-template #anonymousUser> 
+                    Please create an account and sign in to rate or review
+                </ng-template>
+               -->
+                <provide-rating [game_title]="game.title" [username]="username"></provide-rating>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        {{ game.description }}
+
+        <!-- the way you look the comments up will need to be more rigerous since 
+        two types of content could have the same content id. -->
+        <comment-section [contentId]="game_id" [username]="username"></comment-section>
+    </div>
+    <footer>
+        <!-- Note we need to make Game attribute console_maker more specific, console_makers is simply a way to categorize games-->
+        <ul>
+
+            <li>Categories: {{ game.categories }}</li>
+            <li>Creators: {{ game.creators }}</li>
+            <li>consoles: {{ game.console_makers }}</li>
+        </ul>
+        <a routerLink="../">Go back to game list</a>
+    </footer>
+</div>
