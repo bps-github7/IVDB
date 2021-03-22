@@ -11,14 +11,17 @@ import { ViewGameComponent } from './view-game/view-game.component';
 
 /* BIG ASS NOTE: TODO this belongs in contributions but worried about the precendence with routes if its in someone
 elses routing module but uses this modules routes to arrive there- */
-// { path: 'games/:game_title/review', component: EditReviewComponent, canActivate: [AuthGuard] },
 
+//where id refers to review-id:
+// { path: 'games/:game_title/review', component: EditReviewComponent, canActivate: [AuthGuard] },
 
 
 const routes: Routes = [
     { path: 'games', component: GamesComponent },
     { path: 'games/:id', component: ViewGameComponent },
-    // where id refers to review-id
+    
+    /* need to change the routing url, and possibly whole ui of gaming index
+    to just be games/info */
     { path: 'gaming-index', component: GamingIndexComponent },
     { path: 'gaming-index/creators/:creator', component: CreatorsComponent },
     { path: 'gaming-index/creators', component: CreatorsComponent },
