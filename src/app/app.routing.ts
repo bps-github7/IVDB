@@ -1,65 +1,26 @@
 import { NgModule } from '@angular/core'; 
 import { Routes, RouterModule } from '@angular/router'; 
-import { AdminAuthGuard } from './common/services/admin-auth-guard.service';
-import { AuthGuard } from './common/services/auth-guard.service';
-import { ForumInfoFormComponent } from './components/admin/forum/forum-info-form/forum-info-form.component';
-import { ManageForumsComponent } from './components/admin/forum/manage-forums/manage-forums.component';
-import { ManageThreadsComponent } from './components/admin/forum/manage-threads/manage-threads.component';
-import { ManageUsersComponent } from './components/admin/forum/manage-users/manage-users.component';
-import { GameFormComponent } from './components/admin/game-form/game-form.component';
-import { GameInfoFormComponent } from './components/admin/game-info-form/game-info-form.component';
-import { GameInfoComponent } from './components/admin/game-info/game-info.component';
-import { GameComponent } from './components/admin/game/game.component';
-import { ContentDashboardComponent } from './components/content/content-dashboard/content-dashboard.component';
-import { NewsComponent } from './components/content/news/news.component';
-import { RecentlyPostedComponent } from './components/content/recently-posted/recently-posted.component';
-import { StreamingComponent } from './components/content/streaming/streaming.component';
-import { WatchlistsComponent } from './components/content/watchlists/watchlists.component';
-import { ContribDashboardComponent } from './components/contributions/contrib-dashboard/contrib-dashboard.component';
-import { DisplayReviewComponent } from './components/contributions/display-review/display-review.component';
-import { EditReviewComponent } from './components/contributions/edit-review/edit-review.component';
-import { ViewAllPostsComponent } from './components/contributions/view-all-posts/view-all-posts.component';
-import { ViewAllRatingsComponent } from './components/contributions/view-all-ratings/view-all-ratings.component';
-import { ViewAllReviewsComponent } from './components/contributions/view-all-reviews/view-all-reviews.component';
-import { ViewRatingsComponent } from './components/contributions/view-ratings/view-ratings.component';
-import { ViewReviewsComponent } from './components/contributions/view-reviews/view-reviews.component';
-import { CategoriesComponent } from './components/gaming-index/categories/categories.component';
-import { ConsoleComponent } from './components/gaming-index/console/console.component';
-import { CreatorsComponent } from './components/gaming-index/creators/creators.component';
-import { GamesComponent } from './components/gaming-index/games/games.component';
-import { GamingIndexComponent } from './components/gaming-index/gaming-index/gaming-index.component';
-import { PlatformsComponent } from './components/gaming-index/platforms/platforms.component';
-import { ViewGameComponent } from './components/gaming-index/view-game/view-game.component';
-import { HomeComponent } from './components/misc/home/home.component';
-import { NotFoundComponent } from './components/misc/not-found/not-found.component';
-import { SearchComponent } from './components/misc/search/search.component';
-import { EditContributionsComponent } from './components/profile/edit-contributions/edit-contributions.component';
-import { EditPreferencesComponent } from './components/profile/edit-preferences/edit-preferences.component';
-import { EditProfileComponent } from './components/profile/edit-profile/edit-profile.component';
-import { ViewProfileComponent } from './components/profile/view-profile/view-profile.component';
-import { CreateAccountComponent } from './components/sign-in/create-account/create-account.component';
-import { ForgotPasswordComponent } from './components/sign-in/forgot-password/forgot-password.component';
-import { SignInComponent } from './components/sign-in/sign-in/sign-in.component';
-import { DropdownComponent } from './components/misc/dropdown/dropdown.component';
-import { PostComponent } from './components/admin/post/post.component';
 
 
 const routes: Routes = [ 
     //routes asscesible to annoymous users
     //temporarily swapped this for learning css. conveninece.
     { path: '', component: HomeComponent },
-    //note all the inconsistencies in your routing- camel case here, pascal case there. NOOO!
+    { path: 'search', component: SearchComponent },
+
+    { path: 'auth/createAccount/forgotPassword', component: ForgotPasswordComponent },
+    { path: 'auth/createAccount', component: CreateAccountComponent },
+    { path: 'auth', component: SignInComponent },
+    { path: 'auth/create_profile/:uid', component: EditProfileComponent, canActivate: [AuthGuard] },
 
     
 
-    { path: 'sign_in/createAccount/forgotPassword', component: ForgotPasswordComponent },
-    { path: 'sign_in/createAccount', component: CreateAccountComponent },
-    { path: 'sign_in', component: SignInComponent },
-    { path: 'search', component: SearchComponent },
     // On deployment, change uid here to displayname to be user and search friendlier
-    { path: 'sign_in/create_profile/:uid', component: EditProfileComponent, canActivate: [AuthGuard] },
+    
+
+
+    // profile mogvfmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm
     { path: 'profile/:uid/:username', component: ViewProfileComponent, canActivate: [AuthGuard] },
-    //should delete this at somepoint- for now its a fail safe mechanism.
     { path: 'profile/:uid', component: ViewProfileComponent, canActivate: [AuthGuard] },
     { path: 'preferences/:uid/:username', component: EditPreferencesComponent, canActivate: [AuthGuard] },
     { path: 'preferences/:uid', component: EditPreferencesComponent, canActivate: [AuthGuard] },
@@ -72,18 +33,20 @@ const routes: Routes = [
     
     //routes for logged in users
     // { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard] },
-    { path: 'contrib-dashboard/ratings/:username', component: ViewRatingsComponent, canActivate: [AuthGuard] },
-    { path: 'contrib-dashboard/reviews/:username/:game_title', component: DisplayReviewComponent, canActivate: [AuthGuard] },
-    { path: 'contrib-dashboard/reviews/:username', component: ViewReviewsComponent, canActivate: [AuthGuard] },
-    { path: 'contrib-dashboard/:username', component: ContribDashboardComponent, canActivate: [AuthGuard] },
-    { path: 'content-dashboard', component: ContentDashboardComponent },
-    { path: 'content-dashboard/watchlists', component: WatchlistsComponent },
-    { path: 'content-dashboard/streams', component: StreamingComponent },
-    { path: 'content-dashboard/news', component: NewsComponent },
-    { path: 'content-dashboard/recently-posted', component: RecentlyPostedComponent },
-    { path: 'content-dashboard/recently-posted/ratings', component: ViewAllRatingsComponent },
-    { path: 'content-dashboard/recently-posted/reviews', component: ViewAllReviewsComponent },
-    { path: 'content-dashboard/recently-posted/posts', component: ViewAllPostsComponent },
+    { path: 'contributions/ratings/:username', component: ViewRatingsComponent, canActivate: [AuthGuard] },
+    { path: 'contributions/reviews/:username/:game_title', component: DisplayReviewComponent, canActivate: [AuthGuard] },
+    { path: 'contributions/reviews/:username', component: ViewReviewsComponent, canActivate: [AuthGuard] },
+    { path: 'contributions/:username', component: ContribDashboardComponent, canActivate: [AuthGuard] },
+
+
+    { path: 'content', component: ContentDashboardComponent },
+    { path: 'content/watchlists', component: WatchlistsComponent },
+    { path: 'content/streams', component: StreamingComponent },
+    { path: 'content/news', component: NewsComponent },
+    { path: 'content/recently-posted', component: RecentlyPostedComponent },
+    { path: 'content/recently-posted/ratings', component: ViewAllRatingsComponent },
+    { path: 'content/recently-posted/reviews', component: ViewAllReviewsComponent },
+    { path: 'content/recently-posted/posts', component: ViewAllPostsComponent },
     
     
     //wildcard for fallthrough cases.
@@ -97,45 +60,4 @@ const routes: Routes = [
 })
 export class AppRoutingModule { } 
 export const RoutingComponents = [
-    AdminAuthGuard,
-    AuthGuard,
-    ForumInfoFormComponent,
-    ManageForumsComponent,
-    ManageThreadsComponent,
-    ManageUsersComponent,
-    GameFormComponent,
-    GameInfoFormComponent,
-    GameInfoComponent,
-    GameComponent,
-    ContentDashboardComponent,
-    NewsComponent,
-    RecentlyPostedComponent,
-    StreamingComponent,
-    WatchlistsComponent,
-    ContribDashboardComponent,
-    DisplayReviewComponent,
-    EditReviewComponent,
-    ViewAllPostsComponent,
-    ViewAllRatingsComponent,
-    ViewAllReviewsComponent,
-    ViewRatingsComponent,
-    ViewReviewsComponent,
-    CategoriesComponent,
-    ConsoleComponent,
-    CreatorsComponent,
-    GamesComponent,
-    GamingIndexComponent,
-    PlatformsComponent,
-    ViewGameComponent,
-    HomeComponent,
-    NotFoundComponent,
-    SearchComponent,
-    EditContributionsComponent,
-    EditPreferencesComponent,
-    EditProfileComponent,
-    ViewProfileComponent,
-    CreateAccountComponent,
-    ForgotPasswordComponent,
-    SignInComponent,
-    DropdownComponent
-]
+ ]

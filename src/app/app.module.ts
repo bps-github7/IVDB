@@ -22,6 +22,10 @@ import { AppRoutingModule, RoutingComponents } from './app.routing';
 
 
 import { environment } from 'src/environments/environment';
+import { AuthModule } from './modules/auth/auth.module';
+import { ProfileModule } from './modules/profile/profile.module';
+import { CompositeModule } from './modules/composite/composite.module';
+import { AdminModule } from './modules/admin/admin.module';
 
 
 @NgModule({
@@ -30,7 +34,14 @@ import { environment } from 'src/environments/environment';
     AppComponent
 ],
   imports: [
+    AdminModule,
+    AuthModule,
+    CompositeModule,
+    ContentModule,
+    ContributionsModule,
     ForumModule,
+    GamesModule,
+    ProfileModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireAuthModule,
     AngularFirestoreModule,
