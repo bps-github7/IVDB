@@ -22,14 +22,14 @@ const routes: Routes = [
     
     /* need to change the routing url, and possibly whole ui of gaming index
     to just be games/info */
-    { path: 'gaming-index', component: GamingIndexComponent },
-    { path: 'gaming-index/creators/:creator', component: CreatorsComponent },
-    { path: 'gaming-index/creators', component: CreatorsComponent },
-    { path: 'gaming-index/categories/:category', component: CategoriesComponent },
-    { path: 'gaming-index/categories', component: CategoriesComponent },
-    { path: 'gaming-index/platforms/:platform_name/:console_name', component: ConsoleComponent },
-    { path: 'gaming-index/platforms/:platform_name', component: PlatformsComponent },
-    { path: 'gaming-index/platforms', component: PlatformsComponent },
+    { path: 'games/info', component: GamingIndexComponent },
+    { path: 'games/info/creators/:creator', component: CreatorsComponent },
+    { path: 'games/info/creators', component: CreatorsComponent },
+    { path: 'games/info/categories/:category', component: CategoriesComponent },
+    { path: 'games/info/categories', component: CategoriesComponent },
+    { path: 'games/info/platforms/:platform_name/:console_name', component: ConsoleComponent },
+    { path: 'games/info/platforms/:platform_name', component: PlatformsComponent },
+    { path: 'games/info/platforms', component: PlatformsComponent },
 ];
 @NgModule({ 
    imports: [RouterModule.forRoot(routes)], 
