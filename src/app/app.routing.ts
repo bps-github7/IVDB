@@ -33,20 +33,6 @@ const routes: Routes = [
     
     //routes for logged in users
     // { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard] },
-    { path: 'contributions/ratings/:username', component: ViewRatingsComponent, canActivate: [AuthGuard] },
-    { path: 'contributions/reviews/:username/:game_title', component: DisplayReviewComponent, canActivate: [AuthGuard] },
-    { path: 'contributions/reviews/:username', component: ViewReviewsComponent, canActivate: [AuthGuard] },
-    { path: 'contributions/:username', component: ContribDashboardComponent, canActivate: [AuthGuard] },
-
-
-    { path: 'content', component: ContentDashboardComponent },
-    { path: 'content/watchlists', component: WatchlistsComponent },
-    { path: 'content/streams', component: StreamingComponent },
-    { path: 'content/news', component: NewsComponent },
-    { path: 'content/recently-posted', component: RecentlyPostedComponent },
-    { path: 'content/recently-posted/ratings', component: ViewAllRatingsComponent },
-    { path: 'content/recently-posted/reviews', component: ViewAllReviewsComponent },
-    { path: 'content/recently-posted/posts', component: ViewAllPostsComponent },
     
     
     //wildcard for fallthrough cases.

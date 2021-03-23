@@ -13,15 +13,23 @@ import { GameComponent } from './game/game.component';
 
 
 const routes: Routes = [
-{ path: './forum/info/new', component: ForumInfoFormComponent, canActivate: [AuthGuard, AdminAuthGuard] },
-    { path: './game/info/new', component: GameInfoFormComponent, canActivate: [AuthGuard, AdminAuthGuard] },
-    { path: './game/info', component: GameInfoComponent, canActivate: [AuthGuard, AdminAuthGuard] },
-    { path: './game/new', component: GameFormComponent, canActivate: [AuthGuard, AdminAuthGuard] },
-    { path: './forum/threads', component: ManageThreadsComponent, canActivate: [AuthGuard, AdminAuthGuard] },
-    { path: './forum/users', component: ManageUsersComponent, canActivate: [AuthGuard, AdminAuthGuard] },
-    { path: './game/:id', component: GameFormComponent, canActivate: [AuthGuard, AdminAuthGuard] },
-    { path: './game', component: GameComponent, canActivate: [AuthGuard, AdminAuthGuard] },
-    { path: './forum', component: ManageForumsComponent, canActivate: [AuthGuard, AdminAuthGuard] },
+
+    // need to rethink these!
+    { path: 'game/info/new', component: GameInfoFormComponent, canActivate: [AuthGuard, AdminAuthGuard] },
+    { path: 'game/info', component: GameInfoComponent, canActivate: [AuthGuard, AdminAuthGuard] },
+    // TODO: Thats a good idea- use 'new' so u can get 3 uses at a form rather than 2!!!!
+    { path: 'game/new', component: GameFormComponent, canActivate: [AuthGuard, AdminAuthGuard] },
+    { path: 'game/:id', component: GameFormComponent, canActivate: [AuthGuard, AdminAuthGuard] },
+    { path: 'game', component: GameComponent, canActivate: [AuthGuard, AdminAuthGuard] },
+
+    { path: 'forum/info/new', component: ForumInfoFormComponent, canActivate: [AuthGuard, AdminAuthGuard] },
+    { path: 'forum/threads', component: ManageThreadsComponent, canActivate: [AuthGuard, AdminAuthGuard] },
+    { path: 'forum/users', component: ManageUsersComponent, canActivate: [AuthGuard, AdminAuthGuard] },
+    { path: 'forum', component: ManageForumsComponent, canActivate: [AuthGuard, AdminAuthGuard] },
+
+    // admin home:
+    // { path: '', component: '', canActivate: [AuthGuard, AdminAuthGuard] },
+    
 
      
 ];
