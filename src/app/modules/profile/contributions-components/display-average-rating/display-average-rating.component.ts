@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { RatingService } from '../../../common/services/rating.service';
+import { RatingService } from 'src/app/common/services/rating.service';
 
 @Component({
   selector: 'display-average-rating',

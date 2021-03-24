@@ -20,7 +20,7 @@ import { AdminModule } from './modules/admin/admin.module';
 
 import { AppComponent } from './app.component';
 import { ServicesModule } from './common/services/services.module';
-import { AppRoutingModule, RoutingComponents } from './app.routing';
+import { AppRoutingModule } from './app.routing';
 
 
 import { environment } from 'src/environments/environment';
@@ -28,7 +28,6 @@ import { environment } from 'src/environments/environment';
 
 @NgModule({
   declarations: [
-    RoutingComponents,
     AppComponent
 ],
   imports: [

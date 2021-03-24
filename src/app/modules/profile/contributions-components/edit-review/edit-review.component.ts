@@ -1,8 +1,8 @@
 import { NullTemplateVisitor } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ReviewService } from '../../../common/services/review.service';
-import { Review } from '../../../models/content/Review';
+import { ReviewService } from 'src/app/common/services/review.service';
+import { Review } from 'src/app/models/content/Review';
 
 class Game_Review implements Review {
     username = null;
@@ -17,6 +17,7 @@ class Game_Review implements Review {
   styleUrls: ['./edit-review.component.css']
 })
 export class EditReviewComponent implements OnInit {
+    // TODO : fix- such a crummy way of doing things
     username : string = localStorage.getItem("username");
     user_id : string = localStorage.getItem("user_id");
     warning_flag : boolean = false;

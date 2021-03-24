@@ -1,8 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
-import { RatingService } from '../../../common/services/rating.service';
-import { Rating } from '../../../models/content/rating';
+import { RatingService } from 'src/app/common/services/rating.service';
+import { Rating } from 'src/app/models/content/rating';
 
 
 //default object for filling in prior to users providing a rating...

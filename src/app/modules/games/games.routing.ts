@@ -9,12 +9,11 @@ import { PlatformsComponent } from './platforms/platforms.component';
 import { ViewGameComponent } from './view-game/view-game.component';
 
 
-/* BIG ASS NOTE: TODO this belongs in contributions but worried about the precendence with routes if its in someone
-elses routing module but uses this modules routes to arrive there- */
+/* TODO: untangle contributions from profile. some relevancy to here, where game title
+will have to be part of the url for the creating, viewing and editing of a review (but not rating). */
 
-//where id refers to review-id:
-// { path: 'games/:game_title/review', component: EditReviewComponent, canActivate: [AuthGuard] },
 
+// TODO: should just be able to browse consoles like games 
 
 const routes: Routes = [
     { path: '', component: GamesComponent },
@@ -24,13 +23,12 @@ const routes: Routes = [
     { path: 'info/creators', component: CreatorsComponent },
     { path: 'info/categories/:category', component: CategoriesComponent },
     { path: 'info/categories', component: CategoriesComponent },
-    // should just be able to browse consoles like games 
     { path: 'info/platforms/:platform_name/:console_name', component: ConsoleComponent },
     { path: 'info/platforms/:platform_name', component: PlatformsComponent },
     { path: 'info/platforms', component: PlatformsComponent },
 ];
 @NgModule({ 
-   imports: [RouterModule.forRoot(routes)], 
+   imports: [RouterModule.forChild(routes)], 
    exports: [RouterModule] 
 })
 export class GamesRoutingModule { } export const GamesComponents = [

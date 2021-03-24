@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { SuggestionService } from '../../../common/services/suggestion.service';
+import { SuggestionService } from 'src/app/common/services/suggestion.service';
 
 @Component({
   selector: 'suggest-new',

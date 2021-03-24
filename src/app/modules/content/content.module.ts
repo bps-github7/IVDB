@@ -1,14 +1,14 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { ContentRoutingModule } from './content.routing';
+import { ContentComponents, ContentRoutingModule } from './content.routing';
+import { CompositeModule } from '../composite/composite.module';
 
 
 
 @NgModule({
-  declarations: [],
+  declarations: [ContentComponents],
   imports: [
     ContentRoutingModule,
-    CommonModule
+    CompositeModule
   ]
 })
 export class ContentModule { }

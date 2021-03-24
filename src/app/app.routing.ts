@@ -4,6 +4,10 @@ import { HomeComponent } from './modules/composite/misc/home/home.component';
 import { NotFoundComponent } from './modules/composite/misc/not-found/not-found.component';
 import { SearchComponent } from './modules/composite/misc/search/search.component';
 import { DropdownComponent } from './modules/composite/misc/dropdown/dropdown.component';
+import { ZippyComponent } from './modules/composite/display/zippy/zippy.component';
+import { CarouselComponent } from './modules/composite/display/carousel/carousel.component';
+import { CommentSectionComponent } from './modules/composite/display/comment-section/comment-section.component';
+import { FavoriteComponent } from './modules/composite/misc/favorite/favorite.component';
 
 
 const routes: Routes = [ 
@@ -19,10 +23,4 @@ const routes: Routes = [
    imports: [RouterModule.forRoot(routes)], 
    exports: [RouterModule] 
 })
-export class AppRoutingModule { } 
-export const RoutingComponents = [
-        HomeComponent,
-        SearchComponent,
-        NotFoundComponent,
-        DropdownComponent
-    ]
+export class AppRoutingModule { }

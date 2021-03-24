@@ -1,7 +1,7 @@
 import { Component, Input, OnInit, Output, EventEmitter, SimpleChanges, OnChanges, SimpleChange } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { GameInfoService } from '../../../common/services/gameinfo.service';
-import { GameDescriptor } from '../../../models/content/GameDescriptor';
+import { GameInfoService } from '../../../../common/services/gameinfo.service';
+import { GameDescriptor } from '../../../../models/content/GameDescriptor';
 
 @Component({
   selector: 'descriptor-form',

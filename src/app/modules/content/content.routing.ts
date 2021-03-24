@@ -11,32 +11,32 @@ import { ViewAllRatingsComponent } from './view-all-ratings/view-all-ratings.com
 import { ViewAllReviewsComponent } from './view-all-reviews/view-all-reviews.component';
 
 const routes: Routes = [
-    
-    // seems that this one is criss cropssed with contributions
-    { path: 'watchlists', component: WatchlistsComponent },
-    { path: 'streams', component: StreamingComponent },
-    { path: 'news', component: NewsComponent },
-    { path: 'recently-posted', component: RecentlyPostedComponent },
+  
     { path: 'recently-posted/ratings', component: ViewAllRatingsComponent },
     { path: 'recently-posted/reviews', component: ViewAllReviewsComponent },
     { path: 'recently-posted/posts', component: ViewAllPostsComponent },
+    { path: 'recently-posted', component: RecentlyPostedComponent },
+    { path: 'reccomendations', component: ReccomendationsComponent },
+    { path: 'watchlists', component: WatchlistsComponent },
+    { path: 'streams', component: StreamingComponent },
+    { path: 'news', component: NewsComponent },
     { path: '', component: ContentDashboardComponent },
   // recommendation DEf belongs here, but its not in the routes!  
     
      
 ];
 @NgModule({ 
-   imports: [RouterModule.forRoot(routes)], 
+   imports: [RouterModule.forChild(routes)], 
    exports: [RouterModule] 
 })
 export class ContentRoutingModule { } export const ContentComponents = [
-    WatchlistsComponent,
-    StreamingComponent,
+    ContentDashboardComponent,
     NewsComponent,
+    ReccomendationsComponent,
     RecentlyPostedComponent,
+    StreamingComponent,
+    ViewAllPostsComponent,
     ViewAllRatingsComponent,
     ViewAllReviewsComponent,
-    ViewAllPostsComponent, /// ???? for forums!?
-    ContentDashboardComponent,
-    ReccomendationsComponent,
+    WatchlistsComponent,
 ];

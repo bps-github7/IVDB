@@ -1,17 +1,16 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ProfileRoutingModule } from './profile.routing';
+import { ProfileComponents, ProfileRoutingModule } from './profile.routing';
 import { BrowseProfilesComponent } from './browse-profiles/browse-profiles.component';
-import { PreferencesComponent } from './preferences/preferences.component';
-import { CobtributionsComponent } from './cobtributions/cobtributions.component';
+import { CompositeModule } from '../composite/composite.module';
 
 
 
 @NgModule({
-  declarations: [BrowseProfilesComponent, PreferencesComponent, CobtributionsComponent],
+  declarations: [BrowseProfilesComponent, ProfileComponents],
   imports: [
-      ProfileRoutingModule,
-    CommonModule
+    ProfileRoutingModule,
+    CompositeModule
   ]
 })
 export class ProfileModule { }

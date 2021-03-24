@@ -4,6 +4,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { CreatePostComponent } from './create-post/create-post.component';
 import { CreateThreadComponent } from './create-thread/create-thread.component';
 import { ForumComponent } from './forum.component';
+import { ForumsListComponent } from './forums-list/forums-list.component';
 import { ViewForumComponent } from './view-forum/view-forum.component';
 import { ViewThreadComponent } from './view-thread/view-thread.component';
 
@@ -17,13 +18,14 @@ const routes: Routes = [
     { path: '', component: ForumComponent },  
 ];
 @NgModule({ 
-   imports: [RouterModule.forRoot(routes)], 
+   imports: [RouterModule.forChild(routes)], 
    exports: [RouterModule] 
 })
 export class ForumRoutingModule { } export const ForumComponents = [
-    ForumComponent,
-    ViewForumComponent,
     CreatePostComponent,
     CreateThreadComponent,
+    ForumComponent,
+    ForumsListComponent,
+    ViewForumComponent,
     ViewThreadComponent   
 ];

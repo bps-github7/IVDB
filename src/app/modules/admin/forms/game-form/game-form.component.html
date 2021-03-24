@@ -1,7 +1,6 @@
 <div class="row">
     <div class="col-md-6">        
-        <form #finished="ngForm" (ngSubmit)="save(finished.value)">
-            <!-- title form group -->
+        <!-- <form #finished="ngForm" (ngSubmit)="save(finished.value)">
             <div class="form-group">
                 <label for="title">Title: </label>
                 <input
@@ -17,7 +16,6 @@
                     <div *ngIf="title.errors.required">Title is required</div>
                 </div>
             </div>
-            <!-- price form group -->
             <div class="form-group">
                 <label for="price">Price: </label>
                 <div class="input-group">
@@ -37,7 +35,6 @@
                     <div *ngIf="price.errors.min">Price should be zero or greater.</div>
                 </div>
             </div>
-            <!-- categories form group -->
             <div class="form-group">
                 <label for="categories">Categories: </label>
                 <select
@@ -59,7 +56,6 @@
                     <div></div>
                 </div>
             </div>
-            <!-- creators form group -->
             <div class="form-group">
                 <label for="creators">Creators: </label>
                 <select
@@ -81,8 +77,6 @@
                     <div></div>
                 </div>
             </div>
-            <!-- consoleMakers form group: we dont acyually do anything with this value
-                 except use it to render console selection checkboxes below -->
             <div class="form-group">
                 <label for="platforms">Platforms: </label>
                 <select
@@ -95,28 +89,21 @@
                     id="platforms"
                     class="form-control"
                     >
-                    <!-- bug here: console label still appears even if blank option is selected -->
                     <option value=""></option>
                     <option *ngFor="let g of game_platforms" [value]="g.title">
                         {{ g.title }}
                     </option>
                 </select>
-                <!-- does checkbox input need to be in some form control  element? -->
                 <label *ngIf="platforms.value && !platforms.invalid">Console: </label>
 
-                <!-- only one option can be selected at a time, and if deselected, checkbox data is lost upon reselect -->
                 
 
 
-                <!-- checkbox list for nintendo -->
                 <div id="console_sublist"  *ngIf="platforms.value == 'Nintendo'">
                     <ul>
                         <li *ngFor="let n of gameInfo?.nintendo ">
                             <div class="checkbox">
                                 <label>
-                                    <!-- current set up not ideal because commiting to it would mean listing each possibility (approaching innumerable)
-                                    as a boolean key value pair -->
-                                    <a [routerLink]="['../../../gaming-index/console-maker/',  n.name]" title="n?.qualifiedName">
                                         <input type="checkbox" name="console" value="n" ngModel> {{ n.name }}
                                     </a>
                                 </label>
@@ -125,7 +112,6 @@
                     </ul>
                 </div>
                 
-                <!-- checkbox list for sony -->
                 <div id="console_sublist"  *ngIf="platforms.value == 'Sony'">
                     <ul>
                         <li *ngFor="let n of gameInfo?.sony">
@@ -140,7 +126,6 @@
                     </ul>
                 </div>
                 
-                <!-- checkbox list for Microsoft -->
                 <div id="console_sublist"  *ngIf="platforms.value == 'Microsoft'">
                     <ul>
                         <li *ngFor="let n of gameInfo?.microsoft">
@@ -153,11 +138,9 @@
                     </ul>
                 </div>
                 
-                <!-- checkbox for PC -->
                 <div id="console_sublist"  *ngIf="platforms.value == 'PC'">
                     <ul>
                         <li *ngFor="let n of gameInfo?.pc"> 
-                            <!-- where(some attribute == "pc").then(do some stuff w this) -->
                             <div class="checkbox">
                                 <label>
                                     <a [routerLink]="['../../../gaming-index/console-maker/pc/', n.name]" title="n?.qualifiedName">
@@ -169,12 +152,10 @@
                     </ul>
                 </div>
                 
-                <!-- error handling -->
                 <div *ngIf="platforms.touched && platforms.invalid" class="alert alert-danger">
                     <div *ngIf="platforms.errors.required">Console Maker(s) is required</div>
                 </div>
             </div>
-            <!-- description form group     -->
             <div class="form-group">
                 <label for="description">Description: </label>
                 <textarea
@@ -191,7 +172,6 @@
                     <div *ngIf="description.errors.required">Description is required</div>
                 </div>
             </div>
-            <!-- imageUrl form group -->
             <div class="form-group">
                 <label for="imageUrl">Image URL: </label>
                 <input
@@ -211,7 +191,10 @@
             </div>
             <button class="btn btn-primary" [disabled]="!finished.valid">Save/update game</button>
             <button type="button" class="btn btn-danger" (click)="delete()">Delete game</button>
-        </form>
+        </form> -->
+        <p>We lost Game-form but its ok because weve been meaning to re do forms and make them reactive, 
+            and this weird template driven syntax making this thing work previously was no bueno
+        </p>
     </div>
     <div class="col-md-6">
         <div class="card" style="width: 18rem;">
@@ -224,4 +207,4 @@
     </div>
 </div>
 
-<p> {{ finished.value | json }}</p>
+<!-- <p> {{ finished.value | json }}</p> -->

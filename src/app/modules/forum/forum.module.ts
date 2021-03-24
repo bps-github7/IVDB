@@ -1,13 +1,14 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ForumRoutingModule } from './forum.routing';
+import { ForumComponents, ForumRoutingModule } from './forum.routing';
+import { CompositeModule } from '../composite/composite.module';
 
 
 
 @NgModule({
-  declarations: [],
+  declarations: [ForumComponents],
   imports: [
-    CommonModule,
+    CompositeModule,
     ForumRoutingModule
   ]
 })

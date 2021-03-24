@@ -1,11 +1,10 @@
-import { PasswordValidators } from '../common/validators/password.validators';
 import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
 import { Component } from '@angular/core';
 
 @Component({
   selector: 'change-password',
   template: `
-  name: <input type="text" [formControl]="name">
+  name: <input type="text">
   `,
   styleUrls: ['./change-password.component.css']
 })

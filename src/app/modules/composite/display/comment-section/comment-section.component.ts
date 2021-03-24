@@ -1,6 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Comment } from '../../../models/content/Comment';
-import { CommentService } from '../../../common/services/comment.service';
+import { CommentService } from 'src/app/common/services/comment.service';
 
 // didnt implement our interface for convenince sake.
 class UserComment {
