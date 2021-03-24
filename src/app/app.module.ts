@@ -24,6 +24,7 @@ import { AppRoutingModule } from './app.routing';
 
 
 import { environment } from 'src/environments/environment';
+import { CompositeModule } from './modules/composite/composite.module';
 
 
 @NgModule({
@@ -31,6 +32,7 @@ import { environment } from 'src/environments/environment';
     AppComponent
 ],
   imports: [
+    CompositeModule,
     AdminModule,
     AuthModule,
     ContentModule,
