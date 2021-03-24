@@ -14,7 +14,7 @@ import { GameComponent } from './game/game.component';
 
 const routes: Routes = [
 
-    // need to rethink these!
+    // need to rethink these! yea prob arent the best routes ever...
     { path: 'game/info/new', component: GameInfoFormComponent, canActivate: [AuthGuard, AdminAuthGuard] },
     { path: 'game/info', component: GameInfoComponent, canActivate: [AuthGuard, AdminAuthGuard] },
     // TODO: Thats a good idea- use 'new' so u can get 3 uses at a form rather than 2!!!!

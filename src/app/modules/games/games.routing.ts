@@ -17,19 +17,17 @@ elses routing module but uses this modules routes to arrive there- */
 
 
 const routes: Routes = [
-    { path: 'games', component: GamesComponent },
-    { path: 'games/:id', component: ViewGameComponent },
-    
-    /* need to change the routing url, and possibly whole ui of gaming index
-    to just be games/info */
-    { path: 'games/info', component: GamingIndexComponent },
-    { path: 'games/info/creators/:creator', component: CreatorsComponent },
-    { path: 'games/info/creators', component: CreatorsComponent },
-    { path: 'games/info/categories/:category', component: CategoriesComponent },
-    { path: 'games/info/categories', component: CategoriesComponent },
-    { path: 'games/info/platforms/:platform_name/:console_name', component: ConsoleComponent },
-    { path: 'games/info/platforms/:platform_name', component: PlatformsComponent },
-    { path: 'games/info/platforms', component: PlatformsComponent },
+    { path: '', component: GamesComponent },
+    { path: ':id', component: ViewGameComponent },
+    { path: 'info', component: GamingIndexComponent },
+    { path: 'info/creators/:creator', component: CreatorsComponent },
+    { path: 'info/creators', component: CreatorsComponent },
+    { path: 'info/categories/:category', component: CategoriesComponent },
+    { path: 'info/categories', component: CategoriesComponent },
+    // should just be able to browse consoles like games 
+    { path: 'info/platforms/:platform_name/:console_name', component: ConsoleComponent },
+    { path: 'info/platforms/:platform_name', component: PlatformsComponent },
+    { path: 'info/platforms', component: PlatformsComponent },
 ];
 @NgModule({ 
    imports: [RouterModule.forRoot(routes)], 
