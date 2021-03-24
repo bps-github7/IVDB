@@ -17,7 +17,6 @@ import { AuthModule } from './modules/auth/auth.module';
 import { ProfileModule } from './modules/profile/profile.module';
 import { AdminModule } from './modules/admin/admin.module';
 
-
 import { AppComponent } from './app.component';
 import { ServicesModule } from './common/services/services.module';
 import { AppRoutingModule } from './app.routing';

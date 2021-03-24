@@ -27,8 +27,5 @@ export class ViewGameComponent implements OnInit {
         
         }
 
-ngOnInit(): void {
-                
-}
-
+    ngOnInit(): void { }
 }

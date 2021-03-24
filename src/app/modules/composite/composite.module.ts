@@ -10,6 +10,7 @@ import { NotFoundComponent } from './misc/not-found/not-found.component';
 import { SearchComponent } from './misc/search/search.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
+import { GameCardComponent } from './display/game-card/game-card.component';
 
 /* 
 Composite is a shared module for simplifying the imports to the other feature modules
@@ -27,6 +28,7 @@ IT contains components that are used throughout the site and do not belong to a 
     SearchComponent 
   ],
   imports: [
+    FormsModule,
     ReactiveFormsModule,
     CommonModule,
     RouterModule
@@ -41,6 +43,8 @@ IT contains components that are used throughout the site and do not belong to a 
     NotFoundComponent,
     SearchComponent,
     CommonModule,
+    GameCardComponent,
+    ReactiveFormsModule,
     FormsModule
   ]
 })

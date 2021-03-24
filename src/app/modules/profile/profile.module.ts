@@ -7,7 +7,7 @@ import { CompositeModule } from '../composite/composite.module';
 
 
 @NgModule({
-  declarations: [BrowseProfilesComponent, ProfileComponents],
+  declarations: [ProfileComponents],
   imports: [
     ProfileRoutingModule,
     CompositeModule

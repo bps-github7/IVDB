@@ -6,6 +6,7 @@ import { CreatorsComponent } from './creators/creators.component';
 import { GamesComponent } from './games/games.component';
 import { GamingIndexComponent } from './gaming-index/gaming-index.component';
 import { PlatformsComponent } from './platforms/platforms.component';
+import { ProvideRatingComponent } from './provide-rating/provide-rating.component';
 import { ViewGameComponent } from './view-game/view-game.component';
 
 
@@ -38,5 +39,6 @@ export class GamesRoutingModule { } export const GamesComponents = [
     GamesComponent,
     GamingIndexComponent,
     PlatformsComponent,
-    ViewGameComponent
+    ViewGameComponent,
+    ProvideRatingComponent
 ];

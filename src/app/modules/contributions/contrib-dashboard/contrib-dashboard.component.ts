@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Rating } from '../../../../models/content/rating';
-import { Review } from '../../../../models/content/Review';
-import { RatingService } from '../../../../common/services/rating.service';
-import { ReviewService } from '../../../../common/services/review.service';
+import { Rating } from '../../../models/content/rating';
+import { Review } from '../../../models/content/Review';
+import { RatingService } from '../../../common/services/rating.service';
+import { ReviewService } from '../../../common/services/review.service';
 
 @Component({
   selector: 'app-contrib-dashboard',
