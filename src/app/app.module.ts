@@ -24,6 +24,7 @@ import { AppRoutingModule } from './app.routing';
 
 import { environment } from 'src/environments/environment';
 import { CompositeModule } from './modules/composite/composite.module';
+import { ContributionsModule } from './modules/contributions/contributions.module';
 
 
 @NgModule({
@@ -31,13 +32,6 @@ import { CompositeModule } from './modules/composite/composite.module';
     AppComponent
 ],
   imports: [
-    CompositeModule,
-    AdminModule,
-    AuthModule,
-    ContentModule,
-    ForumModule,
-    GamesModule,
-    ProfileModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireAuthModule,
     AngularFirestoreModule,
@@ -47,6 +41,14 @@ import { CompositeModule } from './modules/composite/composite.module';
     ReactiveFormsModule,
     CustomFormsModule,
     ServicesModule.forRoot(),
+    CompositeModule,
+    AdminModule,
+    AuthModule,
+    ContentModule,
+    ContributionsModule,
+    ForumModule,
+    GamesModule,
+    ProfileModule,
     AppRoutingModule
     // RouterModule.forRoot([], { relativeLinkResolution: 'legacy' })
   ],

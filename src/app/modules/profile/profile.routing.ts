@@ -5,7 +5,6 @@ import { UserAuthGuard } from 'src/app/common/services/user-auth-guard.service';
 import { ViewAllReviewsComponent } from '../content/view-all-reviews/view-all-reviews.component';
 import { BrowseProfilesComponent } from './browse-profiles/browse-profiles.component';
 import { ContribDashboardComponent } from '../contributions/contrib-dashboard/contrib-dashboard.component';
-import { ProvideRatingComponent } from '../games/provide-rating/provide-rating.component';
 import { EditContributionsComponent } from './edit-contributions/edit-contributions.component';
 import { EditPreferencesComponent } from './edit-preferences/edit-preferences.component';
 import { EditProfileComponent } from './edit-profile/edit-profile.component';
@@ -35,7 +34,6 @@ const routes: Routes = [
 })
 export class ProfileRoutingModule { } export const ProfileComponents = [
     ContribDashboardComponent,
-    ProvideRatingComponent,
     EditContributionsComponent,
     EditPreferencesComponent,
     EditProfileComponent,

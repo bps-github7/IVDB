@@ -5,18 +5,18 @@
         <input id="searchbar" type="text" placeholder="Search IVDB">
     </header>
     <ul class="dd-menu">
-        <li class="dd-menu-trigger"><a routerLink="/content-dashboard">New Content</a>
+        <li class="dd-menu-trigger"><a routerLink="/content">New Content</a>
             <ul class="sub-menu">
-                <li><a routerLink="/content-dashboard/watchlists">Watchlists</a></li>
-                <li><a routerLink="/content-dashboard/streams">Streams</a></li>
-                <li><a routerLink="/content-dashboard/news">News</a></li>
+                <li><a routerLink="/content/watchlists">Watchlists</a></li>
+                <li><a routerLink="/content/streams">Streams</a></li>
+                <li><a routerLink="/content/news">News</a></li>
                 <!-- Submenu here -->
-                <li class="sub-sub-menu-trigger"><a routerLink="/content-dashboard/recently-posted">Recent</a>
+                <li class="sub-sub-menu-trigger"><a routerLink="/content/recently-posted">Recent</a>
                     <ul class="sub-sub-menu">
-                        <li class="sub-sub-top"><a routerLink="/content-dashboard/recently-posted/posts">Posts</a>
+                        <li class="sub-sub-top"><a routerLink="/content/recently-posted/posts">Posts</a>
                         </li>
-                        <li><a routerLink="/content-dashboard/recently-posted/ratings">Ratings</a></li>
-                        <li><a routerLink="/content-dashboard/recently-posted/reviews">Reviews</a></li>
+                        <li><a routerLink="/content/recently-posted/ratings">Ratings</a></li>
+                        <li><a routerLink="/content/recently-posted/reviews">Reviews</a></li>
                     </ul>
                 </li>
             </ul>
@@ -35,7 +35,7 @@
                 </li>
             </ul>
         </li>
-        <li class="dd-menu-trigger"><a routerLink="/gaming-index">Gaming Index</a>
+        <li class="dd-menu-trigger"><a routerLink="/games">Gaming Index</a>
             <ul class="sub-menu">
                 <!-- sub sub menu here -->
                 <li class="sub-sub-menu-trigger"><a routerLink="/games">Browse Games</a>
@@ -51,12 +51,12 @@
                         <li class="sub-sub-top"><a routerLink="/games/info/platforms/sony">Sony</a></li>
                         <li><a routerLink="/games/info/platforms/nintendo">Nintendo</a></li>
                         <li><a routerLink="/games/info/platforms/microsoft">Microsoft</a></li>
-                        <li><a routerLink="/gaming/info/platforms/pc">PC</a></li>
+                        <li><a routerLink="/games/info/platforms/pc">PC</a></li>
 
                     </ul>
                 </li>
-                <li><a routerLink="/gaming/info/creators">Creators</a></li>
-                <li><a routerLink="/gaming/info/categories">Categories</a></li>
+                <li><a routerLink="/games/info/creators">Creators</a></li>
+                <li><a routerLink="/games/info/categories">Categories</a></li>
                 <!-- would be cool to add this detail later- for gizmos and trivia that does not fit into the above categories likadis...
                     <li><a href="#">Misc & historical</a></li>           -->
             </ul>
@@ -100,12 +100,12 @@
                         </li>
                     </ul>
                 </li>
-                <li class="dd-menu-trigger"><a [routerLink]="['/contrib-dashboard/',  appUser?.username]">Contribute</a>
+                <li class="dd-menu-trigger"><a [routerLink]="['/contributions/',  appUser?.username]">Contribute</a>
                     <ul class="sub-menu">
                         <li class="sub-sub-top"><a
-                                [routerLink]="['/contrib-dashboard/ratings', appUser?.username]">Rate</a>
+                                [routerLink]="['/contributions/ratings', appUser?.username]">Rate</a>
                         </li>
-                        <li><a [routerLink]="['/contrib-dashboard/reviews', appUser?.username]">Review</a>
+                        <li><a [routerLink]="['/contributions/reviews', appUser?.username]">Review</a>
                         </li>
                     </ul>
                 </li>
@@ -113,7 +113,7 @@
             </ul>
         </li>
         <ng-template #anonymousUser>
-            <a routerLink="/sign_in">Sign in</a>
+            <a routerLink="/auth/sign-in">Sign in</a>
         </ng-template>
     </ul>
 </nav>

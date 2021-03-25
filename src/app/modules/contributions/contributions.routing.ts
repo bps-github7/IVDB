@@ -1,11 +1,9 @@
 import { NgModule } from '@angular/core'; 
 import { Routes, RouterModule } from '@angular/router'; 
 import { AuthGuard } from 'src/app/common/services/auth-guard.service';
+import { DisplayReviewComponent } from '../composite/display/display-review/display-review.component';
 import { ContribDashboardComponent } from './contrib-dashboard/contrib-dashboard.component';
 import { ContributionsComponent } from './contributions/contributions.component';
-import { DisplayAverageRatingComponent } from './display-average-rating/display-average-rating.component';
-import { DisplayRatingComponent } from './display-rating/display-rating.component';
-import { DisplayReviewComponent } from './display-review/display-review.component';
 import { EditReviewComponent } from './edit-review/edit-review.component';
 import { SuggestNewComponent } from './suggest-new/suggest-new.component';
 import { ViewPostsComponent } from './view-posts/view-posts.component';
@@ -13,9 +11,21 @@ import { ViewRatingsComponent } from './view-ratings/view-ratings.component';
 import { ViewReviewsComponent } from './view-reviews/view-reviews.component';
 
 const routes: Routes = [ 
+    { path : ':username/reviews/:game-title', component: DisplayReviewComponent, canActivate: [AuthGuard]},
+    
     { path : ':username/reviews/new', component:  EditReviewComponent, canActivate: [AuthGuard]},
     { path : ':username/reviews/edit', component: EditReviewComponent, canActivate: [AuthGuard]},
+    
     { path : ':username/contributions', component:  ContributionsComponent, canActivate: [AuthGuard]},
+    { path : ':username/contributions/ratings', component:  ViewRatingsComponent, canActivate: [AuthGuard]},
+    { path : ':username/contributions/reviews', component:  ViewReviewsComponent, canActivate: [AuthGuard]},
+    { path : ':username/contributions/posts', component:  ViewPostsComponent, canActivate: [AuthGuard]},
+    
+    { path : 'suggest', component:  SuggestNewComponent, canActivate: [AuthGuard]},
+    
+    { path : '', component:  ContribDashboardComponent, canActivate: [AuthGuard]},
+    
+    
         //TODO: finish routes above.
 
 ];
@@ -29,9 +39,6 @@ export class ContributionsRoutingModule { }
     export const ContributionsComponents = [
         ContribDashboardComponent,
         ContributionsComponent,
-        DisplayAverageRatingComponent,
-        DisplayRatingComponent,
-        DisplayReviewComponent,
         EditReviewComponent,
         SuggestNewComponent,
         ViewPostsComponent,

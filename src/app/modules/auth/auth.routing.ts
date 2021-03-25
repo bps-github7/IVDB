@@ -9,10 +9,10 @@ import { ForgotPasswordComponent } from './forgot-password/forgot-password.compo
 import { SignInComponent } from './sign-in/sign-in.component';
 
 const routes: Routes = [
-    { path: 'createAccount/forgotPassword', component: ForgotPasswordComponent },
-    { path: 'createAccount', component: CreateAccountComponent },
-    { path: 'settings', component: AccountSettingsComponent },
-    { path: '', component: SignInComponent },
+    // { path: 'createAccount/forgotPassword', component: ForgotPasswordComponent },
+    // { path: 'createAccount', component: CreateAccountComponent },
+    // { path: 'settings', component: AccountSettingsComponent },
+    { path: 'sign-in', component: SignInComponent },
 
      
 ];

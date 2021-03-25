@@ -11,6 +11,9 @@ import { SearchComponent } from './misc/search/search.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { GameCardComponent } from './display/game-card/game-card.component';
+import { DisplayAverageRatingComponent } from './display/display-average-rating/display-average-rating.component';
+import { DisplayRatingComponent } from './display/display-rating/display-rating.component';
+import { DisplayReviewComponent } from './display/display-review/display-review.component';
 
 /* 
 Composite is a shared module for simplifying the imports to the other feature modules
@@ -18,6 +21,9 @@ IT contains components that are used throughout the site and do not belong to a 
  */
 @NgModule({
   declarations: [
+    DisplayAverageRatingComponent,
+    DisplayRatingComponent,
+    DisplayReviewComponent,
     CarouselComponent,
     CommentSectionComponent,
     ZippyComponent,
@@ -25,7 +31,8 @@ IT contains components that are used throughout the site and do not belong to a 
     FavoriteComponent,
     HomeComponent,
     NotFoundComponent,
-    SearchComponent 
+    SearchComponent,
+    GameCardComponent
   ],
   imports: [
     FormsModule,
@@ -34,6 +41,9 @@ IT contains components that are used throughout the site and do not belong to a 
     RouterModule
 ],
   exports : [
+    DisplayAverageRatingComponent,
+    DisplayRatingComponent,
+    DisplayReviewComponent,
     CarouselComponent,
     CommentSectionComponent,
     ZippyComponent,
