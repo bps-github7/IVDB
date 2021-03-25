@@ -11,6 +11,7 @@
   },
   "private": true,
   "dependencies": {
+    "@angular-devkit/schematics": "^11.2.6",
     "@angular/animations": "~11.2.0",
     "@angular/common": "~11.2.0",
     "@angular/compiler": "~11.2.0",
@@ -22,7 +23,7 @@
     "@angular/router": "~11.2.0",
     "bootstrap": "^5.0.0-alpha2",
     "firebase": "^7.23.0",
-    "firestore-export-import": "^0.6.1",
+    "firestore-export-import": "^0.13.0",
     "font-awesome": "^4.7.0",
     "ng2-validation": "^4.2.0",
     "rxjs": "~6.5.4",
