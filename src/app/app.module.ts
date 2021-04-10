@@ -32,7 +32,7 @@ import { ForgotPasswordComponent } from './forgot-password/forgot-password.compo
 import { CreateThreadComponent } from './create-thread/create-thread.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { GameComponent } from './admin/game/game.component';
-import { GameFormComponent } from './admin/game-form/game-form.component';
+import { GameFormComponent } from './admin/forms/game-form/game-form.component';
 import { ViewGameComponent } from './view-game/view-game.component';
 import { ViewRatingsComponent } from './view-ratings/view-ratings.component';
 import { ProfileService } from './common/services/profile.service';
@@ -80,14 +80,18 @@ import { GameCardComponent } from './game-card/game-card.component';
 import { CarouselComponent } from './carousel/carousel.component';
 import { CommentSectionComponent } from './comment-section/comment-section.component';
 import { GameInfoComponent } from './admin/game-info/game-info.component';
-import { GameInfoFormComponent } from './admin/game-info-form/game-info-form.component';
+import { GameInfoFormComponent } from './admin/forms/game-info-form/game-info-form.component';
 import { SuggestNewComponent } from './suggest-new/suggest-new.component';
 import { DescriptorFormComponent } from './descriptor-form/descriptor-form.component';
+import { AdminDashboardComponent } from './admin/admin-dashboard/admin-dashboard.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
+    AdminDashboardComponent,
+    GameInfoFormComponent,
+    GameFormComponent,
     EditProfileComponent,
     ViewProfileComponent,
     EditPreferencesComponent,
@@ -108,7 +112,7 @@ import { DescriptorFormComponent } from './descriptor-form/descriptor-form.compo
     CreateThreadComponent,
     NotFoundComponent,
     GameComponent,
-    GameFormComponent,
+    // GameFormComponent,
     ViewGameComponent,
     ViewRatingsComponent,
     ReactiveDefaultFormControlComponent,
@@ -221,7 +225,8 @@ import { DescriptorFormComponent } from './descriptor-form/descriptor-form.compo
     
     { path: 'admin/game/:id', component: GameFormComponent, canActivate: [AuthGuard, AdminAuthGuard] },
     { path: 'admin/game', component: GameComponent, canActivate: [AuthGuard, AdminAuthGuard] },
-    
+    { path: 'admin', component: AdminDashboardComponent },
+     
     //wildcard for fallthrough cases.
     { path: '**', component: NotFoundComponent }
 ], { relativeLinkResolution: 'legacy' })

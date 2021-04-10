@@ -35,6 +35,8 @@
                 </li>
             </ul>
         </li>
+
+        <!-- Switch gaming-index to games and gaming-index/blah/blah to games/info/category/:category.title -->
         <li class="dd-menu-trigger"><a routerLink="/gaming-index">Gaming Index</a>
             <ul class="sub-menu">
                 <!-- sub sub menu here -->
@@ -67,7 +69,7 @@
             </a>
             <!-- can non admin users access this? -->
             <ul class="sub-menu">
-                <li *ngIf="appUser.isAdmin"><a class="btn-dd" routerLink="/admin/game">Adminster</a></li>
+                <li *ngIf="appUser.isAdmin"><a class="btn-dd" routerLink="/admin/dashboard">Adminster</a></li>
 
                 <li class="dd-menu-trigger"><a routerLink="/rate">Edit</a>
                     <ul class="sub-menu">
