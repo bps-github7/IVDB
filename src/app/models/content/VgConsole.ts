@@ -1,8 +1,23 @@
 export interface VgConsole {
-    generation : number,
+    
+    // name info
+    nickname : string,
     name : string,
     qualifiedName : string,
-    released : string,
+
+    // console info
+    generation : number,
+    maker : string,
     type : string,
-    maker : string
+    
+
+
+    // optional info
+    description? : string,
+    image? : string,
+    released? : string,
+    uid? : string
+
+
+
 }

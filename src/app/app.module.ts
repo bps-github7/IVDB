@@ -84,6 +84,7 @@ import { GameInfoFormComponent } from './admin/forms/game-info-form/game-info-fo
 import { SuggestNewComponent } from './suggest-new/suggest-new.component';
 import { DescriptorFormComponent } from './descriptor-form/descriptor-form.component';
 import { AdminDashboardComponent } from './admin/admin-dashboard/admin-dashboard.component';
+import { ConsoleInfoFormComponent } from './admin/forms/console-info-form/console-info-form.component';
 
 
 @NgModule({
@@ -127,10 +128,12 @@ import { AdminDashboardComponent } from './admin/admin-dashboard/admin-dashboard
     CreatorsComponent,
     ConsoleMakersComponent,
     ConsoleComponent,
+    ConsoleInfoFormComponent,
     ContribDashboardComponent,
     EditContributionsComponent,
     EditReviewComponent,
     NewsComponent,
+
     ContentDashboardComponent,
     ViewReviewsComponent,
     ViewPostsComponent,
