@@ -2,9 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
 import * as firebase from 'firebase';
 import { Observable } from 'rxjs';
-import { AuthService } from '../common/services/auth.service';
+import { AuthService } from 'src/app/common/services/auth.service';
+import { User } from 'src/app/models/user/user';
 
-import { User } from '../models/user/user';
 
 
 @Component({

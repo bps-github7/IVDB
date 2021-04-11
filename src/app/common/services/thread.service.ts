@@ -16,41 +16,50 @@ export class ThreadService {
         this.threadCollection = this.afs.collection('threads');
     }
 
-    get$(id : string) : Observable<any> {
-        return this.afs.doc('threads/' + id).valueChanges();
+    getAll$() {
+        return this.threadCollection.valueChanges({idField : 'uid'});
     }
 
-    get_threads_by_topic(option : string) {
-        const threadRef = this.afs.collection<Thread>('threads', (ref) => ref.where('topic', '==', option));
-        return threadRef.valueChanges({idField: 'uid'});
+    getThread$(uid) {
+        const threadRef = this.afs.doc<Thread>(`thread/${uid}`)
+        return threadRef.valueChanges();
     }
+
+    getThreadsByForum$(forumTitle) {
+        const forumRef = this.afs.collection<Thread>('threads', (ref) => ref.where('forum','==',forumTitle));
+        return forumRef.valueChanges({idField : 'uid'});
+    }
+
+    get$(id : string) : Observable<any> {
+        return this.afs.doc(`threads/${id}`).valueChanges();
+    }
+
+    // get_threads_by_topic(option : string) {
+    //     const threadRef = this.afs.collection<Thread>('threads', (ref) => ref.where('topic', '==', option));
+    //     return threadRef.valueChanges({idField: 'uid'});
+    // }
 
     add(thread) {
         this.threadCollection.add(thread);
     }
     
     save(thread, uid) {
-        this.threadCollection.doc(uid).set({
-            creator : thread.creator,
-            title : thread.title,
-            description : thread.description,
-            topics : thread.topics   
-        },
-        {merge : true})
-        .then(() => {
-            console.log("Document successfully written!");
-        })
-        .catch((err) => {
-            console.log("error writting to document: " + err);
-        })
+        console.log("saving thread");
+        // this.threadCollection.doc(uid)
+        
+        // .set(thread,
+        // {merge : true})
+        // .then(() => {
+        //     console.log("Document successfully written!");
+        // })
+        // .catch((err) => {
+        //     console.log("error writting to document: " + err);
+        // })
         }
 
     delete(id) {
         /* used to delete a thread 
         */
         this.threadCollection.doc(id).delete();
-    }
-
-
-   
+    }   
 }

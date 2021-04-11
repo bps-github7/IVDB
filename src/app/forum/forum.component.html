@@ -1,25 +1,70 @@
-<h3>Welcome to IVDB forum</h3>
-<strong>Our rules</strong>
-<ul>
-    <li>Dont threaten others</li>
-    <li>Be nice</li>
-    <li>No doxxing allowed</li>
-</ul>
-<p></p>
+<div class="top">
+    <header>
+        <h1>Welcome to IVDB forum</h1>
+    </header>
+    <nav>
+        <ul >
+            <li>
+                <a routerLink="/forum/create-thread">Create new thread</a>
+            </li>
+            <li>
+                <a routerLink="">Recently posted</a>
+            </li>
+            <li>
+                <a routerLink="">Hot threads</a>
+            </li>
+            <li>
+                <a routerLink="">Search</a>
+            </li>
+            <li>
+                <a routerLink="">Forum Rules and info</a>
+                <!-- <ul class="dropdown">
+                    <li>Be nice</li>
+                    <li>No Doxxing!</li>
+                    <li>Threads and users with three violations are temporarily banned or closed.</li>
+                    <li>Threads and users with repeated bannings/closings are permenatnly banned or closed</li>
+                </ul> -->
+            </li>
+        </ul>   
+    </nav>    
+</div>
+<main class="row">
+    <div class="col-md-8" *ngFor="let category of allCategories">
+        <h3>{{category.title}}</h3>
+        <forums-list [category]="category.title"></forums-list>
+        <!-- <zippy [title]="category.title">
+        </zippy> -->
 
-<p>LAtest posts... How do i do xyz in game P? (Breadman), This Level is soo cool (Hedgehog9), where is the whatzit in
-    princess castle? (chunkyNardBoi)</p>
-<p>Mods signed in: 1, 2 ,3 (link to their accounts)</p>
-<p>Banned: 1, 2, 3</p>
+    <!-- <forums-list category="gaming"></forums-list> -->
+    </div>
+    <aside class="col-md-4">
+        <p>Forum meta data</p>
+    
+        <div>
+            <h3>Top posters</h3>
+            <ul>
+                <li>Blah</li>
+                <li>Blah blah</li>
+                <li>Blah Blee Blah Blahalala</li>
+            </ul>
+        </div>
+        <div>
+            <h3>Moderators:</h3>
+            <ul>
+                <li>Splee mcglotenspiel (online)</li>
+                <li>Mrs francee pants</li>
+                <li>Dogbingo tzmplantencot (online)</li>
+            </ul>
+        </div>
+    
+        <div>
+            <h3>Forum administrators:</h3>
+            <ul>
+                <li>Steven Spielberg</li>
+                <li>Mike Oldfield (online)</li>
+            </ul>
+        </div>
+    
+    </aside>        
+</main>
 
-<zippy title="just posted">
-    <!-- <posts></posts>> -->
-</zippy>
-<zippy title="hot threads">
-    <!-- <posts></posts> -->
-</zippy>
-<zippy title="admin favs">
-    <!-- <posts></posts> -->
-</zippy>
-<button><a routerLink="/forum/create-thread">Create new thread</a></button>
-<!-- <comment></comment> -->

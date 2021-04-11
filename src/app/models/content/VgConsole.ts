@@ -1,3 +1,7 @@
+/* 
+VgConsole is 
+*/
+
 export interface VgConsole {
     
     // name info
@@ -10,8 +14,6 @@ export interface VgConsole {
     maker : string,
     type : string,
     
-
-
     // optional info
     description? : string,
     image? : string,

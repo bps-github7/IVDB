@@ -1,10 +1,19 @@
-
 <div>
-    <img [src]="console.image" alt="a picture of a videogame console">
+    <a routerLink="../../../">Go back to gaming index</a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    <a routerLink="../../">Go back to platform selection</a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    <a routerLink="../">Go back to maker of this console</a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    
 
-    <h3>{{console.qualifiedName | titlecase}}</h3>
+    <h1>{{console.qualifiedName | titlecase}}</h1>
+
+    <div class="img-box">
+        <img class="center-fit" [src]="console.image" alt="a picture of a videogame console">
+    </div>
+
 
     <p>{{console.description}}</p>
+    <br>
+    <br>
 
     <ul>
         <li>type: {{ console.type }}</li>

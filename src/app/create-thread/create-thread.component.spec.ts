@@ -1,4 +1,4 @@
-import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { CreateThreadComponent } from './create-thread.component';
 
@@ -6,12 +6,12 @@ describe('CreateThreadComponent', () => {
   let component: CreateThreadComponent;
   let fixture: ComponentFixture<CreateThreadComponent>;
 
-  beforeEach(waitForAsync(() => {
-    TestBed.configureTestingModule({
+  beforeEach(async () => {
+    await TestBed.configureTestingModule({
       declarations: [ CreateThreadComponent ]
     })
     .compileComponents();
-  }));
+  });
 
   beforeEach(() => {
     fixture = TestBed.createComponent(CreateThreadComponent);

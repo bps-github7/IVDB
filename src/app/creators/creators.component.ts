@@ -17,13 +17,17 @@ export class CreatorsComponent implements OnInit {
 
     constructor(private router : Router,
         private route : ActivatedRoute,
+        
         public gameInfoService : GameInfoService) {
             this.route.paramMap.subscribe(params => {
                 this.creator = params.get('creator');
             })
-            this.creators = this.gameInfoService.get_creators_array();
+            // this.creators = this.gameInfoService.get_creators_array();
+            this.gameInfoService.getType$('creator').subscribe(p => this.creators = p);
+
             if (this.creator) {
-                this.creator = this.gameInfoService.find_creator(this.creator);
+                this.gameInfoService.getDocument$(this.creator)
+                .subscribe(p => this.creator = p[0]);
             }
         }
 

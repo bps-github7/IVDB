@@ -8,8 +8,8 @@ import { Preferences } from '../models/user/preferences';
 
 class UserPreferences implements Preferences {
     wouldYouPlay?: (string | Game)[];
-    likes: { games: (string | Game)[]; consoles: string[]; categories: string | string[]; creators: string | string[]; console_makers: string | string[]; };
-    dislikes: { games: (string | Game)[]; consoles: string[]; categories: string | string[]; creators: string | string[]; console_makers: string | string[]; };
+    likes: { games: (string | Game)[]; consoles: string[]; categories: string | string[]; creators: string | string[]; platforms: string | string[]; };
+    dislikes: { games: (string | Game)[]; consoles: string[]; categories: string | string[]; creators: string | string[]; platforms: string | string[]; };
     historic: { favoriteGames: string | string[]; favoriteConsoles: string | string[]; childhoodFavoriteGame: string | string[]; firstGame: string | string[]; };
     currentlyPlaying: { games: string | string[]; consoles: string | string[]; };
 
@@ -24,30 +24,46 @@ export class EditPreferencesComponent implements OnInit {
 
     uid : any;
     preferences : any;
-    gameInfo: any;
+    
+    categories: any[];
+    creators: any[];
+    platforms: any[];
+
+
+    
     test;
     form : any;
 
     constructor(
         private fb : FormBuilder,
-        private preferencesService : PreferencesService, private router : Router, private route : ActivatedRoute, private gameInfoService : GameInfoService) {
+        
+        private preferencesService : PreferencesService,
+        
+        private router : Router, 
+        private route : ActivatedRoute,
+        
+        private gameInfoService : GameInfoService) {
         this.uid = this.route.snapshot.paramMap.get('uid');
         this.preferencesService.get$(this.uid).subscribe((doc) => {this.preferences = doc});
-        this.gameInfo = gameInfoService.gameInfo$.subscribe(resp => this.gameInfo = resp)
+        
+        this.gameInfoService.getType$('category').subscribe(p => this.categories = p);
+        this.gameInfoService.getType$('creator').subscribe(p => this.creators = p);
+        this.gameInfoService.getType$('platform').subscribe(p => this.platforms = p);
+        
         this.form = this.fb.group({
             likes : fb.group({
                 games : fb.array([]),
                 onsoles : fb.array([]),
                 categories : [''],
                 creators : [''],
-                console_makers : ['']
+                platforms : ['']
             }),
             dislikes : fb.group({
                 games : fb.array([]),
                 consoles : fb.array([]),
                 categories : [''],
                 creators : [''],
-                console_makers : ['']
+                platforms : ['']
             }),
             historic : fb.group({
                 favoriteGame : [''],

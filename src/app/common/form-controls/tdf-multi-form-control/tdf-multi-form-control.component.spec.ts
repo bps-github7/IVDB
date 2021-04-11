@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
-import { ConsoleMakersComponent } from './console-makers.component';
+import { TdfMultiFormControlComponent } from './tdf-multi-form-control.component';
 
-describe('ConsoleMakersComponent', () => {
-  let component: ConsoleMakersComponent;
-  let fixture: ComponentFixture<ConsoleMakersComponent>;
+describe('TdfMultiFormControlComponent', () => {
+  let component: TdfMultiFormControlComponent;
+  let fixture: ComponentFixture<TdfMultiFormControlComponent>;
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ ConsoleMakersComponent ]
+      declarations: [ TdfMultiFormControlComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ConsoleMakersComponent);
+    fixture = TestBed.createComponent(TdfMultiFormControlComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

@@ -2,9 +2,6 @@
 <div class="row">
     <div class="col-md-6">
         <form [formGroup]="form" (ngSubmit)="save(form.value)">
-        
-        <!-- For testing     -->
-        <!-- <form [formGroup]="form"> -->
 
             <zippy title="Help">
                 <h3>How does this work?</h3>
@@ -57,12 +54,12 @@
 
 
                 
-
-                <reactive-select-form-control label="Liked Categories: " formControlName="categories" [options]="gameInfo.categories"></reactive-select-form-control>
+<!-- 
+                <reactive-select-form-control label="Liked Categories: " formControlName="categories" [options]="categories"></reactive-select-form-control>
             
-                <reactive-select-form-control label="Liked creators: " formControlName="creators" [options]="gameInfo.creators"></reactive-select-form-control>
+                <reactive-select-form-control label="Liked Creators: " formControlName="creators" [options]="creators"></reactive-select-form-control>
 
-                <reactive-select-form-control label="Liked Console Makers: " formControlName="console_makers" [options]="gameInfo.console_makers"></reactive-select-form-control>
+                <reactive-select-form-control label="Liked Console Makers: " formControlName="console_makers" [options]="platforms"></reactive-select-form-control> -->
             </zippy>
 
 
@@ -101,11 +98,11 @@
                     </ul>
                 </div>
 
-                <reactive-select-form-control label="Disliked Categories: " formControlName="categories" [options]="gameInfo.categories"></reactive-select-form-control>
+                <!-- <reactive-select-form-control label="Disliked Categories: " formControlName="categories" [options]="categories"></reactive-select-form-control>
             
-                <reactive-select-form-control label="Disliked creators: " formControlName="creators" [options]="gameInfo.creators"></reactive-select-form-control>
+                <reactive-select-form-control label="Disliked creators: " formControlName="creators" [options]="creators"></reactive-select-form-control>
 
-                <reactive-select-form-control label="Disliked Console Makers: " formControlName="console_makers" [options]="gameInfo.console_makers"></reactive-select-form-control>
+                <reactive-select-form-control label="Disliked platforms: " formControlName="platforms" [options]="platforms"></reactive-select-form-control> -->
             </zippy>
 
             <zippy class="form-group" title="Historic" formGroupName="historic">
@@ -141,13 +138,13 @@
                         </li>
                     </ul>
                 </div> -->
-                <reactive-default-form-control label="Favorite Game of all time:" formControlName='favoriteGame'></reactive-default-form-control>
+                <!-- <reactive-default-form-control label="Favorite Game of all time:" formControlName='favoriteGame'></reactive-default-form-control>
 
                 <reactive-default-form-control label="Favorite Console of all time:" formControlName='favoriteConsole'></reactive-default-form-control>
 
                 <reactive-default-form-control label="Favorite Game as a child:" formControlName='childhoodFavoriteGame' ></reactive-default-form-control>
                 
-                <reactive-default-form-control label="First game you ever played:" formControlName='firstGame' ></reactive-default-form-control>
+                <reactive-default-form-control label="First game you ever played:" formControlName='firstGame' ></reactive-default-form-control> -->
 
             </zippy>
 

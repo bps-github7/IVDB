@@ -1,6 +1,6 @@
 import { Component, Input, OnChanges, EventEmitter, SimpleChanges, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { GameInfoService } from '../../../../common/services/gameinfo.service';
+import { GameInfoService } from 'src/app/common/services/gameinfo.service';
 
 @Component({
   selector: 'console-form',

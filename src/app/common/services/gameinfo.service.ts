@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from '@angular/fire/firestore';
 // import 'rxjs/add/operator/map';
 import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { map, take } from 'rxjs/operators';
 import { Game } from 'src/app/models/content/Game';
 import { GameInfo } from 'src/app/models/content/GameInfo';
 import { GameDescriptor } from 'src/app/models/content/GameDescriptor';
@@ -12,28 +12,8 @@ import { VgConsole } from 'src/app/models/content/VgConsole';
   providedIn: 'root'
 })
 
-class videogame_Info implements GameInfo {
-    categories: GameDescriptor [];
-    console_makers: GameDescriptor [];
-    creators: GameDescriptor [];
-    microsoft: VgConsole [];
-    nintendo: VgConsole [];
-    pc: VgConsole []
-    sony: VgConsole [];
-    
-
-
-}
-
 export class GameInfoService {
-
-    // shouldnt it be <game info []>?
-    gameInfoCollection : AngularFirestoreCollection<GameInfo>;
-    gameInfoDocument : AngularFirestoreDocument<GameInfo>;
-    doc_id = 'KZX1GyjNGtwUzHsyICBO';
-    gameInfo$;
-    gameInfo = new videogame_Info();
-
+    // gameInfoCollection : AngularFirestoreCollection <GameDescriptor>;
     metadata : string [];
 
     constructor(private afs: AngularFirestore) { 

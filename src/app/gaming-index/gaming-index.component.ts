@@ -1,7 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { GameInfoService } from '../common/services/gameinfo.service';
-import { GameDescriptor } from '../models/content/GameDescriptor';
-import { VgConsole } from '../models/content/VgConsole';
 
 @Component({
   selector: 'app-gaming-index',
@@ -10,23 +8,36 @@ import { VgConsole } from '../models/content/VgConsole';
 })
 export class GamingIndexComponent implements OnInit {
 
-    categories: GameDescriptor [];
-    creators: GameDescriptor [];
-    console_makers: GameDescriptor [];
+    categories: any [];
+    creators: any [];
+    platforms: any [];
     //you could just get the name string value from VG_Console for this, save some loading...
-    sony : VgConsole [];
-    nintendo: VgConsole [];
-    microsoft: VgConsole [];
-    pc: VgConsole [];
+    sony : any [];
+    nintendo: any [];
+    microsoft: any [];
+    pc: any [];
+    web;
+    mobile;
 
 
-    constructor(private gameInfoService : GameInfoService) {
-        this.categories = this.gameInfoService.get_categories_array();
-        this.creators = this.gameInfoService.get_creators_array();
-        this.console_makers = this.gameInfoService.get_console_makers_array();
-        this.sony = this.gameInfoService.get_sony_array();
-        this.nintendo = this.gameInfoService.get_nintendo_array();
-        this.microsoft = this.gameInfoService.get_microsoft_array();
+    constructor(
+        private gameInfoService : GameInfoService,
+        ) {
+        
+        
+        this.gameInfoService.getType$('category').subscribe(p => this.categories = p);
+        this.gameInfoService.getType$('creator').subscribe(p => this.creators = p);
+        this.gameInfoService.getType$('platform').subscribe(p => this.platforms = p);
+
+        // be better to loop over platform (less hardcoded) but not sure how to inject the
+        // variable name with type script like i would use eval in python
+        this.gameInfoService.getConsoleMaker$("nintendo").subscribe(p => this.nintendo = p);
+        this.gameInfoService.getConsoleMaker$("sony").subscribe(p => this.sony = p);
+        this.gameInfoService.getConsoleMaker$("microsoft").subscribe(p => this.microsoft = p);
+        this.gameInfoService.getConsoleMaker$("pc").subscribe(p => this.pc = p);
+        this.gameInfoService.getConsoleMaker$("web").subscribe(p => this.web = p);
+        this.gameInfoService.getConsoleMaker$("mobile").subscribe(p => this.mobile = p);
+
     }
 
   ngOnInit(): void {

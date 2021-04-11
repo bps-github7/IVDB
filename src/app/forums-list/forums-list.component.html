@@ -1,0 +1,13 @@
+<ul class="list-group">
+    <li 
+        class="list-group-item" 
+        *ngFor="let forum of forums">
+        <div>
+            <a [routerLink]="forum.title.split(' ').join('-')">{{ forum.title }}</a>
+            <!-- {{forum.recent }}
+            {{ forum.recent_poster }} -->
+        </div>
+
+
+    </li>
+</ul>
