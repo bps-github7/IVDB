@@ -1,16 +1,15 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ForumDashboardComponent } from './forum/forum-dashboard/forum-dashboard.component';
+import { AdminComponents, AdminRoutingModule } from './admin.routing';
 
 
 
 @NgModule({
-  declarations: [ForumDashboardComponent],
+  declarations: [AdminComponents],
   imports: [
-    CommonModule
+    CommonModule,
+    AdminRoutingModule
   ]
 })
 
-//there was another website (look in history)
-// that showed how you can export the components from routing module
 export class AdminModule { }

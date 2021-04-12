@@ -9,13 +9,13 @@ import { ForumDashboardComponent } from './forum/forum-dashboard/forum-dashboard
  
  
 const routes: Routes = [
-    { path: 'admin', component: AdminDashboardComponent },
-    { path: 'admin/game', component: GameComponent },
-    { path: 'admin/forum', component: ForumDashboardComponent },
-    { path: 'admin/forum/:id', component: ManageForumsComponent },
-    { path: 'admin/forum/info', component: ForumInfoFormComponent }, 
-    { path: 'admin/game/:id', component: GameComponent },
-    { path: 'admin/game/info', component: GameInfoFormComponent }
+    { path: '', component: AdminDashboardComponent },
+    { path: 'game', component: GameComponent },
+    { path: 'forum', component: ForumDashboardComponent },
+    { path: 'forum/:id', component: ManageForumsComponent },
+    { path: 'forum/info', component: ForumInfoFormComponent }, 
+    { path: 'game/:id', component: GameComponent },
+    { path: 'game/info', component: GameInfoFormComponent }
 ];
  
 @NgModule({
