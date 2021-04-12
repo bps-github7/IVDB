@@ -1,0 +1,66 @@
+/* .card-body {
+  display: none;
+  border: 2px solid black;
+  height: 300px;
+  width: 400px;
+  z-index: 2;
+}
+
+.card-trigger:hover+.card-body {
+  display: block;
+  position: relative;
+  top: 0px;
+  right: 15px;
+}
+
+.card-body:hover {
+  display: block;
+}
+
+.card-body .game-info {
+  display: none;
+}
+
+.card-body .dd-trigger:hover+.game-info {
+  display: block;
+} */
+.container,
+.card-body {
+  position: relative;
+}
+
+/* trying to get the ul display-trigger close as possible to the ul, so
+it doesnt disappear while user is trying to inspect it. */
+ul {
+  padding-top: 0px;
+}
+
+.card-body {
+  visibility: hidden;
+  position: absolute;
+  border: 2px solid black;
+  height: 300px;
+  width: 400px;
+  z-index: 1;
+}
+
+.card-trigger:hover+.card-body,
+.card-body:hover {
+  visibility: visible;
+  background-color: blue;
+  position: absolute;
+  top: 25px;
+}
+
+.card-body .game-info {
+  display: none;
+}
+
+.card-body .dd-trigger:hover+.game-info,
+.game-info:hover {
+  display: block;
+}
+
+.dd-trigger {
+  padding: 0px;
+}

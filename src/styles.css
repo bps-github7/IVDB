@@ -1,0 +1,21 @@
+/* You can add global styles to this file, and also import other style files */
+
+/*Apply bootstrap styling globally*/
+@import "~bootstrap/dist/css/bootstrap.css";
+
+@import url('https://fonts.googleapis.com/css?family=Lato|ZCOOL+KuaiLe&display=swap');
+
+
+
+/*highlights input fields that are invalid w. these form-control attrs*/
+.form-control.ng-touched.ng-invalid {
+    border: 2px solid red;
+}
+
+body {
+    box-sizing: border-box;
+    padding-left: 12rem;
+    padding-right: 12rem;
+    margin:0;
+}
+

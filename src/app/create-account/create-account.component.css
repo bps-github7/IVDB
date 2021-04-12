@@ -1,0 +1,10 @@
+/*Would probably be better to say
+center the form in the middle of the screen
+...although im not sure thats how
+forms usually look on a phone screen.
+*/
+
+form {
+    margin-left: 20em;
+    margin-right: 20em;
+}

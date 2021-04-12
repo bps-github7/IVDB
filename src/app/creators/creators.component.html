@@ -1,0 +1,35 @@
+
+<div *ngIf="!creator">    
+
+    <a routerLink="../">Go back to gaming-index</a>
+
+
+    <h3>A place to learn about game creators</h3>
+
+    <p>Creators are the studios/ development firms that create the games we love and play</p>
+
+    <p> By giving us specific info about which creators of games you like or dislike, we can better serve you accurate and timely reccomendations...</p>
+
+    <p>Click on a creator below to learn more about it:</p>    
+    <ul>
+        <li *ngFor="let g of creators">
+            <a [routerLink]="g.title">{{ g.title }}</a>
+        </li>
+    </ul>
+</div>
+
+
+<div *ngIf="creator">
+    <a routerLink="../">Go back to creator list</a>
+
+    <h3>{{ creator.title }}:</h3>
+    <p>
+        {{ creator.description }}
+    </p>
+
+    <!-- Had to abbreviate console-maker to cm in queryParam because of name clash with existing variable -->
+    <a routerLink="../../../games" [queryParams]="{ creator : (creator.title | lowercase ) }">Click here for games made by {{ creator.title }}.</a>
+    
+    <!-- in the future, should just get game recommendations below -->
+
+</div>

@@ -1,0 +1,18 @@
+<div formGroupName="descriptor">
+    <input 
+    #title
+    formControlName="title"
+    placeholder="enter new title (required)"
+    type="text"
+    (keyup.enter)="showSubForm = true">    
+<textarea 
+    *ngIf="showSubForm" 
+    #description
+    formControlName="description"
+    placeholder="enter new description (optional)"
+    cols="50"
+    rows="10"></textarea>    
+
+</div>
+
+<button class="btn btn-primary" (keyup.enter)="submit(title, description)">Add new Game-Descriptor</button>

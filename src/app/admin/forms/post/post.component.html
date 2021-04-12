@@ -1,0 +1,25 @@
+<h3>{{title | titlecase}} :</h3>
+<!-- <p>post component: {{descriptorEditingMode}}</p> -->
+<ul class="list-group">
+    <descriptor-form 
+        [editing]="selected"
+        [editingMode]="descriptorEditingMode"
+        (addNewDescriptorEvent)="addPost($event)"
+        (editDescriptorEvent)="editPost($event)"
+        (resetEvent)="resetForm()"
+        ></descriptor-form>
+
+    <!-- Trigger will be a different event  -->
+    <!-- <input class="list-group-item" type="text" #newPost>
+    <descriptor-form *ngIf="showRest"></descriptor-form> -->
+    
+    <li class="list-group-item" 
+        *ngFor="let p of posts">
+            {{p.title}}<br>
+            <span (click)="triggerDescriptorForm(p.title, p.uid)">edit</span>&nbsp;&nbsp;
+            
+            
+            <span (click)="deletePost(p.uid)">delete</span>
+
+        </li>
+</ul>

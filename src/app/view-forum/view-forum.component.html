@@ -1,0 +1,19 @@
+<h3>{{forumTitle}}</h3>
+<a routerLink="../">Back to forum homepage</a>
+
+
+<ul class="list-group">
+    <li 
+        class="list-group-item"
+        *ngFor="let thread of threads">
+        <a [routerLink]="['thread',thread.title.split(' ').join('-')]">
+            {{ thread.title }}
+        </a>
+    </li>
+</ul>
+
+<a routerLink="thread/edit">
+    <button>
+        Create a thread
+    </button>
+</a>

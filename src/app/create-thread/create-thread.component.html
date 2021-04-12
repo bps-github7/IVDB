@@ -1,0 +1,24 @@
+<h3>Create or Update thread:</h3>
+<form [formGroup]="form" class="form-group">
+    <label for="title">Thread Title:</label>
+    <input 
+        name="title"
+        id="title"
+        class="form-control"
+        formControlName="title"
+        type="text">
+
+
+
+    <label for="text">first post:</label> <br>
+    <textarea 
+        name="text" 
+        id="text" 
+        formControlName="text"
+        class="form-control" cols="30" rows="10"></textarea>
+    <button (click)="submit()">Submit changes</button>
+
+
+    <p>{{ form.value | json }} </p>
+
+</form>

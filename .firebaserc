@@ -1,0 +1,11 @@
+{
+  "targets": {
+    "internet-videogame-database": {
+      "hosting": {
+        "ivdb": [
+          "internet-videogame-database"
+        ]
+      }
+    }
+  }
+}

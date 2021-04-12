@@ -1,0 +1,212 @@
+
+<div class="row">
+    <div class="col-md-6">
+        <form [formGroup]="form" (ngSubmit)="save(form.value)">
+
+            <zippy title="Help">
+                <h3>How does this work?</h3>
+
+                <p>
+                    Enter your liked, disliked games and more in the sections below <br> 
+                    This info will be logged as your "preferences". Having this information <br>
+                    will allow us to reccomend more accurate games and news to you.
+                </p>
+
+            </zippy>
+
+            <zippy class="form-group" title="likes" formGroupName="likes">
+
+
+                <div class="form-control">
+                    <label for="games">Liked Games: </label>
+                    <input
+                        formControlName="games"
+                        type="text"
+                        name="games"
+                        id="games"
+                        #games
+                        (keyup.enter)="add(games, 'likes.games')">
+                    <ul class="list-group">
+                        <li 
+                            class="list-group-item"
+                            *ngFor="let game of form.get('likes.games').controls">
+                            {{ game.value }}
+                        </li>
+                    </ul>
+                </div>
+
+
+                <div class="form-control">
+                    <label for="onsoles">liked Consoles: </label>
+                    <input
+                        formControlName="onsoles"
+                        type="text"
+                        #onsoles
+                        (keyup.enter)="add(onsoles, 'likes.onsoles')">
+                    <ul class="list-group">
+                        <li 
+                            class="list-group-item"
+                            *ngFor="let game of form.get('likes.onsoles').controls">
+                            {{ game.value }}
+                        </li>
+                    </ul>
+                </div>
+
+
+                
+<!-- 
+                <reactive-select-form-control label="Liked Categories: " formControlName="categories" [options]="categories"></reactive-select-form-control>
+            
+                <reactive-select-form-control label="Liked Creators: " formControlName="creators" [options]="creators"></reactive-select-form-control>
+
+                <reactive-select-form-control label="Liked Console Makers: " formControlName="console_makers" [options]="platforms"></reactive-select-form-control> -->
+            </zippy>
+
+
+            <zippy class="form-group" title="Dislikes" formGroupName="dislikes">
+
+                <div class="form-control">
+                    <label for="games">Disiked Games: </label>
+                    <input
+                        formControlName="games"
+                        type="text"
+                        #entry
+                        (keyup.enter)="add(entry, 'dislikes.games')">
+                    <ul class="list-group">
+                        <li 
+                            class="list-group-item"
+                            *ngFor="let game of form.get('dislikes.games').controls">
+                            {{ game.value }}
+                        </li>
+                    </ul>
+                </div>
+
+
+                <div class="form-control">
+                    <label for="consoles">Disliked Consoles: </label>
+                    <input
+                        formControlName="consoles"
+                        type="text"
+                        #consoles
+                        (keyup.enter)="add(consoles, 'dislikes.consoles')">
+                    <ul class="list-group">
+                        <li 
+                            class="list-group-item"
+                            *ngFor="let game of form.get('dislikes.consoles').controls">
+                            {{ game.value }}
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- <reactive-select-form-control label="Disliked Categories: " formControlName="categories" [options]="categories"></reactive-select-form-control>
+            
+                <reactive-select-form-control label="Disliked creators: " formControlName="creators" [options]="creators"></reactive-select-form-control>
+
+                <reactive-select-form-control label="Disliked platforms: " formControlName="platforms" [options]="platforms"></reactive-select-form-control> -->
+            </zippy>
+
+            <zippy class="form-group" title="Historic" formGroupName="historic">
+<!-- 
+                <div class="form-control">
+                    <label for="favoriteGame">All Time Favorite Game: </label>
+                    <input
+                        formControlName="favoriteGame"
+                        type="text"
+                        #favoriteGame/>
+                </div>
+
+                <div class="form-control">
+                    <label for="favoriteConsole">All Time Favorite Console: </label>
+                    <input
+                        formControlName="favoriteConsole"
+                        type="text"
+                        #favoriteConsole/>
+                </div>
+
+                <div class="form-control">
+                    <label for="childhoodFavoriteGames">Childhood favorite games: </label>
+                    <input
+                        formControlName="childhoodFavoriteGames"
+                        type="text"
+                        #childhoodFavoriteGames
+                        (keyup.enter)="add(childhoodFavoriteGames, 'historic.childhoodFavoriteGames')">
+                    <ul class="list-group">
+                        <li 
+                            class="list-group-item"
+                            *ngFor="let game of form.get('likes.childhoodFavoriteGames').controls">
+                            {{ game.value }}
+                        </li>
+                    </ul>
+                </div> -->
+                <!-- <reactive-default-form-control label="Favorite Game of all time:" formControlName='favoriteGame'></reactive-default-form-control>
+
+                <reactive-default-form-control label="Favorite Console of all time:" formControlName='favoriteConsole'></reactive-default-form-control>
+
+                <reactive-default-form-control label="Favorite Game as a child:" formControlName='childhoodFavoriteGame' ></reactive-default-form-control>
+                
+                <reactive-default-form-control label="First game you ever played:" formControlName='firstGame' ></reactive-default-form-control> -->
+
+            </zippy>
+
+            <zippy class="form-group" title="Currently Playing" formGroupName="currentlyPlaying">
+                
+                <!-- switching field name to avoid similar problem as before 
+                would be wise to not carry these changes all the way to interface, service and db-->
+                <div class="form-control">
+                    <label for="cp_games">Games you currently are playing:</label>
+                    <input
+                        formControlName="cp_games"
+                        type="text"
+                        #cp_games
+                        (keyup.enter)="add(cp_games, 'currentlyPlaying.cp_games')">
+                    <ul class="list-group">
+                        <li 
+                            class="list-group-item"
+                            *ngFor="let game of form.get('currentlyPlaying.cp_games').controls">
+                            {{ game.value }}
+                        </li>
+                    </ul>
+                </div>
+
+
+                
+                <div class="form-control">
+                    <label for="cp_consoles">Consoles you are currently using: </label>
+                    <input
+                        formControlName="cp_consoles"
+                        type="text"
+                        #cp_consoles
+                        (keyup.enter)="add(cp_consoles, 'currentlyPlaying.cp_consoles')">
+                    <ul class="list-group">
+                        <li 
+                            class="list-group-item"
+                            *ngFor="let game of form.get('currentlyPlaying.cp_consoles').controls">
+                            {{ game.value }}
+                        </li>
+                    </ul>
+                </div>
+
+
+            </zippy>
+
+            <button class="btn btn-primary" [disabled]="!form.valid">Update preferences</button>
+        </form>
+    </div>
+    <div class="col-md-6">
+        <div class="card" style="width: 18rem;">
+            <div class="card-body">
+                <h6>Likes</h6>
+                <p class="card-text">
+                </p>
+                <h6>Dislikes</h6>
+                <p class="card-text"></p>
+                <h6>Historic</h6>
+                <p class="card-text"></p>
+                <h6>Currently Playing</h6>
+                <p class="card-text"></p>                
+            </div>
+          </div>
+    </div>
+
+    <p> {{ form.value | json }}</p>
+</div>

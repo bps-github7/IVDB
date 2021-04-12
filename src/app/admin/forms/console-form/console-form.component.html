@@ -1,0 +1,111 @@
+<div class="row">
+    <!-- For debugging purposes: -->
+    <!-- <p>{{editingMode}}</p> -->
+    <button *ngIf="!showRest" (click)="showRest = true">Enter a new console</button>
+    <div class="col-md-6">
+        <form *ngIf="showRest">
+            <zippy title="help with nickname vs name">
+                <strong>Nickname:</strong> <span>Common parlance for system name, often made by abbreviating words in the name (ie. playstation 2 = PS2)</span><br>
+<br><br>    
+                <strong>Name:</strong><span>The fully spelled out name for the system (ie PS2 becomes playstation 2)</span>
+    <br><br>
+                <strong>Qualified Name:</strong><span>The full name with maker and name put together (ie. Sony Playstation 2). No need to provide this one, as name and maker provided is sufficient.</span>
+            </zippy>
+    
+            <div class="form-group" [formGroup]="form">
+                <label for="nickname">Nickname:
+                    <input 
+                        type="text"
+                        id="nickname"
+                        name="nickname"
+                        class="form-control"
+                        formControlName="nickname">
+                </label>
+            </div>
+    
+    
+            <div class="form-group" [formGroup]="form">
+                <label for="name">Name:
+                    <input 
+                        type="text"
+                        id="name"
+                        name="name"
+                        class="form-control"
+                        formControlName="name">
+                </label>
+            </div>
+            
+            <div class="form-group" [formGroup]="form">
+                <label for="maker">Maker:
+                    <select name="maker" id="maker" class="form-control" formControlName="maker">
+                        <option [value]="g.title" *ngFor="let g of platforms">{{ g.title}}</option>
+                    </select>
+                </label>
+            </div>
+    
+            <div>
+                Qualified Name : {{ maker | titlecase }} {{ name | titlecase }}
+            </div>
+    
+            <!-- TODO: what we can do instead of name vs qualifiedNAme is have a nickname field like : playstation 2 = ps2, playstation portable = psp -->
+            
+            <div class="form-group" [formGroup]="form">
+                <label for="generation">Generation:
+    
+                    <!-- TODO: id like this to be a reactive-select-form-control  -->              
+                    <input class="form-control" formControlName="generation" type="number" name="generation" id="generation" min=1 max=10>
+    
+                </label>
+            </div>
+    
+    
+            <div class="form-group" [formGroup]="form">
+                <label for="type">Type:
+                    <select name="type" id="type" class="form-control" formControlName="type">
+                        <option [value]="g" *ngFor="let g of types">{{g}}</option>
+                    </select>
+                </label>
+            </div>
+    
+            <!-- vvv optional inputs are below vvv -->
+    
+            <div class="form-group" [formGroup]="form">
+                <label for="released">Release Date:
+                    <input type="date" id="released" name="released" class="form-control" formControlName="released">
+                </label>
+            </div>
+    
+            <div class="form-group" [formGroup]="form">
+                <label for="image">Image URL:
+                    <input type="text" url id="image" name="image" class="form-control" formControlName="image">
+                </label>
+            </div>
+    
+            <div class="form-group" [formGroup]="form">
+                <label for="description">Description of console:
+                    <textarea name="description" id="description" class="form-control" formControlName="description" cols="30" rows="10"></textarea>
+                </label>
+            </div>
+    
+            <button class="btn btn-primary" [disabled]="!form.valid" (click)="submitForm()">{{submitMessage}}</button>
+            <button class="btn btn-danger" (click)="resetForm()">Reset form</button>
+        </form>             
+    </div>
+    <div class="col-md-6" *ngIf="showRest">
+        <div class="card" style="width: 18rem;">
+            <img *ngIf="image" class="card-img-top" [src]="image" alt="Cover of the console being created or edited">
+            <div class="card-body">
+                <h3 class="card-title">
+                    <a [routerLink]="['../../../../gaming-index/platforms', maker, name]">
+                        {{ maker | titlecase }} {{ name | titlecase }}
+                    </a>
+                </h3>
+                <p class="card-text">
+                    <!-- <strong>released: </strong> {{released}} <br>
+                    <strong>type: </strong> {{type}} -->
+                </p>
+            </div>
+          </div>
+    </div>
+    
+</div>

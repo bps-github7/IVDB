@@ -1,0 +1,26 @@
+<h3>New post/ update post:</h3>
+<form class="form-group" [formGroup]="form">
+
+    <!-- <label for="title">Thread Title:</label>
+    <input 
+        name="title"
+        id="title"
+        class="form-control"
+        formControlName="title"
+        type="text">
+
+z -->
+
+    <label for="">type your post below:</label> <br>
+    <textarea 
+        name="text" 
+        id="text" 
+        formControlName="text"
+        class="form-control" cols="30" rows="10"></textarea>
+
+    <button (click)="submit()">Submit changes</button>
+    <p>{{ form.value | json }}</p>
+
+
+</form>
+

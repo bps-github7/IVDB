@@ -1,0 +1,23 @@
+<h3>Reviews by {{ username }}</h3>
+<p>sort by release date (asc/desc), rating amout, game category, game creator, game console</p>
+<input type="text" placeholder="filter by game title, categories, creators, consoles, console makers">
+<div>
+    <h5>Search hints:</h5>
+    <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Repudiandae similique est minima magnam dolorem tenetur
+        ratione corrupti inventore maxime, aliquid deserunt in, obcaecati, velit laudantium consectetur nulla corporis
+        nam labore sit sunt explicabo vitae doloribus adipisci odit. Rem maxime rerum excepturi distinctio ab error
+        nihil quia, veniam totam facere dolore?</p>
+</div>
+<ul>
+    <li *ngFor="let s of reviews">
+        <!-- link to - display-review component-->
+        <!-- contrib-dashboard/reviews/:username/:game_title -->
+        <a [routerLink]="s.game_title">{{s.username}}'s review of
+            {{ s.game_title}}</a>
+    </li>
+</ul>
+
+<div>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sint cupiditate delectus itaque quibusdam. Distinctio
+    expedita necessitatibus consectetur ratione officiis perferendis nobis sapiente. Est laboriosam adipisci voluptates
+    eaque, doloribus ducimus hic libero, maxime sed necessitatibus accusamus neque nemo facilis ullam facere incidunt
+    amet. Repellat voluptates corporis ipsam maiores, voluptatum accusantium laborum.</div>

@@ -1,0 +1,15 @@
+<label for="{{title}}">{{title | titlecase}} :</label>
+<ul class="list-group">
+    <descriptor-form></descriptor-form>
+    <!-- <input class="list-group-item" type="text" #newPost (keyup.enter)="showSubForm = true"> -->
+
+    <li class="list-group-item" 
+        *ngFor="let p of posts">
+            {{p.title}}<br>
+            <span (click)="edit(p.uid)">edit</span>&nbsp;&nbsp;
+            
+            
+            <span (click)="delete(p.uid)">delete</span>
+
+        </li>
+</ul>

@@ -1,0 +1,5 @@
+/* Something seems to be cancling these styles out, Bootstrap maybe? 
+ */
+a {
+    text-decoration: underline;    
+}
