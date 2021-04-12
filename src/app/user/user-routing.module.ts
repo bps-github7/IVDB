@@ -31,6 +31,7 @@ const routes: Routes = [
   imports: [
     SharedModule,
     RouterModule.forChild(routes)],
+    // providers: [AuthGuard],
   exports: [RouterModule]
 })
 export class UserRoutingModule { }

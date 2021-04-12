@@ -9,7 +9,6 @@ import { ControlContainer, ControlValueAccessor, FormControl, FormControlDirecti
         <button type="button" (click)="clearInput()">clear</button><br/>
     </label>
   `,
-  styleUrls: ['./../reactive-form-control.component.css'],
   providers: [
     {provide: NG_VALUE_ACCESSOR,
     useExisting: ReactiveTextareaFormControlComponent,

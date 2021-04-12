@@ -15,19 +15,7 @@ import { AngularFirestoreModule } from '@angular/fire/firestore';
 
 //declarations/ bootstraps
 import { AppComponent } from './app.component';
-
-// misc / composite - doesnt belong in a dedicated feature module, perhaps a shared, lazily loaded one.
-import { DropdownComponent } from './dropdown/dropdown.component';
-import { FavoriteComponent } from './favorite/favorite.component';
-import { PanelComponent } from './panel/panel.component';
-import { ZippyComponent } from './zippy/zippy.component';
-import { HomeComponent } from './home/home.component';
-import { SearchComponent } from './search/search.component';
-import { NotFoundComponent } from './not-found/not-found.component';
-import { CarouselComponent } from './carousel/carousel.component';
-
-
-
+import { SharedModule } from './shared/shared.module';
 
 
 // admin module- all things accessible only to administrators, 
@@ -104,12 +92,7 @@ import { environment } from 'src/environments/environment';
 
 
 
-//not sure why, but these are not getting detected from our service main module.
-import { AdminAuthGuard } from './common/services/admin-auth-guard.service';
-import { AuthGuard } from './common/services/auth-guard.service';
-
 // main service module
-import { ServicesModule } from './common/services/services.module';
 import { PlatformsComponent } from './platforms/platforms.component';
 import { ViewThreadComponent } from './view-thread/view-thread.component';
 import { ViewForumComponent } from './view-forum/view-forum.component';
@@ -118,6 +101,7 @@ import { ConsolePostComponent } from './admin/forms/console-post/console-post.co
 import { ConsoleFormComponent } from './admin/forms/console-form/console-form.component';
 import { CreatePostComponent } from './create-post/create-post.component';
 import { AppRoutingModule } from './app.routing';
+import { ServicesModule } from './common/services/services.module';
 
 
 @NgModule({
@@ -135,11 +119,6 @@ import { AppRoutingModule } from './app.routing';
     EditProfileComponent,
     ViewProfileComponent,
     EditPreferencesComponent,
-    DropdownComponent,
-    FavoriteComponent,
-    PanelComponent,
-    ZippyComponent,
-    HomeComponent,
     SignInComponent,
     CreateAccountComponent,
     ForumComponent,
@@ -147,20 +126,12 @@ import { AppRoutingModule } from './app.routing';
     StreamingComponent,
     ReccomendationsComponent,
     WatchlistsComponent,
-    SearchComponent,
     ForgotPasswordComponent,
     CreateThreadComponent,
-    NotFoundComponent,
     GameComponent,
     // GameFormComponent,
     ViewGameComponent,
     ViewRatingsComponent,
-    ReactiveDefaultFormControlComponent,
-    ReactiveSelectFormControlComponent,
-    ReactiveTextareaFormControlComponent,
-    CredentialFormControlComponent,
-    DisableControlDirective,
-    TdfMultiFormControlComponent,
     PostComponent,
     GamingIndexComponent,
     CategoriesComponent,
@@ -188,7 +159,6 @@ import { AppRoutingModule } from './app.routing';
     ProvideRatingComponent,
     DisplayAverageRatingComponent,
     GameCardComponent,
-    CarouselComponent,
     CommentSectionComponent,
     GameInfoComponent,
     GameInfoFormComponent,

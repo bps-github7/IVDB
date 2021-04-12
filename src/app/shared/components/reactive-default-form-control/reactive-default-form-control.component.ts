@@ -7,7 +7,6 @@ import { ControlContainer, ControlValueAccessor, FormControl, FormControlDirecti
         <label [for]="formControl">{{ label }}
             <input type="text" [formControl]="control" class="form-control">
         </label>`,
-    styleUrls: ['./../reactive-form-control.component.css'],
     providers: [
         {provide: NG_VALUE_ACCESSOR,
         useExisting: ReactiveDefaultFormControlComponent,

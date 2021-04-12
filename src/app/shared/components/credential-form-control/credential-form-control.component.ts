@@ -4,7 +4,7 @@ import { ControlContainer, ControlValueAccessor, FormControl, FormControlDirecti
 @Component({
   selector: 'credential-form-control',
   templateUrl: './credential-form-control.component.html',
-  styleUrls: ['.././reactive-form-control.component.css'],
+  styleUrls: [],
   providers: [
     {provide: NG_VALUE_ACCESSOR,
     useExisting: CredentialFormControlComponent,
