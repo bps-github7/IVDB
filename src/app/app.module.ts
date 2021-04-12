@@ -43,13 +43,13 @@ import { GameInfoFormComponent } from './admin/forms/game-info-form/game-info-fo
 
 
 // auth module - componentry related to authentication and profile 
-import { SignInComponent } from './sign-in/sign-in.component';
-import { CreateAccountComponent } from './create-account/create-account.component';
-import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
+import { SignInComponent } from './user/sign-in/sign-in.component';
+import { CreateAccountComponent } from './user/create-account/create-account.component';
+import { ForgotPasswordComponent } from './user/forgot-password/forgot-password.component';
 // we combined profile with auth for now, for simplicity sake. less modules better while routing doesnt work fully
-import { ViewProfileComponent } from './view-profile/view-profile.component';
-import { EditProfileComponent } from './edit-profile/edit-profile.component';
-import { EditPreferencesComponent } from './edit-preferences/edit-preferences.component';
+import { ViewProfileComponent } from './user/view-profile/view-profile.component';
+import { EditProfileComponent } from './user/edit-profile/edit-profile.component';
+import { EditPreferencesComponent } from './user/edit-preferences/edit-preferences.component';
 
 
 
@@ -66,7 +66,7 @@ import { GamingIndexComponent } from './gaming-index/gaming-index.component';
 import { CategoriesComponent } from './categories/categories.component';
 import { CreatorsComponent } from './creators/creators.component';
 import { ConsoleComponent } from './console/console.component';
-import { GameCardComponent } from './game-card/game-card.component';
+import { GameCardComponent } from './game/game-card/game-card.component';
 
 
 
@@ -82,12 +82,6 @@ import { DisplayAverageRatingComponent } from './display-average-rating/display-
 
 
 // Inclined to remove these, but they are a good idea if they werent soo buggy and unreliable - (debug + test  | redesign -> implement)
-import { ReactiveDefaultFormControlComponent } from './form-controls/reactive-default-form-control/reactive-default-form-control.component';
-import { ReactiveSelectFormControlComponent } from './form-controls/reactive-select-form-control/reactive-select-form-control.component';
-import { ReactiveTextareaFormControlComponent } from './form-controls/reactive-textarea-form-control/reactive-textarea-form-control.component';
-import { CredentialFormControlComponent } from './form-controls/credential-form-control/credential-form-control.component';
-import { DisableControlDirective } from './common/directives/disable-control.directive';
-import { TdfMultiFormControlComponent } from './form-controls/tdf-multi-form-control/tdf-multi-form-control.component';
 
 // contrib module - all things that user can create, modify delete- comments, forum posts, reviews, ratings
 import { ContribDashboardComponent } from './contrib/contrib-dashboard/contrib-dashboard.component';

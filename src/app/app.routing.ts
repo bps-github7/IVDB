@@ -6,42 +6,38 @@ import { GameInfoFormComponent } from './admin/forms/game-info-form/game-info-fo
 import { GameInfoComponent } from './admin/game-info/game-info.component';
 import { GameComponent } from './admin/game/game.component';
 import { CategoriesComponent } from './categories/categories.component';
-import { AdminAuthGuard } from './common/services/admin-auth-guard.service';
-import { AuthGuard } from './common/services/auth-guard.service';
 import { ConsoleComponent } from './console/console.component';
 import { ContentDashboardComponent } from './content/content-dashboard/content-dashboard.component';
 import { ContribDashboardComponent } from './contrib/contrib-dashboard/contrib-dashboard.component';
-import { CreateAccountComponent } from './create-account/create-account.component';
+import { CreateAccountComponent } from './user/create-account/create-account.component';
 import { CreatePostComponent } from './create-post/create-post.component';
 import { CreateThreadComponent } from './create-thread/create-thread.component';
 import { CreatorsComponent } from './creators/creators.component';
 import { DisplayReviewComponent } from './display-review/display-review.component';
 import { EditContributionsComponent } from './edit-contributions/edit-contributions.component';
-import { EditPreferencesComponent } from './edit-preferences/edit-preferences.component';
-import { EditProfileComponent } from './edit-profile/edit-profile.component';
+import { EditPreferencesComponent } from './user/edit-preferences/edit-preferences.component';
+import { EditProfileComponent } from './user/edit-profile/edit-profile.component';
 import { EditReviewComponent } from './edit-review/edit-review.component';
-import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
+import { ForgotPasswordComponent } from './user/forgot-password/forgot-password.component';
 import { ForumComponent } from './forum/forum.component';
 import { GamesComponent } from './games/games.component';
 import { GamingIndexComponent } from './gaming-index/gaming-index.component';
-import { HomeComponent } from './home/home.component';
 import { NewsComponent } from './news/news.component';
-import { NotFoundComponent } from './not-found/not-found.component';
 import { PlatformsComponent } from './platforms/platforms.component';
 import { RecentlyPostedComponent } from './recently-posted/recently-posted.component';
-import { SearchComponent } from './search/search.component';
-import { SignInComponent } from './sign-in/sign-in.component';
+import { SignInComponent } from './user/sign-in/sign-in.component';
 import { StreamingComponent } from './streaming/streaming.component';
 import { ViewAllPostsComponent } from './view-all-posts/view-all-posts.component';
 import { ViewAllRatingsComponent } from './view-all-ratings/view-all-ratings.component';
 import { ViewAllReviewsComponent } from './view-all-reviews/view-all-reviews.component';
 import { ViewForumComponent } from './view-forum/view-forum.component';
 import { ViewGameComponent } from './view-game/view-game.component';
-import { ViewProfileComponent } from './view-profile/view-profile.component';
+import { ViewProfileComponent } from './user/view-profile/view-profile.component';
 import { ViewRatingsComponent } from './view-ratings/view-ratings.component';
 import { ViewReviewsComponent } from './view-reviews/view-reviews.component';
 import { ViewThreadComponent } from './view-thread/view-thread.component';
 import { WatchlistsComponent } from './watchlists/watchlists.component';
+import { SharedModule } from './shared/shared.module';
  
  
 const routes: Routes = [
@@ -49,9 +45,33 @@ const routes: Routes = [
     // home page
     { path: '', component: HomeComponent },
 
-    // { path: 'admin', loadChildren: () => import('./admin/admin.module').then(m => m.AdminModule)},
-    { path: 'admin', loadChildren: './admin/admin.module#AdminModule' },
+    { 
+        path: 'admin',
+        loadChildren: () => import('./admin/admin.module').then(m => m.AdminModule)
+    },
+    { 
+        path: 'user',
+        loadChildren: () => import('./user/user.module').then(m => m.UserModule)
+    },
+    { 
+        path: 'games',
+        loadChildren: () => import('./games/games.module').then(m => m.GamesModule)
+    },
+    { 
+        path: 'forum',
+        loadChildren: () => import('./forum/forum.module').then(m => m.ForumModule)
+    },
+    { 
+        path: 'content',
+        loadChildren: () => import('./content/content.module').then(m => m.ContentModule)
+    },
+    { 
+        path: 'contrib',
+        loadChildren: () => import('./contrib/contrib.module').then(m => m.ContribModule)
+    },
+    // { path: 'admin', loadChildren: './admin/admin.module#AdminModule' },
     // { path: 'user', loadChildren: './user/user.module#UserModule' },
+    //
     // { path: 'game', loadChildren: './game/game.module#GameModule' },
     // { path: 'forum', loadChildren: './forum/forum.module#ForumModule' },
     // { path: 'content', loadChildren: './content/content.module#ContentModule' },
@@ -148,7 +168,8 @@ const routes: Routes = [
 ];
  
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [SharedModule,
+    RouterModule.forRoot(routes)],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }

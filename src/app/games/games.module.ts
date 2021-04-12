@@ -1,12 +1,14 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
+import { GamesRoutingModule } from './games-routing.module';
 
 
 @NgModule({
   declarations: [],
   imports: [
-    CommonModule
+    CommonModule,
+    GamesRoutingModule
   ]
 })
-export class AuthModule { }
+export class GamesModule { }

@@ -1,12 +1,11 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormControl, ControlContainer } from '@angular/forms';
-import { UsernameValidator } from '../common/validators/username.validators';
-import { PasswordValidators } from '../common/validators/password.validators';
 import { Router } from '@angular/router';
-import { User } from '../models/user/user';
-import { AuthService } from '../common/services/auth.service';
-import { UserService } from '../common/services/user.service';
-
+import { AuthService } from 'src/app/common/services/auth.service';
+import { UserService } from 'src/app/common/services/user.service';
+import { PasswordValidators } from 'src/app/common/validators/password.validators';
+import { UsernameValidator } from 'src/app/common/validators/username.validators';
+import { User } from 'src/app/models/user/user';
 
 @Component({
   selector: 'app-create-account',
@@ -15,6 +14,7 @@ import { UserService } from '../common/services/user.service';
 })
 export class CreateAccountComponent implements OnInit {
     form;
+    //shared module?
     user : User;
     authError: any;
     // uid: any;
