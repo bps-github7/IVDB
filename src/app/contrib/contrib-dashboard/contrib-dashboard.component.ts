@@ -6,7 +6,7 @@ import { Rating } from 'src/app/models/content/Rating';
 import { Review } from 'src/app/models/content/Review';
 
 @Component({
-  selector: 'app-contrib-dashboard',
+  selector: 'contrib-dashboard',
   templateUrl: './contrib-dashboard.component.html',
   styleUrls: ['./contrib-dashboard.component.css']
 })

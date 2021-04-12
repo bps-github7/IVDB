@@ -42,7 +42,7 @@ import { ReactiveFormControlComponent } from './components/reactive-form-control
     // directives 
     DisableControlDirective,
 
-    ReactiveFormControlComponent
+    ReactiveFormControlComponent,
 ],
   imports: [
     CommonModule,
@@ -58,8 +58,6 @@ import { ReactiveFormControlComponent } from './components/reactive-form-control
   exports: [
     FormsModule,
     ReactiveFormsModule,
-    AuthGuard,
-    AdminAuthGuard,
     CarouselComponent,
     DropdownComponent,
     FavoriteComponent,

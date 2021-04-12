@@ -14,26 +14,26 @@ const routes: Routes = [
         path: 'admin',
         loadChildren: () => import('./admin/admin.module').then(m => m.AdminModule)
     },
-    { 
-        path: 'user',
-        loadChildren: () => import('./user/user.module').then(m => m.UserModule)
-    },
-    { 
-        path: 'games',
-        loadChildren: () => import('./games/games.module').then(m => m.GamesModule)
-    },
-    { 
-        path: 'forum',
-        loadChildren: () => import('./forum/forum.module').then(m => m.ForumModule)
-    },
-    { 
-        path: 'content',
-        loadChildren: () => import('./content/content.module').then(m => m.ContentModule)
-    },
-    { 
-        path: 'contrib',
-        loadChildren: () => import('./contrib/contrib.module').then(m => m.ContribModule)
-    },
+    // { 
+    //     path: 'user',
+    //     loadChildren: () => import('./user/user.module').then(m => m.UserModule)
+    // },
+    // { 
+    //     path: 'games',
+    //     loadChildren: () => import('./games/games.module').then(m => m.GamesModule)
+    // },
+    // { 
+    //     path: 'forum',
+    //     loadChildren: () => import('./forum/forum.module').then(m => m.ForumModule)
+    // },
+    // { 
+    //     path: 'content',
+    //     loadChildren: () => import('./content/content.module').then(m => m.ContentModule)
+    // },
+    // { 
+    //     path: 'contrib',
+    //     loadChildren: () => import('./contrib/contrib.module').then(m => m.ContribModule)
+    // },
     // { path: 'admin', loadChildren: './admin/admin.module#AdminModule' },
     // { path: 'user', loadChildren: './user/user.module#UserModule' },
     //

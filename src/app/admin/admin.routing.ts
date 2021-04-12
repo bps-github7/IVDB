@@ -6,10 +6,11 @@ import { GameComponent } from './game/game.component';
 import { ForumInfoFormComponent } from './forum/forum-info-form/forum-info-form.component';
 import { ManageForumsComponent } from './forum/manage-forums/manage-forums.component';
 import { ForumDashboardComponent } from './forum/forum-dashboard/forum-dashboard.component';
- 
+import { AdminComponent } from './admin.component';
+import { SharedModule } from '../shared/shared.module';
  
 const routes: Routes = [
-    { path: '', component: AdminDashboardComponent,
+    { path: '', component: AdminComponent,
     children: [
         { path: 'game', component: GameComponent },
         { path: 'forum', component: ForumDashboardComponent },
@@ -23,13 +24,17 @@ const routes: Routes = [
 ];
  
 @NgModule({
-  imports: [RouterModule.forChild(routes)],
+  imports: [
+    SharedModule,  
+    RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
 export class AdminRoutingModule { } export const AdminComponents = [
+    AdminComponent,   
     AdminDashboardComponent,
     GameComponent,
     ForumDashboardComponent,
+    ForumInfoFormComponent,
     ManageForumsComponent,
     GameComponent,
     GameInfoFormComponent

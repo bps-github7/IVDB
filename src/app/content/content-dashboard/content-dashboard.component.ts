@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
 @Component({
-  selector: 'app-content-dashboard',
+  selector: 'content-dashboard',
   templateUrl: './content-dashboard.component.html',
   styleUrls: ['./content-dashboard.component.css']
 })
