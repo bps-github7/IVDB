@@ -75,7 +75,7 @@ import { StreamingComponent } from './streaming/streaming.component';
 import { ReccomendationsComponent } from './reccomendations/reccomendations.component';
 import { WatchlistsComponent } from './watchlists/watchlists.component';
 import { NewsComponent } from './news/news.component';
-import { ContentDashboardComponent } from './content-dashboard/content-dashboard.component';
+import { ContentDashboardComponent } from './content/content-dashboard/content-dashboard.component';
 import { DisplayReviewComponent } from './display-review/display-review.component';
 import { DisplayRatingComponent } from './display-rating/display-rating.component';
 import { DisplayAverageRatingComponent } from './display-average-rating/display-average-rating.component';
@@ -90,7 +90,7 @@ import { DisableControlDirective } from './common/directives/disable-control.dir
 import { TdfMultiFormControlComponent } from './form-controls/tdf-multi-form-control/tdf-multi-form-control.component';
 
 // contrib module - all things that user can create, modify delete- comments, forum posts, reviews, ratings
-import { ContribDashboardComponent } from './contrib-dashboard/contrib-dashboard.component';
+import { ContribDashboardComponent } from './contrib/contrib-dashboard/contrib-dashboard.component';
 import { EditContributionsComponent } from './edit-contributions/edit-contributions.component';
 import { EditReviewComponent } from './edit-review/edit-review.component';
 import { ViewRatingsComponent } from './view-ratings/view-ratings.component'; // iffy here- could be content or contrib- users can view other users ratings or reviews
@@ -123,11 +123,16 @@ import { ForumsListComponent } from './forums-list/forums-list.component';
 import { ConsolePostComponent } from './admin/forms/console-post/console-post.component';
 import { ConsoleFormComponent } from './admin/forms/console-form/console-form.component';
 import { CreatePostComponent } from './create-post/create-post.component';
+import { AdminModule } from './admin/admin.module';
+// import { AdminComponents } from './admin/admin.routing';
 
 
 @NgModule({
   declarations: [
     AppComponent,
+
+
+
     CreatePostComponent,
     ConsoleFormComponent,
     ConsolePostComponent,
@@ -206,6 +211,7 @@ import { CreatePostComponent } from './create-post/create-post.component';
     FormsModule,
     ReactiveFormsModule,
     CustomFormsModule,
+    AdminModule,
     ServicesModule.forRoot(),
     RouterModule.forRoot([
 
