@@ -49,7 +49,8 @@ const routes: Routes = [
     // home page
     { path: '', component: HomeComponent },
 
-    { path: 'admin', loadChildren: () => import('./admin/admin.module').then(m => m.AdminModule)},
+    // { path: 'admin', loadChildren: () => import('./admin/admin.module').then(m => m.AdminModule)},
+    { path: 'admin', loadChildren: './admin/admin.module#AdminModule' },
     // { path: 'user', loadChildren: './user/user.module#UserModule' },
     // { path: 'game', loadChildren: './game/game.module#GameModule' },
     // { path: 'forum', loadChildren: './forum/forum.module#ForumModule' },
