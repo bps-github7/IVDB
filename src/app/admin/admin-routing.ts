@@ -27,7 +27,10 @@ const routes: Routes = [
   imports: [
     SharedModule,  
     RouterModule.forChild(routes)],
-  exports: [RouterModule]
+  exports: [
+    // unclear whether we should be doing this...
+    SharedModule,  
+    RouterModule]
 })
 export class AdminRoutingModule { } export const AdminComponents = [
     AdminComponent,   

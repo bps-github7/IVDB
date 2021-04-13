@@ -1,3 +1,4 @@
+<!-- probably can export this -->
 <div class="top">
     <header>
         <h1>Welcome to IVDB forum</h1>
@@ -18,55 +19,15 @@
             </li>
             <li>
                 <a routerLink="">Forum Rules and info</a>
-                <!-- <ul class="dropdown">
+                <ul class="dropdown">
                     <li>Be nice</li>
                     <li>No Doxxing!</li>
                     <li>Threads and users with three violations are temporarily banned or closed.</li>
                     <li>Threads and users with repeated bannings/closings are permenatnly banned or closed</li>
-                </ul> -->
+                </ul>
             </li>
         </ul>   
     </nav>    
 </div>
-
-<!--  -->
-<main class="row">
-    <div class="col-md-8" *ngFor="let category of allCategories">
-        <h3>{{category.title}}</h3>
-        <forums-list [category]="category.title"></forums-list>
-        <!-- <zippy [title]="category.title">
-        </zippy> -->
-
-    <!-- <forums-list category="gaming"></forums-list> -->
-    </div>
-    <aside class="col-md-4">
-        <p>Forum meta data</p>
-    
-        <div>
-            <h3>Top posters</h3>
-            <ul>
-                <li>Blah</li>
-                <li>Blah blah</li>
-                <li>Blah Blee Blah Blahalala</li>
-            </ul>
-        </div>
-        <div>
-            <h3>Moderators:</h3>
-            <ul>
-                <li>Splee mcglotenspiel (online)</li>
-                <li>Mrs francee pants</li>
-                <li>Dogbingo tzmplantencot (online)</li>
-            </ul>
-        </div>
-    
-        <div>
-            <h3>Forum administrators:</h3>
-            <ul>
-                <li>Steven Spielberg</li>
-                <li>Mike Oldfield (online)</li>
-            </ul>
-        </div>
-    
-    </aside>        
-</main>
-
+<h3>Inside the Forum module!</h3>
+<router-outlet></router-outlet>

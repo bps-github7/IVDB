@@ -1,13 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { GameInfoService } from '../common/services/gameinfo.service';
+import { GameInfoService } from 'src/app/common/services/gameinfo.service';
 
 @Component({
-  selector: 'console',
-  templateUrl: './console.component.html',
-  styleUrls: ['./console.component.css']
+  selector: 'consoles',
+  templateUrl: './consoles.component.html',
+  styleUrls: ['./consoles.component.css']
 })
-export class ConsoleComponent implements OnInit {
+export class ConsolesComponent implements OnInit {
   console_maker: any;
     console_name: any;
     console: any;

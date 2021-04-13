@@ -52,7 +52,10 @@ const routes: Routes = [
   imports: [
     SharedModule,  
     RouterModule.forChild(routes)],
-  exports: [RouterModule]
+  exports: [
+    RouterModule,
+    SharedModule
+  ]
 })
 export class ContentRoutingModule { } export const ContentComponents = [
     ContentComponent,

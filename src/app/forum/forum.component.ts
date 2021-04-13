@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { ForumInfoService } from 'src/app/common/services/forum-info.service';
 
 @Component({
   selector: 'app-forum',
@@ -8,10 +7,8 @@ import { ForumInfoService } from 'src/app/common/services/forum-info.service';
 })
 export class ForumComponent implements OnInit {
 
-    allCategories :  any [];
 
-    constructor(private fourmInfoService : ForumInfoService) {
-        this.fourmInfoService.getType$('category').subscribe(p=> this.allCategories = p);
+    constructor() {
     }
 
 

@@ -50,7 +50,10 @@ const routes: Routes = [
   imports: [
     SharedModule,  
     RouterModule.forChild(routes)],
-  exports: [RouterModule]
+  exports: [
+    RouterModule,
+    SharedModule
+  ]
 })
 export class ContribRoutingModule { } export const ContribComponents = [
     ContribComponent,

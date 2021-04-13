@@ -1,12 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import { GameInfoService } from '../common/services/gameinfo.service';
+import { GameInfoService } from 'src/app/common/services/gameinfo.service';
 
 @Component({
-  selector: 'app-gaming-index',
-  templateUrl: './gaming-index.component.html',
-  styleUrls: ['./gaming-index.component.css']
+  selector: 'app-game-info',
+  templateUrl: './game-info.component.html',
+  styleUrls: ['./game-info.component.css']
 })
-export class GamingIndexComponent implements OnInit {
+export class GameInfoComponent implements OnInit {
+
 
     categories: any [];
     creators: any [];
@@ -42,7 +43,4 @@ export class GamingIndexComponent implements OnInit {
 
   ngOnInit(): void {
   }
-
-  
-
 }

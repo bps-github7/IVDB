@@ -1,11 +1,11 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { GamesRoutingModule } from './games-routing.module';
+import { GamesComponents, GamesRoutingModule } from './games-routing.module';
 
 
 @NgModule({
-  declarations: [],
+  declarations: [GamesComponents],
   imports: [
     CommonModule,
     GamesRoutingModule
