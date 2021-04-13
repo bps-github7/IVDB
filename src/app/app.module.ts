@@ -1,4 +1,4 @@
-//imports and decorators
+//imports and declaratives
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
@@ -9,6 +9,8 @@ import { AngularFireAuthModule } from '@angular/fire/auth';
 import { CustomFormsModule } from 'ng2-validation';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 
+import { AppRoutingModule } from './app.routing';
+import { CoreModule } from './core/core.module';
 
 
 
@@ -18,17 +20,12 @@ import { AppComponent } from './app.component';
 
 //environment 
 import { environment } from 'src/environments/environment';
+import { ServicesModule } from './services/services.module';
 
-
-
-import { AppRoutingModule } from './app.routing';
-import { ServicesModule } from './common/services/services.module';
 
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    ],
+  declarations: [ AppComponent],
   imports: [
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireAuthModule,
@@ -38,14 +35,11 @@ import { ServicesModule } from './common/services/services.module';
     FormsModule,
     ReactiveFormsModule,
     CustomFormsModule,
+    CoreModule,
     AppRoutingModule,
     ServicesModule.forRoot(),
-    
   ],
-    providers: [
-    ],
+    providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule {
-
-}
+export class AppModule { }

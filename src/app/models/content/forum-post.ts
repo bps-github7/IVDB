@@ -5,9 +5,9 @@ export interface ForumPost {
     creator : string;
 
     thread : string;
-    
     uid ?: string;
 
+    // kind of dumb... just saying
     isFirst ?: boolean;
 
 }

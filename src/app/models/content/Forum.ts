@@ -5,7 +5,7 @@ export interface Forum {
     title : string;
     description : string;
 
-    //optional stuff we deal with after tis fleshed me boi!
+    //optional stuff we deal with after tis fresh meatball!
     moderator?: (string | string []); 
     threads?: Thread [];
     uid?: string;

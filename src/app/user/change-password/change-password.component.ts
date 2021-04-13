@@ -1,4 +1,4 @@
-import { PasswordValidators } from '../../common/validators/password.validators';
+import { PasswordValidators } from '../../core/validators/password.validators';
 import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
 import { Component } from '@angular/core';
 

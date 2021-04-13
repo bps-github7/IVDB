@@ -1,11 +1,11 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormControl, ControlContainer } from '@angular/forms';
 import { Router } from '@angular/router';
-import { AuthService } from 'src/app/common/services/auth.service';
-import { UserService } from 'src/app/common/services/user.service';
-import { PasswordValidators } from 'src/app/common/validators/password.validators';
-import { UsernameValidator } from 'src/app/common/validators/username.validators';
+import { AuthService } from 'src/app/core/auth.service';
 import { User } from 'src/app/models/user/user';
+import { UserService } from 'src/app/services/user.service';
+import { PasswordValidators } from 'src/app/services/validators/password.validators';
+import { UsernameValidator } from 'src/app/services/validators/username.validators';
 
 @Component({
   selector: 'app-create-account',
