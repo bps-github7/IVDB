@@ -1,7 +1,7 @@
 import { ModuleWithProviders, NgModule } from '@angular/core';
 import { AdminAuthGuard } from './admin-auth-guard.service';
 import { AuthGuard } from './auth-guard.service';
-import { AuthService } from './auth.service';
+import { AuthService } from '../core/auth.service';
 import { CommentService } from './comment.service';
 import { GameService } from './game.service';
 import { GameInfoService } from './gameinfo.service';
@@ -13,8 +13,14 @@ import { ReviewService } from './review.service';
 import { ThreadService } from './thread.service';
 import { UserAuthGuard } from './user-auth-guard.service';
 import { UserService } from './user.service';
+import { CategoriesService } from './categories.service';
+import { ForumInfoService } from './forum-info.service';
+import { ForumsService } from './forums.service';
+import { ForumPostService } from './forum-post.service';
+import { SuggestionService } from './suggestion.service';
 
-
+/* a strange syntax... why even bother w decorating at this point?!!
+ */
 @NgModule({
     imports: [],
     exports: [],
@@ -27,9 +33,11 @@ export class ServicesModule {
             ngModule: ServicesModule,
             providers: [
                 // authentication services
+                // this is provided already by core. 
                 AuthService,
+
+                // this can all go in user module some day SOON!?
                 UserService,
-                // user profile services
                 ProfileService,
                 PreferencesService,
                 
@@ -38,14 +46,27 @@ export class ServicesModule {
                 AdminAuthGuard,
                 UserAuthGuard,
                 
-                // app wide resource services
-                ThreadService,
-                RatingService,
-                ReviewService,
-                NewsService,
+                
+                
+                
                 GameInfoService,
                 GameService,
+                RatingService,
+                ReviewService,
+
+
+                // content
+                NewsService,
                 CommentService,
+                CategoriesService,
+                SuggestionService,
+                
+ 
+                // forum 
+                ForumsService,
+                ForumInfoService,
+                ForumPostService,
+                ThreadService
             ]
         };
     }

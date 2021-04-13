@@ -1,8 +1,9 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { AdminModule } from './admin/admin.module';
-import { HomeComponent } from './shared/components/home/home.component';
-import { NotFoundComponent } from './shared/components/not-found/not-found.component';
+import { HomeComponent } from './core/home/home.component';
+import { NotFoundComponent } from './core/not-found/not-found.component';
+
 import { SharedModule } from './shared/shared.module';
 import { UserModule } from './user/user.module';
  
@@ -15,30 +16,30 @@ const routes: Routes = [
         path: 'admin',
         loadChildren: () => import('./admin/admin.module').then(m => m.AdminModule)
       },
-      { 
-        path: 'user',
-        loadChildren: () => import('./user/user.module').then(m => m.UserModule)
-      },
-      { 
-        path: 'games',
-        loadChildren: () => import('./games/games.module').then(m => m.GamesModule)
-      },
-      { 
-        path: 'game',
-        loadChildren: () => import('./game/game.module').then(m => m.GameModule)
-      },
-      { 
-        path: 'forum',
-        loadChildren: () => import('./forum/forum.module').then(m => m.ForumModule)
-      },
-      { 
-        path: 'content',
-        loadChildren: () => import('./content/content.module').then(m => m.ContentModule)
-      },
-      { 
-        path: 'contrib',
-        loadChildren: () => import('./contrib/contrib.module').then(m => m.ContribModule)
-      },
+    //   { 
+    //     path: 'user',
+    //     loadChildren: () => import('./user/user.module').then(m => m.UserModule)
+    //   },
+    //   { 
+    //     path: 'games',
+    //     loadChildren: () => import('./games/games.module').then(m => m.GamesModule)
+    //   },
+    //   { 
+    //     path: 'game',
+    //     loadChildren: () => import('./game/game.module').then(m => m.GameModule)
+    //   },
+    //   { 
+    //     path: 'forum',
+    //     loadChildren: () => import('./forum/forum.module').then(m => m.ForumModule)
+    //   },
+    //   { 
+    //     path: 'content',
+    //     loadChildren: () => import('./content/content.module').then(m => m.ContentModule)
+    //   },
+    //   { 
+    //     path: 'contrib',
+    //     loadChildren: () => import('./contrib/contrib.module').then(m => m.ContribModule)
+    //   },
         // { path: 'admin', loadChildren: './admin/admin.module#AdminModule' },
         // { path: 'user', loadChildren: './user/user.module#UserModule' },
         //
@@ -58,5 +59,4 @@ const routes: Routes = [
     RouterModule.forRoot(routes)],
   exports: [RouterModule]
 })
-export class AppRoutingModule { } export const AppModules = [
-]
+export class AppRoutingModule { }

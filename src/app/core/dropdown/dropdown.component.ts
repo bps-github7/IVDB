@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
 import * as firebase from 'firebase';
 import { Observable } from 'rxjs';
-import { AuthService } from 'src/app/common/services/auth.service';
+import { AuthService } from '../../core/auth.service';
 import { User } from 'src/app/models/user/user';
 
 

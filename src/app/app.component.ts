@@ -1,9 +1,9 @@
 import { Component, Injectable, OnInit } from '@angular/core';
-import { AuthService } from './common/services/auth.service';
 import { Router, ActivatedRoute } from '@angular/router';
-import { UserService } from './common/services/user.service';
-import * as firebase from 'firebase';
-import { ProfileService } from './common/services/profile.service';
+import { AuthService } from './core/auth.service';
+import { ProfileService } from './services/profile.service';
+import { UserService } from './services/user.service';
+// import * as firebase from 'firebase';
 
 
 @Component({
