@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ForumsService } from 'src/app/common/services/forums.service';
+import { ForumsService } from '../../../services/forums.service';
 import { Forum } from 'src/app/models/content/Forum';
 
 @Component({

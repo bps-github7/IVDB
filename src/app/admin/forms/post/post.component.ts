@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { ForumInfoService } from 'src/app/common/services/forum-info.service';
-import { GameInfoService } from 'src/app/common/services/gameinfo.service';
+import { ForumInfoService } from 'src/app/services/forum-info.service';
+import { GameInfoService } from 'src/app/services/gameinfo.service';
 
 @Component({
   selector: 'post',

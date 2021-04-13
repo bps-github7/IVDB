@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { GameInfoService } from 'src/app/common/services/gameinfo.service';
-import { GameService } from 'src/app/common/services/game.service';
 import { Route } from '@angular/compiler/src/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { take } from 'rxjs/operators';
+import { GameService } from 'src/app/services/game.service';
+import { GameInfoService } from 'src/app/services/gameinfo.service';
 
 @Component({
   selector: 'app-game-form',
@@ -43,8 +43,7 @@ export class GameFormComponent implements OnInit {
             this.id = this.route.snapshot.paramMap.get('id');
             
             if (this.id)
-                //you assigned this twice here- is that nessecary/ non-problematic?
-                this.game = this.gameService.get$(this.id).subscribe(g =>this.game = g);
+                this.gameService.get$(this.id).subscribe(g => this.game = g);
 
     }
 

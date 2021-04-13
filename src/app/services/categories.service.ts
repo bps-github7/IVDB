@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
-import { GameDescriptor } from 'src/app/models/content/GameDescriptor';
+import { GameDescriptor } from 'src/app/models/content/game-descriptor';
 
 @Injectable({
     providedIn: 'root'

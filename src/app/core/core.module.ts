@@ -1,3 +1,4 @@
+import { RouterModule } from '@angular/router';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { HomeComponent } from './home/home.component';
 import { NgModule, Optional, SkipSelf } from '@angular/core';
@@ -15,12 +16,14 @@ import { SharedModule } from '../shared/shared.module';
   ],
   imports: [
     CommonModule,
-    SharedModule
+    SharedModule,
+    RouterModule
   ],
   providers: [
     AuthService,
   ],
   exports: [
+      RouterModule,
       HomeComponent,
       DropdownComponent,
       NotFoundComponent

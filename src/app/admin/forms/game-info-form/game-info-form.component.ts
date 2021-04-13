@@ -1,8 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
-import { CategoriesService } from 'src/app/common/services/categories.service';
-import { GameInfoService } from 'src/app/common/services/gameinfo.service';
-import { GameDescriptor } from 'src/app/models/content/GameDescriptor';
+import { GameInfoService } from 'src/app/services/gameinfo.service';
 // import { GameDescriptor } from 'src/app/models/content/GameDescriptor';
 // import { GameInfo } from 'src/app/models/content/GameInfo';
 // import { VgConsole } from 'src/app/models/content/VgConsole';

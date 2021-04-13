@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { GameInfoService } from 'src/app/common/services/gameinfo.service';
+import { GameInfoService } from '../../services/gameinfo.service';
 
 @Component({
   selector: 'game-info',

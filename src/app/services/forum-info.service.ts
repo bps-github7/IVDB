@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
-import { GameDescriptor } from 'src/app/models/content/GameDescriptor';
+import { GameDescriptor } from 'src/app/models/content/game-descriptor';
 
 @Injectable({
   providedIn: 'root'

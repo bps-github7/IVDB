@@ -4,9 +4,8 @@ import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument 
 import { Observable } from 'rxjs';
 import { map, take } from 'rxjs/operators';
 import { Game } from 'src/app/models/content/Game';
-import { GameInfo } from 'src/app/models/content/GameInfo';
-import { GameDescriptor } from 'src/app/models/content/GameDescriptor';
-import { VgConsole } from 'src/app/models/content/VgConsole';
+import { GameDescriptor } from '../models/content/game-descriptor';
+import { VgConsole } from '../models/content/vg-console';
 
 @Injectable({
   providedIn: 'root'

@@ -1,10 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { ActivatedRoute, Router } from '@angular/router';
-import { AuthService } from '../common/services/auth.service';
-import { ProfileService } from '../common/services/profile.service';
-import { UserService } from '../common/services/user.service';
-import { Profile } from '../models/user/profile';
+import { Profile } from 'src/app/models/user/profile';
+import { ProfileService } from 'src/app/services/profile.service';
 
 class UserProfile implements Profile {
     nickname: string;

@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormControl } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { GameInfoService } from '../common/services/gameinfo.service';
-import { PreferencesService } from '../common/services/preferences.service';
-import { Game } from '../models/content/Game';
-import { Preferences } from '../models/user/preferences';
+import { Game } from 'src/app/models/content/Game';
+import { Preferences } from 'src/app/models/user/preferences';
+import { GameInfoService } from 'src/app/services/gameinfo.service';
+import { PreferencesService } from 'src/app/services/preferences.service';
 
 class UserPreferences implements Preferences {
     wouldYouPlay?: (string | Game)[];

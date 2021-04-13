@@ -2,14 +2,6 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 
-import { AuthGuard } from '../common/services/auth-guard.service';
-import { AdminAuthGuard } from '../common/services/admin-auth-guard.service';
-import { ServicesModule } from '../common/services/services.module';
-import { CarouselComponent } from './components/carousel/carousel.component';
-import { DropdownComponent } from './components/dropdown/dropdown.component';
-import { FavoriteComponent } from './components/favorite/favorite.component';
-import { HomeComponent } from './components/home/home.component';
-import { NotFoundComponent } from './components/not-found/not-found.component';
 import { PanelComponent } from './components/panel/panel.component';
 import { SearchComponent } from './components/search/search.component';
 import { ZippyComponent } from './components/zippy/zippy.component';
@@ -20,16 +12,18 @@ import { ReactiveSelectFormControlComponent } from './components/reactive-select
 import { ReactiveDefaultFormControlComponent } from './components/reactive-default-form-control/reactive-default-form-control.component';
 import { ReactiveTextareaFormControlComponent } from './components/reactive-textarea-form-control/reactive-textarea-form-control.component';
 import { ReactiveFormControlComponent } from './components/reactive-form-control/reactive-form-control.component';
+import { AdminAuthGuard } from '../services/admin-auth-guard.service';
+import { AuthGuard } from '../services/auth-guard.service';
+import { ServicesModule } from '../services/services.module';
+import { CarouselComponent } from './components/carousel/carousel.component';
+import { FavoriteComponent } from './components/favorite/favorite.component';
 
 
 
 @NgModule({
   declarations: [
     CarouselComponent,
-    DropdownComponent,
     FavoriteComponent,
-    HomeComponent,
-    NotFoundComponent,
     SearchComponent,
     ZippyComponent,
     PanelComponent,
@@ -59,10 +53,7 @@ import { ReactiveFormControlComponent } from './components/reactive-form-control
     FormsModule,
     ReactiveFormsModule,
     CarouselComponent,
-    DropdownComponent,
     FavoriteComponent,
-    HomeComponent,
-    NotFoundComponent,
     SearchComponent,
     ZippyComponent,
     PanelComponent,

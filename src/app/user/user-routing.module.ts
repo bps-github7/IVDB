@@ -45,6 +45,7 @@ const routes: Routes = [
   ]
 })
 export class UserRoutingModule { } export const UserComponents = [
+    UserComponent,
     WelcomeComponent,
     CreateAccountComponent,
     ViewProfileComponent,
