@@ -6,7 +6,6 @@ import { ContribRoutingModule } from './contrib-routing';
 import { SuggestionService } from '../services/suggestion.service';
 import { ContribComponent } from './contrib.component';
 import { ContribDashboardComponent } from './contrib-dashboard/contrib-dashboard.component';
-import { ContributionsComponent } from './contributions/contributions.component';
 import { EditContributionsComponent } from './edit-contributions/edit-contributions.component';
 import { EditReviewComponent } from './edit-review/edit-review.component';
 import { ProvideRatingComponent } from './provide-rating/provide-rating.component';
@@ -17,7 +16,9 @@ import { ViewReviewsComponent } from './view-reviews/view-reviews.component';
 import { ViewUserContribComponent } from './view-user-contrib/view-user-contrib.component';
 import { RatingDashboardComponent } from './rating-dashboard/rating-dashboard.component';
 import {MatButtonToggleModule} from '@angular/material/button-toggle';
-
+import {MatSlideToggleModule} from '@angular/material/slide-toggle';
+import { ContribHomeComponent } from './contrib-home/contrib-home.component';
+import { ViewContribsComponent } from './view-contribs/view-contribs.component'; 
 
 
 @NgModule({
@@ -25,7 +26,6 @@ import {MatButtonToggleModule} from '@angular/material/button-toggle';
     ContribComponent,
     CommentSectionComponent,
     ContribDashboardComponent,
-    ContributionsComponent,
     EditContributionsComponent,
     EditReviewComponent,
     ProvideRatingComponent,
@@ -34,13 +34,16 @@ import {MatButtonToggleModule} from '@angular/material/button-toggle';
     ViewRatingsComponent,
     ViewReviewsComponent,
     ViewUserContribComponent,
-    RatingDashboardComponent
+    RatingDashboardComponent,
+    ContribHomeComponent,
+    ViewContribsComponent
 ],
   imports: [
     CommonModule,
     SharedModule,
     ContribRoutingModule,
-    MatButtonToggleModule
+    MatButtonToggleModule,
+    MatSlideToggleModule
         
   ],
   providers: [

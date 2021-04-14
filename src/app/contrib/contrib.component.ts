@@ -9,7 +9,7 @@ import { Component } from '@angular/core';
   
   export class ContribComponent {
     title = 'contrib-module';
-      
+    show = false;      
     constructor() {  }
 }
   
