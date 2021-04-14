@@ -5,6 +5,7 @@
 
 @import url('https://fonts.googleapis.com/css?family=Lato|ZCOOL+KuaiLe&display=swap');
 
+@import "~@angular/material/prebuilt-themes/deeppurple-amber.css";
 
 
 /*highlights input fields that are invalid w. these form-control attrs*/

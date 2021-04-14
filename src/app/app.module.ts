@@ -8,10 +8,9 @@ import { AngularFireModule } from '@angular/fire';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { CustomFormsModule } from 'ng2-validation';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
-
 import { AppRoutingModule } from './app.routing';
 import { CoreModule } from './core/core.module';
-
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 
 //declarations/ bootstraps
@@ -36,6 +35,7 @@ import { ServicesModule } from './services/services.module';
     ReactiveFormsModule,
     CustomFormsModule,
     CoreModule,
+    BrowserAnimationsModule,
     AppRoutingModule,
     ServicesModule.forRoot(),
   ],

@@ -10,6 +10,7 @@ import { FormBuilder } from '@angular/forms';
 export class EditContributionsComponent implements OnInit {
 
     form: any;
+    selected : string;
 
   constructor(
     private route : ActivatedRoute,

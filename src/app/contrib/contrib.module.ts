@@ -16,6 +16,7 @@ import { ViewRatingsComponent } from './view-ratings/view-ratings.component';
 import { ViewReviewsComponent } from './view-reviews/view-reviews.component';
 import { ViewUserContribComponent } from './view-user-contrib/view-user-contrib.component';
 import { RatingDashboardComponent } from './rating-dashboard/rating-dashboard.component';
+import {MatButtonToggleModule} from '@angular/material/button-toggle';
 
 
 
@@ -34,13 +35,12 @@ import { RatingDashboardComponent } from './rating-dashboard/rating-dashboard.co
     ViewReviewsComponent,
     ViewUserContribComponent,
     RatingDashboardComponent
-
-
 ],
   imports: [
     CommonModule,
     SharedModule,
     ContribRoutingModule,
+    MatButtonToggleModule
         
   ],
   providers: [

@@ -94,27 +94,27 @@
                     </ul>
                 </li>
 
-                <li class="dd-menu-trigger"><a routerLink="/rate">Edit</a>
+                <li class="dd-menu-trigger"><a routerLink="/contrib/edit">Edit</a>
                     <ul class="sub-menu">
                         <li class="sub-sub-top"><a
                                 [routerLink]="['/user/sign_in/create_profile/', appUser?.uid]">Profile</a></li>
                                 <!---WHY?--->
                         <li><a [routerLink]="['/preferences', appUser?.uid, appUser?.username]">Preferences</a>
                         </li>
-                        <li><a href="#" [routerLink]="['/contrib', appUser?.username]">Contributions</a>
+                        <li><a routerLink="contrib/edit">Contributions</a>
                         </li>
                     </ul>
                 </li>
-                <li class="dd-menu-trigger"><a [routerLink]="['/contrib/']">Contribute</a>
+                <li class="dd-menu-trigger"><a routerLink="/contrib/view">Contribute</a>
                     <ul class="sub-menu">
                         <li class="sub-sub-top">
-                            <a routerLink="contrib/ratings">Rate</a>
+                            <a routerLink="contrib/view/ratings">Rate</a>
                         </li>
                         <li>
-                            <a routerLink="/contrib/review">Review</a>
+                            <a routerLink="/contrib/view/review">Review</a>
                         </li>
                         <li><a
-                            routerLink="/contrib/misc">Misc</a>
+                            routerLink="/contrib/view/misc">Misc</a>
                         </li>
                     </ul>
                 </li>
