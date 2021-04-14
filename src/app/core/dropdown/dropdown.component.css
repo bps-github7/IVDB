@@ -36,7 +36,7 @@ nav ul li ul li {
     width : 180px;
 }
 
-.dd-menu-trigger a {
+.dd-menu-trigger a, p {
     color: white;
     text-decoration: none;
     line-height: 50px;

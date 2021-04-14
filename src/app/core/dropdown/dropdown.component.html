@@ -21,10 +21,10 @@
                 </li>
             </ul>
         </li>
-        <li class="dd-menu-trigger"><a routerLink="/forum">Forum</a>
+        <li class="dd-menu-trigger"><a routerLink="/forum/home">Forum</a>
             <ul class="sub-menu">
-                <li><a routerLink="/forum/view-threads">View Threads</a></li>
-                <li><a routerLink="/forum/create-thread">Create a Thread</a></li>
+                <li><a routerLink="/forum/forums">View Threads</a></li>
+                <li><a routerLink="/forum/threads/new">Create a Thread</a></li>
                 <li class="sub-sub-menu-trigger"><a [routerLink]="['forum/my-posts/', appUser?.username]">My posts</a>
                     <ul class="sub-sub-menu">
                         <!--  -->
@@ -38,7 +38,7 @@
         <li class="dd-menu-trigger"><a routerLink="/games">Games</a>
             <ul class="sub-menu">
                 <!-- sub sub menu here -->
-                <li class="sub-sub-menu-trigger"><a routerLink="/games/view">Browse Games</a>
+                <li class="sub-sub-menu-trigger"><a routerLink="/games/all">Browse Games</a>
                     <ul class="sub-sub-menu">
                         <!-- TODO: these all should have query params: category="role-playing | combat | sports",  -->
                         <li class="sub-sub-top"><a href="#">Platformer</a></li>
@@ -47,23 +47,13 @@
                         <li><a href="#">Sports</a></li>
                     </ul>
                 </li>
-                <li class="sub-sub-menu-trigger"><a routerLink="/games/info/platforms">Platforms</a>
-                    <ul class="sub-sub-menu">
-                        <li class="sub-sub-top"><a routerLink="/games/info/platforms/sony">Sony</a></li>
-                        <li><a routerLink="/games/info/platforms/nintendo">Nintendo</a></li>
-                        <li><a routerLink="/games/info/platforms/microsoft">Microsoft</a></li>
-                        <li><a routerLink="/games/info/platforms/pc">PC</a></li>
-
-                    </ul>
-                </li>
-                <li><a routerLink="/games/info/creators">Creators</a></li>
-                <li><a routerLink="/games/info/categories">Categories</a></li>
+                <li><a routerLink="/games/info">Info</a></li>
                 <!-- would be cool to add this detail later- for gizmos and trivia that does not fit into the above categories likadis...
                     <li><a href="#">Misc & historical</a></li>           -->
             </ul>
         </li>
         <li class="dd-menu-trigger" *ngIf="appUser; else anonymousUser" id="profile-nub">
-            <a [routerLink]="['/profile/', appUser?.uid, appUser?.username]">
+            <a [routerLink]="['user/profile/', appUser?.uid, appUser?.username]">
                 {{ appUser?.username }}
             </a>
             <!-- can non admin users access this? temporarily, yes.
@@ -94,12 +84,12 @@
                     </ul>
                 </li>
 
-                <li class="dd-menu-trigger"><a routerLink="/contrib/edit">Edit</a>
+                <li class="dd-menu-trigger"><p>Edit</p>
                     <ul class="sub-menu">
                         <li class="sub-sub-top"><a
-                                [routerLink]="['/user/sign_in/create_profile/', appUser?.uid]">Profile</a></li>
+                                [routerLink]="['/user/sign-in/create-profile/', appUser?.uid]">Profile</a></li>
                                 <!---WHY?--->
-                        <li><a [routerLink]="['/preferences', appUser?.uid, appUser?.username]">Preferences</a>
+                        <li><a [routerLink]="['/user/preferences/', appUser?.uid, appUser?.username]">Preferences</a>
                         </li>
                         <li><a routerLink="contrib/edit">Contributions</a>
                         </li>
@@ -114,7 +104,7 @@
                             <a routerLink="/contrib/view/review">Review</a>
                         </li>
                         <li><a
-                            routerLink="/contrib/view/misc">Misc</a>
+                            routerLink="/contrib/suggest">Suggest</a>
                         </li>
                     </ul>
                 </li>

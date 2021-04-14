@@ -21,6 +21,12 @@ const routes: Routes = [
             path: 'all',
             component: ViewAllPostsComponent
         },
+
+        //sort of redundant ya sea
+        {
+            path: 'forums',
+            component: ForumsListComponent
+        },
         {
             path: ':forum-id',
             component: ViewForumComponent
