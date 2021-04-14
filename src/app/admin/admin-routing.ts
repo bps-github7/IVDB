@@ -14,8 +14,10 @@ import { PostComponent } from './forms/post/post.component';
 import { DescriptorFormComponent } from './forms/descriptor-form/descriptor-form.component';
 import { ConsoleInfoFormComponent } from './forms/console-info-form/console-info-form.component';
  
+
+//need to reincorperate the admin-auth-guard
 const routes: Routes = [
-    { path: '', component: AdminComponent, canActivate: [AdminAuthGuard],
+    { path: '', component: AdminComponent,
     children: [
         { path: 'game', component: GameComponent },
         { path: 'forum', component: ForumDashboardComponent },

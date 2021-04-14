@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { AuthService } from 'src/app/common/services/auth.service';
-import { ForumPostService } from 'src/app/common/services/forum-post.service';
-import { UserService } from 'src/app/common/services/user.service';
-import { ForumPost } from 'src/app/models/content/ForumPost';
+import { AuthService } from 'src/app/core/auth.service';
+import { ForumPostService } from 'src/app/services/forum-post.service';
+import { UserService } from 'src/app/services/user.service';
+import { ForumPost } from 'src/app/models/content/forum-post';
 
 @Component({
   selector: 'app-create-post',

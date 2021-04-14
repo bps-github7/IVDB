@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { ForumsService } from 'src/app/common/services/forums.service';
-import { ThreadService } from 'src/app/common/services/thread.service';
+import { ForumsService } from 'src/app/services/forums.service';
+import { ThreadService } from 'src/app/services/thread.service';
 import { Forum } from 'src/app/models/content/Forum';
 import { Thread } from 'src/app/models/content/Thread';
 

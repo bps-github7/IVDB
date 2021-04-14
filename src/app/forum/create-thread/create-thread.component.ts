@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
-import { ThreadService } from 'src/app/common/services/thread.service';
-import { UserService } from 'src/app/common/services/user.service';
+import { ThreadService } from 'src/app/services/thread.service';
+import { UserService } from 'src/app/services/user.service';
 import { Thread } from 'src/app/models/content/Thread';
 
 @Component({

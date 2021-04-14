@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ForumInfoService } from 'src/app/common/services/forum-info.service';
+import { ForumInfoService } from 'src/app/services/forum-info.service';
 
 @Component({
   selector: 'app-home',

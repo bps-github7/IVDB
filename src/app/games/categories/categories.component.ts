@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { GameInfoService } from 'src/app/common/services/gameinfo.service';
+import { GameInfoService } from 'src/app/services/gameinfo.service';
 
 @Component({
   selector: 'app-categories',

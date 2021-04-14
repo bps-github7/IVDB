@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { GameService } from '../common/services/game.service';
+import { GameService } from '../../services/game.service';
 import { Router, ActivatedRoute } from '@angular/router';
-import { Game } from '../models/content/Game';
-import { UserService } from '../common/services/user.service';
-import { AuthService } from '../common/services/auth.service';
-import { User } from '../models/user/user';
+import { Game } from '../../models/content/game';
+import { UserService } from '../../services/user.service';
+import { AuthService } from '../../core/auth.service';
+import { User } from '../../models/user/user';
 
 @Component({
   selector: 'view-game',

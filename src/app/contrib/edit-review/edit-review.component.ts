@@ -1,8 +1,8 @@
 import { NullTemplateVisitor } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ReviewService } from '../common/services/review.service';
-import { Review } from '../models/content/Review';
+import { ReviewService } from '../../services/review.service';
+import { Review } from '../../models/content/review';
 
 class Game_Review implements Review {
     username = null;

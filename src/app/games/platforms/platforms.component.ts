@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { GameInfoService } from '../common/services/gameinfo.service';
+import { GameInfoService } from '../../services/gameinfo.service';
 
 @Component({
   selector: 'platforms',

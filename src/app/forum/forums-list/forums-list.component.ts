@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { ForumsService } from 'src/app/common/services/forums.service';
+import { ForumsService } from 'src/app/services/forums.service';
 
 @Component({
   selector: 'forums-list',

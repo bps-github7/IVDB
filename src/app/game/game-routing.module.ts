@@ -42,4 +42,5 @@ export class GameRoutingModule { } export const GameComponents = [
     DisplayReviewComponent,
     GameCardComponent,
     ViewGameComponent,
+    GameComponent
 ]

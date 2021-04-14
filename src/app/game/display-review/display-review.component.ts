@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { GameService } from '../common/services/game.service';
-import { ReviewService } from '../common/services/review.service';
-import { Game } from '../models/content/Game';
-import { Review } from '../models/content/Review';
+import { GameService } from '../../services/game.service';
+import { ReviewService } from '../../services/review.service';
+import { Game } from '../../models/content/game';
+import { Review } from '../../models/content/review';
 
 @Component({
     selector: 'app-display-review',

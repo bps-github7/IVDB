@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { RatingService } from 'src/app/common/services/rating.service';
-import { ReviewService } from 'src/app/common/services/review.service';
+import { RatingService } from 'src/app/services/rating.service';
+import { ReviewService } from 'src/app/services/review.service';
 import { Rating } from 'src/app/models/content/Rating';
 import { Review } from 'src/app/models/content/Review';
 

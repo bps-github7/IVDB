@@ -12,7 +12,9 @@
                     Please create an account and sign in to rate or review
                 </ng-template>
                -->
-                <provide-rating [game_title]="game.title" [username]="username"></provide-rating>
+                <!--TODO: put this in the module declarations 
+                    
+                    <provide-rating [game_title]="game.title" [username]="username"></provide-rating> -->
             </div>
         </div>
     </div>
@@ -21,7 +23,9 @@
 
         <!-- the way you look the comments up will need to be more rigerous since 
         two types of content could have the same content id. -->
-        <comment-section [contentId]="game_id" [username]="username"></comment-section>
+        <!--TODO: put this in module declarations:
+            
+            <comment-section [contentId]="game_id" [username]="username"></comment-section> -->
     </div>
     <footer>
         <!-- Note we need to make Game attribute console_maker more specific, console_makers is simply a way to categorize games-->

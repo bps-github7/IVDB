@@ -5,8 +5,8 @@
 <zippy title="Ratings">
     <ul>
         <li *ngFor="let r of ratings">
-            <!-- {{r.game_title}} : {{ r.value }} -->
-            {{r.game_title}} : <display-rating [value]="r.value"></display-rating>
+            {{r.game_title}} : {{ r.value }}
+            <!-- {{r.game_title}} : <display-rating [value]="r.value"></display-rating> -->
             <!-- <br> -->
         </li>
     </ul>

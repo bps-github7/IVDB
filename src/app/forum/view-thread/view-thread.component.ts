@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { ForumPostService } from 'src/app/common/services/forum-post.service';
-import { ForumPost } from 'src/app/models/content/ForumPost';
+import { ForumPostService } from 'src/app/services/forum-post.service';
+import { ForumPost } from 'src/app/models/content/forum-post';
 
 @Component({
   selector: 'view-thread',
