@@ -14,6 +14,8 @@ import { SuggestNewComponent } from './suggest-new/suggest-new.component';
 import { ViewPostsComponent } from './view-posts/view-posts.component';
 import { ViewRatingsComponent } from './view-ratings/view-ratings.component';
 import { ViewReviewsComponent } from './view-reviews/view-reviews.component';
+import { ViewUserContribComponent } from './view-user-contrib/view-user-contrib.component';
+import { RatingDashboardComponent } from './rating-dashboard/rating-dashboard.component';
 
 
 
@@ -29,7 +31,9 @@ import { ViewReviewsComponent } from './view-reviews/view-reviews.component';
     SuggestNewComponent,
     ViewPostsComponent,
     ViewRatingsComponent,
-    ViewReviewsComponent
+    ViewReviewsComponent,
+    ViewUserContribComponent,
+    RatingDashboardComponent
 
 
 ],

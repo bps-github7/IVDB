@@ -1,5 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { ViewUserContribComponent } from './view-user-contrib/view-user-contrib.component';
+import { ContribDashboardComponent } from './contrib-dashboard/contrib-dashboard.component';
 import { ContribComponent } from './contrib.component';
 import { ContributionsComponent } from './contributions/contributions.component';
 import { EditContributionsComponent } from './edit-contributions/edit-contributions.component';
@@ -21,7 +23,11 @@ const routes: Routes = [
         },
         {
             path: 'view',
-            component: ContributionsComponent
+            component: ContribDashboardComponent
+        },
+        {
+            path: 'view/:id',
+            component: ViewUserContribComponent
         },
         {
             path: 'view/posts',

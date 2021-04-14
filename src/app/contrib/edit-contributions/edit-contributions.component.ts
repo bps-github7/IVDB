@@ -1,4 +1,6 @@
+import { ActivatedRoute } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder } from '@angular/forms';
 
 @Component({
   selector: 'app-edit-contributions',
@@ -7,7 +9,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class EditContributionsComponent implements OnInit {
 
-  constructor() { }
+    form: any;
+
+  constructor(
+    private route : ActivatedRoute,
+    private fb : FormBuilder) {
+
+        this.form = fb.group({
+            type : ['']
+        })
+     }
 
   ngOnInit(): void {
   }

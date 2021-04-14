@@ -188,7 +188,7 @@ nav header ul ul {
 
     margin-top: 0.35rem;
 
-}
+} 
 
 nav header ul li {
     display: inline-block;
@@ -200,3 +200,4 @@ nav header ul li {
 nav header #searchbar {
     color: black;
 }
+

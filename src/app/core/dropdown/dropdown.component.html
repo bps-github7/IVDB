@@ -101,16 +101,20 @@
                                 <!---WHY?--->
                         <li><a [routerLink]="['/preferences', appUser?.uid, appUser?.username]">Preferences</a>
                         </li>
-                        <li><a href="#" [routerLink]="['/contributions', appUser?.username]">Contributions</a>
+                        <li><a href="#" [routerLink]="['/contrib', appUser?.username]">Contributions</a>
                         </li>
                     </ul>
                 </li>
-                <li class="dd-menu-trigger"><a [routerLink]="['/contributions/',  appUser?.username]">Contribute</a>
+                <li class="dd-menu-trigger"><a [routerLink]="['/contrib/']">Contribute</a>
                     <ul class="sub-menu">
-                        <li class="sub-sub-top"><a
-                                [routerLink]="['/contributions/ratings', appUser?.username]">Rate</a>
+                        <li class="sub-sub-top">
+                            <a routerLink="contrib/ratings">Rate</a>
                         </li>
-                        <li><a [routerLink]="['/contributions/reviews', appUser?.username]">Review</a>
+                        <li>
+                            <a routerLink="/contrib/review">Review</a>
+                        </li>
+                        <li><a
+                            routerLink="/contrib/misc">Misc</a>
                         </li>
                     </ul>
                 </li>
