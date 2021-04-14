@@ -57,16 +57,5 @@ const routes: Routes = [
     SharedModule
   ]
 })
-export class ContentRoutingModule { } export const ContentComponents = [
-    ContentComponent,
-    ContentDashboardComponent,
-    WatchlistsComponent,
-    NewsComponent,
-    ReccomendationsComponent,
-    RecentlyPostedComponent,
-    StreamingComponent,
-    ViewAllRatingsComponent,
-    ViewAllReviewsComponent,
-
-]
+export class ContentRoutingModule { }
  

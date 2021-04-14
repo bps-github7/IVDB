@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { ModuleWithProviders, NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from '../services/auth-guard.service';
 import { SharedModule } from '../shared/shared.module';
@@ -17,6 +17,7 @@ const routes: Routes = [
     { path: '', component: UserComponent,
         children : [
             { path: 'welcome', component: WelcomeComponent },
+            { path: 'sign_in', component: SignInComponent },
             { path: 'sign_in/createAccount', component: CreateAccountComponent },
             { path: 'profile/:uid', component: ViewProfileComponent, canActivate: [AuthGuard] },
             { path: 'preferences/:uid', component: EditPreferencesComponent, canActivate: [AuthGuard] },
@@ -34,25 +35,4 @@ const routes: Routes = [
     
 ];
 
-@NgModule({
-  imports: [
-    SharedModule,
-    RouterModule.forChild(routes)],
-    // providers: [AuthGuard],
-  exports: [
-    RouterModule,
-    SharedModule
-  ]
-})
-export class UserRoutingModule { } export const UserComponents = [
-    UserComponent,
-    WelcomeComponent,
-    CreateAccountComponent,
-    ViewProfileComponent,
-    EditPreferencesComponent,
-    ForgotPasswordComponent,
-    EditProfileComponent,
-    ViewProfileComponent,
-    SignInComponent,
-    ChangePasswordComponent
-]
+export const UserRoutingModule = RouterModule.forChild(routes);

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Rating } from '../models/content/rating';
-import { RatingService } from '../common/services/rating.service';
+import { Rating } from '../../models/content/rating';
+import { RatingService } from '../../services/rating.service';
 
 @Component({
   selector: 'app-view-ratings',

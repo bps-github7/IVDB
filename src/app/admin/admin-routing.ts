@@ -1,3 +1,4 @@
+import { AdminAuthGuard } from './../services/admin-auth-guard.service';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.component';
@@ -10,9 +11,11 @@ import { ForumDashboardComponent } from './forum/forum-dashboard/forum-dashboard
 import { AdminComponent } from './admin.component';
 import { SharedModule } from '../shared/shared.module';
 import { PostComponent } from './forms/post/post.component';
+import { DescriptorFormComponent } from './forms/descriptor-form/descriptor-form.component';
+import { ConsoleInfoFormComponent } from './forms/console-info-form/console-info-form.component';
  
 const routes: Routes = [
-    { path: '', component: AdminComponent,
+    { path: '', component: AdminComponent, canActivate: [AdminAuthGuard],
     children: [
         { path: 'game', component: GameComponent },
         { path: 'forum', component: ForumDashboardComponent },
@@ -39,14 +42,6 @@ export class AdminRoutingModule { } export const AdminComponents = [
 
     // these arent being put in the declarations like they are supposed to ? maybe this  set up is not needed? complicates imports/exports
     // PostComponent   
-    AdminDashboardComponent,
-    GameInfoComponent,
-    GameComponent,
-    ForumDashboardComponent,
-    ForumInfoFormComponent,
-    ManageForumsComponent,
-    GameComponent,
-    PostComponent,
-    GameInfoFormComponent
+
 ]
  

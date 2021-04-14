@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { AuthService } from 'src/app/common/services/auth.service';
-import { GameService } from 'src/app/common/services/game.service';
-import { GameInfoService } from 'src/app/common/services/gameinfo.service';
+import { AuthService } from '../../core/auth.service';
+import { GameService } from '../../services/game.service';
+import { GameInfoService } from '../../services/gameinfo.service';
 
 @Component({
   selector: 'app-display',

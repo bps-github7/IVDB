@@ -1,11 +1,31 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ContentComponents, ContentRoutingModule } from './content-routing';
+import { ContentRoutingModule } from './content-routing';
+import { ContentComponent } from './content.component';
+import { ContentDashboardComponent } from './content-dashboard/content-dashboard.component';
+import { NewsComponent } from './news/news.component';
+import { ReccomendationsComponent } from './reccomendations/reccomendations.component';
+import { RecentlyPostedComponent } from './recently-posted/recently-posted.component';
+import { StreamingComponent } from './streaming/streaming.component';
+import { ViewAllRatingsComponent } from './view-all-ratings/view-all-ratings.component';
+import { ViewAllReviewsComponent } from './view-all-reviews/view-all-reviews.component';
+import { WatchlistsComponent } from './watchlists/watchlists.component';
 
 
 
 @NgModule({
-  declarations: [ContentComponents],
+  declarations: [
+    ContentComponent,
+    ContentDashboardComponent,
+    WatchlistsComponent,
+    NewsComponent,
+    ReccomendationsComponent,
+    RecentlyPostedComponent,
+    StreamingComponent,
+    ViewAllRatingsComponent,
+    ViewAllReviewsComponent,
+
+],
   imports: [
     ContentRoutingModule,
     CommonModule

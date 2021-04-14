@@ -4,10 +4,8 @@ import { Component } from '@angular/core';
     selector: 'admin-root',
     templateUrl: './admin.component.html',
     styleUrls: ['./admin.component.css']
-  })
-  
-  
-  export class AdminComponent {
+})
+export class AdminComponent {
     selected : boolean = false;
     title = 'admin-module';
       
