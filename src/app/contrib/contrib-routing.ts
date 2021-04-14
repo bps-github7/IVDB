@@ -15,7 +15,7 @@ const routes: Routes = [
     { path: '', component: ContribComponent,
     children: [
         {
-            path: '',
+            path: 'home',
             component: ContribHomeComponent
         },
         {

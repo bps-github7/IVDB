@@ -10,7 +10,9 @@ import { StreamingComponent } from './streaming/streaming.component';
 import { ViewAllRatingsComponent } from './view-all-ratings/view-all-ratings.component';
 import { ViewAllReviewsComponent } from './view-all-reviews/view-all-reviews.component';
 import { WatchlistsComponent } from './watchlists/watchlists.component';
-
+import { ContentHomeComponent } from './content-home/content-home.component';
+import {MatButtonToggleModule} from '@angular/material/button-toggle';
+import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 
 
 @NgModule({
@@ -24,11 +26,14 @@ import { WatchlistsComponent } from './watchlists/watchlists.component';
     StreamingComponent,
     ViewAllRatingsComponent,
     ViewAllReviewsComponent,
+    ContentHomeComponent,
 
 ],
   imports: [
     ContentRoutingModule,
-    CommonModule
+    CommonModule,
+    MatButtonToggleModule,
+    MatSlideToggleModule
   ]
 })
 export class ContentModule { }

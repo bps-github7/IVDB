@@ -9,7 +9,7 @@ import { Component } from '@angular/core';
   
   export class ContentComponent {
     title = 'content-module';
-      
+    show : boolean = false;      
     constructor() {  }
 }
   

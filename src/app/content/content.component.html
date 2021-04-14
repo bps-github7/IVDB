@@ -1,3 +1,10 @@
-<h3>Now in Content module!</h3>
-<content-dashboard></content-dashboard>
+<h1>Content</h1>
+<h3>official posts on the Internet Videogame Database</h3>
+<div>
+    Show dashboard: <mat-slide-toggle
+    (change)=" show = ! show"
+    ></mat-slide-toggle>
+    <div *ngIf="show">Dashboard</div>
+</div>
+
 <router-outlet></router-outlet>
