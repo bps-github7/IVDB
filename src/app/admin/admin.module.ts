@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { AdminComponents, AdminRoutingModule } from './admin-routing';
+import { AdminRoutingModule } from './admin-routing';
 import { SharedModule } from '../shared/shared.module';
 import { PostComponent } from './forms/post/post.component';
 import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.component';

@@ -38,8 +38,9 @@
         <li class="dd-menu-trigger"><a routerLink="/games">Games</a>
             <ul class="sub-menu">
                 <!-- sub sub menu here -->
-                <li class="sub-sub-menu-trigger"><a routerLink="/games">Browse Games</a>
+                <li class="sub-sub-menu-trigger"><a routerLink="/games/view">Browse Games</a>
                     <ul class="sub-sub-menu">
+                        <!-- TODO: these all should have query params: category="role-playing | combat | sports",  -->
                         <li class="sub-sub-top"><a href="#">Platformer</a></li>
                         <li><a href="#">RPG</a></li>
                         <li><a href="#">Combat</a></li>
@@ -65,7 +66,10 @@
             <a [routerLink]="['/profile/', appUser?.uid, appUser?.username]">
                 {{ appUser?.username }}
             </a>
-            <!-- can non admin users access this? -->
+            <!-- can non admin users access this? temporarily, yes.
+            
+                Forum, Games, Profile, Admin routes are all in disarray.
+            -->
             <ul class="sub-menu">
                 <li *ngIf="appUser.isAdmin" class="sub-sub-menu-trigger"><a routerLink="/admin/game">Adminster</a>
                     <ul class=sub-sub-menu>
@@ -76,7 +80,7 @@
                             <a routerLink="admin/game/info/new">Edit Game Info</a>
                         </li>
                         <li>
-                            <!-- This is the right path but too specific (for now) for us to debug -->
+                            
                             <a routerLink="admin/forum/info/new">Forums</a>
 
                         </li>
@@ -94,6 +98,7 @@
                     <ul class="sub-menu">
                         <li class="sub-sub-top"><a
                                 [routerLink]="['/user/sign_in/create_profile/', appUser?.uid]">Profile</a></li>
+                                <!---WHY?--->
                         <li><a [routerLink]="['/preferences', appUser?.uid, appUser?.username]">Preferences</a>
                         </li>
                         <li><a href="#" [routerLink]="['/contributions', appUser?.username]">Contributions</a>

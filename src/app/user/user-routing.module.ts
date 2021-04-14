@@ -17,13 +17,13 @@ const routes: Routes = [
     { path: '', component: UserComponent,
         children : [
             { path: 'welcome', component: WelcomeComponent },
-            { path: 'sign_in', component: SignInComponent },
-            { path: 'sign_in/createAccount', component: CreateAccountComponent },
+            { path: 'sign-in', component: SignInComponent },
+            { path: 'sign-in/createAccount', component: CreateAccountComponent },
             { path: 'profile/:uid', component: ViewProfileComponent, canActivate: [AuthGuard] },
             { path: 'preferences/:uid', component: EditPreferencesComponent, canActivate: [AuthGuard] },
-            { path: 'sign_in/createAccount/forgotPassword', component: ForgotPasswordComponent },
+            { path: 'sign-in/createAccount/forgotPassword', component: ForgotPasswordComponent },
             // change uid here to displayname to be user and search friendlier
-            { path: 'sign_in/create_profile/:uid', component: EditProfileComponent, canActivate: [AuthGuard] },
+            { path: 'sign-in/create-profile/:uid', component: EditProfileComponent, canActivate: [AuthGuard] },
             
             //i think you need to refactor here so that other users can view another users profile.
             // that does not need route guard.

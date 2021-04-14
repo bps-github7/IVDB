@@ -20,7 +20,7 @@ const routes: Routes = [
             component: WatchlistsComponent
         },
         {
-            path: 'streaming',
+            path: 'streams',
             component: StreamingComponent
         },
         {
@@ -32,7 +32,7 @@ const routes: Routes = [
             component: ReccomendationsComponent
         },
         {
-            path: 'recent',
+            path: 'recently-posted',
             component: RecentlyPostedComponent
         },
         {

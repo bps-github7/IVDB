@@ -24,7 +24,7 @@ const routes: Routes = [
         { path: 'forum/:id', component: ManageForumsComponent },
         { path: 'forum/info', component: ForumInfoFormComponent }, 
         { path: 'game/:id', component: GameComponent },
-        { path: 'game/info', component: GameInfoFormComponent }
+        { path: 'game/info/new', component: GameInfoFormComponent }
     ]
     },
     
@@ -35,15 +35,7 @@ const routes: Routes = [
     SharedModule,  
     RouterModule.forChild(routes)],
   exports: [
-    // unclear whether we should be doing this...
-    SharedModule,  
+    // unclear whether we should be doing this...  
     RouterModule]
 })
-export class AdminRoutingModule { } export const AdminComponents = [
-    AdminComponent,
-
-    // these arent being put in the declarations like they are supposed to ? maybe this  set up is not needed? complicates imports/exports
-    // PostComponent   
-
-]
- 
+export class AdminRoutingModule { }

@@ -12,6 +12,7 @@ import { ViewProfileComponent } from './view-profile/view-profile.component';
 import { UserComponent } from './user.component';
 import { EditPreferencesComponent } from './edit-preferences/edit-preferences.component';
 import { SharedModule } from '../shared/shared.module';
+import { EditContributionsComponent } from './edit-contributions/edit-contributions.component';
 
 
 @NgModule({
@@ -24,7 +25,8 @@ import { SharedModule } from '../shared/shared.module';
     ForgotPasswordComponent,
     ViewProfileComponent,
     EditProfileComponent,
-    EditPreferencesComponent
+    EditPreferencesComponent,
+    EditContributionsComponent
   ],
   imports: [
     SharedModule,
