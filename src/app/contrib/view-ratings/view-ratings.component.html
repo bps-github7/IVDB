@@ -21,15 +21,16 @@
         <tr *ngFor="let s of stars">
             <td>
                 <!-- {{s.game_title}} -->
-                <game-card [game_title]='s.game_title'></game-card>
+        <!-- TODO: resolve declarations -->
+                <!-- <game-card [game_title]='s.game_title'></game-card> -->
             </td>
 
             <td>
-                <display-rating [value]="s.value"></display-rating>
+                <!-- <display-rating [value]="s.value"></display-rating> -->
                 <!-- {{ s?.value }} -->
             </td>
             <td>
-                <display-average-rating [game_title]='s.game_title'></display-average-rating>
+                <!-- <display-average-rating [game_title]='s.game_title'></display-average-rating> -->
             </td>
             <td (click)="deleteRating(username, s.game_title)"><button>Delete rating</button></td>
         </tr>
