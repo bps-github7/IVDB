@@ -5,9 +5,36 @@
 </mat-button-toggle-group>
 <div *ngIf="chosen == 'content'">
     <ul>
-        <li>content</li>
-        <li>content</li>
-        <li>content</li>
+        <li>
+            <h3>News</h3>
+            <!-- bring up a dialog box instead of traveling to a new route! -->
+            <button
+                mat-raised-button
+                (click)="openDialog('news')">
+                Add news
+            </button><br>
+            Show recent news<mat-slide-toggle></mat-slide-toggle>
+        </li>
+        <li>
+            <h3>Streams</h3>
+            <button
+                mat-raised-button
+                (click)="openDialog('stream')">
+                Add Stream
+            </button><br>
+            Show recent streams<mat-slide-toggle></mat-slide-toggle>
+            
+        </li>
+        <li>
+            <h3>Watchlists</h3>
+            <button
+                mat-raised-button
+                (click)="openDialog('watchlist')">
+                Create a watchlist
+            </button><br>
+            Show recent watchlists<mat-slide-toggle></mat-slide-toggle>
+
+        </li>
     </ul>
 </div>
 <div *ngIf="chosen == 'contrib'">

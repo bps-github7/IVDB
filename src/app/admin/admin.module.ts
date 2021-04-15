@@ -17,8 +17,14 @@ import { ConsolePostComponent } from './forms/console-post/console-post.componen
 import { ConsoleFormComponent } from './forms/console-form/console-form.component';
 import {MatButtonToggleModule} from '@angular/material/button-toggle';
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
+import {MatDialogModule} from '@angular/material/dialog'; 
+import {MatButtonModule} from '@angular/material/button'; 
+import {MatRadioModule} from '@angular/material/radio'; 
 import { GameFormComponent } from './forms/game-form/game-form.component';
 import { SiteDashboardComponent } from './site-dashboard/site-dashboard.component';
+import { EditStreamComponent } from './forms/edit-stream/edit-stream.component';
+import { EditNewsComponent } from './forms/edit-news/edit-news.component';
+import { EditWatchlistComponent } from './forms/edit-watchlist/edit-watchlist.component';
 
 
 
@@ -39,13 +45,26 @@ import { SiteDashboardComponent } from './site-dashboard/site-dashboard.componen
     ConsoleFormComponent,
     ConsolePostComponent,
     GameInfoFormComponent,
-    SiteDashboardComponent],
+    SiteDashboardComponent,
+    EditStreamComponent,
+    EditNewsComponent,
+    EditWatchlistComponent,
+
+],
+  entryComponents: [
+      EditNewsComponent,
+      EditStreamComponent,
+      EditWatchlistComponent
+  ],
   imports: [
     CommonModule,
     AdminRoutingModule,
     SharedModule,
+    MatButtonModule,
+    MatDialogModule,
     MatSlideToggleModule,
-    MatButtonToggleModule
+    MatButtonToggleModule,
+    MatRadioModule
 ]
 })
 

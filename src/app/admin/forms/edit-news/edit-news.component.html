@@ -1,0 +1,60 @@
+<form [formGroup]="form">
+
+
+    <h3>Create / Update News</h3>
+
+
+    <div>
+        <label for="title">Headline:
+            <input type="text" placeholder="title of the news story">
+        </label>    
+    </div>
+    
+    <div>
+        <label for="Title">Headline:
+            <textarea name="body" id="" cols="30" rows="10"></textarea>
+        </label>    
+    </div>
+    
+    <div>
+        <label id="example-radio-group-label">Category: <br></label>
+        <mat-radio-group
+          aria-labelledby="example-radio-group-label"
+          class="example-radio-group">
+          <mat-radio-button class="example-radio-button" *ngFor="let category of categories" [value]="category">
+            {{category}}
+          </mat-radio-button>
+        </mat-radio-group>    
+    </div>
+    
+    
+    
+    
+    
+    <button
+        mat-button-raised
+    >
+        Clear
+    </button>
+    <button
+        mat-dialog-close
+        mat-button-raised
+    >
+        Cancle
+    </button>
+    <!-- to get the value, assign ti mat-button-close  -->
+    <button
+        mat-dialog-close="save"
+        mat-button-raised
+    
+    >
+        Save
+    </button>
+    <button
+        mat-dialog-close="delete"
+        mat-button-raised
+    >
+        Delete
+    </button>
+
+</form>
