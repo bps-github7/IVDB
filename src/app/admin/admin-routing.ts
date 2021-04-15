@@ -13,6 +13,7 @@ import { SharedModule } from '../shared/shared.module';
 import { PostComponent } from './forms/post/post.component';
 import { DescriptorFormComponent } from './forms/descriptor-form/descriptor-form.component';
 import { ConsoleInfoFormComponent } from './forms/console-info-form/console-info-form.component';
+import { GameFormComponent } from './forms/game-form/game-form.component';
  
 
 //need to reincorperate the admin-auth-guard
@@ -23,7 +24,8 @@ const routes: Routes = [
         { path: 'forum', component: ForumDashboardComponent },
         { path: 'forum/:id', component: ManageForumsComponent },
         { path: 'forum/info', component: ForumInfoFormComponent }, 
-        { path: 'game/:id', component: GameComponent },
+        { path: 'game/new', component: GameFormComponent },
+        { path: 'game/new/:id', component: GameFormComponent },
         { path: 'game/info/new', component: GameInfoFormComponent }
     ]
     },

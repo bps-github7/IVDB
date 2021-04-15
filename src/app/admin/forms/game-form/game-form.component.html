@@ -1,6 +1,6 @@
 <div class="row">
     <div class="col-md-6">        
-        <!-- <form #finished="ngForm" (ngSubmit)="save(finished.value)">
+        <form #finished="ngForm" (ngSubmit)="save(finished.value)">
             <div class="form-group">
                 <label for="title">Title: </label>
                 <input
@@ -104,6 +104,7 @@
                         <li *ngFor="let n of gameInfo?.nintendo ">
                             <div class="checkbox">
                                 <label>
+                                    <a>
                                         <input type="checkbox" name="console" value="n" ngModel> {{ n.name }}
                                     </a>
                                 </label>
@@ -191,10 +192,7 @@
             </div>
             <button class="btn btn-primary" [disabled]="!finished.valid">Save/update game</button>
             <button type="button" class="btn btn-danger" (click)="delete()">Delete game</button>
-        </form> -->
-        <p>We lost Game-form but its ok because weve been meaning to re do forms and make them reactive, 
-            and this weird template driven syntax making this thing work previously was no bueno
-        </p>
+        </form>
     </div>
     <div class="col-md-6">
         <div class="card" style="width: 18rem;">

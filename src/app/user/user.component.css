@@ -1,5 +1,5 @@
-h3 {
+h1, p {
     background-color:coral;
-    border: 2px solid white;
+    border: 5px solid black;
     padding: 15px;
 }

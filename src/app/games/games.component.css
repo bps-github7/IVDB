@@ -1,6 +1,6 @@
-h3 {
+h1, p {
     background-color: blueviolet;
     color: bisque;
-    padding: 15px;
-    border: 2px solid goldenrod;
+    border: 12px ridge pink;
+
 }

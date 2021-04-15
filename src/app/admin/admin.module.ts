@@ -17,12 +17,14 @@ import { ConsolePostComponent } from './forms/console-post/console-post.componen
 import { ConsoleFormComponent } from './forms/console-form/console-form.component';
 import {MatButtonToggleModule} from '@angular/material/button-toggle';
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
+import { GameFormComponent } from './forms/game-form/game-form.component';
 
 
 
 @NgModule({
   declarations: [
     AdminComponent,
+    GameFormComponent,
     DescriptorFormComponent,
     ConsoleInfoFormComponent,
     AdminDashboardComponent,
