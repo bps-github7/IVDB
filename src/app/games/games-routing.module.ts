@@ -6,6 +6,7 @@ import { ConsolesComponent } from './consoles/consoles.component';
 import { CreatorsComponent } from './creators/creators.component';
 import { DisplayComponent } from './display/display.component';
 import { GameInfoComponent } from './game-info/game-info.component';
+import { GamesHomeComponent } from './games-home/games-home.component';
 import { GamesComponent } from './games.component';
 import { PlatformsComponent } from './platforms/platforms.component';
 
@@ -13,6 +14,10 @@ const routes: Routes = [
     {
         path: '', component: GamesComponent,
         children : [
+            {
+                path: '',
+                component: GamesHomeComponent
+            },
             {
                 path: 'all',
                 component: DisplayComponent
