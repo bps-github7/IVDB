@@ -15,13 +15,15 @@ import { GameComponent } from './game/game.component';
 import { AdminComponent } from './admin.component';
 import { ConsolePostComponent } from './forms/console-post/console-post.component';
 import { ConsoleFormComponent } from './forms/console-form/console-form.component';
+import {MatButtonToggleModule} from '@angular/material/button-toggle';
+import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 
 
 
 @NgModule({
   declarations: [
-    DescriptorFormComponent,
     AdminComponent,
+    DescriptorFormComponent,
     ConsoleInfoFormComponent,
     AdminDashboardComponent,
     GameInfoComponent,
@@ -37,7 +39,9 @@ import { ConsoleFormComponent } from './forms/console-form/console-form.componen
   imports: [
     CommonModule,
     AdminRoutingModule,
-    SharedModule
+    SharedModule,
+    MatSlideToggleModule,
+    MatButtonToggleModule
 ]
 })
 

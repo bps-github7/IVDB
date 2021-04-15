@@ -8,6 +8,7 @@ import { CreateAccountComponent } from './create-account/create-account.componen
 import { EditPreferencesComponent } from './edit-preferences/edit-preferences.component';
 import { EditProfileComponent } from './edit-profile/edit-profile.component';
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
+import { InfoComponent } from './info/info.component';
 import { SignInComponent } from './sign-in/sign-in.component';
 import { UserComponent } from './user.component';
 import { ViewProfileComponent } from './view-profile/view-profile.component';
@@ -16,7 +17,8 @@ import { WelcomeComponent } from './welcome/welcome.component';
 const routes: Routes = [
     { path: '', component: UserComponent,
         children : [
-            { path: 'welcome', component: WelcomeComponent },
+            { path: '', component: WelcomeComponent },
+            { path: 'info', component: InfoComponent },
             { path: 'sign-in', component: SignInComponent },
             { path: 'sign-in/createAccount', component: CreateAccountComponent },
             { path: 'profile/:uid', component: ViewProfileComponent, canActivate: [AuthGuard] },

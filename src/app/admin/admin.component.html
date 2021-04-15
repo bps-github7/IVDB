@@ -1,8 +1,13 @@
 <h3>In the admin-module</h3>
-<button onClick="selected = !selected">Click to show admin dashboard</button>
-<div *ngIf="selected">
-    <admin-dashboard></admin-dashboard>
+
+<div>
+    Show dashboard: <mat-slide-toggle
+    (change)=" show = ! show"
+    ></mat-slide-toggle>
+    <div *ngIf="show">Dashboard</div>
 </div>
+
+
 
 
 <router-outlet></router-outlet>

@@ -21,7 +21,7 @@
                 </li>
             </ul>
         </li>
-        <li class="dd-menu-trigger"><a routerLink="/forum/forums/">Forum</a>
+        <li class="dd-menu-trigger"><a routerLink="forum">Forum</a>
             <ul class="sub-menu">
                 <li><a routerLink="/forum/forums">View Threads</a></li>
                 <li><a routerLink="/forum/threads/new">Create a Thread</a></li>
@@ -35,7 +35,7 @@
                 </li>
             </ul>
         </li>
-        <li class="dd-menu-trigger"><a routerLink="/games">Games</a>
+        <li class="dd-menu-trigger"><a routerLink="games">Games</a>
             <ul class="sub-menu">
                 <!-- sub sub menu here -->
                 <li class="sub-sub-menu-trigger"><a routerLink="/games/all">Browse Games</a>
@@ -53,9 +53,7 @@
             </ul>
         </li>
         <li class="dd-menu-trigger" *ngIf="appUser; else anonymousUser" id="profile-nub">
-            <a [routerLink]="['user/profile/', appUser?.uid, appUser?.username]">
-                {{ appUser?.username }}
-            </a>
+            <a  routerLink="user">{{ appUser.username }}</a>
             <!-- can non admin users access this? temporarily, yes.
             
                 Forum, Games, Profile, Admin routes are all in disarray.
@@ -82,6 +80,11 @@
                         </li>
                         
                     </ul>
+                </li>
+                <li *ngIf="appUser">
+                    <a [routerLink]="['user/profile/', appUser?.uid, appUser?.username]">
+                        Profile
+                    </a>
                 </li>
 
                 <li class="dd-menu-trigger"><p>Edit</p>

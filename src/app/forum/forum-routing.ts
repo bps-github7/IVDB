@@ -11,51 +11,46 @@ import { ViewForumComponent } from './view-forum/view-forum.component';
 import { ViewThreadComponent } from './view-thread/view-thread.component';
   
 const routes: Routes = [
-    { path: '', component: ForumComponent,
+  { path: '', component: ForumComponent,
     children: [
-        {
-            path: 'all',
-            component: ViewAllPostsComponent
-        },
-
-        //sort of redundant ya sea
-        {
-            path: 'forums',
-            component: HomeComponent
-        },
-        {
-            path: ':forum-id',
-            component: ViewForumComponent
-        },
-        {
-            path: ':forum-id/:thread-id',
-            component: ViewThreadComponent
-        },
-        {
-            path: ':forum-id/new',
-            component: CreateThreadComponent
-        },
-        // to edit an existing thread
-        {
-            path: ':forum-id/:thread-id',
-            component: CreateThreadComponent
-        },
-        // create a post within a thread
-        {
-            path: ':forum-id/:thread-id/new',
-            component: CreatePostComponent
-        },
-        // for editing a post- NOTE: we could accomplush this in the view thread component
-        // with event listeners
-        // very illedible/ non user friendly/ not se optimized route! but it works (for now)!
-        {
-            path: ':forum-id/:thread-id/:post-id',
-            component: CreatePostComponent
-        },
-
-    ]
+    {
+        path: '',
+        component: HomeComponent
     },
-    
+    {
+        path: 'all',
+        component: ViewAllPostsComponent
+    },
+    {
+        path: 'forums',
+        component: ForumsListComponent
+    },
+    {
+        path: ':forum-id',
+        component: ViewForumComponent
+    },
+    {
+        path: ':forum-id/:thread-id',
+        component: ViewThreadComponent
+    },
+    {
+        path: ':forum-id/new',
+        component: CreateThreadComponent
+    },
+
+    // to edit an existing thread
+    {
+        path: ':forum-id/:thread-id/new',
+        component: CreateThreadComponent
+    },
+    // create a post within a thread
+    {
+        path: ':forum-id/:thread-id/post/new',
+        component: CreatePostComponent
+    },
+  ]
+  },
+
 ];
  
 @NgModule({
