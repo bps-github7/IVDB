@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ForumInfoService } from 'src/app/services/forum-info.service';
 
 @Component({
-  selector: 'app-forum-info-form',
+  selector: 'forum-info-form',
   templateUrl: './forum-info-form.component.html',
   styleUrls: ['./forum-info-form.component.css']
 })

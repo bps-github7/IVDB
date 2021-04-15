@@ -18,6 +18,7 @@ import { ConsoleFormComponent } from './forms/console-form/console-form.componen
 import {MatButtonToggleModule} from '@angular/material/button-toggle';
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 import { GameFormComponent } from './forms/game-form/game-form.component';
+import { SiteDashboardComponent } from './site-dashboard/site-dashboard.component';
 
 
 
@@ -37,7 +38,8 @@ import { GameFormComponent } from './forms/game-form/game-form.component';
     PostComponent,
     ConsoleFormComponent,
     ConsolePostComponent,
-    GameInfoFormComponent],
+    GameInfoFormComponent,
+    SiteDashboardComponent],
   imports: [
     CommonModule,
     AdminRoutingModule,

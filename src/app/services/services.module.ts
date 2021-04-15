@@ -1,3 +1,4 @@
+import { ContentService } from './content.service';
 import { ModuleWithProviders, NgModule } from '@angular/core';
 import { AdminAuthGuard } from './admin-auth-guard.service';
 import { AuthGuard } from './auth-guard.service';
@@ -18,6 +19,7 @@ import { ForumInfoService } from './forum-info.service';
 import { ForumsService } from './forums.service';
 import { ForumPostService } from './forum-post.service';
 import { SuggestionService } from './suggestion.service';
+import { ContribService } from './contrib.service';
 
 /* a strange syntax... why even bother w decorating at this point?!!
  */
@@ -35,6 +37,10 @@ export class ServicesModule {
                 // authentication services
                 // this is provided already by core. 
                 AuthService,
+
+                // overhead services- these conglomerate other services ie content: news + streams + watchlists 
+                ContentService,
+                ContribService,
 
                 // this can all go in user module some day SOON!?
                 UserService,

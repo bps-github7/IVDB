@@ -28,7 +28,7 @@
                 <div class="col" id="gamecard">
                     <div class="card" style="width: 15rem;">
                         <!-- clicking on the image or game title should take you to gameview component -->
-                        <a [routerLink]="['/games/', g?.id]" class="gamelink">
+                        <a [routerLink]="['../game/', g?.id]" class="gamelink">
                             <img class="card-img-top" src="{{ g.imageUrl }}" alt="Card image cap">
                         </a>
                         <div class="card-body">

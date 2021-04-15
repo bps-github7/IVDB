@@ -1,0 +1,19 @@
+
+<mat-button-toggle-group (change)="chosen = $event.value">
+    <mat-button-toggle value="content">Content</mat-button-toggle>
+    <mat-button-toggle value="contrib">Contributions</mat-button-toggle>
+</mat-button-toggle-group>
+<div *ngIf="chosen == 'content'">
+    <ul>
+        <li>content</li>
+        <li>content</li>
+        <li>content</li>
+    </ul>
+</div>
+<div *ngIf="chosen == 'contrib'">
+    <ul>
+        <li>contrib</li>
+        <li>contrib</li>
+        <li>contrib</li>
+    </ul>
+</div>

@@ -1,5 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { DisplayReviewComponent } from '../game/display-review/display-review.component';
+import { ViewGameComponent } from '../game/view-game/view-game.component';
 import { SharedModule } from '../shared/shared.module';
 import { CategoriesComponent } from './categories/categories.component';
 import { ConsolesComponent } from './consoles/consoles.component';
@@ -21,6 +23,10 @@ const routes: Routes = [
             {
                 path: 'all',
                 component: DisplayComponent
+            },
+            {
+                path: ':id',
+                component: ViewGameComponent
             },
             // TODO: condense this mess of routes into a single widget for browsing game info
             {
@@ -58,6 +64,11 @@ const routes: Routes = [
             {
                 path: 'info/consoles/:console',
                 component: ConsolesComponent
+            },// design TODO: should we move provide-review to here?
+            //route would be: 'game/:id/review/new' | 'game/:id/review/edit'
+            {
+                path: ':id/review/:display-name',
+                component: DisplayReviewComponent
             }
 
         ]

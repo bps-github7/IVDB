@@ -14,6 +14,7 @@ import { PostComponent } from './forms/post/post.component';
 import { DescriptorFormComponent } from './forms/descriptor-form/descriptor-form.component';
 import { ConsoleInfoFormComponent } from './forms/console-info-form/console-info-form.component';
 import { GameFormComponent } from './forms/game-form/game-form.component';
+import { SiteDashboardComponent } from './site-dashboard/site-dashboard.component';
  
 
 //need to reincorperate the admin-auth-guard
@@ -22,6 +23,7 @@ const routes: Routes = [
     children: [
         { path: 'game', component: GameComponent },
         { path: 'forum', component: ForumDashboardComponent },
+        { path: 'site', component: SiteDashboardComponent  },
         { path: 'forum/:id', component: ManageForumsComponent },
         { path: 'forum/info', component: ForumInfoFormComponent }, 
         { path: 'game/new', component: GameFormComponent },

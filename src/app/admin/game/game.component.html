@@ -22,7 +22,7 @@
         <tr *ngFor="let g of filteredGames">
             <td>{{ g?.title }}</td>
             <td>{{ g?.price }}</td>
-            <td><a [routerLink]="['/admin/game', g?.id]">edit</a></td>
+            <td><a [routerLink]="['/game/new/', g?.id]">edit</a></td>
         </tr>
     </tbody>
 </table>

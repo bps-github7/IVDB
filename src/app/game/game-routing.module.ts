@@ -11,17 +11,7 @@ import { ViewGameComponent } from './view-game/view-game.component';
 const routes: Routes = [
     { path: '', component: GameComponent,
       children: [
-        {
-            path: ':id',
-            component: ViewGameComponent
-        },
-
-        // design TODO: should we move provide-review to here?
-        //route would be: 'game/:id/review/new' | 'game/:id/review/edit'
-        {
-            path: ':id/review/:display-name',
-            component: DisplayReviewComponent
-        }
+        
       ]
 
     }
