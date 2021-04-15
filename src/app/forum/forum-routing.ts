@@ -14,10 +14,6 @@ const routes: Routes = [
     { path: '', component: ForumComponent,
     children: [
         {
-            path: 'home',
-            component: HomeComponent
-        },
-        {
             path: 'all',
             component: ViewAllPostsComponent
         },
@@ -25,7 +21,7 @@ const routes: Routes = [
         //sort of redundant ya sea
         {
             path: 'forums',
-            component: ForumsListComponent
+            component: HomeComponent
         },
         {
             path: ':forum-id',

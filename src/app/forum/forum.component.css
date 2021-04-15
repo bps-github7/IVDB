@@ -21,7 +21,7 @@
 }
 
  */
-h1 {
+h1, h3 {
     padding: 20px;
     border: 2px dotted yellow;
     background-color: cadetblue;

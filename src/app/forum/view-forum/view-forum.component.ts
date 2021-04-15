@@ -18,7 +18,7 @@ export class ViewForumComponent implements OnInit {
     constructor(
         private threadService : ThreadService,
         private route : ActivatedRoute) {
-        this.forumTitle = this.route.snapshot.paramMap.get('forum');
+        this.forumTitle = this.route.snapshot.paramMap.get('forum-title');
         this.forumTitle = this.forumTitle.split('-').join(' ');
         this.threadService.getThreadsByForum$(this.forumTitle)
         .subscribe(p => this.threads = p);
