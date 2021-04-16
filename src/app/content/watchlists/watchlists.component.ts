@@ -11,11 +11,8 @@ import { News } from '../../models/content/news';
 })
 export class WatchlistsComponent implements OnInit {
 
-    news$ : any;
 
-    constructor(private newsService : NewsService) {
-        this.newsService.news$.subscribe(doc => this.news$ = doc)
-    }
+    constructor() { }
 
     ngOnInit(): void {
 

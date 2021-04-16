@@ -1,9 +1,8 @@
-import { Content } from '@angular/compiler/src/render3/r3_ast';
-import { User } from 'firebase';
-import { Metadata } from './Metadata';
+import { Content } from './content';
 
-export interface News {
-    title : string;
-    content : Content,
-    metadata: Metadata
+// I THINK we can do this without extending?
+
+export interface News extends Content {
+    content:  string
+    // like, favorite
 }

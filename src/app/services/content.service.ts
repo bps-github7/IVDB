@@ -13,7 +13,10 @@ export class ContentService {
     streams : AngularFirestoreCollection<any>;
     news : AngularFirestoreCollection<any>;
 
-
+/* 
+Legit question: better to have this one main service that works on all? 
+lot of dependencies and arguments would be required, i think
+     */
   constructor(private afs: AngularFirestore) {
     this.watchlists = this.afs.collection("watchlists");
     this.streams = this.afs.collection('streams');

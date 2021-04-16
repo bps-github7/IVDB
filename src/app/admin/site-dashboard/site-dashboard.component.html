@@ -6,33 +6,53 @@
 <div *ngIf="chosen == 'content'">
     <ul>
         <li>
-            <h3>News</h3>
+            <h3>News:</h3>
             <!-- bring up a dialog box instead of traveling to a new route! -->
             <button
                 mat-raised-button
                 (click)="openDialog('news')">
                 Add news
             </button><br>
-            Show recent news<mat-slide-toggle></mat-slide-toggle>
+            Show recent news<mat-slide-toggle (change)="showNews = !showNews"></mat-slide-toggle>
+            <ul
+              *ngIf="showNews" 
+              class="list-group">
+              <li
+                *ngFor="let newsPiece of news$" 
+                class="list-group-item">{{ newsPiece.title }}</li>
+            </ul>
         </li>
         <li>
-            <h3>Streams</h3>
+            <h3>Streams:</h3>
             <button
                 mat-raised-button
                 (click)="openDialog('stream')">
                 Add Stream
             </button><br>
-            Show recent streams<mat-slide-toggle></mat-slide-toggle>
-            
+            Show recent streams<mat-slide-toggle (change)="showStreams = !showStreams"></mat-slide-toggle>
+            <ul
+              *ngIf="showStreams" 
+              class="list-group">
+              <li
+                *ngFor="let stream of streams$" 
+                class="list-group-item">{{ stream.title }}</li>
+            </ul>
         </li>
         <li>
-            <h3>Watchlists</h3>
+            <h3>Watchlists:</h3>
             <button
                 mat-raised-button
                 (click)="openDialog('watchlist')">
                 Create a watchlist
             </button><br>
-            Show recent watchlists<mat-slide-toggle></mat-slide-toggle>
+            Show recent watchlists<mat-slide-toggle (change)="showWatchlists = !showWatchlists"></mat-slide-toggle>
+            <ul
+              *ngIf="showWatchlists" 
+              class="list-group">
+              <li
+                *ngFor="let watchlist of watchlists$" 
+                class="list-group-item">{{ watchlist.title }} </li>
+            </ul>
 
         </li>
     </ul>

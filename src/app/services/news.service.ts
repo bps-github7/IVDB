@@ -1,21 +1,53 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
-import { News } from 'src/app/models/content/News';
+// import { News } from 'src/app/models/content/News';
+import { Content } from '../models/content/content';
 
 @Injectable({
   providedIn: 'root'
 })
 export class NewsService {
 
-    newsCollection : AngularFirestoreCollection<News>;
-    news$ : Observable<News []>
+
+    // this syntax can be a bit... messy
+    // newsCollection : AngularFirestoreCollection<News>;
+    // news$ : Observable<News []>
+    newsCollection : AngularFirestoreCollection<Content>
 
 
     constructor(private afs : AngularFirestore) {
-        this.newsCollection = this.afs.collection<News>("news");
-        this.news$ = this.newsCollection.valueChanges();
+        this.newsCollection = this.afs.collection<Content>('news')
+        // this.newsCollection = this.afs.collection<Content>("news");
+        // this.news$ = this.newsCollection.valueChanges();
 
+    }
+
+    getAll$() {
+        return this.newsCollection.valueChanges({ idField : 'uid'});
+    }
+
+    get$( uid : string) {
+        return this.newsCollection.doc(uid).valueChanges();
+    }
+
+    create( newsContent : Content ) {
+        this.newsCollection.add(newsContent)
+        .then(() => console.log("Successfuly created news document"))
+        .catch((err) => console.log(`Error while creating news document: ${err}`));
+    }
+
+    edit( uid : string, updatedContent : Content ) {
+        this.newsCollection.doc(uid).update(updatedContent)
+        .then(() => console.log("successfuly updated news document"))
+        .catch((err) => console.log(`Error while updating news document : ${err}`));
+
+    }
+
+    delete(uid : string) {
+        this.newsCollection.doc(uid).delete()
+        .then(() => console.log("successfuly deleted news document"))
+        .catch((err) => console.log(`Error while deleting news document : ${err}`));
     }
 
 

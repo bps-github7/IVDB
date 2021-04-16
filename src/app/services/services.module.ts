@@ -20,6 +20,8 @@ import { ForumsService } from './forums.service';
 import { ForumPostService } from './forum-post.service';
 import { SuggestionService } from './suggestion.service';
 import { ContribService } from './contrib.service';
+import { WatchlistsService } from './watchlists.service';
+import { StreamsService } from './streams.service';
 
 /* a strange syntax... why even bother w decorating at this point?!!
  */
@@ -63,6 +65,11 @@ export class ServicesModule {
 
                 // content
                 NewsService,
+                StreamsService,
+                WatchlistsService,
+
+
+                // these are Contributions!!!!
                 CommentService,
                 CategoriesService,
                 SuggestionService,
