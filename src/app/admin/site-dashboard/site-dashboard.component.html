@@ -28,9 +28,12 @@ every time something is added to the database.
               class="list-group">
               
               <!-- We will need to sort/ filter these like so - most recent, most views, most dislikes, and limit to an adjustable amount -->
+              <!-- <li
+                *ngFor="let newsPiece of news$" 
+                class="list-group-item">{{ newsPiece.title }}  <button (click)="openDialog('news', newsPiece?.uid)">Edit this jawn</button></li> -->
               <li
                 *ngFor="let newsPiece of news$" 
-                class="list-group-item">{{ newsPiece.title }}  <button (click)="openDialog('news', newsPiece?.uid)">Edit this jawn</button></li>
+                class="list-group-item">{{ newsPiece.title }}  <button (click)="log(newsPiece.uid)">Edit this jawn</button></li>
             </ul>
         </li>
         <li>

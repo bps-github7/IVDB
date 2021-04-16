@@ -1,3 +1,4 @@
+import { ThrowStmt } from '@angular/compiler';
 import { Component, InjectionToken, Inject, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
@@ -19,7 +20,19 @@ export class EditNewsComponent implements OnInit {
 
   form: FormGroup;
   categories: string [] = ["game","console","culture","misc"];
-  initialState = {};
+  initialState = {
+        title: ['', Validators.required],
+        creator: [localStorage.getItem('username'), Validators.required],
+        description: [''],
+        body: ['', Validators.required],
+        images: this.fb.array([]),
+        links: this.fb.array([]),
+        misc: this.fb.array([]),
+        created : [''],
+        category : [''],
+        tags: this.fb.array([]),
+      };
+  editingDoc: Content;
 
   constructor(
     @Inject(MAT_DIALOG_DATA) data: any,
@@ -28,45 +41,14 @@ export class EditNewsComponent implements OnInit {
     private firebaseService : FirebaseService,
     ) {
       if (data) {
-        this.initialState = {
-          title: [data.title, Validators.required],
-          // creator: [data.creator, Validators.required],
-          description: [data.description],
-          creator: [localStorage.getItem('username'), Validators.required],
-          body: ['', Validators.required],
-          images: this.fb.array([]),
-          links: this.fb.array([]),
-          misc: this.fb.array([]),
-          created : [''],
-          category : [''],
-          tags: this.fb.array([]),
-          // body: [data.body, Validators.required],
-          // images: this.fb.array(data.images),
-          // links: this.fb.array(data.links),
-          // misc: this.fb.array(data.misc),
-          // created : [data.created],
-          // category : [data.category],
-          // tags: this.fb.array(data.tags),
-
-        }
-      } else {
-        this.initialState = {
-          title: ['', Validators.required],
-          creator: [localStorage.getItem('username'), Validators.required],
-          description: [''],
-          body: ['', Validators.required],
-          images: this.fb.array([]),
-          links: this.fb.array([]),
-          misc: this.fb.array([]),
-          created : [''],
-          category : [''],
-          tags: this.fb.array([]),
-        }
+        this.editingDoc = data;
       }
-    this.form = this.fb.group(this.initialState)
+      
    }
 
   ngOnInit(): void {
+    // old approach: 
+  this.form = this.fb.group(this.initialState)
   }
 
   save() {
@@ -80,6 +62,14 @@ export class EditNewsComponent implements OnInit {
 
   reset() {
     this.form.reset()
+  }
+
+  delete(uid : string) {
+    if (confirm('Are you sure you want to delete this news piece?')) {
+      // this.NewsService.delete(uid)
+
+      // emit deleteEvent
+    }
   }
 
 }

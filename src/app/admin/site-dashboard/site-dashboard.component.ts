@@ -53,6 +53,12 @@ constructor(
   }
 
 
+  log(uid) {
+    console.log(uid);
+    this.newsService.get$(uid).subscribe(response => this.doc = response) 
+    
+    console.log("got this far: " + this.doc.title)
+  }
   
   openDialog(type : string, uid?: any) {
 
@@ -67,7 +73,7 @@ constructor(
           this.newsService.get$(uid).subscribe(response => this.doc = response) 
           console.log("got this far: " + this.doc.title)
         }
-        dialogConfig.data = this.doc
+        // dialogConfig.data = this.doc
         this.openNewsDialog(dialogConfig)
       }
       else if (type == 'stream'){
