@@ -26,7 +26,6 @@ export class EditNewsComponent implements OnInit {
     private dialogRef : MatDialogRef<EditNewsComponent>,
     private fb: FormBuilder,
     private firebaseService : FirebaseService,
-    private newsService : NewsService 
     ) {
       if (data) {
         this.initialState = {
