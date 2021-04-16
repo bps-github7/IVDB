@@ -3,6 +3,15 @@
     <mat-button-toggle value="content">Content</mat-button-toggle>
     <mat-button-toggle value="contrib">Contributions</mat-button-toggle>
 </mat-button-toggle-group>
+
+<!-- TODO: want to make a 'activity log' service and UI component to display here,
+which will list ALL activities by recency to the site, and use this for each category of activity
+- ie "admin 'BenSehnert' added a new game 'Call of Duty Mobile' click to show more" 
+
+this will require updating every service (or making a global firestore service) that adds a log
+every time something is added to the database.
+-->
+
 <div *ngIf="chosen == 'content'">
     <ul>
         <li>
@@ -21,7 +30,7 @@
               <!-- We will need to sort/ filter these like so - most recent, most views, most dislikes, and limit to an adjustable amount -->
               <li
                 *ngFor="let newsPiece of news$" 
-                class="list-group-item">{{ newsPiece.title }}</li>
+                class="list-group-item">{{ newsPiece.title }}  <button (click)="openDialog('news', newsPiece?.uid)">Edit this jawn</button></li>
             </ul>
         </li>
         <li>
@@ -60,9 +69,5 @@
     </ul>
 </div>
 <div *ngIf="chosen == 'contrib'">
-    <ul>
-        <li>contrib</li>
-        <li>contrib</li>
-        <li>contrib</li>
-    </ul>
+  nothing to show at this point. should be a list of all user contributions to the site. which we havent started tracking
 </div>

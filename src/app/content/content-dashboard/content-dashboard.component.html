@@ -1,4 +1,23 @@
-<h3>Content dashboard here</h3>
+<!-- this could all be a component- in content dashboard: filter-content-component or search-content-component -->
+<div class="filter-box">
+  <label for="tl-filter">Select a filter</label>
+  <mat-checkbox>recently posted</mat-checkbox>
+  <mat-checkbox>top rated</mat-checkbox>
+  <mat-checkbox>most shared</mat-checkbox>
+
+  <label for="tag-filter">Or filter by tags/ themes</label>
+  <!-- design component for filtering by tags... use the pillboxs instead pf checkbox, darken pillboxes that have been selected -->
+  <mat-checkbox>tag 1</mat-checkbox>
+  <mat-checkbox>tag 2</mat-checkbox>
+  <mat-checkbox>tag 3</mat-checkbox>
+
+  <label for="search">Search for streams</label>
+  <input type="text"> <button>search</button>
+
+
+
+</div>
+<!-- <h3>Content dashboard here</h3>
 
 <div *ngIf="user_id; else anonymousUser">
 
@@ -54,4 +73,4 @@
     <zippy title="News">
         <a routerLink="news">View news feed</a>
     </zippy>
-</ng-template>
+</ng-template> -->

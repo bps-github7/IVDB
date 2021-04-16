@@ -28,7 +28,7 @@ export class NewsService {
     }
 
     get$( uid : string) {
-        return this.newsCollection.doc(uid).valueChanges();
+        return this.newsCollection.doc<Content>(uid).valueChanges();
     }
 
     create( newsContent : Content ) {

@@ -1,4 +1,6 @@
+import { StreamsService } from './../../services/streams.service';
 import { Component, OnInit } from '@angular/core';
+import { Content } from 'src/app/models/content/content';
 
 @Component({
   selector: 'app-streaming',
@@ -7,7 +9,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class StreamingComponent implements OnInit {
 
-  constructor() { }
+  streams$ : Content [];
+
+  constructor(private streamService: StreamsService) { 
+    this.streamService.getAll$().subscribe(response => this.streams$ = response);
+  }
 
   ngOnInit(): void {
   }

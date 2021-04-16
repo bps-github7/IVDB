@@ -16,7 +16,7 @@ const routes: Routes = [
     { path: '', component: ContentComponent,
     children: [
         {
-            path: 'home',
+            path: '',
             component: ContentHomeComponent
         },
         {

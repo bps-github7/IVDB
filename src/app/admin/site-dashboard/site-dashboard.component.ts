@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { EditStreamComponent } from '../forms/edit-stream/edit-stream.component';
 import { EditWatchlistComponent } from '../forms/edit-watchlist/edit-watchlist.component';
 import { Content } from 'src/app/models/content/content';
@@ -33,6 +33,8 @@ showStreams : boolean = false;
 showWatchlists : boolean = false;
 
 chosen : any;
+doc : any;
+
 
 constructor(
     private dialog : MatDialog,
@@ -50,22 +52,46 @@ constructor(
   ngOnInit(): void {
   }
 
-  openDialog(type : string) {
-      if (type == 'news') 
-        this.dialog.open(EditNewsComponent)
-        .afterClosed()
-        .subscribe(result => {
-            console.log(result)
-        });
-      else if (type == 'stream')
-        this.dialog.open(EditStreamComponent)
-        .afterClosed()
-        .subscribe(result => console.log(result))
-    else if (type == 'watchlist')
-        this.dialog.open(EditWatchlistComponent)
-        .afterClosed()
-        .subscribe(result => console.log(result))
 
+  
+  openDialog(type : string, uid?: any) {
+
+      const dialogConfig = new MatDialogConfig();
+      dialogConfig.disableClose = true;
+      dialogConfig.autoFocus = true;
+
+      // console.log(`openDialog got this: ${uid}`)
+
+      if (type == 'news'){
+        if (uid) {
+          this.newsService.get$(uid).subscribe(response => this.doc = response) 
+          console.log("got this far: " + this.doc.title)
+        }
+        dialogConfig.data = this.doc
+        this.openNewsDialog(dialogConfig)
+      }
+      else if (type == 'stream'){
+        this.openStreamDialog(dialogConfig)}
+      else if (type == 'watchlist')
+          this.openWatchlistDialog(dialogConfig)
+  }
+
+  openNewsDialog(config) {
+    this.dialog.open(EditNewsComponent,config)
+    .afterClosed()
+    .subscribe(result => console.log(result))
+  }
+
+  openStreamDialog(config) {
+     this.dialog.open(EditStreamComponent,config)
+    .afterClosed()
+    .subscribe(result => console.log(result))
+  }
+
+  openWatchlistDialog(config) {
+    this.dialog.open(EditWatchlistComponent,config)
+    .afterClosed()
+    .subscribe(result => console.log(result))
   }
 
 }

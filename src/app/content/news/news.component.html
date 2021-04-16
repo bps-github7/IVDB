@@ -1,6 +1,12 @@
-<h3>news about video games</h3>
-<ul>
-    <li>game x coming soon</li>
-    <li>game y coming sooner</li>
-    <li>game z coming later</li>
+<h3>News: </h3>
+<!-- only show if there is news to display -->
+<ul 
+  *ngIf="news$"
+  class="list-group">
+  <!-- for now just display the tile
+    TODO: make component for displaying a news article and use it here
+  -->
+  <li
+    *ngFor="let newsPiece of news$" 
+    class="list-group-item">{{ newsPiece.title }}</li>
 </ul>

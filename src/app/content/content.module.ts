@@ -13,6 +13,7 @@ import { WatchlistsComponent } from './watchlists/watchlists.component';
 import { ContentHomeComponent } from './content-home/content-home.component';
 import {MatButtonToggleModule} from '@angular/material/button-toggle';
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
+import {MatCheckboxModule} from '@angular/material/checkbox';
 
 
 @NgModule({
@@ -33,7 +34,8 @@ import {MatSlideToggleModule} from '@angular/material/slide-toggle';
     ContentRoutingModule,
     CommonModule,
     MatButtonToggleModule,
-    MatSlideToggleModule
+    MatSlideToggleModule,
+    MatCheckboxModule
   ]
 })
 export class ContentModule { }

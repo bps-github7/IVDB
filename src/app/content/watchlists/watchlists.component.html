@@ -1,6 +1,12 @@
-<h3>Watchlist</h3>
-<ul>
-    <li>game x coming soon</li>
-    <li>game y coming sooner</li>
-    <li>game z coming later</li>
+<h3>Watchlists</h3>
+<!-- only show if there is streams to display -->
+<ul 
+  *ngIf="watchlists$"
+  class="list-group">
+  <!-- for now just display the tile
+    TODO: make component for displaying a watchlist article and use it here
+  -->
+  <li
+    *ngFor="let watchlist of watchlists$" 
+    class="list-group-item">{{ watchlist.title }}</li>
 </ul>

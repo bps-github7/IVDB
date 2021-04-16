@@ -1,3 +1,4 @@
+import { FirebaseService } from './firebase.service';
 import { ContentService } from './content.service';
 import { ModuleWithProviders, NgModule } from '@angular/core';
 import { AdminAuthGuard } from './admin-auth-guard.service';
@@ -39,6 +40,8 @@ export class ServicesModule {
                 // authentication services
                 // this is provided already by core. 
                 AuthService,
+                FirebaseService,
+
 
                 // overhead services- these conglomerate other services ie content: news + streams + watchlists 
                 ContentService,

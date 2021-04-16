@@ -19,7 +19,10 @@ import {MatButtonToggleModule} from '@angular/material/button-toggle';
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 import {MatDialogModule} from '@angular/material/dialog'; 
 import {MatButtonModule} from '@angular/material/button'; 
-import {MatRadioModule} from '@angular/material/radio'; 
+// import {MatRadioModule} from '@angular/material/radio'; 
+import {MatFormFieldModule} from '@angular/material/form-field'; 
+import {MatInputModule} from '@angular/material/input'; 
+import {MatChipsModule} from '@angular/material/chips'; 
 import { GameFormComponent } from './forms/game-form/game-form.component';
 import { SiteDashboardComponent } from './site-dashboard/site-dashboard.component';
 import { EditStreamComponent } from './forms/edit-stream/edit-stream.component';
@@ -56,6 +59,7 @@ import { EditWatchlistComponent } from './forms/edit-watchlist/edit-watchlist.co
       EditStreamComponent,
       EditWatchlistComponent
   ],
+  providers: [],
   imports: [
     CommonModule,
     AdminRoutingModule,
@@ -64,7 +68,10 @@ import { EditWatchlistComponent } from './forms/edit-watchlist/edit-watchlist.co
     MatDialogModule,
     MatSlideToggleModule,
     MatButtonToggleModule,
-    MatRadioModule
+    // MatRadioModule,
+    MatChipsModule,
+    MatInputModule,
+    MatFormFieldModule
 ]
 })
 
