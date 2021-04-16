@@ -31,15 +31,24 @@ export class EditNewsComponent implements OnInit {
       if (data) {
         this.initialState = {
           title: [data.title, Validators.required],
-          creator: [data.creator, Validators.required],
+          // creator: [data.creator, Validators.required],
           description: [data.description],
-          body: [data.body, Validators.required],
-          images: this.fb.array(data.images),
-          links: this.fb.array(data.links),
-          misc: this.fb.array(data.misc),
-          created : [data.created],
-          category : [data.category],
-          tags: this.fb.array(data.tags),
+          creator: [localStorage.getItem('username'), Validators.required],
+          body: ['', Validators.required],
+          images: this.fb.array([]),
+          links: this.fb.array([]),
+          misc: this.fb.array([]),
+          created : [''],
+          category : [''],
+          tags: this.fb.array([]),
+          // body: [data.body, Validators.required],
+          // images: this.fb.array(data.images),
+          // links: this.fb.array(data.links),
+          // misc: this.fb.array(data.misc),
+          // created : [data.created],
+          // category : [data.category],
+          // tags: this.fb.array(data.tags),
+
         }
       } else {
         this.initialState = {
