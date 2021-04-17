@@ -35,19 +35,35 @@ export class EditNewsComponent implements OnInit {
   editingDoc: Content;
 
   constructor(
+
+    // what happened to the config data!????
     @Inject(MAT_DIALOG_DATA) data: any,
     private dialogRef : MatDialogRef<EditNewsComponent>,
     private fb: FormBuilder,
     private firebaseService : FirebaseService,
     ) {
-      if (data) {
-        this.editingDoc = data;
-      }
-      
+      this.editingDoc = data;
    }
 
   ngOnInit(): void {
+
+    console.log(this.editingDoc.title)
+    if (this.editingDoc) {
+      this.initialState = {
+        title: [this.editingDoc?.title, Validators.required],
+        creator: [localStorage.getItem('username'), Validators.required],
+        description: [this.editingDoc?.description],
+        body: [this.editingDoc?.body, Validators.required],
+        images: this.fb.array([this.editingDoc?.images]),
+        links: this.fb.array([this.editingDoc?.links]),
+        misc: this.fb.array([this.editingDoc?.misc]),
+        created : [this.editingDoc?.created],
+        category : [this.editingDoc?.category],
+        tags: this.fb.array(this.editingDoc?.tags),
+      };
+    }
     // old approach: 
+    console.log(this.editingDoc)
   this.form = this.fb.group(this.initialState)
   }
 

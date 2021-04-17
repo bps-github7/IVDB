@@ -23,18 +23,52 @@ every time something is added to the database.
                 Add news
             </button><br>
             Show recent news<mat-slide-toggle (change)="showNews = !showNews"></mat-slide-toggle>
-            <ul
+            <table *ngIf="showNews" mat-table [dataSource]="news$" class="mat-elevation-z8">
+
+              <ng-container matColumnDef="title">
+                <th mat-header-cell *matHeaderCellDef> title. </th>
+                <td mat-cell *matCellDef="let news"> {{news.title}} </td>
+              </ng-container>
+
+
+              <ng-container matColumnDef="edit">
+                <th mat-header-cell *matHeaderCellDef> </th>
+                <td mat-cell *matCellDef="let news">
+                  <button 
+                    (click)="openDialog('news', news)"
+                    mat-stroked-button>Edit
+                  </button>  
+
+                </td>
+              </ng-container>
+
+              
+              <ng-container matColumnDef="delete">
+                <th mat-header-cell *matHeaderCellDef> </th>
+                <td mat-cell *matCellDef="let news">
+                  <button 
+                    (click)="delete(news.uid)"
+                    mat-stroked-button>Delete
+                  </button>
+                </td>
+              </ng-container>
+
+
+
+              <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+              <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+            </table>
+            
+            <!-- <ul
               *ngIf="showNews" 
               class="list-group">
-              
-              <!-- We will need to sort/ filter these like so - most recent, most views, most dislikes, and limit to an adjustable amount -->
-              <!-- <li
-                *ngFor="let newsPiece of news$" 
-                class="list-group-item">{{ newsPiece.title }}  <button (click)="openDialog('news', newsPiece?.uid)">Edit this jawn</button></li> -->
               <li
                 *ngFor="let newsPiece of news$" 
-                class="list-group-item">{{ newsPiece.title }}  <button (click)="log(newsPiece.uid)">Edit this jawn</button></li>
-            </ul>
+                class="list-group-item">
+                {{ newsPiece.title }}  
+                <button (click)="log(newsPiece.uid)">Edit this jawn</button>
+              </li>
+            </ul> -->
         </li>
         <li>
             <h3>Streams:</h3>

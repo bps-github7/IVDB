@@ -19,12 +19,12 @@ export interface Content {
 
 
   // extra stuff
-  image?: (string | string []),
+  images?: (string | string []),
   links?: (string | string []),
   misc?: (string | string [])
 
   // Metadata
-  created: number, // timestamp
+  created: string, // timestamp
   category: string,
   tags?: string [],
   feedback?: UserFeedback

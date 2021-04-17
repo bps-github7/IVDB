@@ -20,6 +20,7 @@ import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 import {MatDialogModule} from '@angular/material/dialog'; 
 import {MatButtonModule} from '@angular/material/button'; 
 // import {MatRadioModule} from '@angular/material/radio'; 
+import {MatTableModule} from '@angular/material/table'; 
 import {MatFormFieldModule} from '@angular/material/form-field'; 
 import {MatInputModule} from '@angular/material/input'; 
 import {MatChipsModule} from '@angular/material/chips'; 
@@ -68,6 +69,7 @@ import { EditWatchlistComponent } from './forms/edit-watchlist/edit-watchlist.co
     MatDialogModule,
     MatSlideToggleModule,
     MatButtonToggleModule,
+    MatTableModule, 
     // MatRadioModule,
     MatChipsModule,
     MatInputModule,

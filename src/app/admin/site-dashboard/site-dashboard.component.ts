@@ -31,7 +31,7 @@ watchlists$ : Content [];
 showNews : boolean = false;
 showStreams : boolean = false;
 showWatchlists : boolean = false;
-
+displayedColumns: string[] = ['title', 'edit', 'delete'];
 chosen : any;
 doc : any;
 
@@ -52,38 +52,26 @@ constructor(
   ngOnInit(): void {
   }
 
-
-  log(uid) {
-    console.log(uid);
-    this.newsService.get$(uid).subscribe(response => this.doc = response) 
-    
-    console.log("got this far: " + this.doc.title)
-  }
   
-  openDialog(type : string, uid?: any) {
+  openDialog(type : string, updateObject?: any) {
 
       const dialogConfig = new MatDialogConfig();
       dialogConfig.disableClose = true;
       dialogConfig.autoFocus = true;
+      dialogConfig.data = updateObject
 
       // console.log(`openDialog got this: ${uid}`)
 
-      if (type == 'news'){
-        if (uid) {
-          this.newsService.get$(uid).subscribe(response => this.doc = response) 
-          console.log("got this far: " + this.doc.title)
-        }
-        // dialogConfig.data = this.doc
+      if (type == 'news')
         this.openNewsDialog(dialogConfig)
-      }
-      else if (type == 'stream'){
-        this.openStreamDialog(dialogConfig)}
+      else if (type == 'stream')
+        this.openStreamDialog(dialogConfig)
       else if (type == 'watchlist')
           this.openWatchlistDialog(dialogConfig)
   }
 
   openNewsDialog(config) {
-    this.dialog.open(EditNewsComponent,config)
+    this.dialog.open(EditNewsComponent, config)
     .afterClosed()
     .subscribe(result => console.log(result))
   }
@@ -98,6 +86,10 @@ constructor(
     this.dialog.open(EditWatchlistComponent,config)
     .afterClosed()
     .subscribe(result => console.log(result))
+  }
+
+  delete(uid) {
+    console.log("supposed to delete " + uid);
   }
 
 }
