@@ -73,7 +73,23 @@ constructor(
   openNewsDialog(config) {
     this.dialog.open(EditNewsComponent, config)
     .afterClosed()
-    .subscribe(result => console.log(result))
+    .subscribe(result => {
+      // not a great condition but it works..
+      // need it prevent edit or create from happened
+      // on dialog close or reset.
+      if (result.title){
+        if (result.action) {
+          //dont need action so we descruture to get the rest
+          const { action, ...rest } = result;
+          // console.log(rest);
+          this.newsService.edit(rest.uid, rest);
+      } else {
+          console.log("tried to create doc")
+          const { action, ...rest } = result;
+          this.newsService.create(rest);
+      }}
+    
+    })
   }
 
   openStreamDialog(config) {
@@ -88,8 +104,19 @@ constructor(
     .subscribe(result => console.log(result))
   }
 
-  delete(uid) {
-    console.log("supposed to delete " + uid);
+  deleteNews(uid) {
+    if(confirm('are you sure you want to delete this news piece? (cannot be undone)'))
+      this.newsService.delete(uid);
+  }
+
+  deleteStream(uid) {
+    if(confirm('are you sure you want to delete this stream? (cannot be undone)'))
+      this.streamsService.delete(uid);
+  }
+
+  deleteWatchlist(uid) {
+    if(confirm('are you sure you want to delete this watchlist? (cannot be undone)'))
+      this.watchlistsService.delete(uid);
   }
 
 }

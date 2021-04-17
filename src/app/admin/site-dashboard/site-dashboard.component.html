@@ -47,7 +47,7 @@ every time something is added to the database.
                 <th mat-header-cell *matHeaderCellDef> </th>
                 <td mat-cell *matCellDef="let news">
                   <button 
-                    (click)="delete(news.uid)"
+                    (click)="deleteNews(news.uid)"
                     mat-stroked-button>Delete
                   </button>
                 </td>

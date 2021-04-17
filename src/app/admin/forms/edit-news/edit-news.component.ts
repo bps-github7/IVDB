@@ -2,6 +2,7 @@ import { ThrowStmt } from '@angular/compiler';
 import { Component, InjectionToken, Inject, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { database } from 'firebase';
 import { Content } from 'src/app/models/content/content';
 import { FirebaseService } from 'src/app/services/firebase.service';
 import { NewsService } from 'src/app/services/news.service';
@@ -32,7 +33,9 @@ export class EditNewsComponent implements OnInit {
         category : [''],
         tags: this.fb.array([]),
       };
-  editingDoc: Content;
+  
+  editingMode: boolean = false;
+  docUid : string;
 
   constructor(
 
@@ -42,50 +45,52 @@ export class EditNewsComponent implements OnInit {
     private fb: FormBuilder,
     private firebaseService : FirebaseService,
     ) {
-      this.editingDoc = data;
-   }
+      if (data) {
+        this.editingMode = data?.uid ? true : false;
+        this.docUid = data?.uid;
+        this.initialState = {
+          title: [data?.title, Validators.required],
+          creator: [localStorage.getItem('username'), Validators.required],
+          description: [data?.description],
+        //  TODO: implement these later. have to be in the intial state for the form to work..
+          body: ["", Validators.required],
+          images: this.fb.array([]),
+          links: this.fb.array([]),
+          misc: this.fb.array([]),
+          created : [""],
+          category : [""],
+          tags: this.fb.array([]),
+        }
+      //   };
+        // }
+      // console.log(data)
+      // this. = data.data;
+    }}
 
   ngOnInit(): void {
 
-    console.log(this.editingDoc.title)
-    if (this.editingDoc) {
-      this.initialState = {
-        title: [this.editingDoc?.title, Validators.required],
-        creator: [localStorage.getItem('username'), Validators.required],
-        description: [this.editingDoc?.description],
-        body: [this.editingDoc?.body, Validators.required],
-        images: this.fb.array([this.editingDoc?.images]),
-        links: this.fb.array([this.editingDoc?.links]),
-        misc: this.fb.array([this.editingDoc?.misc]),
-        created : [this.editingDoc?.created],
-        category : [this.editingDoc?.category],
-        tags: this.fb.array(this.editingDoc?.tags),
-      };
-    }
-    // old approach: 
-    console.log(this.editingDoc)
+    // console.log(this..title)
+    // 
+    // // old approach: 
+    // console.log(this.)
   this.form = this.fb.group(this.initialState)
   }
 
   save() {
-    // I think what we want to do is call the respecitve service...
-    this.dialogRef.close(this.form.value);
-  }
-
-  update() {
-
+    const returnValue = {action : this.editingMode, uid : this.docUid, ...this.form.value}
+  
+    
+    this.dialogRef.close(returnValue);
+    
+    /* 
+    you could also use this as an attribute instead of writing a method...
+    [mat-dialog-close]="form.value" */
   }
 
   reset() {
+
+    // TODO: need to figure out why this doesnt work
     this.form.reset()
-  }
-
-  delete(uid : string) {
-    if (confirm('Are you sure you want to delete this news piece?')) {
-      // this.NewsService.delete(uid)
-
-      // emit deleteEvent
-    }
   }
 
 }
