@@ -7,5 +7,7 @@
   -->
   <li
     *ngFor="let stream of streams$" 
-    class="list-group-item">{{ stream.title }}</li>
+    class="list-group-item">
+    <content-dropdown [content]="stream"></content-dropdown>
+  </li>
 </ul>

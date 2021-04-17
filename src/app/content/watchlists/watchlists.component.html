@@ -8,5 +8,7 @@
   -->
   <li
     *ngFor="let watchlist of watchlists$" 
-    class="list-group-item">{{ watchlist.title }}</li>
+    class="list-group-item">
+    <content-dropdown [content]="watchlist"></content-dropdown>
+  </li>
 </ul>

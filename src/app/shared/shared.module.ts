@@ -17,6 +17,7 @@ import { AuthGuard } from '../services/auth-guard.service';
 import { ServicesModule } from '../services/services.module';
 import { CarouselComponent } from './components/carousel/carousel.component';
 import { FavoriteComponent } from './components/favorite/favorite.component';
+import { ContentDropdownComponent } from './components/content-dropdown/content-dropdown.component';
 
 
 
@@ -37,6 +38,8 @@ import { FavoriteComponent } from './components/favorite/favorite.component';
     DisableControlDirective,
 
     ReactiveFormControlComponent,
+
+    ContentDropdownComponent,
 ],
   imports: [
     CommonModule,
@@ -57,6 +60,7 @@ import { FavoriteComponent } from './components/favorite/favorite.component';
     SearchComponent,
     ZippyComponent,
     PanelComponent,
+    ContentDropdownComponent
   ]
 })
 export class SharedModule { }

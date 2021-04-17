@@ -11,7 +11,7 @@ import { FirebaseService } from 'src/app/services/firebase.service';
 export class EditNewsComponent implements OnInit {
 
   form: FormGroup;
-  categories: string [] = ["game","console","culture","misc"];
+  categories: string [] = ['game','console','culture','misc'];
   initialState = {
         title: ['', Validators.required],
         creator: [localStorage.getItem('username'), Validators.required],
@@ -21,7 +21,7 @@ export class EditNewsComponent implements OnInit {
         links: this.fb.array([]),
         misc: this.fb.array([]),
         created : [''],
-        category : [''],
+        category : ['news'],
         tags: this.fb.array([]),
       };
   docUid : string;
@@ -43,8 +43,8 @@ export class EditNewsComponent implements OnInit {
           images: this.fb.array([]),
           links: this.fb.array([]),
           misc: this.fb.array([]),
-          created : [""],
-          category : [""],
+          created : [''],
+          category : ['news'],
           tags: this.fb.array([]),
         }
     }}
@@ -56,7 +56,7 @@ export class EditNewsComponent implements OnInit {
     this.dialogRef.close(returnValue);    
     /* 
     you could also use this as an attribute instead of writing a method...
-    [mat-dialog-close]="form.value" */
+    [mat-dialog-close]='form.value' */
   }
 
   reset() {

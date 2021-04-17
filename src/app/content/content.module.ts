@@ -14,6 +14,7 @@ import { ContentHomeComponent } from './content-home/content-home.component';
 import {MatButtonToggleModule} from '@angular/material/button-toggle';
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 import {MatCheckboxModule} from '@angular/material/checkbox';
+import { SharedModule } from '../shared/shared.module';
 
 
 @NgModule({
@@ -33,6 +34,7 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
   imports: [
     ContentRoutingModule,
     CommonModule,
+    SharedModule,
     MatButtonToggleModule,
     MatSlideToggleModule,
     MatCheckboxModule

@@ -7,6 +7,7 @@ import { StreamsService } from './../../services/streams.service';
 import { NewsService } from './../../services/news.service';
 import { EditNewsComponent } from './../forms/edit-news/edit-news.component';
 import { WatchlistsService } from 'src/app/services/watchlists.service';
+import { FirebaseService } from 'src/app/services/firebase.service';
 
 
 
@@ -38,6 +39,7 @@ doc : any;
 
 constructor(
     private dialog : MatDialog,
+    private firebaseService: FirebaseService,
     private newsService : NewsService,
     private streamsService : StreamsService,
     private watchlistsService : WatchlistsService
@@ -77,10 +79,12 @@ constructor(
         if (result.uid) {
           //dont need action so we descruture to get the rest
           const { action, ...rest } = result;
+          rest.createdAt = this.firebaseService.timestamp
           this.newsService.edit(rest.uid, rest);
       } else {
           console.log("tried to create doc")
           const { action, ...rest } = result;
+          rest.updatedAt = this.firebaseService.timestamp
           this.newsService.create(rest);
       }}
     
@@ -95,10 +99,12 @@ constructor(
          if (result.uid) {
            //dont need action so we descruture to get the rest
            const { action, ...rest } = result;
+           rest.createdAt = this.firebaseService.timestamp
            this.streamsService.edit(rest.uid, rest);
        } else {
            console.log("tried to create doc")
            const { action, ...rest } = result;
+           rest.updatedAt = this.firebaseService.timestamp
            this.streamsService.create(rest);
        }}
      
@@ -113,10 +119,12 @@ constructor(
         if (result.uid) {
           //dont need action so we descruture to get the rest
           const { action, ...rest } = result;
+          rest.createdAt = this.firebaseService.timestamp
           this.watchlistsService.edit(rest.uid, rest);
       } else {
           console.log("tried to create doc")
           const { action, ...rest } = result;
+          rest.updatedAt = this.firebaseService.timestamp
           this.watchlistsService.create(rest);
       }}
     

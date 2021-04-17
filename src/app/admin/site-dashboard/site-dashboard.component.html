@@ -2,15 +2,21 @@
 <mat-button-toggle-group (change)="chosen = $event.value">
     <mat-button-toggle value="content">Content</mat-button-toggle>
     <mat-button-toggle value="contrib">Contributions</mat-button-toggle>
+    <mat-button-toggle value="all">All Activity</mat-button-toggle>
 </mat-button-toggle-group>
 
-<!-- TODO: want to make a 'activity log' service and UI component to display here,
-which will list ALL activities by recency to the site, and use this for each category of activity
-- ie "admin 'BenSehnert' added a new game 'Call of Duty Mobile' click to show more" 
 
-this will require updating every service (or making a global firestore service) that adds a log
-every time something is added to the database.
+<!-- TODO: implement this... 
 -->
+<div *ngIf="chosen == 'all'">
+  want to make a 'activity log' service and UI component to display here,
+  which will list ALL activities by recency to the site, and use this for each category of activity
+  - ie "admin 'BenSehnert' added a new game 'Call of Duty Mobile' click to show more" 
+  
+  this will require updating every service (or making a global firestore service) that adds a log
+  every time something is added to the database.
+</div>
+
 
 <div *ngIf="chosen == 'content'">
     <ul class="list-group">
@@ -36,7 +42,15 @@ every time something is added to the database.
 
               <ng-container matColumnDef="title">
                 <th mat-header-cell *matHeaderCellDef> title </th>
-                <td mat-cell *matCellDef="let news"> {{news.title}} </td>
+                <td mat-cell *matCellDef="let news">
+                  <span 
+                  #tooltip="matTooltip"
+                  [matTooltip]="news.description"
+                  matTooltipPosition="after"
+                  matTooltipHideDelay="0">
+                  {{news.title}}
+                </span> 
+                </td>
               </ng-container>
 
 
@@ -66,7 +80,10 @@ every time something is added to the database.
 
               <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
               <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-            </table>
+            </table> <br>
+            <a *ngIf="showNews" routerLink="admin/site/news/all">
+              <button mat-raised-button>View all news</button>
+            </a>
         </li>
         <li class="list-group-item">
           <h3>Streams:</h3>
@@ -80,7 +97,15 @@ every time something is added to the database.
 
             <ng-container matColumnDef="title">
               <th mat-header-cell *matHeaderCellDef> title </th>
-              <td mat-cell *matCellDef="let stream"> {{stream.title}} </td>
+              <td mat-cell *matCellDef="let stream">
+                <span 
+                #tooltip="matTooltip"
+                [matTooltip]="stream.description"
+                matTooltipPosition="after"
+                matTooltipHideDelay="0">
+                {{stream.title}}
+              </span> 
+              </td>
             </ng-container>
 
 
@@ -110,7 +135,10 @@ every time something is added to the database.
 
             <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
             <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-          </table>
+          </table><br>
+          <a *ngIf="showStreams" routerLink="admin/site/streams/all">
+            <button mat-raised-button>View all streams</button>
+          </a>
         </li>
         <li class="list-group-item">
           <h3>Watchlists:</h3>
@@ -124,7 +152,15 @@ every time something is added to the database.
 
             <ng-container matColumnDef="title">
               <th mat-header-cell *matHeaderCellDef> title </th>
-              <td mat-cell *matCellDef="let watchlist"> {{watchlist.title}} </td>
+              <td mat-cell *matCellDef="let watchlist">
+                  <span 
+                    #tooltip="matTooltip"
+                    [matTooltip]="watchlist.description"
+                    matTooltipPosition="after"
+                    matTooltipHideDelay="0">
+                    {{watchlist.title}}
+                  </span> 
+                </td>
             </ng-container>
 
 
@@ -158,11 +194,10 @@ every time something is added to the database.
 
             <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
             <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-            <!--
-              TODO: figure out how to put a button in table footer- this will route to admin/site/news/all
-              and display the unminified list of all selected content in a filterable, searchable table.
-              <tr mat-footer-row *matFooterRowDef="displayedColumns"></tr> -->
-          </table>
+          </table> <br>
+          <a *ngIf="showWatchlists" routerLink="admin/site/watchlists/all">
+            <button mat-raised-button>View all watchlists</button>
+          </a>
       </li>
     </ul>
 </div>

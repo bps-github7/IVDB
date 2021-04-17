@@ -1,3 +1,4 @@
+import { Timestamp } from 'rxjs/internal/operators/timestamp';
 import { UserFeedback } from "./user-feedback";
 
 export interface Content {
@@ -24,7 +25,8 @@ export interface Content {
   misc?: (string | string [])
 
   // Metadata
-  created: string, // timestamp
+  createdAt: any,
+  updatedAt?: any,
   category: string,
   tags?: string [],
   feedback?: UserFeedback

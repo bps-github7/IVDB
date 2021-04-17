@@ -6,7 +6,10 @@
   <!-- for now just display the tile
     TODO: make component for displaying a news article and use it here
   -->
-  <li
-    *ngFor="let newsPiece of news$" 
-    class="list-group-item">{{ newsPiece.title }}</li>
+    <li
+      *ngFor="let newsPiece of news$" 
+      class="list-group-item">
+      <content-dropdown [content]="newsPiece"></content-dropdown>    
+      
+    </li>
 </ul>

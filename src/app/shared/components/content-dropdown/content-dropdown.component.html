@@ -1,0 +1,33 @@
+<zippy [title]="content.title">
+  <p>
+    Author: {{ content.creator }} <br>
+    Published : {{ content.createdAt.toDate() | date:'MM/dd/yyyy hh:ss a' }} <br>
+    <span *ngIf="content.updatedAt">
+      last updated : {{ content.updatedAt.toDate() | date:'MM/dd/yyyy hh:ss a' }} <br>
+    </span>
+
+    {{ content.description }}
+  </p>
+
+
+  <!-- we should have a main picture single img select vs images which is misc/extra images -->
+  <!-- <img [src]="" alt=""> -->
+
+  <p>
+    {{ content.body }}
+  </p>
+
+
+
+  <footer>
+    Links:
+    <ul>
+      <li *ngFor="let c of content.links">{{ c }}</li>
+    </ul>
+    Misc:
+    <ul>
+      <li *ngFor="let c of content.misc">{{ c }}</li>
+    </ul>
+  </footer>
+
+</zippy>
