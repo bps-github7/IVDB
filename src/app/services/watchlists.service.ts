@@ -22,7 +22,10 @@ export class WatchlistsService {
   }
 
   create( watchlist : Content ) {
-    this.watchlistsCollection.add(watchlist)
+//is there a better syntax for this than destructuring?
+    // avoids a weird side effect by ensuring no uid in object were about to create
+    const { uid, ...content } = watchlist
+    this.watchlistsCollection.add(content)
     .then(() => console.log('Successfully added a new watchlist'))
     .catch((err) => console.log(`Error while adding a new watchlist: ${err}`));
   }

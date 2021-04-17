@@ -51,7 +51,6 @@ constructor(
 
   ngOnInit(): void {
   }
-
   
   openDialog(type : string, updateObject?: any) {
 
@@ -74,14 +73,10 @@ constructor(
     this.dialog.open(EditNewsComponent, config)
     .afterClosed()
     .subscribe(result => {
-      // not a great condition but it works..
-      // need it prevent edit or create from happened
-      // on dialog close or reset.
       if (result.title){
-        if (result.action) {
+        if (result.uid) {
           //dont need action so we descruture to get the rest
           const { action, ...rest } = result;
-          // console.log(rest);
           this.newsService.edit(rest.uid, rest);
       } else {
           console.log("tried to create doc")
@@ -94,14 +89,38 @@ constructor(
 
   openStreamDialog(config) {
      this.dialog.open(EditStreamComponent,config)
-    .afterClosed()
-    .subscribe(result => console.log(result))
+     .afterClosed()
+     .subscribe(result => {
+       if (result.title){
+         if (result.uid) {
+           //dont need action so we descruture to get the rest
+           const { action, ...rest } = result;
+           this.streamsService.edit(rest.uid, rest);
+       } else {
+           console.log("tried to create doc")
+           const { action, ...rest } = result;
+           this.streamsService.create(rest);
+       }}
+     
+     })
   }
 
   openWatchlistDialog(config) {
     this.dialog.open(EditWatchlistComponent,config)
     .afterClosed()
-    .subscribe(result => console.log(result))
+    .subscribe(result => {
+      if (result.title){
+        if (result.uid) {
+          //dont need action so we descruture to get the rest
+          const { action, ...rest } = result;
+          this.watchlistsService.edit(rest.uid, rest);
+      } else {
+          console.log("tried to create doc")
+          const { action, ...rest } = result;
+          this.watchlistsService.create(rest);
+      }}
+    
+    })
   }
 
   deleteNews(uid) {

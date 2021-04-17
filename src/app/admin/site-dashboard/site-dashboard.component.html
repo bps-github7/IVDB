@@ -13,8 +13,8 @@ every time something is added to the database.
 -->
 
 <div *ngIf="chosen == 'content'">
-    <ul>
-        <li>
+    <ul class="list-group">
+        <li class="list-group-item">
             <h3>News:</h3>
             <!-- bring up a dialog box instead of traveling to a new route! -->
             <button
@@ -23,10 +23,19 @@ every time something is added to the database.
                 Add news
             </button><br>
             Show recent news<mat-slide-toggle (change)="showNews = !showNews"></mat-slide-toggle>
+            <!-- TODO: Id like to have this as a component, with two modes:
+              1. minified- like below, display 5 or six of the latest entries
+                less capabilities such as search, filter, but a button "show all news" to go to mode 2
+              2.  a routed component with search, autocompletion, filtering, that displays all news content
+                we have. I would be happy to make it but it would be messy and bug friendly because of how
+                we access the services in this parent component. Also not sure how to accomplish:
+                {{ object.attribute }} without using 'eval'. 
+            
+            -->
             <table *ngIf="showNews" mat-table [dataSource]="news$" class="mat-elevation-z8">
 
               <ng-container matColumnDef="title">
-                <th mat-header-cell *matHeaderCellDef> title. </th>
+                <th mat-header-cell *matHeaderCellDef> title </th>
                 <td mat-cell *matCellDef="let news"> {{news.title}} </td>
               </ng-container>
 
@@ -58,51 +67,103 @@ every time something is added to the database.
               <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
               <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
             </table>
-            
-            <!-- <ul
-              *ngIf="showNews" 
-              class="list-group">
-              <li
-                *ngFor="let newsPiece of news$" 
-                class="list-group-item">
-                {{ newsPiece.title }}  
-                <button (click)="log(newsPiece.uid)">Edit this jawn</button>
-              </li>
-            </ul> -->
         </li>
-        <li>
-            <h3>Streams:</h3>
-            <button
-                mat-raised-button
-                (click)="openDialog('stream')">
-                Add Stream
-            </button><br>
-            Show recent streams<mat-slide-toggle (change)="showStreams = !showStreams"></mat-slide-toggle>
-            <ul
-              *ngIf="showStreams" 
-              class="list-group">
-              <li
-                *ngFor="let stream of streams$" 
-                class="list-group-item">{{ stream.title }}</li>
-            </ul>
-        </li>
-        <li>
-            <h3>Watchlists:</h3>
-            <button
-                mat-raised-button
-                (click)="openDialog('watchlist')">
-                Create a watchlist
-            </button><br>
-            Show recent watchlists<mat-slide-toggle (change)="showWatchlists = !showWatchlists"></mat-slide-toggle>
-            <ul
-              *ngIf="showWatchlists" 
-              class="list-group">
-              <li
-                *ngFor="let watchlist of watchlists$" 
-                class="list-group-item">{{ watchlist.title }} </li>
-            </ul>
+        <li class="list-group-item">
+          <h3>Streams:</h3>
+          <button
+              mat-raised-button
+              (click)="openDialog('stream')">
+              Add Stream
+          </button><br>
+          Show recent streams<mat-slide-toggle (change)="showStreams = !showStreams"></mat-slide-toggle>
+          <table *ngIf="showStreams" mat-table [dataSource]="streams$" class="mat-elevation-z8">
 
+            <ng-container matColumnDef="title">
+              <th mat-header-cell *matHeaderCellDef> title </th>
+              <td mat-cell *matCellDef="let stream"> {{stream.title}} </td>
+            </ng-container>
+
+
+            <ng-container matColumnDef="edit">
+              <th mat-header-cell *matHeaderCellDef> </th>
+              <td mat-cell *matCellDef="let stream">
+                <button 
+                  (click)="openDialog('stream', stream)"
+                  mat-stroked-button>Edit
+                </button>  
+
+              </td>
+            </ng-container>
+
+            
+            <ng-container matColumnDef="delete">
+              <th mat-header-cell *matHeaderCellDef> </th>
+              <td mat-cell *matCellDef="let stream">
+                <button 
+                  (click)="deleteStream(stream.uid)"
+                  mat-stroked-button>Delete
+                </button>
+              </td>
+            </ng-container>
+
+
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+          </table>
         </li>
+        <li class="list-group-item">
+          <h3>Watchlists:</h3>
+          <button
+              mat-raised-button
+              (click)="openDialog('watchlist')">
+              Create a watchlist
+          </button><br>
+          Show recent watchlists<mat-slide-toggle (change)="showWatchlists = !showWatchlists"></mat-slide-toggle>
+          <table *ngIf="showWatchlists" mat-table [dataSource]="watchlists$" class="mat-elevation-z8">
+
+            <ng-container matColumnDef="title">
+              <th mat-header-cell *matHeaderCellDef> title </th>
+              <td mat-cell *matCellDef="let watchlist"> {{watchlist.title}} </td>
+            </ng-container>
+
+
+            <ng-container matColumnDef="edit">
+              <th mat-header-cell *matHeaderCellDef> </th>
+              <td mat-cell *matCellDef="let watchlist">
+                <button 
+                  (click)="openDialog('watchlist', watchlist)"
+                  mat-stroked-button>Edit
+                </button>  
+
+              </td>
+            </ng-container>
+
+            
+            <ng-container matColumnDef="delete">
+              <th mat-header-cell *matHeaderCellDef> </th>
+              <td mat-cell *matCellDef="let watchlist">
+                <button 
+                  (click)="deleteWatchlist(watchlist.uid)"
+                  mat-stroked-button>Delete
+                </button>
+              </td>
+              <!-- <td mat-footer-cell *matFooterCellDe>
+                <button mat-raised-button> View full data set</button>
+              </td> -->
+            </ng-container>
+
+           
+
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+            <!--
+              TODO: figure out how to put a button in table footer- this will route to admin/site/news/all
+              and display the unminified list of all selected content in a filterable, searchable table.
+              <tr mat-footer-row *matFooterRowDef="displayedColumns"></tr> -->
+          </table>
+      </li>
     </ul>
 </div>
 <div *ngIf="chosen == 'contrib'">

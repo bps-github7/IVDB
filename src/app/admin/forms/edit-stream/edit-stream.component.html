@@ -22,7 +22,6 @@
             formControlName="description"></textarea>
   </mat-form-field> <br>
 
-<!-- would be great to just format the line breaks using css. the way your supposed to style markup... -->
   <mat-form-field>
     <textarea matInput
             placeholder="URL / view-link: Content of the stream"
@@ -44,26 +43,21 @@
 <mat-dialog-actions>
     
   <button
-    mat-button-raised
-    (onclick)="reset()"
-    >
-    Clear
-  </button>
-  <button
-    mat-dialog-close
-    mat-button-raised>
-    Cancle
-  </button>
-  <button
-    mat-dialog-close="save"
-    mat-button-raised>
-    Save
-  </button>
-  <button
-    mat-dialog-close="delete"
-    mat-button-raised>
-    Delete
-  </button>
+  mat-stroked-button
+  (click)="reset()"
+  >
+  Clear
+</button>
+<button
+  mat-dialog-close
+  mat-stroked-button>
+  Cancle
+</button>
+<button
+  (click)="save()"
+  mat-raised-button>
+  Save
+</button>
 
   <p>Form data: {{ form.value | json }}</p>
 

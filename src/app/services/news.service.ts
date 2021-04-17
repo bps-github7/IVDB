@@ -32,7 +32,9 @@ export class NewsService {
     }
 
     create( newsContent : Content ) {
-        this.newsCollection.add(newsContent)
+      //is there a better syntax for this than destructuring?
+        const { uid, ...content } = newsContent
+        this.newsCollection.add(content)
         .then(() => console.log("Successfuly created news document"))
         .catch((err) => console.log(`Error while creating news document: ${err}`));
     }

@@ -12,6 +12,20 @@ export class EditStreamComponent implements OnInit {
 
     form : FormGroup;
     consoles : string [] = ["nintendo", "sony", "microsoft", "pc", "mobile", "classic"]
+    initialState = {
+      title: ['', Validators.required],
+      creator: [ localStorage.getItem('username'), Validators.required],
+      description: [''],
+      body: ['', Validators.required],
+      images: this.fb.array([]),
+      links: this.fb.array([]),
+      misc: this.fb.array([]),
+      created : [''],
+      category : [''],
+      tags: this.fb.array([]),
+    }
+    docUid: string;
+
 
     constructor(
       @Inject(MAT_DIALOG_DATA) data: any,
@@ -19,37 +33,30 @@ export class EditStreamComponent implements OnInit {
       private fb: FormBuilder,
       private firebaseService : FirebaseService,
   
-      ) {
-        console.log(data)
+      ) { 
+        if (data) {
+          this.docUid = data?.uid;
+          this.initialState = {
+            title: [data?.title, Validators.required],
+            creator: [localStorage.getItem('username'), Validators.required],
+            description: [data?.description],
+          //  TODO: implement these later. have to be in the intial state for the form to work..
+            body: [data?.body, Validators.required],
+            images: this.fb.array([]),
+            links: this.fb.array([]),
+            misc: this.fb.array([]),
+            created : [""],
+            category : [""],
+            tags: this.fb.array([]),
+          }
+        }
+      }
   
-      this.form = this.fb.group({
-        title: ['', Validators.required],
-        creator: [ localStorage.getItem('username')],
-        description: [''],
-        body: ['', Validators.required],
-  
-        images: this.fb.array([]),
-        links: this.fb.array([]),
-        misc: this.fb.array([]),
-  
-  
-  
-        created : [],
-        category : [],
-        tags: this.fb.array([]),
-      })
-     }
-  
-    ngOnInit(): void {
-    }
+    ngOnInit(): void { this.form = this.fb.group(this.initialState) }
   
     save() {
-      // I think what we want to do is call the respecitve service...
-      this.dialogRef.close(this.form.value);
-    }
-  
-    update() {
-  
+      const returnValue = { uid: this.docUid, ...this.form.value }
+      this.dialogRef.close(returnValue);
     }
   
     reset() {
