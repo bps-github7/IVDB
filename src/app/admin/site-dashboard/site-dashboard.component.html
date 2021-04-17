@@ -81,6 +81,30 @@
               <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
               <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
             </table> <br>
+
+            <img *ngIf="downloadURL" [src]="downloadURL" style="max-width: 50px"/>
+<!--             
+            Show recently uploaded news:<mat-slide-toggle (change)="showNewsRecentlyUploaded = !showNewsRecentlyUploaded"></mat-slide-toggle>
+            <div *ngIf="showNewsRecentlyUploaded"> -->
+              <!-- TODO: You could make another section- showNewsRecentlyUploaded, where each
+              contentPiece is a minified image + title card, they can be exited with button on lop left and slide into empty space -->
+              <!-- <mat-progress-bar 
+                *ngIf="uploadPercent"
+                mode="determinate" 
+                [value]="uploadPercent | async"></mat-progress-bar>
+              <p *ngIf="uploadPercent | async">Uploading TitleCard and/or images</p>
+
+              <img *ngIf="downloadURL | async" [src]="downloadURL | async" style="max-width: 50px"/>
+            </div> -->
+            <!-- ^^^ Dont really like this to be honest. will be hard to pull off and its really just a compromise because you cant get the image preview inside the dialog. 
+            gonna be weird once you have a lot of recently uploaded -->
+            
+            <!-- Testing our chaps 
+              
+              <div>upload percentage: {{ uploadPercent | async }}</div>
+            <span>Download URL: (please work)</span> -->
+            <!-- <img [src]="downloadURL | async" style="maxWidth: 50px"/> -->
+
             <a *ngIf="showNews" routerLink="admin/site/news/all">
               <button mat-raised-button>View all news</button>
             </a>

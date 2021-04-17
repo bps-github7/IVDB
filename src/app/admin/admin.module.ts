@@ -25,6 +25,7 @@ import {MatTableModule} from '@angular/material/table';
 import {MatFormFieldModule} from '@angular/material/form-field'; 
 import {MatInputModule} from '@angular/material/input'; 
 import {MatChipsModule} from '@angular/material/chips'; 
+import {MatProgressBarModule} from '@angular/material/progress-bar'; 
 import { GameFormComponent } from './forms/game-form/game-form.component';
 import { SiteDashboardComponent } from './site-dashboard/site-dashboard.component';
 import { EditStreamComponent } from './forms/edit-stream/edit-stream.component';
@@ -72,6 +73,8 @@ import { EditWatchlistComponent } from './forms/edit-watchlist/edit-watchlist.co
     MatButtonToggleModule,
     MatTableModule, 
     MatTooltipModule,
+    
+    MatProgressBarModule,
     // MatRadioModule,
     MatChipsModule,
     MatInputModule,

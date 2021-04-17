@@ -18,6 +18,10 @@ export interface Content {
   description?: string,
   body?: string,
 
+  //the image displayed when content is displayed as card or in grid
+  // the main image that captures the essesense of the content / article.
+  titleCardImage?: string,
+
 
   // extra stuff
   images?: (string | string []),

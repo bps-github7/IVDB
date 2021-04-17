@@ -17,6 +17,7 @@ export class EditNewsComponent implements OnInit {
         creator: [localStorage.getItem('username'), Validators.required],
         description: [''],
         body: ['', Validators.required],
+        titleCardImage: [''],
         images: this.fb.array([]),
         links: this.fb.array([]),
         misc: this.fb.array([]),
@@ -40,9 +41,11 @@ export class EditNewsComponent implements OnInit {
           description: [data?.description],
         //  TODO: implement these later. have to be in the intial state for the form to work..
           body: [data?.body, Validators.required],
+          titleCardImage : [''],
           images: this.fb.array([]),
           links: this.fb.array([]),
           misc: this.fb.array([]),
+          // dont need this form controls here since user wont ever edit them
           created : [''],
           category : ['news'],
           tags: this.fb.array([]),
@@ -57,6 +60,18 @@ export class EditNewsComponent implements OnInit {
     /* 
     you could also use this as an attribute instead of writing a method...
     [mat-dialog-close]='form.value' */
+  }
+
+
+  // just do this when you submit the dialog- problem is we need two seperate calls- 1. storage, 2. firestore
+  upload($event) {
+    const path = $event.target.files[0] 
+    this.form.patchValue({titleCardImage : path})
+    // console.log(path);
+  }
+
+  uploadImage() {
+
   }
 
   reset() {
