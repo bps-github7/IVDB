@@ -120,6 +120,8 @@
             mode="minified" 
             [source]="streams$" 
             [config]="streamConfig"
+            (openDialogEvent)="openDialog($event)"
+            (deleteEvent)="deleteStream($event)"
             ></mat-data-table>
           <!-- Show recent streams<mat-slide-toggle (change)="showStreams = !showStreams"></mat-slide-toggle>
           <table *ngIf="showStreams" mat-table [dataSource]="streams$" class="mat-elevation-z8">
