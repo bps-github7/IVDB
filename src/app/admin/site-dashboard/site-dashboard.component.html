@@ -57,10 +57,10 @@
               <ng-container matColumnDef="edit">
                 <th mat-header-cell *matHeaderCellDef> </th>
                 <td mat-cell *matCellDef="let news">
-                  <!-- <button 
+                  <button 
                     (click)="openDialog('news', news)"
                     mat-stroked-button>Edit
-                  </button>   -->
+                  </button>  
 
                 </td>
               </ng-container>
@@ -82,29 +82,6 @@
               <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
             </table> <br>
 
-            <!-- <img *ngIf="downloadURL" [src]="downloadURL" style="max-width: 50px"/> -->
-<!--             
-            Show recently uploaded news:<mat-slide-toggle (change)="showNewsRecentlyUploaded = !showNewsRecentlyUploaded"></mat-slide-toggle>
-            <div *ngIf="showNewsRecentlyUploaded"> -->
-              <!-- TODO: You could make another section- showNewsRecentlyUploaded, where each
-              contentPiece is a minified image + title card, they can be exited with button on lop left and slide into empty space -->
-              <!-- <mat-progress-bar 
-                *ngIf="uploadPercent"
-                mode="determinate" 
-                [value]="uploadPercent | async"></mat-progress-bar>
-              <p *ngIf="uploadPercent | async">Uploading TitleCard and/or images</p>
-
-              <img *ngIf="downloadURL | async" [src]="downloadURL | async" style="max-width: 50px"/>
-            </div> -->
-            <!-- ^^^ Dont really like this to be honest. will be hard to pull off and its really just a compromise because you cant get the image preview inside the dialog. 
-            gonna be weird once you have a lot of recently uploaded -->
-            
-            <!-- Testing our chaps 
-              
-              <div>upload percentage: {{ uploadPercent | async }}</div>
-            <span>Download URL: (please work)</span> -->
-            <!-- <img [src]="downloadURL | async" style="maxWidth: 50px"/> -->
-
             <a *ngIf="showNews" routerLink="admin/site/news/all">
               <button mat-raised-button>View all news</button>
             </a>
@@ -116,14 +93,14 @@
               (click)="openDialog('stream')">
               Add Stream
           </button><br>
-          <mat-data-table 
+          <!-- <mat-data-table 
             mode="minified" 
             [source]="streams$" 
             [config]="streamConfig"
             (openDialogEvent)="openDialog($event)"
             (deleteEvent)="deleteStream($event)"
-            ></mat-data-table>
-          <!-- Show recent streams<mat-slide-toggle (change)="showStreams = !showStreams"></mat-slide-toggle>
+            ></mat-data-table> -->
+          Show recent streams<mat-slide-toggle (change)="showStreams = !showStreams"></mat-slide-toggle>
           <table *ngIf="showStreams" mat-table [dataSource]="streams$" class="mat-elevation-z8">
 
             <ng-container matColumnDef="title">
@@ -168,7 +145,7 @@
 
             <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
             <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-          </table><br> -->
+          </table><br>
           <a *ngIf="showStreams" routerLink="admin/site/streams/all">
             <button mat-raised-button>View all streams</button>
           </a>
@@ -200,10 +177,10 @@
             <ng-container matColumnDef="edit">
               <th mat-header-cell *matHeaderCellDef> </th>
               <td mat-cell *matCellDef="let watchlist">
-                <!-- <button 
+                <button 
                   (click)="openDialog('watchlist', watchlist)"
                   mat-stroked-button>Edit
-                </button>   -->
+                </button>  
 
               </td>
             </ng-container>

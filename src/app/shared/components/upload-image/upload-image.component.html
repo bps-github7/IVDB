@@ -1,5 +1,12 @@
+<button (click)="fileInput.click()">
+  <span>{{ label | titlecase }}</span>
+  <input #fileInput type="file" (change)="upload($event)" style="display:none;" />
+</button>
 
-
-name of uploaded file
-
-<!-- output property: is the upload-image component -->
+<div *ngIf="file">
+  <upload-task
+    [folder]="folder"
+    (uploadEvent)="save($event)"
+    (deleteEvent)="delete()"
+    [file]="file"></upload-task>
+</div>

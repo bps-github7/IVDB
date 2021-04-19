@@ -27,6 +27,10 @@ export class EditNewsComponent implements OnInit {
       };
   docUid : string;
 
+  //these disable the submit button if set to true
+  titleCardLoading : boolean = false;
+  imagesLoading : boolean = false;
+
   constructor(
     @Inject(MAT_DIALOG_DATA) data: any,
     private dialogRef : MatDialogRef<EditNewsComponent>,
@@ -41,7 +45,7 @@ export class EditNewsComponent implements OnInit {
           description: [data?.description],
         //  TODO: implement these later. have to be in the intial state for the form to work..
           body: [data?.body, Validators.required],
-          titleCardImage : [''],
+          titleCardImage : [data?.titleCardImage],
           images: this.fb.array([]),
           links: this.fb.array([]),
           misc: this.fb.array([]),
@@ -62,16 +66,20 @@ export class EditNewsComponent implements OnInit {
     [mat-dialog-close]='form.value' */
   }
 
-
-  // just do this when you submit the dialog- problem is we need two seperate calls- 1. storage, 2. firestore
-  upload($event) {
-    const path = $event.target.files[0] 
-    this.form.patchValue({titleCardImage : path})
-    // console.log(path);
+  setTitleCard(file) {
+    this.form.patchValue({titleCardImage : file});
   }
 
-  uploadImage() {
+  deleteTitleCard() {
+    this.form.patchValue({titleCardImage : ''});
+  }
 
+  // TODO: upload-images needs to emit a new list of uploaded images every time it deletes one
+  // then when the deleteEvent is emitted, re save the list
+
+  setImages(files) {
+    // console.log(files);
+    this.form.patchValue({images : files})
   }
 
   reset() {

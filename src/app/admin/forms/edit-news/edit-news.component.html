@@ -9,12 +9,11 @@
   </mat-form-field> <br>
 
 
-  <br><label for="titleCardImage">Title Card Image:</label> <br>
   <upload-image
-    mode="single"
-    label="Enter a title card image">
-  </upload-image>
-
+    (loading)="imagesLoading = !imagesLoading"
+    (finishedUpload)="setTitleCard($event)"
+    (deleteEvent)="deleteTitleCard()"
+  ></upload-image>
 
   <!-- <button (click)="fileInput.click()">
     <span>Select</span>
@@ -48,7 +47,13 @@
     <mat-chip color="primary" selected>Primary fish</mat-chip>
     <mat-chip color="accent" selected>Accent fish</mat-chip>
   </mat-chip-list>
-  
+
+  <upload-images
+    (loading)="imagesLoading = !imagesLoading"
+    (finishedUpload)="setImages($event)"
+    (deleteEvent)="setImages($event)">
+  </upload-images>
+
 </mat-dialog-content>
 
 <mat-dialog-actions>

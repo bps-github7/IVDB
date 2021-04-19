@@ -23,7 +23,14 @@
 
 <div *ngFor="let file of files">
   <upload-task
+    *ngIf="file"
     (uploadEvent)="upload($event)"
     (deleteEvent)="delete($event)"
     [file]="file"></upload-task>
 </div>
+<!-- 
+<button
+  (click)="saveImages()"
+  [disabled]="!loading">
+  finished uploading?
+</button> -->

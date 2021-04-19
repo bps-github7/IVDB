@@ -66,22 +66,22 @@ constructor(
   ngOnInit(): void {
   }
   
-  // openDialog(type : string, updateObject?: any) {
-    openDialog(event$) {
-    console.log(event$);
-      // const dialogConfig = new MatDialogConfig();
-      // dialogConfig.disableClose = true;
-      // dialogConfig.autoFocus = true;
-      // dialogConfig.data = updateObject
+  openDialog(type : string, updateObject?: any) {
+      const dialogConfig = new MatDialogConfig();
+      dialogConfig.disableClose = true;
+      dialogConfig.autoFocus = true;
+      dialogConfig.height = '1200px';
+      dialogConfig.width = `900px`;
+      dialogConfig.data = updateObject
 
-      // // console.log(`openDialog got this: ${uid}`)
+      // console.log(`openDialog got this: ${uid}`)
 
-      // if (type == 'news')
-      //   this.openNewsDialog(dialogConfig)
-      // else if (type == 'stream')
-      //   this.openStreamDialog(dialogConfig)
-      // else if (type == 'watchlist')
-      //     this.openWatchlistDialog(dialogConfig)
+      if (type == 'news')
+        this.openNewsDialog(dialogConfig)
+      else if (type == 'stream')
+        this.openStreamDialog(dialogConfig)
+      else if (type == 'watchlist')
+          this.openWatchlistDialog(dialogConfig)
   }
 
   openNewsDialog(config) {
