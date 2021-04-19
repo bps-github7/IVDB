@@ -9,14 +9,19 @@
   </mat-form-field> <br>
 
 
-  <!-- cant wrap in form field because material doesnt support file type input -->
   <br><label for="titleCardImage">Title Card Image:</label> <br>
-  <button (click)="fileInput.click()">
+  <upload-image
+    mode="single"
+    label="Enter a title card image">
+  </upload-image>
+
+
+  <!-- <button (click)="fileInput.click()">
     <span>Select</span>
     <input #fileInput type="file" (change)="upload($event)" style="display:none;" />
     
   
-  </button> <br>
+  </button> <br> -->
 
 
   

@@ -3,9 +3,9 @@ import { Routes, RouterModule } from '@angular/router';
 import { SharedModule } from '../shared/shared.module';
 import { CreatePostComponent } from './create-post/create-post.component';
 import { CreateThreadComponent } from './create-thread/create-thread.component';
+import { ForumHomeComponent } from './forum-home/forum-home.component';
 import { ForumComponent } from './forum.component';
 import { ForumsListComponent } from './forums-list/forums-list.component';
-import { HomeComponent } from './home/home.component';
 import { ViewAllPostsComponent } from './view-all-posts/view-all-posts.component';
 import { ViewForumComponent } from './view-forum/view-forum.component';
 import { ViewThreadComponent } from './view-thread/view-thread.component';
@@ -15,7 +15,7 @@ const routes: Routes = [
     children: [
     {
         path: '',
-        component: HomeComponent
+        component: ForumHomeComponent
     },
     {
         path: 'all',
@@ -66,7 +66,7 @@ export class ForumRoutingModule { } export const ForumComponents = [
     CreatePostComponent,
     CreateThreadComponent,
     ForumsListComponent,
-    HomeComponent,
+    ForumHomeComponent,
     ViewAllPostsComponent,
     ViewForumComponent,
     ViewThreadComponent,

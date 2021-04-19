@@ -19,15 +19,16 @@ import { CarouselComponent } from './components/carousel/carousel.component';
 import { FavoriteComponent } from './components/favorite/favorite.component';
 import { ContentDropdownComponent } from './components/content-dropdown/content-dropdown.component';
 import { UploadImageComponent } from './components/upload-image/upload-image.component';
-import { MatDataTableComponent } from './mat-data-table/mat-data-table.component';
+import { MatDataTableComponent } from './components/mat-data-table/mat-data-table.component';
+import { UploadImagesComponent } from './components/upload-images/upload-images.component';
 import {MatTooltipModule} from '@angular/material/tooltip'; 
 import {MatTableModule} from '@angular/material/table'; 
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
-
+import { UploadTaskComponent } from './components/upload-task/upload-task.component';
+import { DropzoneDirective } from './directives/dropzone.directive';
 
 @NgModule({
   declarations: [
-    UploadImageComponent,
     CarouselComponent,
     FavoriteComponent,
     SearchComponent,
@@ -39,10 +40,16 @@ import {MatSlideToggleModule} from '@angular/material/slide-toggle';
     ReactiveFormControlComponent,
     ContentDropdownComponent,
     MatDataTableComponent,
+
+    UploadImageComponent,
+    UploadImagesComponent,
+    UploadTaskComponent,
     // pipes
 
     // directives 
-    DisableControlDirective
+    DisableControlDirective,
+    
+    DropzoneDirective
 
 ],
   imports: [
@@ -61,9 +68,7 @@ import {MatSlideToggleModule} from '@angular/material/slide-toggle';
   ],
   exports: [
     FormsModule,
-    ReactiveFormsModule,
-    UploadImageComponent,
-    CarouselComponent,
+    ReactiveFormsModule,CarouselComponent,
     FavoriteComponent,
     SearchComponent,
     ZippyComponent,
@@ -74,10 +79,16 @@ import {MatSlideToggleModule} from '@angular/material/slide-toggle';
     ReactiveFormControlComponent,
     ContentDropdownComponent,
     MatDataTableComponent,
+    
+    UploadImageComponent,
+    UploadImagesComponent,
+    UploadTaskComponent,
     // pipes
 
     // directives 
-    DisableControlDirective    
+    DisableControlDirective,
+    
+    DropzoneDirective
   ]
 })
 export class SharedModule { }
