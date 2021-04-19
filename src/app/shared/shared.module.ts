@@ -18,11 +18,16 @@ import { ServicesModule } from '../services/services.module';
 import { CarouselComponent } from './components/carousel/carousel.component';
 import { FavoriteComponent } from './components/favorite/favorite.component';
 import { ContentDropdownComponent } from './components/content-dropdown/content-dropdown.component';
-
+import { UploadImageComponent } from './components/upload-image/upload-image.component';
+import { MatDataTableComponent } from './mat-data-table/mat-data-table.component';
+import {MatTooltipModule} from '@angular/material/tooltip'; 
+import {MatTableModule} from '@angular/material/table'; 
+import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 
 
 @NgModule({
   declarations: [
+    UploadImageComponent,
     CarouselComponent,
     FavoriteComponent,
     SearchComponent,
@@ -31,20 +36,22 @@ import { ContentDropdownComponent } from './components/content-dropdown/content-
     ReactiveDefaultFormControlComponent,
     ReactiveSelectFormControlComponent,
     ReactiveTextareaFormControlComponent,
-
+    ReactiveFormControlComponent,
+    ContentDropdownComponent,
+    MatDataTableComponent,
     // pipes
 
     // directives 
-    DisableControlDirective,
+    DisableControlDirective
 
-    ReactiveFormControlComponent,
-
-    ContentDropdownComponent,
 ],
   imports: [
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
+    MatTableModule, 
+    MatTooltipModule,
+    MatSlideToggleModule
 
   ],
   providers: [
@@ -55,12 +62,22 @@ import { ContentDropdownComponent } from './components/content-dropdown/content-
   exports: [
     FormsModule,
     ReactiveFormsModule,
+    UploadImageComponent,
     CarouselComponent,
     FavoriteComponent,
     SearchComponent,
     ZippyComponent,
     PanelComponent,
-    ContentDropdownComponent
+    ReactiveDefaultFormControlComponent,
+    ReactiveSelectFormControlComponent,
+    ReactiveTextareaFormControlComponent,
+    ReactiveFormControlComponent,
+    ContentDropdownComponent,
+    MatDataTableComponent,
+    // pipes
+
+    // directives 
+    DisableControlDirective    
   ]
 })
 export class SharedModule { }
