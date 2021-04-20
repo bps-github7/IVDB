@@ -63,7 +63,8 @@
     Clear
   </button>
   <button
-    [mat-dialog-close]="cleanStorage()"
+    mat-dialog-close
+    (click)="cleanStorage()"
     mat-stroked-button>
     Cancle
   </button>

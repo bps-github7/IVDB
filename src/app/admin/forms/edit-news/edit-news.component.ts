@@ -100,14 +100,17 @@ export class EditNewsComponent implements OnInit {
   }
 
   cleanStorage() {
-    // gets rid of images in storage should the user close the form.
+    // gets rid of images in storage from current upload, should the user close the form.
     if (this.titleCardImage.value) {
       this.deleteFromStorage(this.titleCardImage.value.downloadURL);
+      console.log("titleCard successfully deleted!")
     }
     if (this.images.value.length) {
       for(let i = 0; i < this.images.value.length; i++)
         this.deleteFromStorage(this.images.value[i].downloadURL)
-    }
+      console.log('all images successfully deleted!')
+      }
+    
   }
 
   deleteFromStorage(url) {
