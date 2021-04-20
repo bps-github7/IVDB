@@ -41,31 +41,31 @@
 
 
   <label id="example-radio-group-label">Tags: <br></label>
-  <mat-chip-list aria-label="tag selection" >
-    <mat-chip>One fish</mat-chip>
-    <mat-chip>Two fish</mat-chip>
-    <mat-chip color="primary" selected>Primary fish</mat-chip>
-    <mat-chip color="accent" selected>Accent fish</mat-chip>
-  </mat-chip-list>
+  
+  <!-- how do i get value in form control? it doesnt like formcontrolName attribute binding -->
+  <!-- <mat-chip-list
+    aria-label="tag selection" >
+    <mat-chip *ngFor="let c of categories">
+      {{ c }}
+    </mat-chip>
+    
+  </mat-chip-list> -->
 
   <upload-images
     (loading)="imagesLoading = !imagesLoading"
-    (finishedUpload)="setImages($event)"
+    (uploadEvent)="setImages($event)"
     (deleteEvent)="setImages($event)">
   </upload-images>
-
 </mat-dialog-content>
 
 <mat-dialog-actions>
-    
   <button
     mat-stroked-button
-    (click)="reset()"
-    >
+    (click)="reset()">
     Clear
   </button>
   <button
-    mat-dialog-close
+    [mat-dialog-close]="cleanStorage()"
     mat-stroked-button>
     Cancle
   </button>
@@ -76,5 +76,4 @@
   </button>
 
   <p>Form data: {{ form.value | json }}</p>
-
 </mat-dialog-actions>

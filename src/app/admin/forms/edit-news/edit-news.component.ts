@@ -1,3 +1,4 @@
+import { AngularFireStorage } from '@angular/fire/storage';
 import { Component, InjectionToken, Inject, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
@@ -35,6 +36,7 @@ export class EditNewsComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) data: any,
     private dialogRef : MatDialogRef<EditNewsComponent>,
     private fb: FormBuilder,
+    private storage : AngularFireStorage,
     private firebaseService : FirebaseService,
     ) {
       if (data) {
@@ -77,13 +79,42 @@ export class EditNewsComponent implements OnInit {
   // TODO: upload-images needs to emit a new list of uploaded images every time it deletes one
   // then when the deleteEvent is emitted, re save the list
 
-  setImages(files) {
+  setImages(file) {
     // console.log(files);
-    this.form.patchValue({images : files})
+    // const currentImages = "bikini bitch"
+    // currentImages.push(file)
+
+    this.images.value.push(file);
+    // console.log(file);
+    // this.form.patchValue({images : "bikini bitch!"})
+  }
+
+  get titleCardImage() {
+    return this.form.get('titleCardImage');
+  }
+
+  get images() {
+    return this.form.get('images');
+  }
+
+  cleanStorage() {
+    // gets rid of images in storage should the user close the form.
+    if (this.titleCardImage.value) {
+      this.deleteFromStorage(this.titleCardImage.value.downloadURL);
+    }
+    if (this.images.value.length) {
+      for(let i = 0; i < this.images.value.length; i++)
+        this.deleteFromStorage(this.images.value[i].downloadURL)
+    }
+  }
+
+  deleteFromStorage(url) {
+    this.storage.storage.refFromURL(url).delete();
   }
 
   reset() {
-    this.form.reset()
+    this.cleanStorage();
+    this.form.reset();
   }
 
 }

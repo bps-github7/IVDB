@@ -45,6 +45,8 @@ and file name when finished
     return this.storage.storage.refFromURL(downloadUrl).delete();
   }
 
+   
+
   startUpload() {
     /* The path to location in storage. by default, stores in a folder called 'images' */
     const path = `${this.folder}/${this.file.name}`;

@@ -28,6 +28,7 @@ export class UploadImageComponent implements OnInit {
     this.loading.emit(true); 
     // so the upload-task doesnt start before we have a folder name provided.
     this.file = event.target.files[0];
+    
   }
 
   delete() {
