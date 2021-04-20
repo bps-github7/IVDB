@@ -70,8 +70,8 @@ constructor(
       const dialogConfig = new MatDialogConfig();
       dialogConfig.disableClose = true;
       dialogConfig.autoFocus = true;
-      dialogConfig.height = '1200px';
-      dialogConfig.width = `900px`;
+      dialogConfig.height = '1600px';
+      dialogConfig.width = `1200px`;
       dialogConfig.data = updateObject
 
       // console.log(`openDialog got this: ${uid}`)

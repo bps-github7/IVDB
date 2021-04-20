@@ -28,8 +28,7 @@ export class EditNewsComponent implements OnInit {
         tags: this.fb.array([]),
       };
   docUid : string;
-
-  //these disable the submit button if set to true
+  //these should disable the submit button if set to true
   titleCardLoading : boolean = false;
   imagesLoading : boolean = false;
 
@@ -63,22 +62,21 @@ export class EditNewsComponent implements OnInit {
     }}
 
   ngOnInit(): void { this.form = this.fb.group(this.initialState) }
-
-  save() {
-    const returnValue = {uid : this.docUid, ...this.form.value}
-    this.dialogRef.close(returnValue);    
-    /* 
-    you could also use this as an attribute instead of writing a method...
-    [mat-dialog-close]='form.value' */
-  }
-
-  setTitleCard(file) {
-    // is this the problem?
+  
+  /* 
+  Giving file a default value allows us to delete titleCard
+  from form should no file be passed in
+   */
+  setTitleCard(file = '') {
     this.form.patchValue({titleCardImage : file});
   }
 
-  deleteTitleCard() {
-    this.form.patchValue({titleCardImage : ''});
+  // deleteTitleCard() {
+  //   this.form.patchValue({titleCardImage : ''});
+  // }
+
+  addTag(tag) {
+
   }
 
   // TODO: upload-images needs to emit a new list of uploaded images every time it deletes one
@@ -103,6 +101,23 @@ export class EditNewsComponent implements OnInit {
     return this.form.get('images');
   }
 
+  
+
+  //methods triggered by using the buttons in mat-dialog-actions
+  
+  save() {
+    const returnValue = {uid : this.docUid, ...this.form.value}
+    this.dialogRef.close(returnValue);    
+    /* 
+    you could also use this as an attribute instead of writing a method...
+    [mat-dialog-close]='form.value' */
+  }
+
+  reset() {
+    this.cleanStorage();
+    this.form.reset();
+  }
+
   cleanStorage() {
     // gets rid of images in storage from current upload, should the user close the form.
     if (this.titleCardImage.value) {
@@ -117,13 +132,9 @@ export class EditNewsComponent implements OnInit {
     
   }
 
+  // this one is a helper for above cleanStorage.
   deleteFromStorage(url) {
     this.storage.storage.refFromURL(url).delete();
-  }
-
-  reset() {
-    this.cleanStorage();
-    this.form.reset();
   }
 
 }

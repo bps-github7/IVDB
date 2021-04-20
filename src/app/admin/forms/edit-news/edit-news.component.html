@@ -9,9 +9,14 @@
   </mat-form-field> <br>
 
 
+
+<!-- need an input prop for this component so you can delete titleCard when editing a newsPiece
+    also the button should be disabled if there is an image provided
+-->
   <upload-image
+    [editing]="titleCardImage"
     (uploadEvent)="setTitleCard($event)"
-    (deleteEvent)="deleteTitleCard()"
+    (deleteEvent)="setTitleCard()"
   ></upload-image>
 
   <!-- <button (click)="fileInput.click()">
@@ -39,16 +44,15 @@
   </mat-form-field> <br>
 
 
-  <!-- <label id="example-radio-group-label">Tags: <br></label> -->
-  
+  <label id="example-radio-group-label">Tags: <br></label>
   <!-- how do i get value in form control? it doesnt like formcontrolName attribute binding -->
-  <!-- <mat-chip-list
+  <mat-chip-list
     aria-label="tag selection" >
-    <mat-chip *ngFor="let c of categories">
+    <mat-chip *ngFor="let c of categories" [value]="c" (click)="addTag(c)">
       {{ c }}
     </mat-chip>
     
-  </mat-chip-list> -->
+  </mat-chip-list>
 
   <upload-images
     (uploadEvent)="setImages($event)"

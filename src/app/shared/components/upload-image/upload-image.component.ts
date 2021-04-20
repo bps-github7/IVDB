@@ -1,27 +1,35 @@
-import { AngularFireStorage, AngularFireStorageReference, AngularFireUploadTask } from '@angular/fire/storage';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { finalize, map } from 'rxjs/operators';
-import { Observable } from 'rxjs';
 
 @Component({
   selector: 'upload-image',
   templateUrl: './upload-image.component.html',
-  styleUrls: ['./upload-image.component.css']
+  styleUrls: ['./upload-image.component.css'],
 })
 export class UploadImageComponent implements OnInit {
 
 
+  
   @Input() label : string = "Enter a title card image"
   @Input() folder : string = 'titleCardImages'
+  @Input() editing : any;
 
   file : File;
+  display : any;
   @Output() loading = new EventEmitter<boolean>();
+
   @Output() deleteEvent = new EventEmitter<any>();
   @Output() uploadEvent = new EventEmitter<any>();
 
   constructor() { }
 
   ngOnInit(): void {
+    if (this.editing.value) {
+
+      //assigning to file is problematic because it
+      // would trigger upload again, in theory.
+      // instead, we need an input prop to upload-task,
+      this.display = this.editing.value;
+    }
   }
 
   upload(event) {
