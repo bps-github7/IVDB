@@ -10,8 +10,7 @@
 
 
   <upload-image
-    (loading)="imagesLoading = !imagesLoading"
-    (finishedUpload)="setTitleCard($event)"
+    (uploadEvent)="setTitleCard($event)"
     (deleteEvent)="deleteTitleCard()"
   ></upload-image>
 
@@ -40,7 +39,7 @@
   </mat-form-field> <br>
 
 
-  <label id="example-radio-group-label">Tags: <br></label>
+  <!-- <label id="example-radio-group-label">Tags: <br></label> -->
   
   <!-- how do i get value in form control? it doesnt like formcontrolName attribute binding -->
   <!-- <mat-chip-list
@@ -52,7 +51,6 @@
   </mat-chip-list> -->
 
   <upload-images
-    (loading)="imagesLoading = !imagesLoading"
     (uploadEvent)="setImages($event)"
     (deleteEvent)="setImages($event)">
   </upload-images>

@@ -17,7 +17,7 @@ export class UploadImageComponent implements OnInit {
   file : File;
   @Output() loading = new EventEmitter<boolean>();
   @Output() deleteEvent = new EventEmitter<any>();
-  @Output() finishedUpload = new EventEmitter<any>();
+  @Output() uploadEvent = new EventEmitter<any>();
 
   constructor() { }
 
@@ -37,6 +37,6 @@ export class UploadImageComponent implements OnInit {
   }
 
   save(event) {
-    this.finishedUpload.emit(event);
+    this.uploadEvent.emit(event);
   } 
 }

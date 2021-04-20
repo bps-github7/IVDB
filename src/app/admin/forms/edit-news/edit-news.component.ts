@@ -69,6 +69,7 @@ export class EditNewsComponent implements OnInit {
   }
 
   setTitleCard(file) {
+    // is this the problem?
     this.form.patchValue({titleCardImage : file});
   }
 
@@ -84,6 +85,7 @@ export class EditNewsComponent implements OnInit {
     // const currentImages = "bikini bitch"
     // currentImages.push(file)
 
+    // is this the problem?
     this.images.value.push(file);
     // console.log(file);
     // this.form.patchValue({images : "bikini bitch!"})
