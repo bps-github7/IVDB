@@ -93,14 +93,11 @@ constructor(
           //dont need action so we descruture to get the rest
           const { action, ...rest } = result;
           rest.createdAt = this.firebaseService.timestamp;
-          
-          // this.handleUploads(rest);
           this.newsService.edit(rest.uid, rest);
       } else {
           console.log("tried to create doc")
           const { action, ...rest } = result;
           rest.updatedAt = this.firebaseService.timestamp;
-          // this.handleUploads(rest);
           this.newsService.create(rest);
       }}
     

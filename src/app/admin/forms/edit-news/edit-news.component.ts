@@ -22,7 +22,8 @@ export class EditNewsComponent implements OnInit {
         images: this.fb.array([]),
         links: this.fb.array([]),
         misc: this.fb.array([]),
-        created : [''],
+        createdAt : [''],
+        updatedAt : [''],
         category : ['news'],
         tags: this.fb.array([]),
       };
@@ -41,6 +42,8 @@ export class EditNewsComponent implements OnInit {
     ) {
       if (data) {
         this.docUid = data?.uid;
+
+        //set the initial state to contain the object we want to edit
         this.initialState = {
           title: [data?.title, Validators.required],
           creator: [localStorage.getItem('username'), Validators.required],
@@ -48,13 +51,14 @@ export class EditNewsComponent implements OnInit {
         //  TODO: implement these later. have to be in the intial state for the form to work..
           body: [data?.body, Validators.required],
           titleCardImage : [data?.titleCardImage],
-          images: this.fb.array([]),
-          links: this.fb.array([]),
-          misc: this.fb.array([]),
+          images: this.fb.array(data?.images),
+          links: this.fb.array(data?.links),
+          misc: this.fb.array(data?.misc),
           // dont need this form controls here since user wont ever edit them
-          created : [''],
+          createdAt : [data?.createdAt],
+          updatedAt: [data?.updatedAt],
           category : ['news'],
-          tags: this.fb.array([]),
+          tags: this.fb.array(data?.tags),
         }
     }}
 
