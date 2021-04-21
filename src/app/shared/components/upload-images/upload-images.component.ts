@@ -1,4 +1,5 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 @Component({
   selector: 'upload-images',
@@ -15,17 +16,29 @@ goes to Jeff from Fireship
 
 https://angularfirebase.com/lessons/firebase-storage-with-angularfire-dropzone-file-uploader/) 
  */
-export class UploadImagesComponent {
+export class UploadImagesComponent implements OnInit {
+
 
   isHovering: boolean;
-
-
+  @Input() editing: any;
   // toggle loading whenever doing an upload
   @Output() loading = new EventEmitter<boolean>();
   @Output() uploadEvent = new EventEmitter<any []>();
   @Output() deleteEvent = new EventEmitter<any []>();
   files: File[] = [];
   successfullyUploaded: {downloadURL : string, path : string, name : string} [];
+
+
+  ngOnInit() {
+    if (this.editing.value) {
+
+      //assigning to file is problematic because it
+      // would trigger upload again, in theory.
+      // instead, we need an input prop to upload-task,
+      this.editing = this.editing.value;
+    }
+  }  
+
 
 
   //for saving the downloadURL to database

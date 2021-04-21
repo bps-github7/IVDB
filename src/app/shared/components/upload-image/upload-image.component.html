@@ -4,9 +4,21 @@
 </button>
 
 <div *ngIf="file">
+  Hi Hello
   <upload-task
     [folder]="folder"
     (uploadEvent)="save($event)"
     (deleteEvent)="delete()"
     [file]="file"></upload-task>
+</div>
+
+
+<div *ngIf="!file && editing">
+  
+
+  <div *ngIf="editing.downloadURL as url">
+    <!-- TODO: need to do something with this delete method because it just deletes from form, not storage! (#looseend) -->
+    {{editing.name}} <button class="btn btn-danger" (click)="delete('scrunchys')">Remove image</button>
+  </div> 
+
 </div>

@@ -27,6 +27,7 @@ export class DescriptorFormComponent implements OnChanges {
 
 
 
+    // TODO: changes.editing is undefined. causes the descriptor form to not upload the existing data when we want to edit a thing.
 
     showSubForm : boolean = false;
     form : FormGroup;

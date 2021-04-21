@@ -17,7 +17,7 @@
     [editing]="titleCardImage"
     (uploadEvent)="setTitleCard($event)"
     (deleteEvent)="setTitleCard()"
-  ></upload-image>
+  ></upload-image> <br>
 
   <!-- <button (click)="fileInput.click()">
     <span>Select</span>
@@ -55,6 +55,7 @@
   </mat-chip-list>
 
   <upload-images
+    [editing]="images"
     (uploadEvent)="setImages($event)"
     (deleteEvent)="setImages($event)">
   </upload-images>

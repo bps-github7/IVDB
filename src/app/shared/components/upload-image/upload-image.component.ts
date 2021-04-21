@@ -28,7 +28,7 @@ export class UploadImageComponent implements OnInit {
       //assigning to file is problematic because it
       // would trigger upload again, in theory.
       // instead, we need an input prop to upload-task,
-      this.display = this.editing.value;
+      this.editing = this.editing.value;
     }
   }
 
@@ -39,7 +39,11 @@ export class UploadImageComponent implements OnInit {
     
   }
 
-  delete() {
+  delete(msg = '') {
+    if (msg) {
+      console.log(msg);
+      console.log("Need to go to the basement and get some salami- delete from storage")
+    }
     this.file = null;
     this.deleteEvent.emit();
   }
