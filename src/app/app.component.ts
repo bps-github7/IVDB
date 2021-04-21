@@ -23,17 +23,23 @@ export class AppComponent {
         private auth : AuthService,
         private router : Router,
         private userService : UserService,
-        private route: ActivatedRoute,
-        private profileService : ProfileService,         
+        // private route: ActivatedRoute,
+        // private profileService : ProfileService,         
         ) {
+
+        //TODO: get rid of this whole jawn/ unneeded, but relied on throughout the app!...
         this.auth.user$.subscribe(user => {
             if (user) {
                 this.user = user;
-                //saves the most recent user date to db
-                this.userService.save(user);
-                localStorage.setItem("user_id", user.uid);
-                //wish there was a less ham-fisted way to do this but works for now.
-                localStorage.setItem("username", (user.displayName.includes(' ') ? user.displayName.split(' ').join('') : user.displayName));
+
+                //save the most recent user date to db
+                // this.userService.save(this.user);
+                
+
+                /* PLEASE use auth state and not local storage to keep userID and display name avialble throughout app!!! */
+                localStorage.setItem("user_id", this.user.uid);
+                localStorage.setItem("username", (this.user.displayName.includes(' ') ? this.user.displayName.split(' ').join('') : this.user.displayName));
+                
                 let returnUrl = localStorage.getItem('returnUrl');
                 this.router.navigateByUrl(returnUrl);
             }

@@ -9,8 +9,8 @@ import { UserService } from './user.service';
 })
 export class UserAuthGuard implements CanActivate {
 
-    //if the userId matches the authstateID, then the user can access their profile to view/update it.
-    //this is essential to release/real use of application, but beyond the scope of what im capable of doing at the moment.
+    //TODO: if the userId matches the authstateID, then the user can access their profile to view/update it.
+    //this is essential to production ready app
     userId;
     authId;
 

@@ -5,7 +5,6 @@ import { AngularFireAuth } from '@angular/fire/auth';
 import * as firebase from 'firebase';
 import { switchMap } from 'rxjs/operators';
 import { of } from 'rxjs';
-import { FirebaseApp } from '@angular/fire';
 import { UserService } from '../services/user.service';
 
 @Injectable({
@@ -13,58 +12,79 @@ import { UserService } from '../services/user.service';
 })
 export class AuthService {
 
-    user$: Observable<firebase.User>
-    user : firebase.User;
-    private eventAuthError = new BehaviorSubject<string>("");
-    public eventAuthError$ = this.eventAuthError.asObservable();
+  user$: Observable<firebase.User>
+  user : firebase.User;
+  private eventAuthError = new BehaviorSubject<string>("");
+  public eventAuthError$ = this.eventAuthError.asObservable();
 
-    constructor(private afAuth : AngularFireAuth, private userService : UserService) {
-      this.user$ = afAuth.authState;
-      this.user$.subscribe((resp) => this.user = resp)
-    }
+  constructor(
+    private afAuth : AngularFireAuth, 
+    private userService : UserService) {
+    this.user$ = afAuth.authState;
+    this.user$.subscribe((resp) => this.user = resp);
+  }
 
-    google_login() {
-       this.afAuth.signInWithPopup(new firebase.auth.GoogleAuthProvider);
-    }
+  google_login() {
+    this.afAuth.signInWithPopup(new firebase.auth.GoogleAuthProvider);
 
-    facebook_login() {
-       alert("facebook login not working at this time.")
-    }
+    this.user$ = this.afAuth.authState;
+    this.user$.subscribe((resp) => this.user = resp);
+  }
 
-    login(email : string, password : string) {
-        this.afAuth.signInWithEmailAndPassword(email, password);
-    }
+  facebook_login() {
+    alert("facebook login not working at this time.")
+  }
 
-    logout() {
-       this.afAuth.signOut();
-       localStorage.removeItem("user_id");
-       localStorage.removeItem("username");
-    }
+  login(email : string, password : string) {
+    this.afAuth.signInWithEmailAndPassword(email, password);
 
-    createUser(email : string, password : string, name : string) {
-        this.afAuth.createUserWithEmailAndPassword(email, password)
-        .then(userCredential => {
-            userCredential.user.updateProfile({
-                displayName: name
-            }
-            )
-        }).catch(error => {
-            console.log(error);
-            this.eventAuthError.next(error);
+    this.user$ = this.afAuth.authState;
+    this.user$.subscribe((resp) => this.user = resp);
+
+    this.userService.save(this.user);
+  }
+
+  logout() {
+    this.afAuth.signOut();
+    localStorage.removeItem("user_id");
+    localStorage.removeItem("username");
+  }
+
+  createUser(email : string, password : string, name : string) {
+    this.afAuth.createUserWithEmailAndPassword(email, password)
+    .then(userCredential => {
+      /* this is how we inject the display name the user provided into the auth state.
+          ensuring that the user is associated with their own display name and what they provided to google.
+          or another auth enabler- facebook, email etc. */  
+      userCredential.user.updateProfile({
+        displayName: name
+        })
+    }).catch(error => {
+          console.log(error);
+          this.eventAuthError.next(error);
+    })
+
+    this.user$ = this.afAuth.authState;
+    this.user$.subscribe((resp) => this.user = resp);
+
+    this.userService.save(this.user);
+  }
+
+  get appUser$(): Observable<User> {
+    /* 
+  appUser$ returns an observable of the current signed in user.
+  
+  It uses firebase auth state to check firestore user collection
+  for a matching uid.  
+      */
+    return this.user$.pipe(
+      switchMap((user) => { 
+        if (user) {
+          return this.userService.get(user.uid).valueChanges();
         }
-
-        )
-    }
-
-    get appUser$(): Observable<any> {
-        // uid is the property of the 'user' object -> the user represented by firebase as part of authentication and not the user object stored in the database
-        // We need to get the firebase 'user' object to read the actual application 'user' object from the database
-        return this.user$.pipe(
-            switchMap((user) => { 
-                if (user) { 
-                    return this.userService.get(user.uid).valueChanges();
-                }
-                return of(null);
-        }));
-    }
+        console.log("error: no user in db with this uid");
+        return of(null);
+      })
+  );
+}
 }

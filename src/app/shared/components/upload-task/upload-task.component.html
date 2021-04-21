@@ -5,7 +5,7 @@
 
 
 
-<div *ngIf="snapshot | async as snap">
+<div *ngIf="snapshot | async as snap; else editMode">
 
   {{ snap.bytesTransferred }} of {{ snap.totalBytes }} 
 
@@ -20,3 +20,7 @@
 
 <!-- TODO: need a seperate view, that shows something like the upload result, for showing
 users the current uploaded image when they are editing a pre exising jawn -->
+
+<ng-template #editMode>
+  Here I am with PEARS in hand
+</ng-template>
