@@ -4,7 +4,6 @@
 </button>
 
 <div *ngIf="file">
-  Hi Hello
   <upload-task
     [folder]="folder"
     (uploadEvent)="save($event)"
@@ -13,12 +12,10 @@
 </div>
 
 
+<!-- Feel like this conditional is sketchy... -->
 <div *ngIf="!file && editing">
-  
-
   <div *ngIf="editing.downloadURL as url">
-    <!-- TODO: need to do something with this delete method because it just deletes from form, not storage! (#looseend) -->
-    {{editing.name}} <button class="btn btn-danger" (click)="delete('scrunchys')">Remove image</button>
+    <!-- looseend tied: delete method just emits, so that parent / form component can do both form and storage delete: Kaching$$$ -->
+    {{editing.name}} <button mat-raised-button class="btn btn-danger" (click)="delete(url)">Remove image</button>
   </div> 
-
 </div>

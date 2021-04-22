@@ -41,7 +41,7 @@ and file name when finished
     //wipes the variables so the progress bar and control panel arent visible
     // this.snapshot = of(null);
     // this.percentage = null;
-    this.deleteEvent.emit(this.file.name);
+    this.deleteEvent.emit();
     return this.storage.storage.refFromURL(downloadUrl).delete();
   }
 

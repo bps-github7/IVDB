@@ -83,14 +83,11 @@ export class EditNewsComponent implements OnInit {
   // then when the deleteEvent is emitted, re save the list
 
   setImages(file) {
-    // console.log(files);
-    // const currentImages = "bikini bitch"
-    // currentImages.push(file)
-
-    // is this the problem?
+    /* Feel like it be more responsible to give this a name like pushImage */
+    
+    // this good???
     this.images.value.push(file);
-    // console.log(file);
-    // this.form.patchValue({images : "bikini bitch!"})
+    
   }
 
   get titleCardImage() {
@@ -135,6 +132,23 @@ export class EditNewsComponent implements OnInit {
   // this one is a helper for above cleanStorage.
   deleteFromStorage(url) {
     this.storage.storage.refFromURL(url).delete();
+  }
+
+  deleteTitleCard(url='') {
+    this.setTitleCard();
+    if (url) {
+      this.deleteFromStorage(url);   
+    }
+  }
+
+  deleteImage(url) {
+    for(let i = 0; i < this.images.value.length; i++) {
+      if (this.images.value[i].downloadURL === url) {
+        const imgs = this.images.value
+        this.form.patchValue({images : imgs.splice(i,1)})
+      }
+    }
+    this.deleteFromStorage(url)
   }
 
 }

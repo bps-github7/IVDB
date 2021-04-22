@@ -1,3 +1,4 @@
+import { AngularFireStorage } from '@angular/fire/storage';
 import { Injectable } from '@angular/core';
 import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
@@ -14,9 +15,9 @@ export class NewsService {
     // newsCollection : AngularFirestoreCollection<News>;
     // news$ : Observable<News []>
     newsCollection : AngularFirestoreCollection<Content>
+    ref : Content;
 
-
-    constructor(private afs : AngularFirestore) {
+    constructor(private afs : AngularFirestore, private storage : AngularFireStorage) {
         this.newsCollection = this.afs.collection<Content>('news')
         // this.newsCollection = this.afs.collection<Content>("news");
         // this.news$ = this.newsCollection.valueChanges();
@@ -50,6 +51,23 @@ export class NewsService {
         this.newsCollection.doc(uid).delete()
         .then(() => console.log("successfuly deleted news document"))
         .catch((err) => console.log(`Error while deleting news document : ${err}`));
+    }
+
+    deleteAssociatedStorage(uid) {
+      this.get$(uid).subscribe(res => this.ref = res);
+      if (this.ref.titleCardImage) {
+        // console.log("got a title card image, so we will delete :" + this.ref.titleCardImage.downloadURL)
+        this.storage.storage.refFromURL(this.ref.titleCardImage.downloadURL).delete();
+      }
+      if (this.ref.images) {
+        console.log("got images so we will delete:")
+        const images = this.ref.images;
+        for (let i = 0; i < images.length; i++) {
+          // console.log(images[i])
+          this.storage.storage.refFromURL(images[i].downloadURL);
+        }
+
+      }
     }
 
 

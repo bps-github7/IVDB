@@ -39,13 +39,16 @@ export class UploadImageComponent implements OnInit {
     
   }
 
-  delete(msg = '') {
-    if (msg) {
-      console.log(msg);
-      console.log("Need to go to the basement and get some salami- delete from storage")
-    }
+
+  delete(url='') {
     this.file = null;
-    this.deleteEvent.emit();
+    if (url) {
+      this.deleteEvent.emit(url)
+    } else {
+      this.deleteEvent.emit();
+    }
+    // ensures the option to delete isnt rendered after button is clicked
+    this.editing = ''; 
   }
 
   save(event) {

@@ -1,3 +1,4 @@
+import { Image } from './image';
 import { Timestamp } from 'rxjs/internal/operators/timestamp';
 import { UserFeedback } from "./user-feedback";
 
@@ -20,13 +21,13 @@ export interface Content {
 
   //the image displayed when content is displayed as card or in grid
   // the main image that captures the essesense of the content / article.
-  titleCardImage?: string,
+  titleCardImage?: Image,
 
 
   // extra stuff
-  images?: (string | string []),
-  links?: (string | string []),
-  misc?: (string | string [])
+  images?: Image [],
+  links?: string [],
+  misc?: string []
 
   // Metadata
   createdAt: any,

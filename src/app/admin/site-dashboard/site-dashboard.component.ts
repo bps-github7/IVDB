@@ -147,7 +147,8 @@ constructor(
 
   deleteNews(uid) {
     if(confirm('are you sure you want to delete this news piece? (cannot be undone)'))
-      this.newsService.delete(uid);
+    this.newsService.deleteAssociatedStorage(uid);
+    this.newsService.delete(uid);
   }
 
   deleteStream(uid) {
