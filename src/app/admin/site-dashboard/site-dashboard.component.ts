@@ -98,9 +98,11 @@ constructor(
           const { urlsToDelete, ...news } = rest
           this.newsService.edit(news.uid, news);
           if (urlsToDelete) {
+            console.log("going to delete for cleanup:")
+            console.log(urlsToDelete)
             const urls = urlsToDelete;
-            for (let i = 0; i < urls; i++)
-              this.storage.storage.refFromURL(urls[i]).delete;
+            for (let i = 0; i < urls.length; i++)
+              this.storage.storage.refFromURL(urls[i]).delete();
           }
       } else {
           console.log("tried to create doc")
@@ -108,10 +110,12 @@ constructor(
           rest.createdAt = this.firebaseService.timestamp;
           const { urlsToDelete, ...news } = rest;
           this.newsService.create(news);
+          console.log("going to delete for cleanup:")
+          console.log(urlsToDelete)
           if (urlsToDelete) {
             const urls = urlsToDelete;
-            for (let i = 0; i < urls; i++)
-              this.storage.storage.refFromURL(urls[i]).delete;
+            for (let i = 0; i < urls.length; i++)
+              this.storage.storage.refFromURL(urls[i]).delete();
           }
       }}
     

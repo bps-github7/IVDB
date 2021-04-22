@@ -34,7 +34,7 @@ export class EditNewsComponent implements OnInit {
   
   // Need to wait till forms submitted to delete from storage,
   // else user could cancle this form edit and downloadURL for their img would not exist.
-  deleteOnSubmit: string [];
+  deleteOnSubmit: string [] = [];
 
 
   constructor(
@@ -108,7 +108,7 @@ export class EditNewsComponent implements OnInit {
   //methods triggered by using the buttons in mat-dialog-actions
   
   save() {
-    const returnValue = {uid : this.docUid, urlsToDelete : this.deleteOnSubmit, ...this.form.value}
+    const returnValue = {uid : this.docUid, urlsToDelete : this.deleteOnSubmit, ...this.form.value}    
     this.dialogRef.close(returnValue);    
   }
 
@@ -122,12 +122,14 @@ export class EditNewsComponent implements OnInit {
   cleanStorage() {
     // gets rid of images in storage from current upload, should the user close the form.
     if (this.titleCardImage.value) {
-      this.deleteFromStorage(this.titleCardImage.value.downloadURL);
+      this.deleteOnSubmit.push(this.titleCardImage.value.downloadURL);
+ 
+      // this.deleteFromStorage(this.titleCardImage.value.downloadURL);
       console.log("titleCard successfully deleted!")
     }
     if (this.images.value.length) {
       for(let i = 0; i < this.images.value.length; i++)
-        this.deleteFromStorage(this.images.value[i].downloadURL)
+        this.deleteOnSubmit.push(this.images.value[i].downloadURL);
       console.log('all images successfully deleted!')
       }
     
@@ -148,10 +150,15 @@ export class EditNewsComponent implements OnInit {
   deleteImage(url) {
     /* for deleting a single image previously uploaded-
     deletes from both storage and formgroup images array */
-    for(let i = 0; i < this.images.value.length; i++) {
-      if (this.images.value[i].downloadURL === url) {
-        const imgs = this.images.value;
-        this.form.patchValue({images : imgs.splice(i,1)})
+    if (this.images.value.length === 1) {
+      this.form.patchValue({images : []});
+    }
+    else {
+      for(let i = 0; i < this.images.value.length; i++) {
+        if (this.images.value[i].downloadURL === url) {
+          const imgs = this.images.value;
+          this.form.patchValue({images : imgs.splice(i,1)})
+        }
       }
     }
     this.deleteOnSubmit.push(url)
