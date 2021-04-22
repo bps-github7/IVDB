@@ -4,6 +4,7 @@ import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/fire
 import { Observable } from 'rxjs';
 // import { News } from 'src/app/models/content/News';
 import { Content } from '../models/content/content';
+import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -29,7 +30,7 @@ export class NewsService {
     }
 
     get$( uid : string) {
-        return this.newsCollection.doc<Content>(uid).valueChanges();
+      return this.newsCollection.doc<Content>(uid).valueChanges();
     }
 
     create( newsContent : Content ) {
@@ -54,22 +55,21 @@ export class NewsService {
     }
 
     deleteAssociatedStorage(uid) {
-      this.get$(uid).subscribe(res => this.ref = res);
-      if (this.ref.titleCardImage) {
-        // console.log("got a title card image, so we will delete :" + this.ref.titleCardImage.downloadURL)
-        this.storage.storage.refFromURL(this.ref.titleCardImage.downloadURL).delete();
-      }
-      if (this.ref.images) {
-        console.log("got images so we will delete:")
-        const images = this.ref.images;
-        for (let i = 0; i < images.length; i++) {
-          // console.log(images[i])
-          this.storage.storage.refFromURL(images[i].downloadURL);
+      this.get$(uid).subscribe(response => {
+        if (response.titleCardImage) {
+          // console.log("got a title card image, so we will delete :" + this.ref.titleCardImage.downloadURL)
+          this.storage.storage.refFromURL(response.titleCardImage.downloadURL).delete();
         }
-
-      }
+        if (response.images) {
+          // console.log("got images so we will delete:")
+          const images = response.images;
+          for (let i = 0; i < images.length; i++) {
+            // console.log(images[i])
+            this.storage.storage.refFromURL(images[i].downloadURL);
+          }
+  
+        }
+  
+      });
     }
-
-
-    // get_news_post(id : string)
 }

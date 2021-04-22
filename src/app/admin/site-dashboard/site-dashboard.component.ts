@@ -52,6 +52,8 @@ constructor(
     private dialog : MatDialog,
     private firebaseService: FirebaseService,
 
+    private storage : AngularFireStorage,
+
     private newsService : NewsService,
     private streamsService : StreamsService,
     private watchlistsService : WatchlistsService,
@@ -92,13 +94,25 @@ constructor(
         if (result.uid) {
           //dont need action so we descruture to get the rest
           const { action, ...rest } = result;
-          rest.createdAt = this.firebaseService.timestamp;
-          this.newsService.edit(rest.uid, rest);
+          rest.updatedAt = this.firebaseService.timestamp;
+          const { urlsToDelete, ...news } = rest
+          this.newsService.edit(news.uid, news);
+          if (urlsToDelete) {
+            const urls = urlsToDelete;
+            for (let i = 0; i < urls; i++)
+              this.storage.storage.refFromURL(urls[i]).delete;
+          }
       } else {
           console.log("tried to create doc")
           const { action, ...rest } = result;
-          rest.updatedAt = this.firebaseService.timestamp;
-          this.newsService.create(rest);
+          rest.createdAt = this.firebaseService.timestamp;
+          const { urlsToDelete, ...news } = rest;
+          this.newsService.create(news);
+          if (urlsToDelete) {
+            const urls = urlsToDelete;
+            for (let i = 0; i < urls; i++)
+              this.storage.storage.refFromURL(urls[i]).delete;
+          }
       }}
     
     })
@@ -113,19 +127,31 @@ constructor(
          if (result.uid) {
            //dont need action so we descruture to get the rest
            const { action, ...rest } = result;
-           rest.createdAt = this.firebaseService.timestamp
+           rest.updatedAt = this.firebaseService.timestamp
            this.streamsService.edit(rest.uid, rest);
+           if (rest.urlsToDelete) {
+            const urls = rest.urlsToDelete
+            for (let i = 0; i < urls; i++)
+              this.storage.storage.refFromURL(urls[i]).delete;
+          }
        } else {
            console.log("tried to create doc")
            const { action, ...rest } = result;
-           rest.updatedAt = this.firebaseService.timestamp
+           rest.createdAt = this.firebaseService.timestamp
            this.streamsService.create(rest);
+           if (rest.urlsToDelete) {
+            const urls = rest.urlsToDelete
+            for (let i = 0; i < urls; i++)
+              this.storage.storage.refFromURL(urls[i]).delete;
+          }
        }}
      
      })
   }
 
   openWatchlistDialog(config) {
+    /* Handles the opening of
+     */
     this.dialog.open(EditWatchlistComponent,config)
     .afterClosed()
     .subscribe(result => {
@@ -133,32 +159,45 @@ constructor(
         if (result.uid) {
           //dont need action so we descruture to get the rest
           const { action, ...rest } = result;
-          rest.createdAt = this.firebaseService.timestamp
+          rest.updatedAt = this.firebaseService.timestamp
           this.watchlistsService.edit(rest.uid, rest);
+          if (rest.urlsToDelete) {
+            const urls = rest.urlsToDelete
+            for (let i = 0; i < urls; i++)
+              this.storage.storage.refFromURL(urls[i]).delete;
+          }
       } else {
           console.log("tried to create doc")
           const { action, ...rest } = result;
-          rest.updatedAt = this.firebaseService.timestamp
+          rest.createdAt = this.firebaseService.timestamp
           this.watchlistsService.create(rest);
+          if (rest.urlsToDelete) {
+            const urls = rest.urlsToDelete
+            for (let i = 0; i < urls; i++)
+              this.storage.storage.refFromURL(urls[i]).delete;
+          }
       }}
     
     })
   }
 
   deleteNews(uid) {
-    if(confirm('are you sure you want to delete this news piece? (cannot be undone)'))
-    this.newsService.deleteAssociatedStorage(uid);
-    this.newsService.delete(uid);
+    if(confirm('are you sure you want to delete this news piece? (cannot be undone)')){
+      this.newsService.deleteAssociatedStorage(uid);
+      this.newsService.delete(uid);
+    }
   }
 
   deleteStream(uid) {
-    if(confirm('are you sure you want to delete this stream? (cannot be undone)'))
+    if(confirm('are you sure you want to delete this stream? (cannot be undone)')){
       this.streamsService.delete(uid);
+    }
   }
 
   deleteWatchlist(uid) {
-    if(confirm('are you sure you want to delete this watchlist? (cannot be undone)'))
+    if(confirm('are you sure you want to delete this watchlist? (cannot be undone)')) {
       this.watchlistsService.delete(uid);
+    }
   }
 
 }

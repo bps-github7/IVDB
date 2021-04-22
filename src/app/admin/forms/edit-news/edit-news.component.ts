@@ -31,6 +31,11 @@ export class EditNewsComponent implements OnInit {
   //these should disable the submit button if set to true
   titleCardLoading : boolean = false;
   imagesLoading : boolean = false;
+  
+  // Need to wait till forms submitted to delete from storage,
+  // else user could cancle this form edit and downloadURL for their img would not exist.
+  deleteOnSubmit: string [];
+
 
   constructor(
     @Inject(MAT_DIALOG_DATA) data: any,
@@ -103,15 +108,14 @@ export class EditNewsComponent implements OnInit {
   //methods triggered by using the buttons in mat-dialog-actions
   
   save() {
-    const returnValue = {uid : this.docUid, ...this.form.value}
+    const returnValue = {uid : this.docUid, urlsToDelete : this.deleteOnSubmit, ...this.form.value}
     this.dialogRef.close(returnValue);    
-    /* 
-    you could also use this as an attribute instead of writing a method...
-    [mat-dialog-close]='form.value' */
   }
 
   reset() {
-    this.cleanStorage();
+    this.deleteOnSubmit.push(this.titleCardImage.value.downloadURL)
+    for (let i = 0; i < this.images.value.length; i++)
+      this.deleteOnSubmit.push(this.images.value[i].downloadURL);
     this.form.reset();
   }
 
@@ -137,18 +141,19 @@ export class EditNewsComponent implements OnInit {
   deleteTitleCard(url='') {
     this.setTitleCard();
     if (url) {
-      this.deleteFromStorage(url);   
+      this.deleteOnSubmit.push(url);   
     }
   }
 
   deleteImage(url) {
+    /* for deleting a single image previously uploaded-
+    deletes from both storage and formgroup images array */
     for(let i = 0; i < this.images.value.length; i++) {
       if (this.images.value[i].downloadURL === url) {
-        const imgs = this.images.value
+        const imgs = this.images.value;
         this.form.patchValue({images : imgs.splice(i,1)})
       }
     }
-    this.deleteFromStorage(url)
+    this.deleteOnSubmit.push(url)
   }
-
 }

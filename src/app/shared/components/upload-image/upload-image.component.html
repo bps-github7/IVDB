@@ -7,15 +7,12 @@
   <upload-task
     [folder]="folder"
     (uploadEvent)="save($event)"
-    (deleteEvent)="delete()"
+    (deleteEvent)="delete($event)"
     [file]="file"></upload-task>
 </div>
 
-
-<!-- Feel like this conditional is sketchy... -->
 <div *ngIf="!file && editing">
   <div *ngIf="editing.downloadURL as url">
-    <!-- looseend tied: delete method just emits, so that parent / form component can do both form and storage delete: Kaching$$$ -->
     {{editing.name}} <button mat-raised-button class="btn btn-danger" (click)="delete(url)">Remove image</button>
   </div> 
 </div>

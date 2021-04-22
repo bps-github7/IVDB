@@ -33,7 +33,7 @@
   <div *ngFor="let img of editing">
     <div *ngIf="img.downloadURL as url">
       <!-- TODO: Removing delete bind to click event, as delete method does something different in this component -->
-      {{img.name}} <button class="btn btn-danger">Remove image</button>
+      {{img.name}} <button class="btn btn-danger" (click)="delete(url)">Remove image</button>
     </div>
   </div>
 </div>

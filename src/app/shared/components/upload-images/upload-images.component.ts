@@ -25,7 +25,7 @@ export class UploadImagesComponent implements OnInit {
   @Output() loading = new EventEmitter<boolean>();
   @Output() uploadEvent = new EventEmitter<any []>();
   @Output() deleteEvent = new EventEmitter<any []>();
-  files: File[] = [];
+  files: any[] = [];
   successfullyUploaded: {downloadURL : string, path : string, name : string} [];
 
 
@@ -54,23 +54,19 @@ export class UploadImagesComponent implements OnInit {
     this.loading.emit(true)
     for (let i = 0; i < files.length; i++) {
       this.files.push(files.item(i));
-    }
+    }3
     this.loading.emit(false);
 
     // really this should happen if a user de selects the component
   }
 
-  delete(fileName) {
+  delete(url) {
     /* 
     upload-task.delete(uid)
     handles removing from storage,
     
     so here we just need to get the record
     of the upload out of the files array. */
-    for (let i = 0; i < this.files.length; i++) {
-      if (this.files[i].name == fileName)
-        this.files.splice(i,1);
-    }
-
+    this.deleteEvent.emit(url);
   }
 }

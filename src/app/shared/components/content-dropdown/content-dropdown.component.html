@@ -1,12 +1,12 @@
-<zippy [title]="content.title">
+<zippy *ngIf="content.title; else errorMsg" [title]="content.title">
   <p>
     Author: {{ content.creator }} <br>
-    Published : {{ content.createdAt.toDate() | date:'MM/dd/yyyy hh:ss a' }} <br>
+    Published : {{ content?.createdAt.toDate() | date:'MM/dd/yyyy hh:ss a' }} <br>
     <span *ngIf="content.updatedAt">
-      last updated : {{ content.updatedAt.toDate() | date:'MM/dd/yyyy hh:ss a' }} <br>
+      last updated : {{ content?.updatedAt.toDate() | date:'MM/dd/yyyy hh:ss a' }} <br>
     </span>
 
-    {{ content.description }}
+    {{ content?.description }}
   </p>
 
 
@@ -14,7 +14,7 @@
   <!-- <img [src]="" alt=""> -->
 
   <p>
-    {{ content.body }}
+    {{ content?.body }}
   </p>
 
 
@@ -31,3 +31,9 @@
   </footer>
 
 </zippy>
+
+<ng-template #errorMsg>
+  Error while loading this content. It seems that it does not exist anymore, <br>
+  the data is corrupted or misplaced, or a magical hedgehog put a pinecone <br>
+  inside a sock and spun it around the world three times fast while climb'n da beanstalk!
+</ng-template>
