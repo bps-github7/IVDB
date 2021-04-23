@@ -18,18 +18,21 @@
       </label>
     </div>
 </div>
-
-<h3>Uploads:</h3>
-
-<div *ngFor="let file of files">
-  <upload-task
-    *ngIf="file"
-    (uploadEvent)="upload($event)"
-    (deleteEvent)="delete($event)"
-    [file]="file"></upload-task>
+<h3>Uploaded:</h3>
+<!-- need to make it one or the other -->
+<div *ngIf="files">
+  
+  <div *ngFor="let file of files">
+    <upload-task
+      *ngIf="file"
+      (uploadEvent)="upload($event)"
+      (deleteEvent)="delete($event)"
+      [file]="file"></upload-task>
+  </div>  
 </div>
 
-<div *ngIf="editing">
+
+<div *ngIf="editing.length > 0">  
   <div *ngFor="let img of editing">
     <div *ngIf="img.downloadURL as url">
       <!-- TODO: Removing delete bind to click event, as delete method does something different in this component -->

@@ -11,7 +11,7 @@
     [file]="file"></upload-task>
 </div>
 
-<div *ngIf="!file && editing">
+<div *ngIf="file || editing">
   <div *ngIf="editing.downloadURL as url">
     {{editing.name}} <button mat-raised-button class="btn btn-danger" (click)="delete(url)">Remove image</button>
   </div> 

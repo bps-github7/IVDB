@@ -6,7 +6,7 @@ will cause major site security exploits.
 
 #### generally there are 4-5 major sub routes in this module
 1. games
-2. game-info
+2. game/info
 3. forums
 4. users
 

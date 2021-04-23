@@ -52,6 +52,7 @@ export class UploadImageComponent implements OnInit {
   }
 
   save(event) {
+    this.file = null;
     this.uploadEvent.emit(event);
   } 
 }

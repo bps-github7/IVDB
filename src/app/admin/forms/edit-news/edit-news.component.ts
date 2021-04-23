@@ -123,14 +123,10 @@ export class EditNewsComponent implements OnInit {
     // gets rid of images in storage from current upload, should the user close the form.
     if (this.titleCardImage.value) {
       this.deleteOnSubmit.push(this.titleCardImage.value.downloadURL);
- 
-      // this.deleteFromStorage(this.titleCardImage.value.downloadURL);
-      console.log("titleCard successfully deleted!")
     }
     if (this.images.value.length) {
       for(let i = 0; i < this.images.value.length; i++)
         this.deleteOnSubmit.push(this.images.value[i].downloadURL);
-      console.log('all images successfully deleted!')
       }
     
   }
@@ -150,15 +146,10 @@ export class EditNewsComponent implements OnInit {
   deleteImage(url) {
     /* for deleting a single image previously uploaded-
     deletes from both storage and formgroup images array */
-    if (this.images.value.length === 1) {
-      this.form.patchValue({images : []});
-    }
-    else {
-      for(let i = 0; i < this.images.value.length; i++) {
-        if (this.images.value[i].downloadURL === url) {
-          const imgs = this.images.value;
-          this.form.patchValue({images : imgs.splice(i,1)})
-        }
+    for(let i = 0; i < this.images.value.length; i++) {
+      if (this.images.value[i].downloadURL === url) {
+        const imgs = this.images.value.splice(i,1);
+        this.form.patchValue({images : "pinecones~ this is an idiot test!"});
       }
     }
     this.deleteOnSubmit.push(url)

@@ -24,7 +24,7 @@ export class UploadImagesComponent implements OnInit {
   // toggle loading whenever doing an upload
   @Output() loading = new EventEmitter<boolean>();
   @Output() uploadEvent = new EventEmitter<any []>();
-  @Output() deleteEvent = new EventEmitter<any []>();
+  @Output() deleteEvent = new EventEmitter<any>();
   files: any[] = [];
   successfullyUploaded: {downloadURL : string, path : string, name : string} [];
 
@@ -54,7 +54,7 @@ export class UploadImagesComponent implements OnInit {
     this.loading.emit(true)
     for (let i = 0; i < files.length; i++) {
       this.files.push(files.item(i));
-    }3
+    }
     this.loading.emit(false);
 
     // really this should happen if a user de selects the component
@@ -67,6 +67,13 @@ export class UploadImagesComponent implements OnInit {
     
     so here we just need to get the record
     of the upload out of the files array. */
+    // console.log(`files: ${this.files}\nediting: ${this.editing}`)
+    for (let i= 0; i < this.editing.length; i++) {
+      if (this.editing[i].downloadURL === url) {
+        this.editing.splice(i,1);
+      }
+    }
+
     this.deleteEvent.emit(url);
   }
 }
