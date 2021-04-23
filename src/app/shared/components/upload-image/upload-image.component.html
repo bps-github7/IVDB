@@ -3,6 +3,12 @@
   <input #fileInput type="file" (change)="upload($event)" style="display:none;" />
 </button>
 
+<!-- TODO: suggest that what we should do is pass up a "queue" of un-activated upload tasks 
+which are then activated after the user opts to submit the form. This will prevent files from being uploaded
+to storage in caSES where the user cancles the form or the form otherwise is not submitted succesfully, 
+
+as of now, all images are automatically uploaded to storage as soon as the user selects them.-->
+
 <div *ngIf="file">
   <upload-task
     [folder]="folder"
