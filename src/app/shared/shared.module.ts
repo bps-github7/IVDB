@@ -26,8 +26,8 @@ import {MatTableModule} from '@angular/material/table';
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 import { UploadTaskComponent } from './components/upload-task/upload-task.component';
 import { DropzoneDirective } from './directives/dropzone.directive';
-import { MatDialogComponent } from './mat-dialog/mat-dialog.component';
-import { ImageUploaderComponent } from './image-uploader/image-uploader.component';
+import { MatDialogComponent } from './components/mat-dialog/mat-dialog.component';
+import { ImageUploaderComponent } from './components/image-uploader/image-uploader.component';
 
 @NgModule({
   declarations: [
