@@ -29,8 +29,7 @@ const routes: Routes = [
             
             //i think you need to refactor here so that other users can view another users profile.
             // that does not need route guard.
-            { path: 'profile/:uid/:username', component: ViewProfileComponent, canActivate: [AuthGuard] },
-            { path: 'preferences/:uid/:username', component: EditPreferencesComponent, canActivate: [AuthGuard] }    
+            { path: 'profile/:uid/:username', component: ViewProfileComponent, canActivate: [AuthGuard] }
         ]
     }
     
