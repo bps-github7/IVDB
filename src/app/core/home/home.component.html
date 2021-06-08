@@ -11,51 +11,47 @@
 <section class="row">
   <section class="col-md-6">
     <form [formGroup]="form">
-      <zippy title="text entry" formGroupName="name">
-        <reactiveFormControl
-          [buildInfo]="firstName">
-        </reactiveFormControl>
-        <reactiveFormControl
-          [buildInfo]="lastName">
-        </reactiveFormControl>
-        <reactiveFormControl
-          [buildInfo]="about">
-        </reactiveFormControl>
-        <!-- expect this one to be most difficult-->
-        <reactiveFormControl
-          [buildInfo]="nicknames">
-        </reactiveFormControl>
-        
+      <reactiveFormControl
+        [buildInfo]="firstName">
+      </reactiveFormControl>
+      <reactiveFormControl
+        [buildInfo]="lastName">
+      </reactiveFormControl>
+      <reactiveFormControl
+        [buildInfo]="about">
+      </reactiveFormControl>
+      <!-- expect this one to be most difficult-->
+      <reactiveFormControl
+        [buildInfo]="nicknames">
+      </reactiveFormControl>
 
 
-      </zippy>
 
 
-      <zippy title="selection form controls (select, multiselect, checkbox, radio)" formGroupName="selection">
-        
-        <!-- single choice select -->
-        <reactiveFormControl
-        [buildInfo]="breakfeast">
-        </reactiveFormControl>
-        
-        <!-- multi choice select -->
-        <reactiveFormControl
-        [buildInfo]="dogs">
-        </reactiveFormControl>
-        
-        
-        
-        <!-- radio or slider  -->
-        <reactiveFormControl
-          [buildInfo]="politics">
-        </reactiveFormControl>
-        
-        <!-- checkbox or chips -->
-        <reactiveFormControl
-          [buildInfo]="ingredients">
-        </reactiveFormControl>
+      
+      <!-- single choice select -->
+      <reactiveFormControl
+      [buildInfo]="breakfeast">
+      </reactiveFormControl>
+      
+      <!-- multi choice select -->
+      <reactiveFormControl
+      [buildInfo]="dogs">
+      </reactiveFormControl>
+      
+      
+      
+      <!-- radio or slider  -->
+      <reactiveFormControl
+        [buildInfo]="politics">
+      </reactiveFormControl>
+      
+      <!-- checkbox or chips -->
+      <reactiveFormControl
+        [buildInfo]="ingredients">
+      </reactiveFormControl>
 
-      </zippy>
+
     </form>
 
 

@@ -44,9 +44,9 @@ export class HomeComponent implements OnInit {
   };
   politics = {
     type: "radio",
-    label : "which animal do you fuck in the ass regularly",
+    label : "which animal do you do",
     formControlName : "politics",
-    options : ["red ass kicking donkey", "blue pussy ass elephant"]
+    options : ["red donkey", "blue ass elephant"]
   }
   ingredients = {
     type: "checkbox",
@@ -55,27 +55,22 @@ export class HomeComponent implements OnInit {
     options: ["pinnaple","artichoke","chopped garlic","goat cheese","garlic pesto sauce", "mozzeralla","classic red sauce","chicken","bacon"]
 
   }
-  
 
   constructor(private fb : FormBuilder) { }
 
   ngOnInit(): void {
     this.form = this.fb.group({
-      name : this.fb.group({
-        first : [""],
-        last : [""],
-        about : [""],
-        nicknames : this.fb.array([])
-      }),
-      selection : this.fb.group({
-        breakfeast : [""],
-        dogs : [""],
-        politics : this.fb.array([]),
-        ingredients : [""],
-      })
-      
-      
+      first : [""],
+      last : [""],
+      about : [""],
+      nicknames : this.fb.array([]),
+      breakfeast : [""],
+      dogs : [""],
+      politics : [""],
+      ingredients : this.fb.array([]),
     })
   }
 
+
+  
 }

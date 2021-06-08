@@ -1,5 +1,5 @@
 import { Component, Input, OnInit, ViewChild } from '@angular/core';
-import { ControlContainer, FormControlDirective, ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { ControlContainer, FormControlDirective, ControlValueAccessor, NG_VALUE_ACCESSOR, FormArray, FormControl } from '@angular/forms';
 
 @Component({
   selector: 'reactiveFormControl',
@@ -59,5 +59,25 @@ export class ReactiveFormControlComponent implements ControlValueAccessor {
   add(item : HTMLInputElement) {
     this.control.value.push(item.value);
     item.value = '';
-}
+  }
+
+  onCheckboxChange(e, control) {
+    // const checkArray: FormArray = this.form.get(control) as FormArray;
+    
+    // this gonna be funky cause 'control' HAS TO BE an actual abstractControl object NOT a string.
+    const checkArray: FormArray = control as FormArray; 
+
+    if (e.target.checked) {
+      checkArray.push(new FormControl(e.target.value));
+    } else {
+      let i: number = 0;
+      checkArray.controls.forEach((item: FormControl) => {
+        if (item.value == e.target.value) {
+          checkArray.removeAt(i);
+          return;
+        }
+        i++;
+      });
+    }
+  }
 }

@@ -9,6 +9,9 @@
     <button type="button" (click)="clearInput()">clear</button><br/>
   </label>
   
+
+  <!-- TODO: would be cool to make this its own nested component that phases out
+    the buggy and non-encapsulated 'descriptorFormComponent' in admin/forms -->
   <label *ngIf="buildInfo.type === 'multi' " [for]="buildInfo.formControlName">{{buildInfo.label}}:
     <input type="text" #value (keydown.enter)="add(value)">
     <ul class="list-group">
@@ -17,28 +20,62 @@
         *ngFor="let item of control.value">
         {{item}}
       </li>
-    </ul>
-  
+    </ul>  
   </label>
   
   <!-- options cant be null for these guys to work -->
-  <label *ngIf="buildInfo.type === 'select' && buildInfo.options.length > 1" for="">
-    Reactive select Form Control
+  <label 
+    *ngIf="buildInfo.type === 'select' && buildInfo.options.length > 1"
+    [for]="buildInfo.formControlName"> {{buildInfo.label}}
+    <select multiple class="form-control" [id]="control" [formControl]="control">
+      <option [value]=" "></option>            
+      <option *ngFor="let option of buildInfo.options" [ngValue]="option">{{ option }}</option>
+    </select>
   </label>
 
-  <label *ngIf="buildInfo.type === 'multiple select' && buildInfo.options.length > 1" for="">
-    Reactive multiselect Form Control
+  <label 
+    *ngIf="buildInfo.type === 'multiple select' && buildInfo.options.length > 1"
+    [for]="buildInfo.formControlName"> {{buildInfo.label}}
+    <select multiple class="form-control" [id]="control" [formControl]="control" multiple>
+      <option [value]=" "></option>            
+      <option *ngFor="let option of buildInfo.options" [ngValue]="option">{{ option }}</option>
+    </select>
   </label>
   
-  <label *ngIf="buildInfo.type === 'radio' && buildInfo.options.length > 1" for="">
-    Reactive radio Form Control
-  </label>
+  <div 
+    *ngIf="buildInfo.type === 'radio' && buildInfo.options.length > 1">{{buildInfo.label}}:<br>
+    <div class="row">
+      <label *ngFor="let g of buildInfo.options" class="md-check">
+        <input type="radio" [value]="g" [name]="control" [formControl]="control">
+        {{ g }}
+      </label>        
+    </div>
+</div>
   
-  <label *ngIf="buildInfo.type === 'checkbox' && buildInfo.options.length > 1" for="">
-    Reactive checkbox Form Control
-  </label>
+<!-- have no idea why this isnt working -->
+<div 
+  *ngIf="buildInfo.type === 'checkbox' && buildInfo.options.length > 1">{{buildInfo.label}}:<br>
+  <div *ngFor="let data of buildInfo.options; let i=index">
+    <label>
+      <input type="checkbox" [value]="data" (change)="onCheckboxChange($event, control)" />
+      {{data}}
+    </label>
+  </div>
+
+  
+  
+  
+  <!-- <div class="row">
+    <label *ngFor="let g of buildInfo.options">
+      <input type="checkbox" [value]="g" [name]="control" [formControl]="control">
+      {{ g }}
+    </label>        
+  </div> -->
+  </div>
 </div>
 
+<!-- These are seperate conditions (duplicates of the ones above)
+with the markup customized for use within a Mat Dialog component -->
 <ng-template #matDialog>
   <!-- <label *ngIf="buildInfo.type === 'text' " [for]="buildInfo.formControlName">{{buildInfo.label}}:
     <input type="text" [formControl]="control" class="form-control">
