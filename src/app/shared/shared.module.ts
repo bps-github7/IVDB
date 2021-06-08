@@ -21,13 +21,24 @@ import { ContentDropdownComponent } from './components/content-dropdown/content-
 import { UploadImageComponent } from './components/upload-image/upload-image.component';
 import { MatDataTableComponent } from './components/mat-data-table/mat-data-table.component';
 import { UploadImagesComponent } from './components/upload-images/upload-images.component';
-import {MatTooltipModule} from '@angular/material/tooltip'; 
-import {MatTableModule} from '@angular/material/table'; 
-import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 import { UploadTaskComponent } from './components/upload-task/upload-task.component';
 import { DropzoneDirective } from './directives/dropzone.directive';
 import { MatDialogComponent } from './components/mat-dialog/mat-dialog.component';
 import { ImageUploaderComponent } from './components/image-uploader/image-uploader.component';
+
+//angular material imports:
+import {MatButtonToggleModule} from '@angular/material/button-toggle';
+import {MatDialogModule} from '@angular/material/dialog'; 
+import {MatButtonModule} from '@angular/material/button'; 
+import {MatTooltipModule} from '@angular/material/tooltip'; 
+import {MatTableModule} from '@angular/material/table'; 
+import {MatSlideToggleModule} from '@angular/material/slide-toggle';
+import {MatRadioModule} from '@angular/material/radio'; 
+import {MatFormFieldModule} from '@angular/material/form-field'; 
+import {MatInputModule} from '@angular/material/input'; 
+import {MatChipsModule} from '@angular/material/chips'; 
+import {MatProgressBarModule} from '@angular/material/progress-bar'; 
+
 
 @NgModule({
   declarations: [
@@ -50,11 +61,9 @@ import { ImageUploaderComponent } from './components/image-uploader/image-upload
 
     // directives 
     DisableControlDirective,
-    
     DropzoneDirective,
-    
+
     MatDialogComponent,
-    
     ImageUploaderComponent
 
 ],
@@ -64,8 +73,15 @@ import { ImageUploaderComponent } from './components/image-uploader/image-upload
     ReactiveFormsModule,
     MatTableModule, 
     MatTooltipModule,
-    MatSlideToggleModule
-
+    MatSlideToggleModule,
+    MatButtonToggleModule,
+    MatButtonModule,
+    MatDialogModule,
+    MatRadioModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatChipsModule,
+    MatProgressBarModule
   ],
   providers: [
       AuthGuard,

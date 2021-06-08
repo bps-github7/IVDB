@@ -1,1 +1,79 @@
-<p>reactive-form-control works!</p>
+<!-- first div is for non dialog form controls  -->
+<div *ngIf="!dialog; else matDialog">
+  <label *ngIf="buildInfo.type === 'text' " [for]="buildInfo.formControlName">{{buildInfo.label}}:
+    <input type="text" [formControl]="control" class="form-control">
+  </label>
+  
+  <label *ngIf="buildInfo.type === 'textarea' " [for]="buildInfo.formControlName">{{buildInfo.label}}:
+    <textarea [formControl]="control" class="form-control" col="30" row="20"></textarea>
+    <button type="button" (click)="clearInput()">clear</button><br/>
+  </label>
+  
+  <label *ngIf="buildInfo.type === 'multi' " [for]="buildInfo.formControlName">{{buildInfo.label}}:
+    <input type="text" #value (keydown.enter)="add(value)">
+    <ul class="list-group">
+      <li 
+        class="list-group-item"
+        *ngFor="let item of control.value">
+        {{item}}
+      </li>
+    </ul>
+  
+  </label>
+  
+  <!-- options cant be null for these guys to work -->
+  <label *ngIf="buildInfo.type === 'select' && buildInfo.options.length > 1" for="">
+    Reactive select Form Control
+  </label>
+
+  <label *ngIf="buildInfo.type === 'multiple select' && buildInfo.options.length > 1" for="">
+    Reactive multiselect Form Control
+  </label>
+  
+  <label *ngIf="buildInfo.type === 'radio' && buildInfo.options.length > 1" for="">
+    Reactive radio Form Control
+  </label>
+  
+  <label *ngIf="buildInfo.type === 'checkbox' && buildInfo.options.length > 1" for="">
+    Reactive checkbox Form Control
+  </label>
+</div>
+
+<ng-template #matDialog>
+  <!-- <label *ngIf="buildInfo.type === 'text' " [for]="buildInfo.formControlName">{{buildInfo.label}}:
+    <input type="text" [formControl]="control" class="form-control">
+  </label> -->
+
+  <!-- GOto test these seperately -->
+  <mat-form-field>
+    <input matInput
+            [placeholder]="buildInfo.config.placeholder"
+            [formControlName]="buildInfo.formControlName">
+</mat-form-field> <br>
+  
+  <label *ngIf="buildInfo.type === 'textarea' " for="">
+    DIALOG :Reactive textarea Form Control
+  </label>
+  
+  <label *ngIf="buildInfo.type === 'multi' " for="">
+  dialog: Reactive multi text Form Control
+  </label>
+  
+  <!-- options cant be null for these guys to work -->
+  <label *ngIf="buildInfo.type === 'select' && buildInfo.options.length > 1" for="">
+  dialog: Reactive select Form Control
+  </label>
+  
+  <label *ngIf="buildInfo.type === 'multiple select' && buildInfo.options.length > 1" for="">
+    dialog Reactive multiselect Form Control
+  </label>
+
+  <label *ngIf="buildInfo.type === 'radio' && buildInfo.options.length > 1" for="">
+   dialog:Reactive radio Form Control
+  </label>
+  
+  <label *ngIf="buildInfo.type === 'checkbox' && buildInfo.options.length > 1" for="">
+   dialog:Reactive checkbox Form Control
+  </label>
+</ng-template>
+
