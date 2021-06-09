@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
+import { EditStreamComponent } from 'src/app/admin/forms/edit-stream/edit-stream.component';
 
 @Component({
   selector: 'app-home',
@@ -56,7 +58,8 @@ export class HomeComponent implements OnInit {
 
   }
 
-  constructor(private fb : FormBuilder) { }
+  constructor(private fb : FormBuilder,
+    private dialog : MatDialog) { }
 
   ngOnInit(): void {
     this.form = this.fb.group({
@@ -69,6 +72,25 @@ export class HomeComponent implements OnInit {
       politics : [""],
       ingredients : this.fb.array([]),
     })
+  }
+
+
+  openDialog() {
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.disableClose = true;
+    dialogConfig.autoFocus = true;
+    dialogConfig.height = '1600px';
+    dialogConfig.width = `1200px`;
+    // dialogConfig.data = updateObject
+
+    // console.log(`openDialog got this: ${uid}`)
+
+    this.openStreamDialog(dialogConfig)
+
+  }
+
+  openStreamDialog(config) {
+    this.dialog.open(EditStreamComponent,config)   
   }
 
 

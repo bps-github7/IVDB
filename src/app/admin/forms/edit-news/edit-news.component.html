@@ -2,50 +2,56 @@
 
 <mat-dialog-content [formGroup]="form">
 
-  <mat-form-field>
-      <input matInput
-              placeholder="Title"
-              formControlName="title">
-  </mat-form-field> <br>
+  <reactiveFormControl
+    dialog=true
+    [buildInfo]="buildInfo.title"></reactiveFormControl>
 
-
-
-<!-- need an input prop for this component so you can delete titleCard when editing a newsPiece
-    also the button should be disabled if there is an image provided
--->
-  <upload-image
-    [editing]="titleCardImage"
-    (uploadEvent)="setTitleCard($event)"
-    (deleteEvent)="deleteTitleCard($event)"
-  ></upload-image> <br>
-
-  <!-- <button (click)="fileInput.click()">
-    <span>Select</span>
-    <input #fileInput type="file" (change)="upload($event)" style="display:none;" />
-    
+  <reactiveFormControl
+    dialog=true
+    [buildInfo]="buildInfo.description"
+  ></reactiveFormControl>
   
-  </button> <br> -->
-
+  <reactiveFormControl
+    dialog=true
+    [buildInfo]="buildInfo.body"
+  ></reactiveFormControl>
+  
+  
+  <reactiveFormControl
+    dialog=true
+    [buildInfo]="buildInfo.body"
+  ></reactiveFormControl>
 
   
-
-
-  <mat-form-field>
+  <reactiveFormControl
+    dialog=true
+    [buildInfo]="buildInfo.body"
+  ></reactiveFormControl>
+  
+  <!-- <mat-form-field>
     <textarea matInput
             placeholder="a short description"
             formControlName="description"></textarea>
   </mat-form-field> <br>
 
-<!-- would be great to just format the line breaks using css. the way your supposed to style markup... -->
   <mat-form-field>
     <textarea matInput
             placeholder="Body/Content of the news piece"
             formControlName="body"></textarea>
-  </mat-form-field> <br>
+  </mat-form-field> <br> -->
 
+
+  <!-- <upload-image
+    [editing]="titleCardImage"
+    (uploadEvent)="setTitleCard($event)"
+    (deleteEvent)="deleteTitleCard($event)"
+  ></upload-image> <br>
+  <button (click)="fileInput.click()">
+    <span>Select</span>
+    <input #fileInput type="file" (change)="upload($event)" style="display:none;" />
+  </button> <br>
 
   <label id="example-radio-group-label">Tags: <br></label>
-  <!-- how do i get value in form control? it doesnt like formcontrolName attribute binding -->
   <mat-chip-list
     aria-label="tag selection" >
     <mat-chip *ngFor="let c of categories" [value]="c" (click)="addTag(c)">
@@ -59,7 +65,7 @@
     (uploadEvent)="setImages($event)"
     (deleteEvent)="deleteImage($event)">
   </upload-images>
-</mat-dialog-content>
+</mat-dialog-content> -->
 
 <mat-dialog-actions>
   <button

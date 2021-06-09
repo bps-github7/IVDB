@@ -1,4 +1,3 @@
-<!-- first div is for non dialog form controls  -->
 <div *ngIf="!dialog; else matDialog">
   <label *ngIf="buildInfo.type === 'text' " [for]="buildInfo.formControlName">{{buildInfo.label}}:
     <input type="text" [formControl]="control" class="form-control">
@@ -23,7 +22,6 @@
     </ul>  
   </label>
   
-  <!-- options cant be null for these guys to work -->
   <label 
     *ngIf="buildInfo.type === 'select' && buildInfo.options.length > 1"
     [for]="buildInfo.formControlName"> {{buildInfo.label}}
@@ -52,7 +50,6 @@
     </div>
 </div>
   
-<!-- have no idea why this isnt working -->
 <div 
   *ngIf="buildInfo.type === 'checkbox' && buildInfo.options.length > 1">{{buildInfo.label}}:<br>
   <div *ngFor="let data of buildInfo.options; let i=index">
@@ -61,49 +58,54 @@
       {{data}}
     </label>
   </div>
-
-  
-  
-  
-  <!-- <div class="row">
-    <label *ngFor="let g of buildInfo.options">
-      <input type="checkbox" [value]="g" [name]="control" [formControl]="control">
-      {{ g }}
-    </label>        
-  </div> -->
   </div>
 </div>
 
-<!-- These are seperate conditions (duplicates of the ones above)
-with the markup customized for use within a Mat Dialog component -->
-<ng-template #matDialog>
-  <!-- <label *ngIf="buildInfo.type === 'text' " [for]="buildInfo.formControlName">{{buildInfo.label}}:
-    <input type="text" [formControl]="control" class="form-control">
-  </label> -->
 
-  <!-- GOto test these seperately -->
-  <mat-form-field>
-    <input matInput
-            [placeholder]="buildInfo.config.placeholder"
-            [formControlName]="buildInfo.formControlName">
-</mat-form-field> <br>
-  
-  <label *ngIf="buildInfo.type === 'textarea' " for="">
-    DIALOG :Reactive textarea Form Control
-  </label>
+<ng-template #matDialog>
+    <mat-form-field *ngIf="buildInfo.type === 'text' ">
+      <input 
+        matInput
+        [placeholder]="buildInfo.config.placeholder"
+        [formControl]="control"
+        class="form-control"><br>
+    </mat-form-field>
+
+  <mat-form-field *ngIf="buildInfo.type === 'textarea'">
+    <textarea 
+      matInput
+      [placeholder]="buildInfo.config.placeholder"
+      [formControl]="control"
+      class="form-control"></textarea><br>
+  </mat-form-field> 
+
+
   
   <label *ngIf="buildInfo.type === 'multi' " for="">
   dialog: Reactive multi text Form Control
+  Implement this one later
   </label>
   
-  <!-- options cant be null for these guys to work -->
-  <label *ngIf="buildInfo.type === 'select' && buildInfo.options.length > 1" for="">
-  dialog: Reactive select Form Control
-  </label>
   
-  <label *ngIf="buildInfo.type === 'multiple select' && buildInfo.options.length > 1" for="">
-    dialog Reactive multiselect Form Control
-  </label>
+  <mat-form-field *ngIf="buildInfo.type === 'select' && buildInfo.options.length > 1" appearance="fill">
+    <mat-label>{{ buildInfo.label }}</mat-label>
+    <mat-select >
+      <mat-option *ngFor="let option of buildInfo.options" [value]="control">
+        {{ option }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>    
+
+
+  
+    <mat-form-field *ngIf="buildInfo.type === 'multiple select' && buildInfo.options.length > 1" appearance="fill">
+      <mat-label>{{ buildInfo.label }}</mat-label>
+      <mat-select>
+        <mat-option multiple *ngFor="let option of buildInfo.options" [value]="control">
+          {{ option }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
 
   <label *ngIf="buildInfo.type === 'radio' && buildInfo.options.length > 1" for="">
    dialog:Reactive radio Form Control

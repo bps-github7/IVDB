@@ -38,6 +38,7 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input'; 
 import {MatChipsModule} from '@angular/material/chips'; 
 import {MatProgressBarModule} from '@angular/material/progress-bar'; 
+import {MatSelectModule} from '@angular/material/select';
 
 
 @NgModule({
@@ -81,7 +82,8 @@ import {MatProgressBarModule} from '@angular/material/progress-bar';
     MatFormFieldModule,
     MatInputModule,
     MatChipsModule,
-    MatProgressBarModule
+    MatProgressBarModule,
+    MatSelectModule
   ],
   providers: [
       AuthGuard,

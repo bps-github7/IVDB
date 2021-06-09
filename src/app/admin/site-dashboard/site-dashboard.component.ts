@@ -8,8 +8,6 @@ import { NewsService } from './../../services/news.service';
 import { EditNewsComponent } from './../forms/edit-news/edit-news.component';
 import { WatchlistsService } from 'src/app/services/watchlists.service';
 import { FirebaseService } from 'src/app/services/firebase.service';
-import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
 import { AngularFireStorage } from '@angular/fire/storage';
 
 

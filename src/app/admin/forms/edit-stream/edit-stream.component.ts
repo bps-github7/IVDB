@@ -10,6 +10,31 @@ import { FirebaseService } from 'src/app/services/firebase.service';
 })
 export class EditStreamComponent implements OnInit {
 
+  buildInfo = {
+    name : {
+      type : "text",
+      formControlName : "title",
+      config : {
+        placeholder : "enter a title for the article"
+      }
+    },
+    description : {
+      type: 'textarea',
+      formControlName : "description",
+      config : {
+        placeholder : "a short description"
+      }  
+    },
+    breakfeast : {
+      type: 'textarea',
+      formControlName : "body",
+      config : {
+        placeholder : "the content of the article"
+      }
+    },
+
+  }
+
     form : FormGroup;
     consoles : string [] = ["nintendo", "sony", "microsoft", "pc", "mobile", "classic"]
     initialState = {

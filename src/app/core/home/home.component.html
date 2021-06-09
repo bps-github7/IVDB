@@ -10,6 +10,8 @@
 <!-- life is good when we implment reusable components -->
 <section class="row">
   <section class="col-md-6">
+    <button (click) = "openDialog()">Open new + improved dialog form</button>
+
     <form [formGroup]="form">
       <reactiveFormControl
         [buildInfo]="firstName">
