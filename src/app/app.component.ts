@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 
 @Component({
@@ -11,8 +12,13 @@ import { Router } from '@angular/router';
 export class AppComponent {
     title = 'ivdb';
     
-    constructor(private router : Router) {
+    constructor(private router : Router,
+      private dialog : MatDialog) {
       let returnUrl = localStorage.getItem('returnUrl');
       this.router.navigateByUrl(returnUrl);
     }  
+
+    openDialog() {
+      
+    }
 }

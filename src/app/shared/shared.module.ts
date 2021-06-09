@@ -39,6 +39,7 @@ import {MatInputModule} from '@angular/material/input';
 import {MatChipsModule} from '@angular/material/chips'; 
 import {MatProgressBarModule} from '@angular/material/progress-bar'; 
 import {MatSelectModule} from '@angular/material/select';
+import { DialogComponent } from './components/dialog/dialog.component';
 
 
 @NgModule({
@@ -65,7 +66,8 @@ import {MatSelectModule} from '@angular/material/select';
     DropzoneDirective,
 
     MatDialogComponent,
-    ImageUploaderComponent
+    ImageUploaderComponent,
+    DialogComponent
 
 ],
   imports: [

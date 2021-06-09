@@ -4,19 +4,30 @@
 
   <reactiveFormControl
     dialog=true
-    [buildInfo]="buildInfo.title"></reactiveFormControl>
+    [buildInfo]="buildInfo.first"></reactiveFormControl>
 
   <reactiveFormControl
     dialog=true
-    [buildInfo]="buildInfo.description"
+    [buildInfo]="buildInfo.last"
   ></reactiveFormControl>
   
   <reactiveFormControl
     dialog=true
-    [buildInfo]="buildInfo.body"
+    [buildInfo]="buildInfo.about"
   ></reactiveFormControl>
   
+  <reactiveFormControl
+  dialog=true
+  [buildInfo]="buildInfo.breakfeast"
+  ></reactiveFormControl>
+
+<reactiveFormControl
+  dialog=true
+  [buildInfo]="buildInfo.dogs"
+></reactiveFormControl>
   
+
+
   <!-- <reactiveFormControl
     dialog=true
     [buildInfo]="buildInfo.body"
@@ -75,7 +86,6 @@
   </button>
   <button
     mat-dialog-close
-    (click)="cleanStorage()"
     mat-stroked-button>
     Cancle
   </button>
