@@ -6,6 +6,62 @@
      <carousel></carousel>
 </zippy>-->
 <!-- <suggest-new></suggest-new> -->
+
+<!-- life is good when we implment reusable components -->
+<section class="row">
+  <section class="col-md-6">
+    <form [formGroup]="form">
+      <reactiveFormControl
+        [buildInfo]="firstName">
+      </reactiveFormControl>
+      <reactiveFormControl
+        [buildInfo]="lastName">
+      </reactiveFormControl>
+      <reactiveFormControl
+        [buildInfo]="about">
+      </reactiveFormControl>
+      <!-- expect this one to be most difficult-->
+      <reactiveFormControl
+        [buildInfo]="nicknames">
+      </reactiveFormControl>
+
+
+
+
+      
+      <!-- single choice select -->
+      <reactiveFormControl
+      [buildInfo]="breakfeast">
+      </reactiveFormControl>
+      
+      <!-- multi choice select -->
+      <reactiveFormControl
+      [buildInfo]="dogs">
+      </reactiveFormControl>
+      
+      
+      
+      <!-- radio or slider  -->
+      <reactiveFormControl
+        [buildInfo]="politics">
+      </reactiveFormControl>
+      
+      <!-- checkbox or chips -->
+      <reactiveFormControl
+        [buildInfo]="ingredients">
+      </reactiveFormControl>
+
+
+    </form>
+
+
+    <section>
+      {{form.value | json }}
+    </section>
+  </section>
+</section>
+
+
 <zippy title="Welcome">
   Welcome to the Internet Videogame Database <br>
   Welcome to the Internet Videogame Database <br>

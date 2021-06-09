@@ -11,6 +11,32 @@ import { FirebaseService } from 'src/app/services/firebase.service';
 })
 export class EditNewsComponent implements OnInit {
 
+  // testing. put this in array later on when its tested
+  buildInfo = {
+    title : {
+      type : "text",
+      formControlName : "title",
+      config : {
+        placeholder : "enter a title for the article"
+      }
+    },
+    description : {
+      type: 'textarea',
+      formControlName : "description",
+      config : {
+        placeholder : "a short description"
+      }  
+    },
+    body : {
+      type: 'textarea',
+      formControlName : "body",
+      config : {
+        placeholder : "the content of the article"
+      }
+    },
+
+  }
+
   form: FormGroup;
   categories: string [] = ['game','console','culture','misc'];
   initialState = {

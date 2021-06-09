@@ -7,6 +7,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MatDialogComponent implements OnInit {
 
+  dialog : any = {};
+
   constructor() { }
 
   ngOnInit(): void {

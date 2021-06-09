@@ -7,9 +7,12 @@ import { switchMap, map } from 'rxjs/operators';
 import { User } from '../models/user/user';
 import { UserService } from './user.service';
 
+@Injectable({
+  providedIn: 'root'
+})
 export class AdminAuthGuard implements CanActivate {
 
-    constructor(private auth: AuthService, private userService: UserService) { }
+  constructor(private auth: AuthService, private userService: UserService) { }
   
     canActivate(): Observable<boolean> {
         return this.auth.appUser$.pipe(
