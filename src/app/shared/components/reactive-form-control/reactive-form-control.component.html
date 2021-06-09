@@ -2,7 +2,17 @@
   <label *ngIf="buildInfo.type === 'text' " [for]="buildInfo.formControlName">{{buildInfo.label}}:
     <input type="text" [formControl]="control" class="form-control">
   </label>
+
+  <label *ngIf="buildInfo.type === 'img' " [for]="buildInfo.formControlName">{{ buildInfo.label }}
+    upload image
+  </label>
+ 
   
+  <label *ngIf="buildInfo.type === 'multi img' " [for]="buildInfo.formControlName">{{ buildInfo.label }}
+    upload images
+  </label>
+
+
   <label *ngIf="buildInfo.type === 'textarea' " [for]="buildInfo.formControlName">{{buildInfo.label}}:
     <textarea [formControl]="control" class="form-control" col="30" row="20"></textarea>
     <button type="button" (click)="clearInput()">clear</button><br/>
@@ -81,10 +91,16 @@
 
 
   
-  <label *ngIf="buildInfo.type === 'multi' " for="">
-  dialog: Reactive multi text Form Control
-  Implement this one later
-  </label>
+  <mat-form-field *ngIf="buildInfo.type === 'multi' ">
+    <input matInput type="text" #value (keydown.enter)="add(value)" [placeholder]="buildInfo.config.placeholder">
+    <ul class="list-group">
+      <li 
+        class="list-group-item"
+        *ngFor="let item of control.value">
+        {{item}}
+      </li>
+    </ul>
+  </mat-form-field>
   
   
   <mat-form-field *ngIf="buildInfo.type === 'select' && buildInfo.options.length > 1" appearance="fill">
@@ -100,38 +116,25 @@
   </mat-form-field>    
 
 
-  
-    <mat-form-field *ngIf="buildInfo.type === 'multiple select' && buildInfo.options.length > 1" appearance="fill">
-      <mat-chip-list
-        matInput  
-        [formControl]="control"
-        class="form-control"
-        selectable
-        multiple
-        aria-label="tag selection" >
-        <mat-chip 
-          *ngFor="let option of buildInfo.options" 
-          [value]="option"
-          #c="matChip"
-          (click)="toggleSelected(c)">
-          {{ option }}</mat-chip>
-     
-      </mat-chip-list>
-      
-      <!-- <mat-label>{{ buildInfo.label }}:</mat-label>
-      <mat-select>
-        <mat-option multiple *ngFor="let option of buildInfo.options" [value]="control">
-          {{ option }}
-        </mat-option>
-      </mat-select> -->
-    </mat-form-field>
+  <div *ngIf="buildInfo.type === 'multiple select' && buildInfo.options.length > 1">
+    <multi-select-chips [formControl]="control"  [options]="buildInfo.options"></multi-select-chips>
+  </div>
 
-  <label *ngIf="buildInfo.type === 'radio' && buildInfo.options.length > 1" for="">
-   dialog:Reactive radio Form Control
-  </label>
+
+  <div *ngIf="buildInfo.type === 'radio' && buildInfo.options.length > 1" >
+    note: does not work- our form control does not register with radio buttons yet 
+    <label for="">{{ buildInfo.config.placeholder || buildInfo.label }}</label> <br>
+    <mat-radio-group aria-label="buildInfo.config.placeholder">
+      <mat-radio-button *ngFor="let option of buildInfo.options" [value]="option">{{ option }}</mat-radio-button>
+    </mat-radio-group>
+    
+  </div>
   
-  <label *ngIf="buildInfo.type === 'checkbox' && buildInfo.options.length > 1" for="">
-   dialog:Reactive checkbox Form Control
-  </label>
+  <div *ngIf="buildInfo.type === 'checkbox' && buildInfo.options.length > 1" >
+    note: does not work- our form control doesnt register with checkbox yet
+  
+    <label for="">{{ buildInfo.config.placeholder || buildInfo.label }}</label> <br>
+    <mat-checkbox *ngFor="let option of buildInfo.options" [value]="option">{{ option }} <br></mat-checkbox>
+  </div>
 </ng-template>
 

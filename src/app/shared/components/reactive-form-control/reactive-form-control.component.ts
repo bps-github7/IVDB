@@ -88,11 +88,6 @@ export class ReactiveFormControlComponent implements ControlValueAccessor {
     }
   }
 
-  toggleSelected(chip : MatChip) {
-    chip.toggleSelected();
 
-
-
-
-  }
 }
+

@@ -37,10 +37,10 @@ export class DialogComponent implements OnInit {
       }  
     },
     nicknames : {
-      type: 'multitext',
+      type: 'multi',
       formControlName : "nicknames",
       config : {
-        placeholder : "the content of the article"
+        placeholder : "list all your nicknames (press enter to submit one)"
       }
     },
     breakfeast : {

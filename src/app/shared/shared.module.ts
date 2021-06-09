@@ -39,7 +39,10 @@ import {MatInputModule} from '@angular/material/input';
 import {MatChipsModule} from '@angular/material/chips'; 
 import {MatProgressBarModule} from '@angular/material/progress-bar'; 
 import {MatSelectModule} from '@angular/material/select';
+import {MatCheckboxModule} from '@angular/material/checkbox';
+import {MatIconModule} from '@angular/material/icon';
 import { DialogComponent } from './components/dialog/dialog.component';
+import { MultiSelectChipsComponent } from './components/multi-select-chips/multi-select-chips.component';
 
 
 @NgModule({
@@ -67,13 +70,15 @@ import { DialogComponent } from './components/dialog/dialog.component';
 
     MatDialogComponent,
     ImageUploaderComponent,
-    DialogComponent
+    DialogComponent,
+    MultiSelectChipsComponent
 
 ],
   imports: [
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
+    MatIconModule,
     MatTableModule, 
     MatTooltipModule,
     MatSlideToggleModule,
@@ -85,7 +90,8 @@ import { DialogComponent } from './components/dialog/dialog.component';
     MatInputModule,
     MatChipsModule,
     MatProgressBarModule,
-    MatSelectModule
+    MatSelectModule,
+    MatCheckboxModule
   ],
   providers: [
       AuthGuard,
