@@ -46,13 +46,17 @@ export class DialogComponent implements OnInit {
     breakfeast : {
       type: 'select',
       formControlName : "breakfeast",
+      label : "choose your breakfeast weapon",
+      options: ["french toast", "strudel", "waffle" ],
       config : {
-        placeholder : "choose your breakfeast weapons"
+        placeholder : "choose your breakfeast weapon"
       }  
     },
     dogs : {
       type: 'multiple select',
       formControlName : "dogs",
+      options : ["Corgis", "Golden Boios", "Red Mearle fluffos", "Blue Mearle Fluffos"],
+      label: "which cute fluffs are the bestest bois",
       config : {
         placeholder : "which cute fluffs are the bestest bois"
       }
@@ -60,6 +64,8 @@ export class DialogComponent implements OnInit {
     politics : {
       type: 'radio',
       formControlName : "politics",
+      options : ["red donkey", "blue ass elephant"],
+      label: "which animal do you do regularly",
       config : {
         placeholder : "which animal do you do"
       }  
@@ -67,6 +73,8 @@ export class DialogComponent implements OnInit {
     ingredients : {
       type: 'checkbox',
       formControlName : "ingredients",
+      label: "You put THAT on your pizza?",
+      options: ["pinnaple","artichoke","chopped garlic","goat cheese","garlic pesto sauce", "mozzeralla","classic red sauce","chicken","bacon"],
       config : {
         placeholder : "you put WHAT on your pizza?"
       }
@@ -81,7 +89,8 @@ export class DialogComponent implements OnInit {
     about : [""],
     nicknames : this.fb.array([]),
     breakfeast : [""],
-    dogs : [""],
+    dogs: [""],
+    // dogs : this.fb.array([]),
     politics : [""],
     ingredients : this.fb.array([]),
   };

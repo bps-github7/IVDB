@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { Router } from '@angular/router';
+import { DialogComponent } from './shared/components/dialog/dialog.component';
 
 @Component({
   selector: 'app-root',
@@ -19,6 +20,12 @@ export class AppComponent {
     }  
 
     openDialog() {
+      const dialogConfig = new MatDialogConfig();
+      dialogConfig.disableClose = true;
+      dialogConfig.autoFocus = true;
+      dialogConfig.height = '1600px';
+      dialogConfig.width = `1200px`;
       
+      this.dialog.open(DialogComponent, dialogConfig);
     }
 }

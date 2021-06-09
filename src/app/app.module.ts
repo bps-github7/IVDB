@@ -21,6 +21,7 @@ import { AppComponent } from './app.component';
 //environment 
 import { environment } from 'src/environments/environment';
 import { ServicesModule } from './services/services.module';
+import { DialogComponent } from './shared/components/dialog/dialog.component';
 
 
 
@@ -40,6 +41,9 @@ import { ServicesModule } from './services/services.module';
     BrowserAnimationsModule,
     AppRoutingModule,
     ServicesModule.forRoot(),
+  ],
+  entryComponents : [
+    DialogComponent
   ],
     providers: [],
   bootstrap: [AppComponent]

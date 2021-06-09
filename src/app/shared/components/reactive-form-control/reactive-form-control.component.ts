@@ -1,5 +1,6 @@
 import { Component, Input, OnInit, ViewChild } from '@angular/core';
-import { ControlContainer, FormControlDirective, ControlValueAccessor, NG_VALUE_ACCESSOR, FormArray, FormControl } from '@angular/forms';
+import { ControlContainer, FormControlDirective, ControlValueAccessor, NG_VALUE_ACCESSOR, FormArray, FormControl, AbstractControl } from '@angular/forms';
+import { MatChip } from '@angular/material/chips';
 
 @Component({
   selector: 'reactiveFormControl',
@@ -23,6 +24,7 @@ export class ReactiveFormControlComponent implements ControlValueAccessor {
     options : [],
     config : {
       placeholder : "",
+      errorCondition : "",
       errorMsg : "",
       required : false
     }
@@ -62,9 +64,14 @@ export class ReactiveFormControlComponent implements ControlValueAccessor {
   }
 
   onCheckboxChange(e, control) {
-    // const checkArray: FormArray = this.form.get(control) as FormArray;
+    /* name says it all, sets a specific checkbox value 
+    as a member in the form control array 
     
-    // this gonna be funky cause 'control' HAS TO BE an actual abstractControl object NOT a string.
+    e : the checked event
+    control : abstract control for the paticular control this method is called by
+    NOTE that this has to be form control and not formControlName, and this must be a FormArray 
+    for this method to work
+     */
     const checkArray: FormArray = control as FormArray; 
 
     if (e.target.checked) {
@@ -79,5 +86,13 @@ export class ReactiveFormControlComponent implements ControlValueAccessor {
         i++;
       });
     }
+  }
+
+  toggleSelected(chip : MatChip) {
+    chip.toggleSelected();
+
+
+
+
   }
 }

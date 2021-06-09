@@ -89,8 +89,11 @@
   
   <mat-form-field *ngIf="buildInfo.type === 'select' && buildInfo.options.length > 1" appearance="fill">
     <mat-label>{{ buildInfo.label }}</mat-label>
-    <mat-select >
-      <mat-option *ngFor="let option of buildInfo.options" [value]="control">
+    <mat-select 
+      matInput  
+      [formControl]="control"
+      class="form-control">
+      <mat-option *ngFor="let option of buildInfo.options" [value]="option">
         {{ option }}
       </mat-option>
     </mat-select>
@@ -99,12 +102,28 @@
 
   
     <mat-form-field *ngIf="buildInfo.type === 'multiple select' && buildInfo.options.length > 1" appearance="fill">
-      <mat-label>{{ buildInfo.label }}</mat-label>
+      <mat-chip-list
+        matInput  
+        [formControl]="control"
+        class="form-control"
+        selectable
+        multiple
+        aria-label="tag selection" >
+        <mat-chip 
+          *ngFor="let option of buildInfo.options" 
+          [value]="option"
+          #c="matChip"
+          (click)="toggleSelected(c)">
+          {{ option }}</mat-chip>
+     
+      </mat-chip-list>
+      
+      <!-- <mat-label>{{ buildInfo.label }}:</mat-label>
       <mat-select>
         <mat-option multiple *ngFor="let option of buildInfo.options" [value]="control">
           {{ option }}
         </mat-option>
-      </mat-select>
+      </mat-select> -->
     </mat-form-field>
 
   <label *ngIf="buildInfo.type === 'radio' && buildInfo.options.length > 1" for="">
