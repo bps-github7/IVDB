@@ -43,9 +43,123 @@ newsConfig = {title : "Recently Uploaded Streams", displayedColumns : this.displ
 streamConfig = {title : "Recently Uploaded Streams", displayedColumns : this.displayedColumns, type : "stream"}
 watchlistConfig = {title : "Recently Uploaded Streams", displayedColumns : this.displayedColumns, type : "watchlist"}
 
-
-
-
+// The configs we need to build dialogs dynamically. These will change over time but are identical as this is a build mode prototype
+builds = {
+	news : {
+    title : {
+      type : "text",
+      formControlName : "title",
+      config : {
+        placeholder : "enter a title for this watchlist"
+      }
+    },
+    description : {
+      type : "textarea",
+      formControlName : "description",
+      config : {
+        placeholder : "enter a short description for this watchlist"
+      }
+    },
+    body : {
+      type : "textarea",
+      formControlName : "body",
+      config : {
+        placeholder : "enter the body for this watchlist"
+      }
+    },
+    tags : {
+      type : "multiple select",
+      formControlName : "tags",
+      options : ["games", "recent release", "aniversery"],
+      config : {
+        placeholder : "add tags for this watchlist"
+      }
+    }
+  },
+	stream : {
+    title : {
+      type : "text",
+      formControlName : "title",
+      config : {
+        placeholder : "enter a title for this watchlist"
+      }
+    },
+    description : {
+      type : "textarea",
+      formControlName : "description",
+      config : {
+        placeholder : "enter a short description for this watchlist"
+      }
+    },
+    body : {
+      type : "textarea",
+      formControlName : "body",
+      config : {
+        placeholder : "enter the body for this watchlist"
+      }
+    },
+    tags : {
+      type : "multiple select",
+      formControlName : "tags",
+      options : ["games", "recent release", "aniversery"],
+      config : {
+        placeholder : "add tags for this watchlist"
+      }
+    }    
+  },
+	watchlist : {  
+    title : {
+      type : "text",
+      formControlName : "title",
+      config : {
+        placeholder : "enter a title for this watchlist"
+      }
+    },
+    description : {
+      type : "textarea",
+      formControlName : "description",
+      config : {
+        placeholder : "enter a short description for this watchlist"
+      }
+    },
+    body : {
+      type : "textarea",
+      formControlName : "body",
+      config : {
+        placeholder : "enter the body for this watchlist"
+      }
+    },
+    tags : {
+      type : "multiple select",
+      formControlName : "tags",
+      options : ["games", "recent release", "aniversery"],
+      config : {
+        placeholder : "add tags for this watchlist"
+      }
+    }
+  }
+}
+forms = {
+  // These will be unique values. in time.
+  news : {
+    title : [""],
+		description : [""],
+		body : [""],
+		tags : [""]
+  },
+	stream : {
+    title : [""],
+		description : [""],
+		body : [""],
+		tags : [""]
+  },
+	watchlist : {
+		title : [""],
+		description : [""],
+		body : [""],
+		tags : [""],	      
+	}
+}
 
 constructor(
     private dialog : MatDialog,
@@ -59,31 +173,85 @@ constructor(
     ) {
         this.newsService.getAll$().subscribe((response) => this.news$ = response );  
         this.streamsService.getAll$().subscribe((response) => this.streams$ = response);
-        this.watchlistsService.getAll$().subscribe((response) => this.watchlists$ = response);
-
-        
+        this.watchlistsService.getAll$().subscribe((response) => this.watchlists$ = response);        
      }
 
   ngOnInit(): void {
   }
   
   openDialog(type : string, updateObject?: any) {
-      const dialogConfig = new MatDialogConfig();
-      dialogConfig.disableClose = true;
-      dialogConfig.autoFocus = true;
-      dialogConfig.height = '1600px';
-      dialogConfig.width = `1200px`;
-      dialogConfig.data = updateObject
+      const config = new MatDialogConfig();
+      
+      // some configurations for the dialog
+      config.disableClose = true;
+      config.autoFocus = true;
+      config.height = '1600px';
+      config.width = `1200px`;
+      // would be better if open dialog knew these instructions. the class doesnt need them.
+      config.data = {
+        type,
+        initialState: this.forms[type],
+        buildInfo : this.builds[type],    
+        updateObject : (updateObject ? updateObject : null)
+      };
 
-      // console.log(`openDialog got this: ${uid}`)
+      this.dialog.open(DialogComponent, config)
+      .afterClosed()
+      .subscribe(result => {
+        if(result.uid) {
+          // this is why you should have a master service for content...
+          this.edit(result);
+        }
+        else {
+          this.create(result);
+        }
+      })
+    }
 
-      if (type == 'news')
-        this.openNewsDialog(dialogConfig)
-      else if (type == 'stream')
-        this.openStreamDialog(dialogConfig)
-      else if (type == 'watchlist')
-          this.openWatchlistDialog(dialogConfig)
+  create(result) {
+    const content = {
+      category : result.type,
+      creator : localStorage.getItem('username'),
+      createdAt: this.firebaseService.timestamp,
+      title : result.title,
+      description : result.description,
+      body : result.body,
+      tags : result.tags
+    }
+    //totally serious question- why cant we just use an aggregate collection + service for content
+    // and then have an attribute 'type' which seperates news, streams, watchlists, reviews
+    if(result.type === "stream") {
+    this.streamsService.create(content);
+    }
+    else if (result.type === "news") {
+      this.newsService.create(content);
+    }
+    else if (result.type === "watchlist") {
+      this.watchlistsService.create(content);
+    }
+   }
+
+   edit(result) {
+    // todo : this is a whole nother animal/ 
+
+    //totally serious question- why cant we just use an aggregate collection + service for content
+    // and then have an attribute 'type' which seperates news, streams, watchlists, reviews
+    // if(result.type === "stream") {
+    // this.streamsService.edit(result.uid, content);
+    // }
+    // else if (result.type === "news") {
+    //   this.newsService.create(content);
+    // }
+    // else if (result.type === "watchlist") {
+    //   this.watchlistsService.create(content);
+    // }
   }
+
+  delete(result) {
+    console.log(result);
+  }
+
+   
 
   openNewsDialog(config) {
     this.dialog.open(EditNewsComponent, config)
@@ -154,46 +322,9 @@ constructor(
 
   openWatchlistDialog(config) {
     config.data = {
-      initialState: {
-        title : [""],
-        description : [""],
-        body : [""],
-        //this needs to be formArray, but we are aboiding DI into the parent component until we deterime better place to inject this data
-        tags : [""],
-        // titleCardImage : [""],
-        // images : [""]
-      },
-      buildInfo : {
-        title : {
-          type : "text",
-          formControlName : "title",
-          config : {
-            placeholder : "enter a title for this watchlist"
-          }
-        },
-        description : {
-          type : "textarea",
-          formControlName : "description",
-          config : {
-            placeholder : "enter a short description for this watchlist"
-          }
-        },
-        body : {
-          type : "textarea",
-          formControlName : "body",
-          config : {
-            placeholder : "enter the body for this watchlist"
-          }
-        },
-        tags : {
-          type : "multiple select",
-          formControlName : "tags",
-          options : ["games", "recent release", "aniversery"],
-          config : {
-            placeholder : "add tags for this watchlist"
-          }
-        }
-      }    
+    
+    initialState: this.forms.watchlist,
+    buildInfo : this.builds.watchlist    
     }
     this.dialog.open(DialogComponent, config)
     .afterClosed()
@@ -222,54 +353,4 @@ constructor(
       this.watchlistsService.delete(uid);
     }
   }
-
-  // buildInfo = {
-  //   first : {
-  //     type : "text",
-  //     formControlName : "first",
-  //     config : {
-  //       placeholder : "enter your first name"
-  //     }
-  //   },
-  //   last : {
-  //     type : "text",
-  //     formControlName : "last",
-  //     config : {
-  //       placeholder : "enter your last name"
-  //     }
-  //   }
-  // }
-  // initialState = {
-  //   first : [""],
-  //   last : [""],
-  //  };
-  // returned : any;
-  
-  // constructor(private router : Router,
-  //   private dialog : MatDialog,
-  //   private fb: FormBuilder) {
-  //   let returnUrl = localStorage.getItem('returnUrl');
-  //   this.router.navigateByUrl(returnUrl);
-  // }  
-
-  // openDialog() {
-  //   const dialogConfig = new MatDialogConfig();
-  //   dialogConfig.disableClose = true;
-  //   dialogConfig.autoFocus = true;
-  //   dialogConfig.height = '1600px';
-  //   dialogConfig.width = `1200px`;
-  //   dialogConfig.data = {
-  //     buildInfo : this.buildInfo,
-  //     initialState:  this.initialState
-  //   }
-    
-  //   this.dialog.open(DialogComponent, dialogConfig)
-  //   .afterClosed()
-  //   .subscribe(result => {
-  //     this.returned = result;
-  //     console.log(result);
-  //   })
-  // }
-
-
 }
