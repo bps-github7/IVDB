@@ -1,3 +1,4 @@
+import { ContentService } from './../../services/content.service';
 import { DialogComponent } from './../../shared/components/dialog/dialog.component';
 import { Component, OnInit } from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
@@ -167,6 +168,9 @@ constructor(
 
     private storage : AngularFireStorage,
 
+
+		private contentService : ContentService,
+
     private newsService : NewsService,
     private streamsService : StreamsService,
     private watchlistsService : WatchlistsService,
@@ -199,57 +203,15 @@ constructor(
       .afterClosed()
       .subscribe(result => {
         if(result.uid) {
-          // this is why you should have a master service for content...
-          this.edit(result);
+          // you should just make the dialog component more mindful of what kinda stuff it returns!
+          // this.contentService.edit(result.);
         }
         else {
-          this.create(result);
+          this.contentService.create(result);
         }
       })
     }
 
-  create(result) {
-    const content = {
-      category : result.type,
-      creator : localStorage.getItem('username'),
-      createdAt: this.firebaseService.timestamp,
-      title : result.title,
-      description : result.description,
-      body : result.body,
-      tags : result.tags
-    }
-    //totally serious question- why cant we just use an aggregate collection + service for content
-    // and then have an attribute 'type' which seperates news, streams, watchlists, reviews
-    if(result.type === "stream") {
-    this.streamsService.create(content);
-    }
-    else if (result.type === "news") {
-      this.newsService.create(content);
-    }
-    else if (result.type === "watchlist") {
-      this.watchlistsService.create(content);
-    }
-   }
-
-   edit(result) {
-    // todo : this is a whole nother animal/ 
-
-    //totally serious question- why cant we just use an aggregate collection + service for content
-    // and then have an attribute 'type' which seperates news, streams, watchlists, reviews
-    // if(result.type === "stream") {
-    // this.streamsService.edit(result.uid, content);
-    // }
-    // else if (result.type === "news") {
-    //   this.newsService.create(content);
-    // }
-    // else if (result.type === "watchlist") {
-    //   this.watchlistsService.create(content);
-    // }
-  }
-
-  delete(result) {
-    console.log(result);
-  }
 
    
 

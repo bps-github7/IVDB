@@ -1,3 +1,4 @@
+import { Metadata } from './../../../models/content/metadata';
 import { Component, Inject, Input, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
@@ -13,6 +14,8 @@ export class DialogComponent implements OnInit {
   returnValues : any;
   controls: any;
   form: FormGroup;
+	
+	existingMetadata : any;
 
   type: string;
   docUid: string;
@@ -23,7 +26,7 @@ export class DialogComponent implements OnInit {
   private fb : FormBuilder) {
     // this needs to persist if we are gonna edit documents
     if (data.updateObject) {
-      this.docUid = data.updateObject?.uid;
+      this.existingMetadata = data.updateObject?.metadata;
     }
     this.type = data?.type;
     this.buildInfo = Object.values(data.buildInfo);
@@ -35,7 +38,12 @@ export class DialogComponent implements OnInit {
   }
     
   save() {
-    const returnValue = {uid : this.docUid, type : this.type, ...this.form.value }
+		const returnValue = {
+			// metadata : 
+			uid: this.existingMetadata.uid, 
+			category: this.existingMetadata.category,
+			...this.form.value 
+		}
     this.dialogRef.close(returnValue);
   }
 
