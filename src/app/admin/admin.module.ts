@@ -1,3 +1,4 @@
+import { DialogComponent } from './../shared/components/dialog/dialog.component';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { AdminRoutingModule } from './admin-routing';
@@ -61,9 +62,10 @@ import { EditWatchlistComponent } from './forms/edit-watchlist/edit-watchlist.co
 
 ],
   entryComponents: [
-      EditNewsComponent,
-      EditStreamComponent,
-      EditWatchlistComponent
+    DialogComponent,  
+    EditNewsComponent,
+    EditStreamComponent,
+    EditWatchlistComponent
   ],
   providers: [],
   imports: [

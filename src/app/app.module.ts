@@ -42,10 +42,7 @@ import { DialogComponent } from './shared/components/dialog/dialog.component';
     AppRoutingModule,
     ServicesModule.forRoot(),
   ],
-  entryComponents : [
-    DialogComponent
-  ],
-    providers: [],
+  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

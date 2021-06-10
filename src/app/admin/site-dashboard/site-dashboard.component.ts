@@ -1,3 +1,4 @@
+import { DialogComponent } from './../../shared/components/dialog/dialog.component';
 import { Component, OnInit } from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { EditStreamComponent } from '../forms/edit-stream/edit-stream.component';
@@ -152,34 +153,54 @@ constructor(
   }
 
   openWatchlistDialog(config) {
-    /* Handles the opening of
-     */
-    this.dialog.open(EditWatchlistComponent,config)
+    config.data = {
+      initialState: {
+        title : [""],
+        description : [""],
+        body : [""],
+        //this needs to be formArray, but we are aboiding DI into the parent component until we deterime better place to inject this data
+        tags : [""],
+        // titleCardImage : [""],
+        // images : [""]
+      },
+      buildInfo : {
+        title : {
+          type : "text",
+          formControlName : "title",
+          config : {
+            placeholder : "enter a title for this watchlist"
+          }
+        },
+        description : {
+          type : "textarea",
+          formControlName : "description",
+          config : {
+            placeholder : "enter a short description for this watchlist"
+          }
+        },
+        body : {
+          type : "textarea",
+          formControlName : "body",
+          config : {
+            placeholder : "enter the body for this watchlist"
+          }
+        },
+        tags : {
+          type : "multiple select",
+          formControlName : "tags",
+          options : ["games", "recent release", "aniversery"],
+          config : {
+            placeholder : "add tags for this watchlist"
+          }
+        }
+      }    
+    }
+    this.dialog.open(DialogComponent, config)
     .afterClosed()
     .subscribe(result => {
-      if (result.title){
-        if (result.uid) {
-          //dont need action so we descruture to get the rest
-          const { action, ...rest } = result;
-          rest.updatedAt = this.firebaseService.timestamp
-          this.watchlistsService.edit(rest.uid, rest);
-          if (rest.urlsToDelete) {
-            const urls = rest.urlsToDelete
-            for (let i = 0; i < urls; i++)
-              this.storage.storage.refFromURL(urls[i]).delete;
-          }
-      } else {
-          console.log("tried to create doc")
-          const { action, ...rest } = result;
-          rest.createdAt = this.firebaseService.timestamp
-          this.watchlistsService.create(rest);
-          if (rest.urlsToDelete) {
-            const urls = rest.urlsToDelete
-            for (let i = 0; i < urls; i++)
-              this.storage.storage.refFromURL(urls[i]).delete;
-          }
-      }}
-    
+      // if watchlist exists already
+      // edit it
+      this.watchlistsService.create(result);
     })
   }
 
@@ -201,5 +222,54 @@ constructor(
       this.watchlistsService.delete(uid);
     }
   }
+
+  // buildInfo = {
+  //   first : {
+  //     type : "text",
+  //     formControlName : "first",
+  //     config : {
+  //       placeholder : "enter your first name"
+  //     }
+  //   },
+  //   last : {
+  //     type : "text",
+  //     formControlName : "last",
+  //     config : {
+  //       placeholder : "enter your last name"
+  //     }
+  //   }
+  // }
+  // initialState = {
+  //   first : [""],
+  //   last : [""],
+  //  };
+  // returned : any;
+  
+  // constructor(private router : Router,
+  //   private dialog : MatDialog,
+  //   private fb: FormBuilder) {
+  //   let returnUrl = localStorage.getItem('returnUrl');
+  //   this.router.navigateByUrl(returnUrl);
+  // }  
+
+  // openDialog() {
+  //   const dialogConfig = new MatDialogConfig();
+  //   dialogConfig.disableClose = true;
+  //   dialogConfig.autoFocus = true;
+  //   dialogConfig.height = '1600px';
+  //   dialogConfig.width = `1200px`;
+  //   dialogConfig.data = {
+  //     buildInfo : this.buildInfo,
+  //     initialState:  this.initialState
+  //   }
+    
+  //   this.dialog.open(DialogComponent, dialogConfig)
+  //   .afterClosed()
+  //   .subscribe(result => {
+  //     this.returned = result;
+  //     console.log(result);
+  //   })
+  // }
+
 
 }

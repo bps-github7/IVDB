@@ -2,6 +2,16 @@
 
 <mat-dialog-content [formGroup]="form">
 
+  <!-- <h3 *ngFor="let control of controls">{{buildInfo[control]}}</h3> -->
+  
+  
+  <reactiveFormControl 
+    *ngFor="let builds of buildInfo"
+    dialog=true
+    [buildInfo]="builds"
+  ></reactiveFormControl><br>
+
+  <!-- 
   <reactiveFormControl
     dialog=true
     [buildInfo]="buildInfo.first">
@@ -43,57 +53,7 @@
 <reactiveFormControl
   dialog=true
   [buildInfo]="buildInfo.ingredients"
-></reactiveFormControl><br>
-
-  <!-- <reactiveFormControl
-    dialog=true
-    [buildInfo]="buildInfo.body"
-  ></reactiveFormControl>
-
-  
-  <reactiveFormControl
-    dialog=true
-    [buildInfo]="buildInfo.body"
-  ></reactiveFormControl> -->
-  
-  <!-- <mat-form-field>
-    <textarea matInput
-            placeholder="a short description"
-            formControlName="description"></textarea>
-  </mat-form-field> <br>
-
-  <mat-form-field>
-    <textarea matInput
-            placeholder="Body/Content of the news piece"
-            formControlName="body"></textarea>
-  </mat-form-field> <br> -->
-
-
-  <!-- <upload-image
-    [editing]="titleCardImage"
-    (uploadEvent)="setTitleCard($event)"
-    (deleteEvent)="deleteTitleCard($event)"
-  ></upload-image> <br>
-  <button (click)="fileInput.click()">
-    <span>Select</span>
-    <input #fileInput type="file" (change)="upload($event)" style="display:none;" />
-  </button> <br>
-
-  <label id="example-radio-group-label">Tags: <br></label>
-  <mat-chip-list
-    aria-label="tag selection" >
-    <mat-chip *ngFor="let c of categories" [value]="c" (click)="addTag(c)">
-      {{ c }}
-    </mat-chip>
-    
-  </mat-chip-list>
-
-  <upload-images
-    [editing]="images"
-    (uploadEvent)="setImages($event)"
-    (deleteEvent)="deleteImage($event)">
-  </upload-images>
-</mat-dialog-content> -->
+></reactiveFormControl><br> -->
 
 <mat-dialog-actions>
   <button
