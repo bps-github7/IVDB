@@ -1,0 +1,248 @@
+import { ContentService } from './../../../services/content.service';
+import { Component, Input, OnInit } from '@angular/core';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
+import { FirebaseService } from 'src/app/services/firebase.service';
+import { DialogComponent } from 'src/app/shared/components/dialog/dialog.component';
+import { Content } from 'src/app/models/content/content';
+
+@Component({
+  selector: 'crud-dropdown',
+  templateUrl: './crud-dropdown.component.html',
+  styleUrls: ['./crud-dropdown.component.css']
+})
+export class CrudDropdownComponent implements OnInit {
+
+
+	// The configs we need to build dialogs dynamically. These will change over time but are identical as this is a build mode prototype
+	builds = {
+		news : {
+			title : {
+				type : "text",
+				formControlName : "title",
+				config : {
+					placeholder : "enter a title for this watchlist"
+				}
+			},
+			description : {
+				type : "textarea",
+				formControlName : "description",
+				config : {
+					placeholder : "enter a short description for this watchlist"
+				}
+			},
+			body : {
+				type : "textarea",
+				formControlName : "body",
+				config : {
+					placeholder : "enter the body for this watchlist"
+				}
+			},
+			tags : {
+				type : "multiple select",
+				formControlName : "tags",
+				options : ["games", "recent release", "aniversery"],
+				config : {
+					placeholder : "add tags for this watchlist"
+				}
+			}
+		},
+		streams : {
+			title : {
+				type : "text",
+				formControlName : "title",
+				config : {
+					placeholder : "enter a title for this stream"
+				}
+			},
+			description : {
+				type : "textarea",
+				formControlName : "description",
+				config : {
+					placeholder : "enter a short description"
+				}
+			},
+			body : {
+				type : "textarea",
+				formControlName : "body",
+				config : {
+					placeholder : "enter the body for this stream"
+				}
+			},
+			tags : {
+				type : "multiple select",
+				formControlName : "tags",
+				options : ["games", "recent release", "aniversery"],
+				config : {
+					placeholder : "add tags for stream"
+				}
+			}    
+		},
+		watchlists : {  
+			title : {
+				type : "text",
+				formControlName : "title",
+				config : {
+					placeholder : "enter a title for this watchlist"
+				}
+			},
+			description : {
+				type : "textarea",
+				formControlName : "description",
+				config : {
+					placeholder : "enter a short description for this watchlist"
+				}
+			},
+			body : {
+				type : "textarea",
+				formControlName : "body",
+				config : {
+					placeholder : "enter the body for this watchlist"
+				}
+			},
+			tags : {
+				type : "multiple select",
+				formControlName : "tags",
+				options : ["games", "recent release", "aniversery"],
+				config : {
+					placeholder : "add tags for this watchlist"
+				}
+			}
+		},
+		reviews : {
+			title : {
+				type : "text",
+				formControlName : "title",
+				config : {
+					placeholder : "enter a title for this review"
+				}
+			},
+			description : {
+				type : "textarea",
+				formControlName : "description",
+				config : {
+					placeholder : "enter a short description for this review"
+				}
+			},
+			body : {
+				type : "textarea",
+				formControlName : "body",
+				config : {
+					placeholder : "enter the body for this review"
+				}
+			},
+			tags : {
+				type : "multiple select",
+				formControlName : "tags",
+				options : ["games", "recent release", "aniversery"],
+				config : {
+					placeholder : "add tags for this review"
+				}
+			}
+		}
+		
+	}
+	forms = {
+		// These will be unique values. in time.
+		news : {
+			title : [""],
+			description : [""],
+			body : [""],
+			tags : [""]
+		},
+		streams : {
+			title : [""],
+			description : [""],
+			body : [""],
+			tags : [""]
+		},
+		watchlists : {
+			title : [""],
+			description : [""],
+			body : [""],
+			tags : [""],	      
+		},
+		reviews : {
+			title : [""],
+			description : [""],
+			body : [""],
+			tags : [""],	      
+		}
+	}
+	
+	@Input() contentType : string;
+	content$ : Content [];
+	showContent : boolean = false;
+
+	displayedColumns: string[] = ['title', 'edit', 'delete'];
+	tableConfig : any;
+
+  constructor(
+		private contentService : ContentService,
+		private dialog : MatDialog,
+    private firebaseService: FirebaseService,
+	) {
+		this.tableConfig = {title : `Recently Uploaded ${this.contentType}`, displayedColumns : this.displayedColumns, type : this.contentType}
+	 }
+
+  ngOnInit(): void {
+		this.contentService.getCategory$(this.contentType).subscribe(data => this.content$ = data);
+	}
+
+  
+  openDialog(type : string, updateObject?: any) {
+		
+		// // makes types singluar, except for news where singluar and plural are same.
+		// if (type !== "news") {
+			
+		// 	const lookupType = type.slice(0,-1)
+		// } 
+
+		const config = new MatDialogConfig();
+		
+		config.disableClose = true;
+		config.autoFocus = true;
+		config.height = '1600px';
+		config.width = `1200px`;
+
+		config.data = {
+			type,
+			initialState: this.forms[type],
+			buildInfo : this.builds[type],    
+			updateObject : (updateObject ? updateObject : null)
+		};
+
+		this.dialog.open(DialogComponent, config)
+		.afterClosed()
+		.subscribe(result => {
+			if (result) {
+				if(result.uid) {
+					console.log("then we are going to make an edit")
+					// you should just make the dialog component more mindful of what kinda stuff it returns!
+					// this.contentService.edit(result.);
+				}
+				else {
+					console.log("then we are going to make a new piece of content")
+					result.metadata = {
+						createdAt : this.firebaseService.timestamp,
+						creator : localStorage.getItem("username"),
+						category : type,
+						tags: result.tags,				
+					};
+					//dont need this since its stored in metadata now
+					delete result.tags;
+					this.contentService.create(result);
+				}
+			}
+			
+		})
+	}
+
+	deleteContent(uid : string) {
+		if(confirm('are you sure you want to delete this piece of content? (cannot be undone)')){
+      // this.newsService.deleteAssociatedStorage(uid);
+      this.contentService.delete(uid);
+    }	
+	}
+
+
+}

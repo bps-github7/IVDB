@@ -16,11 +16,11 @@ export class ContentService {
 
 	getCategory$(category : string) {
 		const categoryRef = this.afs.collection<Content>('content', (ref) => ref.where('metadata.category', '==', category));
-		return categoryRef.valueChanges();
+		return categoryRef.valueChanges({ idField : 'uid' });
 	}
 
 	getAll$() {
-		return this.afs.collection("content").valueChanges();
+		return this.afs.collection("content").valueChanges({ idField : 'uid' });
 	}
 
 	create(newContent : Content) {

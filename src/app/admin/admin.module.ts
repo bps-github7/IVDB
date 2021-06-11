@@ -35,6 +35,7 @@ import { SiteDashboardComponent } from './site-dashboard/site-dashboard.componen
 import { EditStreamComponent } from './forms/edit-stream/edit-stream.component';
 import { EditNewsComponent } from './forms/edit-news/edit-news.component';
 import { EditWatchlistComponent } from './forms/edit-watchlist/edit-watchlist.component';
+import { CrudDropdownComponent } from './site-dashboard/crud-dropdown/crud-dropdown.component';
 
 
 
@@ -59,6 +60,7 @@ import { EditWatchlistComponent } from './forms/edit-watchlist/edit-watchlist.co
     EditStreamComponent,
     EditNewsComponent,
     EditWatchlistComponent,
+    CrudDropdownComponent,
 
 ],
   entryComponents: [

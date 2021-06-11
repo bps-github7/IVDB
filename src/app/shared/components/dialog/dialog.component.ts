@@ -28,9 +28,20 @@ export class DialogComponent implements OnInit {
     if (data.updateObject) {
       this.existingMetadata = data.updateObject?.metadata;
     }
-    this.type = data?.type;
-    this.buildInfo = Object.values(data.buildInfo);
-    this.initialState = data.initialState;
+
+		// removes the plural from type-words where it makes sense
+		// news is exception because its singular is the same as its plural.
+		if (data.type) {
+			this.type = ("news" ? data.type : data.type.slice(0,-1))
+		}
+
+		if (data.buildInfo) {
+			this.buildInfo = Object.values(data.buildInfo);
+		}
+
+		if (data.initialState) {
+			this.initialState = data.initialState;
+		}
   }
 
   ngOnInit(): void { 
