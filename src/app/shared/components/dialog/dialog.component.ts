@@ -38,13 +38,13 @@ export class DialogComponent implements OnInit {
   }
     
   save() {
-		const returnValue = {
+		// const returnValue = {
 			// metadata : 
-			uid: this.existingMetadata.uid, 
-			category: this.existingMetadata.category,
-			...this.form.value 
-		}
-    this.dialogRef.close(returnValue);
+			// uid: this.existingMetadata.uid, 
+			// category: this.existingMetadata.category,
+			// ...this.form.value 
+		// }
+    this.dialogRef.close(this.form.value)
   }
 
   reset() {

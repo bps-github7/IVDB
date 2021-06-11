@@ -54,22 +54,22 @@ export class NewsService {
         .catch((err) => console.log(`Error while deleting news document : ${err}`));
     }
 
-    deleteAssociatedStorage(uid) {
-      this.get$(uid).subscribe(response => {
-        if (response.titleCardImage) {
-          // console.log("got a title card image, so we will delete :" + this.ref.titleCardImage.downloadURL)
-          this.storage.storage.refFromURL(response.titleCardImage.downloadURL).delete();
-        }
-        if (response.images) {
-          // console.log("got images so we will delete:")
-          const images = response.images;
-          for (let i = 0; i < images.length; i++) {
-            // console.log(images[i])
-            this.storage.storage.refFromURL(images[i].downloadURL);
-          }
+    // deleteAssociatedStorage(uid) {
+    //   this.get$(uid).subscribe(response => {
+    //     if (response.titleCardImage) {
+    //       // console.log("got a title card image, so we will delete :" + this.ref.titleCardImage.downloadURL)
+    //       this.storage.storage.refFromURL(response.titleCardImage.downloadURL).delete();
+    //     }
+    //     if (response.images) {
+    //       // console.log("got images so we will delete:")
+    //       const images = response.images;
+    //       for (let i = 0; i < images.length; i++) {
+    //         // console.log(images[i])
+    //         this.storage.storage.refFromURL(images[i].downloadURL);
+    //       }
   
-        }
+    //     }
   
-      });
-    }
+    //   });
+    // }
 }

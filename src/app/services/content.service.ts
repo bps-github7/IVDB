@@ -14,8 +14,8 @@ export class ContentService {
 		return this.afs.collection("content").doc(uid).valueChanges();		
 	}
 
-	getType$(category : string) {
-		const categoryRef = this.afs.collection('content', (ref) => ref.where('metadata.category', '==', category));
+	getCategory$(category : string) {
+		const categoryRef = this.afs.collection<Content>('content', (ref) => ref.where('metadata.category', '==', category));
 		return categoryRef.valueChanges();
 	}
 

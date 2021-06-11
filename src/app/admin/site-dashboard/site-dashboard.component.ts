@@ -3,7 +3,6 @@ import { DialogComponent } from './../../shared/components/dialog/dialog.compone
 import { Component, OnInit } from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { EditStreamComponent } from '../forms/edit-stream/edit-stream.component';
-import { EditWatchlistComponent } from '../forms/edit-watchlist/edit-watchlist.component';
 import { Content } from 'src/app/models/content/content';
 import { StreamsService } from './../../services/streams.service';
 import { NewsService } from './../../services/news.service';
@@ -27,22 +26,6 @@ content: news, streams, recently-posted, watchlists
 contrib: ratings, reviews, comments, posts, suggestions
 */
 
-
-news$ : Content [];
-streams$ : Content [];
-watchlists$ : Content [];
-
-showNews : boolean = false;
-showStreams : boolean = false;
-showWatchlists : boolean = false;
-
-displayedColumns: string[] = ['title', 'edit', 'delete'];
-chosen : any;
-doc : any;
-
-newsConfig = {title : "Recently Uploaded Streams", displayedColumns : this.displayedColumns, type : "news"}
-streamConfig = {title : "Recently Uploaded Streams", displayedColumns : this.displayedColumns, type : "stream"}
-watchlistConfig = {title : "Recently Uploaded Streams", displayedColumns : this.displayedColumns, type : "watchlist"}
 
 // The configs we need to build dialogs dynamically. These will change over time but are identical as this is a build mode prototype
 builds = {
@@ -162,6 +145,29 @@ forms = {
 	}
 }
 
+
+
+news$ : Content [];
+streams$ : Content [];
+watchlists$ : Content [];
+officialReviews$ : Content [];
+
+showNews : boolean = false;
+showStreams : boolean = false;
+showWatchlists : boolean = false;
+showOfficialReviews : boolean = false;
+
+displayedColumns: string[] = ['title', 'edit', 'delete'];
+chosen : any;
+doc : any;
+
+options = ["news","streams","watchlists","official reviews"];
+
+newsConfig = {title : "Recently Uploaded Streams", displayedColumns : this.displayedColumns, type : "news"}
+streamConfig = {title : "Recently Uploaded Streams", displayedColumns : this.displayedColumns, type : "stream"}
+watchlistConfig = {title : "Recently Uploaded Streams", displayedColumns : this.displayedColumns, type : "watchlist"}
+officialReviewsConfig = {title : "Recently Uploaded Official Reviews", displayedColumns : this.displayedColumns, type : "reviews"} 
+
 constructor(
     private dialog : MatDialog,
     private firebaseService: FirebaseService,
@@ -175,9 +181,15 @@ constructor(
     private streamsService : StreamsService,
     private watchlistsService : WatchlistsService,
     ) {
-        this.newsService.getAll$().subscribe((response) => this.news$ = response );  
-        this.streamsService.getAll$().subscribe((response) => this.streams$ = response);
-        this.watchlistsService.getAll$().subscribe((response) => this.watchlists$ = response);        
+				this.contentService.getCategory$("news").subscribe((response)=> this.news$ = response);
+				this.contentService.getCategory$("stream").subscribe((response)=> this.streams$ = response);
+				this.contentService.getCategory$("watchlist").subscribe((response)=> this.watchlists$ = response);
+				this.contentService.getCategory$("officialReview").subscribe((response)=> this.officialReviews$ = response);
+				
+				
+				// this.newsService.getAll$().subscribe((response) => this.news$ = response );  
+        // this.streamsService.getAll$().subscribe((response) => this.streams$ = response);
+        // this.watchlistsService.getAll$().subscribe((response) => this.watchlists$ = response);        
      }
 
   ngOnInit(): void {
@@ -207,6 +219,7 @@ constructor(
           // this.contentService.edit(result.);
         }
         else {
+					result.metadata = {category : type};
           this.contentService.create(result);
         }
       })
@@ -299,7 +312,7 @@ constructor(
 
   deleteNews(uid) {
     if(confirm('are you sure you want to delete this news piece? (cannot be undone)')){
-      this.newsService.deleteAssociatedStorage(uid);
+      // this.newsService.deleteAssociatedStorage(uid);
       this.newsService.delete(uid);
     }
   }

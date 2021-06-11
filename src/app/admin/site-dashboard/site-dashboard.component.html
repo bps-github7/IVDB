@@ -10,17 +10,14 @@
 -->
 <div *ngIf="chosen == 'all'">
   want to make a 'activity log' service and UI component to display here,
-  which will list ALL activities by recency to the site, and use this for each category of activity
-  - ie "admin 'BenSehnert' added a new game 'Call of Duty Mobile' click to show more" 
-  
-  this will require updating every service (or making a global firestore service) that adds a log
-  every time something is added to the database.
 </div>
 
 
 <div *ngIf="chosen == 'content'">
   <ul class="list-group">
-      <li class="list-group-item">
+
+		<!-- TODO: to make it possible to loop over content types here to display content, you will need to make the below li contained elements a reusable component -->
+		<li class="list-group-item">
         <h3>News:</h3>
         <!-- bring up a dialog box instead of traveling to a new route! -->
         <button
@@ -86,7 +83,9 @@
           <button mat-raised-button>View all news</button>
         </a>
     </li>
-    <li class="list-group-item">
+    
+		
+		<li class="list-group-item">
       <h3>Streams:</h3>
       <button
           mat-raised-button
