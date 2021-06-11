@@ -5,7 +5,6 @@ export interface Content {
  this is the data that is shared between all types of content, but the implementations / categories
  will go on to include "watchlists", "news", "streams" and "official reviews"  
 	*/
-  uid?: string,
   title: string,
   description?: string,
   body?: string,
@@ -15,7 +14,8 @@ export interface Content {
 		updatedAt?: any,
 		creator: string,
 		category: string,
-		tags?: string []
+		tags?: string [],
+		uid? : string
 	}
   // titleCardImage?: Image,
 

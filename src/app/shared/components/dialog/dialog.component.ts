@@ -26,36 +26,46 @@ export class DialogComponent implements OnInit {
   private fb : FormBuilder) {
     // this needs to persist if we are gonna edit documents
     if (data.updateObject) {
-      this.existingMetadata = data.updateObject?.metadata;
-    }
+			this.docUid = data.updateObject.uid;
+			const old = data.updateObject;
+			this.initialState = {
+				title : [old.title],
+				description : [old.description],
+				body : [old.body],
+				tags : [old.tags]
+			}
+			// TODO: this probably blotches everything up!
+			this.existingMetadata = {
+				createdAt : data.updateObject.metadata.createdAt,
+				creator : this.detectNewContributors(),
+				category : data.updateObject.metadata.category,
+				tags: data.updateObject.metadata.tags,
+			}
+    } 
+		// this is the case where we are creating- makes a new form
+		else {
+			this.initialState = data.buildInfo.initialState;
 
-		// removes the plural from type-words where it makes sense
-		// news is exception because its singular is the same as its plural.
-		if (data.type) {
-			this.type = ("news" ? data.type : data.type.slice(0,-1))
 		}
-
-		if (data.buildInfo) {
-			this.buildInfo = Object.values(data.buildInfo);
-		}
-
-		if (data.initialState) {
-			this.initialState = data.initialState;
-		}
-  }
+		this.buildInfo = Object.values(data.buildInfo.build);
+	}
 
   ngOnInit(): void { 
     this.form = this.fb.group(this.initialState);
   }
-    
+   
+	
+	detectNewContributors() {
+		// TODO: implement- this checks to see if the current contributor is same as the one who published the article
+		// and appends them if not. careful of situations where there are more than 2!
+	}
   save() {
 		// const returnValue = {
-			// metadata : 
-			// uid: this.existingMetadata.uid, 
-			// category: this.existingMetadata.category,
-			// ...this.form.value 
+		// 	this.existingMetadata,
+		// 	...this.form.value
 		// }
-    this.dialogRef.close(this.form.value)
+		console.log("dialog still is not returning a custom object!!!")
+		this.dialogRef.close(this.form.value)
   }
 
   reset() {

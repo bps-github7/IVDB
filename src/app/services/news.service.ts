@@ -35,10 +35,10 @@ export class NewsService {
 
     create( newsContent : Content ) {
       //is there a better syntax for this than destructuring?
-        const { uid, ...content } = newsContent
-        this.newsCollection.add(content)
-        .then(() => console.log("Successfuly created news document"))
-        .catch((err) => console.log(`Error while creating news document: ${err}`));
+        // const { uid, ...content } = newsContent
+        // this.newsCollection.add(content)
+        // .then(() => console.log("Successfuly created news document"))
+        // .catch((err) => console.log(`Error while creating news document: ${err}`));
     }
 
     edit( uid : string, updatedContent : Content ) {

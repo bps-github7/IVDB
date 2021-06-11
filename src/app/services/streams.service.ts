@@ -23,11 +23,11 @@ export class StreamsService {
 
   create( stream : Content ) {
     //is there a better syntax for this than destructuring?
-    // avoids a weird side effect by ensuring no uid in object were about to create
-    const { uid, ...content } = stream
-    this.streamsCollection.add(content)
-    .then(() => console.log('Successfully added a new stream'))
-    .catch((err) => console.log(`Error while adding a new stream: ${err}`));
+  //   // avoids a weird side effect by ensuring no uid in object were about to create
+  //   const { uid, ...content } = stream
+  //   this.streamsCollection.add(content)
+  //   .then(() => console.log('Successfully added a new stream'))
+  //   .catch((err) => console.log(`Error while adding a new stream: ${err}`));
   }
 
   edit(uid: string, newStream : Content) {

@@ -4,6 +4,7 @@ import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { FirebaseService } from 'src/app/services/firebase.service';
 import { DialogComponent } from 'src/app/shared/components/dialog/dialog.component';
 import { Content } from 'src/app/models/content/content';
+import { database } from 'firebase';
 
 @Component({
   selector: 'crud-dropdown',
@@ -190,13 +191,8 @@ export class CrudDropdownComponent implements OnInit {
 
   
   openDialog(type : string, updateObject?: any) {
-		
-		// // makes types singluar, except for news where singluar and plural are same.
-		// if (type !== "news") {
-			
-		// 	const lookupType = type.slice(0,-1)
-		// } 
 
+		// BIG NOTE: this only works if the data between contents stays the same... which it wont.
 		const config = new MatDialogConfig();
 		
 		config.disableClose = true;
@@ -205,10 +201,18 @@ export class CrudDropdownComponent implements OnInit {
 		config.width = `1200px`;
 
 		config.data = {
-			type,
-			initialState: this.forms[type],
-			buildInfo : this.builds[type],    
-			updateObject : (updateObject ? updateObject : null)
+			buildInfo : {
+				initialState: this.forms[type],
+				build : this.builds[type],    
+			},
+			updateObject : (updateObject?
+				{
+					title : updateObject.title,
+					description : updateObject.description, 
+					body : updateObject.body,
+					tags : updateObject.metadata.tags
+				}
+				: null)
 		};
 
 		this.dialog.open(DialogComponent, config)
@@ -216,12 +220,13 @@ export class CrudDropdownComponent implements OnInit {
 		.subscribe(result => {
 			if (result) {
 				if(result.uid) {
-					console.log("then we are going to make an edit")
-					// you should just make the dialog component more mindful of what kinda stuff it returns!
-					// this.contentService.edit(result.);
+
+
+					
+					this.contentService.edit(result.uid, result);
 				}
 				else {
-					console.log("then we are going to make a new piece of content")
+					// then we are going to make a new piece of content!
 					result.metadata = {
 						createdAt : this.firebaseService.timestamp,
 						creator : localStorage.getItem("username"),
