@@ -4,7 +4,8 @@ import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { FirebaseService } from 'src/app/services/firebase.service';
 import { DialogComponent } from 'src/app/shared/components/dialog/dialog.component';
 import { Content } from 'src/app/models/content/content';
-import { database } from 'firebase';
+import { AuthService } from 'src/app/core/auth.service';
+import { User } from 'src/app/models/user/user';
 
 @Component({
   selector: 'crud-dropdown',
@@ -173,6 +174,7 @@ export class CrudDropdownComponent implements OnInit {
 	@Input() contentType : string;
 	content$ : Content [];
 	showContent : boolean = false;
+	currentUser: Promise<String>;
 
 	displayedColumns: string[] = ['title', 'edit', 'delete'];
 	tableConfig : any;
@@ -181,14 +183,18 @@ export class CrudDropdownComponent implements OnInit {
 		private contentService : ContentService,
 		private dialog : MatDialog,
     private firebaseService: FirebaseService,
+		private authService : AuthService
 	) {
 		this.tableConfig = {title : `Recently Uploaded ${this.contentType}`, displayedColumns : this.displayedColumns, type : this.contentType}
-	 }
+
+		
+	}
 
   ngOnInit(): void {
 		this.contentService.getCategory$(this.contentType).subscribe(data => this.content$ = data);
 	}
 
+	
   
   openDialog(type : string, updateObject?: any) {
 
@@ -219,9 +225,13 @@ export class CrudDropdownComponent implements OnInit {
 		.afterClosed()
 		.subscribe(result => {
 			if (result) {
+
+				// if the object returned by dialog has UID, then it is being updated.
 				if(result.uid) {
 
+					// store an update timestamp
 
+					// detect new contributors
 					
 					this.contentService.edit(result.uid, result);
 				}

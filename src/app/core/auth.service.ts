@@ -39,13 +39,15 @@ export class AuthService {
     this.afAuth.signInWithEmailAndPassword(email, password);
 
     this.user$ = this.afAuth.authState;
-    this.user$.subscribe((resp) => this.user = resp);
+		// you did this already in the constructor
+		this.user$.subscribe((resp) => this.user = resp);
 
     this.userService.save(this.user);
   }
 
   logout() {
     this.afAuth.signOut();
+		// think these are pointless lines.
     localStorage.removeItem("user_id");
     localStorage.removeItem("username");
   }

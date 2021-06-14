@@ -37,7 +37,7 @@ export class DialogComponent implements OnInit {
 			// TODO: this probably blotches everything up!
 			this.existingMetadata = {
 				createdAt : data.updateObject.metadata.createdAt,
-				creator : this.detectNewContributors(),
+				// creator : this.detectNewContributors(),
 				category : data.updateObject.metadata.category,
 				tags: data.updateObject.metadata.tags,
 			}
@@ -55,16 +55,11 @@ export class DialogComponent implements OnInit {
   }
    
 	
-	detectNewContributors() {
-		// TODO: implement- this checks to see if the current contributor is same as the one who published the article
-		// and appends them if not. careful of situations where there are more than 2!
-	}
   save() {
-		// const returnValue = {
-		// 	this.existingMetadata,
-		// 	...this.form.value
-		// }
-		console.log("dialog still is not returning a custom object!!!")
+		/* in the case where there is a new contributor to the article
+			return the list of all contributors, and the form value, else
+			only return the form value.
+		*/
 		this.dialogRef.close(this.form.value)
   }
 
