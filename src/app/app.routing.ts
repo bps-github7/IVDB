@@ -25,6 +25,8 @@ const routes: Routes = [
           path: 'user',
           loadChildren: () => import('./user/user.module').then(m => m.UserModule)
         },
+				// this is a questionable design choice... there is never going to be an instance
+				// where you have games/:uid or game/*, dont think it makes any sense to have two modules.
         { 
           path: 'games',
           loadChildren: () => import('./games/games.module').then(m => m.GamesModule)
