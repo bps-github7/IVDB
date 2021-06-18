@@ -1,0 +1,7 @@
+<h1 class="banner">Site Administration:</h1>
+<span>
+	<strong>Show dashboard:</strong>
+	<mat-slide-toggle (change)="showDashboard = !showDashboard"></mat-slide-toggle>
+</span>
+<app-admin-dashboard *ngIf="showDashboard"></app-admin-dashboard>
+<router-outlet></router-outlet>

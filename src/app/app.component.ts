@@ -1,19 +1,23 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
+import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
+import { Post } from './models/post.model';
+import * as PostActions from './actions/post.actions';
+
+interface AppState {
+	message: string;
+	post : Post;
+}
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  styleUrls: ['./app.component.sass']
 })
-
-
 export class AppComponent {
-    title = 'ivdb';
-    
-    constructor(private router : Router) {
-      let returnUrl = localStorage.getItem('returnUrl');
-      this.router.navigateByUrl(returnUrl);
-    }  
+	title="IVDB"
+  
+	constructor(private store: Store<AppState>) {
+	}
 
 }

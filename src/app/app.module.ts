@@ -1,47 +1,68 @@
-//imports and declaratives
+
+// ng common stuff
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-import { ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
-import { AngularFireModule } from '@angular/fire';
-import { AngularFireAuthModule } from '@angular/fire/auth';
-import { AngularFireStorageModule } from '@angular/fire/storage';
+
+// routing, root component and our shared + core modules
+import { AppRoutingModule } from './app-routing.module';
+import { AppComponent } from './app.component';
+import { SharedModule } from './modules/shared/shared.module';
+import { CoreModule } from './modules/core/core.module';
+
+// ngrx
+import { reducers } from './reducers';
+import { StoreModule } from '@ngrx/store';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { EffectsModule } from '@ngrx/effects';
+// import { PostEffects } from './effects/post.effects';
+
+// forms + form components
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CustomFormsModule } from 'ng2-validation';
-import { AngularFirestoreModule } from '@angular/fire/firestore';
-import { AppRoutingModule } from './app.routing';
-import { CoreModule } from './core/core.module';
+
+
+// angular material
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
-
-//declarations/ bootstraps
-import { AppComponent } from './app.component';
-
-
-//environment 
+//angular fire
+import { AngularFireModule } from '@angular/fire';
+import { AngularFirestoreModule } from '@angular/fire/firestore';
+// import { AngularFireDatabase } from '@angular/fire/database';
 import { environment } from 'src/environments/environment';
-import { ServicesModule } from './services/services.module';
-import { DialogComponent } from './shared/components/dialog/dialog.component';
-
+import { ContentEffects } from './effects/content.effects';
 
 
 @NgModule({
-  declarations: [AppComponent],
-  imports: [
-    AngularFireModule.initializeApp(environment.firebase),
-    AngularFireAuthModule,
-    AngularFirestoreModule,
-    AngularFireStorageModule,
-    BrowserModule,
-    HttpClientModule,
-    FormsModule,
-    ReactiveFormsModule,
-    CustomFormsModule,
-    CoreModule,
-    BrowserAnimationsModule,
-    AppRoutingModule,
-    ServicesModule.forRoot(),
+  declarations: [
+    AppComponent,
   ],
+  imports: [
+		// angular base stuff + our modules
+		BrowserModule,
+    AppRoutingModule,
+		SharedModule,
+		CoreModule,
+
+		//firebase
+		AngularFireModule.initializeApp(environment.firebase),
+    AngularFirestoreModule,
+		//just for testing for now
+		// AngularFireDatabase,
+
+		//for forms
+		FormsModule,
+		ReactiveFormsModule,
+    CustomFormsModule,
+ 
+		// angular material
+		// ngMaterialModule?
+		BrowserAnimationsModule,
+
+		// ngrx 
+		StoreModule.forRoot(reducers),
+		StoreDevtoolsModule.instrument({maxAge: 25}),
+		EffectsModule.forRoot([])
+	],
   providers: [],
   bootstrap: [AppComponent]
 })
