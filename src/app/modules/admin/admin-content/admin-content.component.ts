@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Content } from 'src/app/models/content/content.model';
 
 @Component({
   selector: 'app-admin-content',
@@ -7,7 +8,28 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AdminContentComponent implements OnInit {
 
-  constructor() { }
+/* Will talk to the content and contrib services, 
+which facilitiate acess to respectively:
+content: news, streams, recently-posted, watchlists
+contrib: ratings, reviews, comments, posts, suggestions
+*/
+
+
+
+
+
+news$ : Content [];
+streams$ : Content [];
+watchlists$ : Content [];
+officialReviews$ : Content [];
+
+chosen : any;
+doc : any;
+
+options = ["news","streams","watchlists","reviews"];
+
+
+	constructor() { }
 
   ngOnInit(): void {
   }

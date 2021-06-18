@@ -9,10 +9,11 @@ import { AdminForumComponent } from './admin-forum/admin-forum.component';
 import { AdminUserComponent } from './admin-user/admin-user.component';
 import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.component';
 import { SharedModule } from '../shared/shared.module';
+import { AdminGameFormComponent } from './admin-game/admin-game-form/admin-game-form.component';
 
 
 @NgModule({
-  declarations: [AdminComponent, AdminGameComponent, AdminContentComponent, AdminForumComponent, AdminUserComponent, AdminDashboardComponent],
+  declarations: [AdminComponent, AdminGameComponent, AdminContentComponent, AdminForumComponent, AdminUserComponent, AdminDashboardComponent, AdminGameFormComponent],
   imports: [
     CommonModule,
 		SharedModule,

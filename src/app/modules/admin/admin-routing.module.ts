@@ -1,3 +1,4 @@
+import { AdminGameFormComponent } from './admin-game/admin-game-form/admin-game-form.component';
 import { AdminComponent } from './admin.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
@@ -8,6 +9,8 @@ import { AdminUserComponent } from './admin-user/admin-user.component';
 
 const routes: Routes = [
 	{ path: '', component: AdminComponent, children: [
+		{ path: 'game/new/:id', component: AdminGameFormComponent },
+		{ path: 'game/new', component: AdminGameFormComponent },
 		{ path: 'game', component: AdminGameComponent },
 		{ path: 'content', component: AdminContentComponent },
 		{ path: 'forum', component: AdminForumComponent },

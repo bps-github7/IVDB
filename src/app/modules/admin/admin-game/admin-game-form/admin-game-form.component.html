@@ -1,0 +1,210 @@
+<!-- note: we should do this with a dialog instead! -->
+<div class="row">
+	<h3>admin's game form: create, edit or delete a game</h3>
+	<div class="col-md-6">        
+			<form #finished="ngForm" (ngSubmit)="save(finished.value)">
+					<div class="form-group">
+							<label for="title">Title: </label>
+							<input
+									#title="ngModel"
+									[(ngModel)]="game.title"
+									name="title"
+									id="title"
+									class="form-control"
+									required
+									type="text"
+									>
+							<div *ngIf="title.touched && title.invalid" class="alert alert-danger">
+									<div *ngIf="title.errors.required">Title is required</div>
+							</div>
+					</div>
+					<div class="form-group">
+							<label for="price">Price: </label>
+							<div class="input-group">
+									<span class="input-group-addon">$</span>
+									<input 
+											#price="ngModel" 
+											name="price" 
+											id="price"
+											class="form-control"
+											type="number"
+											[min]="0"
+											[(ngModel)]="game.price" 
+											required>
+							</div>
+							<div *ngIf="price.touched && price.invalid" class="alert alert-danger">
+									<div *ngIf="price.errors.required">Price is required.</div>
+									<div *ngIf="price.errors.min">Price should be zero or greater.</div>
+							</div>
+					</div>
+					<div class="form-group">
+							<label for="categories">Categories: </label>
+							<select
+									[(ngModel)]="game.categories"
+									multiple
+									required
+									#categories="ngModel"
+									name="categories"
+									id="categories"
+									class="form-control"
+									>
+									<option value=""></option>
+									<option *ngFor="let g of game_categories" [value]="g.title">
+											{{ g.title }}
+									</option>
+							</select>
+							<div *ngIf="categories.touched && categories.invalid" class="alert alert-danger">
+									<div *ngIf="categories.errors.required">Categories is required</div>
+									<div></div>
+							</div>
+					</div>
+					<div class="form-group">
+							<label for="creators">Creators: </label>
+							<select
+									#creators="ngModel"
+									multiple
+									required
+									[(ngModel)]="game.creators"
+									name="creators" 
+									id="creators"
+									class="form-control"
+									>
+									<option value=""></option>
+									<option *ngFor="let g of game_creators" [value]="g.title">
+											{{ g.title }}
+									</option>
+							</select>
+							<div *ngIf="creators.touched && creators.invalid" class="alert alert-danger">
+									<div *ngIf="creators.errors.required">Creators is required</div>
+									<div></div>
+							</div>
+					</div>
+					<div class="form-group">
+							<label for="platforms">Platforms: </label>
+							<select
+									#console
+									#platforms="ngModel"
+									multiple
+									required
+									[(ngModel)]="game.platforms"
+									name="platforms" 
+									id="platforms"
+									class="form-control"
+									>
+									<option value=""></option>
+									<option *ngFor="let g of game_platforms" [value]="g.title">
+											{{ g.title }}
+									</option>
+							</select>
+							<label *ngIf="platforms.value && !platforms.invalid">Console: </label>
+
+							
+
+
+							<!-- <div id="console_sublist"  *ngIf="platforms.value == 'Nintendo'">
+									<ul>
+											<li *ngFor="let n of gameInfo?.nintendo ">
+													<div class="checkbox">
+															<label>
+																			<a>
+																			<input type="checkbox" name="console" value="n" ngModel> {{ n.name }}
+																	</a>
+															</label>
+													</div>
+											</li>
+									</ul>
+							</div>
+							
+							<div id="console_sublist"  *ngIf="platforms.value == 'Sony'">
+									<ul>
+											<li *ngFor="let n of gameInfo?.sony">
+													<div class="checkbox">
+															<label>
+																	<a [routerLink]="['../../../gaming-index/console-maker_makers/sony/', n.name]" title="n?.qualifiedName">
+																			<input type="checkbox" name="console" value="n" ngModel> {{ n.name }}
+																	</a>
+															</label>
+													</div>
+											</li>
+									</ul>
+							</div>
+							
+							<div id="console_sublist"  *ngIf="platforms.value == 'Microsoft'">
+									<ul>
+											<li *ngFor="let n of gameInfo?.microsoft">
+													<label>
+															<a [routerLink]="['../../../gaming-index/console-maker/microsoft/', n.name]" [title]="n?.qualifiedName">
+																	<input type="checkbox" name="console" value="n" ngModel> {{ n.name }}
+															</a>
+													</label>
+											</li>
+									</ul>
+							</div>
+							
+							<div id="console_sublist"  *ngIf="platforms.value == 'PC'">
+									<ul>
+											<li *ngFor="let n of gameInfo?.pc"> 
+													<div class="checkbox">
+															<label>
+																	<a [routerLink]="['../../../gaming-index/console-maker/pc/', n.name]" title="n?.qualifiedName">
+																			<input type="checkbox" name="console" value="n" ngModel> {{ n.name }}
+																	</a>
+															</label>
+													</div>                            
+											</li>
+									</ul>
+							</div> -->
+							
+							<div *ngIf="platforms.touched && platforms.invalid" class="alert alert-danger">
+									<div *ngIf="platforms.errors.required">Console Maker(s) is required</div>
+							</div>
+					</div>
+					<div class="form-group">
+							<label for="description">Description: </label>
+							<textarea
+									#description="ngModel" 
+									name="description"
+									id="description"
+									class="form-control"
+									cols="30"
+									rows="10"
+									required
+									[(ngModel)]="game.description"          
+									></textarea>
+							<div *ngIf="description.touched && description.invalid" class="alert alert-danger">
+									<div *ngIf="description.errors.required">Description is required</div>
+							</div>
+					</div>
+					<div class="form-group">
+							<label for="imageUrl">Image URL: </label>
+							<input
+									#imageUrl="ngModel"
+									id="imageUrl"
+									class="form-control"
+									required
+									[(ngModel)]="game.imageUrl"
+									name="imageUrl"
+									type="text"
+									url
+									>
+							<div *ngIf="imageUrl.touched && imageUrl.invalid" class="alert alert-danger">
+									<div *ngIf="imageUrl.errors.required">Image URL is required</div>
+									<div *ngIf="imageUrl.errors.url">Must be a valid URL</div>
+							</div>
+					</div>
+					<button class="btn btn-primary" [disabled]="!finished.valid">Save/update game</button>
+					<button type="button" class="btn btn-danger" (click)="delete()">Delete game</button>
+			</form>
+	</div>
+	<div class="col-md-6">
+			<div class="card" style="width: 18rem;">
+					<img class="card-img-top" [src]="game.imageUrl" alt="Cover of the game being created or edited">
+					<div class="card-body">
+						<h5 class="card-title">{{ game.title }}</h5>
+						<p class="card-text">{{ game.price | currency:'USD':true }}</p>
+					</div>
+				</div>
+	</div>
+</div>
+
+<p> {{ finished.value | json }}</p>

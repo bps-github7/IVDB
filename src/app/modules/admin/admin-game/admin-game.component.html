@@ -1,1 +1,29 @@
-<p>admin-game works!</p>
+<h3>Games:</h3>
+<p>
+    <a class="btn btn-primary" routerLink="/admin/game/new">Add New Game</a>
+</p>
+<p>
+    <input
+        #query
+        (keyup)="filter(query.value)" 
+        type="text" 
+        class="form-control" 
+        placeholder="Search...">
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Title</th>
+            <th>Price</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let g of filteredGames">
+            <td>{{ g?.title }}</td>
+            <td>{{ g?.price }}</td>
+            <td><a [routerLink]="['new/', g?.id]">edit</a></td>
+        </tr>
+    </tbody>
+</table>
+<!--game info goes below  -->
