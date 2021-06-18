@@ -1,4 +1,3 @@
-import { Content } from './../../../models/content/content.model';
 import { Observable } from 'rxjs';
 import { Component, OnInit } from '@angular/core';
 

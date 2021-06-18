@@ -8,12 +8,16 @@ import { StoreModule } from '@ngrx/store';
 import { ContentReducer } from 'src/app/reducers/content.reducer';
 import { CrudHubComponent } from './crud-hub/crud-hub.component';
 import { ContentEffects } from 'src/app/effects/content.effects';
+import { ContentBrowserComponent } from './content-browser/content-browser.component';
+import { ContentViewComponent } from './content-view/content-view.component';
 
 
 @NgModule({
   declarations: [
 		ContentComponent,
-		CrudHubComponent
+		CrudHubComponent,
+		ContentBrowserComponent,
+		ContentViewComponent
 	],
   imports: [
     CommonModule,
