@@ -2,7 +2,7 @@ import { ActionReducerMap } from "@ngrx/store";
 // import { postReducer } from "./post.reducer";
 import { simpleReducer } from "./simple.reducer";
 import { ContentReducer } from "./content.reducer";
-
+import { GameReducer } from "./game.reducer";
 // import the reducers for each feature module below
 // content
 // contrib
@@ -14,11 +14,9 @@ import { ContentReducer } from "./content.reducer";
 
 
 export const reducers: ActionReducerMap<any> = {
-	// simple : simpleReducer,
-	// post : postReducer,
 	content : ContentReducer,
+	game : GameReducer,
 	// contrib : contribReducer,
-	// games : gamesReducer,
 	// forum : forumReducer,
 	// user : userReducer,
 	// admin : adminReducer

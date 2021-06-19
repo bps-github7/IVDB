@@ -1,14 +1,14 @@
+import { Game } from '../reducers/game.reducer';
 import { Action } from "@ngrx/store";
-import { Content } from '../reducers/content.reducer';
 
-export const QUERY 			= '[Content] query content';
+export const QUERY 			= '[Game] query game';
 
-export const ADDED			= '[Content] added';
-export const MODIFIED		= '[Content] modified';
-export const REMOVED		= '[Content] removed';
+export const ADDED			= '[Game] added';
+export const MODIFIED		= '[Game] modified';
+export const REMOVED		= '[Game] removed';
 
-export const UPDATE     = '[Content] update';
-export const SUCCESS		= '[Content] update success';
+export const UPDATE     = '[Game] update';
+export const SUCCESS		= '[Game] update success';
 
 export class Query implements Action {
 	readonly type = QUERY;
@@ -17,18 +17,18 @@ export class Query implements Action {
 
 export class Added implements Action {
 	readonly type = ADDED;
-	constructor(public payload: Content) { }
+	constructor(public payload: Game) { }
 }
 
 
 export class Modified implements Action {
 	readonly type = MODIFIED;
-	constructor(public payload: Content) { }
+	constructor(public payload: Game) { }
 }
 
 export class Removed implements Action {
 	readonly type = REMOVED;
-	constructor(public payload: Content) { }
+	constructor(public payload: Game) { }
 }
 
 export class Update implements Action {
@@ -36,7 +36,7 @@ export class Update implements Action {
 	constructor(
 		// need to get this from the database!
 		public id: string,
-		public changes: Partial<Content>
+		public changes: Partial<Game>
 	) { }
 }
 
@@ -45,7 +45,7 @@ export class Success implements Action {
 	constructor() { }
 }
 
-export type ContentActions = 
+export type GameActions = 
 	Query |
 	Added |
 	Modified |
