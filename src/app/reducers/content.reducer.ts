@@ -16,12 +16,19 @@ export interface Content {
 export const contentAdapter = createEntityAdapter<Content>();
 export interface State extends EntityState<Content> { }
 
-const defaultContent = {
-	ids: [],
-	entities : {}
-}
+// const defaultContent = {
+// 	ids: ['123'],
+// 	entities : {
+// 		'123' : {
+// 			id: '123',
+// 			title: 'if you are seeing this',
+// 			description : '',
+// 			body: 'you have reached the end of the content collection'
+// 		}
+// 	}
+// }
 
-export const initialState: State = contentAdapter.getInitialState(defaultContent);
+export const initialState: State = contentAdapter.getInitialState();
 
 export function ContentReducer(
 	state : State = initialState,

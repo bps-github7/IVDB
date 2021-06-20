@@ -1,3 +1,4 @@
+import { CrudHubComponent } from './crud-hub/crud-hub.component';
 import { ContentBrowserComponent } from './content-browser/content-browser.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
@@ -9,7 +10,8 @@ const routes: Routes = [
 	children: [
 			{
 					path: '',
-					component: ContentBrowserComponent 
+					component: CrudHubComponent
+					// component: ContentBrowserComponent 
 			},
 			{
 				path: ':id',
