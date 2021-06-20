@@ -1,29 +1,29 @@
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs/Observable";
 import { Actions, createEffect, ofType } from "@ngrx/effects";
-import { Content } from "../reducers/content.reducer";
-import * as contentActions from '../actions/content.actions'
-import { AngularFirestore, AngularFirestoreCollection } from "@angular/fire/firestore";
+import { Contribution } from "../reducers/contribution.reducer";
+import * as contributionActions from '../actions/contribution.actions'
+import { AngularFirestore } from "@angular/fire/firestore";
 import { switchMap, mergeMap, map } from "rxjs/operators";
 import 'rxjs/add/observable/fromPromise';
 import { of } from "rxjs";
 
 @Injectable()
-export class ContentEffects {
+export class ContributionEffects {
 
 	constructor(private actions$: Actions, private afs : AngularFirestore) {}
 
 	query$ = createEffect(() =>this.actions$.pipe(
-		ofType(contentActions.QUERY),
+		ofType(contributionActions.QUERY),
 		switchMap(action => {
 			console.log(action);
-			return this.afs.collection<Content>('content')
+			return this.afs.collection<Contribution>('contribution')
 			.stateChanges()
 		}),
 		mergeMap(actions => actions),
 		map(action => {
 			return {
-				type: `[Content] ${action.type}`,
+				type: `[Contribution] ${action.type}`,
 				payload: {
 					...action.payload.doc.data(),
 					id: action.payload.doc.id
@@ -34,36 +34,32 @@ export class ContentEffects {
 	
 	
 	update$ = createEffect(() => this.actions$.pipe(
-		ofType(contentActions.UPDATE),
-		map((action: contentActions.Update) => action),
+		ofType(contributionActions.UPDATE),
+		map((action: contributionActions.Update) => action),
 		switchMap(data => {
-			const ref = this.afs.doc<Content>(`content/${data.id}`)
+			const ref = this.afs.doc<Contribution>(`contribution/${data.id}`)
 			return Observable.fromPromise(ref.update(data.changes))
 		}),
-		map(() => new contentActions.Success())
+		map(() => new contributionActions.Success())
 	))
 
 	create$ = createEffect(() => this.actions$.pipe(
-		ofType(contentActions.ADDED),
-		switchMap((action: contentActions.Added) => of(action.payload)),
+		ofType(contributionActions.ADDED),
+		switchMap((action: contributionActions.Added) => of(action.payload)),
 		map(payload =>  {
-			const ref = this.afs.doc<Content>("content");
+			const ref = this.afs.doc<Contribution>("contribution");
 			return Observable.fromPromise(ref.set(payload))
 		}),
-		map(() => new contentActions.Success())
+		map(() => new contributionActions.Success())
 	))
 
 	delete$ = createEffect(() => this.actions$.pipe(
-		ofType(contentActions.REMOVED),
-		map((action: contentActions.Removed) => action),
+		ofType(contributionActions.REMOVED),
+		map((action: contributionActions.Removed) => action),
 		switchMap(id => {
-			const ref = this.afs.doc<Content>(`content/${id}`)
+			const ref = this.afs.doc<Contribution>(`contribution/${id}`)
 			return Observable.fromPromise(ref.delete())
 		}),
-		map(()=> new contentActions.Success())
+		map(()=> new contributionActions.Success())
 	))
-		
-	
-		
-
 }

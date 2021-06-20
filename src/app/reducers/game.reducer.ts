@@ -52,7 +52,7 @@ export function GameReducer(
 }
 
 // create the default selectors
-export const getContentState = createFeatureSelector<State>('game');
+export const getContentState = createFeatureSelector<State>('games');
 
 export const {
 	selectIds,

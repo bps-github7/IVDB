@@ -10,6 +10,7 @@ import * as gameActions from '../actions/game.actions'
 import { AngularFirestore  } from "@angular/fire/firestore";
 import { switchMap, mergeMap, map } from "rxjs/operators";
 import 'rxjs/add/observable/fromPromise';
+import { of } from "rxjs";
 
 @Injectable()
 export class GameEffects {
@@ -50,14 +51,29 @@ export class GameEffects {
 
 	create$ = createEffect(() => this.actions$.pipe(
 		ofType(gameActions.ADDED),
-		map((action: gameActions.Added) => action),
-		switchMap(data => {
-					//TODO: stuck problem solving here- the previous approach made no sense, but worked myteriously.... changed it but now we have bugs.
-			    const ref = this.afs.doc<Game>("games");
-			    return Observable.fromPromise(ref.set(data))
-			  }),
-			map(() => new gameActions.Success())
+		switchMap((action: gameActions.Added) => of(action.payload)),
+		map(payload =>  {
+			//TODO: stuck problem solving here- the previous approach made no sense, but worked myteriously.... changed it but now we have bugs.
+			const ref = this.afs.doc<Game>("games");
+			return Observable.fromPromise(ref.set(payload))
+		}),
+		map(() => new gameActions.Success())
 	))
+
+	// create$ = createEffect(() => this.actions$.pipe(
+	// ofType(fromActions.ArticleActionTypes.ADD_ARTICLE),
+	// switchMap((action: fromActions.AddArticle) => of(action.payload)),
+	// map(payload => {
+	// 	const ref = this.afs.doc<Article>(`articles/${payload.article.id}`);
+	// 	return Observable.fromPromise(ref.set(payload.article));
+	// 	}
+	// 	)
+	// )
+
+
+
+
+
 
   // Listen for the 'DELETE' action
   // @Effect() _delete: Observable<Action> = this._actions.ofType(actions.DELETE)
