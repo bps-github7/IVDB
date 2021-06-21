@@ -48,7 +48,9 @@ export class ContentEffects {
 		switchMap((action: contentActions.Added) => of(action.payload)),
 		map(payload =>  {
 			const ref = this.afs.doc<Content>("content");
-			return Observable.fromPromise(ref.set(payload))
+			let uid;
+			ref.valueChanges({idField : 'uid'}).subscribe(data => uid = data.uid)
+			return Observable.fromPromise(ref.set({id : uid,  ...payload}))
 		}),
 		map(() => new contentActions.Success())
 	))

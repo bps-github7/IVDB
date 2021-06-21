@@ -33,7 +33,9 @@ export class CrudHubComponent implements OnInit {
 
 
 	createContent(title, description, body) {
-		this.store.dispatch( new actions.Added({ id: new Date().getUTCMilliseconds().toString(), title, description, body }) )
+		// this.store.dispatch( new actions.Added({ id: new Date().getUTCMilliseconds().toString(), title, description, body }) )
+		this.store.dispatch( new actions.Added({id : '', title, description, body }) )
+
 	}
 	
 	updateContent(id, title, description, body) {
