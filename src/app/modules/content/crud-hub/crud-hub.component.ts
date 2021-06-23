@@ -24,7 +24,7 @@ export class CrudHubComponent implements OnInit {
 	description: string;
 	body: string;
 
-	// TODO: this should be done at content.component level !
+	// TODO: question- should be done at content.component level?
   constructor(private store : Store<fromContent.State>) { }
 
   ngOnInit(): void {

@@ -1,5 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Store } from '@ngrx/store';
+
+import * as actions from '../../../../actions/game.actions';
+import * as fromGame from '../../../../reducers/game.reducer';
+
 
 @Component({
   selector: 'admin-game-form',
@@ -18,13 +23,12 @@ export class AdminGameFormComponent implements OnInit {
 	constructor(
 			
 			// private gameInfoService: GameInfoService,
-			// private gameService : GameService,
+			private store : Store<fromGame.State>,
 			private router : Router,
 			private route : ActivatedRoute) { 
 			// this.gameInfo = this.gameInfoService;
 			
 			
-					// feel like taking game_ out of the variables would be better- another time...
 					// this.gameInfoService.getType$('category').subscribe(p => this.game_categories = p);
 					// this.gameInfoService.getType$('creator').subscribe(p => this.game_creators = p);
 					// this.gameInfoService.getType$('platform').subscribe(p => this.game_platforms = p);

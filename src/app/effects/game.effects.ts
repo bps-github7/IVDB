@@ -53,7 +53,6 @@ export class GameEffects {
 		ofType(gameActions.ADDED),
 		switchMap((action: gameActions.Added) => of(action.payload)),
 		map(payload =>  {
-			//TODO: stuck problem solving here- the previous approach made no sense, but worked myteriously.... changed it but now we have bugs.
 			const ref = this.afs.doc<Game>("games");
 			return Observable.fromPromise(ref.set(payload))
 		}),
