@@ -20,7 +20,6 @@ import { EffectsModule } from '@ngrx/effects';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CustomFormsModule } from 'ng2-validation';
 
-
 // angular material
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 

@@ -4,6 +4,7 @@ import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import * as actions from '../../../actions/content.actions';
 import * as fromContent from '../../../reducers/content.reducer';
+import { v4 } from 'uuid';
 
 @Component({
   selector: 'app-crud-hub',
@@ -23,6 +24,7 @@ export class CrudHubComponent implements OnInit {
 	description: string;
 	body: string;
 
+	// TODO: this should be done at content.component level !
   constructor(private store : Store<fromContent.State>) { }
 
   ngOnInit(): void {
@@ -33,11 +35,12 @@ export class CrudHubComponent implements OnInit {
 
 
 	createContent(title, description, body) {
-		// this.store.dispatch( new actions.Added({ id: new Date().getUTCMilliseconds().toString(), title, description, body }) )
-		this.store.dispatch( new actions.Added({id : '', title, description, body }) )
+		this.store.dispatch( new actions.Added({ id: v4(), title, description, body }) )
+		// TODO: id needs to be obtained during firestore effect call..., 
+		// this.store.dispatch( new actions.Added({id : , title, description, body }) )
 
 	}
-	
+
 	updateContent(id, title, description, body) {
 		this.store.dispatch( new actions.Update(id, { title, description, body }))
 	}

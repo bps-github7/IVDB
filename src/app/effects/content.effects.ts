@@ -45,19 +45,17 @@ export class ContentEffects {
 
 	create$ = createEffect(() => this.actions$.pipe(
 		ofType(contentActions.ADDED),
-		switchMap((action: contentActions.Added) => of(action.payload)),
-		map(payload =>  {
-			const ref = this.afs.doc<Content>("content");
-			let uid;
-			ref.valueChanges({idField : 'uid'}).subscribe(data => uid = data.uid)
-			return Observable.fromPromise(ref.set({id : uid,  ...payload}))
+		map((action: contentActions.Added) => action.payload),
+		switchMap(data => {
+		const ref = this.afs.doc<Content>(`content/${data.id}`);
+		return Observable.fromPromise(ref.set(data));
 		}),
 		map(() => new contentActions.Success())
 	))
 
 	delete$ = createEffect(() => this.actions$.pipe(
 		ofType(contentActions.REMOVED),
-		map((action: contentActions.Removed) => action),
+		map((action: contentActions.Removed) => action.payload.id),
 		switchMap(id => {
 			const ref = this.afs.doc<Content>(`content/${id}`)
 			return Observable.fromPromise(ref.delete())
