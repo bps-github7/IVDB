@@ -10,6 +10,13 @@ import { AdminUserComponent } from './admin-user/admin-user.component';
 import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.component';
 import { SharedModule } from '../shared/shared.module';
 import { AdminGameFormComponent } from './admin-game/admin-game-form/admin-game-form.component';
+import { StoreModule } from '@ngrx/store';
+import { EffectsModule } from '@ngrx/effects';
+// import { ContentEffects } from 'src/app/effects/content.effects';
+
+// import { ContentReducer } from 'src/app/reducers/content.reducer';
+import { reducers } from 'src/app/reducers';
+import { effects } from 'src/app/modules/admin/admin.index';
 
 
 @NgModule({
@@ -17,6 +24,9 @@ import { AdminGameFormComponent } from './admin-game/admin-game-form/admin-game-
   imports: [
     CommonModule,
 		SharedModule,
+		StoreModule.forFeature('adminModule', reducers),
+		// EffectsModule.forFeature([ContentEffects]),
+		EffectsModule.forFeature(effects),
     AdminRoutingModule
   ]
 })
