@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { Post } from './models/post.model';
-import * as PostActions from './actions/post.actions';
+import * as PostActions from './store/actions/post.actions';
 
 interface AppState {
 	message: string;

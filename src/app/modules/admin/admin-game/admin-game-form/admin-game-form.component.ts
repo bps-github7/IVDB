@@ -3,9 +3,9 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 
-import * as gameActions from '../../../../actions/game.actions';
+import * as gameActions from '../../../../store/actions/game.actions';
 import * as fromGame from '../../../../reducers/game.reducer';
-import * as gameInfoActions from '../../../../actions/game-info.actions'; 
+import * as gameInfoActions from '../../../../store/actions/game-info.actions'; 
 import * as fromGameInfo from '../../../../reducers/game-info.reducer';
 
 @Component({

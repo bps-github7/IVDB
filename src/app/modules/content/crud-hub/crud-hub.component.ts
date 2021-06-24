@@ -2,7 +2,7 @@ import { Observable } from 'rxjs';
 import { Component, OnInit } from '@angular/core';
 
 import { Store } from '@ngrx/store';
-import * as actions from '../../../actions/content.actions';
+import * as actions from '../../../store/actions/content.actions';
 import * as fromContent from '../../../reducers/content.reducer';
 import { v4 } from 'uuid';
 
