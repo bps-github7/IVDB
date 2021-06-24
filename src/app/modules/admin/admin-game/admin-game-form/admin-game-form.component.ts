@@ -1,10 +1,12 @@
+import { Observable } from 'rxjs';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 
-import * as actions from '../../../../actions/game.actions';
+import * as gameActions from '../../../../actions/game.actions';
 import * as fromGame from '../../../../reducers/game.reducer';
-
+import * as gameInfoActions from '../../../../actions/game-info.actions'; 
+import * as fromGameInfo from '../../../../reducers/game-info.reducer';
 
 @Component({
   selector: 'admin-game-form',
@@ -14,7 +16,7 @@ import * as fromGame from '../../../../reducers/game.reducer';
 export class AdminGameFormComponent implements OnInit {
 
 	game: any={};
-	gameInfo;
+	gameInfo$ : Observable<any>;
 	game_categories;
 	game_creators;
 	game_platforms;
@@ -22,34 +24,25 @@ export class AdminGameFormComponent implements OnInit {
 
 	constructor(
 			
-			// private gameInfoService: GameInfoService,
-			private store : Store<fromGame.State>,
+			private gameInfoStore: Store<fromGameInfo.State>,
+			private gameStore : Store<fromGame.State>,
 			private router : Router,
-			private route : ActivatedRoute) { 
-			// this.gameInfo = this.gameInfoService;
-			
-			
-					// this.gameInfoService.getType$('category').subscribe(p => this.game_categories = p);
-					// this.gameInfoService.getType$('creator').subscribe(p => this.game_creators = p);
-					// this.gameInfoService.getType$('platform').subscribe(p => this.game_platforms = p);
-							
-					// this.game_categories = this.gameInfo.get_categories_array();
-					// this.game_creators = this.gameInfo.get_creators_array();
-					// this.game_console_makers = this.gameInfo.get_console_makers_array();
-
-
-			
-
-					
-					this.id = this.route.snapshot.paramMap.get('id');
-					
-					if (this.id)
-						console.log(this.id)		
-					// this.gameService.get$(this.id).subscribe(g => this.game = g);
-
-	}
+			private route : ActivatedRoute) { }
 
 	ngOnInit(): void {
+		// this.gameInfo = this.gameInfoService;
+		this.gameInfo$ = this.gameInfoStore.select(fromGameInfo.selectAll)
+		this.gameInfoStore.dispatch( new gameInfoActions.Query() );
+		console.log(this.gameInfo$)
+
+		// this.gameInfoService.getType$('category').subscribe(p => this.game_categories = p);
+		// this.gameInfoService.getType$('creator').subscribe(p => this.game_creators = p);
+		// this.gameInfoService.getType$('platform').subscribe(p => this.game_platforms = p);
+						
+		this.id = this.route.snapshot.paramMap.get('id');
+		
+		if (this.id)
+			console.log(this.id)							
 	}
 
 	save(game) {

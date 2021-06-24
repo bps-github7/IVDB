@@ -1,4 +1,3 @@
-// import { GameActions, QUERY, Success } from './../actions/game.actions';
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs/Observable";
 import { Action } from "@ngrx/store";
@@ -17,8 +16,6 @@ export class GameEffects {
 
 	constructor(private actions$: Actions, private afs : AngularFirestore) {}
 
-
-	// BOY this caused a lot of headache. praise the docs!
 	query$ = createEffect(() =>this.actions$.pipe(
 		ofType(gameActions.QUERY),
 		switchMap(action => {
@@ -37,7 +34,6 @@ export class GameEffects {
 			}
 		})
 	))
-	
 	
 	update$ = createEffect(() => this.actions$.pipe(
 		ofType(gameActions.UPDATE),
@@ -59,40 +55,13 @@ export class GameEffects {
 		map(() => new gameActions.Success())
 	))
 
-	// create$ = createEffect(() => this.actions$.pipe(
-	// ofType(fromActions.ArticleActionTypes.ADD_ARTICLE),
-	// switchMap((action: fromActions.AddArticle) => of(action.payload)),
-	// map(payload => {
-	// 	const ref = this.afs.doc<Article>(`articles/${payload.article.id}`);
-	// 	return Observable.fromPromise(ref.set(payload.article));
-	// 	}
-	// 	)
-	// )
-
-
-
-
-
-
-  // Listen for the 'DELETE' action
-  // @Effect() _delete: Observable<Action> = this._actions.ofType(actions.DELETE)
-  //   .map((action: actions.Delete) => action.id)
-  //   .switchMap(id => {
-  //     const ref = this._afs.doc<fromPizza.Pizza>(`pizzas/${id}`)
-  //     return Observable.fromPromise(ref.delete())
-  //   })
-  //   .map(() => new actions.Success());
 	delete$ = createEffect(() => this.actions$.pipe(
 		ofType(gameActions.REMOVED),
-		map((action: gameActions.Removed) => action),
+		map((action: gameActions.Removed) => action.payload.id),
 		switchMap(id => {
 			const ref = this.afs.doc<Game>(`games/${id}`)
 			return Observable.fromPromise(ref.delete())
 		}),
 		map(()=> new gameActions.Success())
 	))
-		
-	
-		
-
 }

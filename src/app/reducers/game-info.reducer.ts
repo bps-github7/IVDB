@@ -1,52 +1,36 @@
 import * as actions from '../actions/game-info.actions';
 import { EntityState, createEntityAdapter } from '@ngrx/entity';
 import { createFeatureSelector } from '@ngrx/store';
-
-export interface GameInfo {
-	microsoft?: VgConsole [],
-	sony?: VgConsole [],
-	nintendo?: VgConsole [],
-	pc?: VgConsole [],
-	categories?:  GameDescriptor [],
-	creators?: GameDescriptor [],
-	console_makers?: GameDescriptor []
+export interface GameInfo{
+	id: string,
+	type: string,
+	title: string,
+	description: string
 }
 
-export const contentAdapter = createEntityAdapter<Content>();
-export interface State extends EntityState<Content> { }
+export const gameInfoAdapter = createEntityAdapter<GameInfo>();
+export interface State extends EntityState<GameInfo> { }
 
-// const defaultContent = {
-// 	ids: ['123'],
-// 	entities : {
-// 		'123' : {
-// 			id: '123',
-// 			title: 'if you are seeing this',
-// 			description : '',
-// 			body: 'you have reached the end of the content collection'
-// 		}
-// 	}
-// }
+export const initialState: State = gameInfoAdapter.getInitialState();
 
-export const initialState: State = contentAdapter.getInitialState();
-
-export function ContentReducer(
+export function GameInfoReducer(
 	state : State = initialState,
-	action : actions.ContentActions
+	action : actions.GameInfoActions
 	) {
 		console.log(action.type, state);
 
 		switch(action.type) {
 			case actions.ADDED:
-				return contentAdapter.addOne(action.payload, state);
+				return gameInfoAdapter.addOne(action.payload, state);
 		
 			case actions.MODIFIED:
-				return contentAdapter.updateOne({
+				return gameInfoAdapter.updateOne({
 					id : action.payload.id,
 					changes: action.payload
 				}, state);
 		
 			case actions.REMOVED:
-				return contentAdapter.removeOne(action.payload.id, state);
+				return gameInfoAdapter.removeOne(action.payload.id, state);
 		
 			default:
 				return state;
@@ -54,11 +38,11 @@ export function ContentReducer(
 }
 
 // create the default selectors
-export const getContentState = createFeatureSelector<State>('content');
+export const getGameInfoState = createFeatureSelector<State>('gameInfo');
 
 export const {
 	selectIds,
 	selectEntities,
 	selectAll,
 	selectTotal,
-} = contentAdapter.getSelectors(getContentState)
+} = gameInfoAdapter.getSelectors(getGameInfoState)

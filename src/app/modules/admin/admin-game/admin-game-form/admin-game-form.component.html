@@ -2,7 +2,14 @@
 <div class="row">
 	<h3>admin's game form: create, edit or delete a game</h3>
 	<div class="col-md-6">        
-			<form #finished="ngForm" (ngSubmit)="save(finished.value)">
+		<div *ngFor="let g of gameInfo$ | async"> 
+			<h3>{{ g.title }}</h3>
+
+			<p>{{ g.description }}</p>
+
+			<a href="#">{{ g.id }}</a>
+		</div>
+		<!-- <form #finished="ngForm" (ngSubmit)="save(finished.value)">
 					<div class="form-group">
 							<label for="title">Title: </label>
 							<input
@@ -98,7 +105,7 @@
 							</select>
 							<label *ngIf="platforms.value && !platforms.invalid">Console: </label>
 
-							
+							 -->
 
 
 							<!-- <div id="console_sublist"  *ngIf="platforms.value == 'Nintendo'">
@@ -155,7 +162,7 @@
 									</ul>
 							</div> -->
 							
-							<div *ngIf="platforms.touched && platforms.invalid" class="alert alert-danger">
+							<!-- <div *ngIf="platforms.touched && platforms.invalid" class="alert alert-danger">
 									<div *ngIf="platforms.errors.required">Console Maker(s) is required</div>
 							</div>
 					</div>
@@ -194,9 +201,9 @@
 					</div>
 					<button class="btn btn-primary" [disabled]="!finished.valid">Save/update game</button>
 					<button type="button" class="btn btn-danger" (click)="delete()">Delete game</button>
-			</form>
+			</form> -->
 	</div>
-	<div class="col-md-6">
+	<!-- <div class="col-md-6">
 			<div class="card" style="width: 18rem;">
 					<img class="card-img-top" [src]="game.imageUrl" alt="Cover of the game being created or edited">
 					<div class="card-body">
@@ -205,6 +212,6 @@
 					</div>
 				</div>
 	</div>
-</div>
+</div> -->
 
-<p> {{ finished.value | json }}</p>
+<!-- <p> {{ finished.value | json }}</p> -->

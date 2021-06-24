@@ -1,7 +1,7 @@
 import { GameInfo } from '../reducers/game-info.reducer';
 import { Action } from "@ngrx/store";
 
-export const QUERY 			= '[GameInfo] query game-info';
+export const QUERY 			= '[GameInfo] query gameInfo';
 
 export const ADDED			= '[GameInfo] added';
 export const MODIFIED		= '[GameInfo] modified';

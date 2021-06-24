@@ -27,7 +27,7 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MatIconModule} from '@angular/material/icon';
 import { DialogComponent } from './components/dialog/dialog.component';
 import { MultiSelectChipsComponent } from './components/multi-select-chips/multi-select-chips.component';
-
+import { CrudHubComponent } from './components/crud-hub/crud-hub.component';
 
 @NgModule({
   declarations: [
@@ -36,7 +36,7 @@ import { MultiSelectChipsComponent } from './components/multi-select-chips/multi
     ZippyComponent,
     ReactiveFormControlComponent,
     MatDataTableComponent,
-
+		CrudHubComponent,
     // pipes
 
     // directives 
@@ -91,8 +91,11 @@ import { MultiSelectChipsComponent } from './components/multi-select-chips/multi
     MatChipsModule,
     MatProgressBarModule,
     MatSelectModule,
-    MatCheckboxModule
-    // pipes
+    MatCheckboxModule,
+
+		//for testing only
+		CrudHubComponent
+		// pipes
 
     // directives 
     // DisableControlDirective,
