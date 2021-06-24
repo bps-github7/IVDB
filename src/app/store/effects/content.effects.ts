@@ -14,9 +14,9 @@ export class ContentEffects {
 	constructor(private actions$: Actions, private afs : AngularFirestore) {}
 
 	query$ = createEffect(() =>this.actions$.pipe(
-		ofType(contentActions.QUERY),
+		ofType(contentActions.readContent),
 		switchMap(action => {
-			console.log(action);
+			console.log("got this far");
 			return this.afs.collection<Content>('content')
 			.stateChanges()
 		}),
@@ -34,33 +34,33 @@ export class ContentEffects {
 	
 	
 	update$ = createEffect(() => this.actions$.pipe(
-		ofType(contentActions.UPDATE),
-		map((action: contentActions.Update) => action),
+		ofType(contentActions.updateContent),
+		map(action => action),
 		switchMap(data => {
 			const ref = this.afs.doc<Content>(`content/${data.id}`)
-			return Observable.fromPromise(ref.update(data.changes))
+			return Observable.fromPromise(ref.update(data))
 		}),
-		map(() => new contentActions.Success())
+		map(() => contentActions.contentSuccess())
 	))
 
 	create$ = createEffect(() => this.actions$.pipe(
-		ofType(contentActions.ADDED),
-		map((action: contentActions.Added) => action.payload),
+		ofType(contentActions.createContent),
+		map(action => action),
 		switchMap(data => {
 		const ref = this.afs.doc<Content>(`content/${data.id}`);
 		return Observable.fromPromise(ref.set(data));
 		}),
-		map(() => new contentActions.Success())
+		map(() => contentActions.contentSuccess())
 	))
 
 	delete$ = createEffect(() => this.actions$.pipe(
-		ofType(contentActions.REMOVED),
-		map((action: contentActions.Removed) => action.payload.id),
+		ofType(contentActions.deleteContent),
+		map(action => action.id),
 		switchMap(id => {
 			const ref = this.afs.doc<Content>(`content/${id}`)
 			return Observable.fromPromise(ref.delete())
 		}),
-		map(()=> new contentActions.Success())
+		map(()=> contentActions.contentSuccess())
 	))
 		
 	

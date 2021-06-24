@@ -22,7 +22,6 @@ export class GameInfoEffects {
 	query$ = createEffect(() =>this.actions$.pipe(
 		ofType(gameInfoActions.QUERY),
 		switchMap(action => {
-			console.log(action);
 			return this.afs.collection<GameInfo>('game-info')
 			.stateChanges()
 		}),

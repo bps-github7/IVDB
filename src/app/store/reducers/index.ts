@@ -1,6 +1,5 @@
 import { ActionReducerMap } from "@ngrx/store";
 // import { postReducer } from "./post.reducer";
-import { simpleReducer } from "./simple.reducer";
 import { ContentReducer } from "./content.reducer";
 import { GameReducer } from "./game.reducer";
 import { GameInfoReducer } from "./game-info.reducer";

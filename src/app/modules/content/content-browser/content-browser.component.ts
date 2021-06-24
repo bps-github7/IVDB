@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 
 import { Store } from '@ngrx/store';
 import * as actions from '../../../store/actions/content.actions';
-import * as fromContent from '../../../reducers/content.reducer';
+import * as fromContent from '../../../store/reducers/content.reducer';
 
 @Component({
   selector: 'app-content-browser',
@@ -21,7 +21,7 @@ export class ContentBrowserComponent implements OnInit {
 
   ngOnInit(): void {
 		this.contents = this.store.select(fromContent.selectAll)
-		this.store.dispatch( new actions.Query() );
+		this.store.dispatch( actions.readContent() );
 		console.log(this.contents);
 	}
 

@@ -15,11 +15,11 @@ import { EffectsModule } from '@ngrx/effects';
 // import { ContentEffects } from 'src/app/effects/content.effects';
 
 // import { ContentReducer } from 'src/app/reducers/content.reducer';
-import { reducers } from 'src/app/reducers';
+import { reducers } from 'src/app/store/reducers';
 import { ContentEffects, effects } from 'src/app/modules/admin/admin.index';
-import { GameInfoEffects } from 'src/app/effects/game-info.effects';
-import { ContentReducer } from 'src/app/reducers/content.reducer';
-import { GameInfoReducer } from 'src/app/reducers/game-info.reducer';
+import { GameInfoEffects } from 'src/app/store/effects/game-info.effects';
+import { ContentReducer } from 'src/app/store/reducers/content.reducer';
+import { GameInfoReducer } from 'src/app/store/reducers/game-info.reducer';
 
 
 @NgModule({
@@ -27,7 +27,7 @@ import { GameInfoReducer } from 'src/app/reducers/game-info.reducer';
   imports: [
     CommonModule,
 		SharedModule,
-		StoreModule.forFeature('gameInfo', GameInfoReducer),
+		StoreModule.forFeature('content', ContentReducer),
 		// EffectsModule.forFeature([ContentEffects]),
 		EffectsModule.forFeature([GameInfoEffects, ContentEffects]),
     AdminRoutingModule

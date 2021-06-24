@@ -1,6 +1,7 @@
-import * as actions from '../actions/content.actions';
+import { createContent, deleteContent, readContent, updateContent } from './../actions/content.actions';
+import { contentActionTypes } from '../actions/content.actions';
 import { EntityState, createEntityAdapter } from '@ngrx/entity';
-import { createFeatureSelector } from '@ngrx/store';
+import { createFeatureSelector, createReducer, on } from '@ngrx/store';
 // import { Content } from '../models/content/content.model';
 
 // need to export content model from here, for this example. hopefully we can find a workaround
@@ -16,43 +17,30 @@ export interface Content {
 export const contentAdapter = createEntityAdapter<Content>();
 export interface State extends EntityState<Content> { }
 
-// const defaultContent = {
-// 	ids: ['123'],
-// 	entities : {
-// 		'123' : {
-// 			id: '123',
-// 			title: 'if you are seeing this',
-// 			description : '',
-// 			body: 'you have reached the end of the content collection'
-// 		}
-// 	}
-// }
 
 export const initialState: State = contentAdapter.getInitialState();
 
-export function ContentReducer(
-	state : State = initialState,
-	action : actions.ContentActions
-	) {
-		console.log(action.type, state);
+export const ContentReducer = createReducer(
+  initialState,
 
-		switch(action.type) {
-			case actions.ADDED:
-				return contentAdapter.addOne(action.payload, state);
-		
-			case actions.MODIFIED:
-				return contentAdapter.updateOne({
-					id : action.payload.id,
-					changes: action.payload
-				}, state);
-		
-			case actions.REMOVED:
-				return contentAdapter.removeOne(action.payload.id, state);
-		
-			default:
-				return state;
-		}
-}
+  on(readContent, 
+		(state, action) => {return contentAdapter.addMany(actions,{...state});}
+	),
+
+  on(createContent, (state, action) => {
+		return contentAdapter.addOne(action, state);
+  }),
+
+  on(deleteContent, (state, action) => {
+    return contentAdapter.removeOne(action.id, state);
+  }),
+
+  // on(updateContent, (state, action) => {
+  //   return contentAdapter.updateOne({action : action.id, data : action.play} state);
+  // })
+);
+
+
 
 // create the default selectors
 export const getContentState = createFeatureSelector<State>('content');
