@@ -28,6 +28,7 @@ import {MatIconModule} from '@angular/material/icon';
 import { DialogComponent } from './components/dialog/dialog.component';
 import { MultiSelectChipsComponent } from './components/multi-select-chips/multi-select-chips.component';
 import { CrudHubComponent } from './components/crud-hub/crud-hub.component';
+import { CarouselComponent } from './components/carousel/carousel.component';
 
 @NgModule({
   declarations: [
@@ -45,8 +46,8 @@ import { CrudHubComponent } from './components/crud-hub/crud-hub.component';
 
     // MatDialogComponent,
     DialogComponent,
-    MultiSelectChipsComponent
-
+    MultiSelectChipsComponent,
+    CarouselComponent
 ],
   imports: [
     CommonModule,
@@ -94,7 +95,8 @@ import { CrudHubComponent } from './components/crud-hub/crud-hub.component';
     MatCheckboxModule,
 
 		//for testing only
-		CrudHubComponent
+		CrudHubComponent,
+    CarouselComponent
 		// pipes
 
     // directives 

@@ -1,0 +1,28 @@
+<div class="carousel-wrapper" id="carouselElement">
+
+    <div (window:resize)="onChangeBreakpoint()" class="carousel-wrapper__slider" id="sliderWrapper">
+        
+        <a href="/" class="slide-card"
+            [style.width.px]="getWidth()"
+            [style.margin-right.px]="spaceBetween"
+            [style.margin-left.px]="spaceBetween"
+            *ngFor="let slide of images">
+
+            <div class="slide-card__thumbnail">
+                <img [src]="slide.imageUrl" class="carousel-wrapper__image">
+            </div>
+            <div class="slide-card__info">
+                <h2 class="title-text">
+                    {{ slide.title }}
+                </h2>
+            </div>
+        </a>
+        
+    </div>
+
+    <div class="carousel-wrapper__actions">
+        <button id="prevBtn" (click)="onPrev()"><i class="fas fa-angle-left"></i></button>
+        <button id="nextBtn" (click)="onNext()"><i class="fas fa-angle-right"></i></button>
+    </div>
+
+</div>

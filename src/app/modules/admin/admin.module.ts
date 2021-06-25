@@ -15,11 +15,11 @@ import { EffectsModule } from '@ngrx/effects';
 // import { ContentEffects } from 'src/app/effects/content.effects';
 
 // import { ContentReducer } from 'src/app/reducers/content.reducer';
-import { reducers } from 'src/app/reducers';
-import { ContentEffects, effects } from 'src/app/modules/admin/admin.index';
-import { GameInfoEffects } from 'src/app/effects/game-info.effects';
-import { ContentReducer } from 'src/app/reducers/content.reducer';
-import { GameInfoReducer } from 'src/app/reducers/game-info.reducer';
+import { reducers } from 'src/app/store/reducers';
+import { ContentEffects } from 'src/app/store/effects/content.effects';
+import { GameInfoEffects } from 'src/app/store/effects/game-info.effects';
+import { ContentReducer } from 'src/app/store/reducers/content.reducer';
+import { GameInfoReducer } from 'src/app/store/reducers/game-info.reducer';
 
 
 @NgModule({

@@ -10,7 +10,7 @@ import { SharedModule } from './modules/shared/shared.module';
 import { CoreModule } from './modules/core/core.module';
 
 // ngrx
-import { reducers } from './reducers';
+import { reducers } from 'src/app/store/reducers';
 import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { EffectsModule } from '@ngrx/effects';
@@ -28,7 +28,7 @@ import { AngularFireModule } from '@angular/fire';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 // import { AngularFireDatabase } from '@angular/fire/database';
 import { environment } from 'src/environments/environment';
-import { ContentEffects } from './effects/content.effects';
+import { ContentEffects } from 'src/app/store/effects/content.effects';
 
 
 @NgModule({
