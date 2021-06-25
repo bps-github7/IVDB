@@ -1,4 +1,4 @@
-import { createContent, deleteContent, readContent, updateContent } from './../actions/content.actions';
+import { createContent, deleteContent, readContent, updateContent, readContentSuccess } from './../actions/content.actions';
 import { contentActionTypes } from '../actions/content.actions';
 import { EntityState, createEntityAdapter } from '@ngrx/entity';
 import { createFeatureSelector, createReducer, on } from '@ngrx/store';
@@ -7,6 +7,7 @@ import { createFeatureSelector, createReducer, on } from '@ngrx/store';
 // need to export content model from here, for this example. hopefully we can find a workaround
 export interface Content {
 	id: string,
+	// uid?: string,
 	title ?: string,
 	description ?: string,
 	body ?: string,
@@ -23,9 +24,13 @@ export const initialState: State = contentAdapter.getInitialState();
 export const ContentReducer = createReducer(
   initialState,
 
-  on(readContent, 
-		(state, action) => {return contentAdapter.addMany(actions,{...state});}
-	),
+  on(readContentSuccess, (state, action) => {
+		console.log("commoe you miserabe bitch")
+		console.log(state.ids.slice(0))
+		// console.log(action.ids)
+		return contentAdapter.addMany([...action], state)
+		
+	}),
 
   on(createContent, (state, action) => {
 		return contentAdapter.addOne(action, state);

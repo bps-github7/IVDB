@@ -4,33 +4,40 @@ import { Actions, createEffect, ofType } from "@ngrx/effects";
 import { Content } from "../reducers/content.reducer";
 import * as contentActions from '../actions/content.actions'
 import { AngularFirestore, AngularFirestoreCollection } from "@angular/fire/firestore";
-import { switchMap, mergeMap, map } from "rxjs/operators";
+import { switchMap, mergeMap, map, exhaustMap } from "rxjs/operators";
 import 'rxjs/add/observable/fromPromise';
-import { of } from "rxjs";
+import { EmptyError, of } from "rxjs";
 
 @Injectable()
 export class ContentEffects {
 
 	constructor(private actions$: Actions, private afs : AngularFirestore) {}
 
-	query$ = createEffect(() =>this.actions$.pipe(
-		ofType(contentActions.readContent),
-		switchMap(action => {
-			console.log("got this far");
-			return this.afs.collection<Content>('content')
-			.stateChanges()
-		}),
-		mergeMap(actions => actions),
-		map(action => {
-			return {
-				type: `[Content] ${action.type}`,
-				payload: {
-					...action.payload.doc.data(),
-					id: action.payload.doc.id
-				}
-			}
-		})
-	))
+	// query$ = createEffect(() =>this.actions$.pipe(
+	// 	ofType(contentActions.readContent),
+	// 	switchMap(action => {
+	// 		console.log("got this far");
+	// 		return this.afs.collection<Content>('content')
+	// 		.stateChanges()
+	// 	}),
+	// 	mergeMap(actions => actions),
+	// 	map(action => {
+	// 		return {
+	// 			type: `[Content] ${action.type}`,
+	// 			payload: {
+	// 				...action.payload.doc.data(),
+	// 				id: action.payload.doc.id
+	// 			}
+	// 		}
+	// 	})
+	// ))
+
+		query$ = createEffect(() => this.actions$.pipe(
+			ofType(contentActions.readContent),
+			exhaustMap(() => this.afs.collection<Content>('content').valueChanges().pipe(
+					map((contents) => contentActions.readContentSuccess(contents))
+			))
+		))
 	
 	
 	update$ = createEffect(() => this.actions$.pipe(

@@ -1,17 +1,34 @@
 import { createAction, props, Action } from "@ngrx/store";
 import { Content } from '../reducers/content.reducer';
 
-// get each document in the collection
+// get every document in the collection
 export const readContent = createAction(
 	'[Content] readContent',
 );
 
-// need the full object (at least props required by the interface) to create or update
-export const createContent = createAction(
-	'[Content] createContent',
-	props<Content>()
+export const readContentSuccess = createAction(
+	//**note: it returns contents . note the plural  */
+	'[Content] readContentSuccess',
+	(contents : ReadonlyArray<Content>) => contents,
+	// props<{contents : ReadonlyArray<Content>}>()
 );
 
+
+// this is the inverse of readContent and readContentSuccess because we need to pass a value in
+// when we dispatch createContentSuccess in order for it to be returned to the reducer
+export const createContent = createAction(
+	'[Content] createContent',
+	(newContent : Content) => newContent
+);
+
+export const createContentSuccess = createAction(
+	'[Content] createContentSuccess',
+	props<Content>()
+
+);
+
+
+//not sure how this one is used/ how is it unique from updateContent?
 export const modifyContent = createAction(
 	'[Content] updateContent',
 	props<Content>()

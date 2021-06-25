@@ -29,7 +29,7 @@ import { GameInfoReducer } from 'src/app/store/reducers/game-info.reducer';
 		SharedModule,
 		StoreModule.forFeature('content', ContentReducer),
 		// EffectsModule.forFeature([ContentEffects]),
-		EffectsModule.forFeature([GameInfoEffects, ContentEffects]),
+		EffectsModule.forFeature([ContentEffects]),
     AdminRoutingModule
   ]
 })
