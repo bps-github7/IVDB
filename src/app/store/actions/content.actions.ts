@@ -24,30 +24,9 @@ export const createContent = createAction(
 
 export const createContentSuccess = createAction(
 	'[Content] createContentSuccess',
-	props<Content>()
+	// props<Content>()
 
 );
-
-
-//not sure how this one is used/ how is it unique from updateContent?
-export const modifyContent = createAction(
-	'[Content] updateContent',
-	props<Content>()
-);
-
-// all we need for delete and getter is id of the paticular piece of content 
-
-export const deleteContent = createAction(
-	'[Content] deleteContent',
-	props<{id : string}>()
-);
-
-export const getContentDocument = createAction(
-	'[Content] getContentDocument',
-	props<{id : string}>()
-);
-
-// keeping these around from fireship  code along. I think content.effects depends on them, 
 
 //this one handles update of content document, when only partial is passed in
 export const updateContent = createAction(
@@ -56,16 +35,37 @@ export const updateContent = createAction(
 );
 
 // indicates when updating the document was successful
-export const contentSuccess = createAction(
+export const updateContentSuccess = createAction(
 	'[Content] contentSuccess',
 );
+
+
+
+// all we need for delete and getter is id of the paticular piece of content 
+export const deleteContent = createAction(
+	'[Content] deleteContent',
+	props<{id : string}>()
+);
+
+export const deleteContentSuccess = createAction(
+	'[Content] deleteContentSuccess',
+	// props<{id : string}>()
+);
+
+// can probably accomplish this with map(filter(item => item.id === some.id)) on the store
+// export const getContentDocument = createAction(
+// 	'[Content] getContentDocument',
+// 	props<{id : string}>()
+// );
+
 
 export const contentActionTypes = {
 	readContent,
 	createContent,
-	modifyContent,
-	getContentDocument,
+	createContentSuccess,
+	// getContentDocument,
 	deleteContent,
+	deleteContentSuccess,
 	updateContent,
-	contentSuccess
+	updateContentSuccess
 }

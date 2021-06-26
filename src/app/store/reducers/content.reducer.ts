@@ -38,7 +38,8 @@ export const ContentReducer = createReducer(
   }),
 
   // on(updateContent, (state, action) => {
-  //   return contentAdapter.updateOne({action : action.id, data : action.play} state);
+  //   // 
+	// 	// return contentAdapter.updateOne({ action.id,  }, state);
   // })
 );
 

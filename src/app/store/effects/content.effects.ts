@@ -38,18 +38,8 @@ export class ContentEffects {
 					map((contents) => contentActions.readContentSuccess({contents}))
 			))
 		))
-	
-	
-	update$ = createEffect(() => this.actions$.pipe(
-		ofType(contentActions.updateContent),
-		map(action => action),
-		switchMap(data => {
-			const ref = this.afs.doc<Content>(`content/${data.id}`)
-			return Observable.fromPromise(ref.update(data))
-		}),
-		map(() => contentActions.contentSuccess())
-	))
 
+		
 	create$ = createEffect(() => this.actions$.pipe(
 		ofType(contentActions.createContent),
 		map(action => action),
@@ -59,17 +49,29 @@ export class ContentEffects {
 			const ref = this.afs.doc<Content>(`content/${data.id}`);
 			return Observable.fromPromise(ref.set(data));
 		}),
-		map(() => contentActions.contentSuccess())
+		map(() => contentActions.createContentSuccess())
+	))
+
+
+
+	update$ = createEffect(() => this.actions$.pipe(
+		ofType(contentActions.updateContent),
+		map(action => action),
+		switchMap(data => {
+			const ref = this.afs.doc<Content>(`content/${data.id}`)
+			return Observable.fromPromise(ref.update(data))
+		}),
+		map(() => contentActions.updateContentSuccess())
 	))
 
 	delete$ = createEffect(() => this.actions$.pipe(
 		ofType(contentActions.deleteContent),
-		map(action => action.id),
+		map(action => action),
 		switchMap(id => {
 			const ref = this.afs.doc<Content>(`content/${id}`)
 			return Observable.fromPromise(ref.delete())
 		}),
-		map(()=> contentActions.contentSuccess())
+		map(()=> contentActions.deleteContentSuccess())
 	))
 		
 	
