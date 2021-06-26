@@ -39,13 +39,14 @@ export class ContentEffects {
 			))
 		))
 
-		
+
+	// todo: probably same problem as update- need to burrow deeper
 	create$ = createEffect(() => this.actions$.pipe(
 		ofType(contentActions.createContent),
 		map(action => action),
 		switchMap(data => {
-			//probably need to be more specific when you map, about the type
-			// your getting misc info because your not filtering it down enough.
+			console.log("create effect got this:")
+			console.log(data);
 			const ref = this.afs.doc<Content>(`content/${data.id}`);
 			return Observable.fromPromise(ref.set(data));
 		}),
@@ -54,20 +55,27 @@ export class ContentEffects {
 
 
 
+	// TODO: update method, we need to burrow further, got '{id, data, action.type} instead of {id, data}'
 	update$ = createEffect(() => this.actions$.pipe(
 		ofType(contentActions.updateContent),
 		map(action => action),
 		switchMap(data => {
+			console.log(`going to update doc with id: ${data.id}\n and data:`)
+			console.log(data);
 			const ref = this.afs.doc<Content>(`content/${data.id}`)
 			return Observable.fromPromise(ref.update(data))
 		}),
 		map(() => contentActions.updateContentSuccess())
 	))
 
+	//TODO: delete method: we are burrowing too far down into the data- got t,h,i,s, ,i,s, ,e,x,a,m,p,l,e instead of "this is example"
+
 	delete$ = createEffect(() => this.actions$.pipe(
 		ofType(contentActions.deleteContent),
-		map(action => action),
+		// map(action => action),
 		switchMap(id => {
+			console.log("delete effect:")
+			console.log(id)
 			const ref = this.afs.doc<Content>(`content/${id}`)
 			return Observable.fromPromise(ref.delete())
 		}),

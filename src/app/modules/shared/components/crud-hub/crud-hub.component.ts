@@ -37,16 +37,15 @@ export class CrudHubComponent implements OnInit {
 	createContent(title, description, body) {
 		// where is data and tyoe coming from?>>>>>?>>?>
 		this.store.dispatch( actions.createContent({ id: v4(), title, description, body }) )
-		// TODO: id needs to be obtained during firestore effect call..., 
-		// this.store.dispatch( new actions.Added({id : , title, description, body }) )
 
 	}
 
 	updateContent(id, title, description, body) {
+		// we need to refactor the effect and action so these are part of the same object
 		this.store.dispatch( actions.updateContent({id : id, data: {title, description, body}}))
 	}
 
-	deleteContent(id, title, description, body) {
+	deleteContent(id) {
 		this.store.dispatch( actions.deleteContent(id) )
 	}
 }
