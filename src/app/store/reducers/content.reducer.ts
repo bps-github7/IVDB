@@ -24,11 +24,8 @@ export const initialState: State = contentAdapter.getInitialState();
 export const ContentReducer = createReducer(
   initialState,
 
-  on(readContentSuccess, (state, action) => {
-		console.log("commoe you miserabe bitch")
-		console.log(state.ids.slice(0))
-		// console.log(action.ids)
-		return contentAdapter.addMany([...action], state)
+  on(readContentSuccess, (state, {contents}) => {
+		return contentAdapter.addMany(contents, state)
 		
 	}),
 

@@ -35,7 +35,7 @@ export class ContentEffects {
 		query$ = createEffect(() => this.actions$.pipe(
 			ofType(contentActions.readContent),
 			exhaustMap(() => this.afs.collection<Content>('content').valueChanges().pipe(
-					map((contents) => contentActions.readContentSuccess(contents))
+					map((contents) => contentActions.readContentSuccess({contents}))
 			))
 		))
 	
@@ -54,8 +54,10 @@ export class ContentEffects {
 		ofType(contentActions.createContent),
 		map(action => action),
 		switchMap(data => {
-		const ref = this.afs.doc<Content>(`content/${data.id}`);
-		return Observable.fromPromise(ref.set(data));
+			//probably need to be more specific when you map, about the type
+			// your getting misc info because your not filtering it down enough.
+			const ref = this.afs.doc<Content>(`content/${data.id}`);
+			return Observable.fromPromise(ref.set(data));
 		}),
 		map(() => contentActions.contentSuccess())
 	))

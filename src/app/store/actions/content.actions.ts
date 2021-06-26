@@ -9,8 +9,8 @@ export const readContent = createAction(
 export const readContentSuccess = createAction(
 	//**note: it returns contents . note the plural  */
 	'[Content] readContentSuccess',
-	(contents : ReadonlyArray<Content>) => contents,
-	// props<{contents : ReadonlyArray<Content>}>()
+	// (contents : ReadonlyArray<Content>) => contents,
+	props<{contents : Content[]}>()
 );
 
 
@@ -18,8 +18,9 @@ export const readContentSuccess = createAction(
 // when we dispatch createContentSuccess in order for it to be returned to the reducer
 export const createContent = createAction(
 	'[Content] createContent',
-	(newContent : Content) => newContent
-);
+	// (newContent : Content) => newContent
+	props<Content>()
+	);
 
 export const createContentSuccess = createAction(
 	'[Content] createContentSuccess',

@@ -7,6 +7,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ContentViewComponent implements OnInit {
 
+
+	//** * this is the presentation component for content
   constructor() { }
 
   ngOnInit(): void {

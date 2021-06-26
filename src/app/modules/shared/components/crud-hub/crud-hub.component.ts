@@ -35,6 +35,7 @@ export class CrudHubComponent implements OnInit {
 
 
 	createContent(title, description, body) {
+		// where is data and tyoe coming from?>>>>>?>>?>
 		this.store.dispatch( actions.createContent({ id: v4(), title, description, body }) )
 		// TODO: id needs to be obtained during firestore effect call..., 
 		// this.store.dispatch( new actions.Added({id : , title, description, body }) )
