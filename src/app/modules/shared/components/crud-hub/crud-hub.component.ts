@@ -12,11 +12,6 @@ import { v4 } from 'uuid';
   styleUrls: ['./crud-hub.component.sass']
 })
 
-/* 
-	This is really just an example of how to leverage ngrx entity + store. 
-	in finished site, admins will create, update or delete content from 'admin/site-dashboard/content'
-*/
-
 export class CrudHubComponent implements OnInit {
 
 	contents: Observable<any>;
@@ -24,28 +19,28 @@ export class CrudHubComponent implements OnInit {
 	description: string;
 	body: string;
 
-	// TODO: question- should be done at content.component level?
   constructor(private store : Store<fromContent.State>) { }
 
   ngOnInit(): void {
 		this.contents = this.store.select(fromContent.selectAll)
 		this.store.dispatch( actions.readContent() );
-		console.log(this.contents);
 	}
 
 
 	createContent(title, description, body) {
-		// where is data and tyoe coming from?>>>>>?>>?>
+		// LESSONS from updating actions and reducer to the new version- 
+		// 1. all data to action arguments has to be an object! note same in update, delete and create.
+		
 		this.store.dispatch( actions.createContent({ id: v4(), title, description, body }) )
 
 	}
 
 	updateContent(id, title, description, body) {
-		// we need to refactor the effect and action so these are part of the same object
 		this.store.dispatch( actions.updateContent({id : id, data: {title, description, body}}))
 	}
 
 	deleteContent(id) {
+	// failure to make id an object: {t,h,i,s, ,i,s, ,e,x,a,m,p,l,e, ,s,t,r,i,n,g} instead of {this is example string} 
 		this.store.dispatch( actions.deleteContent({id}) )
 	}
 }

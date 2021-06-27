@@ -24,7 +24,10 @@ export const initialState: State = contentAdapter.getInitialState();
 export const ContentReducer = createReducer(
   initialState,
 
-  on(readContentSuccess, (state, {contents}) => {
+	//2. had to make action 'contents' here, action does not work.
+	// contents was the identifier of variable passed to readContentSuccess
+  //3. also, had to make this an object for entityAdapter to know what to do with it (even though it already was made an object)
+	on(readContentSuccess, (state, {contents}) => {
 		return contentAdapter.addMany(contents, state)
 		
 	}),
@@ -34,20 +37,17 @@ export const ContentReducer = createReducer(
   }),
 
   on(deleteContent, (state, action) => {
-		console.log("from reducer: ",action);
     return contentAdapter.removeOne(action.id, state);
   }),
 
-  on(updateContent, (state, action) => {
-    // 
+	//4. updateOne method expects {id, changes : <change object emitted by firestore doc reference when updated>} 
+  on(updateContent, (state, action) => { 
 		return contentAdapter.updateOne({id : action.id, changes : action.data}, state);
 
   })
+	
 );
 
-
-
-// create the default selectors
 export const getContentState = createFeatureSelector<State>('content');
 
 export const {

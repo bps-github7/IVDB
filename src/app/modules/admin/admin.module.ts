@@ -16,20 +16,22 @@ import { EffectsModule } from '@ngrx/effects';
 
 // import { ContentReducer } from 'src/app/reducers/content.reducer';
 import { reducers } from 'src/app/store/reducers';
-import { ContentEffects, effects } from 'src/app/modules/admin/admin.index';
+import { effects } from 'src/app/modules/admin/admin.index';
 import { GameInfoEffects } from 'src/app/store/effects/game-info.effects';
 import { ContentReducer } from 'src/app/store/reducers/content.reducer';
 import { GameInfoReducer } from 'src/app/store/reducers/game-info.reducer';
-
+import { GameReducer } from 'src/app/store/reducers/game.reducer';
+import { GameEffects } from 'src/app/store/effects/game.effects';
 
 @NgModule({
   declarations: [AdminComponent, AdminGameComponent, AdminContentComponent, AdminForumComponent, AdminUserComponent, AdminDashboardComponent, AdminGameFormComponent],
   imports: [
     CommonModule,
 		SharedModule,
-		StoreModule.forFeature('content', ContentReducer),
+		// StoreModule.forFeature('content', ContentReducer),
+		StoreModule.forFeature('games', GameReducer),
 		// EffectsModule.forFeature([ContentEffects]),
-		EffectsModule.forFeature([ContentEffects]),
+		EffectsModule.forFeature([GameEffects]),
     AdminRoutingModule
   ]
 })

@@ -1,54 +1,52 @@
+import { createAction, props, Action } from "@ngrx/store";
 import { Game } from '../reducers/game.reducer';
-import { Action } from "@ngrx/store";
 
-export const QUERY 			= '[Game] query game';
+// get every document in the collection
+export const readGames = createAction(
+	'[Game] readGames',
+);
 
-export const ADDED			= '[Game] added';
-export const MODIFIED		= '[Game] modified';
-export const REMOVED		= '[Game] removed';
+export const readGamesSuccess = createAction(
+	'[Game] readGamesSuccess',
+	props<{games : Game[]}>()
+);
 
-export const UPDATE     = '[Game] update';
-export const SUCCESS		= '[Game] update success';
 
-export class Query implements Action {
-	readonly type = QUERY;
-	constructor() { }
+export const createGame = createAction(
+	'[Games] createGames',
+	props<Game>()
+	);
+
+export const createGameSuccess = createAction(
+	'[Game] createGameSuccess',
+);
+
+export const updateGame = createAction(
+	'[Game] updateGame',
+	props<{id : string, data : Partial<Game>}>()
+);
+
+// indicates when updating the document was successful
+export const updateGameSuccess = createAction(
+	'[Game] updateGameSuccess',
+);
+
+export const deleteGame = createAction(
+	'[Game] deleteGame',
+	props<{id : string}>()
+);
+
+export const deleteGameSuccess = createAction(
+	'[Game] deleteGameSuccess',
+);
+
+export const contentActionTypes = {
+	readGames,
+	readGamesSuccess,
+	createGame,
+	createGameSuccess,
+	deleteGame,
+	deleteGameSuccess,
+	updateGame,
+	updateGameSuccess
 }
-
-export class Added implements Action {
-	readonly type = ADDED;
-	constructor(public payload: Game) { }
-}
-
-
-export class Modified implements Action {
-	readonly type = MODIFIED;
-	constructor(public payload: Game) { }
-}
-
-export class Removed implements Action {
-	readonly type = REMOVED;
-	constructor(public payload: Game) { }
-}
-
-export class Update implements Action {
-	readonly type = UPDATE;
-	constructor(
-		// need to get this from the database!
-		public id: string,
-		public changes: Partial<Game>
-	) { }
-}
-
-export class Success implements Action {
-	readonly type = SUCCESS;
-	constructor() { }
-}
-
-export type GameActions = 
-	Query |
-	Added |
-	Modified |
-	Removed |
-	Update |
-	Success;

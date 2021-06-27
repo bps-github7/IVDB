@@ -1,7 +1,11 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Store } from '@ngrx/store';
 // import { GameService } from '../../services/game.service';
-import { Subscription } from 'rxjs';
+import { Subscription, Observable } from 'rxjs';
 import { Game } from 'src/app/models/content/Game';
+import * as actions from '../../../store/actions/game.actions';
+import * as fromGame from '../../../store/reducers/game.reducer';
+// import { v4 } from 'uuid';
 
 @Component({
   selector: 'admin-game',
@@ -9,41 +13,29 @@ import { Game } from 'src/app/models/content/Game';
   styleUrls: ['./admin-game.component.sass']
 })
 export class AdminGameComponent implements OnInit, OnDestroy {
-    // trying this out for size
-    // games: Game;
-    games: Game [];
-    games$;
-    filteredGames: any[];
-    subscription: Subscription;
+	games: Game [];
+	games$ : Observable<any>;
+	filteredGames: any[];
+	subscription: Subscription;
 
-    // constructor(private gameService : GameService) {
-    //     this.subscription = gameService.getAll$()
-    //         .subscribe(games => {
-    //             this.filteredGames = this.games = games;
-    //         });    
-    // }
+	constructor(private store : Store<fromGame.State>) {
+	}
 
-		constructor() {
-			// some dumby info to keep app from crashing until we get game reducer, actions, effects working
-			this.filteredGames = [
-				{title : "Call of Duty Black Ops: Cold War", price: 69.88, description: "fight 8 legged monkeys in the jungle for fun"},
-				{title : "some game", price: 44.23, description: "I need to be a walrus under the sea to fight the juicy spider of the east"}
-			
-			]
-		 }
+	ngOnInit(): void {
+		this.games$ =  this.store.select(fromGame.selectAll)
+		this.store.dispatch( actions.readGames() );
+	}
 
-    filter(query: string) {
-        this.filteredGames = (query) ?
-            this.games.filter(p => p.title.toLowerCase().includes(query.toLowerCase())) :
-            this.games;
-        console.log(query);
-    }
+	ngOnDestroy(): void {
+		// this.subscription.unsubscribe();
+	}
 
-    ngOnDestroy(): void {
-      // this.subscription.unsubscribe();
-    }
 
-    ngOnInit(): void {
-    }
+	// filter(query: string) {
+	// 		this.filteredGames = (query) ?
+	// 				this.games.filter(p => p.title.toLowerCase().includes(query.toLowerCase())) :
+	// 				this.games;
+	// 		console.log(query);
+	// }
 
 }
