@@ -34,13 +34,15 @@ export const ContentReducer = createReducer(
   }),
 
   on(deleteContent, (state, action) => {
+		console.log("from reducer: ",action);
     return contentAdapter.removeOne(action.id, state);
   }),
 
-  // on(updateContent, (state, action) => {
-  //   // 
-	// 	// return contentAdapter.updateOne({ action.id,  }, state);
-  // })
+  on(updateContent, (state, action) => {
+    // 
+		return contentAdapter.updateOne({id : action.id, changes : action.data}, state);
+
+  })
 );
 
 

@@ -46,6 +46,6 @@ export class CrudHubComponent implements OnInit {
 	}
 
 	deleteContent(id) {
-		this.store.dispatch( actions.deleteContent(id) )
+		this.store.dispatch( actions.deleteContent({id}) )
 	}
 }

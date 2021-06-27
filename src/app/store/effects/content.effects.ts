@@ -1,3 +1,4 @@
+import { createContent } from './../actions/content.actions';
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs/Observable";
 import { Actions, createEffect, ofType } from "@ngrx/effects";
@@ -7,31 +8,34 @@ import { AngularFirestore, AngularFirestoreCollection } from "@angular/fire/fire
 import { switchMap, mergeMap, map, exhaustMap } from "rxjs/operators";
 import 'rxjs/add/observable/fromPromise';
 import { EmptyError, of } from "rxjs";
+import { Action } from '@ngrx/store';
 
 @Injectable()
 export class ContentEffects {
 
 	constructor(private actions$: Actions, private afs : AngularFirestore) {}
 
+	// todo: this one worked before you modified the action names
+	// and made the list of content reload as soon as an update occured.
 	// query$ = createEffect(() =>this.actions$.pipe(
 	// 	ofType(contentActions.readContent),
-	// 	switchMap(action => {
-	// 		console.log("got this far");
+	// 	switchMap(() => {
 	// 		return this.afs.collection<Content>('content')
 	// 		.stateChanges()
 	// 	}),
+	// 	map(content => contentActions.readContentSuccess({contents.payload.doc.data()}))
 	// 	mergeMap(actions => actions),
 	// 	map(action => {
+	// 		console.log("this is emitted once per document")
 	// 		return {
-	// 			type: `[Content] ${action.type}`,
-	// 			payload: {
-	// 				...action.payload.doc.data(),
-	// 				id: action.payload.doc.id
-	// 			}
-	// 		}
+	// 			 type : "readContentSuccess", payload: {
+	// 			...action.payload.doc.data(),
+	// 			id: action.payload.doc.id
+	// 		}}
 	// 	})
 	// ))
 
+	// this isnt reactive- when we update the content, it doesnt change until page refreshes
 		query$ = createEffect(() => this.actions$.pipe(
 			ofType(contentActions.readContent),
 			exhaustMap(() => this.afs.collection<Content>('content').valueChanges().pipe(
@@ -43,40 +47,36 @@ export class ContentEffects {
 	// todo: probably same problem as update- need to burrow deeper
 	create$ = createEffect(() => this.actions$.pipe(
 		ofType(contentActions.createContent),
-		map(action => action),
+		// map((action) => action),
 		switchMap(data => {
-			console.log("create effect got this:")
-			console.log(data);
+			const {type, ...payload} = data
 			const ref = this.afs.doc<Content>(`content/${data.id}`);
-			return Observable.fromPromise(ref.set(data));
+			return Observable.fromPromise(ref.set(payload));
 		}),
 		map(() => contentActions.createContentSuccess())
 	))
 
 
 
-	// TODO: update method, we need to burrow further, got '{id, data, action.type} instead of {id, data}'
 	update$ = createEffect(() => this.actions$.pipe(
 		ofType(contentActions.updateContent),
-		map(action => action),
-		switchMap(data => {
-			console.log(`going to update doc with id: ${data.id}\n and data:`)
-			console.log(data);
-			const ref = this.afs.doc<Content>(`content/${data.id}`)
-			return Observable.fromPromise(ref.update(data))
+		map((action) => action),
+		switchMap(content => {
+			// console.log(`going to update doc with id: ${content.id}\n and data:`)
+			// console.log(content.data);
+			const ref = this.afs.doc<Content>(`content/${content.id}`)
+			return Observable.fromPromise(ref.update({id : content.id,  ...content.data}))
 		}),
 		map(() => contentActions.updateContentSuccess())
 	))
 
-	//TODO: delete method: we are burrowing too far down into the data- got t,h,i,s, ,i,s, ,e,x,a,m,p,l,e instead of "this is example"
-
 	delete$ = createEffect(() => this.actions$.pipe(
 		ofType(contentActions.deleteContent),
-		// map(action => action),
-		switchMap(id => {
-			console.log("delete effect:")
-			console.log(id)
-			const ref = this.afs.doc<Content>(`content/${id}`)
+		map(action => action),
+		switchMap(action => {
+			// const {type, ...payload} = action
+			// const id = Object.values(payload).join('');
+			const ref = this.afs.doc<Content>(`content/${action.id}`)
 			return Observable.fromPromise(ref.delete())
 		}),
 		map(()=> contentActions.deleteContentSuccess())
