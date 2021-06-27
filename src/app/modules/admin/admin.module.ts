@@ -22,6 +22,8 @@ import { ContentReducer } from 'src/app/store/reducers/content.reducer';
 import { GameInfoReducer } from 'src/app/store/reducers/game-info.reducer';
 import { GameReducer } from 'src/app/store/reducers/game.reducer';
 import { GameEffects } from 'src/app/store/effects/game.effects';
+import { ContentEffects } from 'src/app/store/effects/content.effects';
+
 
 @NgModule({
   declarations: [AdminComponent, AdminGameComponent, AdminContentComponent, AdminForumComponent, AdminUserComponent, AdminDashboardComponent, AdminGameFormComponent],
