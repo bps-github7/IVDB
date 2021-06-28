@@ -20,10 +20,8 @@ export class ContentEffects {
 		))
 
 
-	// todo: probably same problem as update- need to burrow deeper
 	create$ = createEffect(() => this.actions$.pipe(
 		ofType(contentActions.createContent),
-		// map((action) => action),
 		switchMap(data => {
 			const {type, ...payload} = data
 			const ref = this.afs.doc<Content>(`content/${data.id}`);
@@ -38,8 +36,6 @@ export class ContentEffects {
 		ofType(contentActions.updateContent),
 		map((action) => action),
 		switchMap(content => {
-			// console.log(`going to update doc with id: ${content.id}\n and data:`)
-			// console.log(content.data);
 			const ref = this.afs.doc<Content>(`content/${content.id}`)
 			return Observable.fromPromise(ref.update({id : content.id,  ...content.data}))
 		}),
@@ -50,8 +46,6 @@ export class ContentEffects {
 		ofType(contentActions.deleteContent),
 		map(action => action),
 		switchMap(action => {
-			// const {type, ...payload} = action
-			// const id = Object.values(payload).join('');
 			const ref = this.afs.doc<Content>(`content/${action.id}`)
 			return Observable.fromPromise(ref.delete())
 		}),

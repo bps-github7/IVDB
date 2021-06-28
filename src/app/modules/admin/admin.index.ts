@@ -23,18 +23,15 @@ export const effects : any [] = [ContentEffects, GameInfoEffects];
 
 
 
-export const reducers: ActionReducerMap<any> = {
-	content : ContentReducer,
-	game : GameReducer,
-	gameInfo : GameInfoReducer
-}
-
-
 @NgModule({
   declarations: [],
   imports: [
-		StoreModule.forFeature('admin module', reducers),
+
+		StoreModule.forFeature('game', GameReducer),
+		StoreModule.forFeature('gameInfo', GameInfoReducer),
+		StoreModule.forFeature('content', ContentReducer),
 		EffectsModule.forFeature([ContentEffects]),
+		EffectsModule.forFeature([GameInfoEffects]),
 		EffectsModule.forFeature([GameEffects]),
   ],
 	// exports: [

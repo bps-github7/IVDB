@@ -1,54 +1,53 @@
+import { createAction, props, Action } from "@ngrx/store";
 import { GameInfo } from '../reducers/game-info.reducer';
-import { Action } from "@ngrx/store";
 
-export const QUERY 			= '[GameInfo] query gameInfo';
+// get every document in the collection
+export const readGameInfo = createAction(
+	'[GameInfo] readGameInfo',
+);
 
-export const ADDED			= '[GameInfo] added';
-export const MODIFIED		= '[GameInfo] modified';
-export const REMOVED		= '[GameInfo] removed';
+export const readGameInfoSuccess = createAction(
+	'[GameInfo] readGameInfoSuccess',
+	props<{gameInfo : GameInfo[]}>()
+);
 
-export const UPDATE     = '[GameInfo] update';
-export const SUCCESS		= '[GameInfo] update success';
+// came across a weird one, which forced out hand -> gameInfo.type is now gameInfo.family
+// apparently - action doesnt respond well to objects passed into props with attribute 'type'
+export const createGameInfo = createAction(
+	'[GameInfo] createGameInfo',
+	props<GameInfo>()
+);
 
-export class Query implements Action {
-	readonly type = QUERY;
-	constructor() { }
+export const createGameInfoSuccess = createAction(
+	'[GameInfo] createGameInfoSuccess',
+);
+
+export const updateGameInfo = createAction(
+	'[GameInfo] updateGameInfo',
+	props<{id : string, data : Partial<GameInfo>}>()
+);
+
+export const updateGameInfoSuccess = createAction(
+	'[GameInfo] updateGameInfoSuccess',
+);
+
+export const deleteGameInfo = createAction(
+	'[GameInfo] deleteGameInfo',
+	props<{id : string}>()
+);
+
+export const deleteGameInfoSuccess = createAction(
+	'[GameInfo] deleteGameInfoSuccess',
+);
+
+export const gameInfoActionTypes = {
+
+	readGameInfo,
+	readGameInfoSuccess,
+	createGameInfo,
+	createGameInfoSuccess,
+	deleteGameInfo,
+	deleteGameInfoSuccess,
+	updateGameInfo,
+	updateGameInfoSuccess
 }
-
-export class Added implements Action {
-	readonly type = ADDED;
-	constructor(public payload: GameInfo) { }
-}
-
-
-export class Modified implements Action {
-	readonly type = MODIFIED;
-	constructor(public payload: GameInfo) { }
-}
-
-export class Removed implements Action {
-	readonly type = REMOVED;
-	constructor(public payload: GameInfo) { }
-}
-
-export class Update implements Action {
-	readonly type = UPDATE;
-	constructor(
-		// need to get this from the database!
-		public id: string,
-		public changes: Partial<GameInfo>
-	) { }
-}
-
-export class Success implements Action {
-	readonly type = SUCCESS;
-	constructor() { }
-}
-
-export type GameInfoActions = 
-	Query |
-	Added |
-	Modified |
-	Removed |
-	Update |
-	Success;

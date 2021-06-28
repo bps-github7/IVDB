@@ -1,3 +1,4 @@
+import { exhaustMap } from 'rxjs/operators';
 // angular core stuff + ngrx 
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs/Observable";
@@ -13,77 +14,47 @@ import { of } from "rxjs";
 import { GameInfo } from "../reducers/game-info.reducer";
 import * as gameInfoActions from '../actions/game-info.actions'
 
-
 @Injectable()
 export class GameInfoEffects {
 
 	constructor(private actions$: Actions, private afs : AngularFirestore) {}
 
-	query$ = createEffect(() =>this.actions$.pipe(
-		ofType(gameInfoActions.QUERY),
-		switchMap(action => {
-			return this.afs.collection<GameInfo>('game-info')
-			.stateChanges()
-		}),
-		mergeMap(actions => actions),
-		map(action => {
-			return {
-				type: `[GameInfo] ${action.type}`,
-				payload: {
-					...action.payload.doc.data(),
-					id: action.payload.doc.id
-				}
-			}
-		})
-	))
-	
-  // Listen for the 'QUERY' action, must be the first effect you trigger
-		// query$ = createEffect(() => this.actions$.pipe(
-		// 	ofType(gameInfoActions.QUERY),
-    // 	switchMap(action => {
-    // 	  const ref = this.afs.collection<GameInfo>('game-info');
-    // 	  return ref.snapshotChanges().pipe(
-		// 			map(arr => {
-		// 				return arr.map(doc => {
-		// 					const data = doc.payload.doc.data();
-		// 					return {
-		// 						id: doc.payload.doc.id,
-		// 						...data
-		// 					} as GameInfo; 
-		// 				})
-		// 			})
-		// 		)
-			
-    // 	})
-		// )
-	
-	update$ = createEffect(() => this.actions$.pipe(
-		ofType(gameInfoActions.UPDATE),
-		map((action: gameInfoActions.Update) => action),
-		switchMap(data => {
-			const ref = this.afs.doc<GameInfo>(`game-info/${data.id}`)
-			return Observable.fromPromise(ref.update(data.changes))
-		}),
-		map(() => new gameInfoActions.Success())
+	query$ = createEffect(() => this.actions$.pipe(
+		ofType(gameInfoActions.readGameInfo),
+		exhaustMap(() => this.afs.collection<GameInfo>('game-info').valueChanges().pipe(
+			map((gameInfo) => gameInfoActions.readGameInfoSuccess({gameInfo}))
+		))
 	))
 
 	create$ = createEffect(() => this.actions$.pipe(
-		ofType(gameInfoActions.ADDED),
-		switchMap((action: gameInfoActions.Added) => of(action.payload)),
-		map(payload =>  {
-			const ref = this.afs.doc<GameInfo>("game-info");
-			return Observable.fromPromise(ref.set(payload))
+		ofType(gameInfoActions.createGameInfo),
+		switchMap(data => {
+			const {type, ...payload} = data
+			const ref = this.afs.doc<GameInfo>(`game-info/${data.id}`);
+			return Observable.fromPromise(ref.set(payload));
 		}),
-		map(() => new gameInfoActions.Success())
+		map(() => gameInfoActions.createGameInfoSuccess())
+	))
+
+
+
+	update$ = createEffect(() => this.actions$.pipe(
+		ofType(gameInfoActions.updateGameInfo),
+		map((action) => action),
+		switchMap(content => {
+			const ref = this.afs.doc<GameInfo>(`game-info/${content.id}`)
+			return Observable.fromPromise(ref.update({id : content.id,  ...content.data}))
+		}),
+		map(() => gameInfoActions.updateGameInfoSuccess())
 	))
 
 	delete$ = createEffect(() => this.actions$.pipe(
-		ofType(gameInfoActions.REMOVED),
-		map((action: gameInfoActions.Removed) => action.payload.id),
-		switchMap(id => {
-			const ref = this.afs.doc<GameInfo>(`game-info/${id}`)
+		ofType(gameInfoActions.deleteGameInfo),
+		map(action => action),
+		switchMap(action => {
+			const ref = this.afs.doc<GameInfo>(`game-info/${action.id}`)
 			return Observable.fromPromise(ref.delete())
 		}),
-		map(()=> new gameInfoActions.Success())
+		map(()=> gameInfoActions.deleteGameInfoSuccess())
 	))
 }

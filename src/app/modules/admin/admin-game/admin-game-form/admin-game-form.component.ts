@@ -32,7 +32,7 @@ export class AdminGameFormComponent implements OnInit {
 	ngOnInit(): void {
 		// this.gameInfo = this.gameInfoService;
 		this.gameInfo$ = this.gameInfoStore.select(fromGameInfo.selectAll)
-		this.gameInfoStore.dispatch( new gameInfoActions.Query() );
+		this.gameInfoStore.dispatch( gameInfoActions.readGameInfo() );
 		console.log(this.gameInfo$)
 
 		// this.gameInfoService.getType$('category').subscribe(p => this.game_categories = p);

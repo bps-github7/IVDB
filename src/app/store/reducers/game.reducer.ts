@@ -56,7 +56,7 @@ export const GameReducer = createReducer(
 
 
 // create the default selectors
-export const getGameState = createFeatureSelector<State>('games');
+export const getGameState = createFeatureSelector<State>('game');
 
 export const {
 	selectIds,

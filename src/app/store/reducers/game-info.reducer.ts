@@ -1,43 +1,32 @@
 import * as actions from '../actions/game-info.actions';
 import { EntityState, createEntityAdapter } from '@ngrx/entity';
-import { createFeatureSelector } from '@ngrx/store';
+import { createFeatureSelector, createReducer, on } from '@ngrx/store';
 export interface GameInfo{
 	id: string,
-	type: string,
+	family: string,
 	title: string,
 	description: string
 }
 
 export const gameInfoAdapter = createEntityAdapter<GameInfo>();
+
 export interface State extends EntityState<GameInfo> { }
 
-export const initialState: State = gameInfoAdapter.getInitialState();
-
-export function GameInfoReducer(
-	state : State = initialState,
-	action : actions.GameInfoActions
-	) {
-		console.log(action.type, state);
-
-		switch(action.type) {
-			case actions.ADDED:
-				return gameInfoAdapter.addOne(action.payload, state);
-		
-			case actions.MODIFIED:
-				return gameInfoAdapter.updateOne({
-					id : action.payload.id,
-					changes: action.payload
-				}, state);
-		
-			case actions.REMOVED:
-				return gameInfoAdapter.removeOne(action.payload.id, state);
-		
-			default:
-				return state;
-		}
+const defaultGameInfo = {
+	ids: [],
+	entities : {}
 }
 
-// create the default selectors
+export const initialState: State = gameInfoAdapter.getInitialState(defaultGameInfo);
+
+export const GameInfoReducer = createReducer(
+  initialState,
+	on(actions.readGameInfoSuccess, (state, {gameInfo}) => {return gameInfoAdapter.addMany(gameInfo, state)}),
+  on(actions.createGameInfo, (state, action) => {return gameInfoAdapter.addOne(action, state)}),
+  on(actions.deleteGameInfo, (state, action) => {return gameInfoAdapter.removeOne(action.id, state)}),
+  on(actions.updateGameInfo, (state, action) => {return gameInfoAdapter.updateOne({id : action.id, changes : action.data}, state)})
+);
+
 export const getGameInfoState = createFeatureSelector<State>('gameInfo');
 
 export const {
@@ -45,4 +34,4 @@ export const {
 	selectEntities,
 	selectAll,
 	selectTotal,
-} = gameInfoAdapter.getSelectors(getGameInfoState)
+} = gameInfoAdapter.getSelectors(getGameInfoState);

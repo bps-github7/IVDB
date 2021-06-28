@@ -23,6 +23,9 @@ import { AdminGameFormComponent } from './admin-game/admin-game-form/admin-game-
 		AdminGameFormComponent
 	],
   imports: [
+		// StoreModule.forFeature('a', reducers),
+		// EffectsModule.forFeature([ContentEffects]),
+		// EffectsModule.forFeature([GameEffects]),
     CommonModule,
 		SharedModule,
 		AdminStoreModule,

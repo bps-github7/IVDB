@@ -2,8 +2,8 @@ import { Observable } from 'rxjs';
 import { Component, OnInit } from '@angular/core';
 
 import { Store } from '@ngrx/store';
-import * as actions from '../../../../store/actions/content.actions';
-import * as fromContent from '../../../../store/reducers/content.reducer';
+import * as actions from 'src/app/store/actions/content.actions';
+import * as fromContent from 'src/app/store/reducers/content.reducer';
 import { v4 } from 'uuid';
 
 @Component({
