@@ -7,6 +7,7 @@ import * as gameActions from '../../../../store/actions/game.actions';
 import * as fromGame from '../../../../store/reducers/game.reducer';
 import * as gameInfoActions from '../../../../store/actions/game-info.actions'; 
 import * as fromGameInfo from '../../../../store/reducers/game-info.reducer';
+import { filter, map } from 'rxjs/operators';
 
 @Component({
   selector: 'admin-game-form',
@@ -15,12 +16,13 @@ import * as fromGameInfo from '../../../../store/reducers/game-info.reducer';
 })
 export class AdminGameFormComponent implements OnInit {
 
-	game: any={};
 	gameInfo$ : Observable<any>;
-	game_categories;
-	game_creators;
-	game_platforms;
-	id;
+	game_categories$: Observable<any>;
+	game_creators$: Observable<any>;
+	game_platforms$: Observable<any>;
+
+	game: any={};
+	id: string;
 
 	constructor(
 			
@@ -30,15 +32,19 @@ export class AdminGameFormComponent implements OnInit {
 			private route : ActivatedRoute) { }
 
 	ngOnInit(): void {
-		// this.gameInfo = this.gameInfoService;
 		this.gameInfo$ = this.gameInfoStore.select(fromGameInfo.selectAll)
 		this.gameInfoStore.dispatch( gameInfoActions.readGameInfo() );
-		console.log(this.gameInfo$)
 
-		// this.gameInfoService.getType$('category').subscribe(p => this.game_categories = p);
-		// this.gameInfoService.getType$('creator').subscribe(p => this.game_creators = p);
-		// this.gameInfoService.getType$('platform').subscribe(p => this.game_platforms = p);
-						
+		this.game_categories$ = this.gameInfo$.pipe(map(info => info.family === "category"))
+		this.game_creators$ = this.gameInfo$.pipe(filter(info => info.family === "creator"))
+		this.game_platforms$ = this.gameInfo$.pipe(filter(info => info.family === "platform"))
+
+		console.log(this.game_categories$)
+
+
+
+
+		console.log(this.gameInfo$)
 		this.id = this.route.snapshot.paramMap.get('id');
 		
 		if (this.id)
