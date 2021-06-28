@@ -1,19 +1,46 @@
-// import { contentActionTypes } from './../../store/actions/content.actions';
-import { ContentEffects } from '../../store/effects/content.effects';
-// import { GameEffects } from '../../store/effects/game.effects';
+import { NgModule } from '@angular/core';
+
+import { ActionReducerMap } from "@ngrx/store";
+import { StoreModule } from '@ngrx/store';
+import { EffectsModule } from '@ngrx/effects'
+
+// reducers
+import { ContentReducer } from "src/app/store/reducers/content.reducer";
+import { GameReducer } from "src/app/store/reducers/game.reducer";
+import { GameInfoReducer } from "src/app/store/reducers/game-info.reducer";
+
+// effects
+import { GameInfoEffects } from 'src/app/store/effects/game-info.effects';
+import { ContentEffects } from 'src/app/store/effects/content.effects';
+import { GameEffects } from '../../store/effects/game.effects';
 // import { ContributionEffects } from '../../store/effects/contribution.effects';
-import { GameInfoEffects } from '../../store/effects/game-info.effects';
 // import { ForumEffects } from './forum.effects';
 
-// export const effects : any [] = [ContentEffects, GameEffects, ContributionEffects, GameInfoEffects];
-// export const effects : any [] = [ContentEffects, GameEffects, ContributionEffects, ForumEffects];
+
+//** I dont think this is working */
+// export const effects : any [] = [ContentEffects, GameEffects, ContributionEffects, GameInfoEffects, ForumEffects];
 export const effects : any [] = [ContentEffects, GameInfoEffects];
 
 
-/* TODO: not sure this is ideal.. double back soon  */
 
-// export * from '../../store/effects/content.effects';
-// export * from '../../store/effects/game.effects';
-// export * from '../../store/effects/game-info.effects';
-// export * from '../../store/effects/contribution.effects';
-// export * from '../../store/effects/forum.effects';
+export const reducers: ActionReducerMap<any> = {
+	content : ContentReducer,
+	game : GameReducer,
+	gameInfo : GameInfoReducer
+}
+
+
+@NgModule({
+  declarations: [],
+  imports: [
+		StoreModule.forFeature('admin module', reducers),
+		EffectsModule.forFeature([ContentEffects]),
+		EffectsModule.forFeature([GameEffects]),
+  ],
+	// exports: [
+	// 	StoreModule.forFeature('admin module', reducers),
+	// 	EffectsModule.forFeature([ContentEffects]),
+	// 	EffectsModule.forFeature([GameEffects]),
+  // ]
+})
+export class AdminStoreModule { }
