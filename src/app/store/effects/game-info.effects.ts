@@ -11,7 +11,7 @@ import 'rxjs/add/observable/fromPromise';
 import { of } from "rxjs";
 
 // our model and actions
-import { GameInfo } from "../reducers/game-info.reducer";
+import { GameInfo } from "src/app/models/game-info.model";
 import * as gameInfoActions from '../actions/game-info.actions'
 
 @Injectable()

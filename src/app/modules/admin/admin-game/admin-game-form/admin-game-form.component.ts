@@ -1,12 +1,18 @@
+import { getFamily } from './../../../../store/selectors/game-info.selector';
 import { Observable } from 'rxjs';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Store } from '@ngrx/store';
+import { select, Store } from '@ngrx/store';
 
-import * as gameActions from '../../../../store/actions/game.actions';
-import * as fromGame from '../../../../store/reducers/game.reducer';
-import * as gameInfoActions from '../../../../store/actions/game-info.actions'; 
-import * as fromGameInfo from '../../../../store/reducers/game-info.reducer';
+// examine these imports closer
+import * as gameActions from 'src/app/store/actions/game.actions';
+import * as fromGame from 'src/app/store/reducers/game.reducer';
+import * as gameInfoActions from 'src/app/store/actions/game-info.actions'; 
+import * as fromGameInfo from 'src/app/store/reducers/game-info.reducer';
+import * as gameInfoSelectors from 'src/app/store/selectors/game-info.selector';
+
+
+
 import { filter, map } from 'rxjs/operators';
 
 @Component({
@@ -32,10 +38,10 @@ export class AdminGameFormComponent implements OnInit {
 			private route : ActivatedRoute) { }
 
 	ngOnInit(): void {
-		this.gameInfo$ = this.gameInfoStore.select(fromGameInfo.selectAll)
+		this.gameInfo$ = this.gameInfoStore.select(gameInfoSelectors.selectAll)
 		this.gameInfoStore.dispatch( gameInfoActions.readGameInfo() );
 
-		this.game_categories$ = this.gameInfo$.pipe(map(info => info.family === "category"))
+		this.game_categories$ = this.gameInfo$.pipe(select(getFamily("category")))
 		this.game_creators$ = this.gameInfo$.pipe(filter(info => info.family === "creator"))
 		this.game_platforms$ = this.gameInfo$.pipe(filter(info => info.family === "platform"))
 

@@ -1,11 +1,10 @@
 import * as actions from '../actions/game-info.actions';
 import { EntityState, createEntityAdapter } from '@ngrx/entity';
-import { createFeatureSelector, createReducer, on } from '@ngrx/store';
-export interface GameInfo{
-	id: string,
-	family: string,
-	title: string,
-	description: string
+import { createReducer, on } from '@ngrx/store';
+import { GameInfo } from 'src/app/models/game-info.model';
+
+export interface GameInfoState {
+	gameInfo : ReadonlyArray<GameInfo>;
 }
 
 export const gameInfoAdapter = createEntityAdapter<GameInfo>();
@@ -26,12 +25,3 @@ export const GameInfoReducer = createReducer(
   on(actions.deleteGameInfo, (state, action) => {return gameInfoAdapter.removeOne(action.id, state)}),
   on(actions.updateGameInfo, (state, action) => {return gameInfoAdapter.updateOne({id : action.id, changes : action.data}, state)})
 );
-
-export const getGameInfoState = createFeatureSelector<State>('gameInfo');
-
-export const {
-	selectIds,
-	selectEntities,
-	selectAll,
-	selectTotal,
-} = gameInfoAdapter.getSelectors(getGameInfoState);
