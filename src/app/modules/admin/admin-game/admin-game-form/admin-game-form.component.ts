@@ -32,7 +32,7 @@ export class AdminGameFormComponent implements OnInit {
 
 	constructor(
 			
-			private gameInfoStore: Store<fromGameInfo.State>,
+			private gameInfoStore: Store<fromGameInfo.GameInfoState>,
 			private gameStore : Store<fromGame.State>,
 			private router : Router,
 			private route : ActivatedRoute) { }
@@ -42,8 +42,8 @@ export class AdminGameFormComponent implements OnInit {
 		this.gameInfoStore.dispatch( gameInfoActions.readGameInfo() );
 
 		this.game_categories$ = this.gameInfoStore.pipe(select(getFamily("category")))
-		this.game_creators$ = this.gameInfo$.pipe(filter(info => info.family === "creator"))
-		this.game_platforms$ = this.gameInfo$.pipe(filter(info => info.family === "platform"))
+		this.game_creators$ =  this.gameInfoStore.pipe(select(getFamily("creator")))
+		this.game_platforms$ =  this.gameInfoStore.pipe(select(getFamily("platform")))
 
 		console.log(this.game_categories$)
 
@@ -58,8 +58,7 @@ export class AdminGameFormComponent implements OnInit {
 	}
 
 	save(game) {
-		console.log("create a new game in the database:");
-		console.log(game);
+		this.gameStore.dispatch(gameActions.createGame(game))			
 			// if(this.id) this.gameService.update(this.id, game);
 			// else this.gameService.create(game);
 			// this.router.navigate(['/admin/game']);

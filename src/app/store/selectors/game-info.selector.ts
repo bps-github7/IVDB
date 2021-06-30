@@ -1,10 +1,6 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
 import {GameInfo} from 'src/app/models/game-info.model'
-import { getGameInfoState } from '../reducers/game-info.reducer';
-
-export interface GameInfoState {
-	gameInfo : ReadonlyArray<GameInfo>;
-}
+import { GameInfoState } from '../reducers/game-info.reducer';
 
 /* 
 TODO: two points:
