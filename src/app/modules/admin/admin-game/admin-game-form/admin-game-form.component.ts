@@ -38,10 +38,10 @@ export class AdminGameFormComponent implements OnInit {
 			private route : ActivatedRoute) { }
 
 	ngOnInit(): void {
-		this.gameInfo$ = this.gameInfoStore.select(gameInfoSelectors.selectAll)
+		this.gameInfo$ = this.gameInfoStore.select(fromGame.selectAll)
 		this.gameInfoStore.dispatch( gameInfoActions.readGameInfo() );
 
-		this.game_categories$ = this.gameInfo$.pipe(select(getFamily("category")))
+		this.game_categories$ = this.gameInfoStore.pipe(select(getFamily("category")))
 		this.game_creators$ = this.gameInfo$.pipe(filter(info => info.family === "creator"))
 		this.game_platforms$ = this.gameInfo$.pipe(filter(info => info.family === "platform"))
 

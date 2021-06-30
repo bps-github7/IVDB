@@ -1,17 +1,10 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
-// worried this could cause circular dependencies
-import {GameInfoState, gameInfoAdapter, State } from '../reducers/game-info.reducer';
 import {GameInfo} from 'src/app/models/game-info.model'
+import { getGameInfoState } from '../reducers/game-info.reducer';
 
-
-export const getGameInfoState = createFeatureSelector<State>('gameInfo');
-
-export const {
-	selectIds,
-	selectEntities,
-	selectAll,
-	selectTotal,
-} = gameInfoAdapter.getSelectors(getGameInfoState);
+export interface GameInfoState {
+	gameInfo : ReadonlyArray<GameInfo>;
+}
 
 /* 
 TODO: two points:
@@ -28,7 +21,7 @@ export const gameInfoSelector = createSelector(
 
 //please note: family is our word for "type". including type in the inteface
 // unfortunately causes problems when that interface is passed in as action props
-export const getFamily = (family : string) =>
+export const getFamily = (family : string) => 
 	createSelector(gameInfoSelector, (gameInfo) => {
 		return gameInfo.filter((gameInfo : GameInfo) => gameInfo.family === family) 
 	})

@@ -1,11 +1,7 @@
 import * as actions from '../actions/game-info.actions';
 import { EntityState, createEntityAdapter } from '@ngrx/entity';
-import { createReducer, on } from '@ngrx/store';
+import { createFeatureSelector, createReducer, on } from '@ngrx/store';
 import { GameInfo } from 'src/app/models/game-info.model';
-
-export interface GameInfoState {
-	gameInfo : ReadonlyArray<GameInfo>;
-}
 
 export const gameInfoAdapter = createEntityAdapter<GameInfo>();
 
@@ -15,6 +11,14 @@ const defaultGameInfo = {
 	ids: [],
 	entities : {}
 }
+export const getGameInfoState = createFeatureSelector<State>('gameInfo');
+
+export const {
+	selectIds,
+	selectEntities,
+	selectAll,
+	selectTotal,
+} = gameInfoAdapter.getSelectors(getGameInfoState);
 
 export const initialState: State = gameInfoAdapter.getInitialState(defaultGameInfo);
 
