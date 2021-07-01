@@ -13,6 +13,9 @@ export const selectAllGameInfos = createSelector(
 // 		(entities: GameInfo[]) => {
 // 			entities.filter((item: GameInfo) => item.family === family)}
 // 	);
-export const getFamily = (family: string) => createSelector(
-	selectAllGameInfos, (entities : GameInfo[]) => entities.filter((gameInfo : GameInfo) => gameInfo.family === family)
-);
+export const getFamily = (family: string) => 
+	createSelector(
+		selectAllGameInfos, 
+		(entities : GameInfo[]) => {
+			return entities.filter((gameInfo : GameInfo) => gameInfo.family === family)
+});
