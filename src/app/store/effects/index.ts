@@ -1,9 +1,9 @@
 import { ContentEffects } from './content.effects';
 import { GameEffects } from './game.effects';
-import { ContributionEffects } from './contribution.effects';
+import { GameInfoEffects } from './game-info.effects';
 // import { ForumEffects } from './forum.effects';
 
-export const effects : any [] = [ContentEffects, GameEffects, ContributionEffects];
+export const effects : any [] = [ContentEffects, GameEffects, GameInfoEffects];
 // export const effects : any [] = [ContentEffects, GameEffects, ContributionEffects, ForumEffects];
 
 
@@ -13,5 +13,6 @@ export const effects : any [] = [ContentEffects, GameEffects, ContributionEffect
 
 export * from './content.effects';
 export * from './game.effects';
-export * from './contribution.effects';
+export * from './game-info.effects';
+// export * from './contribution.effects';
 // export * from './forum.effects';

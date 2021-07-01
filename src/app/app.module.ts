@@ -58,7 +58,7 @@ import { ContentEffects } from 'src/app/store/effects/content.effects';
 		BrowserAnimationsModule,
 
 		// ngrx 
-		StoreModule.forRoot([]),
+		StoreModule.forRoot(reducers),
 		StoreDevtoolsModule.instrument({maxAge: 25}),
 		EffectsModule.forRoot([])
 	],

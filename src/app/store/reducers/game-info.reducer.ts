@@ -12,6 +12,17 @@ const defaultGameInfo = {
 	ids: [],
 	entities : {}
 }
+
+export const initialState: State = gameInfoAdapter.getInitialState(defaultGameInfo);
+
+export const GameInfoReducer = createReducer(
+  initialState,
+	on(actions.readGameInfoSuccess, (state, {gameInfo}) => {return gameInfoAdapter.addMany(gameInfo, state)}),
+  on(actions.createGameInfo, (state, action) => {return gameInfoAdapter.addOne(action, state)}),
+  on(actions.deleteGameInfo, (state, action) => {return gameInfoAdapter.removeOne(action.id, state)}),
+  on(actions.updateGameInfo, (state, action) => {return gameInfoAdapter.updateOne({id : action.id, changes : action.data}, state)})
+);
+
 export const getGameInfoState = createFeatureSelector<State>('gameInfo');
 
 export const {
@@ -33,20 +44,11 @@ export const selectAllGameInfos = selectAll;
 // select the total GameInfo count
 export const selectGameInfoTotal = selectTotal;
 
-export const initialState: State = gameInfoAdapter.getInitialState(defaultGameInfo);
-
-export const GameInfoReducer = createReducer(
-  initialState,
-	on(actions.readGameInfoSuccess, (state, {gameInfo}) => {return gameInfoAdapter.addMany(gameInfo, state)}),
-  on(actions.createGameInfo, (state, action) => {return gameInfoAdapter.addOne(action, state)}),
-  on(actions.deleteGameInfo, (state, action) => {return gameInfoAdapter.removeOne(action.id, state)}),
-  on(actions.updateGameInfo, (state, action) => {return gameInfoAdapter.updateOne({id : action.id, changes : action.data}, state)})
-);
 
 // an alternative reducer which doesnt use entityAdapter to track gameInfo data in state
-export interface GameInfoState {
-	gameInfo : ReadonlyArray<GameInfo>;
-}
+// export interface GameInfoState {
+// 	gameInfo : ReadonlyArray<GameInfo>;
+// }
 
 // const initialState : ReadonlyArray<GameInfo> = [];
 

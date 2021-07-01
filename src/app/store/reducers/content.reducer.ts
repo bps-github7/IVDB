@@ -7,7 +7,6 @@ import { createFeatureSelector, createReducer, on } from '@ngrx/store';
 // need to export content model from here, for this example. hopefully we can find a workaround
 export interface Content {
 	id: string,
-	// uid?: string,
 	title ?: string,
 	description ?: string,
 	body ?: string,

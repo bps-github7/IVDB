@@ -32,29 +32,32 @@ export class AdminGameFormComponent implements OnInit {
 
 	constructor(
 			
-			private gameInfoStore: Store<fromGameInfo.GameInfoState>,
+			private gameInfoStore: Store<fromGameInfo.State>,
 			private gameStore : Store<fromGame.State>,
 			private router : Router,
 			private route : ActivatedRoute) { }
 
 	ngOnInit(): void {
-		this.gameInfo$ = this.gameInfoStore.select(fromGame.selectAll)
+		this.gameInfo$ = this.gameInfoStore.select(fromGameInfo.selectAll)
 		this.gameInfoStore.dispatch( gameInfoActions.readGameInfo() );
 
-		this.game_categories$ = this.gameInfoStore.pipe(select(getFamily("category")))
-		this.game_creators$ =  this.gameInfoStore.pipe(select(getFamily("creator")))
-		this.game_platforms$ =  this.gameInfoStore.pipe(select(getFamily("platform")))
+		this.game_categories$ = this.gameInfoStore.select(getFamily("category"))
+		this.game_creators$ =  this.gameInfoStore.select(getFamily("creator"))
+		this.game_platforms$ =  this.gameInfoStore.select(getFamily("platform"))
 
-		console.log(this.game_categories$)
+		// console.log(this.game_categories$)
+		// this.game_categories$.subscribe(res => {
+		// 	console.log(res)
+		// })
 
 
 
 
-		console.log(this.gameInfo$)
-		this.id = this.route.snapshot.paramMap.get('id');
+		// console.log(this.gameInfo$)
+		// this.id = this.route.snapshot.paramMap.get('id');
 		
-		if (this.id)
-			console.log(this.id)							
+		// if (this.id)
+		// 	console.log(this.id)							
 	}
 
 	save(game) {
