@@ -13,7 +13,7 @@ import * as gameInfoSelectors from 'src/app/store/selectors/game-info.selector';
 
 
 
-import { filter, map } from 'rxjs/operators';
+// import { filter, map } from 'rxjs/operators';
 
 @Component({
   selector: 'admin-game-form',
