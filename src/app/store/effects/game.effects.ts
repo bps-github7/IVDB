@@ -5,7 +5,7 @@ import { Game } from "../reducers/game.reducer";
 import * as gameActions from '../actions/game.actions'
 import { AngularFirestore, AngularFirestoreCollection } from "@angular/fire/firestore";
 import { switchMap, mergeMap, map, exhaustMap } from "rxjs/operators";
-import 'rxjs/add/observable/fromPromise';
+// import { fromPromise } from "rxjs/internal-compatibility";
 
 @Injectable()
 export class GameEffects {

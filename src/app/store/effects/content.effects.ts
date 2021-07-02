@@ -1,11 +1,13 @@
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs/Observable";
 import { Actions, createEffect, ofType } from "@ngrx/effects";
-import { Content } from "../reducers/content.reducer";
+import { Content } from "src/app/models/content/content.model";
 import * as contentActions from '../actions/content.actions'
 import { AngularFirestore, AngularFirestoreCollection } from "@angular/fire/firestore";
 import { switchMap, mergeMap, map, exhaustMap } from "rxjs/operators";
 import 'rxjs/add/observable/fromPromise';
+// import { fromPromise } from "rxjs/internal-compatibility";
+
 
 @Injectable()
 export class ContentEffects {

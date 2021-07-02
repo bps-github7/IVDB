@@ -1,5 +1,5 @@
 import { createAction, props, Action } from "@ngrx/store";
-import { GameInfo } from 'src/app/models/game-info.model';
+import { GameInfo } from 'src/app/models/content/game-info.model';
 
 // get every document in the collection
 export const readGameInfo = createAction(

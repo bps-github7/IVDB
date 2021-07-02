@@ -2,16 +2,8 @@ import { createContent, deleteContent, readContent, updateContent, readContentSu
 import { contentActionTypes } from '../actions/content.actions';
 import { EntityState, createEntityAdapter } from '@ngrx/entity';
 import { createFeatureSelector, createReducer, on } from '@ngrx/store';
-// import { Content } from '../models/content/content.model';
+import { Content } from 'src/app/models/content/content.model';
 
-// need to export content model from here, for this example. hopefully we can find a workaround
-export interface Content {
-	id: string,
-	title ?: string,
-	description ?: string,
-	body ?: string,
-	delivered?: string;
-}
 
 
 export const contentAdapter = createEntityAdapter<Content>();
@@ -23,9 +15,6 @@ export const initialState: State = contentAdapter.getInitialState();
 export const ContentReducer = createReducer(
   initialState,
 
-	//2. had to make action 'contents' here, action does not work.
-	// contents was the identifier of variable passed to readContentSuccess
-  //3. also, had to make this an object for entityAdapter to know what to do with it (even though it already was made an object)
 	on(readContentSuccess, (state, {contents}) => {
 		return contentAdapter.addMany(contents, state)
 		
@@ -39,12 +28,9 @@ export const ContentReducer = createReducer(
     return contentAdapter.removeOne(action.id, state);
   }),
 
-	//4. updateOne method expects {id, changes : <change object emitted by firestore doc reference when updated>} 
   on(updateContent, (state, action) => { 
 		return contentAdapter.updateOne({id : action.id, changes : action.data}, state);
-
   })
-	
 );
 
 export const getContentState = createFeatureSelector<State>('content');
@@ -55,3 +41,8 @@ export const {
 	selectAll,
 	selectTotal,
 } = contentAdapter.getSelectors(getContentState);
+
+// export const selectAllContent = selectAll;
+// export const selectContentIds = selectIds;
+// export const selectContentEntities = selectEntities;
+// export const selectContentTotal = selectTotal;

@@ -1,7 +1,7 @@
 import * as actions from '../actions/game-info.actions';
 import { EntityState, createEntityAdapter } from '@ngrx/entity';
 import { createFeatureSelector, createReducer, on } from '@ngrx/store';
-import { GameInfo } from 'src/app/models/game-info.model';
+import { GameInfo } from 'src/app/models/content/game-info.model';
 
 
 export const gameInfoAdapter = createEntityAdapter<GameInfo>();
