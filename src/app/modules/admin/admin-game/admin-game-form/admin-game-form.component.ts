@@ -12,6 +12,9 @@ import * as fromGameInfo from 'src/app/store/reducers/game-info.reducer';
 import * as gameInfoSelectors from 'src/app/store/selectors/game-info.selector';
 
 
+import { v4 } from 'uuid';
+
+
 
 // import { filter, map } from 'rxjs/operators';
 
@@ -45,31 +48,27 @@ export class AdminGameFormComponent implements OnInit {
 		this.game_creators$ =  this.gameInfoStore.select(getFamily("creator"))
 		this.game_platforms$ =  this.gameInfoStore.select(getFamily("platform"))
 
-		// console.log(this.game_categories$)
-		// this.game_categories$.subscribe(res => {
-		// 	console.log(res)
-		// })
-
-
-
-
-		// console.log(this.gameInfo$)
-		// this.id = this.route.snapshot.paramMap.get('id');
+		this.id = this.route.snapshot.paramMap.get('id');
 		
-		// if (this.id)
-		// 	console.log(this.id)							
+		if (this.id)
+			// then select the game in question from store and preload form data with game.
+			console.log(this.id)							
 	}
 
 	save(game) {
-		this.gameStore.dispatch(gameActions.createGame(game))			
-			// if(this.id) this.gameService.update(this.id, game);
-			// else this.gameService.create(game);
-			// this.router.navigate(['/admin/game']);
-	}
+			if(this.id)
+				console.log("then we are going to update an existing game");
+				// this.gameService.update(this.id, game);
+			else {
+				this.gameStore.dispatch(gameActions.createGame({ id : v4(), ...game}));	
+				this.router.navigate(['/admin/game']);	
+			}
+
+		}
 
 	delete() {
 			if (!confirm('Are you sure that you want to delete this game?')) return;
-			
+			console.log("then we are going to delete a game");			
 			// this.gameService.delete(this.id);
 			this.router.navigate(['/admin/game']);
 	}

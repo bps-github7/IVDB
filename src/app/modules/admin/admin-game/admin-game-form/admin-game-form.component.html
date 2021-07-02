@@ -1,12 +1,7 @@
 <!-- note: we should do this with a dialog instead! -->
 <div class="row">
 	<h3>admin's game form: create, edit or delete a game</h3>
-
-	<h4>For testing:</h4>
-	<div *ngFor="let g of gameInfo$ | async">
-		<p>{{g.title}}</p>
-
-	</div>
+	<p>We are going to have to remake this form reactively and using a dialog box</p>
 	<div class="col-md-6">       
 		<form #finished="ngForm" (ngSubmit)="save(finished.value)">
 					<div class="form-group">
