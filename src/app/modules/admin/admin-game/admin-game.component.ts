@@ -12,10 +12,10 @@ import * as fromGame from '../../../store/reducers/game.reducer';
   templateUrl: './admin-game.component.html',
   styleUrls: ['./admin-game.component.sass']
 })
-export class AdminGameComponent implements OnInit, OnDestroy {
+export class AdminGameComponent implements OnInit {
 	games: Game [];
 	games$ : Observable<any>;
-	filteredGames: any[];
+	filteredGames$: Observable<any>;
 	subscription: Subscription;
 
 	constructor(private store : Store<fromGame.State>) {
@@ -26,16 +26,15 @@ export class AdminGameComponent implements OnInit, OnDestroy {
 		this.store.dispatch( actions.readGames() );
 	}
 
-	ngOnDestroy(): void {
-		// this.subscription.unsubscribe();
+
+
+	filter(query: string) {
+			this.filteredGames$ = (query) ?
+					// should be a selector which gets a title that matches a substring
+					// this.store.pipe(select(selectByTitleSubstring(query)))
+					this.games$:
+					this.games$;
+			console.log(query);
 	}
-
-
-	// filter(query: string) {
-	// 		this.filteredGames = (query) ?
-	// 				this.games.filter(p => p.title.toLowerCase().includes(query.toLowerCase())) :
-	// 				this.games;
-	// 		console.log(query);
-	// }
 
 }

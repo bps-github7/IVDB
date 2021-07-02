@@ -2,14 +2,15 @@
 <p>
     <a class="btn btn-primary" routerLink="/admin/game/new">Add New Game</a>
 </p>
+<!-- put a tab jawn here to toggle thru games and game-info -->
+
 <p>
-	get this filter feature working later!
-    <!-- <input
-        #query
-        (keyup)="filter(query.value)" 
-        type="text" 
-        class="form-control" 
-        placeholder="Search..."> -->
+	<input
+		#query
+		(keyup)="filter(query.value)" 
+		type="text" 
+		class="form-control" 
+		placeholder="Search...">
 </p>
 <table class="table">
     <thead>
@@ -20,8 +21,8 @@
         </tr>
     </thead>
     <tbody>
-        <!-- <tr *ngFor="let g of filteredGames"> -->
-				<tr *ngFor="let g of games$ | async">
+        <tr *ngFor="let g of filteredGames$ | async">
+				<!-- <tr *ngFor="let g of games$ | async"> -->
             <td>{{ g?.title }}</td>
             <td>{{ g?.price }}</td>
             <td><a [routerLink]="['new/', g?.id]">edit</a></td>

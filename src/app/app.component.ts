@@ -1,8 +1,4 @@
 import { Component } from '@angular/core';
-import { Store } from '@ngrx/store';
-import { Observable } from 'rxjs';
-import { Post } from './models/post.model';
-
 
 @Component({
   selector: 'app-root',
