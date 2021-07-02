@@ -1,8 +1,9 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { Store } from '@ngrx/store';
+import { select, Store } from '@ngrx/store';
 // import { GameService } from '../../services/game.service';
 import { Subscription, Observable } from 'rxjs';
 import { Game } from 'src/app/models/content/Game';
+import { selectByTitleSubstring } from 'src/app/store/selectors/game.selector';
 import * as actions from '../../../store/actions/game.actions';
 import * as fromGame from '../../../store/reducers/game.reducer';
 // import { v4 } from 'uuid';
@@ -22,7 +23,7 @@ export class AdminGameComponent implements OnInit {
 	}
 
 	ngOnInit(): void {
-		this.games$ =  this.store.select(fromGame.selectAll)
+		this.filteredGames$ = this.games$ =  this.store.select(fromGame.selectAll)
 		this.store.dispatch( actions.readGames() );
 	}
 
@@ -31,8 +32,7 @@ export class AdminGameComponent implements OnInit {
 	filter(query: string) {
 			this.filteredGames$ = (query) ?
 					// should be a selector which gets a title that matches a substring
-					// this.store.pipe(select(selectByTitleSubstring(query)))
-					this.games$:
+					this.store.pipe(select(selectByTitleSubstring(query))) :
 					this.games$;
 			console.log(query);
 	}
