@@ -1,6 +1,6 @@
 <h1>Site Content Dashboard</h1>
 <!-- todo: learn about show and hide APIs -->
-<mat-button-toggle-group (change)="chosen - $event.value">
+<mat-button-toggle-group (change)="chosen = $event.value">
 	<mat-button-toggle value="all">all site content</mat-button-toggle>
 	<mat-button-toggle value="content">content</mat-button-toggle>
 	<mat-button-toggle value="contrib">contribution</mat-button-toggle>
@@ -11,3 +11,14 @@
 <!-- contrib list component -->
 
 <!-- content list component -->
+<ul class="list-group" *ngIf="chosen === 'content'">
+	<!-- this is gonna be messy- not sure if that syntax will work -->
+	<admin-content-manager 
+		*ngFor="let opt of options"
+		[contentType]="opt"
+		[build]="builds[opt]"
+		[form]="forms[opt]"
+		[content$]="getStoreSlice(opt)">
+
+	</admin-content-manager>
+</ul>
