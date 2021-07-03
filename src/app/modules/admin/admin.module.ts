@@ -13,6 +13,7 @@ import { SharedModule } from '../shared/shared.module';
 import { AdminGameFormComponent } from './admin-game/admin-game-form/admin-game-form.component';
 import { AdminGameTableComponent } from './admin-game/admin-game-table/admin-game-table.component';
 import { AdminGameInfoComponent } from './admin-game/admin-game-info/admin-game-info.component';
+import { AdminContentManagerComponent } from './admin-content/admin-content-manager/admin-content-manager.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { AdminGameInfoComponent } from './admin-game/admin-game-info/admin-game-
 		AdminDashboardComponent,
 		AdminGameFormComponent,
   AdminGameTableComponent,
-  AdminGameInfoComponent
+  AdminGameInfoComponent,
+  AdminContentManagerComponent,
 	],
   imports: [
 		// StoreModule.forFeature('a', reducers),

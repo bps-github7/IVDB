@@ -14,7 +14,13 @@ import * as fromGame from '../../../store/reducers/game.reducer';
   styleUrls: ['./admin-game.component.sass']
 })
 export class AdminGameComponent implements OnInit {
+	
+	selected : string = "game";
+	options : string [] = ["game", "game-info"];	
+
+
 	games: Game [];
+
 	games$ : Observable<any>;
 	filteredGames$: Observable<any>;
 	subscription: Subscription;
