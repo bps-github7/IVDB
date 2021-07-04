@@ -23,9 +23,9 @@
 		*ngFor="let c of contents"
 		[contentType]="c.title"
 		[content$]="c.content"
-		(createContentEvent$)="openDialog('CREATE')"
-		(updateContentEvent$)="openDialog('UPDATE', $event)"
-		(deleteContentEvent$)="openDialog('DELETE', $event)">
+		(createContentEvent$)="openDialog('CREATE', c.title)"
+		(updateContentEvent$)="openDialog('UPDATE', c.title, $event)"
+		(deleteContentEvent$)="openDialog('DELETE', c.title, $event)">
 	</admin-content-manager>
 	<!-- <div *ngFor="let c of contents">
 

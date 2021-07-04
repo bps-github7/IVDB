@@ -25,7 +25,7 @@ export class AdminContentManagerComponent implements OnInit {
 
 	@Output() createContentEvent$ = new EventEmitter();
 	@Output() updateContentEvent$ = new EventEmitter<{id : string, body : Partial<Content>}>();
-	@Output() deleteContentEvent$ = new EventEmitter<string>();
+	@Output() deleteContentEvent$ = new EventEmitter<{id : string}>();
 
   constructor() { }
 
@@ -43,7 +43,7 @@ export class AdminContentManagerComponent implements OnInit {
 	}
 
 	deleteContent(id : string) {
-		this.deleteContentEvent$.emit(id);
+		this.deleteContentEvent$.emit({id});
 	}
 
 

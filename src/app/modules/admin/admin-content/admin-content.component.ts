@@ -21,11 +21,6 @@ export class AdminContentComponent implements OnInit {
 	contrib: ratings, reviews, comments, posts, suggestions
 	*/
 
-	// The configs we need to build dialogs dynamically. These will change over time but are identical as this is a build mode prototype
-
-
-	// todo: conflicted about how to deal with these. I was tempted to put them in the dialogComponent, 
-	// but in order for it to stay reusable, it should accept these via input props.
 	builds = {
 		news : {
 			title : {
@@ -269,7 +264,7 @@ export class AdminContentComponent implements OnInit {
 		];
 	}
 
-	openDialog(actionType : string, updateObject? : { id : string, body?: Partial<Content> }) {
+	openDialog(actionType : string, contentType : string, updateObject? : { id : string, body?: Partial<Content> }) {
 		switch(actionType) {
 			case "CREATE":
 				console.log("going to create a new piece of content");
@@ -284,12 +279,14 @@ export class AdminContentComponent implements OnInit {
 		}
 		const config = new MatDialogConfig();
 		config.disableClose = true;
-		config.autoFocus = true;
+		config.autoFocus = false;
 		config.height = '1600px';
 		config.width = `1200px`;
 		// would be better if open dialog knew these instructions. the class doesnt need them.
 		config.data = {
 			actionType,
+			buildInfo : this.builds[contentType],
+			form : this.forms[contentType],
 			updateObject : (updateObject ? updateObject : null)
 		};
 
