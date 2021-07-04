@@ -7,8 +7,13 @@
 </mat-button-toggle-group>
 
 <!-- all site content component -->
-
+<div *ngIf="chosen === 'all'">
+	All site content
+</div>
 <!-- contrib list component -->
+<div *ngIf="chosen === 'contrib'">
+	all user contributions
+</div>
 
 <!-- content list component -->
 <ul class="list-group" *ngIf="chosen === 'content'">
@@ -21,4 +26,30 @@
 		[form]="c.form"
 		[content$]="c.content">
 	</admin-content-manager>
+	<!-- <div *ngFor="let c of contents">
+
+
+		<h3>build :</h3>
+		<p>
+			{{c.build | json }}
+		</p>
+
+		<h3>form:</h3>
+		<p>
+			{{ c.build | json }}
+		</p>
+
+
+		<h3>
+			store slice when selecting for family {{c.title}}:
+		</h3>		
+		<div *ngFor="let content of (c.content | async)">
+			content title : {{ content.title}}
+			content description : {{ content.description }}
+			content body : {{ content.body }}
+			content family : {{ content.family }}
+		</div>
+	</div>
+ -->
+
 </ul>

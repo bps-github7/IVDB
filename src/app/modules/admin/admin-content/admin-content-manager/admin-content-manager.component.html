@@ -47,8 +47,8 @@
 
 
 
-		<tr mat-header-row *matHeaderRowDef="config"></tr>
-		<tr mat-row *matRowDef="let row; columns: config;"></tr>
+		<tr mat-header-row *matHeaderRowDef="config.displayedColumns"></tr>
+		<tr mat-row *matRowDef="let row; columns: config.displayedColumns;"></tr>
 	</table> <br>
 
 	<a *ngIf="show" routerLink="admin/site/news/all">
