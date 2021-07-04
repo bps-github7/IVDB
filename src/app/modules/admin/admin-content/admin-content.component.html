@@ -22,9 +22,10 @@
 	<admin-content-manager 
 		*ngFor="let c of contents"
 		[contentType]="c.title"
-		[build]="c.build"
-		[form]="c.form"
-		[content$]="c.content">
+		[content$]="c.content"
+		(createContentEvent$)="openDialog('CREATE')"
+		(updateContentEvent$)="openDialog('UPDATE', $event)"
+		(deleteContentEvent$)="openDialog('DELETE', $event)">
 	</admin-content-manager>
 	<!-- <div *ngFor="let c of contents">
 

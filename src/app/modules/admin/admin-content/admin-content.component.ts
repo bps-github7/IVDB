@@ -5,6 +5,8 @@ import { Content } from 'src/app/models/content/content.model';
 import * as fromContent from 'src/app/store/reducers/content.reducer';
 import * as contentActions from 'src/app/store/actions/content.actions';
 import { getFamily } from 'src/app/store/selectors/content.selector';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
+import { DialogComponent } from '../../shared/components/dialog/dialog.component';
 
 @Component({
   selector: 'app-admin-content',
@@ -20,6 +22,10 @@ export class AdminContentComponent implements OnInit {
 	*/
 
 	// The configs we need to build dialogs dynamically. These will change over time but are identical as this is a build mode prototype
+
+
+	// todo: conflicted about how to deal with these. I was tempted to put them in the dialogComponent, 
+	// but in order for it to stay reusable, it should accept these via input props.
 	builds = {
 		news : {
 			title : {
@@ -224,7 +230,10 @@ export class AdminContentComponent implements OnInit {
 	chosen : any;
 	doc : any;
 
-	constructor(private store : Store<fromContent.State>) { }
+	constructor(
+		private store : Store<fromContent.State>,
+		private dialog : MatDialog
+		) { }
 
   ngOnInit(): void {
 		this.store.dispatch( contentActions.readContent() )
@@ -239,34 +248,64 @@ export class AdminContentComponent implements OnInit {
 		this.contents = [
 			{
 				title : "news", 
-				content : this.news$,
-				build : this.builds["news"],
-				form : this.forms["news"]
+				content : this.news$,	
 			},
 			{
 				title : "streams", 
 				content : this.streams$,
-				build : this.builds["stream"],
-				form : this.forms["stream"]
 			},
 			{
 				title : "watchlists", 
 				content : this.watchlists$,
-				build : this.builds["watchlist"],
-				form : this.forms["watchlist"]
 			},
 			{
 				title : "reviews", 
 				content : this.reviews$,
-				build : this.builds["review"],
-				form : this.forms["review"]
 			},
 			{
 				title : "groups", 
 				content : this.groups$,
-				build : this.builds["group"],
-				form : this.forms["group"]
 			}
 		];
 	}
+
+	openDialog(actionType : string, updateObject? : { id : string, body?: Partial<Content> }) {
+		switch(actionType) {
+			case "CREATE":
+				console.log("going to create a new piece of content");
+				break;
+			case "UPDATE":
+				console.log(`going to update document with id == ${updateObject.id}`);
+				console.log(updateObject.body)
+				break;
+			case "DELETE":
+				console.log(`going to delete doc with id == ${updateObject.id}`);
+				break;
+		}
+		const config = new MatDialogConfig();
+		config.disableClose = true;
+		config.autoFocus = true;
+		config.height = '1600px';
+		config.width = `1200px`;
+		// would be better if open dialog knew these instructions. the class doesnt need them.
+		config.data = {
+			actionType,
+			updateObject : (updateObject ? updateObject : null)
+		};
+
+		this.dialog.open(DialogComponent, config)
+		.afterClosed()
+		.subscribe(result => {
+			if(result.uid) {
+				// this.contentService.edit(result.);
+				console.log("then we update")
+			}
+			else {
+				console.log("then we create")
+				// this.contentService.create(result);
+			}
+		})
+	}
+
+	
 }

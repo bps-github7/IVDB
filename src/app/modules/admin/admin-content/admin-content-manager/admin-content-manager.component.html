@@ -1,9 +1,9 @@
 <li class="list-group-item">
-	<h3>{{ contentType }}</h3>
+	<h3>{{ contentType | titlecase }}</h3>
 	<!-- bring up a dialog box instead of traveling to a new route! -->
 	<button
 			mat-raised-button
-			(click)="openDialog(contentType)">
+			(click)="createContent()">
 			Add news
 	</button><br>
 	Show recent news<mat-slide-toggle (change)="show = !show"></mat-slide-toggle>
@@ -27,10 +27,9 @@
 			<th mat-header-cell *matHeaderCellDef> </th>
 			<td mat-cell *matCellDef="let row">
 				<button 
-					(click)="openDialog('row', row)"
+					(click)="updateContent(row.id, row)"
 					mat-stroked-button>Edit
 				</button>  
-
 			</td>
 		</ng-container>
 
@@ -39,7 +38,7 @@
 			<th mat-header-cell *matHeaderCellDef> </th>
 			<td mat-cell *matCellDef="let row">
 				<button 
-					(click)="delete(row.uid)"
+					(click)="deleteContent(row.id)"
 					mat-stroked-button>Delete
 				</button>
 			</td>

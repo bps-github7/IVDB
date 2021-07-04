@@ -1,7 +1,8 @@
 import { Observable } from 'rxjs/Observable';
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { DialogComponent } from 'src/app/modules/shared/components/dialog/dialog.component';
+import { Content } from 'src/app/models/content/content.model';
 
 @Component({
   selector: 'admin-content-manager',
@@ -9,7 +10,6 @@ import { DialogComponent } from 'src/app/modules/shared/components/dialog/dialog
   styleUrls: ['./admin-content-manager.component.sass']
 })
 export class AdminContentManagerComponent implements OnInit {
-
 
 	/* 
 	admin-content-manager: a dumb component which takes a slice 
@@ -23,46 +23,28 @@ export class AdminContentManagerComponent implements OnInit {
 	@Input() content$ : Observable<any>;
 	config : any; 
 
-  constructor(private dialog : MatDialog) { }
+	@Output() createContentEvent$ = new EventEmitter();
+	@Output() updateContentEvent$ = new EventEmitter<{id : string, body : Partial<Content>}>();
+	@Output() deleteContentEvent$ = new EventEmitter<string>();
+
+  constructor() { }
 
   ngOnInit(): void {
 		this.config =  { title : `recently posted ${this.contentType}`, displayedColumns : ["title", "edit", "delete"], type: this.contentType }
 	}
 
-  openDialog(type : string, updateObject?: any) {
-		// const config = new MatDialogConfig();
-		console.log("opening up a dialog of tyope", type, "and update object")
-		console.log(updateObject)	
-		// // some configurations for the dialog
-		// config.disableClose = true;
-		// config.autoFocus = true;
-		// config.height = '1600px';
-		// config.width = `1200px`;
-		// // would be better if open dialog knew these instructions. the class doesnt need them.
-		// config.data = {
-		// 	type,
-		// 	initialState: this.form,
-		// 	buildInfo : this.build,    
-		// 	updateObject : (updateObject ? updateObject : null)
-		// };
-
-		// this.dialog.open(DialogComponent, config)
-		// .afterClosed()
-		// .subscribe(result => {
-		// 	if(result.uid) {
-		// 		// you should just make the dialog component more mindful of what kinda stuff it returns!
-		// 		// this.contentService.edit(result.);
-		// 		console.log("then we update")
-		// 	}
-		// 	else {
-		// 		console.log("then we create")
-		// 		// this.contentService.create(result);
-		// 	}
-		// })
+	createContent() {
+		this.createContentEvent$.emit();
 	}
 
-	delete(content :  string) {
-		console.log("delete a jawn")
+	updateContent(id : string, existingItem) {
+		// ** * yes this looks odd but it out of respect to the store.dispatch( updateAction ) interface
+		this.updateContentEvent$.emit({id, body: existingItem});
 	}
+
+	deleteContent(id : string) {
+		this.deleteContentEvent$.emit(id);
+	}
+
 
 }
