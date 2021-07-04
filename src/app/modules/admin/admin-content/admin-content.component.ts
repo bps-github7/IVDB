@@ -1,8 +1,10 @@
+import { Observable } from 'rxjs/Observable';
 import { Component, OnInit } from '@angular/core';
 import { select, Store } from '@ngrx/store';
 import { Content } from 'src/app/models/content/content.model';
-import * as fromContent from 'src/app/store/reducers/content.reducer'
-import { getFamily } from 'src/app/store/selectors/content.selector'
+import * as fromContent from 'src/app/store/reducers/content.reducer';
+import * as contentActions from 'src/app/store/actions/content.actions';
+import { getFamily } from 'src/app/store/selectors/content.selector';
 
 @Component({
   selector: 'app-admin-content',
@@ -16,15 +18,6 @@ export class AdminContentComponent implements OnInit {
 	content: news, streams, recently-posted, watchlists
 	contrib: ratings, reviews, comments, posts, suggestions
 	*/
-
-
-	displayedColumns: string[] = ['title', 'edit', 'delete'];
-
-	tableConfig = {
-		newsConfig : {title : "Recently Uploaded Streams", displayedColumns : this.displayedColumns, type : "news"},
-		streamConfig : {title : "Recently Uploaded Streams", displayedColumns : this.displayedColumns, type : "stream"},
-		watchlistConfig : {title : "Recently Uploaded Streams", displayedColumns : this.displayedColumns, type : "watchlist"}	
-	}
 
 	// The configs we need to build dialogs dynamically. These will change over time but are identical as this is a build mode prototype
 	builds = {
@@ -120,6 +113,68 @@ export class AdminContentComponent implements OnInit {
 					placeholder : "add tags for this watchlist"
 				}
 			}
+		},
+		review : {
+			title : {
+				type : "text",
+				formControlName : "title",
+				config : {
+					placeholder : "enter a title for this review"
+				}
+			},
+			description : {
+				type : "textarea",
+				formControlName : "description",
+				config : {
+					placeholder : "enter a short description for this review"
+				}
+			},
+			body : {
+				type : "textarea",
+				formControlName : "body",
+				config : {
+					placeholder : "enter the body for this review"
+				}
+			},
+			tags : {
+				type : "multiple select",
+				formControlName : "tags",
+				options : ["games", "recent release", "aniversery"],
+				config : {
+					placeholder : "add tags for this watchlist"
+				}
+			}
+		},
+		group : {
+			title : {
+				type : "text",
+				formControlName : "title",
+				config : {
+					placeholder : "enter a title for this group"
+				}
+			},
+			description : {
+				type : "textarea",
+				formControlName : "description",
+				config : {
+					placeholder : "enter a short description for this group"
+				}
+			},
+			body : {
+				type : "textarea",
+				formControlName : "body",
+				config : {
+					placeholder : "enter the body for this group"
+				}
+			},
+			tags : {
+				type : "multiple select",
+				formControlName : "tags",
+				options : ["games", "recent release", "aniversery"],
+				config : {
+					placeholder : "add tags for this watchlist"
+				}
+			}
 		}
 	}
 	forms = {
@@ -141,46 +196,77 @@ export class AdminContentComponent implements OnInit {
 			description : [""],
 			body : [""],
 			tags : [""],	      
+		},
+		review : {
+			title : [""],
+			description : [""],
+			body : [""],
+			tags : [""],	      
+		},
+		group : {
+			title : [""],
+			description : [""],
+			body : [""],
+			tags : [""],	      
 		}
 	}
 
 
 
+	news$ : Observable<any>;
+	streams$ : Observable<any>;
+	watchlists$ : Observable<any>;
+	reviews$ : Observable<any>;
+	groups$ : Observable<any>;
 
-	news$ : Content [];
-	streams$ : Content [];
-	watchlists$ : Content [];
-	officialReviews$ : Content [];
 
+	contents : any []
 	chosen : any;
 	doc : any;
-
-	// options = ["news","streams","watchlists","reviews"];
-	options = ["news", "streams", "watchlists"]
 
 	constructor(private store : Store<fromContent.State>) { }
 
   ngOnInit(): void {
-  }
+		this.store.dispatch( contentActions.readContent() )
 
-
-	getStoreSlice(type) {
-		switch (type) {
-			case "news" :
-				console.log("then we get news")
-				return this.store.pipe(select(getFamily("news")))
-			case "stream" :
-				console.log("then we get streams")
-				return this.store.pipe(select(getFamily("stream")))
-			case "watchlist" :
-				console.log("then we get watchlists")
-				return this.store.pipe(select(getFamily("watchlist")))
-			case "review" :
-				console.log("then we get review")
-				return this.store.pipe(select(getFamily("review")))
-			case "group" :
-				console.log("then we get groups")
-				return this.store.pipe(select(getFamily("review")))
-		}
+		// get all content by category
+		this.news$ = this.store.pipe(select(getFamily("news")));
+		this.streams$ = this.store.pipe(select(getFamily("stream")))
+		this.watchlists$ = this.store.pipe(select(getFamily("watchlist")))	
+		this.reviews$ = this.store.pipe(select(getFamily("review")))
+		this.groups$ = this.store.pipe(select(getFamily("group")))
+		
+		this.contents = [
+			{
+				title : "news", 
+				content : this.news$,
+				build : this.builds["news"],
+				form : this.forms["news"]
+			},
+			{
+				title : "streams", 
+				content : this.streams$,
+				build : this.builds["stream"],
+				form : this.forms["stream"]
+			},
+			{
+				title : "watchlists", 
+				content : this.watchlists$,
+				build : this.builds["watchlist"],
+				form : this.forms["watchlist"]
+			},
+			{
+				title : "reviews", 
+				content : this.reviews$,
+				build : this.builds["review"],
+				form : this.forms["review"]
+			},
+			{
+				title : "groups", 
+				content : this.groups$,
+				build : this.builds["group"],
+				form : this.forms["group"]
+			}
+		];
 	}
 }

@@ -12,13 +12,13 @@
 
 <!-- content list component -->
 <ul class="list-group" *ngIf="chosen === 'content'">
-	<!-- this is gonna be messy- not sure if that syntax will work -->
+	<!-- build and form wont work because the key is 
+	"stream" & "watchlist", whereas here you are passing in their plurals -->
 	<admin-content-manager 
-		*ngFor="let opt of options"
-		[contentType]="opt"
-		[build]="builds[opt]"
-		[form]="forms[opt]"
-		[content$]="getStoreSlice(opt)">
-
+		*ngFor="let c of contents"
+		[contentType]="c.title"
+		[build]="c.build"
+		[form]="c.form"
+		[content$]="c.content">
 	</admin-content-manager>
 </ul>

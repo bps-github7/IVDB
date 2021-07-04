@@ -30,37 +30,38 @@ export class AdminContentManagerComponent implements OnInit {
 	}
 
   openDialog(type : string, updateObject?: any) {
-		const config = new MatDialogConfig();
-		
-		// some configurations for the dialog
-		config.disableClose = true;
-		config.autoFocus = true;
-		config.height = '1600px';
-		config.width = `1200px`;
-		// would be better if open dialog knew these instructions. the class doesnt need them.
-		config.data = {
-			type,
-			initialState: this.form,
-			buildInfo : this.build,    
-			updateObject : (updateObject ? updateObject : null)
-		};
+		// const config = new MatDialogConfig();
+		console.log("opening up a dialog of tyope", type, "and update object")
+		console.log(updateObject)	
+		// // some configurations for the dialog
+		// config.disableClose = true;
+		// config.autoFocus = true;
+		// config.height = '1600px';
+		// config.width = `1200px`;
+		// // would be better if open dialog knew these instructions. the class doesnt need them.
+		// config.data = {
+		// 	type,
+		// 	initialState: this.form,
+		// 	buildInfo : this.build,    
+		// 	updateObject : (updateObject ? updateObject : null)
+		// };
 
-		this.dialog.open(DialogComponent, config)
-		.afterClosed()
-		.subscribe(result => {
-			if(result.uid) {
-				// you should just make the dialog component more mindful of what kinda stuff it returns!
-				// this.contentService.edit(result.);
-				console.log("then we update")
-			}
-			else {
-				console.log("then we create")
-				// this.contentService.create(result);
-			}
-		})
+		// this.dialog.open(DialogComponent, config)
+		// .afterClosed()
+		// .subscribe(result => {
+		// 	if(result.uid) {
+		// 		// you should just make the dialog component more mindful of what kinda stuff it returns!
+		// 		// this.contentService.edit(result.);
+		// 		console.log("then we update")
+		// 	}
+		// 	else {
+		// 		console.log("then we create")
+		// 		// this.contentService.create(result);
+		// 	}
+		// })
 	}
 
-	deleteNews(news :  string) {
+	delete(content :  string) {
 		console.log("delete a jawn")
 	}
 
