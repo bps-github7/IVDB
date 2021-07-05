@@ -98,13 +98,114 @@ This is roughly based around the feature modules which the app.module employs/ r
 -app.module
 -
 ```
-put here a decription of the sub components of each feature module
-You might consider listing the sub routes for each feature component
+feature modules and their sub route/ components are elaborated below
+## Games: 
+you can browse games and learn more about game-info (how IVDB categorizes games)
+```
+./     			// base component - welcome page for game.component
 
--games: the top level component lists all the games in the database, which can be browsed and clicked on to learn more
-  - game-info: you can learn more about how IVDB categorizes games, by browsing game info (see definition below)
+./all       // games.browse - view a select amount of games, supports filtering and pagination, with view of gameCover, title, price, quick link to buy/rate/review
+
+./:uid      // games.view - when you click on a game from browse, shows more info like description, game-info, pictures of game play and a comment section
+
+./info      // games.info - widget with tabs, to learn about game-info by type, as well as our defintions for different game info categories
+//lets avoid making routes more complicated than this
+```
+## Forum:
+Access to IVDB forum, at highest level view- ie showing all forum families and a list of the current/active threads in them. in addition shows moderator / admin list, rules, top posters and links to games being discussed currently in a thread
+```
+./					// base component- welcome page for forum.component
+./forum/:id
+./forum/:forum_id/thread/:thread_id
+```
+ I need to review and possibly revise uml and models for forum. this is a 'nice-to-have' feature, dont prioritize its design and development till all other stuff is taken care of.
+
+## Content:
+Official content of IVDB includes news, streams (streaming-broadcasts and info), watchlists, official reviews and groups. Its posted on the homepage, typically tied to a game or other category related to gaming, and can be commented on and favorited by users
+```
+./
+./all
+./all/family=[:family]
+./:uid
+```
+
+## Contrib (contributing):
+Supports user contribution to the site, a portal through which users will rate, review, and otherwise interact with site, and have dashboards for organizing and managing their past contributions. 
+
+In the beta version of this site, contributution data will be fed to machine learning functions which build a hidden profile on the user in question and allow us to make reccomendations about games and content they will like or wont like, prioritizing and customizing their feed.
+
+- total avenues for user contribution to IVDB:
+- rate a game
+- review a game
+- comment on a game, or piece of content
+- comment on another users profile or review
+- favorite a piece of content
+- react to a piece of content: like, dislike, laugh (emoji support like modern social media platform)
+- share a piece of content
+- create a thread
+- post in a thread
+- reply to a comment
+- suggest a feature or game - users should be able to provide feedback and feature requests, both through the forum (help and support threads), or suggestion form component
+```
+//contrib can be rerouted from user module, in case the user is examining their profile and wants to view past contributions:
+
+user/contrib -> ./:username/own
+
+./					                 //information and guidelines on contributing to IVDB / and a jumpuing off point where user can choose a option of how they want to contribte
+
+./rate                       //browse all recent ratings added to site
+
+./rate/game=[:uid]					 //see reviews submitted to a paticular game, submit your own
+
+./rate/user=[:uid]					 //see the reviews submitted by a paticular user
+
+// review follows this same route structure
+
+./suggest                     // provide a suggestion to the site
+```
+
+many smaller components (comment section, favorite, react) are disperased throughout the site, and ultimately, it may make sense to make the above routes 
+subroutes of the user and game modules ie.
+
+ ```games/:uid/<rate/review>``` to see game ratings
+ 
+  ```user/contrib/review``` to see all contributions by a certain user.
 
 
+Then the smaller components can be added to shared module so you can simply add a comment to a game by viewing that game in the games module
+
+In this case, contrib is more a design class then implemenation. 
+
+There can, for example, be a ```action/reducer/selector/effect``` chain for contribs, without there
+nescesarily being a module and sub route tree for contributions 
+
+## Admin
+Create,Read,Update and Delete hub for admin users to administer the site
+```
+./                      // an overview of site activity and quick link portal to edit different areas of the site. maybe a dashboard that integrates the two
+
+./games                 // tab select games or game info to create, update or delete entities from these areas
+
+./content               // create, read, update, delete content by family/type
+
+./users                 // view all users of the site, and their contributions, review threads, comments that are flagged, make decisions about banning certain users
+
+./forum                 // administer forums, recruit, screen/train and assign moderators to threads. move or delete a paticular thread.
+```
+
+## User
+a module for authenticated users to create profile, provide preference data and manage their contributions to the site. users authenticated and non authenticated can use the user module to view other user profiles and contributions (in cases where they arent blocked user or private profiles) 
+```
+./ 							// informs of user features of IVDB, for authenticated users serves as a portal to navigate - profiles they follow, recent contrib by them or others
+./profile/own   // view your profile
+./profile/edit  // create, update, delete a profile assigned to the auth user
+./profile/:uid  // view a different user profile page
+./profile/all   // browse profiles of users of IVDB
+./preferences   // view your prefernce data and how IVDB processes it (ie show the logic of how liking game A and game B means we think you will like game C)
+./prefernces/edit   //provide prefernce data via one of two means ([#16](https://github.com/bps-github7/IVDB/issues/16))
+./contrib       // view your past contributions, manage them
+./contrib/:uid  // view a contribution, such as a review, and posibly react to it (like, favorite, dislike, share, ...etc)
+```
 
 # Connective-tissue
 ## a quick rundown on the vocabulary employed throughout the IVDB:
