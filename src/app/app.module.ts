@@ -28,7 +28,8 @@ import { AngularFireModule } from '@angular/fire';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 // import { AngularFireDatabase } from '@angular/fire/database';
 import { environment } from 'src/environments/environment';
-import { ContentEffects } from 'src/app/store/effects/content.effects';
+// our custom service for getting server timestamps
+import { FirebaseService } from './services/firebase.service';
 
 
 @NgModule({
@@ -62,7 +63,9 @@ import { ContentEffects } from 'src/app/store/effects/content.effects';
 		StoreDevtoolsModule.instrument({maxAge: 25}),
 		EffectsModule.forRoot([])
 	],
-  providers: [],
+  providers: [
+		FirebaseService
+	],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

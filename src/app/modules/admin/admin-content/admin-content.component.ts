@@ -1,3 +1,4 @@
+
 import { Observable } from 'rxjs/Observable';
 import { Component, OnInit } from '@angular/core';
 import { select, Store } from '@ngrx/store';
@@ -7,6 +8,8 @@ import * as contentActions from 'src/app/store/actions/content.actions';
 import { getFamily } from 'src/app/store/selectors/content.selector';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { DialogComponent } from '../../shared/components/dialog/dialog.component';
+import { v4 } from 'uuid';
+import { FirebaseService } from 'src/app/services/firebase.service';
 
 @Component({
   selector: 'app-admin-content',
@@ -21,6 +24,7 @@ export class AdminContentComponent implements OnInit {
 	contrib: ratings, reviews, comments, posts, suggestions
 	*/
 
+	//provides instructions for building dialog for a paticular type of content
 	builds = {
 		news : {
 			title : {
@@ -211,23 +215,23 @@ export class AdminContentComponent implements OnInit {
 			tags : [""],	      
 		}
 	}
-
-
-
+	
+	// these are slices of the store and conglomerate array
 	news$ : Observable<any>;
 	streams$ : Observable<any>;
 	watchlists$ : Observable<any>;
 	reviews$ : Observable<any>;
 	groups$ : Observable<any>;
-
-
 	contents : any []
+	
+	
 	chosen : any;
 	doc : any;
 
 	constructor(
 		private store : Store<fromContent.State>,
-		private dialog : MatDialog
+		private dialog : MatDialog,
+		private fb : FirebaseService
 		) { }
 
   ngOnInit(): void {
@@ -240,6 +244,7 @@ export class AdminContentComponent implements OnInit {
 		this.reviews$ = this.store.pipe(select(getFamily("review")))
 		this.groups$ = this.store.pipe(select(getFamily("group")))
 		
+		//think we can write this in less lines of code
 		this.contents = [
 			{
 				title : "news", 
@@ -264,45 +269,126 @@ export class AdminContentComponent implements OnInit {
 		];
 	}
 
-	openDialog(actionType : string, contentType : string, updateObject? : { id : string, body?: Partial<Content> }) {
-		switch(actionType) {
-			case "CREATE":
-				console.log("going to create a new piece of content");
-				break;
-			case "UPDATE":
-				console.log(`going to update document with id == ${updateObject.id}`);
-				console.log(updateObject.body)
-				break;
-			case "DELETE":
-				console.log(`going to delete doc with id == ${updateObject.id}`);
-				break;
-		}
+	// openDialog(actionType : string, contentType : string, updateObject? : { id : string, body?: Partial<Content> }) {
+
+	// 	const config = new MatDialogConfig();
+	// 	config.disableClose = true;
+	// 	config.autoFocus = false;
+	// 	config.height = '1600px';
+	// 	config.width = `1200px`;
+	// 	// would be better if open dialog knew these instructions. the class doesnt need them.
+	// 	config.data = {
+	// 		actionType,
+	// 		buildInfo : this.builds[contentType],
+	// 		form : this.forms[contentType],
+	// 		updateObject : (updateObject ? updateObject : null)
+	// 	};
+	// 	switch(actionType) {
+	// 		case "CREATE":
+	// 			console.log("going to create a new piece of content");
+	// 			break;
+	// 		case "UPDATE":
+	// 			console.log(`going to update document with id == ${updateObject.id}`);
+	// 			console.log(updateObject.body)
+	// 			break;
+	// 	}
+	// 	this.dialog.open(DialogComponent, config)
+	// 	.afterClosed()
+	// 	.subscribe(result => {
+	// 		if(result.uid) {
+	// 			// this.contentService.edit(result.);
+	// 			console.log("then we update")
+	// 		}
+	// 		else {
+	// 			console.log("then we create")
+	// 			// this.contentService.create(result);
+	// 		}
+	// 	})
+	// }
+
+	createDialog(contentType : string) {
+		// remove s from end because thats incorrect for all except "news"
+		if (contentType.endsWith("s") && contentType !== "news")
+			contentType = contentType.slice(0,-1)
+
 		const config = new MatDialogConfig();
 		config.disableClose = true;
-		config.autoFocus = false;
+		config.autoFocus = true;
 		config.height = '1600px';
 		config.width = `1200px`;
-		// would be better if open dialog knew these instructions. the class doesnt need them.
+
 		config.data = {
-			actionType,
 			buildInfo : this.builds[contentType],
 			form : this.forms[contentType],
-			updateObject : (updateObject ? updateObject : null)
 		};
 
 		this.dialog.open(DialogComponent, config)
 		.afterClosed()
-		.subscribe(result => {
-			if(result.uid) {
-				// this.contentService.edit(result.);
-				console.log("then we update")
+		.subscribe((returned) => {
+			const content = { 
+				id : v4(),
+				title : returned.title,
+				description : returned.description,
+				body : returned.body,
+				metadata : {
+					createdAt : this.fb.timestamp,
+					creator : "get this from auth module when its created",
+					family : contentType,
+					tags : returned.tags
+				}		
 			}
-			else {
-				console.log("then we create")
-				// this.contentService.create(result);
-			}
+			this.store.dispatch( contentActions.createContent(content))
 		})
+		// lets put error handling here
+		// .catchError((err) => console.log("error while creating doc"))
 	}
 
+	updateDialog(contentType : string, updateObject : Partial<Content>) {
+		// console.log(`we are gonna make a update to a ${actionType} type document`);
+		// console.log("here is the existing data:");
+		// console.log(updateObject);
+		if (contentType.endsWith("s") && contentType !== "news")
+			contentType = contentType.slice(0,-1)
+
+		const config = new MatDialogConfig();
+		config.disableClose = true;
+		config.autoFocus = true;
+		config.height = '1600px';
+		config.width = `1200px`;
+
+		config.data = {
+			buildInfo : this.builds[contentType],
+			form : this.forms[contentType],
+			updateObject
+		};
+
+		this.dialog.open(DialogComponent, config)
+		.afterClosed()
+		.subscribe((returned) => {
+			const content = { 
+				id : returned.id,
+				title : returned.title,
+				description : returned.description,
+				body : returned.body,
+				metadata : {
+					createdAt : returned.metadata.createdAt,
+					updatedAt : this.fb.timestamp,
+					creator : returned.metadata.creator,
+					family : returned.metadata.family,
+					tags : returned.tags
+				}		
+			}
+			this.store.dispatch( contentActions.updateContent({id : content.id, data : content}))
+		})
+		// lets put error handling here
+
+
+	}
+
+	deleteContent(id) {
+		if(confirm("Are you sure you want to delete this piece of content?\n(warning: cannot be undone)"))
+			this.store.dispatch( contentActions.deleteContent(id))
+		return;
+	}
 	
 }

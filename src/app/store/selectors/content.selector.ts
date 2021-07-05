@@ -6,5 +6,5 @@ export const getFamily = (family: string) =>
 	createSelector(
 		fromContent.selectAll, 
 		(entities : Content[]) => {
-			return entities.filter((content : Content) => content.family === family)
+			return entities.filter((content : Content) => content?.metadata?.family === family)
 });

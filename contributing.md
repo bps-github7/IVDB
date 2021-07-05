@@ -15,7 +15,7 @@ by dispatching actions, and handle side effects (talking to external api) with e
 
 version 2.0 used angular and rxjs, so you may find lingering components which get data with service and observable subscription.
 These are fair game for refactoring, and it is good idea to check, but more than likely the case that they are not
-tightly coupled/ depended on by other parts of the site.
+tightly coupled to other parts of the site.
 
 ### Styling:
 version 3.0 uses sass (indented syntax)
@@ -125,7 +125,7 @@ please contact me immedietly and we can discuss finding a more appropriate title
   - groups: users can join a group to recieve tailored info about topic they are interested in.
  - contribution:
    - rate: user can rate game 1-5 stars
-   - review: user can provide a qualitative review of game
+   - review: user can provide a qualitative review of game. note a distinction here- admins and site owner review of games go in content, and are considered "official reviews", these are reviews displayed on homepage, users' ```contrib/reviews``` require a little bit more work to find (under ```games/:id/reviews```, or ```user/profile/contrib/reviews```)
    - comment: user can comment on a game, official site content, other users profiles
    - forum activity: user can post to threads, create new thread, apply to be mod or admin
    - suggestion: user can provide suggestions (to be reviewed by admins) about a new game to add, game info, etc

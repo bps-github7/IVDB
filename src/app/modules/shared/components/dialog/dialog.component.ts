@@ -1,3 +1,4 @@
+import { Metadata } from './../../../../models/content/metadata.model';
 // import { Metadata } from './../../../models/content/metadata';
 import { Component, Inject, Input, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder } from '@angular/forms';
@@ -11,15 +12,10 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 export class DialogComponent implements OnInit {
   buildInfo: {};
   initialState: {};
-  // returnValues : any;
-  // controls: any;
   form: FormGroup;
-	
-	// existingMetadata : any;
 
-  // type: string;
-  // docUid: string;
-
+	oldValues : any;
+	mode : string = "create";
 
   constructor(@Inject(MAT_DIALOG_DATA) data: any,
   private dialogRef : MatDialogRef<DialogComponent>,
@@ -27,35 +23,22 @@ export class DialogComponent implements OnInit {
 		if (data) {
 			this.buildInfo = Object.values(data.buildInfo);
 			this.initialState = data.form
+			if (data.updateObject) {
+				this.oldValues = data.updateObject.body;
+				this.mode = "edit";
+				this.initialState = {
+					title : [this.oldValues.title],
+					description : [this.oldValues.description],
+					body : [this.oldValues.body],
+					tags : [this.oldValues.tags]
+				}
+				// console.log(this.oldValues)
+			}
 		}
-		// // this needs to persist if we are gonna edit documents
-    // if (data.updateObject) {
-		// 	this.docUid = data.updateObject.uid;
-		// 	const old = data.updateObject;
-		// 	this.initialState = {
-		// 		title : [old.title],
-		// 		description : [old.description],
-		// 		body : [old.body],
-		// 		tags : [old.tags]
-		// 	}
-		// 	// TODO: this probably blotches everything up!
-		// 	this.existingMetadata = {
-		// 		createdAt : data.updateObject.metadata.createdAt,
-		// 		// creator : this.detectNewContributors(),
-		// 		category : data.updateObject.metadata.category,
-		// 		tags: data.updateObject.metadata.tags,
-		// 	}
-    // } 
-		// // this is the case where we are creating- makes a new form
-		// else {
-			// this.initialState = data.buildInfo;
-
-		// }
-		// this.buildInfo = Object.values(data.buildInfo.build);
 	}
 
   ngOnInit(): void { 
-    this.form = this.fb.group(this.initialState);
+		this.form = this.fb.group(this.initialState);
   }
    
 	
@@ -64,7 +47,17 @@ export class DialogComponent implements OnInit {
 			return the list of all contributors, and the form value, else
 			only return the form value.
 		*/
-		this.dialogRef.close(this.form.value)
+		if (this.mode === "edit") {
+			const returnValue = {
+				id : this.oldValues.id,
+				metadata : this.oldValues.metadata,
+				...this.form.value
+			}
+			this.dialogRef.close(returnValue)
+		}
+		else {
+			this.dialogRef.close(this.form.value)
+		}
   }
 
   reset() {

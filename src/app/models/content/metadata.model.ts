@@ -1,8 +1,7 @@
 export interface Metadata {
-	createdAt: any,
+	createdAt?: any,
 	updatedAt?: any,
 	creator: string,
-	category: string,
+	family: string,
 	tags?: string [],
-	uid? : string
 	}
