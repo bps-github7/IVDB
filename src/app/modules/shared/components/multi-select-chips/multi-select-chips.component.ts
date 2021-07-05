@@ -9,6 +9,7 @@ import { map } from 'rxjs/operators';
   <mat-chip-list multiple selectable>
     <mat-chip #c="matChip" *ngFor="let option of options" [value]="option" (click)="toggleSelection(c)">
       <mat-icon *ngIf="c.selected">check</mat-icon>
+			<span class="cdk-visually-hidden">check</span>
       {{option}}
     </mat-chip>
   </mat-chip-list>
