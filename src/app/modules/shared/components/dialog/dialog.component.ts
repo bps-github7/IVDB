@@ -30,7 +30,7 @@ export class DialogComponent implements OnInit {
 					title : [this.oldValues.title],
 					description : [this.oldValues.description],
 					body : [this.oldValues.body],
-					tags : [this.oldValues.tags]
+					tags : [this.oldValues.metadata.tags]
 				}
 				// console.log(this.oldValues)
 			}
