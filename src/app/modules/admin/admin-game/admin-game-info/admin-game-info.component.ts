@@ -63,14 +63,18 @@ export class AdminGameInfoComponent implements OnInit {
 	}
 
 	update(formValue : NgForm) {
-		this.updateEvent$.emit({
-			id : this.updateId,
-			data : {
-				title : formValue.controls['title'].value,
-				description :  formValue.controls['description'].value,
-				family : this.singularName
-			}
-		})
+		console.log(formValue.controls['title'].value)
+		console.log(formValue.controls['description'].value)
+
+		
+		// this.updateEvent$.emit({
+		// 	id : this.updateId,
+		// 	data : {
+		// 		title : formValue.controls['title'].value,
+		// 		description :  formValue.controls['description'].value,
+		// 		family : this.singularName
+		// 	}
+		// })
 		this.mode = "create";
 		this.reset(formValue);
 	}
