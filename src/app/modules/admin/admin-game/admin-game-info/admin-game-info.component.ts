@@ -24,7 +24,7 @@ export class AdminGameInfoComponent implements OnInit {
 
 	updateContent : any =  {title : "", description : ""}
 	updateId : string;
-
+	notUpdated : boolean = true;
 
 
 	showDescription : boolean = false;
@@ -62,20 +62,33 @@ export class AdminGameInfoComponent implements OnInit {
 		this.mode = 'edit'
 	}
 
-	update(formValue : NgForm) {
-		console.log(formValue.controls['title'].value)
-		console.log(formValue.controls['description'].value)
+	checkUpdate(formValue : NgForm) {
+		/* We only want to emit updateEvent if the user changed something */
+		if (this.mode === 'create') {
+			return
+		}
+		this.notUpdated = formValue.pristine ? true : false;
+		// if (formValue.pristine ) {
+		// 	this.notUpdated = true;
+		// }
+		// else {
+		// 	this.notUpdated = false
+		// }
+	}
 
-		
-		// this.updateEvent$.emit({
-		// 	id : this.updateId,
-		// 	data : {
-		// 		title : formValue.controls['title'].value,
-		// 		description :  formValue.controls['description'].value,
-		// 		family : this.singularName
-		// 	}
-		// })
+	update(formValue : NgForm) {
+		this.updateEvent$.emit({
+			id : this.updateId,
+			data : {
+				title : formValue.controls['title'].value,
+				description :  formValue.controls['description'].value,
+				family : this.singularName
+			}
+		})
 		this.mode = "create";
+		//this part is important...
+		this.updateContent =  {title : "", description : ""}
+		this.notUpdated = true;
 		this.reset(formValue);
 	}
 

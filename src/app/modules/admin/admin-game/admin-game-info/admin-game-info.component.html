@@ -4,7 +4,7 @@
 </form> -->
 
 <h3>{{this.familyName}}:</h3>
-<form #finished="ngForm" (ngSubmit)="create(finished)">
+<form #finished="ngForm" (ngSubmit)="create(finished)" (change)="checkUpdate(finished)">
 	<input 
 	[ngModel]="updateContent.title"
 	name="title"
@@ -24,6 +24,7 @@
 		primary 
 		class="btn btn-primary">Create new game Info</button>
 	<button
+		[disabled]="notUpdated"	
 		*ngIf="mode == 'edit'"  
 		primary 
 		class="btn btn-primary">Edit game Info</button>
