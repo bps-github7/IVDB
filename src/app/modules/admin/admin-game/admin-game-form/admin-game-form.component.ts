@@ -13,6 +13,8 @@ import { getFamily } from 'src/app/store/selectors/game-info.selector';
 
 import { v4 } from 'uuid';
 import { selectEntity } from 'src/app/store/selectors/game.selector';
+import { map, pluck, take } from 'rxjs/operators';
+import { Game } from 'src/app/models/content/game.model';
 
 
 
@@ -31,7 +33,7 @@ export class AdminGameFormComponent implements OnInit {
 	game_platforms$: Observable<any>;
 
 	game$ : Observable<any>;
-	game: any = {};
+	game: Game;
 	id: string;
 
 	constructor(
@@ -53,6 +55,7 @@ export class AdminGameFormComponent implements OnInit {
 		
 		if (this.id) {
 			this.game$ = this.gameStore.select(selectEntity(this.id))
+			this.game$.subscribe((response : Game) => this.game = response)
 		}
 }
 
