@@ -1,1 +1,43 @@
-<p>admin-game-info works!</p>
+<!-- <form #finished>
+	input
+
+</form> -->
+
+<h3>{{this.familyName}}:</h3>
+<form #finished="ngForm" (ngSubmit)="create(finished)">
+	<input 
+	[ngModel]="updateContent.title"
+	name="title"
+	type="text" 
+	mat-input 
+	[placeholder]="placeholder" 
+	(click)="showDescription = true"
+	><br>
+	<textarea 
+		[ngModel]="updateContent.description"
+		name="description"	
+		mat-text-area
+		*ngIf="showDescription"
+		placeholder="enter description" cols="30" rows="10"></textarea>
+	<button
+		*ngIf="mode == 'create'"  
+		primary 
+		class="btn btn-primary">Create new game Info</button>
+	<button
+		*ngIf="mode == 'edit'"  
+		primary 
+		class="btn btn-primary">Edit game Info</button>
+	<button class="btn btn-danger" (click)="reset(finished)">Reset</button>
+</form>
+
+
+<ul class="list-group">
+	<li 
+		*ngFor="let g of gameInfo$ | async"	
+		class="list-group-item"
+		(click)="setUpUpdate(g)"
+		>
+		{{ g.title }}
+		<button mat-button (click)="delete(g.id)">Delete</button>
+	</li>
+</ul>

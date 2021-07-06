@@ -1,4 +1,3 @@
-import { getFamily } from './../../../../store/selectors/game-info.selector';
 import { Observable } from 'rxjs';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -9,7 +8,7 @@ import * as gameActions from 'src/app/store/actions/game.actions';
 import * as fromGame from 'src/app/store/reducers/game.reducer';
 import * as gameInfoActions from 'src/app/store/actions/game-info.actions'; 
 import * as fromGameInfo from 'src/app/store/reducers/game-info.reducer';
-import * as gameInfoSelectors from 'src/app/store/selectors/game-info.selector';
+import { getFamily } from 'src/app/store/selectors/game-info.selector';
 
 
 import { v4 } from 'uuid';

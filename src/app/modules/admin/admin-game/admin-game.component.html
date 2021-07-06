@@ -1,32 +1,52 @@
 <h2>Game and Game-info dashboard:</h2>
-<p>
-    <a class="btn btn-primary" routerLink="/admin/game/new">Add New Game</a>
-</p>
-<!-- put a tab jawn here to toggle thru games and game-info -->
 
-<p>
-	<input
-		#query
-		(keyup)="filter(query.value)" 
-		type="text" 
-		class="form-control" 
-		placeholder="Search...">
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>Title</th>
-            <th>Price</th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr *ngFor="let g of filteredGames$ | async">
-				<!-- <tr *ngFor="let g of games$ | async"> -->
-            <td>{{ g?.title }}</td>
-            <td>{{ g?.price }}</td>
-            <td><a [routerLink]="['new/', g?.id]">edit</a></td>
-        </tr>
-    </tbody>
-</table>
-<!--game info goes below  -->
+<mat-button-toggle-group (change)="chosen = $event.value">
+	<mat-button-toggle value="games">Games</mat-button-toggle>
+	<mat-button-toggle value="game-info">Game-Info</mat-button-toggle>
+</mat-button-toggle-group>
+
+<!-- all site content component -->
+<div *ngIf="chosen === 'games'">
+	<p>
+    <a class="btn btn-primary" routerLink="/admin/game/new">Add New Game</a>
+	</p>
+	<p>
+		<input
+			#query
+			(keyup)="filter(query.value)" 
+			type="text" 
+			class="form-control" 
+			placeholder="Search...">
+	</p>
+	<table class="table">
+			<thead>
+					<tr>
+							<th>Title</th>
+							<th>Price</th>
+							<th></th>
+					</tr>
+			</thead>
+			<tbody>
+					<tr *ngFor="let g of filteredGames$ | async">
+					<!-- <tr *ngFor="let g of games$ | async"> -->
+							<td>{{ g?.title }}</td>
+							<td>{{ g?.price }}</td>
+							<td><a [routerLink]="['new/', g?.id]">edit</a></td>
+					</tr>
+			</tbody>
+	</table>
+</div>
+<!-- contrib list component -->
+<div *ngIf="chosen === 'game-info'">
+	<admin-game-info
+		*ngFor="let g of gameInfo"
+		[gameInfo$]="g.content"
+		[familyName]="g.title"
+		[singularName]="g.singular"
+		(createEvent$)="createGameInfo($event)"
+		(updateEvent$)="updateGameInfo($event)"
+		(deleteEvent$)="deleteGameInfo($event)">
+	</admin-game-info>	
+
+	<!-- seperate thing here for consoles -->
+</div>
