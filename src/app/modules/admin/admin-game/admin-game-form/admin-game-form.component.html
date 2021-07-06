@@ -2,6 +2,15 @@
 <div class="row">
 	<h3>admin's game form: create, edit or delete a game</h3>
 	<p>We are going to have to remake this form reactively and using a dialog box</p>
+	<div *ngIf="game$ | async">
+		<!-- tricky part is injecting this into the form
+			wish there was a method like the async pipe for getting observable method, subscription frustrates me 
+		-->
+		{{ game$ | async | json  }}
+
+	</div>
+
+
 	<div class="col-md-6">       
 		<form #finished="ngForm" (ngSubmit)="save(finished.value)">
 					<div class="form-group">

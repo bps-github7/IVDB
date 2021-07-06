@@ -12,7 +12,7 @@ import { getFamily } from 'src/app/store/selectors/game-info.selector';
 
 
 import { v4 } from 'uuid';
-import { getGameById } from 'src/app/store/selectors/game.selector';
+import { selectEntity } from 'src/app/store/selectors/game.selector';
 
 
 
@@ -30,6 +30,7 @@ export class AdminGameFormComponent implements OnInit {
 	game_creators$: Observable<any>;
 	game_platforms$: Observable<any>;
 
+	game$ : Observable<any>;
 	game: any = {};
 	id: string;
 
@@ -50,9 +51,10 @@ export class AdminGameFormComponent implements OnInit {
 
 		this.id = this.route.snapshot.paramMap.get('id');
 		
-		if (this.id)
-			this.game = this.gameStore.select(getGameById(this.id))
-	}
+		if (this.id) {
+			this.game$ = this.gameStore.select(selectEntity(this.id))
+		}
+}
 
 	save(game) {
 			if(this.id)
