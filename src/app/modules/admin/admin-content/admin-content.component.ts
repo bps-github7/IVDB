@@ -269,43 +269,6 @@ export class AdminContentComponent implements OnInit {
 		];
 	}
 
-	// openDialog(actionType : string, contentType : string, updateObject? : { id : string, body?: Partial<Content> }) {
-
-	// 	const config = new MatDialogConfig();
-	// 	config.disableClose = true;
-	// 	config.autoFocus = false;
-	// 	config.height = '1600px';
-	// 	config.width = `1200px`;
-	// 	// would be better if open dialog knew these instructions. the class doesnt need them.
-	// 	config.data = {
-	// 		actionType,
-	// 		buildInfo : this.builds[contentType],
-	// 		form : this.forms[contentType],
-	// 		updateObject : (updateObject ? updateObject : null)
-	// 	};
-	// 	switch(actionType) {
-	// 		case "CREATE":
-	// 			console.log("going to create a new piece of content");
-	// 			break;
-	// 		case "UPDATE":
-	// 			console.log(`going to update document with id == ${updateObject.id}`);
-	// 			console.log(updateObject.body)
-	// 			break;
-	// 	}
-	// 	this.dialog.open(DialogComponent, config)
-	// 	.afterClosed()
-	// 	.subscribe(result => {
-	// 		if(result.uid) {
-	// 			// this.contentService.edit(result.);
-	// 			console.log("then we update")
-	// 		}
-	// 		else {
-	// 			console.log("then we create")
-	// 			// this.contentService.create(result);
-	// 		}
-	// 	})
-	// }
-
 	createDialog(contentType : string) {
 		// remove s from end because thats incorrect for all except "news"
 		if (contentType.endsWith("s") && contentType !== "news")
@@ -320,6 +283,7 @@ export class AdminContentComponent implements OnInit {
 		config.data = {
 			buildInfo : this.builds[contentType],
 			form : this.forms[contentType],
+			contentType
 		};
 
 		this.dialog.open(DialogComponent, config)

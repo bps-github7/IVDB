@@ -1,5 +1,5 @@
 import { createAction, props, Action } from "@ngrx/store";
-import { Game } from '../reducers/game.reducer';
+import { Game } from "src/app/models/content/game.model";
 
 // get every document in the collection
 export const readGames = createAction(

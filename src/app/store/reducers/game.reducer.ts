@@ -1,20 +1,9 @@
 import * as actions from '../actions/game.actions';
 import { EntityState, createEntityAdapter } from '@ngrx/entity';
 import { createFeatureSelector, createReducer, on } from '@ngrx/store';
+import { Game } from 'src/app/models/content/game.model';
 
 // need to export game model from here, for this example. hopefully we can find a workaround
-export interface Game {
-	id: string,
-	title : string,
-	price: number,
-	description ?: string,
-	gameInfo? : {
-		creators: string[],
-		categories: string [],
-		// consoleOwners: ? string []
-		consoles: string[]
-	}
-}
 
 
 export const gameAdapter = createEntityAdapter<Game>();

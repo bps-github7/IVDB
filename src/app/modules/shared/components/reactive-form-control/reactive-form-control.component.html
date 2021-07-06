@@ -3,6 +3,18 @@
     <input type="text" [formControl]="control" class="form-control">
   </label>
 
+	<label *ngIf="buildInfo.type === 'number' " [for]="buildInfo.formControlName">{{buildInfo.label}}:
+		<!-- <span class="input-group-addon">$</span>  -->
+		<input type="number" [formControl]="control" class="form-control">
+  </label>
+
+	<label *ngIf="buildInfo.type === 'currency' " [for]="buildInfo.formControlName">{{buildInfo.label}}:
+		<span class="input-group-addon">$</span> 
+		<input type="number" [formControl]="control" class="form-control">
+  </label>
+
+
+
   <label *ngIf="buildInfo.type === 'img' " [for]="buildInfo.formControlName">{{ buildInfo.label }}
     upload image
   </label>
@@ -78,8 +90,32 @@
         matInput
         [placeholder]="buildInfo.config.placeholder"
         [formControl]="control"
-        class="form-control"><br>
+        class="form-control">
     </mat-form-field>
+
+    <mat-form-field *ngIf="buildInfo.type === 'number' ">
+      <input 
+        matInput
+				type="number"
+        [placeholder]="buildInfo.config.placeholder"
+        [formControl]="control"
+        class="form-control">
+    </mat-form-field>
+
+
+    <mat-form-field *ngIf="buildInfo.type === 'currency' ">
+			<span class="input-group-addon">$</span> 
+			<input 
+        matInput
+				type="number"
+        [placeholder]="buildInfo.config.placeholder"
+        [formControl]="control"
+        class="form-control">
+    </mat-form-field>
+		
+
+
+
 
   <mat-form-field *ngIf="buildInfo.type === 'textarea'">
     <textarea 
@@ -115,6 +151,23 @@
     </mat-select>
   </mat-form-field>    
 
+
+	<!-- a seperate jawn for async data--->
+		
+<!-- 	
+		<mat-form-field *ngIf="buildInfo.type === 'select' && buildInfo.asyncOptions" appearance="fill">
+    <mat-label>{{ buildInfo.label }}</mat-label>
+    <mat-select 
+      matInput  
+      [formControl]="control"
+      class="form-control">
+      <mat-option *ngFor="let option of (buildInfo.asyncOptions | async)" [value]="option">
+        {{ option?.title }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+ -->
 
   <div *ngIf="buildInfo.type === 'multiple select' && buildInfo.options.length > 1">
     <multi-select-chips [formControl]="control"  [options]="buildInfo.options"></multi-select-chips>

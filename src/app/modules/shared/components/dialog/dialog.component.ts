@@ -16,6 +16,7 @@ export class DialogComponent implements OnInit {
 
 	oldValues : any;
 	mode : string = "create";
+	contentType: string;
 
   constructor(@Inject(MAT_DIALOG_DATA) data: any,
   private dialogRef : MatDialogRef<DialogComponent>,
@@ -23,6 +24,7 @@ export class DialogComponent implements OnInit {
 		if (data) {
 			this.buildInfo = Object.values(data.buildInfo);
 			this.initialState = data.form
+			this.contentType = data.contentType
 			if (data.updateObject) {
 				this.oldValues = data.updateObject.body;
 				this.mode = "edit";

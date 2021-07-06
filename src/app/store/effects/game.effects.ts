@@ -1,10 +1,10 @@
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs/Observable";
 import { Actions, createEffect, ofType } from "@ngrx/effects";
-import { Game } from "../reducers/game.reducer";
 import * as gameActions from '../actions/game.actions'
 import { AngularFirestore, AngularFirestoreCollection } from "@angular/fire/firestore";
 import { switchMap, mergeMap, map, exhaustMap } from "rxjs/operators";
+import { Game } from "src/app/models/content/game.model";
 // import { fromPromise } from "rxjs/internal-compatibility";
 
 @Injectable()

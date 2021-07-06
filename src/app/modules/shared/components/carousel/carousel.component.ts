@@ -1,5 +1,5 @@
 import { Component, ElementRef, OnInit } from '@angular/core';
-import { Game } from 'src/app/models/content/Game';
+import { Game } from 'src/app/models/content/game.model';
 
 export interface Breakpoints {
   [key: number]: {

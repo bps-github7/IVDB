@@ -1,6 +1,7 @@
 import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { ControlContainer, FormControlDirective, ControlValueAccessor, NG_VALUE_ACCESSOR, FormArray, FormControl, AbstractControl } from '@angular/forms';
 import { MatChip } from '@angular/material/chips';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'reactiveFormControl',
