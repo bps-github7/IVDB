@@ -7,6 +7,7 @@ export const reducers: ActionReducerMap<any> = {
 	content : ContentReducer,
 	game : GameReducer,
 	gameInfo : GameInfoReducer
+	
 	// contrib : contribReducer,
 	// forum : forumReducer,
 	// forumInfo : forumInfoReducer,

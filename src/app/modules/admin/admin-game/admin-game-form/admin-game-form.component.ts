@@ -12,6 +12,7 @@ import { getFamily } from 'src/app/store/selectors/game-info.selector';
 
 
 import { v4 } from 'uuid';
+import { getGameById } from 'src/app/store/selectors/game.selector';
 
 
 
@@ -29,7 +30,7 @@ export class AdminGameFormComponent implements OnInit {
 	game_creators$: Observable<any>;
 	game_platforms$: Observable<any>;
 
-	game: any={};
+	game: any = {};
 	id: string;
 
 	constructor(
@@ -50,8 +51,7 @@ export class AdminGameFormComponent implements OnInit {
 		this.id = this.route.snapshot.paramMap.get('id');
 		
 		if (this.id)
-			// then select the game in question from store and preload form data with game.
-			console.log(this.id)							
+			this.game = this.gameStore.select(getGameById(this.id))
 	}
 
 	save(game) {

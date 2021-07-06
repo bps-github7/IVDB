@@ -24,6 +24,7 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatDialogModule } from '@angular/material/dialog';
 import {MatButtonToggleModule} from '@angular/material/button-toggle';
 import { MatButtonModule } from '@angular/material/button';
+import { AdminConsolesComponent } from './admin-game/admin-consoles/admin-consoles.component';
 
 @NgModule({
   declarations: [
@@ -37,6 +38,7 @@ import { MatButtonModule } from '@angular/material/button';
 		AdminGameTableComponent,
 		AdminGameInfoComponent,
 		AdminContentManagerComponent,
+  AdminConsolesComponent,
 	],
   imports: [
 		// StoreModule.forFeature('a', reducers),

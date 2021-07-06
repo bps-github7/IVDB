@@ -31,12 +31,11 @@
 					<!-- <tr *ngFor="let g of games$ | async"> -->
 							<td>{{ g?.title }}</td>
 							<td>{{ g?.price }}</td>
-							<td><a [routerLink]="['new/', g?.id]">edit</a></td>
+							<td><a [routerLink]="['./', g?.id]">edit</a></td>
 					</tr>
 			</tbody>
 	</table>
 </div>
-<!-- contrib list component -->
 <div *ngIf="chosen === 'game-info'">
 	<admin-game-info
 		*ngFor="let g of gameInfo"
@@ -48,5 +47,9 @@
 		(deleteEvent$)="deleteGameInfo($event)">
 	</admin-game-info>	
 
-	<!-- seperate thing here for consoles -->
+	<admin-consoles
+		*ngFor="let p of gameInfo[2].content | async"
+		[platformName]="p.title"
+	></admin-consoles>
+	
 </div>

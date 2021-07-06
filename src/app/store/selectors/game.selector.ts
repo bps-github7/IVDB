@@ -12,7 +12,13 @@ export const selectByTitleSubstring = (title : string) =>
 		} 
 	)
 
-
+export const getGameById = (id : string) =>
+		createSelector(
+			fromGame.selectAll,
+			(entities : Game []) => {
+				return entities.filter((game : Game) => game.id === id)
+			}
+		)
 
 // select by category
 export const selectGamesByCategory = (category: string | string []) => {

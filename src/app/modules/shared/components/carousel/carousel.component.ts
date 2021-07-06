@@ -38,47 +38,47 @@ export class CarouselComponent implements OnInit {
 
   images: Game[] = [
     {
-      uid : '0',
+      id : '0',
       title: 'Danger of Guardian',
       imageUrl: 'assets/images/1.jpg',
     },
     {
-      uid: '1',
+      id: '1',
       title: 'The Sliver of the Shards',
       imageUrl: 'assets/images/2.jpg',
     },
     {
-      uid: '2',
+      id: '2',
       title: 'Next Tales',
       imageUrl: 'assets/images/3.jpg',
     },
     {
-      uid: '3',
+      id: '3',
       title: 'Theft in the Dreams',
       imageUrl: 'assets/images/4.jpg',
     },
     {
-      uid: '4',
+      id: '4',
       title: 'Snow of Hustler',
       imageUrl: 'assets/images/5.jpg',
     },
     {
-      uid: '5',
+      id: '5',
       title: 'Living Man',
       imageUrl: 'assets/images/6.jpg',
     },
     {
-      uid: '6',
+      id: '6',
       title: 'The Voyagers of the Prince',
       imageUrl: 'assets/images/7.jpg',
     },
     {
-      uid: '7',
+      id: '7',
       title: 'The Diamond Lord',
       imageUrl: 'assets/images/8.jpg',
     },
     {
-      uid: '8',
+      id: '8',
       title: 'Kiss in the Rainbow',
       imageUrl: 'assets/images/9.jpg',
     }

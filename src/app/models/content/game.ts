@@ -1,6 +1,6 @@
 
 export interface Game {
-    uid ?: string,
+    id ?: string,
     title?: string,
     price?: string | number,
     imageUrl?: string,

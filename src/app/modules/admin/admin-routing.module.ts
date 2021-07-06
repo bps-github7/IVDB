@@ -9,7 +9,7 @@ import { AdminUserComponent } from './admin-user/admin-user.component';
 
 const routes: Routes = [
 	{ path: '', component: AdminComponent, children: [
-		{ path: 'game/new/:id', component: AdminGameFormComponent },
+		{ path: 'game/:id', component: AdminGameFormComponent },
 		{ path: 'game/new', component: AdminGameFormComponent },
 		{ path: 'game', component: AdminGameComponent },
 		{ path: 'content', component: AdminContentComponent },
