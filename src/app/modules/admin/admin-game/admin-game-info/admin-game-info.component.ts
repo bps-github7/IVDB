@@ -56,7 +56,8 @@ export class AdminGameInfoComponent implements OnInit {
 	}
 
 	setUpUpdate(gameInfo : GameInfo) {
-		this.updateContent = gameInfo 
+		// got a weird bug not sure where its taking plaece... mess around with update to see it
+		this.updateContent = {title : gameInfo.title, description : gameInfo.description} 
 		this.updateId = gameInfo.id 
 		this.mode = 'edit'
 	}
