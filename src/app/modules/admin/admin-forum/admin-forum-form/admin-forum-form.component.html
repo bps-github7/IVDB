@@ -1,0 +1,76 @@
+<div class="row">
+	<h3>Forum form: create, edit or delete a forum</h3>
+	<div class="col-md-6">       
+		<form #finished="ngForm" (ngSubmit)="save(finished.value)">
+			<div class="form-group">
+					<label for="title">Title: </label>
+					<input
+						#title="ngModel"
+						[(ngModel)]="forum.title"
+						name="title"
+						id="title"
+						class="form-control"
+						required
+						type="text"
+						>
+				<div *ngIf="title.touched && title.invalid" class="alert alert-danger">
+						<div *ngIf="title.errors.required">Title is required</div>
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="categories">Family: </label>
+				<select
+						[(ngModel)]="forum.family"
+						required
+						#family="ngModel"
+						name="family"
+						id="family"
+						class="form-control"
+						>
+						<option value=""></option>
+						<option *ngFor="let g of forumFamilies$ | async" [value]="g.title">
+								{{ g.title }}
+						</option>
+				</select>
+				<div *ngIf="family.touched && family.invalid" class="alert alert-danger">
+						<div *ngIf="family.errors.required">Family is required</div>
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="description">Description: </label>
+				<textarea
+					#description="ngModel" 
+					name="description"
+					id="description"
+					class="form-control"
+					cols="30"
+					rows="10"
+					required
+					[(ngModel)]="forum.description"          
+					></textarea>
+				<div *ngIf="description.touched && description.invalid" class="alert alert-danger">
+						<div *ngIf="description.errors.required">Description is required</div>
+				</div>
+			</div>
+			<p>in time, we will need:</p>
+			<ul>
+				<li>list of threads in forum, with prefix, type, etc</li>
+				<li>assign moderator to a forum, or specific thread</li>
+				<li>list of banned users, current contributing users</li>
+				<li>list of all contributions associated with the forum in question</li>
+			</ul>
+			<button class="btn btn-primary" [disabled]="!finished.valid">Save/update game</button>
+			<!-- disable is tied to id variable because you cant delete a game that does not exist-->
+			<button type="button" class="btn btn-danger" [disabled]="disableDeleteButton" (click)="delete()">Delete game</button>
+		</form>
+	</div>
+	<div class="col-md-6">
+			<div class="card" style="width: 18rem;">
+
+					<div class="card-body">
+						<h5 class="card-title">maybe put some info here about the forum in question, or details on how to work with forums</h5>
+						<!-- <p class="card-text">{{ game.price | currency:'USD':true }}</p> -->
+					</div>
+				</div>
+	</div>
+</div> 

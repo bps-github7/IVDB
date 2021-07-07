@@ -6,11 +6,14 @@ import { AdminGameComponent } from './admin-game/admin-game.component';
 import { AdminContentComponent } from './admin-content/admin-content.component';
 import { AdminForumComponent } from './admin-forum/admin-forum.component';
 import { AdminUserComponent } from './admin-user/admin-user.component';
+import { AdminForumFormComponent } from './admin-forum/admin-forum-form/admin-forum-form.component';
 
 const routes: Routes = [
 	{ path: '', component: AdminComponent, children: [
 		{ path: 'game/:id', component: AdminGameFormComponent },
+		{ path: 'forum/:id', component: AdminForumFormComponent },
 		{ path: 'game/new', component: AdminGameFormComponent },
+		{ path: 'forum/new', component: AdminForumFormComponent },
 		{ path: 'game', component: AdminGameComponent },
 		{ path: 'content', component: AdminContentComponent },
 		{ path: 'forum', component: AdminForumComponent },
