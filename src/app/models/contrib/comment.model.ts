@@ -1,4 +1,4 @@
-import { Metadata } from "./metadata";
+// import { Metadata } from "./metadata";
 // worry about this later...
 
 
@@ -10,5 +10,5 @@ export interface Comment {
     contentId: string;
     text: string;
     media?: string;
-    metadata? : Metadata;
+    // metadata? : Metadata;
 }

@@ -36,6 +36,8 @@ export class AdminGameFormComponent implements OnInit {
 	game: Game;
 	id: string;
 
+	disableDeleteButton: boolean;
+
 	constructor(
 			
 			private gameInfoStore: Store<fromGameInfo.State>,
@@ -51,30 +53,50 @@ export class AdminGameFormComponent implements OnInit {
 		this.game_creators$ =  this.gameInfoStore.select(getFamily("creator"))
 		this.game_platforms$ =  this.gameInfoStore.select(getFamily("platform"))
 
+		// if (this.route.snapshot.paramMap.get('id'))
 		this.id = this.route.snapshot.paramMap.get('id');
-		
-		if (this.id) {
+
+		// sketchy way of preventing some annoying errors.
+		if(this.id === "new") {
+			this.id = '';
+			this.disableDeleteButton = true		
+
+			this.game = {
+				id : "",
+				title : "",
+				price : 0,
+				description : "",
+				imageUrl : "",
+				categories : [],
+				creators : [],
+				platforms : [],
+				consoles : []
+			}
+		}
+	
+		if (this.id != "new" && this.id.length > 1) {
 			this.game$ = this.gameStore.select(selectEntity(this.id))
 			this.game$.subscribe((response : Game) => this.game = response)
+			this.disableDeleteButton = false
 		}
 }
 
 	save(game) {
-			if(this.id)
-				console.log("then we are going to update an existing game");
-				// this.gameService.update(this.id, game);
-			else {
-				this.gameStore.dispatch(gameActions.createGame({ id : v4(), ...game}));	
-				this.router.navigate(['/admin/game']);	
-			}
-
+		if(this.id) {
+			this.gameStore.dispatch( gameActions.updateGame({id : this.id, data : game }) )
+			this.router.navigate(['/admin/game']);	
+		} else {
+			this.gameStore.dispatch(gameActions.createGame({ id : v4(), ...game}));	
+			this.router.navigate(['/admin/game']);	
+		}
 		}
 
 	delete() {
-			if (!confirm('Are you sure that you want to delete this game?')) return;
-			console.log("then we are going to delete a game");			
-			// this.gameService.delete(this.id);
+		if (confirm('Are you sure that you want to delete this game?')) {
+			this.gameStore.dispatch( gameActions.deleteGame({ id : this.id}) )
 			this.router.navigate(['/admin/game']);
+		}			
+		return;
 	}
 
 }

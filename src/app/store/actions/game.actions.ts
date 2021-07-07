@@ -40,7 +40,7 @@ export const deleteGameSuccess = createAction(
 	'[Game] deleteGameSuccess',
 );
 
-export const contentActionTypes = {
+export const gameActionTypes = {
 	readGames,
 	readGamesSuccess,
 	createGame,

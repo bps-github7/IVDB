@@ -8,11 +8,18 @@ import { EffectsModule } from '@ngrx/effects'
 import { ContentReducer } from "src/app/store/reducers/content.reducer";
 import { GameReducer } from "src/app/store/reducers/game.reducer";
 import { GameInfoReducer } from "src/app/store/reducers/game-info.reducer";
+import { VideogameConsoleReducer } from 'src/app/store/reducers/videogame-console.reducer';
+import { ForumInfoReducer } from 'src/app/store/reducers/forum-info.reducer';
+import { ForumReducer } from 'src/app/store/reducers/forum.reducer';
 
 // effects
 import { GameInfoEffects } from 'src/app/store/effects/game-info.effects';
 import { ContentEffects } from 'src/app/store/effects/content.effects';
 import { GameEffects } from '../../store/effects/game.effects';
+import { ForumEffects } from 'src/app/store';
+import { ForumInfoEffects } from 'src/app/store';
+import { VideogameConsoleEffects } from 'src/app/store/effects/videogame-console.effects';
+
 // import { ContributionEffects } from '../../store/effects/contribution.effects';
 // import { ForumEffects } from './forum.effects';
 
@@ -30,6 +37,8 @@ export const effects : any [] = [ContentEffects, GameInfoEffects];
 		StoreModule.forFeature('game', GameReducer),
 		StoreModule.forFeature('gameInfo', GameInfoReducer),
 		StoreModule.forFeature('content', ContentReducer),
+		// need to add our new features to store and effect above and below, but be sure feature name matches whats in the reducer!
+
 		EffectsModule.forFeature([ContentEffects]),
 		EffectsModule.forFeature([GameInfoEffects]),
 		EffectsModule.forFeature([GameEffects]),

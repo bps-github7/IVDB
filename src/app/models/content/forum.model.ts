@@ -1,12 +1,11 @@
-import { Thread } from "./Thread";
 
 export interface Forum {
-    category : string;
+    family : string;
     title : string;
     description : string;
 
     //optional stuff we deal with after tis fresh meatball!
     moderator?: (string | string []); 
-    threads?: Thread [];
-    uid?: string;
+    threads?: any [];
+    id?: string;
 }

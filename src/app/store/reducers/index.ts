@@ -1,16 +1,21 @@
+import { VideogameConsoleReducer } from './videogame-console.reducer';
 import { ActionReducerMap } from "@ngrx/store";
 import { ContentReducer } from "./content.reducer";
 import { GameReducer } from "./game.reducer";
 import { GameInfoReducer } from "./game-info.reducer";
+import { ForumReducer } from "./forum.reducer";
+import { ForumInfoReducer } from "./forum-info.reducer";
+
+
 
 export const reducers: ActionReducerMap<any> = {
 	content : ContentReducer,
 	game : GameReducer,
-	gameInfo : GameInfoReducer
-	
+	gameInfo : GameInfoReducer,
 	// contrib : contribReducer,
-	// forum : forumReducer,
-	// forumInfo : forumInfoReducer,
+	forum : ForumReducer,
+	forumInfo : ForumInfoReducer,
+	videogameConsole : VideogameConsoleReducer
 	// user : userReducer,
 	// admin : adminReducer
 }

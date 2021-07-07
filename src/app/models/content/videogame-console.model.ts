@@ -2,7 +2,7 @@
 VgConsole is 
 */
 
-export interface VgConsole {
+export interface VideogameConsole {
     
     // name info
     nickname : string,
@@ -12,13 +12,13 @@ export interface VgConsole {
     // console info
     generation : number,
     maker : string,
-    type : string,
+    family : string,
     
     // optional info
     description? : string,
     image? : string,
     released? : string,
-    uid? : string
+    id? : string
 
 
 
