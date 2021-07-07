@@ -1,1 +1,80 @@
-<p>admin-forum works!</p>
+<h2>Forum and Forum-Info dashboard:</h2>
+
+<mat-button-toggle-group (change)="chosen = $event.value">
+	<mat-button-toggle value="forums">Forums</mat-button-toggle>
+	<mat-button-toggle value="forum-info">Forum-Info</mat-button-toggle>
+</mat-button-toggle-group>
+
+<!-- all site content component -->
+<div *ngIf="chosen === 'forums'">
+	<p>
+    <a class="btn btn-primary" routerLink="/admin/forum/new">Add New Forum</a>
+	</p>
+	<p>
+		<input
+			#query
+			(keyup)="filter(query.value)" 
+			type="text" 
+			class="form-control" 
+			placeholder="Search...">
+	</p>
+	<table class="table">
+			<thead>
+					<tr>
+							<th>Title</th>
+							<th>family</th>
+							<th></th>
+					</tr>
+			</thead>
+			<tbody>
+					<tr *ngFor="let g of filteredForums$ | async">
+					<!-- <tr *ngFor="let g of games$ | async"> -->
+							<td>{{ g?.title }}</td>
+							<td>{{ g?.family }}</td>
+							<td><a [routerLink]="['./', g?.id]">edit</a></td>
+					</tr>
+			</tbody>
+	</table>
+</div>
+<div *ngIf="chosen === 'forum-info'">
+
+	<div class="forum-help">
+		<h4></h4>
+		<button mat-button (click)="showHelp = !showHelp">
+
+			<span *ngIf="!showHelp; else hide">Need help with Forum Info?</span>
+			<ng-template #hide>
+				hide
+			</ng-template>
+
+		</button>
+
+		<div *ngIf="showHelp">
+			<div *ngFor="let f of forumInfoHelp">
+				<h4>{{ f.title }}</h4>
+
+				<p>{{ f.description }}</p>
+			</div>
+		</div>
+
+
+	</div>
+
+
+	<!-- using game-info because their interfaces are identical -->
+	<admin-game-info
+		*ngFor="let g of forumInfo"
+		[gameInfo$]="g.content"
+		[familyName]="g.title"
+		[singularName]="g.singular"
+		(createEvent$)="createForumInfo($event)"
+		(updateEvent$)="updateForumInfo($event)"
+		(deleteEvent$)="deleteForumInfo($event)">
+	</admin-game-info>	
+<!-- 
+	<admin-consoles
+		*ngFor="let p of gameInfo[2].content | async"
+		[platformName]="p.title"
+	></admin-consoles> -->
+	
+</div>

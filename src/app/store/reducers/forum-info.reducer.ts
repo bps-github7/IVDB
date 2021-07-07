@@ -3,6 +3,7 @@ import { EntityState, createEntityAdapter } from '@ngrx/entity';
 import { createFeatureSelector, createReducer, on } from '@ngrx/store';
 import { ForumInfo } from 'src/app/models/content/forum-info.model';
 
+// set up entity...
 export const forumInfoAdapter = createEntityAdapter<ForumInfo>();
 export interface State extends EntityState<ForumInfo> { }
 
@@ -13,6 +14,7 @@ const defaultForumInfo = {
 
 export const initialState: State = forumInfoAdapter.getInitialState(defaultForumInfo);
 
+// declare the Forum Info Reducer, which handles actions regarding forum metadata- forum families (categories), prefixes, types, etc
 export const ForumInfoReducer = createReducer(
   initialState,
 
@@ -37,7 +39,7 @@ export const ForumInfoReducer = createReducer(
 );
 
 
-// create the default selectors
+// create the feature selector and default entity selectors
 export const getForumInfo = createFeatureSelector<State>('forumInfo');
 
 export const {

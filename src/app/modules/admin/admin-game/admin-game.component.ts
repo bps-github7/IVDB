@@ -23,7 +23,7 @@ import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 })
 export class AdminGameComponent implements OnInit {
 	
-	chosen : string = "games";
+	chosen : string;
 
 
 	// this is for building mat dialog forms with our reusable dialog component

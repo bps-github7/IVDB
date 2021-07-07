@@ -3,6 +3,7 @@ import { EntityState, createEntityAdapter } from '@ngrx/entity';
 import { createFeatureSelector, createReducer, on } from '@ngrx/store';
 import { Forum } from 'src/app/models/content/forum.model';
 
+// set up entity
 export const forumAdapter = createEntityAdapter<Forum>();
 export interface State extends EntityState<Forum> { }
 
@@ -13,6 +14,7 @@ const defaultForum = {
 
 export const initialState: State = forumAdapter.getInitialState(defaultForum);
 
+// declares the ForumReducer, which handles actions for CRUD of IVDB Forums
 export const ForumReducer = createReducer(
   initialState,
 
@@ -36,8 +38,7 @@ export const ForumReducer = createReducer(
 	
 );
 
-
-// create the default selectors
+// create feature selector and default entity selectors
 export const getForum = createFeatureSelector<State>('forum');
 
 export const {

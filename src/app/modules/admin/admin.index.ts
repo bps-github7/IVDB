@@ -37,12 +37,18 @@ export const effects : any [] = [ContentEffects, GameInfoEffects];
 		StoreModule.forFeature('game', GameReducer),
 		StoreModule.forFeature('gameInfo', GameInfoReducer),
 		StoreModule.forFeature('content', ContentReducer),
-		// need to add our new features to store and effect above and below, but be sure feature name matches whats in the reducer!
+		StoreModule.forFeature('videogameConsole', VideogameConsoleReducer),
+		StoreModule.forFeature('forum', ForumReducer),
+		StoreModule.forFeature('forumInfo', ForumInfoReducer),
 
 		EffectsModule.forFeature([ContentEffects]),
 		EffectsModule.forFeature([GameInfoEffects]),
 		EffectsModule.forFeature([GameEffects]),
-  ],
+		EffectsModule.forFeature([VideogameConsoleEffects]),
+		EffectsModule.forFeature([ForumInfoEffects]),
+		EffectsModule.forFeature([ForumEffects])
+
+	],
 	// exports: [
 	// 	StoreModule.forFeature('admin module', reducers),
 	// 	EffectsModule.forFeature([ContentEffects]),

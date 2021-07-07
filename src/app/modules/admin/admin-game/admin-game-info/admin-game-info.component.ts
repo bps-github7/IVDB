@@ -93,7 +93,7 @@ export class AdminGameInfoComponent implements OnInit {
 	}
 
 	delete(id : string) {
-		if(confirm("Are you sure you want to delete this game info? Warning: cannot be undone"))
+		if(confirm("Are you sure you want to delete this? Warning: cannot be undone"))
 			this.deleteEvent$.emit(id);
 		return;
 	}
