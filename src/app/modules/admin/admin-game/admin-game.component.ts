@@ -132,38 +132,7 @@ export class AdminGameComponent implements OnInit {
 				content : this.gameInfoStore.select(getFamily("platform"))
 			}
 		]
-		// this.gameFormBuild.categories.options = {
-		// 	async : true,
-		// 	value : this.gameInfoStore.select(getFamily("category")) 
-		// }
-		// this.gameFormBuild.creators.options = {
-		// 	async : true,
-		// 	value : this.gameInfoStore.select(getFamily("creator")) 
-		// }
-		// this.gameFormBuild.platforms.options = {
-		// 	async : true,
-		// 	value : this.gameInfoStore.select(getFamily("platform")) 
-		// }
-
-
 	}
-
-	// newGame() {
-	// 	const config = new MatDialogConfig();
-	// 	config.disableClose = true;
-	// 	config.autoFocus = true;
-	// 	config.height = '1600px';
-	// 	config.width = `1200px`;
-
-	// 	config.data = {
-	// 		buildInfo : this.gameFormBuild,
-	// 		form : this.gameFormControls,
-	// 		contentType : "game"
-	// 	};
-
-	// 	this.dialog.open(DialogComponent, config)		
-	// }
-
 
 	filter(query: string) {
 			this.filteredGames$ = (query) ?

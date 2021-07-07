@@ -1,3 +1,4 @@
+import { GameInfoPanelComponent } from './game-info-panel/game-info-panel.component';
 import { GameBrowserComponent } from './game-browser/game-browser.component';
 import { GamesComponent } from './games.component';
 import { NgModule } from '@angular/core';
@@ -7,8 +8,9 @@ import { GameViewComponent } from './game-view/game-view.component';
 const routes: Routes = [
 	{path: '',component: GamesComponent,
 		children: [
-			{ path: ':id', component: GameViewComponent },
-			{ path: 'all', component: GameBrowserComponent }
+			{ path: 'all', component: GameBrowserComponent },
+			{ path: 'info', component: GameInfoPanelComponent },
+			{ path: ':id', component: GameViewComponent }
 			// { path: 'game/:id', component: AdminGameFormComponent },
 			// { path: 'forum/:id', component: AdminForumFormComponent },
 			// { path: 'game/new', component: AdminGameFormComponent },

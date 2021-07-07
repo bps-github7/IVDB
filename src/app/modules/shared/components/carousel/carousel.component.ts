@@ -16,6 +16,8 @@ export interface Breakpoints {
 })
 export class CarouselComponent implements OnInit {
 
+
+	// TODO: take games as an input prop of type ob=servbale. making this a dumb reusable component.
   dom: HTMLElement | null = null;
   slidesWrapper: HTMLElement | null = null;
   carouselElement: HTMLElement | null = null;
