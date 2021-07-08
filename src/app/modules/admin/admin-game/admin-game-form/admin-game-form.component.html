@@ -1,19 +1,23 @@
 <div class="row">
 	<h3>Game Form: create, edit or delete a game</h3>
 	<div class="col-md-6">       
-		<form [formGroup]="form">
+		<form [formGroup]="form" *ngIf="game$ | async as game">
+			<label for="title">Title: </label>
+			<input 
+				id="title"
+				formControl="title"
+				class="form-control"
+				>
+			
 
-			<reactiveFormControl buildInfo></reactiveFormControl>
 
 			<button class="btn btn-primary">save</button>
 		</form>
 
 		
-		<!-- TODO: 
-			cannot update games at this time,
-			we really ought to shift these (admin-forum-form as well) to reactive forms
-			ngModel is saying object value tied to it should be immutable. throws an 
-			error when we try to change something during update.
+		<!-- 
+			...We are waiting for the content before the site can go live...
+			...If you are content, let us know and we can start putting lobsters all over the place
 		-->
 		<!-- <form #finished="ngForm" (ngSubmit)="save(finished.value)">
 			<div class="form-group">
@@ -207,13 +211,26 @@
 		</form>--->
 
 	</div>
-	<div class="col-md-6">
-			<div class="card" style="width: 18rem;">
-					<img class="card-img-top" [src]="game.imageUrl" alt="Cover of the game being created or edited">
-					<div class="card-body">
-						<h5 class="card-title">{{ game.title }}</h5>
-						<p class="card-text">{{ game.price | currency:'USD':'symbol' }}</p>
-					</div>
+	<!-- the real thing
+		<div class="col-md-6">
+		<div class="card" style="width: 18rem;">
+				<img class="card-img-top" [src]="game.imageUrl" alt="Cover of the game being created or edited">
+				<div class="card-body">
+					<h5 class="card-title">{{ game.title }}</h5>
+					<p class="card-text">{{ game.price | currency:'USD':'symbol' }}</p>
 				</div>
+			</div>
+	</div> -->
+
+	<!-- just for testing. note the gamarooni -->
+	<div class="col-md-6">
+		<h3>this should populate when we are updating a game</h3>
+		<div *ngIf="game$ | async as gamarooni" class="card" style="width: 18rem;">
+				<img class="card-img-top" [src]="gamarooni.imageUrl" alt="Cover of the game being created or edited">
+				<div class="card-body">
+					<h5 class="card-title">{{ gamarooni.title }}</h5>
+					<p class="card-text">{{ gamarooni.price | currency:'USD':'symbol' }}</p>
+				</div>
+			</div>
 	</div>
 </div> 

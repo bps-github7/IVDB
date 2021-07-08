@@ -30,6 +30,7 @@ import { MultiSelectChipsComponent } from './components/multi-select-chips/multi
 import { CrudHubComponent } from './components/crud-hub/crud-hub.component';
 import { CarouselComponent } from './components/carousel/carousel.component';
 import { MaterialModule } from './material/material.module';
+import { ReactiveAsyncFormControlComponent } from './components/reactive-async-form-control/reactive-async-form-control.component';
 
 @NgModule({
   declarations: [
@@ -42,6 +43,7 @@ import { MaterialModule } from './material/material.module';
     MultiSelectChipsComponent,
     CarouselComponent,
 		CrudHubComponent,
+  ReactiveAsyncFormControlComponent,
     // pipes
 
     // directives 

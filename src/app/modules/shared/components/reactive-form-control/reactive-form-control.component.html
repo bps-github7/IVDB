@@ -53,6 +53,8 @@
     </select>
   </label>
 
+
+
   <label 
     *ngIf="buildInfo.type === 'multiple select' && buildInfo.options.length > 1"
     [for]="buildInfo.formControlName"> {{buildInfo.label}}
@@ -61,6 +63,7 @@
       <option *ngFor="let option of buildInfo.options" [ngValue]="option">{{ option }}</option>
     </select>
   </label>
+
   
   <div 
     *ngIf="buildInfo.type === 'radio' && buildInfo.options.length > 1">{{buildInfo.label}}:<br>
@@ -150,24 +153,6 @@
       </mat-option>
     </mat-select>
   </mat-form-field>    
-
-
-	<!-- a seperate jawn for async data--->
-		
-<!-- 	
-		<mat-form-field *ngIf="buildInfo.type === 'select' && buildInfo.asyncOptions" appearance="fill">
-    <mat-label>{{ buildInfo.label }}</mat-label>
-    <mat-select 
-      matInput  
-      [formControl]="control"
-      class="form-control">
-      <mat-option *ngFor="let option of (buildInfo.asyncOptions | async)" [value]="option">
-        {{ option?.title }}
-      </mat-option>
-    </mat-select>
-  </mat-form-field>
-
- -->
 
   <div *ngIf="buildInfo.type === 'multiple select' && buildInfo.options.length > 1">
     <multi-select-chips [formControl]="control"  [options]="buildInfo.options"></multi-select-chips>

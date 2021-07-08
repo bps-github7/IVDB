@@ -1,35 +1,21 @@
 import { Component, Input, OnInit, ViewChild } from '@angular/core';
-import { ControlContainer, FormControlDirective, ControlValueAccessor, NG_VALUE_ACCESSOR, FormArray, FormControl, AbstractControl } from '@angular/forms';
-import { MatChip } from '@angular/material/chips';
-import { Observable, of } from 'rxjs';
+import { NG_VALUE_ACCESSOR, FormControlDirective, ControlContainer, FormArray, FormControl, ControlValueAccessor } from '@angular/forms';
 
 @Component({
-  selector: 'reactiveFormControl',
-  templateUrl: './reactive-form-control.component.html',
-  styleUrls: ['./reactive-form-control.component.sass'],
+  selector: 'reactive-async-form-control',
+  templateUrl: './reactive-async-form-control.component.html',
+  styleUrls: ['./reactive-async-form-control.component.sass'],
   providers: [
     {provide: NG_VALUE_ACCESSOR,
-    useExisting: ReactiveFormControlComponent,
+    useExisting: ReactiveAsyncFormControlComponent,
     multi: true}]
 })
-
-export class ReactiveFormControlComponent implements ControlValueAccessor {
+export class ReactiveAsyncFormControlComponent implements ControlValueAccessor {
+	/* this should only work with async data */
   
   @ViewChild(FormControlDirective, {static: true}) formControlDirective: FormControlDirective;
   @Input() dialog : boolean = false;
-  @Input() buildInfo = {
-    type : "text",
-    label : "",
-    formControlName : "",
-    formGroupName : "should be inherited from parent",
-    options : [],
-    config : {
-      placeholder : "",
-      errorCondition : "",
-      errorMsg : "",
-      required : false
-    }
-  };
+  @Input() buildInfo;
 
   constructor(private controlContainer: ControlContainer) { }
 
@@ -88,7 +74,4 @@ export class ReactiveFormControlComponent implements ControlValueAccessor {
       });
     }
   }
-
-
 }
-
