@@ -1,1 +1,18 @@
-<p>forum-view works!</p>
+<div *ngIf="forum; else notFound">
+	<h3>Forum: {{ forum.title }}</h3>
+	<p>{{ forum.description }}</p>
+
+	threads listed below
+	moderators
+	top contributors
+	recent posts
+	etc
+</div>
+
+<ng-template #notFound>
+	<h3>Forum not found</h3>
+	<p>Sorry, the forum you looked up is no longer available</p>
+	<button>
+		<a routerLink="../">Go back</a>
+	</button>
+</ng-template>
