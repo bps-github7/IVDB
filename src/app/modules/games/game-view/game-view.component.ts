@@ -1,12 +1,12 @@
-import { gameSelector, getGameByParam } from './../../../store/selectors/game.selector';
-import { ActivatedRoute, Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
+
 import { select, Store } from '@ngrx/store';
 import { Game } from 'src/app/models/content/game.model';
 import * as fromGame from 'src/app/store/reducers/game.reducer';
-import { selectEntity } from 'src/app/store/selectors/game.selector';
-import { AppState, readGames } from 'src/app/store';
-import { Observable } from 'rxjs';
+import { readGames } from 'src/app/store';
+import { getGameByParam } from 'src/app/store/selectors/game.selector';
+
 
 @Component({
   selector: 'app-game-view',
@@ -14,29 +14,13 @@ import { Observable } from 'rxjs';
   styleUrls: ['./game-view.component.sass']
 })
 export class GameViewComponent implements OnInit {
-	id: string;
 	game$ : Observable<any>
-	// game: Game; 
+	game: Game; 
 
-	constructor(
-	// private auth : AuthService,
-	private gameStore : Store<fromGame.State>,
-	private routerStore : Store<AppState>
-	// private router : Router,
-	// private route : ActivatedRoute) {	}
-	) { }
+	constructor(private gameStore : Store<fromGame.State>) { }
 
 	ngOnInit(): void {
 		this.gameStore.dispatch( readGames() )
-
-		// this.id = this.route.snapshot.paramMap.get('id');
-		// if (this.id){
-		// 	this.game$ = this.gameStore.pipe(select(selectEntity(this.id)))
-		// 	this.game$.subscribe((response : Game) => this.game = response);
-		// }	
-
-		this.game$ = this.routerStore.pipe(select( game ))
-
-
+		this.game$ = this.gameStore.pipe(select(getGameByParam))
 	}
 }

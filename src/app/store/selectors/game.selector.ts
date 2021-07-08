@@ -18,23 +18,18 @@ export const selectEntity = id => createSelector(
 	entities => entities[id]
 );
 
-const routerParams = createSelector(
+const routeParams = createSelector(
 	(state : AppState) => state.router.state,
 	(state) => state.params
-)
 
-// used by paramSelector, 
-export const gameSelector = createSelector(
-	(state : AppState) => state.games,
-	(games : ReadonlyArray<Game>) => games
-);
+)
 
 export const getGameByParam = createSelector(
 	fromGame.selectAll,
-	routerParams,
-	(games : ReadonlyArray<Game>, { id }) => {
-		return games.filter((game : Game) => game.id === id)[0];
-	}	
+	routeParams,
+	(games, { id } ) => { 
+		return games.filter((game : Game) => game.id === id)[0]
+	}
 )
 
 // select by category

@@ -8,7 +8,7 @@ import { GameViewComponent } from './game-view/game-view.component';
 const routes: Routes = [
 	{path: '',component: GamesComponent,
 		children: [
-			{ path: 'all', component: GameBrowserComponent },
+			{ path: '', component: GameBrowserComponent },
 			{ path: 'info', component: GameInfoPanelComponent },
 			{ path: ':id', component: GameViewComponent }
 			// { path: 'game/:id', component: AdminGameFormComponent },

@@ -1,6 +1,5 @@
 import { Observable } from 'rxjs/Observable';
 import { Component, Input, OnInit } from '@angular/core';
-import { Forum } from 'src/app/models/content/forum.model';
 import * as fromForum from 'src/app/store/reducers/forum.reducer';
 import * as forumActions from 'src/app/store/actions/forum.actions';
 import * as forumSelectors from 'src/app/store/selectors/forum.selector';

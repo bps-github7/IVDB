@@ -3,6 +3,8 @@
 		*ngFor="let f of forums$ | async"	
 		class="list-group-item">
 		<!-- this prob wont work -->
-		<a [routerLink]="['./../' , f.id]">{{ f.title }}</a>
+		<a [routerLink]="['../forum/',f.id]">{{ f.title }}</a>
+
+		{{ f.description }}
 	</li>
 </ul>

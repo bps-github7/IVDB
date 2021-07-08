@@ -7,7 +7,7 @@ import { ForumViewComponent } from './forum-view/forum-view.component';
 const routes: Routes = [
 	{path: '', component: ForumComponent,
 		children: [
-			{ path: 'all', component: ForumBrowserComponent },
+			{ path: '', component: ForumBrowserComponent },
 			{ path: ':id', component: ForumViewComponent }
 		]
 

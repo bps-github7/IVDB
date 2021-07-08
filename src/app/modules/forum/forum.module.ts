@@ -22,9 +22,9 @@ import { ForumListComponent } from './forum-browser/forum-list/forum-list.compon
 	],
   imports: [
     CommonModule,
-		SharedModule,
     ForumRoutingModule,
-    ForumStoreModule
+    ForumStoreModule,
+		SharedModule
   ]
 })
 export class ForumModule { }

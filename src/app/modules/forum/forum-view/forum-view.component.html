@@ -1,12 +1,22 @@
-<div *ngIf="forum; else notFound">
-	<h3>Forum: {{ forum.title }}</h3>
+<!-- <div style ="height: 100%"> 
+	<section class="display-game" *ngIf="forum$ | async as forum">
+		<mat-card style="height: 300px; width: 300px;">
+			<h1>{{forum.title}}</h1>
+			<p>{{forum.description}}</p>
+		</mat-card>
+
+	</section>
+</div> -->
+
+<div *ngIf="forum$ | async as forum; else notFound">
+ <h3>Forum: {{ forum.title }}</h3>
 	<p>{{ forum.description }}</p>
 
 	threads listed below
 	moderators
 	top contributors
 	recent posts
-	etc
+	etc 
 </div>
 
 <ng-template #notFound>

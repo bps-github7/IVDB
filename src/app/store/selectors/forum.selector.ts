@@ -30,11 +30,11 @@ const routerParams = createSelector(
 	(state) => state.params
 )
 
-export const getGameByParam = createSelector(
+export const getForumByParam = createSelector(
 	fromForum.selectAll,
 	routerParams,
-	(forums : ReadonlyArray<Forum>, { id }) => {
-		return forums.filter((forum : Forum) => forum.id === id)[0];
+	(forums, { id }) => {	
+		return forums.filter((forum : Forum) => forum.id === id )[0];
 	}	
 )
 
