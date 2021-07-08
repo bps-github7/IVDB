@@ -17,6 +17,7 @@ import { getFamily } from 'src/app/store/selectors/game-info.selector';
 
 import { getGameByParam, selectEntity } from 'src/app/store/selectors/game.selector';
 import { Game } from 'src/app/models/content/game.model';
+import { FormBuilder, FormGroup, FormArray } from '@angular/forms';
 
 @Component({
   selector: 'admin-game-form',
@@ -32,39 +33,58 @@ export class AdminGameFormComponent implements OnInit {
 	game$ : Observable<any>;
 	game: Game;
 	id: string;
-	disableDeleteButton: boolean;
+	disableDeleteButton: boolean
+	
+	form: FormGroup;
+	initialState  = {
+		title : [''],
+		price : [0],
+		desciprtion : [''],
+		imageUrl : [''],
+		categories : this.fb.array([]),
+		creators : this.fb.array([]),
+		platforms : this.fb.array([]),
+		consoles : this.fb.array([])
+	};
 
 	constructor(
 		private gameInfoStore: Store<fromGameInfo.State>,
 		private gameStore : Store<fromGame.State>,
 		private route : ActivatedRoute,
-		private router : Router) { }
+		private router : Router,
+		private fb : FormBuilder		
+		) { }
 
 	ngOnInit(): void {
+
+
+
+
+
 		this.gameInfo$ = this.gameInfoStore.select(fromGameInfo.selectAll)
 		this.gameInfoStore.dispatch( gameInfoActions.readGameInfo() );
 
-		// just to be safe. also note, i dont think this is efficient./ economical
 		this.gameStore.dispatch( gameActions.readGames() );
-
-		// if there is no game being updated (ie game is being created) route param 'id' will read "new"
 		if (this.route.snapshot.paramMap.get('id') === "new") {
-
-			//  if that's the case, we need default values for game, to avoid errors with NgModel
-			this.game = { id : "", title : "", price : 0, description : "", categories : [], creators : [], platforms: [], consoles : []};
-			
-			// disable the delete button because we can't delete a game that doesnt exist yet
+			// this.game = { id : "", title : "", price : 0, description : "", categories : [], creators : [], platforms: [], consoles : []};
 			this.disableDeleteButton = true;
-		
+			this.form = this.fb.group(this.initialState)
 		} else {
-		
-			// read the route param id and get game object which matches 
-			this.game$ = this.gameStore.pipe(select( getGameByParam ))
 
-			// unwrap the observable
+
+			this.game$ = this.gameStore.pipe(select( getGameByParam ))
 			this.game$.subscribe((response : Game) => this.game = response);	
+			this.initialState  = {
+				title : [this.game.title],
+				price : [this.game.price],
+				desciprtion : [this.game.description],
+				imageUrl : [this.game.imageUrl],
+				categories : this.fb.array(this.game.categories),
+				creators : this.fb.array(this.game.creators),
+				platforms : this.fb.array(this.game.platforms),
+				consoles : this.fb.array(this.game.consoles)
+			};
 		
-			// we can delete the game because now we have an id value of something in the database
 			this.disableDeleteButton = false;
 		}
 

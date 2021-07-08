@@ -1,13 +1,21 @@
 <div class="row">
 	<h3>Game Form: create, edit or delete a game</h3>
 	<div class="col-md-6">       
+		<form [formGroup]="form">
+
+			<reactiveFormControl buildInfo></reactiveFormControl>
+
+			<button class="btn btn-primary">save</button>
+		</form>
+
+		
 		<!-- TODO: 
 			cannot update games at this time,
 			we really ought to shift these (admin-forum-form as well) to reactive forms
 			ngModel is saying object value tied to it should be immutable. throws an 
 			error when we try to change something during update.
 		-->
-		<form #finished="ngForm" (ngSubmit)="save(finished.value)">
+		<!-- <form #finished="ngForm" (ngSubmit)="save(finished.value)">
 			<div class="form-group">
 					<label for="title">Title: </label>
 					<input
@@ -100,8 +108,8 @@
 					<option *ngFor="let g of game_platforms$ | async" [value]="g.title">
 							{{ g.title }}
 					</option>
-				</select>
-				<!-- 
+				</select> 
+	 
 				<label *ngIf="platforms.value && !platforms.invalid">Console: </label>
 				<div id="console_sublist"  *ngIf="platforms.value == 'Nintendo'">
 					<ul>
@@ -155,7 +163,7 @@
 									</div>                            
 							</li>
 					</ul>
-				</div> -->
+				</div>
 				
 				<div *ngIf="platforms.touched && platforms.invalid" class="alert alert-danger">
 						<div *ngIf="platforms.errors.required">Console Maker(s) is required</div>
@@ -195,9 +203,9 @@
 					</div>
 			</div>
 			<button class="btn btn-primary" [disabled]="!finished.valid">Save/update game</button>
-			<!-- disable is tied to id variable because you cant delete a game that does not exist-->
-			<button type="button" class="btn btn-danger" [disabled]="disableDeleteButton" (click)="delete()">Delete game</button>
-		</form>
+		<button type="button" class="btn btn-danger" [disabled]="disableDeleteButton" (click)="delete()">Delete game</button>
+		</form>--->
+
 	</div>
 	<div class="col-md-6">
 			<div class="card" style="width: 18rem;">
