@@ -29,6 +29,7 @@ import { DialogComponent } from './components/dialog/dialog.component';
 import { MultiSelectChipsComponent } from './components/multi-select-chips/multi-select-chips.component';
 import { CrudHubComponent } from './components/crud-hub/crud-hub.component';
 import { CarouselComponent } from './components/carousel/carousel.component';
+import { MaterialModule } from './material/material.module';
 
 @NgModule({
   declarations: [
@@ -37,6 +38,9 @@ import { CarouselComponent } from './components/carousel/carousel.component';
     ZippyComponent,
     ReactiveFormControlComponent,
     MatDataTableComponent,
+		DialogComponent,
+    MultiSelectChipsComponent,
+    CarouselComponent,
 		CrudHubComponent,
     // pipes
 
@@ -44,29 +48,13 @@ import { CarouselComponent } from './components/carousel/carousel.component';
     // DisableControlDirective,
     // DropzoneDirective,
 
-    // MatDialogComponent,
-    DialogComponent,
-    MultiSelectChipsComponent,
-    CarouselComponent
+    
 ],
   imports: [
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
-    MatIconModule,
-    MatTableModule, 
-    MatTooltipModule,
-    MatSlideToggleModule,
-    // MatButtonToggleModule,
-    MatButtonModule,
-    MatDialogModule,
-    MatRadioModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatChipsModule,
-    MatProgressBarModule,
-    MatSelectModule,
-    MatCheckboxModule
+    MaterialModule
   ],
   providers: [
   ],
@@ -79,24 +67,10 @@ import { CarouselComponent } from './components/carousel/carousel.component';
     ReactiveFormControlComponent,
     MatDataTableComponent,
  
-		MatIconModule,
-    MatTableModule, 
-    MatTooltipModule,
-    MatSlideToggleModule,
-    // MatButtonToggleModule,
-    MatButtonModule,
-    MatDialogModule,
-    MatRadioModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatChipsModule,
-    MatProgressBarModule,
-    MatSelectModule,
-    MatCheckboxModule,
-
 		//for testing only
 		CrudHubComponent,
-    CarouselComponent
+    CarouselComponent,
+		MaterialModule
 		// pipes
 
     // directives 

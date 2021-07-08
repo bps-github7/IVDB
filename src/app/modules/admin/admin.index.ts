@@ -49,10 +49,6 @@ export const effects : any [] = [ContentEffects, GameInfoEffects];
 		EffectsModule.forFeature([ForumEffects])
 
 	],
-	// exports: [
-	// 	StoreModule.forFeature('admin module', reducers),
-	// 	EffectsModule.forFeature([ContentEffects]),
-	// 	EffectsModule.forFeature([GameEffects]),
-  // ]
+	exports: [ ]
 })
 export class AdminStoreModule { }
