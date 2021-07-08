@@ -1,40 +1,33 @@
-<div class="row">
+<!-- <div class="row">
 	<div class="col-md-6">
 			<div class="card" style="width: 18rem;">
 					<img class="card-img-top" [src]="game.imageUrl" alt="the game in question">
 					<div class="card-body">
 							<h5 class="card-title">{{ game.title }}</h5>
 							<p class="card-text">{{ game.price | currency:'USD':true }}</p>
-							<!-- <div *ngIf="appUser; else anonymousUser">
-									
-							</div>
-							<ng-template #anonymousUser> 
-									Please create an account and sign in to rate or review
-							</ng-template>
-						 -->
-							<!--TODO: put this in the module declarations 
-									
-									<provide-rating [game_title]="game.title" [username]="username"></provide-rating> -->
+							<p> if user : provide rate or review; else, show avg, bounce to sign in/ warn them if providing is attemted </p>
 					</div>
 			</div>
 	</div>
 	<div class="col-md-6">
 			{{ game.description }}
-
-			<!-- the way you look the comments up will need to be more rigerous since 
-			two types of content could have the same content id. -->
-			<!--TODO: put this in module declarations:
-					
-					<comment-section [contentId]="game_id" [username]="username"></comment-section> -->
 	</div>
 	<footer>
-			<!-- Note we need to make Game attribute console_maker more specific, console_makers is simply a way to categorize games-->
-			<ul>
+		<ul>
 
-					<li>Categories: {{ game.categories }}</li>
-					<li>Creators: {{ game.creators }}</li>
-					<li>consoles: {{ game.platforms }}</li>
-			</ul>
-			<a routerLink="../">Go back to game list</a>
+				<li>Categories: {{ game.categories }}</li>
+				<li>Creators: {{ game.creators }}</li>
+				<li>consoles: {{ game.platforms }}</li>
+		</ul>
+		<a routerLink="../">Go back to game list</a>
 	</footer>
+</div> -->
+
+<div style ="height: 100%"> 
+	<section class="display-game" *ngIf="game$ | async as game">
+		<mat-card style="height: 300px; width: 300px;">
+			<h1>{{game.title}}</h1>
+		</mat-card>
+
+	</section>
 </div>

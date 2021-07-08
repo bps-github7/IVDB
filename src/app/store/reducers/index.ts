@@ -7,19 +7,44 @@ import { ForumReducer } from "./forum.reducer";
 import { ForumInfoReducer } from "./forum-info.reducer";
 import { Content } from 'src/app/models/content/content.model';
 import { environment } from 'src/environments/environment';
+import { routerReducer, RouterReducerState } from '@ngrx/router-store';
+import { Game } from 'src/app/models/content/game.model';
+import { GameInfo } from 'src/app/models/content/game-info.model';
+import { Forum } from 'src/app/models/content/forum.model';
+import { ForumInfo } from 'src/app/models/content/forum-info.model';
+import { VideogameConsole } from 'src/app/models/content/videogame-console.model';
 
 export interface AppState  {
-	content : Content []
+	router : RouterReducerState<any>;
+	content : ReadonlyArray<Content>;
+	games : ReadonlyArray<Game>;
+	gameInfo : ReadonlyArray<GameInfo>;
+	forum : ReadonlyArray<Forum>;
+	forumInfo : ReadonlyArray<ForumInfo>;
+	videogameConsole : ReadonlyArray<VideogameConsole>;
+	
+	// thread : ReadonlyArray<Thread>;
+	// rating : ReadonlyArray<Rating>;
+	// review : ReadoonlyArray<Review>;
+	// feedback : ReadonlyArray<Feedback>;
+	// suggestion : ReadonlyArray<Suggestion>;
 }
 
 export const reducers: ActionReducerMap<any> = {
+
+	// ngrx specific function reducers
+	router : routerReducer,
+
+	// IVDB reducers
 	content : ContentReducer,
 	game : GameReducer,
 	gameInfo : GameInfoReducer,
-	// contrib : contribReducer,
 	forum : ForumReducer,
 	forumInfo : ForumInfoReducer,
 	videogameConsole : VideogameConsoleReducer
+
+	// unimplemented reducers...
+	// contrib : contribReducer,
 	// user : userReducer,
 	// admin : adminReducer
 }
@@ -31,8 +56,11 @@ export * from './content.reducer';
 
 const metaDebugger = (reducer : ActionReducer<any>) : ActionReducer<any> => {
 	return (state, action) => {
-		console.log(`action : ${action}`);
-		console.log(`state : ${state}`);
+		// // yes, commenting this out makes metaReducer pretty much pointless,
+		// // but we will keep in the case where this debug output is something we need
+		// // ... a lot more contol here, than random console log t/o the application src.
+		// console.log("action : ",action);
+		// console.log("state : ",state);
 		return reducer(state, action);
 	}
 };

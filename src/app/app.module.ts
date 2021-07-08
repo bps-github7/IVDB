@@ -13,6 +13,7 @@ import { reducers, metaReducers } from 'src/app/store/reducers';
 import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { EffectsModule } from '@ngrx/effects';
+import { StoreRouterConnectingModule } from '@ngrx/router-store';
 
 
 
@@ -31,6 +32,7 @@ import { AngularFirestoreModule } from '@angular/fire/firestore';
 // our custom service for getting server timestamps
 import { FirebaseService } from './services/firebase.service';
 import { environment } from 'src/environments/environment';
+import { RouterSerializer } from './store/router-serializer';
 
 
 @NgModule({
@@ -59,7 +61,10 @@ import { environment } from 'src/environments/environment';
 		// ngrx 
 		StoreModule.forRoot(reducers, { metaReducers }),
 		StoreDevtoolsModule.instrument({maxAge: 25}),
-		EffectsModule.forRoot([])
+		EffectsModule.forRoot([]),
+		StoreRouterConnectingModule.forRoot({
+			serializer: RouterSerializer
+		})
 	],
   providers: [
 		FirebaseService
