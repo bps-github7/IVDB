@@ -17,7 +17,27 @@ items for Internet Video Game Database
 - meta reducer
 - authentication
 - store-router
+
 - keep learning
+
+### Modules
+1) admin
+- console crud form
+- delete game-form and forum-form, use dialog component instead (see #4.1 in this list first)
+2) user
+
+3) content
+
+4) shared
+- reactive-form-control : doesnt handle async data, checkbox, radio
+- contrib : rate, review, comment section, user feedback, thread creation
+- carousel component : make a dumb component which takes a slice of gameState
+5) core
+	- authentication
+
+6) forum
+
+7) games
 
 ### Styling
 - Responsive (dropdown) navbar

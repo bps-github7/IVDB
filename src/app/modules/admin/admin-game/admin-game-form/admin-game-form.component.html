@@ -188,9 +188,9 @@
 							<div *ngIf="imageUrl.errors.url">Must be a valid URL</div>
 					</div>
 			</div>
-			<button class="btn btn-primary" disabled="!finished.valid">Save/update game</button>
+			<button class="btn btn-primary" [disabled]="!finished.valid">Save/update game</button>
 			<!-- disable is tied to id variable because you cant delete a game that does not exist-->
-			<button type="button" class="btn btn-danger" disabled="disableDeleteButton" (click)="delete()">Delete game</button>
+			<button type="button" class="btn btn-danger" [disabled]="disableDeleteButton" (click)="delete()">Delete game</button>
 		</form>
 	</div>
 	<div class="col-md-6">
