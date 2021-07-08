@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { Store } from '@ngrx/store';
+import { select, Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { Forum } from 'src/app/models/content/forum.model';
 import * as fromForum from 'src/app/store/reducers/forum.reducer';
@@ -9,7 +9,7 @@ import * as fromForumInfo from 'src/app/store/reducers/forum-info.reducer';
 import * as forumActions from 'src/app/store/actions/forum.actions';
 import * as forumInfoActions from 'src/app/store/actions/forum-info.actions';
 import { getFamily } from 'src/app/store/selectors/forum-info.selector';
-import { selectEntity } from 'src/app/store/selectors/forum.selector';
+import { selectEntity, getForumByParam } from 'src/app/store/selectors/forum.selector';
 
 import v4 from 'uuid';
 
@@ -32,8 +32,7 @@ export class AdminForumFormComponent implements OnInit {
 
 	disableDeleteButton: boolean;
 
-	constructor(
-			
+	constructor(			
 			private forumInfoStore: Store<fromForumInfo.State>,
 			private forumStore : Store<fromForum.State>,
 			private router : Router,
@@ -42,34 +41,30 @@ export class AdminForumFormComponent implements OnInit {
 	ngOnInit(): void {
 		this.forumInfo$ = this.forumInfoStore.select(fromForumInfo.selectAll)
 		this.forumInfoStore.dispatch( forumInfoActions.readForumInfo() );
-
 		this.forumFamilies$ = this.forumInfoStore.select(getFamily("family"))
 		// this.forum_prefixes$ =  this.forumInfoStore.select(getFamily("prefix"))
 		// this.forum_types$ =  this.forumInfoStore.select(getFamily("type"))
+		this.forumStore.dispatch( forumActions.readForum() );
+		if (this.route.snapshot.paramMap.get('id') === "new") {
 
-		// if (this.route.snapshot.paramMap.get('id'))
-		this.id = this.route.snapshot.paramMap.get('id');
+			//  if that's the case, we need default values for forum, to avoid errors with NgModel
+			this.forum = { id : "",	creator : "",	title : "",	description : "",	family: "" }
 
-		if(this.id === "new") {
-			this.id = '';
-			this.disableDeleteButton = true		
-			//gives the form control default values
-			this.forum = {
-				id : "",
-				creator : "",
-				title : "",
-				description : "",
-				family: "",
+			// disable the delete button because we can't delete a forum that doesnt exist yet
+			this.disableDeleteButton = true;
+		
+		} else {
+		
+			// read the route param id and get forum object which matches 
+			this.forum$ = this.forumStore.pipe(select( getForumByParam ))
 
-			}
+			// unwrap the observable
+			this.forum$.subscribe((response : Forum) => this.forum = response);	
+		
+			// we can delete the forum because now we have an id value of something in the database
+			this.disableDeleteButton = false;
 		}
-	
-		if (this.id != "new" && this.id.length > 1) {
-			this.forum$ = this.forumStore.select(selectEntity(this.id))
-			this.forum$.subscribe((response : Forum) => this.forum = response)
-			this.disableDeleteButton = false
-		}
-}
+	}
 
 	save(forum) {
 		if(this.id) {
@@ -88,6 +83,4 @@ export class AdminForumFormComponent implements OnInit {
 		}			
 		return;
 	}
-
-
 }

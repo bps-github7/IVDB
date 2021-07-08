@@ -1,6 +1,12 @@
 <div class="row">
-	<h3>admin's game form: create, edit or delete a game</h3>
+	<h3>Game Form: create, edit or delete a game</h3>
 	<div class="col-md-6">       
+		<!-- TODO: 
+			cannot update games at this time,
+			we really ought to shift these (admin-forum-form as well) to reactive forms
+			ngModel is saying object value tied to it should be immutable. throws an 
+			error when we try to change something during update.
+		-->
 		<form #finished="ngForm" (ngSubmit)="save(finished.value)">
 			<div class="form-group">
 					<label for="title">Title: </label>
@@ -198,7 +204,7 @@
 					<img class="card-img-top" [src]="game.imageUrl" alt="Cover of the game being created or edited">
 					<div class="card-body">
 						<h5 class="card-title">{{ game.title }}</h5>
-						<p class="card-text">{{ game.price | currency:'USD':true }}</p>
+						<p class="card-text">{{ game.price | currency:'USD':'symbol' }}</p>
 					</div>
 				</div>
 	</div>

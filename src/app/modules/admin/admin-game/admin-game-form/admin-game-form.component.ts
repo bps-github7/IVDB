@@ -30,14 +30,13 @@ export class AdminGameFormComponent implements OnInit {
 	game_creators$: Observable<any>;
 	game_platforms$: Observable<any>;
 	game$ : Observable<any>;
-	game: Game = { id : "", title : "", price : 0, description : "", categories : [], creators : [], platforms: [], consoles : []};
+	game: Game;
 	id: string;
 	disableDeleteButton: boolean;
 
 	constructor(
 		private gameInfoStore: Store<fromGameInfo.State>,
 		private gameStore : Store<fromGame.State>,
-		private routerStore : Store<AppState>,
 		private route : ActivatedRoute,
 		private router : Router) { }
 
@@ -45,28 +44,38 @@ export class AdminGameFormComponent implements OnInit {
 		this.gameInfo$ = this.gameInfoStore.select(fromGameInfo.selectAll)
 		this.gameInfoStore.dispatch( gameInfoActions.readGameInfo() );
 
+		// just to be safe. also note, i dont think this is efficient./ economical
+		this.gameStore.dispatch( gameActions.readGames() );
+
+		// if there is no game being updated (ie game is being created) route param 'id' will read "new"
+		if (this.route.snapshot.paramMap.get('id') === "new") {
+
+			//  if that's the case, we need default values for game, to avoid errors with NgModel
+			this.game = { id : "", title : "", price : 0, description : "", categories : [], creators : [], platforms: [], consoles : []};
+			
+			// disable the delete button because we can't delete a game that doesnt exist yet
+			this.disableDeleteButton = true;
+		
+		} else {
+		
+			// read the route param id and get game object which matches 
+			this.game$ = this.gameStore.pipe(select( getGameByParam ))
+
+			// unwrap the observable
+			this.game$.subscribe((response : Game) => this.game = response);	
+		
+			// we can delete the game because now we have an id value of something in the database
+			this.disableDeleteButton = false;
+		}
+
+
+
+
+
 		this.game_categories$ = this.gameInfoStore.select(getFamily("category"))
 		this.game_creators$ =  this.gameInfoStore.select(getFamily("creator"))
 		this.game_platforms$ =  this.gameInfoStore.select(getFamily("platform"))
-
-		// this.game$ = this.routerStore.select( getGameByParam(game) )
-
-
-		// this chain of conditionals sucks and makes this form buggy
-		if (this.route.snapshot.paramMap.get('id'))
-		this.id = this.route.snapshot.paramMap.get('id');
-
-		if(this.id === "new") {
-			this.id = '';
-			this.disableDeleteButton = true		
-		}
-	
-		if (this.id != "new" && this.id.length > 1) {
-			this.game$ = this.gameStore.select(selectEntity(this.id))
-			this.game$.subscribe((response : Game) => this.game = response)
-			this.disableDeleteButton = false
-		}
-}
+	}
 
 	save(game) {
 		if(this.id) {
