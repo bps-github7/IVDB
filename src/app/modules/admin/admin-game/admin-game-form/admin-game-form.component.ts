@@ -47,6 +47,9 @@ export class AdminGameFormComponent implements OnInit {
 	ngOnInit(): void {
 		
 		// getting game and gameInfo data from the store.
+
+		// this.game$ = this.gameStore.select(fromGame.selectAll)
+		
 		this.gameStore.dispatch( gameActions.readGames() );
 		this.gameInfoStore.dispatch( gameInfoActions.readGameInfo() )
 
