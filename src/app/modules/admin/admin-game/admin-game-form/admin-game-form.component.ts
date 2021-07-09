@@ -18,6 +18,7 @@ import { getFamily } from 'src/app/store/selectors/game-info.selector';
 import { getGameByParam, selectEntity } from 'src/app/store/selectors/game.selector';
 import { Game } from 'src/app/models/content/game.model';
 import { FormBuilder, FormGroup, FormArray } from '@angular/forms';
+import { take } from 'rxjs/operators';
 
 interface buildInfoObj {
 	type : string;
@@ -47,20 +48,20 @@ export class AdminGameFormComponent implements OnInit {
 	game_creators$: Observable<any>;
 	game_platforms$: Observable<any>;
 	game$ : Observable<any>;
-	game: Game;
+	game: Game = {id : "a weasel fell in my dick", title: "",price : 0, description : "", imageUrl : "", categories : [], creators : [], platforms: [], consoles : []};
 	id: string;
 	disableDeleteButton: boolean
 	
 	form: FormGroup;
 	initialState  = {
-		title : [''],
+		title : ['my ass taste like sweat'],
 		price : [0],
 		desciprtion : [''],
 		imageUrl : [''],
-		categories : this.fb.array([]),
-		creators : this.fb.array([]),
-		platforms : this.fb.array([]),
-		consoles : this.fb.array([])
+		// categories : this.fb.array([]),
+		// creators : this.fb.array([]),
+		// platforms : this.fb.array([]),
+		// consoles : this.fb.array([])
 	}
 	buildInfo  = [
 		{
@@ -96,38 +97,34 @@ export class AdminGameFormComponent implements OnInit {
 		) { }
 
 	ngOnInit(): void {
-
 		this.gameInfo$ = this.gameInfoStore.select(fromGameInfo.selectAll)
 		this.gameInfoStore.dispatch( gameInfoActions.readGameInfo() );
-
 		this.gameStore.dispatch( gameActions.readGames() );
-		if (this.route.snapshot.paramMap.get('id') === "new") {
-			// this.game = { id : "", title : "", price : 0, description : "", categories : [], creators : [], platforms: [], consoles : []};
-			this.disableDeleteButton = true;
-			this.form = this.fb.group(this.initialState)
-		} 
-		else {
-			this.game$ = this.gameStore.pipe(select( getGameByParam ))
-			this.game$.subscribe((response : Game) => this.game = response);	
-			console.log("hey this executed!")
-			if (this.game) {
-				this.initialState  = {
-					title : [this.game.title],
-					price : [this.game.price],
-					desciprtion : [this.game.description],
-					imageUrl : [this.game.imageUrl],
-					categories : this.fb.array(this.game.categories),
-					creators : this.fb.array(this.game.creators),
-					platforms : this.fb.array(this.game.platforms),
-					consoles : this.fb.array(this.game.consoles)
-				}
-				console.log("and also this!")				
-		
-			}
-			this.form = this.fb.group(this.initialState)
-		
-			this.disableDeleteButton = false;
+		this.game$ = this.gameStore.pipe(select( getGameByParam ))
+		this.game$.subscribe((response :Game) => this.game = response);
+		this.initialState = {
+			title : [this.game.title],
+			price : [this.game.price],
+			desciprtion : [this.game.description],
+			imageUrl : [this.game.imageUrl],
+			// categories : this.fb.array(this.game.categories),
+			// creators : this.fb.array(this.game.creators),
+			// platforms : this.fb.array(this.game.platforms),
+			// consoles : this.fb.array(this.game.consoles)
 		}
+		this.form = this.fb.group(this.initialState)	
+		this.disableDeleteButton = false;
+		// if (this.route.snapshot.paramMap.get('id') === "new") {
+		// 	// this.game = { id : "", title : "", price : 0, description : "", categories : [], creators : [], platforms: [], consoles : []};
+		// 	this.disableDeleteButton = true;
+		// } 
+		// else {
+		// 	this.game$ = this.gameStore.pipe(select( getGameByParam ))
+		// 	this.game$.subscribe(response => this.game = response);
+		// 	this.disableDeleteButton = false;
+		// 	console.log(this.game)
+		// }
+		
 
 		this.asyncBuildInfo = [	
 		{
@@ -166,10 +163,7 @@ export class AdminGameFormComponent implements OnInit {
 
 		this.game_categories$ = this.gameInfoStore.select(getFamily("category"))
 		this.game_creators$ = this.gameInfoStore.select(getFamily("creator"))
-		this.game_platforms$ = this.gameInfoStore.select(getFamily("platform"))
-
-
-		
+		this.game_platforms$ = this.gameInfoStore.select(getFamily("platform"))		
 	}
 
 	save(game) {
