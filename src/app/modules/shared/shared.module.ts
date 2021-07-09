@@ -31,6 +31,7 @@ import { CrudHubComponent } from './components/crud-hub/crud-hub.component';
 import { CarouselComponent } from './components/carousel/carousel.component';
 import { MaterialModule } from './material/material.module';
 import { ReactiveAsyncFormControlComponent } from './components/reactive-async-form-control/reactive-async-form-control.component';
+import { ConnectFormDirective } from './directives/connect-form.directive';
 
 @NgModule({
   declarations: [
@@ -44,6 +45,7 @@ import { ReactiveAsyncFormControlComponent } from './components/reactive-async-f
     CarouselComponent,
 		CrudHubComponent,
   ReactiveAsyncFormControlComponent,
+  ConnectFormDirective,
     // pipes
 
     // directives 
@@ -72,12 +74,13 @@ import { ReactiveAsyncFormControlComponent } from './components/reactive-async-f
 		//for testing only
 		CrudHubComponent,
     CarouselComponent,
-		MaterialModule
+		MaterialModule,
 		// pipes
 
     // directives 
     // DisableControlDirective,
     // DropzoneDirective
+		ConnectFormDirective
   ]
 })
 export class SharedModule { }

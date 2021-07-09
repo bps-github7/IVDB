@@ -33,7 +33,7 @@ import { AdminForumFormComponent } from './admin-forum/admin-forum-form/admin-fo
 		AdminGameInfoComponent,
 		AdminContentManagerComponent,
 		AdminConsolesComponent,
-		AdminForumFormComponent
+		AdminForumFormComponent,
 	],
   imports: [
     CommonModule,

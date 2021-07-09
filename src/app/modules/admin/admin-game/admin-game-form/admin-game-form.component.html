@@ -1,48 +1,93 @@
 <div class="row">
 	<h3>Game Form: create, edit or delete a game</h3>
 	<div class="col-md-6">       
-		<form [formGroup]="form">
+		<form [connectForm]="game$ | async" [formGroup]="form">
 			<div class="form-group">
 				<label for="title">Title: </label>
 				<input 
-					id="title"
-					formControlName="title"
-					class="form-control">
+					type="text"
+					class="form-control"
+					formControlName="title">
 			</div>
-			
-			<label for="price">Price: </label>
-			<span class="input-group-addon">$</span>
-			<input 
-				type="number"
-				id="price"
-
-				formControlName="price"
-				class="form-control">
-
+		
 			<div class="form-group">
-				<label for="description">Description:
-					<textarea 
-						id="description" 
-						cols="30" 
-						rows="10" 
-						formControlName="description"
-						class="form-control"></textarea>
-				</label>	
-			</div>
-			
-			<div class="form-group">
-				<label for="imageUrl">Image Url: </label>
+				<label for="price">Price: </label>
+				<span class="input-group-addon">$</span>
 				<input 
-					id="imageUrl"
-					formControlName="imageUrl"
-					class="form-control">
+					type="number"
+					class="form-control"
+					formControlName="price"
+					>
 			</div>
-			<button class="btn btn-primary">Save/update game</button>
-			<!-- <button class="btn btn-primary" [disabled]="!finished.valid">Save/update game</button> -->
-			<button type="button" class="btn btn-danger" [disabled]="disableDeleteButton" (click)="delete()">Delete game</button>
+		
+			<div class="form-group">
+				<label for="description">Description: </label>
+				<textarea 
+					class="form-control"
+					formControlName="description"></textarea>
+			</div>
+		
+			<div class="form-group">
+				<label for="imageUrl">Cover Image URL: </label>
+				<input 
+					type="text"
+					class="form-control"
+					formControlName="imageUrl"
+					>
+			</div>
+		
+			<!-- <div class="form-group">
+				<label for="categories">Categories: </label>
+				<select 
+					multiple 
+					class="form-control"
+					formControlName="categories">
+					<option value=""></option>
+					<option 
+						*ngFor="let opt of (categories$ | async)"	
+						[value]="opt.title">
+						{{ opt.title }}
+					</option>
+				</select>
+			</div>
+		
+			<div class="form-group">
+				<label for="creators">Creators: </label>
+				<select 
+					multiple 
+					class="form-control"
+					formControlName="creators">
+					<option value=""></option>
+					<option 
+						*ngFor="let opt of (creators$ | async)"	
+						[value]="opt.title">
+						{{ opt.title }}
+					</option>
+				</select>
+			</div>
+		
+			<div class="form-group">
+				<label for="platforms">Platforms: </label>
+				<select 
+					multiple 
+					class="form-control"
+					formControlName="platforms">
+					<option value=""></option>
+					<option 
+						*ngFor="let opt of (platforms$ | async)"	
+						[value]="opt.title">
+						{{ opt.title }}
+					</option>
+				</select>
+			</div>
+		 -->
+			<div class="form-group">
+				consoles go here, checkbox options are determined by above choice for platform
+			</div>
+			<!-- {{ formValue | json }} -->
 		</form>
 	</div>
-	<div class="col-md-6">
+	<div *ngIf="game$ | async as game" class="col-md-6">
 		<div class="card" style="width: 18rem;">
 				<img class="card-img-top" [src]="game.imageUrl" alt="Cover of the game being created or edited">
 				<div class="card-body">
