@@ -45,7 +45,7 @@ export class AdminForumFormComponent implements OnInit {
 		// this.forum_prefixes$ =  this.forumInfoStore.select(getFamily("prefix"))
 		// this.forum_types$ =  this.forumInfoStore.select(getFamily("type"))
 		this.forumStore.dispatch( forumActions.readForum() );
-		if (this.route.snapshot.paramMap.get('id') === "new") {
+		if (this.route.snapshot.paramMap.get('forumId') === "new") {
 
 			//  if that's the case, we need default values for forum, to avoid errors with NgModel
 			this.forum = { id : "",	creator : "",	title : "",	description : "",	family: "" }

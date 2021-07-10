@@ -27,8 +27,8 @@ const routeParams = createSelector(
 export const getGameByParam = createSelector(
 	fromGame.selectAll,
 	routeParams,
-	(games, { id } ) => { 
-		return games.filter((game : Game) => game.id === id)[0]
+	(games, { gameId } ) => { 
+		return games.filter((game : Game) => game.id === gameId)[0]
 	}
 )
 

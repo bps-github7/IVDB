@@ -41,7 +41,7 @@
 				<select 
 					multiple 
 					class="form-control"
-					formControlName="categories">
+					formControl="categories">
 					<option value=""></option>
 					<option 
 						*ngFor="let opt of (categories$ | async)"	
@@ -84,7 +84,10 @@
 			<div class="form-group">
 				consoles go here, checkbox options are determined by above choice for platform
 			</div>
-			<!-- {{ formValue | json }} -->
+
+			<button class="btn btn-primary" (click)="save(form.value)"  >Save game</button>
+			<button class="btn alert-danger" (click)="delete()" [disabled]="disableDeleteButton">Delete game</button>
+		
 		</form>
 	</div>
 	<div *ngIf="game$ | async as game" class="col-md-6">

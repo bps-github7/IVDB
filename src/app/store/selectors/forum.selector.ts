@@ -33,8 +33,8 @@ const routerParams = createSelector(
 export const getForumByParam = createSelector(
 	fromForum.selectAll,
 	routerParams,
-	(forums, { id }) => {	
-		return forums.filter((forum : Forum) => forum.id === id )[0];
+	(forums, { forumId }) => {	
+		return forums.filter((forum : Forum) => forum.id === forumId )[0];
 	}	
 )
 

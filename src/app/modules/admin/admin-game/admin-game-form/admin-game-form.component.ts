@@ -35,6 +35,7 @@ export class AdminGameFormComponent implements OnInit {
 	// game: Game = {id : "a weasel fell in my dick", title: "",price : 0, description : "", imageUrl : "", categories : [], creators : [], platforms: [], consoles : []};
 	form: FormGroup;
 	id: string;
+	disableDeleteButton: boolean = true;
 	
 	constructor(
 		private gameInfoStore: Store<fromGameInfo.State>,
@@ -48,8 +49,7 @@ export class AdminGameFormComponent implements OnInit {
 		
 		// getting game and gameInfo data from the store.
 
-		// this.game$ = this.gameStore.select(fromGame.selectAll)
-		
+		this.game$ = this.gameStore.select(fromGame.selectAll)
 		this.gameStore.dispatch( gameActions.readGames() );
 		this.gameInfoStore.dispatch( gameInfoActions.readGameInfo() )
 
@@ -63,34 +63,43 @@ export class AdminGameFormComponent implements OnInit {
 			price : [0],
 			description : [""],
 			imageUrl : [""],
-			categories : this.fb.array([]),
-			creators : this.fb.array([]),
-			platforms : this.fb.array([]),
-			consoles : this.fb.array([]),
+			categories : [],
+			creators : [],
+			platforms : [],
+			consoles : [],
 		})		
+
+		//  cheating w/ activated route to see if we are updating or creating a new game
+		if (this.route.snapshot.paramMap.get('gameId') !== "new") {
+			this.id = this.route.snapshot.paramMap.get('gameId')
+			this.disableDeleteButton = false
+		}
+
 	}
 
-	// get formValue() {
-	// 	return this.form.value
-	// }
+	/* 
+	TODO:
+	1. test both these methods
+	2. form validation
+	3. carefully control whether either control is clickable
+	4. add safeguards in method (in case a button is clicked when it shouldnt have been able to be clicked)	
+	*/
+	save(game) {
+		if(this.id) {
+			this.gameStore.dispatch( gameActions.updateGame({id : this.id, data : this.form.value }) )
+			this.router.navigate(['/admin/game']);	
+		} else {
+			this.gameStore.dispatch(gameActions.createGame({ id : v4(), ...game}));	
+			this.router.navigate(['/admin/game']);	
+		}
+		}
 
-	// need to rewrite this for reactive forms 
-	// save(game) {
-	// 	if(this.id) {
-	// 		this.gameStore.dispatch( gameActions.updateGame({id : this.id, data : this.form.value }) )
-	// 		this.router.navigate(['/admin/game']);	
-	// 	} else {
-	// 		this.gameStore.dispatch(gameActions.createGame({ id : v4(), ...game}));	
-	// 		this.router.navigate(['/admin/game']);	
-	// 	}
-	// 	}
-
-	// delete() {
-	// 	if (confirm('Are you sure that you want to delete this game?')) {
-	// 		this.gameStore.dispatch( gameActions.deleteGame({ id : this.id}) )
-	// 		this.router.navigate(['/admin/game']);
-	// 	}			
-	// 	return;
-	// }
+	delete() {
+		if (confirm('Are you sure that you want to delete this game?')) {
+			this.gameStore.dispatch( gameActions.deleteGame({ id : this.id}) )
+			this.router.navigate(['/admin/game']);
+		}			
+		return;
+	}
 
 }
