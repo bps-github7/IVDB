@@ -16,7 +16,7 @@ import { getFamily } from 'src/app/store/selectors/game-info.selector';
 
 import { getGameByParam, selectEntity } from 'src/app/store/selectors/game.selector';
 import { Game } from 'src/app/models/content/game.model';
-import { FormBuilder, FormGroup, FormArray } from '@angular/forms';
+import { FormBuilder, FormGroup, FormArray, Validators } from '@angular/forms';
 import { take } from 'rxjs/operators';
 
 
@@ -32,7 +32,6 @@ export class AdminGameFormComponent implements OnInit {
 	creators$: Observable<any>;
 	platforms$: Observable<any>;
 	game$ : Observable<any>;
-	// game: Game = {id : "a weasel fell in my dick", title: "",price : 0, description : "", imageUrl : "", categories : [], creators : [], platforms: [], consoles : []};
 	form: FormGroup;
 	id: string;
 	disableDeleteButton: boolean = true;
@@ -59,9 +58,9 @@ export class AdminGameFormComponent implements OnInit {
 		this.platforms$ = this.gameInfoStore.pipe(select( getFamily("platform") ))
 
 		this.form = this.fb.group({
-			title : [""],
-			price : [0],
-			description : [""],
+			title : ["", Validators.required],
+			description : ["", Validators.required],
+			price : [0, Validators.min(0)],
 			imageUrl : [""],
 			categories : [],
 			creators : [],
@@ -77,6 +76,38 @@ export class AdminGameFormComponent implements OnInit {
 
 	}
 
+	get title () {
+		return this.form.get('title');
+	}
+
+	get description () {
+		return this.form.get('description');
+	}
+
+	get price () {
+		return this.form.get('price');
+	}
+
+	get imageUrl () {
+		return this.form.get('imageUrl');
+	}
+
+	get categories () {
+		return this.form.get('categories');
+	}
+
+	get creators () {
+		return this.form.get('creators');
+	}
+
+	get platforms () {
+		return this.form.get('platforms');
+	}
+
+	get consoles () {
+		return this.form.get('consoles');
+	}
+
 	/* 
 	TODO:
 	1. test both these methods
@@ -86,11 +117,13 @@ export class AdminGameFormComponent implements OnInit {
 	*/
 	save(game) {
 		if(this.id) {
-			this.gameStore.dispatch( gameActions.updateGame({id : this.id, data : this.form.value }) )
-			this.router.navigate(['/admin/game']);	
+			console.log("this happens")
+			this.gameStore.dispatch( gameActions.updateGame({id : this.id, data : game}) )
+			this.router.navigate(['../../']);	
 		} else {
+			console.log("that happens")
 			this.gameStore.dispatch(gameActions.createGame({ id : v4(), ...game}));	
-			this.router.navigate(['/admin/game']);	
+			this.router.navigate(['../']);	
 		}
 		}
 

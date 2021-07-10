@@ -8,6 +8,8 @@
 					type="text"
 					class="form-control"
 					formControlName="title">
+				<div *ngIf="title.errors?.required" class="alert-danger">Title is required</div>
+			
 			</div>
 		
 			<div class="form-group">
@@ -15,9 +17,11 @@
 				<span class="input-group-addon">$</span>
 				<input 
 					type="number"
+					min=0
 					class="form-control"
-					formControlName="price"
-					>
+					formControlName="price">
+				<div *ngIf="price.errors?.min" class="alert-danger">Minimum price is $0 (free)</div>
+				
 			</div>
 		
 			<div class="form-group">
@@ -25,6 +29,7 @@
 				<textarea 
 					class="form-control"
 					formControlName="description"></textarea>
+				<div *ngIf="description.errors?.required" class="alert-danger">Description is required</div>
 			</div>
 		
 			<div class="form-group">
@@ -85,7 +90,7 @@
 				consoles go here, checkbox options are determined by above choice for platform
 			</div>
 
-			<button class="btn btn-primary" (click)="save(form.value)"  >Save game</button>
+			<button class="btn btn-primary" (click)="save(form.value)" [disabled]="!form.valid">Save game</button>
 			<button class="btn alert-danger" (click)="delete()" [disabled]="disableDeleteButton">Delete game</button>
 		
 		</form>
