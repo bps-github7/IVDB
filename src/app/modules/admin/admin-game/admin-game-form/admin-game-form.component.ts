@@ -62,10 +62,10 @@ export class AdminGameFormComponent implements OnInit {
 			description : ["", Validators.required],
 			price : [0, Validators.min(0)],
 			imageUrl : [""],
-			categories : [],
-			creators : [],
-			platforms : [],
-			consoles : [],
+			categories : this.fb.array([]),
+			creators :this.fb.array([]), 
+			platforms :this.fb.array([]), 
+			consoles :this.fb.array([]) 
 		})		
 
 		//  cheating w/ activated route to see if we are updating or creating a new game
@@ -116,6 +116,7 @@ export class AdminGameFormComponent implements OnInit {
 	4. add safeguards in method (in case a button is clicked when it shouldnt have been able to be clicked)	
 	*/
 	save(game) {
+		console.log(game)
 		if(this.id) {
 			console.log("this happens")
 			this.gameStore.dispatch( gameActions.updateGame({id : this.id, data : game}) )
