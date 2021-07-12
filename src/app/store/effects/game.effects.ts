@@ -41,7 +41,7 @@ export class GameEffects {
 		switchMap(game => {
 			// console.log(`going to update doc with id: ${content.id}\n and data:`)
 			// console.log(content.data);
-			const ref = this.afs.doc<Game>(`content/${game.id}`)
+			const ref = this.afs.doc<Game>(`games/${game.id}`)
 			return Observable.fromPromise(ref.update({id : game.id,  ...game.data}))
 		}),
 		map(() => gameActions.updateGameSuccess())

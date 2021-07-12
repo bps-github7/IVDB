@@ -1,5 +1,6 @@
 <div class="row">
 	<h3>Game Form: create, edit or delete a game</h3>
+	<!-- {{ form.value | json }} -->
 	<div class="col-md-6">       
 		<form [connectForm]="game$ | async" [formGroup]="form">
 			<div class="form-group">
@@ -46,7 +47,7 @@
 				<select 
 					multiple 
 					class="form-control"
-					formControl="categories">
+					formControlName="categories">
 					<option value=""></option>
 					<option 
 						*ngFor="let opt of (categories$ | async)"	

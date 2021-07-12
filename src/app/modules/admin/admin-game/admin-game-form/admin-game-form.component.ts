@@ -34,7 +34,8 @@ export class AdminGameFormComponent implements OnInit {
 	game$ : Observable<any>;
 	form: FormGroup;
 	id: string;
-	disableDeleteButton: boolean = true;
+	disableDeleteButton: boolean = false;
+
 	
 	constructor(
 		private gameInfoStore: Store<fromGameInfo.State>,
@@ -43,39 +44,40 @@ export class AdminGameFormComponent implements OnInit {
 		private router : Router,
 		private fb : FormBuilder		
 		) { }
-
-	ngOnInit(): void {
+	ngOnInit() {
+		this.id = this.route.snapshot.paramMap.get('gameId').replace(" ","");
 		
-		// getting game and gameInfo data from the store.
-
-		this.game$ = this.gameStore.select(fromGame.selectAll)
-		this.gameStore.dispatch( gameActions.readGames() );
-		this.gameInfoStore.dispatch( gameInfoActions.readGameInfo() )
-
+		if (this.id === "new") {
+			this.disableDeleteButton = true;
+			delete this.id;			
+		}
+		
 		this.game$ = this.gameStore.pipe(select( getGameByParam ))
-		this.categories$ = this.gameInfoStore.pipe(select( getFamily("category") ));
-		this.creators$ = this.gameInfoStore.pipe(select( getFamily("creator") ));
-		this.platforms$ = this.gameInfoStore.pipe(select( getFamily("platform") ))
 
 		this.form = this.fb.group({
 			title : ["", Validators.required],
 			description : ["", Validators.required],
 			price : [0, Validators.min(0)],
 			imageUrl : [""],
-			categories : this.fb.array([]),
-			creators :this.fb.array([]), 
-			platforms :this.fb.array([]), 
-			consoles :this.fb.array([]) 
-		})		
+			categories : [],
+			creators :[], 
+			platforms :[], 
+			consoles :[]		
 
-		//  cheating w/ activated route to see if we are updating or creating a new game
-		if (this.route.snapshot.paramMap.get('gameId') !== "new") {
-			this.id = this.route.snapshot.paramMap.get('gameId')
-			this.disableDeleteButton = false
-		}
+		});
+		// getting game and gameInfo data from the store.
+
+		this.gameStore.dispatch( gameActions.readGames() );
+		this.gameInfoStore.dispatch( gameInfoActions.readGameInfo() )
+
+		this.categories$ = this.gameInfoStore.pipe(select( getFamily("category") ));
+		this.creators$ = this.gameInfoStore.pipe(select( getFamily("creator") ));
+		this.platforms$ = this.gameInfoStore.pipe(select( getFamily("platform") ))
+
+
 
 	}
-
+	
 	get title () {
 		return this.form.get('title');
 	}
@@ -108,27 +110,26 @@ export class AdminGameFormComponent implements OnInit {
 		return this.form.get('consoles');
 	}
 
-	/* 
-	TODO:
-	1. test both these methods
-	2. form validation
-	3. carefully control whether either control is clickable
-	4. add safeguards in method (in case a button is clicked when it shouldnt have been able to be clicked)	
-	*/
+	// /* 
+	// TODO:
+	// 2. form validation
+	// 3. set save to disabled if the form is invalid or shouldnt be clickable!
+	// */
 	save(game) {
-		console.log(game)
-		if(this.id) {
-			console.log("this happens")
-			this.gameStore.dispatch( gameActions.updateGame({id : this.id, data : game}) )
-			this.router.navigate(['../../']);	
-		} else {
-			console.log("that happens")
+		if(!this.id) {
 			this.gameStore.dispatch(gameActions.createGame({ id : v4(), ...game}));	
-			this.router.navigate(['../']);	
-		}
+			this.router.navigate(['/admin/game']);	
+		}	
+		this.gameStore.dispatch( gameActions.updateGame({id : this.id, data : game}) )
+		this.router.navigate(['/admin/game']);	
 		}
 
-	delete() {
+	delete() {		
+		// just a safety check: cannot delete a game with no id
+		if (this.id === "new" || !this.id) {
+			return;
+		}
+
 		if (confirm('Are you sure that you want to delete this game?')) {
 			this.gameStore.dispatch( gameActions.deleteGame({ id : this.id}) )
 			this.router.navigate(['/admin/game']);
