@@ -3,7 +3,6 @@ import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { select, Store } from '@ngrx/store';
 import { v4 } from 'uuid';
-import { AppState } from 'src/app/store';
 
 
 // examine these imports closer
@@ -14,10 +13,8 @@ import * as fromGameInfo from 'src/app/store/reducers/game-info.reducer';
 import { getFamily } from 'src/app/store/selectors/game-info.selector';
 
 
-import { getGameByParam, selectEntity } from 'src/app/store/selectors/game.selector';
-import { Game } from 'src/app/models/content/game.model';
-import { FormBuilder, FormGroup, FormArray, Validators } from '@angular/forms';
-import { take } from 'rxjs/operators';
+import { getGameByParam } from 'src/app/store/selectors/game.selector';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 
 @Component({
@@ -35,7 +32,6 @@ export class AdminGameFormComponent implements OnInit {
 	form: FormGroup;
 	id: string;
 	disableDeleteButton: boolean = false;
-
 	
 	constructor(
 		private gameInfoStore: Store<fromGameInfo.State>,
@@ -44,38 +40,47 @@ export class AdminGameFormComponent implements OnInit {
 		private router : Router,
 		private fb : FormBuilder		
 		) { }
+
 	ngOnInit() {
-		this.id = this.route.snapshot.paramMap.get('gameId').replace(" ","");
+
 		
+		// component depends on route param to be able to tell wether we want to create or update a game.
+		this.id = this.route.snapshot.paramMap.get('gameId').replace(" ","");	
 		if (this.id === "new") {
 			this.disableDeleteButton = true;
 			delete this.id;			
 		}
-		
-		this.game$ = this.gameStore.pipe(select( getGameByParam ))
 
-		this.form = this.fb.group({
-			title : ["", Validators.required],
-			description : ["", Validators.required],
-			price : [0, Validators.min(0)],
-			imageUrl : [""],
-			categories : [],
-			creators :[], 
-			platforms :[], 
-			consoles :[]		
-
-		});
 		// getting game and gameInfo data from the store.
-
 		this.gameStore.dispatch( gameActions.readGames() );
 		this.gameInfoStore.dispatch( gameInfoActions.readGameInfo() )
-
 		this.categories$ = this.gameInfoStore.pipe(select( getFamily("category") ));
 		this.creators$ = this.gameInfoStore.pipe(select( getFamily("creator") ));
 		this.platforms$ = this.gameInfoStore.pipe(select( getFamily("platform") ))
+		
 
 
-
+		// precaution to prevent form from being blank because
+		// the form data was loaded after changeDetection was completed
+		//TODO: get this working. need to refresh to get update data 
+		
+		setTimeout(() => {
+			this.game$ = this.gameStore.pipe(select( getGameByParam ))
+			this.form = this.fb.group({
+				title : ["", Validators.required],
+				description : ["", Validators.required],
+				price : [0, Validators.min(0)],
+				imageUrl : [
+					"", 
+					Validators.required, 
+					// Validators.pattern(/^(?:http(s)?:\/\/)?[\w.-]+(?:\.[\w\.-]+)+[\w\-\._~:/?#[\]@!\$&'\(\)\*\+,;=.]+$/)
+				],
+				categories : [],
+				creators :[], 
+				platforms :[], 
+				consoles :[]		
+			});
+		},0)
 	}
 	
 	get title () {
