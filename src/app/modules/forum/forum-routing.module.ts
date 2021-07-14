@@ -8,7 +8,9 @@ const routes: Routes = [
 	{path: '', component: ForumComponent,
 		children: [
 			{ path: '', component: ForumBrowserComponent },
-			{ path: ':id', component: ForumViewComponent }
+			{ path: ':forumId', component: ForumViewComponent }
+			// perhaps this can be a redirect?
+			// { path: 'help/new', component: ForumSubmitHelpAndSupportThreadCompoinent }
 		]
 
 }

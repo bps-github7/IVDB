@@ -10,7 +10,7 @@ const routes: Routes = [
 		children: [
 			{ path: '', component: GameBrowserComponent },
 			{ path: 'info', component: GameInfoPanelComponent },
-			{ path: ':id', component: GameViewComponent }
+			{ path: ':gameId', component: GameViewComponent }
 			// { path: 'game/:id', component: AdminGameFormComponent },
 			// { path: 'forum/:id', component: AdminForumFormComponent },
 			// { path: 'game/new', component: AdminGameFormComponent },
