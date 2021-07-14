@@ -64,23 +64,22 @@ export class AdminGameFormComponent implements OnInit {
 		// the form data was loaded after changeDetection was completed
 		//TODO: get this working. need to refresh to get update data 
 		
-		setTimeout(() => {
-			this.game$ = this.gameStore.pipe(select( getGameByParam ))
-			this.form = this.fb.group({
-				title : ["", Validators.required],
-				description : ["", Validators.required],
-				price : [0, Validators.min(0)],
-				imageUrl : [
-					"", 
-					Validators.required, 
-					// Validators.pattern(/^(?:http(s)?:\/\/)?[\w.-]+(?:\.[\w\.-]+)+[\w\-\._~:/?#[\]@!\$&'\(\)\*\+,;=.]+$/)
-				],
-				categories : [],
-				creators :[], 
-				platforms :[], 
-				consoles :[]		
-			});
-		},0)
+	
+		this.game$ = this.gameStore.pipe(select( getGameByParam ))
+		this.form = this.fb.group({
+			title : ["", Validators.required],
+			description : ["", Validators.required],
+			price : [0, Validators.min(0)],
+			imageUrl : [
+				"", 
+				Validators.required, 
+				// Validators.pattern(/^(?:http(s)?:\/\/)?[\w.-]+(?:\.[\w\.-]+)+[\w\-\._~:/?#[\]@!\$&'\(\)\*\+,;=.]+$/)
+			],
+			categories : [],
+			creators :[], 
+			platforms :[], 
+			consoles :[]		
+		});
 	}
 	
 	get title () {
@@ -115,19 +114,19 @@ export class AdminGameFormComponent implements OnInit {
 		return this.form.get('consoles');
 	}
 
-	// /* 
-	// TODO:
-	// 2. form validation
-	// 3. set save to disabled if the form is invalid or shouldnt be clickable!
-	// */
 	save(game) {
-		if(!this.id) {
-			this.gameStore.dispatch(gameActions.createGame({ id : v4(), ...game}));	
-			this.router.navigate(['/admin/game']);	
-		}	
-		this.gameStore.dispatch( gameActions.updateGame({id : this.id, data : game}) )
-		this.router.navigate(['/admin/game']);	
+		/* Manager which decides whether we want to create or update a game
+				then dispatches the appropriate action and routes away from submitted form.
+		*/
+		if (this.id) {
+			this.gameStore.dispatch( gameActions.updateGame({id : this.id, data : game}) )
+			this.router.navigate(['/admin/game']);		
 		}
+		else {
+			this.gameStore.dispatch(gameActions.createGame({ id : v4(), ...game}));	
+			this.router.navigate(['/admin/game']);			
+		}
+	}
 
 	delete() {		
 		// just a safety check: cannot delete a game with no id

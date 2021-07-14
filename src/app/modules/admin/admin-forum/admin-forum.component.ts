@@ -22,7 +22,7 @@ export class AdminForumComponent implements OnInit {
 	/* this component will be much like admin-game, except
 		you will use it to administer forums instead of games.
 	*/	
-	chosen : string;
+	chosen : string = "forums";
 	forums: Forum [];
 
 	forums$ : Observable<any>;

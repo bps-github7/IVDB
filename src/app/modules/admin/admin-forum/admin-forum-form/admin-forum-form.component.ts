@@ -12,6 +12,7 @@ import { getFamily } from 'src/app/store/selectors/forum-info.selector';
 import { selectEntity, getForumByParam } from 'src/app/store/selectors/forum.selector';
 
 import v4 from 'uuid';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 @Component({
   selector: 'admin-forum-form',
@@ -22,61 +23,79 @@ export class AdminForumFormComponent implements OnInit {
 	
 	forumInfo$ : Observable<any>;
 	forumFamilies$: Observable<any>;
-	// forum_prefixes$: Observable<any>;
-	// forum_types$: Observable<any>;
-
+	
 	// variables for storing the forum to update
 	forum$ : Observable<any>;
-	forum: Forum;
 	id: string;
+	form : FormGroup;
 
 	disableDeleteButton: boolean;
 
 	constructor(			
+			private fb : FormBuilder,
 			private forumInfoStore: Store<fromForumInfo.State>,
 			private forumStore : Store<fromForum.State>,
 			private router : Router,
 			private route : ActivatedRoute) { }
 
 	ngOnInit(): void {
+		// component depends on route param to be able to tell wether we want to create or update a forum.
+		this.id = this.route.snapshot.paramMap.get('forumId').replace(" ","");	
+		if (this.id === "new") {
+			this.disableDeleteButton = true;
+			delete this.id;			
+		}
+
 		this.forumInfo$ = this.forumInfoStore.select(fromForumInfo.selectAll)
 		this.forumInfoStore.dispatch( forumInfoActions.readForumInfo() );
 		this.forumFamilies$ = this.forumInfoStore.select(getFamily("family"))
-		// this.forum_prefixes$ =  this.forumInfoStore.select(getFamily("prefix"))
-		// this.forum_types$ =  this.forumInfoStore.select(getFamily("type"))
+
 		this.forumStore.dispatch( forumActions.readForum() );
-		if (this.route.snapshot.paramMap.get('forumId') === "new") {
 
-			//  if that's the case, we need default values for forum, to avoid errors with NgModel
-			this.forum = { id : "",	creator : "",	title : "",	description : "",	family: "" }
+		this.forum$ = this.forumStore.pipe(select( getForumByParam ))
+		this.form = this.fb.group({
+			title : ["", Validators.required],
+			description : ["", Validators.required],
+			family : ["", Validators.required],
+		});
+	
+	}
 
-			// disable the delete button because we can't delete a forum that doesnt exist yet
-			this.disableDeleteButton = true;
-		
-		} else {
-		
-			// read the route param id and get forum object which matches 
-			this.forum$ = this.forumStore.pipe(select( getForumByParam ))
+	get title () {
+		return this.form.get('title');
+	}
 
-			// unwrap the observable
-			this.forum$.subscribe((response : Forum) => this.forum = response);	
-		
-			// we can delete the forum because now we have an id value of something in the database
-			this.disableDeleteButton = false;
-		}
+	get description () {
+		return this.form.get('description');
+	}
+
+	
+	get family () {
+		return this.form.get('family');
 	}
 
 	save(forum) {
+		/* Manager method which decides whether we are creating or updating
+			then dispatches the appropriate action and routes away from the submitted form.
+		*/
 		if(this.id) {
 			this.forumStore.dispatch( forumActions.updateForum({id : this.id, data : forum }) )
 			this.router.navigate(['/admin/forum']);	
-		} else {
+		} 
+		else {
 			this.forumStore.dispatch(forumActions.createForum({ id : v4(), ...forum}));	
 			this.router.navigate(['/admin/forum']);	
 		}
-		}
+	}
+
+
 
 	delete() {
+		
+		if (this.id === "new" || !this.id) {
+			return;
+		}
+		
 		if (confirm('Are you sure that you want to delete this forum?')) {
 			this.forumStore.dispatch( forumActions.deleteForum({ id : this.id}) )
 			this.router.navigate(['/admin/forum']);

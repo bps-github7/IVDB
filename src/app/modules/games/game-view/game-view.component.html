@@ -1,4 +1,4 @@
-<div class="row" *ngIf="game$ | async as game">
+<div class="row" *ngIf="game$ | async as game; else notFound">
 	<div class="col-md-6">
 			<div class="card" style="width: 18rem;">
 					<img class="card-img-top" [src]="game.imageUrl" alt="the game in question">
@@ -23,14 +23,19 @@
 	</footer>
 </div>
 
-<!-- <div style ="height: 100%"> 
-	<section class="display-game" >
-		<mat-card style="height: 300px; width: 300px;">
-			<h1>{{game.title}}</h1>
-			<h3>{{game.price}}</h3>
-			<p>{{game.description}}</p>
-			<img [src]="game.imageUrl" alt="">
-		</mat-card>
+<ng-template #notFound>
+	<h3>Game not found</h3>
+	<p>the game you looked up is no longer available</p>
 
-	</section>
-</div> -->
+	<h5>Possible reasons</h5>
+	<ul>
+		<li>the game has been deleted</li>
+		<li>admins or moderators have temporarily hidden the game while they make changes</li>
+		<li>There is a problem with the site. </li>
+	</ul>
+	<p>Sorry for any inconveience this may have cause</p>
+	<p>If this happens again, you can <a routerLink="../../forum/help/new">Report this issue</a> through the forum</p>
+	<button>
+		<a routerLink="../">Go back</a>
+	</button>
+</ng-template>
