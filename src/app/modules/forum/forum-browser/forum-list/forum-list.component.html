@@ -2,8 +2,9 @@
 	<li 
 		*ngFor="let f of forums$ | async"	
 		class="list-group-item">
-		<!-- this prob wont work -->
-		<a [routerLink]="['../forum/',f.id]">{{ f.title }}</a>
+		<!-- need to strip the white space out for this to work!!! -->
+
+		<a [routerLink]="['../forum/',f.title]">{{ f.title }}</a>
 
 		{{ f.description }}
 	</li>

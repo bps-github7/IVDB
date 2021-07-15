@@ -2,6 +2,7 @@ import { createSelector } from "@ngrx/store";
 import { Forum } from "src/app/models/content/forum.model";
 import * as fromForum from 'src/app/store/reducers/forum.reducer';
 import { AppState } from "../reducers";
+import { selectParams, selectQueryParams } from "./router.selector";
 
 
 // select by titleSubstring
@@ -25,16 +26,19 @@ export const selectEntity = id => createSelector(
 	entities => entities[id]
 );
 
-const routerParams = createSelector(
-	(state : AppState) => state.router.state,
-	(state) => state.params
-)
-
-export const getForumByParam = createSelector(
+export const getForumByIdParam = createSelector(
 	fromForum.selectAll,
-	routerParams,
+	selectParams,
 	(forums, { forumId }) => {	
 		return forums.filter((forum : Forum) => forum.id === forumId )[0];
 	}	
 )
 
+// TODO-ish: this is probably going to require some debugging
+export const getForumByTitleParam = createSelector(
+	fromForum.selectAll,
+	selectParams,
+	(forums, { title } ) => { 
+		return forums.filter((forum : Forum) => forum.title === title)[0]
+	}
+)
