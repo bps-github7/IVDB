@@ -11,7 +11,7 @@ export interface VideogameConsole {
 
     // console info
     generation : number,
-    platform : string,
+    maker : string,
     family : string,
     
     // optional info

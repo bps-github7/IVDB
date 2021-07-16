@@ -1,3 +1,4 @@
+import { VideogameConsole } from 'src/app/models/content/videogame-console.model';
 import { DialogComponent } from 'src/app/modules/shared/components/dialog/dialog.component';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { select, Store } from '@ngrx/store';
@@ -18,7 +19,7 @@ import * as fromGame from 'src/app/store/reducers/game.reducer';
 import { GameInfo } from 'src/app/models/content/game-info.model';
 import { v4 } from 'uuid';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
-import { getByPlatform } from 'src/app/store/selectors/videogame-console.selector';
+import { getByMaker } from 'src/app/store/selectors/videogame-console.selector';
 
 @Component({
   selector: 'admin-game',
@@ -45,9 +46,11 @@ export class AdminGameComponent implements OnInit {
 
 	ngOnInit(): void {
 		this.filteredGames$ = this.games$ =  this.gameStore.select(fromGame.selectAll)
+	
 		this.gameStore.dispatch( gameActions.readGames() );
-
+		this.consoleStore.dispatch( consoleActions.readVideogameConsole() );
 		this.gameInfoStore.dispatch( gameInfoActions.readGameInfo() );		
+	
 		this.gameInfo = [
 			{
 				title : "categories",
@@ -70,25 +73,24 @@ export class AdminGameComponent implements OnInit {
 	this.consoles = [
 		{
 			title : "nintendo",
-			content : this.consoleStore.select(getByPlatform("nintendo"))
+			content : this.consoleStore.select(getByMaker("nintendo"))
 		},
 		{
 			title : "sony",
-			content : this.consoleStore.select(getByPlatform("sony"))
+			content : this.consoleStore.select(getByMaker("sony"))
 		},
 		{
 			title : "microsoft",
-			content : this.consoleStore.select(getByPlatform("microsoft"))
+			content : this.consoleStore.select(getByMaker("microsoft"))
 		},
 		{
 			title : "pc",
-			content : this.consoleStore.select(getByPlatform("pc"))
+			content : this.consoleStore.select(getByMaker("pc"))
 		},
 		{
 			title : "mobile",
-			singular : "mobile",
-			content : this.consoleStore.select(getByPlatform("mobile"))
-		},
+			content : this.consoleStore.select(getByMaker("mobile"))
+		}
 	]
 
 	}
@@ -101,6 +103,26 @@ export class AdminGameComponent implements OnInit {
 			console.log(query);
 	}
 
+	createConsole(videogameConsole : VideogameConsole) {
+		console.log("create method recieved this:")
+		// console.log(videogameConsole)
+		this.consoleStore.dispatch( consoleActions.createVideogameConsole( {id : v4(), ...videogameConsole} ) )
+	}
+
+	updateConsole(videogameConsole : {id : string, data : Partial<VideogameConsole>}) {
+		console.log("update method recieved this:")
+		console.log(videogameConsole.id)
+		console.log(videogameConsole.data)
+
+
+		// this.gameInfoStore.dispatch( gameInfoActions.updateGameInfo({id : videogameConsole.id, data : videogameConsole.data}))
+	}
+
+	deleteConsole(id : string) {
+		console.log("delete method recieved this: ");
+		console.log(id);
+		// this.consoleStore.dispatch( consoleActions.deleteVideogameConsole({id}) )
+	}
 
 	createGameInfo(gameInfo : GameInfo) {
 		this.gameInfoStore.dispatch( gameInfoActions.createGameInfo( {id : v4(), ...gameInfo} ) )

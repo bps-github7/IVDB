@@ -20,11 +20,11 @@ export const getFamily = (family: string) =>
 });
 
 
-export const getByPlatform = (platform: string) => 
+export const getByMaker = (maker: string) => 
 	createSelector(
 		fromVideogameConsole.selectAll, 
 		(entities : VideogameConsole[]) => {
-			return entities.filter((entity : VideogameConsole) => entity?.platform === platform)
+			return entities.filter((entity : VideogameConsole) => entity?.maker === maker)
 });
 
 export const selectEntity = id => createSelector(

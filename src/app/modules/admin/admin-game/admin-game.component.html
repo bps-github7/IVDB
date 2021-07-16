@@ -56,6 +56,10 @@
 		*ngFor="let p of consoles"
 		[platformName]="p.title"
 		[existingConsoles]="p.content"
+		[makerChoices]="gameInfo[2].content"
+		(createConsoleEvent$)="createConsole($event)"
+		(updateConsoleEvent$)="updateConsole($event)"
+		(deleteConsoleEvent$)="deleteConsole($event)"
 	></admin-consoles>
 	
 </div>

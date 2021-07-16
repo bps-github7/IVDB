@@ -1,6 +1,7 @@
 import { VideogameConsole } from './../../../../models/content/videogame-console.model';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'admin-consoles',
@@ -11,12 +12,17 @@ export class AdminConsolesComponent implements OnInit {
 
 
 	@Input() platformName : string;
-	@Input() existingConsoles : any;
+	@Input() existingConsoles : Observable<any>;
+	@Input() makerChoices : Observable<any>;
 
 
 	@Output() createConsoleEvent$ = new EventEmitter<VideogameConsole>()
 	@Output() updateConsoleEvent$ = new EventEmitter<{id : string, data : Partial<VideogameConsole>}>()
 	@Output() deleteConsoleEvent$ = new EventEmitter<string>();
+
+	showFormBody : boolean = false;
+	familyChoices = ["home", "portable", "hybrid"];
+
 
   constructor() { }
 
@@ -25,20 +31,16 @@ export class AdminConsolesComponent implements OnInit {
 
 
 	createConsole (VgConsole : NgForm) {
-		console.log(VgConsole);
-		// if validation is passed
-		//this.createConsoleEvent$.emit(VgConsole);
+		//if validation tests were passed	
+		this.createConsoleEvent$.emit(VgConsole.value);
 	}
 
-	updateConsole(id : string, data : Partial<VideogameConsole>) {
-		console.log(id);
-		console.log(data);
-		//this.updateConsoleEvent$.emit({id, data});
+	updateConsole(data : Partial<VideogameConsole>) {
+		this.updateConsoleEvent$.emit({id : data.id, data: data});
 	}
 
 	deleteConsole(id : string) {
-		console.log(id);
-		// this.deleteConsoleEvent$.emit(id);
+		this.deleteConsoleEvent$.emit(id);
 	}
 
 
