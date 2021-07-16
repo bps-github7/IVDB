@@ -5,7 +5,7 @@ import { select, Store } from '@ngrx/store';
 import { Game } from 'src/app/models/content/game.model';
 import * as fromGame from 'src/app/store/reducers/game.reducer';
 import { readGames } from 'src/app/store';
-import { getGameByParam } from 'src/app/store/selectors/game.selector';
+import { getGameByTitleParam } from 'src/app/store/selectors/game.selector';
 
 
 @Component({
@@ -21,6 +21,6 @@ export class GameViewComponent implements OnInit {
 
 	ngOnInit(): void {
 		this.gameStore.dispatch( readGames() )
-		this.game$ = this.gameStore.pipe(select(getGameByParam))
+		this.game$ = this.gameStore.pipe(select(getGameByTitleParam))
 	}
 }

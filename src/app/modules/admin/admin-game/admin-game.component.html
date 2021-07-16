@@ -53,8 +53,9 @@
 	</admin-game-info>	
 
 	<admin-consoles
-		*ngFor="let p of gameInfo[2].content | async"
+		*ngFor="let p of consoles"
 		[platformName]="p.title"
+		[existingConsoles]="p.content"
 	></admin-consoles>
 	
 </div>

@@ -9,12 +9,16 @@ import { getFamily } from 'src/app/store/selectors/game-info.selector';
 import * as gameInfoActions from 'src/app/store/actions/game-info.actions';
 import * as fromGameInfo from 'src/app/store/reducers/game-info.reducer';
 
+import * as fromVideogameConsole from 'src/app/store/reducers/videogame-console.reducer';
+import * as consoleActions from 'src/app/store/actions/videogame-console.actions'; 
+
 
 import * as gameActions from 'src/app/store/actions/game.actions';
 import * as fromGame from 'src/app/store/reducers/game.reducer';
 import { GameInfo } from 'src/app/models/content/game-info.model';
 import { v4 } from 'uuid';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
+import { getByPlatform } from 'src/app/store/selectors/videogame-console.selector';
 
 @Component({
   selector: 'admin-game',
@@ -24,80 +28,8 @@ import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 export class AdminGameComponent implements OnInit {
 	
 	chosen : string = "games";
-
-
-	// this is for building mat dialog forms with our reusable dialog component
-	// gameFormBuild = {
-	// 	title : {
-	// 		type : "text",
-	// 		formControlName : "title",
-	// 		config : {
-	// 			placeholder : "enter a title for this game"
-	// 		}
-	// 	},
-	// 	price : {
-	// 		type : "number",
-	// 		formControlName : "currency",
-	// 		config : {
-	// 			placeholder : ""
-	// 		}
-	// 	},
-	// 	description : {
-	// 		type : "textarea",
-	// 		formControlName : "description",
-	// 		config : {
-	// 			placeholder : "enter a description for this game"
-	// 		}
-	// 	},
-	// 	// need to inject the selector values in here in ngOnInit, but first, reactive form control needs to know what to do with observable data as option input
-	// 	categories : {
-	// 		type : "multiple select",
-	// 		formControlName : "categories",
-	// 		options : {},
-	// 		config : {
-	// 			placeholder : "select categories"
-	// 		}
-	// 	},
-	// 	creators : {
-	// 		type : "multiple select",
-	// 		formControlName : "creators",
-	// 		options : {},
-	// 		config : {
-	// 			placeholder : "select creators"
-	// 		}
-	// 	},
-	// 	platforms : {
-	// 		type : "multiple select",
-	// 		formControlName : "platforms",
-	// 		options : {},
-	// 		config : {
-	// 			placeholder : "select platforms"
-	// 		}
-	// 	}
-	// 	// , handle this later, its complicated and based off the platforms
-	// 	// consoles : {
-	// 	// 	type : "multiple select",
-	// 	// 	formControlName : "tags",
-	// 	// 	options : ["games", "recent release", "aniversery"],
-	// 	// 	config : {
-	// 	// 		placeholder : "add tags for this watchlist"
-	// 	// 	}
-	// 	// }
-	// }
-	// gameFormControls = {
-	// 	title : [""],
-	// 	price : [""],
-	// 	description : [""],
-	// 	categories : [""],
-	// 	creators: [""],
-	// 	platforms: [""],
-	// 	// consoles : [""]
-	// }
-
-
-
 	games: Game [];
-
+	consoles : any [];
 	games$ : Observable<any>;
 	gameInfo : any [];
 	filteredGames$: Observable<any>;
@@ -106,6 +38,7 @@ export class AdminGameComponent implements OnInit {
 	constructor(
 		private gameStore : Store<fromGame.State>,
 		private gameInfoStore : Store<fromGameInfo.State>, 
+		private consoleStore : Store<fromVideogameConsole.State>,
 		private dialog : MatDialog
 		) {
 	}
@@ -131,7 +64,33 @@ export class AdminGameComponent implements OnInit {
 				singular : "platform",
 				content : this.gameInfoStore.select(getFamily("platform"))
 			}
+
 		]
+		
+	this.consoles = [
+		{
+			title : "nintendo",
+			content : this.consoleStore.select(getByPlatform("nintendo"))
+		},
+		{
+			title : "sony",
+			content : this.consoleStore.select(getByPlatform("sony"))
+		},
+		{
+			title : "microsoft",
+			content : this.consoleStore.select(getByPlatform("microsoft"))
+		},
+		{
+			title : "pc",
+			content : this.consoleStore.select(getByPlatform("pc"))
+		},
+		{
+			title : "mobile",
+			singular : "mobile",
+			content : this.consoleStore.select(getByPlatform("mobile"))
+		},
+	]
+
 	}
 
 	filter(query: string) {

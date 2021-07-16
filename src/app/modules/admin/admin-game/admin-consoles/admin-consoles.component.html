@@ -1,45 +1,16 @@
 <h3>{{platformName}}</h3>
-<!-- <form #finished="ngForm" (ngSubmit)="create(finished)" (change)="checkUpdate(finished)"> -->
-<form>
+<form #finished="ngForm" (ngSubmit)="createConsole(finished)">
+<!-- <form> -->
 	<input type="text" placeholder="enter new console name">
-	provide info below...
-	<!-- <input 
-	[ngModel]="updateContent.title"
-	name="title"
-	type="text" 
-	mat-input 
-	[placeholder]="placeholder" 
-	(click)="showDescription = true"
-	><br>
-	<textarea 
-		[ngModel]="updateContent.description"
-		name="description"	
-		mat-text-area
-		*ngIf="showDescription"
-		placeholder="enter description" cols="30" rows="10"></textarea>
-	<button
-		*ngIf="mode == 'create'"  
-		primary 
-		class="btn btn-primary">Create new game Info</button>
-	<button
-		[disabled]="notUpdated"	
-		*ngIf="mode == 'edit'"  
-		primary 
-		class="btn btn-primary">Edit game Info</button>
-	<button class="btn btn-danger" (click)="reset(finished)">Reset</button> -->
+	<button type="submit">
+		Save
+	</button>
 </form>
 
 
 <ul class="list-group">
-	<li>Here</li>
-	<li>IS an</li>
-	<li>example</li>
-	<!-- <li 
-		*ngFor="let g of gameInfo$ | async"	
-		class="list-group-item"
-		(click)="setUpUpdate(g)"
-		>
-		{{ g.title }}
-		<button mat-button (click)="delete(g.id)">Delete</button>
-	</li> -->
+	<li *ngFor="let c of existingConsoles | async">
+		{{c.title}}
+		<button class="alert-alert-danger" (click)="deleteConsole(c.id)">Delete</button>
+	</li>
 </ul>

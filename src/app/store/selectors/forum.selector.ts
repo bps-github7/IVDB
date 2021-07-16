@@ -38,7 +38,7 @@ export const getForumByIdParam = createSelector(
 export const getForumByTitleParam = createSelector(
 	fromForum.selectAll,
 	selectParams,
-	(forums, { title } ) => { 
-		return forums.filter((forum : Forum) => forum.title === title)[0]
+	(forums, { forumTitle } ) => { 
+		return forums.filter((forum : Forum) => forum.title === forumTitle.replaceAll("+"," "))[0]
 	}
 )

@@ -19,6 +19,14 @@ export const getFamily = (family: string) =>
 			return entities.filter((entity : VideogameConsole) => entity?.family === family)
 });
 
+
+export const getByPlatform = (platform: string) => 
+	createSelector(
+		fromVideogameConsole.selectAll, 
+		(entities : VideogameConsole[]) => {
+			return entities.filter((entity : VideogameConsole) => entity?.platform === platform)
+});
+
 export const selectEntity = id => createSelector(
 	fromVideogameConsole.selectEntities,
 	entities => entities[id]

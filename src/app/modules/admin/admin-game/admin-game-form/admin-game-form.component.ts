@@ -13,7 +13,7 @@ import * as fromGameInfo from 'src/app/store/reducers/game-info.reducer';
 import { getFamily } from 'src/app/store/selectors/game-info.selector';
 
 
-import { getGameByParam } from 'src/app/store/selectors/game.selector';
+import { getGameByIdParam } from 'src/app/store/selectors/game.selector';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 
@@ -65,7 +65,7 @@ export class AdminGameFormComponent implements OnInit {
 		//TODO: get this working. need to refresh to get update data 
 		
 	
-		this.game$ = this.gameStore.pipe(select( getGameByParam ))
+		this.game$ = this.gameStore.pipe(select( getGameByIdParam ))
 		this.form = this.fb.group({
 			title : ["", Validators.required],
 			description : ["", Validators.required],

@@ -26,7 +26,7 @@ const routeParams = createSelector(
 
 
 
-export const getGameByParam = createSelector(
+export const getGameByIdParam = createSelector(
 	fromGame.selectAll,
 	selectParams,
 	(games, { gameId } ) => { 
@@ -35,11 +35,11 @@ export const getGameByParam = createSelector(
 )
 
 // TODO-ish: this is probably going to require some debugging
-export const getGameByQueryParam = createSelector(
+export const getGameByTitleParam = createSelector(
 	fromGame.selectAll,
-	selectQueryParams,
-	(games, { title } ) => { 
-		return games.filter((game : Game) => game.title === title)[0]
+	selectParams,
+	(games, { gameTitle } ) => { 
+		return games.filter((game : Game) => game.title === gameTitle.replaceAll("+"," "))[0]
 	}
 )
 
