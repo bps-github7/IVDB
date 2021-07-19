@@ -19,6 +19,9 @@ import { AdminGameInfoComponent } from './admin-game/admin-game-info/admin-game-
 import { AdminContentManagerComponent } from './admin-content/admin-content-manager/admin-content-manager.component';
 import { AdminConsolesComponent } from './admin-game/admin-consoles/admin-consoles.component';
 import { AdminForumFormComponent } from './admin-forum/admin-forum-form/admin-forum-form.component';
+import { AdminDashboardInfoTableComponent } from './admin-dashboard/admin-dashboard-info-table/admin-dashboard-info-table.component';
+import { AdminDashboardTableManagerComponent } from './admin-dashboard/admin-dashboard-table-manager/admin-dashboard-table-manager.component';
+import { AdminDashboardFormComponent } from './admin-dashboard/admin-dashboard-form/admin-dashboard-form.component';
 
 @NgModule({
   declarations: [
@@ -34,6 +37,9 @@ import { AdminForumFormComponent } from './admin-forum/admin-forum-form/admin-fo
 		AdminContentManagerComponent,
 		AdminConsolesComponent,
 		AdminForumFormComponent,
+  AdminDashboardInfoTableComponent,
+  AdminDashboardTableManagerComponent,
+  AdminDashboardFormComponent,
 	],
   imports: [
     CommonModule,

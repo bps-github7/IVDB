@@ -3,6 +3,8 @@
 <mat-button-toggle-group (change)="chosen = $event.value">
 	<mat-button-toggle value="games">Games</mat-button-toggle>
 	<mat-button-toggle value="game-info">Game-Info</mat-button-toggle>
+	<mat-button-toggle value="consoles">Consoles</mat-button-toggle>
+
 </mat-button-toggle-group>
 
 <!-- all site content component -->
@@ -42,7 +44,14 @@
 	</table>
 </div>
 <div *ngIf="chosen === 'game-info'">
-	<admin-game-info
+	<table-manager 
+	
+		[tables]="testData"
+		(createEvent$)="createAction()"
+		(deleteEvent$)="deleteAction($event)"
+		></table-manager>
+
+	<!-- <admin-game-info
 		*ngFor="let g of gameInfo"
 		[gameInfo$]="g.content"
 		[familyName]="g.title"
@@ -61,5 +70,5 @@
 		(updateConsoleEvent$)="updateConsole($event)"
 		(deleteConsoleEvent$)="deleteConsole($event)"
 	></admin-consoles>
-	
+	 -->
 </div>

@@ -35,6 +35,7 @@ export class AdminGameComponent implements OnInit {
 	gameInfo : any [];
 	filteredGames$: Observable<any>;
 	subscription: Subscription;
+	testData: any;
 
 	constructor(
 		private gameStore : Store<fromGame.State>,
@@ -69,6 +70,7 @@ export class AdminGameComponent implements OnInit {
 			}
 
 		]
+		this.testData = { "categories" : this.gameInfo[0].content, "creators" : this.gameInfo[1].content, "platforms" : this.gameInfo[2].content  } 
 		
 	this.consoles = [
 		{
@@ -135,4 +137,14 @@ export class AdminGameComponent implements OnInit {
 	deleteGameInfo(id : string) {
 		this.gameInfoStore.dispatch( gameInfoActions.deleteGameInfo({id}) )
 	}
+
+	// our new event handling functions
+	deleteAction(id : string) {
+		console.log(`top level component recieved this ${id}`);
+	}
+
+	createAction() {
+		console.log("this should make the ")
+	}
+
 }

@@ -1,0 +1,48 @@
+<h3 mat-heading>{{tableHeading}}</h3>
+<button mat-button-raised (click)="createItem()">Create new</button>
+<table mat-table [dataSource]="tableData" class="mat-elevation-z8">
+	
+
+	<ng-container matColumnDef="title">
+		<th mat-header-cell *matHeaderCellDef>title</th>
+		<td mat-cell *matCellDef="let row">
+			<span 
+			#tooltip="matTooltip"
+			[matTooltip]="row.description"
+			matTooltipPosition="after"
+			matTooltipHideDelay="0">
+			{{row.title}}
+		</span> 
+		</td>
+	</ng-container>
+
+
+	<ng-container matColumnDef="edit">
+		<th mat-header-cell *matHeaderCellDef> </th>
+		<td mat-cell *matCellDef="let row">
+			<button 
+				(click)="updateItem(row)"
+				mat-stroked-button>Edit
+			</button>  
+		</td>
+	</ng-container>
+
+	
+	<ng-container matColumnDef="delete">
+		<th mat-header-cell *matHeaderCellDef> </th>
+		<td mat-cell *matCellDef="let row">
+			<button 
+				(click)="deleteItem(row.id)"
+				mat-stroked-button>Delete
+			</button>
+		</td>
+	</ng-container>
+
+
+
+	<tr mat-header-row *matHeaderRowDef="tableColumns"></tr>
+	<tr mat-row *matRowDef="let row; columns: tableColumns;"></tr>
+</table>
+<!-- <button (click)="createItem()">create</button>
+<button (click)="updateItem('tabasco sauce')">update</button>
+<button (click)="deleteItem('12345')">delete</button> -->

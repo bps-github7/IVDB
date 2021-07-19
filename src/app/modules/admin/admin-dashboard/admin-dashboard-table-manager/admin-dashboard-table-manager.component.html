@@ -1,0 +1,19 @@
+<mat-button-toggle-group (change)="chosen = $event.value">
+	<mat-button-toggle *ngFor="let choice of choices" [value]="choice">{{ choice }}</mat-button-toggle>
+</mat-button-toggle-group>
+
+<zippy title="create or update game-info" open="openForm">
+	<dashboard-form dataType="game-info">
+	</dashboard-form>
+</zippy>
+
+
+<div *ngIf="chosen">
+	<info-table 
+	[tableHeading]="chosen"
+	[tableData]="tables[chosen]"
+	(createEvent$)="create()"
+	(updateEvent$)="update($event)"
+	(deleteEvent$)="delete($event)">
+	</info-table>
+</div>

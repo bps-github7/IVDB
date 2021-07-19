@@ -5,9 +5,20 @@ import { Component, OnInit, Input } from '@angular/core';
   templateUrl: './zippy.component.html',
   styleUrls: ['./zippy.component.sass']
 })
-export class ZippyComponent  {
+export class ZippyComponent implements OnInit  {
   @Input('title') title: string;
-  isExpanded: boolean;
+	@Input('open') open = false;
+
+	ngOnInit() {
+
+		if (this.open) {
+			console.log("create event: zippy level")
+			this.isExpanded = true;
+		}		
+	}
+
+	isExpanded: boolean;
+
 
   toggle() { 
     this.isExpanded = !this.isExpanded;

@@ -1,3 +1,5 @@
+import { ConsoleSelectedService } from './services/behaivor-subjects/console-selected.service';
+import { GameInfoSelectedService } from './services/behaivor-subjects/game-info-selected.service';
 // ng common stuff
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
@@ -67,7 +69,9 @@ import { RouterSerializer } from './store/router-serializer';
 		})
 	],
   providers: [
-		FirebaseService
+		FirebaseService,
+		GameInfoSelectedService,
+		ConsoleSelectedService
 	],
   bootstrap: [AppComponent]
 })
