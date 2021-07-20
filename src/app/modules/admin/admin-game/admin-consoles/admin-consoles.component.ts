@@ -1,7 +1,13 @@
-import { VideogameConsole } from './../../../../models/content/videogame-console.model';
+import { Observable } from 'rxjs/Observable';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { NgForm } from '@angular/forms';
-import { Observable } from 'rxjs';
+import { VideogameConsole } from 'src/app/models/content/videogame-console.model';
+import { v4 } from 'uuid';
+
+// ngrx + our store stuff
+import { Store } from '@ngrx/store';
+import * as fromConsole from 'src/app/store/reducers/videogame-console.reducer';
+import * as consoleActions from 'src/app/store/actions/videogame-console.actions'; 
+import { getByMaker } from 'src/app/store/selectors/videogame-console.selector';
 
 @Component({
   selector: 'admin-consoles',
@@ -9,39 +15,47 @@ import { Observable } from 'rxjs';
   styleUrls: ['./admin-consoles.component.sass']
 })
 export class AdminConsolesComponent implements OnInit {
+	/* 
+	a non-routed, container component which manages consoles from
+	within the admin module. In template, it is nested within the admin-game
+	component, accesible by choosing the consoles tab
 
+	it handles communication with the store
+	and uses the admin-dashboard-table-manager
+	to faciliate CRUD ops on consoles. 
+	
+	reduces boilerplate and irrelevant code from admin-game
+	which used to handle the CRUD and display of games, game info and consoles on its own.
+	*/
+	showMetaData : boolean = false;
+	buttonText : string;
+	consoleData : any={};
 
-	@Input() platformName : string;
-	@Input() existingConsoles : Observable<any>;
-	@Input() makerChoices : Observable<any>;
+	constructor(private consoleStore : Store<fromConsole.State>) { }
 
+	ngOnInit() {
+		this.buttonText = this.showMetaData ? "Show info about consoles" : "hide Info"
 
-	@Output() createConsoleEvent$ = new EventEmitter<VideogameConsole>()
-	@Output() updateConsoleEvent$ = new EventEmitter<{id : string, data : Partial<VideogameConsole>}>()
-	@Output() deleteConsoleEvent$ = new EventEmitter<string>();
+		this.consoleStore.dispatch( consoleActions.readVideogameConsole() );
 
-	showFormBody : boolean = false;
-	familyChoices = ["home", "portable", "hybrid"];
-
-
-  constructor() { }
-
-  ngOnInit(): void {
-  }
-
-
-	createConsole (VgConsole : NgForm) {
-		//if validation tests were passed	
-		this.createConsoleEvent$.emit(VgConsole.value);
+		this.consoleData = {
+			"nintendo" : this.consoleStore.select(getByMaker("nintendo")),
+			"sony" : this.consoleStore.select(getByMaker("sony")),
+			"microsoft" : this.consoleStore.select(getByMaker("microsoft")),
+			"pc" : this.consoleStore.select(getByMaker("pc")),
+			"mobile" : this.consoleStore.select(getByMaker("mobile"))
+		}
 	}
 
-	updateConsole(data : Partial<VideogameConsole>) {
-		this.updateConsoleEvent$.emit({id : data.id, data: data});
+	createConsole(content : VideogameConsole) {
+		this.consoleStore.dispatch( consoleActions.createVideogameConsole({id: v4(), ...content}) )
+	}
+
+	updateConsole(content : Partial<VideogameConsole> | VideogameConsole ) {
+		this.consoleStore.dispatch( consoleActions.updateVideogameConsole({id : content.id, data : content}) )
 	}
 
 	deleteConsole(id : string) {
-		this.deleteConsoleEvent$.emit(id);
+		this.consoleStore.dispatch( consoleActions.deleteVideogameConsole({ id }) )
 	}
-
-
 }

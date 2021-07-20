@@ -1,5 +1,6 @@
 <section *ngIf="dataType === 'game-info'; else VgConsole" >
 	<form #finished="ngForm" (ngSubmit)="save(finished)">
+		<p>Boutta NUT: {{selected?.id}}</p>
 		<div class="form-group">
 			<label for="title">Title:</label>
 			<input 
@@ -25,14 +26,13 @@
 				[ngModel]="selected.family" 
 				name="family" id="family"
 				class="form-control">
-				<option [value]="f" *ngFor="let f of families">{{f}}</option>
+				<option [value]="f" *ngFor="let f of gameInfoFamilies">{{f}}</option>
 			</select>
 		</div>
 		
-		<button
-			primary 
-			class="btn btn-primary">Create / update game info</button>
-		<button class="btn btn-danger" (click)="reset(finished)">Reset</button>
+		<button	type="submit"	class="btn btn-primary">Create / update game info</button>
+		<button type="button" class="btn alert-danger" (click)="reset(finished)">Reset</button>
+		<button type="button" class="btn btn-danger" (click)="delete(selected.id, finished)" [disabled]="!selected.id">Delete</button>
 	</form>
 </section>
 
@@ -49,7 +49,7 @@
 		</div>	
 			
 		<div class="form-group">
-			<label for="nickname">nickname:</label>
+			<label for="nickname">Nickname:</label>
 			<input 
 				[ngModel]="selected.nickname"
 				name="nickname" 
@@ -58,7 +58,7 @@
 		</div>
 
 		<div class="form-group">
-			<label for="generation">generation:</label>
+			<label for="generation">Generation:</label>
 			<input 
 				[ngModel]="selected.generation"
 				name="generation" 
@@ -86,7 +86,7 @@
 				name="family" 
 				id="family" 
 				class="form-control">
-				<option [value]="f" *ngFor="let f of familyChoices">{{ f }}</option>
+				<option [value]="f" *ngFor="let f of consoleFamilies">{{ f }}</option>
 			</select>
 		</div>
 
@@ -124,8 +124,8 @@
 				id='released'>
 		</div>
 		
-		<button type="submit">
-			Save
-		</button>
+		<button	primary	class="btn btn-primary">Create / update a console</button>
+		<button class="btn btn-danger" (click)="reset(finished)">Reset</button>
+		<button class="btn alert-danger" (click)="delete(selected.id, finished)" [disabled]="!selected.id">Delete</button>
 	</form>		
 </ng-template>

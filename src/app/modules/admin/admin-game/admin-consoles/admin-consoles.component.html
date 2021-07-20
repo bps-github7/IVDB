@@ -1,77 +1,42 @@
-<h3>{{platformName}}</h3>
-<form #finished="ngForm" (ngSubmit)="createConsole(finished)">
-<!-- TODO; realized this is a poor design decision. we should have a single form at the top of the page for creating both game-info and consoles,
-	and modulate the form format based on whether the user wants to create a console or new game info. 
+<section>
+	<h3>Administer Consoles Below:</h3>
 
-	instead we have a new form for each type of game info, and a new form for each plaform/ console makers
-	also note that we are given a choice for maker in each of these forms, so it defeats the purpsoe of selecting microsoft
-	form dropdown if you can make sony consoles in it.
--->
-	<input ngModel name="name" type="text" placeholder="enter new console name" (click)="showFormBody = true">
-	<div *ngIf="showFormBody">
-		<div class="form-group">
-			<label for="nickname">nickname:</label>
-			<input ngModel name="nickname" type="text" class="form-control">
-		</div>
+<!-- TODO: make this not hardcoded. Should be rather straightforward once we get ./games/info index thingy working
+	<button mat-button-raised (click)="showMetaData = !showMetaData">{{buttonText}}</button>
+	<ul *ngIf="showMetaData">
 
-		<div class="form-group">
-			<label for="qualifiedName">qualified Name:</label>
-			<input ngModel name="qualifiedName" type="text" class="form-control">
-		</div>
+		<li>
+			<strong>Nintendo:</strong>
+			<section>Isa me a mario!</section>
+		</li>
 
-		<div class="form-group">
-			<label for="generation">generation:</label>
-			<input ngModel name="generation" type="number" min=0 class="form-control">
-		</div>
+		<li>
+			<strong>Sony:</strong>
+			<section>Hello I love tomatos and onions, garlic and leeks</section>
+		</li>
 
-		<div class="form-group">
-			<label for="maker">Maker:</label>
-			<select ngModel="maker" name="maker" id="maker" class="form-control">
-				<option [value]="m.title" *ngFor="let m of makerChoices | async">{{ m.title }}</option>
-			</select>
-		</div>
+		<li>
+			<strong>Microsoft:</strong>
+			<section>my finger sticky from spreading the sausage across the counter top and toilet bowl</section>
+		</li>
+
+		<li>
+			<strong>PC:</strong>
+			<section>olive oil coats the plants who love the fat seasoning scent and hunt chubby children with a dagger for their birthday!</section>
+		</li>
+
+		<li>
+			<strong>Mobile:</strong>
+			<section>The tomatos gave a passionate embrace before being crushed by the chef in alaska baking a seal meatball for granny</section>
+		</li>
 		
-
-		<div class="form-group">
-			<label for="family">Family:</label>
-			<select ngModel name="family" id="family" class="form-control">
-				<option [value]="f" *ngFor="let f of familyChoices">{{ f }}</option>
-			</select>
-		</div>
-
-		
-		<div class="form-group">
-			<label for="description">Description:</label>
-			<textarea ngModel name="description" id="description" class="form-control" cols="30" rows="10"></textarea>
-		</div>
-
-			
-		<div class="form-group">
-			<label for="image">Image:</label>
-			<input url ngModel name="image" type="text" class="form-control" id='image'>
-		</div>
-
-		<div class="form-control">
-			<label for="released">Released:</label>
-			<input ngModel name="released" type="date" class="form-control" id='released'>
-		</div>
-
-
-
-	</div>
-	
-	<button type="submit">
-		Save
-	</button>
-</form>
-
-
-<ul class="list-group">
-	<li 
-		class="list-group-item"	
-		*ngFor="let c of existingConsoles | async">
-		{{c.name}}
-		<button mat-stroked-button (click)="updateConsole(c)">Update</button>
-		<button mat-raised-button class="alert alert-danger" (click)="deleteConsole(c.id)">Delete</button>
-	</li>
-</ul>
+	</ul>
+	--->	
+	<table-manager 
+		[tables]="consoleData"
+		dataType="console"
+		(createEvent$)="createConsole($event)"
+		(updateEvent$)="updateConsole($event)"
+		(deleteEvent$)="deleteConsole($event)">
+	</table-manager>	
+</section>

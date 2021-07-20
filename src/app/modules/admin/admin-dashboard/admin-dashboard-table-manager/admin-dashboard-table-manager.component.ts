@@ -12,13 +12,15 @@ export class AdminDashboardTableManagerComponent implements OnInit {
 
 	@Input() dataType : string = "game-info";
 	@Input() tables : {title : Observable<any>};
-	@Input() makerChoices : Observable<any>;
 	choices : string [];
 	chosen : string;
 
+	// TODO: this is meant to open up the zippy when we want to update a game,
+	//  which has become more important since testing w/ visual inspection has commenced 
 	openForm : boolean = false;
 
-	// can we handle this with a behaivor subject as well?
+	@Output() createEvent$ = new EventEmitter<any>();
+	@Output() updateEvent$ = new EventEmitter<any>();
 	@Output() deleteEvent$ = new EventEmitter<any>();
 
   constructor(
@@ -31,24 +33,48 @@ export class AdminDashboardTableManagerComponent implements OnInit {
 		this.choices = this.tables ? Object.keys(this.tables)  : null;
 	}
 
-	create() {
-
+	createFromForm(obj : any={}) {
+		this.createEvent$.emit(obj);
 	}
 
-	update(obj) {
-		// we had to make this class more concrete at some point..
+	updateFromForm(obj : any={}) {
+		this.updateEvent$.emit(obj);
+	}
+
+	deleteFromForm(id : string) {
+		// should we ask user to confirm here? or deeper / shallower? 
+		//NOTE that this component is in between emiter and action dispatcher
+		this.deleteEvent$.emit(id);
+	}
+
+
+	createFromTable() {
+		/* 
+			it would be nice to open the zippy (and move focus .ie cursor to first form group)
+			if a user pressed the 'create' button from the table
+			but this was difficult in practice, and not super important. so we skipped for now.
+		*/
+		console.log("create event emitted from table, listened to from table manager")	
+	}
+
+	updateFromTable(obj) {
+		/* 
+			In case where user selects 'edit' from the table, we use the selectedService
+			to attach the update object to a behaivor subject, which the form populates with.	
+
+			Don't need to emit anything, except maybe, if you get  the zippy opening working, 
+			like mentioned above, that could help the user experience.
+		*/
 		if (this.dataType === "game-info") {
 			this.gameInfoSelectedService.select(obj)
 		} else {
 			this.videogameConsoleSelectedService.select(obj)
 		}
-
-		console.log("update got this")
-		console.log(obj)
-
 	}
 
-	delete(id : string) {
-		console.log(`we will delete ${id}`);
+	deleteFromTable(id : string) {
+		// we could use validation, try catch here. but typescript probably suffices.
+		this.deleteEvent$.emit(id);
+		// console.log(`we will delete ${id}`);
 	}
 }

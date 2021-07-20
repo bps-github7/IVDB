@@ -25,7 +25,7 @@ export class AdminDashboardInfoTableComponent implements OnInit {
 
 
 	updateItem (item : any) {
-		if (confirm("are you sure you want to update this item?\nexisting data will be overwritten!\nCannot be undone!")) {
+		if (confirm("Are you sure you want to update this item?\nWARNING: Existing data could be overwritten!\nWARNING: Cannot be undone!")) {
 			this.updateEvent$.emit(item);
 		}
 	}

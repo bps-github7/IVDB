@@ -1,5 +1,8 @@
 <h2>Forum and Forum-Info dashboard:</h2>
 
+<!-- TODO: Need to reformulate admin-forum to be in compliance with the revised component architecture -->
+
+
 <mat-button-toggle-group (change)="chosen = $event.value">
 	<mat-button-toggle value="forums">Forums</mat-button-toggle>
 	<mat-button-toggle value="forum-info">Forum-Info</mat-button-toggle>
@@ -60,21 +63,5 @@
 
 	</div>
 
-
-	<!-- using game-info because their interfaces are identical -->
-	<admin-game-info
-		*ngFor="let g of forumInfo"
-		[gameInfo$]="g.content"
-		[familyName]="g.title"
-		[singularName]="g.singular"
-		(createEvent$)="createForumInfo($event)"
-		(updateEvent$)="updateForumInfo($event)"
-		(deleteEvent$)="deleteForumInfo($event)">
-	</admin-game-info>	
-<!-- 
-	<admin-consoles
-		*ngFor="let p of gameInfo[2].content | async"
-		[platformName]="p.title"
-	></admin-consoles> -->
 	
 </div>

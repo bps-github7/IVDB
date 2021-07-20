@@ -1,19 +1,26 @@
+<!-- toggle select- choose which table to display -->
 <mat-button-toggle-group (change)="chosen = $event.value">
 	<mat-button-toggle *ngFor="let choice of choices" [value]="choice">{{ choice }}</mat-button-toggle>
 </mat-button-toggle-group>
 
+<!-- create / update form -->
 <zippy title="click here to create new or update">
-	<dashboard-form [dataType]="dataType" [makerChoices]="makerChoices">
+	<dashboard-form 
+		[dataType]="dataType" 
+		(createEvent$)="createFromForm($event)"
+		(updateEvent$)="updateFromForm($event)"
+		(deleteEvent$)="deleteFromForm($event)"
+		>
 	</dashboard-form>
 </zippy>
 
-
+<!-- display table -->
 <div *ngIf="chosen">
 	<info-table 
 	[tableHeading]="chosen"
 	[tableData]="tables[chosen]"
-	(createEvent$)="create()"
-	(updateEvent$)="update($event)"
-	(deleteEvent$)="delete($event)">
+	(createEvent$)="createFromTable()"
+	(updateEvent$)="updateFromTable($event)"
+	(deleteEvent$)="deleteFromTable($event)">
 	</info-table>
 </div>

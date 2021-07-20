@@ -1,44 +1,33 @@
-<!-- <form #finished>
-	input
+<section>
+	<h3>Administer Game Info Below:</h3>
+	
+	<!--
+		TODO: get this working, after getting ./game/info index component woring, it should be cake... 
+		also do note, that the hide button text is not updated when we switch showMetaData,
+		because you set it in ngOnInit, which is only ran when the component is rendered
+	 
+	<button mat-button-raised (click)="showMetaData = !showMetaData">{{buttonText}}</button>
+	<ul *ngIf="showMetaData">
+		<li>
+			<strong>Categories: </strong>
+			<section>The broad families which games belong to, such as adventure, role playing , or first person shooter</section>			
+		</li>
 
-</form> -->
-
-<h3>{{this.familyName}}:</h3>
-<form #finished="ngForm" (ngSubmit)="create(finished)" (change)="checkUpdate(finished)">
-	<input 
-	[ngModel]="updateContent.title"
-	name="title"
-	type="text" 
-	mat-input 
-	[placeholder]="placeholder" 
-	(click)="showDescription = true"
-	><br>
-	<textarea 
-		[ngModel]="updateContent.description"
-		name="description"	
-		mat-text-area
-		*ngIf="showDescription"
-		placeholder="enter description" cols="30" rows="10"></textarea>
-	<button
-		*ngIf="mode == 'create'"  
-		primary 
-		class="btn btn-primary">Create new game Info</button>
-	<button
-		[disabled]="notUpdated"	
-		*ngIf="mode == 'edit'"  
-		primary 
-		class="btn btn-primary">Edit game Info</button>
-	<button class="btn btn-danger" (click)="reset(finished)">Reset</button>
-</form>
-
-
-<ul class="list-group">
-	<li 
-		*ngFor="let g of gameInfo$ | async"	
-		class="list-group-item"
-		(click)="setUpUpdate(g)"
-		>
-		{{ g.title }}
-		<button mat-button (click)="delete(g.id)">Delete</button>
-	</li>
-</ul>
+		<li>
+			<strong>Creators:</strong>
+			<section>Creators are the development studios which create the games we love and play, such as Game Freak or Activision</section>
+		</li>
+		
+		<li>
+			<strong>Platforms:</strong>
+			<section>the creators of videogame consoles, such as Nintendo or Sony</section>
+		</li>
+	</ul> -->
+	
+	<table-manager 
+		[tables]="gameInfoData"
+		(createEvent$)="createGameInfo($event)"
+		(updateEvent$)="updateGameInfo($event)"
+		(deleteEvent$)="deleteGameInfo($event)">
+	</table-manager>	
+</section>

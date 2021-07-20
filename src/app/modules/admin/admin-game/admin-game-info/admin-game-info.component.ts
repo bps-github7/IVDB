@@ -1,8 +1,13 @@
-import { Preferences } from './../../../../models/user/preferences';
 import { Observable } from 'rxjs/Observable';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { GameInfo } from 'src/app/models/content/game-info.model';
-import { NgForm } from '@angular/forms';
+import { v4 } from 'uuid';
+
+// ngrx + our store stuff
+import { Store } from '@ngrx/store';
+import * as fromGameInfo from 'src/app/store/reducers/game-info.reducer';
+import * as gameInfoActions from 'src/app/store/actions/game-info.actions'; 
+import { getFamily } from 'src/app/store/selectors/game-info.selector';
 
 @Component({
   selector: 'admin-game-info',
@@ -10,91 +15,47 @@ import { NgForm } from '@angular/forms';
   styleUrls: ['./admin-game-info.component.sass']
 })
 export class AdminGameInfoComponent implements OnInit {
+	/* 
+	a non-routed, container component which manages game info from
+	within the admin module. In template, it is nested within the admin-game
+	component, accesible by choosing the game-info tab
 
-	@Input() familyName : string; 
-	@Input() gameInfo$ : Observable<any>
-	@Input() singularName : string;
-	placeholder : string; 
+	it handles communication with the store
+	and uses the admin-dashboard-table-manager
+	to faciliate CRUD ops on game-info. 
 
+	Though it might seem like useless middleware component
+	We repurposed game info so that we can reduce the boilerplate
+	and hardcoded, unrelated bloat from admin-game, thus allowing
+	it to better conform to S.R.P (single responsilbity [per class/object] principle )
+	*/
+	showMetaData : boolean = false;
+	buttonText : string;
+	gameInfoData : any={}
 
-	@Output() createEvent$ = new EventEmitter<GameInfo>();
-	@Output() updateEvent$ = new EventEmitter<{id : string, data : Partial<GameInfo>}>();
+	constructor(private gameInfoStore : Store<fromGameInfo.State>) { }
 
-	@Output() deleteEvent$ = new EventEmitter<string>();
-
-	updateContent : any =  {title : "", description : ""}
-	updateId : string;
-	notUpdated : boolean = true;
-
-
-	showDescription : boolean = false;
-	
-	mode = "create"
-	// update should technically be completely internal to this component. 
-
-  constructor() { }
-
-  ngOnInit(): void {
-		this.placeholder = `enter new ${this.singularName}`;
+	ngOnInit() {
+		this.buttonText = this.showMetaData ? "hide Info" : "Show info about Game Info"
+		
+		this.gameInfoStore.dispatch( gameInfoActions.readGameInfo() );
+		
+		this.gameInfoData = {
+			"categories" : this.gameInfoStore.select(getFamily("category")),
+			"creators" : this.gameInfoStore.select(getFamily("creator")),
+			"platforms" : this.gameInfoStore.select(getFamily("platform"))
+		} 		
 	}
 
-	reset(formValue : NgForm) {
-		formValue.resetForm();
+	createGameInfo(content : GameInfo) {
+		this.gameInfoStore.dispatch( gameInfoActions.createGameInfo({id: v4(), ...content}) )
 	}
 
-	create(formValue : NgForm) {
-		if (this.mode === 'edit') {
-			this.update(formValue);
-			return;
-		}
-		this.createEvent$.emit({
-			title : formValue.controls['title'].value,
-			description :  formValue.controls['description'].value,
-			family : this.singularName
-		})
-		this.reset(formValue);	
+	updateGameInfo(content : Partial<GameInfo> | GameInfo ) {
+		this.gameInfoStore.dispatch( gameInfoActions.updateGameInfo({id : content.id, data : content}) )
 	}
 
-	setUpUpdate(gameInfo : GameInfo) {
-		// got a weird bug not sure where its taking plaece... mess around with update to see it
-		this.updateContent = {title : gameInfo.title, description : gameInfo.description} 
-		this.updateId = gameInfo.id 
-		this.mode = 'edit'
-	}
-
-	checkUpdate(formValue : NgForm) {
-		/* We only want to emit updateEvent if the user changed something */
-		if (this.mode === 'create') {
-			return
-		}
-		this.notUpdated = formValue.pristine ? true : false;
-		// if (formValue.pristine ) {
-		// 	this.notUpdated = true;
-		// }
-		// else {
-		// 	this.notUpdated = false
-		// }
-	}
-
-	update(formValue : NgForm) {
-		this.updateEvent$.emit({
-			id : this.updateId,
-			data : {
-				title : formValue.controls['title'].value,
-				description :  formValue.controls['description'].value,
-				family : this.singularName
-			}
-		})
-		this.mode = "create";
-		//this part is important...
-		this.updateContent =  {title : "", description : ""}
-		this.notUpdated = true;
-		this.reset(formValue);
-	}
-
-	delete(id : string) {
-		if(confirm("Are you sure you want to delete this? Warning: cannot be undone"))
-			this.deleteEvent$.emit(id);
-		return;
+	deleteGameInfo(id : string) {
+		this.gameInfoStore.dispatch( gameInfoActions.deleteGameInfo({ id }) )
 	}
 }
