@@ -6,8 +6,7 @@ export interface VideogameConsole {
     
     // name info
     nickname : string,
-    name : string,
-    qualifiedName : string,
+    title : string,
 
     // console info
     generation : number,

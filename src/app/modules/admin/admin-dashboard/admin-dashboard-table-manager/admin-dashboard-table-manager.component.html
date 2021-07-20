@@ -2,8 +2,8 @@
 	<mat-button-toggle *ngFor="let choice of choices" [value]="choice">{{ choice }}</mat-button-toggle>
 </mat-button-toggle-group>
 
-<zippy title="create or update game-info" open="openForm">
-	<dashboard-form dataType="game-info">
+<zippy title="click here to create new or update">
+	<dashboard-form [dataType]="dataType" [makerChoices]="makerChoices">
 	</dashboard-form>
 </zippy>
 

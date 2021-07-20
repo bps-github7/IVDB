@@ -2,6 +2,7 @@ import { NgForm } from '@angular/forms';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { ConsoleSelectedService } from 'src/app/services/behaivor-subjects/console-selected.service';
 import { GameInfoSelectedService } from 'src/app/services/behaivor-subjects/game-info-selected.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'dashboard-form',
@@ -11,7 +12,10 @@ import { GameInfoSelectedService } from 'src/app/services/behaivor-subjects/game
 export class AdminDashboardFormComponent implements OnInit {
 
 	@Input() dataType : "game-info" | "console";
+	@Input() makerChoices : Observable<any>;
 	selected : any;
+	families : any[];
+	familyChoices : any[];
 
 	@Output() createEvent$ = new EventEmitter<any>();
 	@Output() updateEvent$ = new EventEmitter<any>();
@@ -21,10 +25,13 @@ export class AdminDashboardFormComponent implements OnInit {
 
   constructor(
 		private gameInfoSelectedService : GameInfoSelectedService,
-		private videogameConsoleSelectedService : ConsoleSelectedService
-	) { }
+		private videogameConsoleSelectedService : ConsoleSelectedService		
+		) { }
 
   ngOnInit(): void {
+		this.families = ['category','creator','platform']
+		this.familyChoices = ["home", "portable", "hybrid"];
+
 		if (this.dataType === "game-info") {
 			this.gameInfoSelectedService.selected$.subscribe((data) => this.selected = data)
 		} else if (this.dataType === "console") {

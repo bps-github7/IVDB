@@ -12,6 +12,7 @@ export class AdminDashboardTableManagerComponent implements OnInit {
 
 	@Input() dataType : string = "game-info";
 	@Input() tables : {title : Observable<any>};
+	@Input() makerChoices : Observable<any>;
 	choices : string [];
 	chosen : string;
 
@@ -31,8 +32,7 @@ export class AdminDashboardTableManagerComponent implements OnInit {
 	}
 
 	create() {
-		console.log("create: at table manager level")
-		this.openForm = true;
+
 	}
 
 	update(obj) {

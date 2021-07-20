@@ -16,7 +16,6 @@ export class AdminDashboardInfoTableComponent implements OnInit {
 	@Input() tableHeading : string;
 	@Input() tableColumns : string [] = ["title","edit","delete"]
 
-	@Output() createEvent$ = new EventEmitter<any>()
 	@Output() updateEvent$ = new EventEmitter<any>()
 	@Output() deleteEvent$ = new EventEmitter<any>()
   constructor() { }
@@ -37,7 +36,4 @@ export class AdminDashboardInfoTableComponent implements OnInit {
 		}
 	}
 
-	createItem () {
-		this.createEvent$.emit();
-	}
 }

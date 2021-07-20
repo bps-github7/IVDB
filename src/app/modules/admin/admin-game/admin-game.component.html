@@ -45,11 +45,10 @@
 </div>
 <div *ngIf="chosen === 'game-info'">
 	<table-manager 
-	
-		[tables]="testData"
+		[tables]="gameInfoData"
 		(createEvent$)="createAction()"
-		(deleteEvent$)="deleteAction($event)"
-		></table-manager>
+		(deleteEvent$)="deleteAction($event)">
+	</table-manager>
 
 	<!-- <admin-game-info
 		*ngFor="let g of gameInfo"
@@ -71,4 +70,15 @@
 		(deleteConsoleEvent$)="deleteConsole($event)"
 	></admin-consoles>
 	 -->
+
+</div>
+<div *ngIf="chosen === 'consoles'">
+	<table-manager 
+	dataType="console"
+	[makerChoices]="gameInfoData['platforms']"
+	[tables]="consoleData"
+	(createEvent$)="createAction()"
+	(deleteEvent$)="deleteAction($event)">
+</table-manager>
+
 </div>

@@ -36,6 +36,8 @@ export class AdminGameComponent implements OnInit {
 	filteredGames$: Observable<any>;
 	subscription: Subscription;
 	testData: any;
+	gameInfoData: { categories: any; creators: any; platforms: any; };
+	consoleData: any={};
 
 	constructor(
 		private gameStore : Store<fromGame.State>,
@@ -46,54 +48,22 @@ export class AdminGameComponent implements OnInit {
 	}
 
 	ngOnInit(): void {
-		this.filteredGames$ = this.games$ =  this.gameStore.select(fromGame.selectAll)
-	
+		this.filteredGames$ = this.games$ =  this.gameStore.select(fromGame.selectAll)	
 		this.gameStore.dispatch( gameActions.readGames() );
 		this.consoleStore.dispatch( consoleActions.readVideogameConsole() );
 		this.gameInfoStore.dispatch( gameInfoActions.readGameInfo() );		
-	
-		this.gameInfo = [
-			{
-				title : "categories",
-				singular : "category",
-				content : this.gameInfoStore.select(getFamily("category"))
-			},
-			{
-				title : "creators",
-				singular : "creator",
-				content : this.gameInfoStore.select(getFamily("creator"))
-			},
-			{
-				title : "platforms",
-				singular : "platform",
-				content : this.gameInfoStore.select(getFamily("platform"))
+		this.gameInfoData = {
+			"categories" : this.gameInfoStore.select(getFamily("category")),
+			"creators" : this.gameInfoStore.select(getFamily("creator")),
+			"platforms" : this.gameInfoStore.select(getFamily("platform"))
+		} 		
+		this.consoleData = {
+			"nintendo" : this.consoleStore.select(getByMaker("nintendo")),
+			"sony" : this.consoleStore.select(getByMaker("sony")),
+			"microsoft" : this.consoleStore.select(getByMaker("microsoft")),
+			"pc" : this.consoleStore.select(getByMaker("pc")),
+			"mobile" : this.consoleStore.select(getByMaker("mobile"))
 			}
-
-		]
-		this.testData = { "categories" : this.gameInfo[0].content, "creators" : this.gameInfo[1].content, "platforms" : this.gameInfo[2].content  } 
-		
-	this.consoles = [
-		{
-			title : "nintendo",
-			content : this.consoleStore.select(getByMaker("nintendo"))
-		},
-		{
-			title : "sony",
-			content : this.consoleStore.select(getByMaker("sony"))
-		},
-		{
-			title : "microsoft",
-			content : this.consoleStore.select(getByMaker("microsoft"))
-		},
-		{
-			title : "pc",
-			content : this.consoleStore.select(getByMaker("pc"))
-		},
-		{
-			title : "mobile",
-			content : this.consoleStore.select(getByMaker("mobile"))
-		}
-	]
 
 	}
 

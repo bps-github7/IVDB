@@ -1,16 +1,34 @@
 <section *ngIf="dataType === 'game-info'; else VgConsole" >
 	<form #finished="ngForm" (ngSubmit)="save(finished)">
-		<input 
-		[ngModel]="selected.title"
-		name="title"
-		type="text" 
-		mat-input 
-		><br>
-		<textarea 
-			[ngModel]="selected.description"
-			name="description"	
-			mat-text-area
-			placeholder="enter description" cols="30" rows="10"></textarea>
+		<div class="form-group">
+			<label for="title">Title:</label>
+			<input 
+				[ngModel]="selected.title"
+				name="title"
+				type="text" 
+				mat-input
+				class="form-control">
+		</div>
+		<div class="form-group">
+			<label for="description">Description:</label>
+			<textarea 
+				[ngModel]="selected.description"
+				name="description"	
+				mat-text-area
+				class="form-control"
+				placeholder="enter a description" cols="30" rows="10">
+			</textarea>
+		</div>
+		<div class="form-group">
+			<label for="family">Family:</label>
+			<select 
+				[ngModel]="selected.family" 
+				name="family" id="family"
+				class="form-control">
+				<option [value]="f" *ngFor="let f of families">{{f}}</option>
+			</select>
+		</div>
+		
 		<button
 			primary 
 			class="btn btn-primary">Create / update game info</button>
@@ -20,63 +38,94 @@
 
 <ng-template #VgConsole>
 	<form #finished="ngForm" (ngSubmit)="save(finished)">
-			<input ngModel name="name" type="text" placeholder="enter new console name" >
+		<div class="form-group">
+			<label for="title">Title:</label>
+			<input 
+				class="form-control"
+				[ngModel]="selected.title"
+				name="title" 
+				type="text"
+				placeholder="enter new console title">
+		</div>	
 			
-			<div class="form-group">
-				<label for="nickname">nickname:</label>
-				<input ngModel name="nickname" type="text" class="form-control">
-			</div>
-	
-			<div class="form-group">
-				<label for="qualifiedName">qualified Name:</label>
-				<input ngModel name="qualifiedName" type="text" class="form-control">
-			</div>
-	
-			<div class="form-group">
-				<label for="generation">generation:</label>
-				<input ngModel name="generation" type="number" min=0 class="form-control">
-			</div>
-	
-			<div class="form-group">
-				<label for="maker">Maker:</label>
-				<select ngModel="maker" name="maker" id="maker" class="form-control">
-					<option value=""></option>
-					<!-- <option [value]="m.title" *ngFor="let m of makerChoices | async">{{ m.title }}</option> -->
-				</select>
-			</div>
-			
-	
-			<div class="form-group">
-				<label for="family">Family:</label>
-				<select ngModel name="family" id="family" class="form-control">
-					<option value=""></option>
-					<!-- <option [value]="f" *ngFor="let f of familyChoices">{{ f }}</option> -->
-				</select>
-			</div>
-	
-			
-			<div class="form-group">
-				<label for="description">Description:</label>
-				<textarea ngModel name="description" id="description" class="form-control" cols="30" rows="10"></textarea>
-			</div>
-	
-				
-			<div class="form-group">
-				<label for="image">Image:</label>
-				<input url ngModel name="image" type="text" class="form-control" id='image'>
-			</div>
-	
-			<div class="form-control">
-				<label for="released">Released:</label>
-				<input ngModel name="released" type="date" class="form-control" id='released'>
-			</div>
-	
-	
-	
-			
-			<button type="submit">
-				Save
-			</button>
-		</form>
+		<div class="form-group">
+			<label for="nickname">nickname:</label>
+			<input 
+				[ngModel]="selected.nickname"
+				name="nickname" 
+				type="text" 
+				class="form-control">
+		</div>
+
+		<div class="form-group">
+			<label for="generation">generation:</label>
+			<input 
+				[ngModel]="selected.generation"
+				name="generation" 
+				type="number" 
+				min=0 
+				class="form-control">
+		</div>
+
+		<div class="form-group">
+			<label for="maker">Maker:</label>
+			<select 
+				[ngModel]="selected.maker"
+				name="maker"
+				id="maker"
+				class="form-control">
+				<option [value]="m.title" *ngFor="let m of makerChoices | async">{{ m.title }}</option>
+			</select>
+		</div>
 		
+
+		<div class="form-group">
+			<label for="family">Family:</label>
+			<select 
+				[ngModel]="selected.family"
+				name="family" 
+				id="family" 
+				class="form-control">
+				<option [value]="f" *ngFor="let f of familyChoices">{{ f }}</option>
+			</select>
+		</div>
+
+		
+		<div class="form-group">
+			<label for="description">Description:</label>
+			<textarea 
+				[ngModel]="selected.description" 
+				name="description" 
+				id="description"
+				class="form-control"
+				cols="30" rows="10">
+			</textarea>
+		</div>
+
+			
+		<div class="form-group">
+			<label for="image">Image:</label>
+			<input 
+				url 
+				[ngModel]="selected.image"
+				name="image" 
+				type="text" 
+				class="form-control" 
+				id='image'>
+		</div>
+
+		<div class="form-control">
+			<label for="released">Released:</label>
+			<input 
+				[ngModel]="selected.released"
+				name="released"
+				type="date"
+				class="form-control"
+				id='released'>
+		</div>
+		
+		<button type="submit">
+			Save
+		</button>
+	</form>		
 </ng-template>
