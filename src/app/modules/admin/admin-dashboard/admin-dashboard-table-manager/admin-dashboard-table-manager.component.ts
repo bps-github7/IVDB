@@ -14,10 +14,7 @@ export class AdminDashboardTableManagerComponent implements OnInit {
 	@Input() tables : {title : Observable<any>};
 	choices : string [];
 	chosen : string;
-
-	// TODO: this is meant to open up the zippy when we want to update a game,
-	//  which has become more important since testing w/ visual inspection has commenced 
-	openForm : boolean = false;
+	showForm : boolean = false;
 
 	@Output() createEvent$ = new EventEmitter<any>();
 	@Output() updateEvent$ = new EventEmitter<any>();
@@ -54,7 +51,8 @@ export class AdminDashboardTableManagerComponent implements OnInit {
 			if a user pressed the 'create' button from the table
 			but this was difficult in practice, and not super important. so we skipped for now.
 		*/
-		console.log("create event emitted from table, listened to from table manager")	
+		this.showForm = true;
+		// TODO: need to 1. clear any existing data from form (make it 'pristine') 2. scroll to form and make first input come into focus/ cursor selected input 
 	}
 
 	updateFromTable(obj) {
@@ -65,6 +63,7 @@ export class AdminDashboardTableManagerComponent implements OnInit {
 			Don't need to emit anything, except maybe, if you get  the zippy opening working, 
 			like mentioned above, that could help the user experience.
 		*/
+		this.showForm = true;
 		if (this.dataType === "game-info") {
 			this.gameInfoSelectedService.select(obj)
 		} else {

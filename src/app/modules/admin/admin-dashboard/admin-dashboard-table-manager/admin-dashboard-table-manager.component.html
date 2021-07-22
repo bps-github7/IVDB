@@ -2,17 +2,17 @@
 <mat-button-toggle-group (change)="chosen = $event.value">
 	<mat-button-toggle *ngFor="let choice of choices" [value]="choice">{{ choice }}</mat-button-toggle>
 </mat-button-toggle-group>
-
+<br>
 <!-- create / update form -->
-<zippy title="click here to create new or update">
-	<dashboard-form 
-		[dataType]="dataType" 
-		(createEvent$)="createFromForm($event)"
-		(updateEvent$)="updateFromForm($event)"
-		(deleteEvent$)="deleteFromForm($event)"
-		>
-	</dashboard-form>
-</zippy>
+<button mat-stroked-button (click)="showForm = !showForm">Create or update an item</button>
+<dashboard-form 
+	*ngIf="showForm"
+	[dataType]="dataType" 
+	(createEvent$)="createFromForm($event)"
+	(updateEvent$)="updateFromForm($event)"
+	(deleteEvent$)="deleteFromForm($event)"
+	>
+</dashboard-form>
 
 <!-- display table -->
 <div *ngIf="chosen">

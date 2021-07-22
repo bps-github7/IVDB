@@ -1,6 +1,5 @@
 <section *ngIf="dataType === 'game-info'; else VgConsole" >
 	<form #finished="ngForm" (ngSubmit)="save(finished)">
-		<p>Boutta NUT: {{selected?.id}}</p>
 		<div class="form-group">
 			<label for="title">Title:</label>
 			<input 

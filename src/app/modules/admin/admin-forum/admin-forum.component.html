@@ -6,6 +6,8 @@
 <mat-button-toggle-group (change)="chosen = $event.value">
 	<mat-button-toggle value="forums">Forums</mat-button-toggle>
 	<mat-button-toggle value="forum-info">Forum-Info</mat-button-toggle>
+	<mat-button-toggle value="threads">Threads</mat-button-toggle>
+
 </mat-button-toggle-group>
 
 <!-- all site content component -->
@@ -40,28 +42,8 @@
 	</table>
 </div>
 <div *ngIf="chosen === 'forum-info'">
-
-	<div class="forum-help">
-		<h4></h4>
-		<button mat-button (click)="showHelp = !showHelp">
-
-			<span *ngIf="!showHelp; else hide">Need help with Forum Info?</span>
-			<ng-template #hide>
-				hide
-			</ng-template>
-
-		</button>
-
-		<div *ngIf="showHelp">
-			<div *ngFor="let f of forumInfoHelp">
-				<h4>{{ f.title }}</h4>
-
-				<p>{{ f.description }}</p>
-			</div>
-		</div>
-
-
-	</div>
-
-	
+	<admin-forum-info></admin-forum-info>
+</div>
+<div *ngIf="chosen === 'threads'">
+	<admin-threads></admin-threads>	
 </div>

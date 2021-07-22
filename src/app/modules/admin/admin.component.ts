@@ -6,8 +6,6 @@ import { Component } from '@angular/core';
   styleUrls: ['./admin.component.sass']
 })
 export class AdminComponent {
-	showDashboard: boolean = false;
-
 
 	constructor() {
 	}

@@ -24,6 +24,7 @@ export class AdminDashboardFormComponent implements OnInit {
 	@Input() dataType : "game-info" | "console";
 	@Input() makerChoices : Observable<any>;
 	selected : any={};
+	// TODO: need to make these Input props to make the component truly reusable.
 	gameInfoFamilies : any[];
 	consoleFamilies : any[];
 
