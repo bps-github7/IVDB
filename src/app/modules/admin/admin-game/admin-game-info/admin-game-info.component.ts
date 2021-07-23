@@ -32,6 +32,7 @@ export class AdminGameInfoComponent implements OnInit {
 	showMetaData : boolean = false;
 	buttonText : string;
 	gameInfoData : any={}
+	familyChoices;
 
 	constructor(private gameInfoStore : Store<fromGameInfo.State>) { }
 
@@ -45,6 +46,7 @@ export class AdminGameInfoComponent implements OnInit {
 			"creators" : this.gameInfoStore.select(getFamily("creator")),
 			"platforms" : this.gameInfoStore.select(getFamily("platform"))
 		} 		
+		this.familyChoices = Object.keys(this.gameInfoData)
 	}
 
 	createGameInfo(content : GameInfo) {

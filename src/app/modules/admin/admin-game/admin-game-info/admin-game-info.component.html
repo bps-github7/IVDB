@@ -24,6 +24,7 @@
 	
 	<table-manager 
 		[tables]="gameInfoData"
+		[familyChoices]="familyChoices"
 		(createEvent$)="createGameInfo($event)"
 		(updateEvent$)="updateGameInfo($event)"
 		(deleteEvent$)="deleteGameInfo($event)">

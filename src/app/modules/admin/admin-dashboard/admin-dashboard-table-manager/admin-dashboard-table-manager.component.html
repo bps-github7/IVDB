@@ -8,6 +8,8 @@
 <dashboard-form 
 	*ngIf="showForm"
 	[dataType]="dataType" 
+	[familyChoices]="familyChoices"
+	[makerChoices]="makerChoices"
 	(createEvent$)="createFromForm($event)"
 	(updateEvent$)="updateFromForm($event)"
 	(deleteEvent$)="deleteFromForm($event)"

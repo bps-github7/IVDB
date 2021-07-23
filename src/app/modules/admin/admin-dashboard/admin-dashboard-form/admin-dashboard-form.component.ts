@@ -12,6 +12,8 @@ import { Store } from '@ngrx/store';
 import * as fromGameInfo from 'src/app/store/reducers/game-info.reducer';
 import { readGameInfo } from './../../../../store/actions/game-info.actions';
 import { getFamily } from 'src/app/store/selectors/game-info.selector';
+import { ForumInfoSelectedService } from 'src/app/services/behaivor-subjects/forum-info-selected.service';
+import { ThreadSelectedService } from 'src/app/services/behaivor-subjects/thread-selected.service';
 
 
 @Component({
@@ -21,41 +23,51 @@ import { getFamily } from 'src/app/store/selectors/game-info.selector';
 })
 export class AdminDashboardFormComponent implements OnInit {
 
-	@Input() dataType : "game-info" | "console";
+	@Input() dataType : "game-info" | "console" | "forum-info" | "thread";
 	@Input() makerChoices : Observable<any>;
-	selected : any={};
-	// TODO: need to make these Input props to make the component truly reusable.
-	gameInfoFamilies : any[];
-	consoleFamilies : any[];
+	@Input() familyChoices : string [];
 
 	@Output() createEvent$ = new EventEmitter<any>();
 	@Output() updateEvent$ = new EventEmitter<any>();
 	@Output() deleteEvent$ = new EventEmitter<string>();
-
+;
+	selected : any={};
 	
-
   constructor(
 		private gameInfoSelectedService : GameInfoSelectedService,
 		private videogameConsoleSelectedService : ConsoleSelectedService,		
-		private gameInfoStore : Store<fromGameInfo.State>
+		private forumInfoSelectedService : ForumInfoSelectedService,
+		private threadSelectedService : ThreadSelectedService,		
 		) { }
 
   ngOnInit(): void {
+		// changes plural "categories" to singula "category" or plural "prefixes" to singular "prefix"
+		this.familyChoices = this.familyChoices.map(item => {
+			// wanted to do this with a ternary but need else if for "es" 
+			if  (item.endsWith("ies")) { 
+				return item.replace("ies","y")
+			} else if (item.endsWith("es")) {
+				return (item === "types" ?
+				 item.replace("s", "") :
+				 item.replace("es",""))
+			} else if (item.endsWith("s")) {
+				return item.replace("s","")
+			}
+			
+			
+		});
 
-		// to make these reusable, we will need this info passed in!
-		this.gameInfoStore.dispatch( readGameInfo() )
-
-		this.makerChoices = this.gameInfoStore.select( getFamily("platform") )
-		this.gameInfoFamilies = ['category','creator','platform']
-		this.consoleFamilies = ["home", "portable", "hybrid"];
 
 		if (this.dataType === "game-info") {
 			this.gameInfoSelectedService.selected$.subscribe((data) => this.selected = data)
 		} else if (this.dataType === "console") {
 			this.videogameConsoleSelectedService.selected$.subscribe((data) => this.selected = data)
-		}
-		else {
-			console.log("nothing to show")
+		}	else if (this.dataType === "forum-info") {
+			this.forumInfoSelectedService.selected$.subscribe((data) => this.selected = data)
+		} else if (this.dataType === "thread") {
+			this.threadSelectedService.selected$.subscribe((data) => this.selected = data)
+		}	else {
+			console.error("no form update data recieved in admin-dashboard-form component")
 		}
   }
 
@@ -65,7 +77,10 @@ export class AdminDashboardFormComponent implements OnInit {
 		} else {
 			this.createEvent$.emit(form.value);
 		}
-		// do a hard reset, so that the form has no data displayed and nothing to recall the last submit with.
+		/* 
+			do a hard reset, so that the form has no data displayed 
+			and nothing to recall the last submit with.
+		*/
 		form.reset()
 		this.selected = {}
 		return;
@@ -83,10 +98,10 @@ export class AdminDashboardFormComponent implements OnInit {
 			this.deleteEvent$.emit(obj?.id)
 			this.selected = {};
 		} else {
-			console.log("error: cannot delete object without an id");
+			console.error("error: cannot delete object without an id");
 			return;
 		}
-		// we gotta reset the form if the data is deleted 
+		/* Delete existing form data upon reset */
 		form.reset()
 		this.selected = {};
 		

@@ -1,3 +1,5 @@
+import { ThreadSelectedService } from './../../../../services/behaivor-subjects/thread-selected.service';
+import { ForumInfoSelectedService } from './../../../../services/behaivor-subjects/forum-info-selected.service';
 import { ConsoleSelectedService } from './../../../../services/behaivor-subjects/console-selected.service';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Observable } from 'rxjs';
@@ -12,18 +14,23 @@ export class AdminDashboardTableManagerComponent implements OnInit {
 
 	@Input() dataType : string = "game-info";
 	@Input() tables : {title : Observable<any>};
-	choices : string [];
-	chosen : string;
-	showForm : boolean = false;
+	@Input() familyChoices : string [];
+	@Input() makerChoices : Observable<any>;
 
 	@Output() createEvent$ = new EventEmitter<any>();
 	@Output() updateEvent$ = new EventEmitter<any>();
 	@Output() deleteEvent$ = new EventEmitter<any>();
 
-  constructor(
+	choices : string [];
+	chosen : string;
+	showForm : boolean = false;
+
+	constructor(
 		private gameInfoSelectedService : GameInfoSelectedService,
-		private videogameConsoleSelectedService : ConsoleSelectedService
-	) { }
+		private videogameConsoleSelectedService : ConsoleSelectedService,
+		private forumInfoSelectedService : ForumInfoSelectedService,
+		private threadSelectedService : ThreadSelectedService
+		) { }
 
   ngOnInit(): void {
 		// if tables input prop was passed in, populate 'choices' with the key of each table object (its title)
@@ -65,9 +72,15 @@ export class AdminDashboardTableManagerComponent implements OnInit {
 		*/
 		this.showForm = true;
 		if (this.dataType === "game-info") {
-			this.gameInfoSelectedService.select(obj)
+			this.gameInfoSelectedService.select(obj);
+		} else if (this.dataType == "console") {
+			this.videogameConsoleSelectedService.select(obj);
+		} else if (this.dataType == "forum-info") {
+			this.forumInfoSelectedService.select(obj);
+		} else if (this.dataType == "thread") {
+			this.threadSelectedService.select(obj);
 		} else {
-			this.videogameConsoleSelectedService.select(obj)
+			console.error("there was a problem loading the forms update data");
 		}
 	}
 

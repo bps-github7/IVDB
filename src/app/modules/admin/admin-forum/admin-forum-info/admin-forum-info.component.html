@@ -24,6 +24,8 @@
 	
 	<table-manager 
 		[tables]="forumInfoData"
+		[familyChoices]="familyChoices"
+		[makerChoices]="makerChoices"
 		(createEvent$)="createForumInfo($event)"
 		(updateEvent$)="updateForumInfo($event)"
 		(deleteEvent$)="deleteForumInfo($event)">

@@ -1,4 +1,4 @@
-<section *ngIf="dataType === 'game-info'; else VgConsole" >
+<section *ngIf="dataType === 'game-info' || dataType === 'forum-info'" >
 	<form #finished="ngForm" (ngSubmit)="save(finished)">
 		<div class="form-group">
 			<label for="title">Title:</label>
@@ -25,7 +25,7 @@
 				[ngModel]="selected.family" 
 				name="family" id="family"
 				class="form-control">
-				<option [value]="f" *ngFor="let f of gameInfoFamilies">{{f}}</option>
+				<option [value]="f" *ngFor="let f of familyChoices">{{f}}</option>
 			</select>
 		</div>
 		
@@ -35,7 +35,7 @@
 	</form>
 </section>
 
-<ng-template #VgConsole>
+<section *ngIf="dataType === 'console'">
 	<form #finished="ngForm" (ngSubmit)="save(finished)">
 		<div class="form-group">
 			<label for="title">Title:</label>
@@ -85,7 +85,7 @@
 				name="family" 
 				id="family" 
 				class="form-control">
-				<option [value]="f" *ngFor="let f of consoleFamilies">{{ f }}</option>
+				<option [value]="f" *ngFor="let f of familyChoices">{{ f }}</option>
 			</select>
 		</div>
 
@@ -127,4 +127,43 @@
 		<button class="btn btn-danger" (click)="reset(finished)">Reset</button>
 		<button class="btn alert-danger" (click)="delete(selected.id, finished)" [disabled]="!selected.id">Delete</button>
 	</form>		
-</ng-template>
+</section>
+<!-- <section *ngIf="dataType === 'forum-info'">
+	<form #finished="ngForm" (ngSubmit)="save(finished)">
+		<div class="form-group">
+			<label for="title">Title:</label>
+			<input 
+				[ngModel]="selected.title"
+				name="title"
+				type="text" 
+				mat-input
+				class="form-control">
+		</div>
+		<div class="form-group">
+			<label for="description">Description:</label>
+			<textarea 
+				[ngModel]="selected.description"
+				name="description"	
+				mat-text-area
+				class="form-control"
+				placeholder="enter a description" cols="30" rows="10">
+			</textarea>
+		</div>
+		<div class="form-group">
+			<label for="family">Family:</label>
+			<select 
+				[ngModel]="selected.family" 
+				name="family" id="family"
+				class="form-control">
+				<option [value]="f" *ngFor="let f of familyChoices | async">{{f}}</option>
+			</select>
+		</div>
+		
+		<button	type="submit"	class="btn btn-primary">Create / update game info</button>
+		<button type="button" class="btn alert-danger" (click)="reset(finished)">Reset</button>
+		<button type="button" class="btn btn-danger" (click)="delete(selected.id, finished)" [disabled]="!selected.id">Delete</button>
+	</form>
+</section> -->
+<section *ngIf="dataType === 'thread'">
+	this should display for thread editing
+</section>
