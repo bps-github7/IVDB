@@ -4,4 +4,5 @@ export interface Thread {
     topics: string;
     description: string;
     invitees?: string [];
+		id : string;
 }

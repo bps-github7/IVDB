@@ -1,5 +1,6 @@
 export interface Rating {
-    username : string;
-    game_title : string;
-    value : number;
+	id : string;
+	username : string;
+	game_title : string;
+	value : number;
 }

@@ -2,9 +2,9 @@
 username is for internal use (route params in url, document id in database) 
  */
 export interface User {
-    uid: string,
-    email : string,
-    username : string,
-    displayname ?: string,
-    isAdmin? : boolean
+	id: string,
+	email : string,
+	username : string,
+	displayname ?: string,
+	isAdmin? : boolean
 }

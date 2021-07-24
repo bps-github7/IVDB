@@ -3,18 +3,19 @@ other than that, string value fields are for reference to other users, where as 
 are for that and informing user reccomendations. 
  */
 export interface Review {   
-    username : string,
-    game_title : string,
-    body?: string,
-    playability? : number,
-    replayability? : number,
-    graphics? : number,
-    audio ? : number,
-    story? : number,
-    settings? : number,
-    characters ? : number,
-    favorite_parts ? : string,
-    least_favorite_parts ? : string,
-    improvable? : string,
-    comments? : string
+	id : string;
+	username : string,
+	game_title : string,
+	body?: string,
+	playability? : number,
+	replayability? : number,
+	graphics? : number,
+	audio ? : number,
+	story? : number,
+	settings? : number,
+	characters ? : number,
+	favorite_parts ? : string,
+	least_favorite_parts ? : string,
+	improvable? : string,
+	comments? : string
 }

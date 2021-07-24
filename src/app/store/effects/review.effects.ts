@@ -1,55 +1,55 @@
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs/Observable";
 import { Actions, createEffect, ofType } from "@ngrx/effects";
-import { Content } from "src/app/models/content/content.model";
-import * as contentActions from '../actions/content.actions'
+import { Review } from "src/app/models/contrib/review.model";
+import * as reviewActions from '../actions/review.actions'
 import { AngularFirestore, AngularFirestoreCollection } from "@angular/fire/firestore";
 import { switchMap, mergeMap, map, exhaustMap } from "rxjs/operators";
 import 'rxjs/add/observable/fromPromise';
 
 
 @Injectable()
-export class ContentEffects {
+export class ReviewEffects {
 
 	constructor(private actions$: Actions, private afs : AngularFirestore) {}
 
 		query$ = createEffect(() => this.actions$.pipe(
-			ofType(contentActions.readContent),
-			exhaustMap(() => this.afs.collection<Content>('content').valueChanges().pipe(
-					map((contents) => contentActions.readContentSuccess({contents}))
+			ofType(reviewActions.readReviews),
+			exhaustMap(() => this.afs.collection<Review>('reviews').valueChanges().pipe(
+					map((reviews) => reviewActions.readReviewsSuccess({reviews}))
 			))
 		))
 
 
 	create$ = createEffect(() => this.actions$.pipe(
-		ofType(contentActions.createContent),
+		ofType(reviewActions.createReview),
 		switchMap(data => {
 			const {type, ...payload} = data
-			const ref = this.afs.doc<Content>(`content/${data.id}`);
+			const ref = this.afs.doc<Review>(`reviews/${data.id}`);
 			return Observable.fromPromise(ref.set(payload));
 		}),
-		map(() => contentActions.createContentSuccess())
+		map(() => reviewActions.createReviewSuccess())
 	))
 
 
 
 	update$ = createEffect(() => this.actions$.pipe(
-		ofType(contentActions.updateContent),
+		ofType(reviewActions.updateReview),
 		map((action) => action),
-		switchMap(content => {
-			const ref = this.afs.doc<Content>(`content/${content.id}`)
-			return Observable.fromPromise(ref.update({id : content.id,  ...content.data}))
+		switchMap(review => {
+			const ref = this.afs.doc<Review>(`reviews/${review.id}`)
+			return Observable.fromPromise(ref.update({id : review.id,  ...review.data}))
 		}),
-		map(() => contentActions.updateContentSuccess())
+		map(() => reviewActions.updateReviewSuccess())
 	))
 
 	delete$ = createEffect(() => this.actions$.pipe(
-		ofType(contentActions.deleteContent),
+		ofType(reviewActions.deleteReview),
 		map(action => action),
 		switchMap(action => {
-			const ref = this.afs.doc<Content>(`content/${action.id}`)
+			const ref = this.afs.doc<Review>(`reviews/${action.id}`)
 			return Observable.fromPromise(ref.delete())
 		}),
-		map(()=> contentActions.deleteContentSuccess())
+		map(()=> reviewActions.deleteReviewSuccess())
 	))
 }

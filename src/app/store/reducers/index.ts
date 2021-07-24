@@ -1,18 +1,32 @@
+import { ReviewReducer } from './review.reducer';
+import { RatingReducer } from './rating.reducer';
 import { VideogameConsoleReducer } from './videogame-console.reducer';
-import { ActionReducer, ActionReducerMap, INIT, MetaReducer } from "@ngrx/store";
+import { ActionReducer, ActionReducerMap, MetaReducer } from "@ngrx/store";
 import { ContentReducer } from "./content.reducer";
 import { GameReducer } from "./game.reducer";
 import { GameInfoReducer } from "./game-info.reducer";
 import { ForumReducer } from "./forum.reducer";
 import { ForumInfoReducer } from "./forum-info.reducer";
-import { Content } from 'src/app/models/content/content.model';
 import { environment } from 'src/environments/environment';
 import { routerReducer, RouterReducerState } from '@ngrx/router-store';
-import { Game } from 'src/app/models/content/game.model';
-import { GameInfo } from 'src/app/models/content/game-info.model';
-import { Forum } from 'src/app/models/content/forum.model';
-import { ForumInfo } from 'src/app/models/content/forum-info.model';
-import { VideogameConsole } from 'src/app/models/content/videogame-console.model';
+import { 
+	Game,
+	Content,
+	GameInfo,
+	Forum,
+	ForumInfo,
+	VideogameConsole,
+	Thread,
+	Rating,
+	Review,
+	Feedback,
+	Suggestion,
+	User
+} from 'src/app/models';
+import { SuggestionReducer } from './suggestion.reducer';
+import { FeedbackReducer } from './feedback.reducer';
+import { ThreadReducer } from './thread.reducer';
+import { UserReducer } from './user.reducer';
 
 export interface AppState  {
 	router : RouterReducerState<any>;
@@ -21,13 +35,13 @@ export interface AppState  {
 	gameInfo : ReadonlyArray<GameInfo>;
 	forum : ReadonlyArray<Forum>;
 	forumInfo : ReadonlyArray<ForumInfo>;
-	videogameConsole : ReadonlyArray<VideogameConsole>;
-	
-	// thread : ReadonlyArray<Thread>;
-	// rating : ReadonlyArray<Rating>;
-	// review : ReadoonlyArray<Review>;
-	// feedback : ReadonlyArray<Feedback>;
-	// suggestion : ReadonlyArray<Suggestion>;
+	videogameConsole : ReadonlyArray<VideogameConsole>;	
+	thread : ReadonlyArray<Thread>;
+	rating : ReadonlyArray<Rating>;
+	review : ReadonlyArray<Review>;
+	feedback : ReadonlyArray<Feedback>;
+	suggestion : ReadonlyArray<Suggestion>;
+	User : ReadonlyArray<User>;
 }
 
 export const reducers: ActionReducerMap<any> = {
@@ -41,7 +55,14 @@ export const reducers: ActionReducerMap<any> = {
 	gameInfo : GameInfoReducer,
 	forum : ForumReducer,
 	forumInfo : ForumInfoReducer,
-	videogameConsole : VideogameConsoleReducer
+	videogameConsole : VideogameConsoleReducer,
+	rating : RatingReducer,
+	review : ReviewReducer,
+	suggestion : SuggestionReducer,
+	feedback : FeedbackReducer,
+	thread : ThreadReducer,
+	user : UserReducer,	
+
 
 	// unimplemented reducers...
 	// contrib : contribReducer,
