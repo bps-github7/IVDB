@@ -38,18 +38,12 @@ export class AdminDashboardFormComponent implements OnInit {
 
   ngOnInit(): void {
 		// changes plural "categories" to singula "category" or plural "prefixes" to singular "prefix"
-		this.familyChoices = this.familyChoices.map(item => {
-			// wanted to do this with a ternary but need else if for "es" 
-			if  (item.endsWith("ies")) { 
-				return item.replace("ies","y")
-			} else if (item.endsWith("es")) {
-				return (item === "types" ?
-				 item.replace("s", "") :
-				 item.replace("es",""))
-			} else if (item.endsWith("s")) {
-				return item.replace("s","")
-			}
-		});
+
+		// console.log("before:")
+		// console.log(this.familyChoices)
+		this.familyChoices = this.familyChoices.map(item => this.depluralizer(item));
+		console.log("after depluralizer:")
+		console.log(this.familyChoices);
 
 
 		if (this.dataType === "game-info") {
@@ -64,6 +58,21 @@ export class AdminDashboardFormComponent implements OnInit {
 			console.error("no form update data recieved in admin-dashboard-form component")
 		}
   }
+
+	depluralizer(word) {
+		// simple fn for turning a word in our lexicon from plural to singular.
+		if  (word.endsWith("ies")) { 
+			return word.replace("ies","y")
+		} else if (word.endsWith("es")) {
+			if(word === "types") {
+				return "type"
+			} else {
+				return word.replace("es","")
+			}
+		} else if (word.endsWith("s")) {
+			return word.replace("s","")
+		}
+	}
 
 	save(form : NgForm) {
 		if (this.selected.id) {

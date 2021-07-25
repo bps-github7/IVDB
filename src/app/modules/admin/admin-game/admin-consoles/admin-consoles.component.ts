@@ -30,7 +30,7 @@ export class AdminConsolesComponent implements OnInit {
 	showMetaData : boolean = false;
 	buttonText : string;
 	consoleData : any={};
-	familyChoices: string[] = ["home", "portable", "hybrid", "other"];
+	familyChoices: string[];
 	makerChoices: string[];
 
 	constructor(private consoleStore : Store<fromConsole.State>) { }
@@ -48,6 +48,7 @@ export class AdminConsolesComponent implements OnInit {
 			"mobile" : this.consoleStore.select(selectConsolesByMaker("mobile"))
 		}
 		this.makerChoices = Object.keys(this.consoleData);
+		this.familyChoices = ["home", "portable", "hybrid", "other"];
 	}
 
 	createConsole(content : VideogameConsole) {
