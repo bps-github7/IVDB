@@ -13,7 +13,8 @@ export class AdminContentManagerComponent implements OnInit {
 
 	/* 
 	admin-content-manager: a dumb component which takes a slice 
-	of store data (content) and supports crud operations.
+	of store data (content) and supports crud operations by emitting
+	parents listened to by the parent smart component 'admin-content'.
 	*/
 
 	show : boolean = false;

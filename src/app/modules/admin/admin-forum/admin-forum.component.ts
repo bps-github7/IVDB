@@ -6,12 +6,12 @@ import { select, Store } from '@ngrx/store';
 
 import v4 from 'uuid';
 import { MatDialog } from '@angular/material/dialog';
-import { selectByTitleSubstring } from 'src/app/store/selectors/forum.selector';
+import { selectForumByTitleSubstring } from 'src/app/store/selectors/forum.selector';
 import * as forumActions from 'src/app/store/actions/forum.actions'
 import * as forumInfoActions from 'src/app/store/actions/forum-info.actions';
 import * as fromForum from 'src/app/store/reducers/forum.reducer';
 import * as fromForumInfo from 'src/app/store/reducers/forum-info.reducer';
-import { getFamily } from 'src/app/store/selectors/forum-info.selector';
+import { selectForumInfoFamily } from 'src/app/store/selectors/forum-info.selector';
 
 @Component({
   selector: 'admin-forum',
@@ -49,17 +49,17 @@ export class AdminForumComponent implements OnInit {
 			{
 				title : "families",
 				singular : "family",
-				content : this.forumInfoStore.select(getFamily("family"))
+				content : this.forumInfoStore.select(selectForumInfoFamily("family"))
 			},
 			{
 				title : "prefixes",
 				singular : "prefix",
-				content : this.forumInfoStore.select(getFamily("prefix"))
+				content : this.forumInfoStore.select(selectForumInfoFamily("prefix"))
 			},
 			{
 				title : "types",
 				singular : "type",
-				content : this.forumInfoStore.select(getFamily("type"))
+				content : this.forumInfoStore.select(selectForumInfoFamily("type"))
 			}
 		]
 		this.forumInfoHelp = [
@@ -82,7 +82,7 @@ export class AdminForumComponent implements OnInit {
 	filter(query: string) {
 		this.filteredForums$ = (query) ?
 				// should be a selector which gets a title that matches a substring
-				this.forumStore.pipe(select(selectByTitleSubstring(query))) :
+				this.forumStore.pipe(select(selectForumByTitleSubstring(query))) :
 				this.forums$;
 	}
 

@@ -12,7 +12,7 @@ import * as fromVideogameConsole from 'src/app/store/reducers/videogame-console.
 // 		} 
 // 	)
 
-export const getFamily = (family: string) => 
+export const selectConsoleFamily = (family: string) => 
 	createSelector(
 		fromVideogameConsole.selectAll, 
 		(entities : VideogameConsole[]) => {
@@ -20,14 +20,14 @@ export const getFamily = (family: string) =>
 });
 
 
-export const getByMaker = (maker: string) => 
+export const selectConsolesByMaker = (maker: string) => 
 	createSelector(
 		fromVideogameConsole.selectAll, 
 		(entities : VideogameConsole[]) => {
 			return entities.filter((entity : VideogameConsole) => entity?.maker === maker)
 });
 
-export const selectEntity = id => createSelector(
+export const selectConsoleEntity = id => createSelector(
 	fromVideogameConsole.selectEntities,
 	entities => entities[id]
 );

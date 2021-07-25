@@ -6,7 +6,7 @@ import * as fromGameInfo from 'src/app/store/reducers/game-info.reducer';
 
 import { readGameInfo, readGames } from 'src/app/store';
 import { select, Store } from '@ngrx/store';
-import { getFamily } from 'src/app/store/selectors/game-info.selector';
+import { selectGameInfoFamily } from 'src/app/store/selectors/game-info.selector';
 import { Observable } from 'rxjs';
 
 
@@ -36,9 +36,9 @@ export class GameBrowserComponent implements OnInit {
 			this.gameInfoStore.dispatch( readGameInfo() )
 
 
-			this.categories$ = this.gameInfoStore.pipe(select(getFamily("category")))
-			this.creators$ = this.gameInfoStore.pipe(select(getFamily("creator")))
-			this.platforms$ = this.gameInfoStore.pipe(select(getFamily("platform")))
+			this.categories$ = this.gameInfoStore.pipe(select(selectGameInfoFamily("category")))
+			this.creators$ = this.gameInfoStore.pipe(select(selectGameInfoFamily("creator")))
+			this.platforms$ = this.gameInfoStore.pipe(select(selectGameInfoFamily("platform")))
 
 
 

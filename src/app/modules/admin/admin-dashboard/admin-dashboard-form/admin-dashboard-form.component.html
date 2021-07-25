@@ -16,7 +16,7 @@
 				name="description"	
 				mat-text-area
 				class="form-control"
-				placeholder="enter a description" cols="30" rows="10">
+				cols="30" rows="10">
 			</textarea>
 		</div>
 		<div class="form-group">
@@ -44,7 +44,7 @@
 				[ngModel]="selected.title"
 				name="title" 
 				type="text"
-				placeholder="enter new console title">
+				>	
 		</div>	
 			
 		<div class="form-group">
@@ -73,7 +73,7 @@
 				name="maker"
 				id="maker"
 				class="form-control">
-				<option [value]="m.title" *ngFor="let m of makerChoices | async">{{ m.title }}</option>
+				<option [value]="m" *ngFor="let m of makerChoices">{{ m }}</option>
 			</select>
 		</div>
 		

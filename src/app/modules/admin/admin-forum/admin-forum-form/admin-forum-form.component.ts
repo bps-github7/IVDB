@@ -8,8 +8,8 @@ import * as fromForumInfo from 'src/app/store/reducers/forum-info.reducer';
 
 import * as forumActions from 'src/app/store/actions/forum.actions';
 import * as forumInfoActions from 'src/app/store/actions/forum-info.actions';
-import { getFamily } from 'src/app/store/selectors/forum-info.selector';
-import { selectEntity, getForumByIdParam } from 'src/app/store/selectors/forum.selector';
+import { selectForumInfoFamily } from 'src/app/store/selectors/forum-info.selector';
+import { selectForumEntity, selectForumByIdParam } from 'src/app/store/selectors/forum.selector';
 
 import v4 from 'uuid';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
@@ -48,12 +48,12 @@ export class AdminForumFormComponent implements OnInit {
 
 		this.forumInfo$ = this.forumInfoStore.select(fromForumInfo.selectAll)
 		this.forumInfoStore.dispatch( forumInfoActions.readForumInfo() );
-		this.forumFamilies$ = this.forumInfoStore.select(getFamily("family"))
+		this.forumFamilies$ = this.forumInfoStore.select(selectForumInfoFamily("family"))
 
 		this.forumStore.dispatch( forumActions.readForum() );
 
 		// doesnt matter here because its not super end user facing.
-		this.forum$ = this.forumStore.pipe(select( getForumByIdParam ))
+		this.forum$ = this.forumStore.pipe(select( selectForumByIdParam ))
 		this.form = this.fb.group({
 			title : ["", Validators.required],
 			description : ["", Validators.required],

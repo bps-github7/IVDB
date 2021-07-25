@@ -6,7 +6,7 @@ import { selectParams, selectQueryParams } from "./router.selector";
 
 
 // select by titleSubstring
-export const selectGameByTitleSubstring = (title : string) =>
+export const selectReviewByTitleSubstring = (title : string) =>
 	createSelector(
 		fromGame.selectAll,
 		(entities : Game []) => {
@@ -14,12 +14,19 @@ export const selectGameByTitleSubstring = (title : string) =>
 		} 
 	)
 
-export const selectGameEntity = id => createSelector(
+export const selectReviewEntity = id => createSelector(
 	fromGame.selectEntities,
 	entities => entities[id]
 );
 
-export const selectGameByIdParam = createSelector(
+const routeParams = createSelector(
+	(state : AppState) => state.router.state,
+	(state) => state.params
+)
+
+
+
+export const getGameByIdParam = createSelector(
 	fromGame.selectAll,
 	selectParams,
 	(games, { gameId } ) => { 
@@ -27,7 +34,7 @@ export const selectGameByIdParam = createSelector(
 	}
 )
 
-export const selectGameByTitleParam = createSelector(
+export const getGameByTitleParam = createSelector(
 	fromGame.selectAll,
 	selectParams,
 	(games, { gameTitle } ) => { 

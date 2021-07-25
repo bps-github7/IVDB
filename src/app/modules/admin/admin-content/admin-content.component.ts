@@ -5,7 +5,7 @@ import { select, Store } from '@ngrx/store';
 import { Content } from 'src/app/models/content/content.model';
 import * as fromContent from 'src/app/store/reducers/content.reducer';
 import * as contentActions from 'src/app/store/actions/content.actions';
-import { getFamily } from 'src/app/store/selectors/content.selector';
+import { selectContentFamily } from 'src/app/store/selectors/content.selector';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { DialogComponent } from '../../shared/components/dialog/dialog.component';
 import { v4 } from 'uuid';
@@ -238,11 +238,11 @@ export class AdminContentComponent implements OnInit {
 		this.store.dispatch( contentActions.readContent() )
 
 		// get all content by category
-		this.news$ = this.store.pipe(select(getFamily("news")));
-		this.streams$ = this.store.pipe(select(getFamily("stream")))
-		this.watchlists$ = this.store.pipe(select(getFamily("watchlist")))	
-		this.reviews$ = this.store.pipe(select(getFamily("review")))
-		this.groups$ = this.store.pipe(select(getFamily("group")))
+		this.news$ = this.store.pipe(select(selectContentFamily("news")));
+		this.streams$ = this.store.pipe(select(selectContentFamily("stream")))
+		this.watchlists$ = this.store.pipe(select(selectContentFamily("watchlist")))	
+		this.reviews$ = this.store.pipe(select(selectContentFamily("review")))
+		this.groups$ = this.store.pipe(select(selectContentFamily("group")))
 		
 		//think we can write this in less lines of code
 		this.contents = [

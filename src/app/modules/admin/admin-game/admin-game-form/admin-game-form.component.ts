@@ -10,10 +10,10 @@ import * as gameActions from 'src/app/store/actions/game.actions';
 import * as fromGame from 'src/app/store/reducers/game.reducer';
 import * as gameInfoActions from 'src/app/store/actions/game-info.actions'; 
 import * as fromGameInfo from 'src/app/store/reducers/game-info.reducer';
-import { getFamily } from 'src/app/store/selectors/game-info.selector';
+import { selectGameInfoFamily } from 'src/app/store/selectors/game-info.selector';
 
 
-import { getGameByIdParam } from 'src/app/store/selectors/game.selector';
+import { selectGameByIdParam } from 'src/app/store/selectors/game.selector';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 
@@ -54,9 +54,9 @@ export class AdminGameFormComponent implements OnInit {
 		// getting game and gameInfo data from the store.
 		this.gameStore.dispatch( gameActions.readGames() );
 		this.gameInfoStore.dispatch( gameInfoActions.readGameInfo() )
-		this.categories$ = this.gameInfoStore.pipe(select( getFamily("category") ));
-		this.creators$ = this.gameInfoStore.pipe(select( getFamily("creator") ));
-		this.platforms$ = this.gameInfoStore.pipe(select( getFamily("platform") ))
+		this.categories$ = this.gameInfoStore.pipe(select( selectGameInfoFamily("category") ));
+		this.creators$ = this.gameInfoStore.pipe(select( selectGameInfoFamily("creator") ));
+		this.platforms$ = this.gameInfoStore.pipe(select( selectGameInfoFamily("platform") ))
 		
 
 
@@ -65,7 +65,7 @@ export class AdminGameFormComponent implements OnInit {
 		//TODO: get this working. need to refresh to get update data 
 		
 	
-		this.game$ = this.gameStore.pipe(select( getGameByIdParam ))
+		this.game$ = this.gameStore.pipe(select( selectGameByIdParam ))
 		this.form = this.fb.group({
 			title : ["", Validators.required],
 			description : ["", Validators.required],

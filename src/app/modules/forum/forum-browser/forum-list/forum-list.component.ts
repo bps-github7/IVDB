@@ -2,8 +2,8 @@ import { Observable } from 'rxjs/Observable';
 import { Component, Input, OnInit } from '@angular/core';
 import * as fromForum from 'src/app/store/reducers/forum.reducer';
 import * as forumActions from 'src/app/store/actions/forum.actions';
-import * as forumSelectors from 'src/app/store/selectors/forum.selector';
 import { select, Store } from '@ngrx/store';
+import { selectForumFamily } from 'src/app/store/selectors/forum.selector';
 
 @Component({
   selector: 'forum-list',
@@ -22,7 +22,7 @@ export class ForumListComponent implements OnInit {
 
   ngOnInit(): void {
 		this.forumStore.dispatch( forumActions.readForum() )
-		this.forums$ = this.forumStore.pipe(select(forumSelectors.getFamily(this.family)));
+		this.forums$ = this.forumStore.pipe(select(selectForumFamily(this.family)));
 	}
 
 }

@@ -7,7 +7,7 @@ import { v4 } from 'uuid';
 import { Store } from '@ngrx/store';
 import * as fromConsole from 'src/app/store/reducers/videogame-console.reducer';
 import * as consoleActions from 'src/app/store/actions/videogame-console.actions'; 
-import { getByMaker } from 'src/app/store/selectors/videogame-console.selector';
+import { selectConsolesByMaker } from 'src/app/store/selectors/videogame-console.selector';
 
 @Component({
   selector: 'admin-consoles',
@@ -30,6 +30,8 @@ export class AdminConsolesComponent implements OnInit {
 	showMetaData : boolean = false;
 	buttonText : string;
 	consoleData : any={};
+	familyChoices: string[] = ["home", "portable", "hybrid", "other"];
+	makerChoices: string[];
 
 	constructor(private consoleStore : Store<fromConsole.State>) { }
 
@@ -39,12 +41,13 @@ export class AdminConsolesComponent implements OnInit {
 		this.consoleStore.dispatch( consoleActions.readVideogameConsole() );
 
 		this.consoleData = {
-			"nintendo" : this.consoleStore.select(getByMaker("nintendo")),
-			"sony" : this.consoleStore.select(getByMaker("sony")),
-			"microsoft" : this.consoleStore.select(getByMaker("microsoft")),
-			"pc" : this.consoleStore.select(getByMaker("pc")),
-			"mobile" : this.consoleStore.select(getByMaker("mobile"))
+			"nintendo" : this.consoleStore.select(selectConsolesByMaker("nintendo")),
+			"sony" : this.consoleStore.select(selectConsolesByMaker("sony")),
+			"microsoft" : this.consoleStore.select(selectConsolesByMaker("microsoft")),
+			"pc" : this.consoleStore.select(selectConsolesByMaker("pc")),
+			"mobile" : this.consoleStore.select(selectConsolesByMaker("mobile"))
 		}
+		this.makerChoices = Object.keys(this.consoleData);
 	}
 
 	createConsole(content : VideogameConsole) {

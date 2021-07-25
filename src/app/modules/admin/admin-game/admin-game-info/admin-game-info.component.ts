@@ -7,7 +7,7 @@ import { v4 } from 'uuid';
 import { Store } from '@ngrx/store';
 import * as fromGameInfo from 'src/app/store/reducers/game-info.reducer';
 import * as gameInfoActions from 'src/app/store/actions/game-info.actions'; 
-import { getFamily } from 'src/app/store/selectors/game-info.selector';
+import { selectGameInfoFamily } from 'src/app/store/selectors/game-info.selector';
 
 @Component({
   selector: 'admin-game-info',
@@ -42,9 +42,9 @@ export class AdminGameInfoComponent implements OnInit {
 		this.gameInfoStore.dispatch( gameInfoActions.readGameInfo() );
 		
 		this.gameInfoData = {
-			"categories" : this.gameInfoStore.select(getFamily("category")),
-			"creators" : this.gameInfoStore.select(getFamily("creator")),
-			"platforms" : this.gameInfoStore.select(getFamily("platform"))
+			"categories" : this.gameInfoStore.select(selectGameInfoFamily("category")),
+			"creators" : this.gameInfoStore.select(selectGameInfoFamily("creator")),
+			"platforms" : this.gameInfoStore.select(selectGameInfoFamily("platform"))
 		} 		
 		this.familyChoices = Object.keys(this.gameInfoData)
 	}

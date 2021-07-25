@@ -15,7 +15,7 @@ export class AdminDashboardTableManagerComponent implements OnInit {
 	@Input() dataType : string = "game-info";
 	@Input() tables : {title : Observable<any>};
 	@Input() familyChoices : string [];
-	@Input() makerChoices : Observable<any>;
+	@Input() makerChoices : string [];
 
 	@Output() createEvent$ = new EventEmitter<any>();
 	@Output() updateEvent$ = new EventEmitter<any>();

@@ -7,6 +7,7 @@
 	<table-manager 
 		[tables]="consoleData"
 		dataType="console"
+		[familyChoices]="familyChoices"
 		(createEvent$)="createConsole($event)"
 		(updateEvent$)="updateConsole($event)"
 		(deleteEvent$)="deleteConsole($event)">

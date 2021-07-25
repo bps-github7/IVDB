@@ -6,7 +6,7 @@ import { selectParams, selectQueryParams } from "./router.selector";
 
 
 // select by titleSubstring
-export const selectByTitleSubstring = (title : string) =>
+export const selectForumByTitleSubstring = (title : string) =>
 	createSelector(
 		fromForum.selectAll,
 		(entities : Forum []) => {
@@ -14,19 +14,19 @@ export const selectByTitleSubstring = (title : string) =>
 		} 
 	)
 
-export const getFamily = (family: string) => 
+export const selectForumFamily = (family: string) => 
 	createSelector(
 		fromForum.selectAll, 
 		(entities : Forum[]) => {
 			return entities.filter((entity : Forum) => entity?.family === family)
 });
 
-export const selectEntity = id => createSelector(
+export const selectForumEntity = id => createSelector(
 	fromForum.selectEntities,
 	entities => entities[id]
 );
 
-export const getForumByIdParam = createSelector(
+export const selectForumByIdParam = createSelector(
 	fromForum.selectAll,
 	selectParams,
 	(forums, { forumId }) => {	
@@ -34,8 +34,7 @@ export const getForumByIdParam = createSelector(
 	}	
 )
 
-// TODO-ish: this is probably going to require some debugging
-export const getForumByTitleParam = createSelector(
+export const selectForumByTitleParam = createSelector(
 	fromForum.selectAll,
 	selectParams,
 	(forums, { forumTitle } ) => { 

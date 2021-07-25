@@ -75,7 +75,7 @@
                     </ul>
                 </li>
                 <li *ngIf="appUser">
-                    <a [routerLink]="['user/profile/', appUser?.uid, appUser?.username]">
+                    <a [routerLink]="['user/profile/', appUser?.id, appUser?.username]">
                         Profile
                     </a>
                 </li>
@@ -83,9 +83,9 @@
                 <li class="dd-menu-trigger"><p>Edit</p>
                     <ul class="sub-menu">
                         <li class="sub-sub-top"><a
-                                [routerLink]="['/user/sign-in/create-profile/', appUser?.uid]">Profile</a></li>
+                                [routerLink]="['/user/sign-in/create-profile/', appUser?.id]">Profile</a></li>
                                 <!---WHY?--->
-                        <li><a [routerLink]="['/user/preferences/', appUser?.uid, appUser?.username]">Preferences</a>
+                        <li><a [routerLink]="['/user/preferences/', appUser?.id, appUser?.username]">Preferences</a>
                         </li>
                         <li><a routerLink="contrib/edit">Contributions</a>
                         </li>

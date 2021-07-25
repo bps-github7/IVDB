@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
 
 //store stuff
 import { select, Store } from '@ngrx/store';
-import { selectByTitleSubstring } from 'src/app/store/selectors/game.selector';
+import { selectGameByTitleSubstring } from 'src/app/store/selectors/game.selector';
 import * as gameActions from 'src/app/store/actions/game.actions';
 import * as fromGame from 'src/app/store/reducers/game.reducer';
 
@@ -32,7 +32,7 @@ export class AdminGameComponent implements OnInit {
 
 	filter(query: string) {
 			this.filteredGames$ = (query) ?
-					this.gameStore.pipe(select(selectByTitleSubstring(query))) :
+					this.gameStore.pipe(select(selectGameByTitleSubstring(query))) :
 					this.games$;
 	}
 }

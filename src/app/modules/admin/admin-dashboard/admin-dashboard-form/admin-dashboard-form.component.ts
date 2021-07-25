@@ -8,10 +8,6 @@ import { ConsoleSelectedService } from 'src/app/services/behaivor-subjects/conso
 import { GameInfoSelectedService } from 'src/app/services/behaivor-subjects/game-info-selected.service';
 
 //ngrx stuff
-import { Store } from '@ngrx/store';
-import * as fromGameInfo from 'src/app/store/reducers/game-info.reducer';
-import { readGameInfo } from './../../../../store/actions/game-info.actions';
-import { getFamily } from 'src/app/store/selectors/game-info.selector';
 import { ForumInfoSelectedService } from 'src/app/services/behaivor-subjects/forum-info-selected.service';
 import { ThreadSelectedService } from 'src/app/services/behaivor-subjects/thread-selected.service';
 
@@ -24,7 +20,7 @@ import { ThreadSelectedService } from 'src/app/services/behaivor-subjects/thread
 export class AdminDashboardFormComponent implements OnInit {
 
 	@Input() dataType : "game-info" | "console" | "forum-info" | "thread";
-	@Input() makerChoices : Observable<any>;
+	@Input() makerChoices : string [];
 	@Input() familyChoices : string [];
 
 	@Output() createEvent$ = new EventEmitter<any>();
@@ -53,8 +49,6 @@ export class AdminDashboardFormComponent implements OnInit {
 			} else if (item.endsWith("s")) {
 				return item.replace("s","")
 			}
-			
-			
 		});
 
 

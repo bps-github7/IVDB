@@ -5,7 +5,7 @@ import { Component, OnInit } from '@angular/core';
 import * as fromForumInfo from 'src/app/store/reducers/forum-info.reducer';
 import * as forumInfoActions from 'src/app/store/actions/forum-info.actions';
 import { Store } from '@ngrx/store';
-import { getFamily } from 'src/app/store/selectors/forum-info.selector';
+import { selectForumInfoFamily } from 'src/app/store/selectors/forum-info.selector';
 import { Observable } from 'rxjs';
 
 @Component({
@@ -28,9 +28,9 @@ export class AdminForumInfoComponent implements OnInit {
 		this.forumInfoStore.dispatch( forumInfoActions.readForumInfo() );
 		
 		this.forumInfoData = {
-			"families" : this.forumInfoStore.select(getFamily("family")),
-			"prefixes" : this.forumInfoStore.select(getFamily("prefix")),
-			"types" : this.forumInfoStore.select(getFamily("type"))
+			"families" : this.forumInfoStore.select(selectForumInfoFamily("family")),
+			"prefixes" : this.forumInfoStore.select(selectForumInfoFamily("prefix")),
+			"types" : this.forumInfoStore.select(selectForumInfoFamily("type"))
 		}
 		this.familyChoices = Object.keys(this.forumInfoData);  		
 	}

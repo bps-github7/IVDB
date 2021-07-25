@@ -4,7 +4,7 @@ import { ActivationStart } from '@angular/router';
 import { select, Store } from '@ngrx/store';
 import * as fromForum from 'src/app/store/reducers/forum.reducer';
 import * as forumActions from 'src/app/store/actions/forum.actions';
-import { getForumByIdParam, getForumByTitleParam } from 'src/app/store/selectors/forum.selector';
+import { selectForumByIdParam, selectForumByTitleParam } from 'src/app/store/selectors/forum.selector';
 import { Forum } from 'src/app/models/content/forum.model';
 
 
@@ -24,7 +24,7 @@ export class ForumViewComponent implements OnInit {
   ngOnInit(): void {
 		// read forums from database
 		this.forumStore.dispatch( forumActions.readForum() )		
-		this.forum$ =	this.forumStore.pipe(select(getForumByTitleParam))
+		this.forum$ =	this.forumStore.pipe(select(selectForumByTitleParam))
 		// this.forum$.subscribe((response : Forum) => this.forum = response)
 	}
 
