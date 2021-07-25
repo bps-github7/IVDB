@@ -4,12 +4,12 @@ import * as fromForumInfo from 'src/app/store/reducers/forum-info.reducer';
 
 
 // select by titleSubstring
-export const selectForumInfoByTitleSubstring = (title : string) =>
+export const selectForumInfoByTitleSubstring = (family : string, title : string) => 
 	createSelector(
-		fromForumInfo.selectAll,
-		(entities : ForumInfo []) => {
-			return entities.filter((entity : ForumInfo) => (entity.title.toLowerCase()).includes(title.toLowerCase()))
-		} 
+		selectForumInfoFamily(family),
+		(selectedFamily : ForumInfo[]) => {
+			return selectedFamily.filter((selectedFamily : ForumInfo) =>(selectedFamily.title.toLowerCase()).includes(title.toLowerCase()))
+		}
 	)
 
 export const selectForumInfoFamily = (family: string) => 

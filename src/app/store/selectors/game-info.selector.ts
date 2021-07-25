@@ -7,4 +7,12 @@ export const selectGameInfoFamily = (family: string) =>
 		fromGameInfo.selectAll, 
 		(entities : GameInfo[]) => {
 			return entities.filter((gameInfo : GameInfo) => gameInfo.family === family)
-});
+})
+
+export const selectGameInfoByTitleSubstring = (family : string, title : string) => 
+	createSelector(
+		selectGameInfoFamily(family),
+		(selectedFamily : GameInfo[]) => {
+			return selectedFamily.filter((selectedFamily : GameInfo) =>(selectedFamily.title.toLowerCase()).includes(title.toLowerCase()))
+		}
+	)

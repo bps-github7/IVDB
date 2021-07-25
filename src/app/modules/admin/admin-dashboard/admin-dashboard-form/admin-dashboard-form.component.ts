@@ -26,7 +26,7 @@ export class AdminDashboardFormComponent implements OnInit {
 	@Output() createEvent$ = new EventEmitter<any>();
 	@Output() updateEvent$ = new EventEmitter<any>();
 	@Output() deleteEvent$ = new EventEmitter<string>();
-;
+
 	selected : any={};
 	
   constructor(
@@ -41,9 +41,22 @@ export class AdminDashboardFormComponent implements OnInit {
 
 		// console.log("before:")
 		// console.log(this.familyChoices)
-		this.familyChoices = this.familyChoices.map(item => this.depluralizer(item));
-		console.log("after depluralizer:")
-		console.log(this.familyChoices);
+		if (this.dataType === "game-info" || this.dataType === "forum-info")  {
+			this.familyChoices = this.familyChoices.map(item => {
+				if  (item.endsWith("ies")) { 
+					console.log("this executed with word:", item)
+					return item.replace("ies","y")
+				} else if (item.endsWith("es")) {
+					if(item === "types") {
+						return "type"
+					} else {
+						return item.replace("es","")
+					}
+				} else if (item.endsWith("s")) {
+					return item.replace("s","")
+				}
+			});
+		}
 
 
 		if (this.dataType === "game-info") {
@@ -58,21 +71,6 @@ export class AdminDashboardFormComponent implements OnInit {
 			console.error("no form update data recieved in admin-dashboard-form component")
 		}
   }
-
-	depluralizer(word) {
-		// simple fn for turning a word in our lexicon from plural to singular.
-		if  (word.endsWith("ies")) { 
-			return word.replace("ies","y")
-		} else if (word.endsWith("es")) {
-			if(word === "types") {
-				return "type"
-			} else {
-				return word.replace("es","")
-			}
-		} else if (word.endsWith("s")) {
-			return word.replace("s","")
-		}
-	}
 
 	save(form : NgForm) {
 		if (this.selected.id) {

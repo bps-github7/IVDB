@@ -19,13 +19,6 @@ export const selectEntity = id => createSelector(
 	entities => entities[id]
 );
 
-const routeParams = createSelector(
-	(state : AppState) => state.router.state,
-	(state) => state.params
-)
-
-
-
 export const getFeedbackByIdParam = createSelector(
 	fromFeedback.selectAll,
 	selectParams,
@@ -41,4 +34,3 @@ export const getFeedbackByIdParam = createSelector(
 // 		return feedbacks.filter((feedback : Feedback) => feedback.title === feedbackTitle.replaceAll("+"," "))[0]
 // 	}
 // )
-
