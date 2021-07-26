@@ -1,6 +1,6 @@
 import { createSelector } from "@ngrx/store";
-import { Game } from "src/app/models/content/game.model";
-import * as fromGame from 'src/app/store/reducers/game.reducer';
+import { Review } from "src/app/models/contrib/review.model";
+import * as fromReview from 'src/app/store/reducers/Review.reducer';
 import { AppState } from "../reducers";
 import { selectParams, selectQueryParams } from "./router.selector";
 
@@ -8,14 +8,14 @@ import { selectParams, selectQueryParams } from "./router.selector";
 // select by titleSubstring
 export const selectReviewByTitleSubstring = (title : string) =>
 	createSelector(
-		fromGame.selectAll,
-		(entities : Game []) => {
-			return entities.filter((entity : Game) => (entity.title.toLowerCase()).includes(title.toLowerCase()))
+		fromReview.selectAll,
+		(entities : Review []) => {
+			return entities.filter((entity : Review) => (entity.title.toLowerCase()).includes(title.toLowerCase()))
 		} 
 	)
 
 export const selectReviewEntity = id => createSelector(
-	fromGame.selectEntities,
+	fromReview.selectEntities,
 	entities => entities[id]
 );
 
@@ -27,17 +27,17 @@ const routeParams = createSelector(
 
 
 export const getGameByIdParam = createSelector(
-	fromGame.selectAll,
+	fromReview.selectAll,
 	selectParams,
 	(games, { gameId } ) => { 
-		return games.filter((game : Game) => game.id === gameId)[0]
+		return games.filter((game : Review) => game.id === gameId)[0]
 	}
 )
 
 export const getGameByTitleParam = createSelector(
-	fromGame.selectAll,
+	fromReview.selectAll,
 	selectParams,
 	(games, { gameTitle } ) => { 
-		return games.filter((game : Game) => game.title === gameTitle.replaceAll("+"," "))[0]
+		return games.filter((game : Review) => game.title === gameTitle.replaceAll("+"," "))[0]
 	}
 )

@@ -4,6 +4,7 @@ are for that and informing user reccomendations.
  */
 export interface Review {   
 	id : string;
+	title: string;
 	username : string,
 	game_title : string,
 	body?: string,
