@@ -3,31 +3,32 @@ import { createSelector } from "@ngrx/store";
 import * as fromThread from 'src/app/store/reducers/thread.reducer';
 
 
-// select by titleSubstring
-// export const selectByTitleSubstring = (title : string) =>
-// 	createSelector(
-// 		fromVideogameThread.selectAll,
-// 		(entities : VideogameThread []) => {
-// 			return entities.filter((entity : VideogameThread) => (entity.e.toLowerCase()).includes(title.toLowerCase()))
-// 		} 
-// 	)
+// Allows filtering of a list of forums
+export const selectThreadByForumAndTitleSubstring = (forum : string, title : string) =>
+	createSelector(
+		selectThreadsByForum(forum),	
+		(entities : Thread []) => {
+			return entities.filter((entity : Thread) => (entity.title.toLowerCase()).includes(title.toLowerCase()))
+		} 
+	)
 
-export const selectThreadFamily = (family: string) => 
+export const selectThreadsByForum = (forum: string) => 
+	// get all the threads of a paticular type	
 	createSelector(
 		fromThread.selectAll, 
 		(entities : Thread[]) => {
-			return entities.filter((entity : Thread) => entity?.family === family)
+			return entities.filter((entity : Thread) => entity?.forum === forum)
 });
 
 
-export const selectThreadsByMaker = (maker: string) => 
+export const selectThreadsByCreator = (creator: string) => 
 	createSelector(
-		fromVideogameThread.selectAll, 
-		(entities : VideogameThread[]) => {
-			return entities.filter((entity : VideogameThread) => entity?.maker === maker)
+		fromThread.selectAll, 
+		(entities : Thread[]) => {
+			return entities.filter((entity : Thread) => entity?.creator === creator)
 });
 
 export const selectThreadEntity = id => createSelector(
-	fromVideogameThread.selectEntities,
+	fromThread.selectEntities,
 	entities => entities[id]
 );

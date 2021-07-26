@@ -1,8 +1,20 @@
+import { Metadata } from "..";
+
 export interface Thread {
-    creator: string;
-    title: string;
-    topics: string;
-    description: string;
-    invitees?: string [];
-		id : string;
+
+	// essential + logisitcal data.
+	id : string;
+	forum: string;
+	title: string;
+
+
+	// authorship + maintance.
+	creator: string;
+	moderator: string;
+
+	// metadata + descriptors.
+	description?: string;
+	metadata : Metadata;
+	prefixes?: string;
+	invitees?: string [];
 }

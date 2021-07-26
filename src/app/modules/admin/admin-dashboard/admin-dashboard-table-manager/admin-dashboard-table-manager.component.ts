@@ -12,8 +12,11 @@ import { GameInfoSelectedService } from 'src/app/services/behaivor-subjects/game
 })
 export class AdminDashboardTableManagerComponent implements OnInit {
 
-	@Input() dataType : string = "game-info";
+	@Input() dataType : string = "game-info" || "forum-info" || "console" || "thread";
 	@Input() tables : {title : Observable<any>};
+	
+
+	// these ppopulate the options in select form controls
 	@Input() familyChoices : string [];
 	@Input() makerChoices : string [];
 
@@ -35,6 +38,23 @@ export class AdminDashboardTableManagerComponent implements OnInit {
   ngOnInit(): void {
 		// if tables input prop was passed in, populate 'choices' with the key of each table object (its title)
 		this.choices = this.tables ? Object.keys(this.tables)  : null;
+	}
+
+	filter (query, family) {
+		switch (this.dataType) {
+			case "game-info":
+				console.log(`game info\nfamily: ${family}\nQuery: ${query}`);
+				break;
+			case "forum-info":
+				console.log(`forum info\nfamily: ${family}\nQuery: ${query}`);
+				break;
+			case "console" :
+				console.log(`console\nfamily: ${family}\nQuery: ${query}`);
+				break;
+			case "thread":
+				console.log(`thread\nfamily: ${family}\nQuery: ${query}`);
+				break;
+			}	
 	}
 
 	createFromForm(obj : any={}) {

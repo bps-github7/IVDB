@@ -16,6 +16,17 @@
 	>
 </dashboard-form>
 
+<!-- query filter, shown only if a family has been selected -->
+<p *ngIf="chosen">
+	que es? {{chosen}}
+	<input
+		#query
+		(keyup)="filter(query.value, chosen)" 
+		type="text" 
+		class="form-control" 
+		placeholder="type a search term to filter results">
+</p> 
+
 <!-- display table -->
 <div *ngIf="chosen">
 	<info-table 
