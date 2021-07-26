@@ -4,7 +4,7 @@ import * as fromForumInfo from 'src/app/store/reducers/forum-info.reducer';
 
 
 // select by titleSubstring
-export const selectForumInfoByTitleSubstring = (family : string, title : string) => 
+export const selectForumInfoByFamilyAndTitleSubstring = (family : string, title : string) => 
 	createSelector(
 		selectForumInfoFamily(family),
 		(selectedFamily : ForumInfo[]) => {

@@ -1,3 +1,4 @@
+import { selectForumInfoByFamilyAndTitleSubstring } from './../../../../store/selectors/forum-info.selector';
 import { ForumInfo } from './../../../../models/content/forum-info.model';
 import { v4 } from 'uuid';
 import { Component, OnInit } from '@angular/core';
@@ -33,6 +34,17 @@ export class AdminForumInfoComponent implements OnInit {
 			"types" : this.forumInfoStore.select(selectForumInfoFamily("type"))
 		}
 		this.familyChoices = Object.keys(this.forumInfoData);  		
+	}
+
+
+	filterForumInfo(event : any) {
+		// console.log(event);
+
+		const {family, singularFamilyName, query}  = event 
+		// console.log("family: ",family)
+		// console.log("query: ",query)
+		this.forumInfoData[family] = this.forumInfoStore.select(selectForumInfoByFamilyAndTitleSubstring(singularFamilyName, query))
+
 	}
 
 	createForumInfo(content : ForumInfo) {

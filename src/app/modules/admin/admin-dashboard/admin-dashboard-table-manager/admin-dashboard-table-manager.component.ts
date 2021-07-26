@@ -24,6 +24,9 @@ export class AdminDashboardTableManagerComponent implements OnInit {
 	@Output() updateEvent$ = new EventEmitter<any>();
 	@Output() deleteEvent$ = new EventEmitter<any>();
 
+	//experimental, will probably require we implement onChanges
+	@Output() filterEvent$ = new EventEmitter<any>();
+
 	choices : string [];
 	chosen : string;
 	showForm : boolean = false;
@@ -40,21 +43,23 @@ export class AdminDashboardTableManagerComponent implements OnInit {
 		this.choices = this.tables ? Object.keys(this.tables)  : null;
 	}
 
+	depluralize(item) {
+		if  (item.endsWith("ies")) { 
+			return item.replace("ies","y")
+		} else if (item.endsWith("es")) {
+			if(item === "types") {
+				return "type"
+			} else {
+				return item.replace("es","")
+			}
+		} else if (item.endsWith("s")) {
+			return item.replace("s","")
+		}
+	}
+
 	filter (query, family) {
-		switch (this.dataType) {
-			case "game-info":
-				console.log(`game info\nfamily: ${family}\nQuery: ${query}`);
-				break;
-			case "forum-info":
-				console.log(`forum info\nfamily: ${family}\nQuery: ${query}`);
-				break;
-			case "console" :
-				console.log(`console\nfamily: ${family}\nQuery: ${query}`);
-				break;
-			case "thread":
-				console.log(`thread\nfamily: ${family}\nQuery: ${query}`);
-				break;
-			}	
+		const singularFamilyName = this.depluralize(family)
+		this.filterEvent$.emit({family,query})
 	}
 
 	createFromForm(obj : any={}) {

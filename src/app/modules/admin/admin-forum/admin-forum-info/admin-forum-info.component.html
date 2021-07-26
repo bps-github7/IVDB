@@ -27,6 +27,7 @@
 		[tables]="forumInfoData"
 		[familyChoices]="familyChoices"
 		[makerChoices]="makerChoices"
+		(filterEvent$)="filterForumInfo($event)"
 		(createEvent$)="createForumInfo($event)"
 		(updateEvent$)="updateForumInfo($event)"
 		(deleteEvent$)="deleteForumInfo($event)">
