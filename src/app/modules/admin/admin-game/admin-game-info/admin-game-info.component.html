@@ -27,6 +27,7 @@
 		dataType="game-info"	
 		[tables]="gameInfoData"
 		[familyChoices]="familyChoices"
+		(filterEvent$)="filterGameInfo($event)"
 		(createEvent$)="createGameInfo($event)"
 		(updateEvent$)="updateGameInfo($event)"
 		(deleteEvent$)="deleteGameInfo($event)">

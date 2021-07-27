@@ -7,7 +7,7 @@ import { v4 } from 'uuid';
 import { Store } from '@ngrx/store';
 import * as fromConsole from 'src/app/store/reducers/videogame-console.reducer';
 import * as consoleActions from 'src/app/store/actions/videogame-console.actions'; 
-import { selectConsolesByMaker } from 'src/app/store/selectors/videogame-console.selector';
+import { selectConsolesByMaker, selectConsolesByMakerAndTitleSubstring } from 'src/app/store/selectors/videogame-console.selector';
 
 @Component({
   selector: 'admin-consoles',
@@ -49,6 +49,16 @@ export class AdminConsolesComponent implements OnInit {
 		}
 		this.makerChoices = Object.keys(this.consoleData);
 		this.familyChoices = ["home", "portable", "hybrid", "other"];
+	}
+
+	filterConsoles (event) {
+		const { query, family } = event	
+		if (query) {
+			this.consoleData[family] = this.consoleStore.select(selectConsolesByMakerAndTitleSubstring(family, query));
+		} else {
+			this.consoleData[family] = this.consoleStore.select(selectConsolesByMaker(family))
+		}
+	
 	}
 
 	createConsole(content : VideogameConsole) {

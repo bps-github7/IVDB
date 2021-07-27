@@ -9,6 +9,7 @@
 		[tables]="consoleData"
 		[familyChoices]="familyChoices"
 		[makerChoices]="makerChoices"
+		(filterEvent$)="filterConsoles($event)"
 		(createEvent$)="createConsole($event)"
 		(updateEvent$)="updateConsole($event)"
 		(deleteEvent$)="deleteConsole($event)">

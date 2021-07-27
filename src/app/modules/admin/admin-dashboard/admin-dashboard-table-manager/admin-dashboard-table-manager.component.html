@@ -1,5 +1,7 @@
 <!-- toggle select- choose which table to display -->
-<mat-button-toggle-group (change)="chosen = $event.value">
+<!-- <mat-button-toggle-group #group="matButtonToggleGroup" (change)="toggleButtons(group.value)" [value]="chosen" > -->
+<mat-button-toggle-group (change)="chosen = $event.value" [value]="chosen">
+	<!-- TODO: the f -->
 	<mat-button-toggle *ngFor="let choice of choices" [value]="choice">{{ choice }}</mat-button-toggle>
 </mat-button-toggle-group>
 <br>
@@ -17,15 +19,16 @@
 </dashboard-form>
 
 <!-- query filter, shown only if a family has been selected -->
-<p *ngIf="chosen">
-	que es? {{chosen}}
+<form *ngIf="chosen">
+	<!-- TODO: nice to have feature- updating 'chosen' value causes form to reset,
+		so search term doesnt carry across differnet families -->
 	<input
 		#query
 		(keyup)="filter(query.value, chosen)" 
 		type="text" 
 		class="form-control" 
 		placeholder="type a search term to filter results">
-</p> 
+</form> 
 
 <!-- display table -->
 <div *ngIf="chosen">

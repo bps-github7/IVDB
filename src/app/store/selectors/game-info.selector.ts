@@ -9,7 +9,7 @@ export const selectGameInfoFamily = (family: string) =>
 			return entities.filter((gameInfo : GameInfo) => gameInfo.family === family)
 })
 
-export const selectGameInfoByTitleSubstring = (family : string, title : string) => 
+export const selectGameInfoByFamilyAndTitleSubstring = (family : string, title : string) => 
 	createSelector(
 		selectGameInfoFamily(family),
 		(selectedFamily : GameInfo[]) => {

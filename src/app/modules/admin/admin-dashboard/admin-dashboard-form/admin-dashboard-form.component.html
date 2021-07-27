@@ -128,42 +128,65 @@
 		<button class="btn alert-danger" (click)="delete(selected.id, finished)" [disabled]="!selected.id">Delete</button>
 	</form>		
 </section>
-<!-- <section *ngIf="dataType === 'forum-info'">
+<section *ngIf="dataType === 'thread'">
 	<form #finished="ngForm" (ngSubmit)="save(finished)">
 		<div class="form-group">
 			<label for="title">Title:</label>
 			<input 
+				class="form-control"
 				[ngModel]="selected.title"
-				name="title"
-				type="text" 
-				mat-input
+				name="title" 
+				type="text"
+				>	
+		</div>	
+			
+		<div class="form-group">
+			<label for="forum">Forum:</label>
+			<select 
+				[ngModel]="selected.forum"
+				name="forum" 
+				id="forum" 
 				class="form-control">
+				<option [value]="f" *ngFor="let f of familyChoices">{{ f }}</option>
+			</select>
 		</div>
+
+		
 		<div class="form-group">
 			<label for="description">Description:</label>
 			<textarea 
-				[ngModel]="selected.description"
-				name="description"	
-				mat-text-area
+				[ngModel]="selected.description" 
+				name="description" 
+				id="description"
 				class="form-control"
-				placeholder="enter a description" cols="30" rows="10">
+				cols="30" rows="10">
 			</textarea>
 		</div>
+
+			
 		<div class="form-group">
-			<label for="family">Family:</label>
-			<select 
-				[ngModel]="selected.family" 
-				name="family" id="family"
-				class="form-control">
-				<option [value]="f" *ngFor="let f of familyChoices | async">{{f}}</option>
-			</select>
+			<label for="image">Image:</label>
+			<input 
+				url 
+				[ngModel]="selected.image"
+				name="image" 
+				type="text" 
+				class="form-control" 
+				id='image'>
+		</div>
+
+		<div class="form-control">
+			<label for="released">Released:</label>
+			<input 
+				[ngModel]="selected.released"
+				name="released"
+				type="date"
+				class="form-control"
+				id='released'>
 		</div>
 		
-		<button	type="submit"	class="btn btn-primary">Create / update game info</button>
-		<button type="button" class="btn alert-danger" (click)="reset(finished)">Reset</button>
-		<button type="button" class="btn btn-danger" (click)="delete(selected.id, finished)" [disabled]="!selected.id">Delete</button>
+		<button	primary	class="btn btn-primary">Create / update a console</button>
+		<button class="btn btn-danger" (click)="reset(finished)">Reset</button>
+		<button class="btn alert-danger" (click)="delete(selected.id, finished)" [disabled]="!selected.id">Delete</button>
 	</form>
-</section> -->
-<section *ngIf="dataType === 'thread'">
-	this should display for thread editing
 </section>

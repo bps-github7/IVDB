@@ -1,3 +1,12 @@
-<p>admin-threads works!</p>
+<section>
 
-<span>Make sure you set the dataType input prop in tableManager!</span>
+	<table-manager 
+		dataType="thread"
+		[tables]="threadData"
+		[familyChoices]="forumChoices"
+		(filterEvent$)="filterThreads($event)"
+		(createEvent$)="createThread($event)"
+		(updateEvent$)="updateThread($event)"
+		(deleteEvent$)="deleteThread($event)">
+	</table-manager>
+</section>

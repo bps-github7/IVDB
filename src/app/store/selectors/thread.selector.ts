@@ -4,7 +4,7 @@ import * as fromThread from 'src/app/store/reducers/thread.reducer';
 
 
 // Allows filtering of a list of forums
-export const selectThreadByForumAndTitleSubstring = (forum : string, title : string) =>
+export const selectThreadsByForumAndTitleSubstring = (forum : string, title : string) =>
 	createSelector(
 		selectThreadsByForum(forum),	
 		(entities : Thread []) => {

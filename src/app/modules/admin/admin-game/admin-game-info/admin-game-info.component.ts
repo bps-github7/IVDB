@@ -7,7 +7,7 @@ import { v4 } from 'uuid';
 import { Store } from '@ngrx/store';
 import * as fromGameInfo from 'src/app/store/reducers/game-info.reducer';
 import * as gameInfoActions from 'src/app/store/actions/game-info.actions'; 
-import { selectGameInfoFamily } from 'src/app/store/selectors/game-info.selector';
+import { selectGameInfoByFamilyAndTitleSubstring, selectGameInfoFamily } from 'src/app/store/selectors/game-info.selector';
 
 @Component({
   selector: 'admin-game-info',
@@ -40,7 +40,8 @@ export class AdminGameInfoComponent implements OnInit {
 		this.buttonText = this.showMetaData ? "hide Info" : "Show info about Game Info"
 		
 		this.gameInfoStore.dispatch( gameInfoActions.readGameInfo() );
-		
+	
+		// TODO: prefer looping over a dynamicly loaded array of game-info families!!!
 		this.gameInfoData = {
 			"categories" : this.gameInfoStore.select(selectGameInfoFamily("category")),
 			"creators" : this.gameInfoStore.select(selectGameInfoFamily("creator")),
@@ -48,6 +49,17 @@ export class AdminGameInfoComponent implements OnInit {
 		} 		
 		this.familyChoices = Object.keys(this.gameInfoData)
 	}
+
+
+	filterGameInfo(event : any) {
+		const {family, singularFamilyName, query}  = event 
+		if (query) {
+			this.gameInfoData[family] = this.gameInfoStore.select(selectGameInfoByFamilyAndTitleSubstring(singularFamilyName, query))
+		} else {
+			this.gameInfoData[family] = this.gameInfoStore.select(selectGameInfoFamily(singularFamilyName));
+		}
+	}
+
 
 	createGameInfo(content : GameInfo) {
 		this.gameInfoStore.dispatch( gameInfoActions.createGameInfo({id: v4(), ...content}) )

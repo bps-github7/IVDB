@@ -38,13 +38,12 @@ export class AdminForumInfoComponent implements OnInit {
 
 
 	filterForumInfo(event : any) {
-		// console.log(event);
-
 		const {family, singularFamilyName, query}  = event 
-		// console.log("family: ",family)
-		// console.log("query: ",query)
-		this.forumInfoData[family] = this.forumInfoStore.select(selectForumInfoByFamilyAndTitleSubstring(singularFamilyName, query))
-
+		if (query) {
+			this.forumInfoData[family] = this.forumInfoStore.select(selectForumInfoByFamilyAndTitleSubstring(singularFamilyName, query))
+		} else {
+			this.forumInfoData[family] = this.forumInfoStore.select(selectForumInfoFamily(singularFamilyName));
+		}
 	}
 
 	createForumInfo(content : ForumInfo) {

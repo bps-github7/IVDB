@@ -4,13 +4,13 @@ import * as fromVideogameConsole from 'src/app/store/reducers/videogame-console.
 
 
 // select by titleSubstring
-// export const selectByTitleSubstring = (title : string) =>
-// 	createSelector(
-// 		fromVideogameConsole.selectAll,
-// 		(entities : VideogameConsole []) => {
-// 			return entities.filter((entity : VideogameConsole) => (entity.e.toLowerCase()).includes(title.toLowerCase()))
-// 		} 
-// 	)
+export const selectConsolesByMakerAndTitleSubstring = (family : string, title : string) =>
+	createSelector(
+		selectConsolesByMaker(family),
+		(entities : VideogameConsole []) => {
+			return entities.filter((entity : VideogameConsole) => (entity.title.toLowerCase()).includes(title.toLowerCase()))
+		} 
+	)
 
 export const selectConsoleFamily = (family: string) => 
 	createSelector(

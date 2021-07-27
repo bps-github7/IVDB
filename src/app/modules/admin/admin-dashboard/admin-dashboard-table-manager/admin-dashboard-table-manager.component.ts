@@ -39,8 +39,17 @@ export class AdminDashboardTableManagerComponent implements OnInit {
 		) { }
 
   ngOnInit(): void {
+
 		// if tables input prop was passed in, populate 'choices' with the key of each table object (its title)
 		this.choices = this.tables ? Object.keys(this.tables)  : null;
+		
+		// makes the default state of the component display the first table option
+		this.chosen = this.choices[0];
+
+	}
+
+	toggleButtons(choice) {
+		this.chosen = choice;
 	}
 
 	depluralize(item) {
@@ -59,7 +68,7 @@ export class AdminDashboardTableManagerComponent implements OnInit {
 
 	filter (query, family) {
 		const singularFamilyName = this.depluralize(family)
-		this.filterEvent$.emit({family,query})
+		this.filterEvent$.emit({family,singularFamilyName,query})
 	}
 
 	createFromForm(obj : any={}) {
