@@ -1,12 +1,16 @@
 <section>
 
-	<table-manager 
-		dataType="thread"
-		[tables]="threadData"
-		[familyChoices]="forumChoices"
-		(filterEvent$)="filterThreads($event)"
-		(createEvent$)="createThread($event)"
-		(updateEvent$)="updateThread($event)"
-		(deleteEvent$)="deleteThread($event)">
-	</table-manager>
+	<h4>About:</h4>
+	<p>
+		first, choose a forum to manage the threads within. <br>
+		you can do this by either searching by title, filtering by forum-family or both. <br>
+		By selecting a forum, you will be able to view the threads within it and adminster them.
+	</p>
+
+	<admin-forum-dropdown
+		*ngFor="let f of forums$ | async"	
+		[forum]="f"
+		[threads$]="getThreadsInForum(f.title)"
+	></admin-forum-dropdown>
+
 </section>

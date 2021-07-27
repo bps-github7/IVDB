@@ -1,3 +1,4 @@
+import { ThreadEffects } from './../../store/effects/thread.effects';
 import { NgModule } from '@angular/core';
 
 import { ActionReducerMap } from "@ngrx/store";
@@ -19,6 +20,7 @@ import { GameEffects } from '../../store/effects/game.effects';
 import { ForumEffects } from 'src/app/store';
 import { ForumInfoEffects } from 'src/app/store';
 import { VideogameConsoleEffects } from 'src/app/store/effects/videogame-console.effects';
+import { ThreadReducer } from 'src/app/store/reducers/thread.reducer';
 
 // import { ContributionEffects } from '../../store/effects/contribution.effects';
 // import { ForumEffects } from './forum.effects';
@@ -40,14 +42,16 @@ export const effects : any [] = [ContentEffects, GameInfoEffects];
 		StoreModule.forFeature('videogameConsole', VideogameConsoleReducer),
 		StoreModule.forFeature('forum', ForumReducer),
 		StoreModule.forFeature('forumInfo', ForumInfoReducer),
+		StoreModule.forFeature('thread', ThreadReducer),
+				
 
 		EffectsModule.forFeature([ContentEffects]),
 		EffectsModule.forFeature([GameInfoEffects]),
 		EffectsModule.forFeature([GameEffects]),
 		EffectsModule.forFeature([VideogameConsoleEffects]),
 		EffectsModule.forFeature([ForumInfoEffects]),
-		EffectsModule.forFeature([ForumEffects])
-
+		EffectsModule.forFeature([ForumEffects]),
+		EffectsModule.forFeature([ThreadEffects])
 	],
 	exports: [ ]
 })

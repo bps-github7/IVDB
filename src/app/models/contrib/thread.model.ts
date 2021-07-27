@@ -16,5 +16,6 @@ export interface Thread {
 	description?: string;
 	metadata : Metadata;
 	prefixes?: string;
+	threadType : string;
 	invitees?: string [];
 }

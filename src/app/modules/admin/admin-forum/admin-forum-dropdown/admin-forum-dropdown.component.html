@@ -1,0 +1,16 @@
+<zippy *ngIf="forum" [title]="forum.title">
+	<!-- <div *ngIf="threads$ | async as threads">
+		{{ threads }}
+	</div> -->
+	<ul class="list-group">
+		<thread-admin-view
+			*ngFor="let thread of threads$ | async"	
+			class="list-group-item"
+			[thread]="thread"
+		>
+
+		</thread-admin-view> 
+	</ul>
+
+
+</zippy>

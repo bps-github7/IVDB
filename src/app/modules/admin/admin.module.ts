@@ -24,6 +24,8 @@ import { AdminDashboardTableManagerComponent } from './admin-dashboard/admin-das
 import { AdminDashboardFormComponent } from './admin-dashboard/admin-dashboard-form/admin-dashboard-form.component';
 import { AdminForumInfoComponent } from './admin-forum/admin-forum-info/admin-forum-info.component';
 import { AdminThreadsComponent } from './admin-forum/admin-threads/admin-threads.component';
+import { AdminForumDropdownComponent } from './admin-forum/admin-forum-dropdown/admin-forum-dropdown.component';
+import { ThreadAdminViewComponent } from './admin-forum/admin-forum-dropdown/thread-admin-view/thread-admin-view.component';
 
 @NgModule({
   declarations: [
@@ -44,6 +46,8 @@ import { AdminThreadsComponent } from './admin-forum/admin-threads/admin-threads
   AdminDashboardFormComponent,
   AdminForumInfoComponent,
   AdminThreadsComponent,
+  AdminForumDropdownComponent,
+  ThreadAdminViewComponent,
 	],
   imports: [
     CommonModule,

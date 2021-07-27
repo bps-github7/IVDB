@@ -1,12 +1,17 @@
-<div *ngIf="forum$ | async as forum; else notFound">
- <h3>Forum: {{ forum.title }}</h3>
-	<p>{{ forum.description }}</p>
-
-	threads listed below
-	moderators
-	top contributors
-	recent posts
-	etc 
+<div 
+	*ngIf="forum$ | async as forum; else notFound"
+	class="card" style="width : 18rem;">
+	<h3 class="card-title">Forum: {{ forum.title }}</h3>
+	<div class="card-body">
+		<h5>{{ forum.description }}</h5>
+		<p class="card-text">
+			threads listed below
+			moderators
+			top contributors
+			recent posts
+			etc
+		</p>
+	</div> 
 </div>
 
 <ng-template #notFound>
