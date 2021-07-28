@@ -28,6 +28,7 @@ export class AdminForumInfoComponent implements OnInit {
 		
 		this.forumInfoStore.dispatch( forumInfoActions.readForumInfo() );
 		
+		// TODO: ought to find a way to load these keys and values dynamically... what if the way we describe the forums and threads changes?
 		this.forumInfoData = {
 			"families" : this.forumInfoStore.select(selectForumInfoFamily("family")),
 			"prefixes" : this.forumInfoStore.select(selectForumInfoFamily("prefix")),

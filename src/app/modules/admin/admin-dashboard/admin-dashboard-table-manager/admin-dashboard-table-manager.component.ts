@@ -20,6 +20,13 @@ export class AdminDashboardTableManagerComponent implements OnInit {
 	@Input() familyChoices : string [];
 	@Input() makerChoices : string [];
 
+	// these props are only used for admin-forum.admin-threads
+	@Input() forumFamilyChoices : string [] = ['games','culture','misc','help and support'];
+	@Input() forumChoices : string [];
+	@Input() prefixChoices : string [];
+	@Input() threadTypeChoices : string [];
+
+
 	@Output() createEvent$ = new EventEmitter<any>();
 	@Output() updateEvent$ = new EventEmitter<any>();
 	@Output() deleteEvent$ = new EventEmitter<any>();
