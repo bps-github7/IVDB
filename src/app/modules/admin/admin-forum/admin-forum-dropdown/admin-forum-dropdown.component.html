@@ -1,4 +1,7 @@
+
 <zippy *ngIf="forum" [title]="forum.title">
+
+
 	<!-- <div *ngIf="threads$ | async as threads">
 		{{ threads }}
 	</div> -->
@@ -7,7 +10,8 @@
 			*ngFor="let thread of threads$ | async"	
 			class="list-group-item"
 			[thread]="thread"
-		>
+			(updateEvent$)="handleUpdate()"
+			>
 
 		</thread-admin-view> 
 	</ul>

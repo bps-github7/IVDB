@@ -1,5 +1,9 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { ThrowStmt } from '@angular/compiler';
+import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
+import { Router } from '@angular/router';
 import { Thread } from 'src/app/models';
+import { ThreadSelectedService } from 'src/app/services/behaivor-subjects/thread-selected.service';
+
 
 @Component({
   selector: 'thread-admin-view',
@@ -10,14 +14,20 @@ export class ThreadAdminViewComponent implements OnInit {
 
 
 	@Input() thread: Thread;
+	
+	@Output() updateEvent$ = new EventEmitter<Thread>();
 
-	constructor() { }
+	constructor(
+		private router : Router,
+		private threadSelectedService : ThreadSelectedService
+		) { }
 
   ngOnInit(): void {
   }
 
-	editThreadDialog() {
-		alert("edit thread with dialog here!")
+	editThreadDetails() {
+		this.threadSelectedService.select(this.thread);
+		this.updateEvent$.emit();		
 	}
 
 	manageModeratorsDialog() {
@@ -25,13 +35,12 @@ export class ThreadAdminViewComponent implements OnInit {
 	}
 
 	viewThreadAsContributor() {
-		console.log("go to this route")
-		console.log("['../../forum/',thread.forum.replaceAll(' ','+'),'/thread',thread.title.replaceAll(' ','+')]")
+		// issues here and everywhere- converts the space replace character with hexidecimal, so the back conversion doesnt work.
+		this.router.navigate(['../../forum/',this.thread.forum.replace(' ','%'),'/thread',this.thread.title.replace(' ','%')])
 	}
 
 	viewThreadAsAdmin() {
-		console.log("go to this route:")
-		console.log("['../../forum/',thread.forum.replaceAll(' ','+'),'/thread',thread.title.replaceAll(' ','+')]?mode='admin/edit']");
+		this.router.navigate(['../../forum/',this.thread.forum.replace(' ','%'),'/thread',this.thread.title.replace(' ','%'),"?mode='admin/edit'"]);
 	}
 
 	closeThread() {

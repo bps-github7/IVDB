@@ -1,5 +1,22 @@
 <section>
 
+	<button mat-stroked-button (click)="showForm = !showForm">Create or update an item</button>
+	<dashboard-form 
+		*ngIf="showForm"
+		dataType="thread"
+		[forumFamilyChoices]="familyChoices"
+		[prefixChoices]="prefixChoices"
+		[typeChoices]="typeChoices"		
+		
+
+
+		(createEvent$)="createThread($event)"
+		(updateEvent$)="updateThread($event)"
+		(deleteEvent$)="deleteThread($event)"
+		>
+	</dashboard-form>
+	
+
 	<h4>About:</h4>
 	<p>
 		first, choose a forum to manage the threads within. <br>
@@ -11,6 +28,7 @@
 		*ngFor="let f of forums$ | async"	
 		[forum]="f"
 		[threads$]="getThreadsInForum(f.title)"
+		(updateEvent$)="showForm = true"
 	></admin-forum-dropdown>
 
 </section>

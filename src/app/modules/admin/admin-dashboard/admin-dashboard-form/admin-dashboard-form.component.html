@@ -139,8 +139,45 @@
 				type="text"
 				>	
 		</div>	
-			
+
 		<div class="form-group">
+			<label for="forum">Forum families:</label>
+			<select 
+				[ngModel]="selected.family"
+				name="family" 
+				id="family" 
+				class="form-control">
+				<option [value]="f" *ngFor="let f of forumFamilyChoices | async">{{ f.title }}</option>
+			</select>
+		</div>
+
+		<!-- TODO: use mat-chip multiselect component -->
+		<div class="form-group">
+			<label for="prefixes">Prefixes:</label>
+			<select 
+				[ngModel]="selected.prefixes"
+				name="prefixes" 
+				id="prefixes" 
+				class="form-control">
+				<option [value]="f" *ngFor="let f of prefixChoices | async">{{ f.title }}</option>
+			</select>
+		</div>
+
+
+		<div class="form-group">
+			<label for="type">thread type:</label>
+			<select 
+				[ngModel]="selected.type"
+				name="type" 
+				id="type" 
+				class="form-control">
+				<option [value]="f" *ngFor="let f of typeChoices | async">{{ f.title }}</option>
+			</select>
+		</div>
+
+
+		<!-- this depends on user choice for forum, so it should come last and appear only if a choice was made for forum family -->
+		<!-- <div class="form-group">
 			<label for="forum">Forum:</label>
 			<select 
 				[ngModel]="selected.forum"
@@ -150,6 +187,8 @@
 				<option [value]="f" *ngFor="let f of familyChoices">{{ f }}</option>
 			</select>
 		</div>
+
+		 -->
 
 		
 		<div class="form-group">
@@ -163,29 +202,30 @@
 			</textarea>
 		</div>
 
-			
+
 		<div class="form-group">
-			<label for="image">Image:</label>
-			<input 
-				url 
-				[ngModel]="selected.image"
-				name="image" 
-				type="text" 
-				class="form-control" 
-				id='image'>
+			<label for="closed">thread open or closed?</label>
+			<mat-button-toggle-group class="form-control" name="closed" [ngModel]="selected.closed" [value]="selected.closed">
+				<mat-button-toggle value="false">Open</mat-button-toggle>
+				<mat-button-toggle value="true">Closed</mat-button-toggle>
+			</mat-button-toggle-group>
 		</div>
 
-		<div class="form-control">
-			<label for="released">Released:</label>
-			<input 
-				[ngModel]="selected.released"
-				name="released"
-				type="date"
-				class="form-control"
-				id='released'>
-		</div>
+
+		prefixes
+
+		threadType
+
+		select moderators
+
+		invite users
+
+		block users
+
+
+
 		
-		<button	primary	class="btn btn-primary">Create / update a console</button>
+		<button	primary	class="btn btn-primary">Create / update thread</button>
 		<button class="btn btn-danger" (click)="reset(finished)">Reset</button>
 		<button class="btn alert-danger" (click)="delete(selected.id, finished)" [disabled]="!selected.id">Delete</button>
 	</form>

@@ -22,6 +22,13 @@ export class AdminDashboardFormComponent implements OnInit {
 	@Input() dataType : "game-info" | "console" | "forum-info" | "thread";
 	@Input() makerChoices : string [];
 	@Input() familyChoices : string [];
+	
+	// these are specifically for threads
+	@Input() forumFamilyChoices : Observable<any>;
+	@Input() prefixChoices : Observable<any>;
+	@Input() typeChoices : Observable<any>;
+
+
 
 	@Output() createEvent$ = new EventEmitter<any>();
 	@Output() updateEvent$ = new EventEmitter<any>();

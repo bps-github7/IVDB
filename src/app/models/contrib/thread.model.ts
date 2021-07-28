@@ -12,9 +12,12 @@ export interface Thread {
 	creator: string;
 	moderator: string;
 
+
 	// metadata + descriptors.
+	closed : boolean;
 	description?: string;
 	metadata : Metadata;
+	family : string;
 	prefixes?: string;
 	threadType : string;
 	invitees?: string [];

@@ -24,13 +24,20 @@ import { Observable } from 'rxjs';
 })
 export class AdminThreadsComponent implements OnInit {
 	filteredThread$: any;
-	forumChoices : ForumInfo []
+	familyChoices : Observable<any>;
+	prefixChoices : Observable<any>;
+	typeChoices : Observable<any>;
+	
+	
+	forumChoices : Observable<any>;
 
 	forums$ : Observable<any>;
 	forumData : any;
 
 	threads$: Observable<any>;
 	threadData: any;
+
+	showForm : boolean = false;
 
   constructor(
 		private forumStore : Store<fromForum.State>,
@@ -48,9 +55,16 @@ export class AdminThreadsComponent implements OnInit {
 		this.forums$ = this.forumStore.select( fromForum.selectAll );
 
 
+
 		// did this in an effort to avoid hardcoding, turned out being quite a pain
-		// this.forumInfoStore.dispatch( forumInfoActions.readForumInfo() );
-		// this.forumInfoStore.select( selectForumInfoFamily("families") ).subscribe( response => this.forumChoices = response);
+		this.forumInfoStore.dispatch( forumInfoActions.readForumInfo() );
+
+		// this an un ideal / hardcoded implm id like to avoid
+		this.familyChoices = this.forumInfoStore.select( selectForumInfoFamily("family") )
+		this.prefixChoices = this.forumInfoStore.select( selectForumInfoFamily("prefix") )
+		this.typeChoices = this.forumInfoStore.select( selectForumInfoFamily("type") )
+		
+		
 		// console.log(this.forumChoices);
 
 		// this.threadData = {
