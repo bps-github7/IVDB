@@ -12,17 +12,20 @@
 
 <!-- all site content component -->
 <div *ngIf="chosen === 'forums'">
-	<p>
-    <a class="btn btn-primary" routerLink="/admin/forum/new">Add New Forum</a>
-	</p>
-	<p>
+	<a routerLink="/admin/forum/new">
+    <button mat-stroked-button class="btn" style="width: 17rem;">Add New Forum</button>
+	</a>
+	<section>
 		<input
 			#query
 			(keyup)="filter(query.value)" 
 			type="text" 
 			class="form-control" 
 			placeholder="Search...">
-	</p>
+			<!-- TODO: make this section container its own component- admin-filter-search-bar -->
+		<div>use this space to apply a filter: forum-info, recent poster, threads contained, etc</div>
+	</section>
+	
 	<table class="table">
 			<thead>
 					<tr>

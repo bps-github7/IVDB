@@ -5,17 +5,18 @@
 	<mat-button-toggle value="consoles">Consoles</mat-button-toggle>
 </mat-button-toggle-group>
 <div *ngIf="chosen === 'games'">
-	<p>
-    <a class="btn btn-primary" routerLink="/admin/game/new">Add New Game</a>
-	</p>
-	<p>
+	<a routerLink="/admin/game/new">
+    <button mat-stroked-button class="btn" style="width: 17rem;">Add New Game</button>
+	</a>
+	<section>
 		<input
 			#query
 			(keyup)="filter(query.value)" 
 			type="text" 
 			class="form-control" 
 			placeholder="Search...">
-	</p>
+		<div>use this space to apply a filter: game-info categories, creators, platform or consoles are probably the only ones relevant to an admin view</div>
+	</section>
 
 	<!-- TODO: lets make this a material-table! -->
 	<table class="table">

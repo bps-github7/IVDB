@@ -35,6 +35,7 @@ export class AdminForumInfoComponent implements OnInit {
 		}
 		this.familyChoices = Object.keys(this.forumInfoData);  		
 	}
+	
 
 
 	filterForumInfo(event : any) {
