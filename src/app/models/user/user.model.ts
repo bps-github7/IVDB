@@ -1,10 +1,14 @@
-/* display name is what the user provided as a username
-username is for internal use (route params in url, document id in database) 
- */
 export interface User {
-	id: string,
-	email : string,
-	username : string,
-	displayname ?: string,
-	isAdmin? : boolean
+	id: string;
+	email : string;
+	displayname ?: string;
+	privalleges? : number;
+
+	// stuff that fireship impls, not sure how 
+	loading ?: boolean;
+	error?: string;
+}
+
+export class User {
+	constructor(public id: string, public displayName: string) {	}
 }

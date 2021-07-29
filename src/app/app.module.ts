@@ -1,3 +1,4 @@
+import { UserEffects } from './store/effects/user.effects';
 import { ConsoleSelectedService } from './services/behaivor-subjects/console-selected.service';
 import { GameInfoSelectedService } from './services/behaivor-subjects/game-info-selected.service';
 // ng common stuff
@@ -30,6 +31,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 //angular fire
 import { AngularFireModule } from '@angular/fire';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
+import { AngularFireAuthModule } from '@angular/fire/auth';
+
 
 // our custom service for getting server timestamps
 import { FirebaseService } from './services/firebase.service';
@@ -50,6 +53,7 @@ import { RouterSerializer } from './store/router-serializer';
 
 		//firebase
 		AngularFireModule.initializeApp(environment.firebase),
+		AngularFireAuthModule,
     AngularFirestoreModule,
 
 		//for forms
@@ -63,7 +67,7 @@ import { RouterSerializer } from './store/router-serializer';
 		// ngrx 
 		StoreModule.forRoot(reducers, { metaReducers }),
 		StoreDevtoolsModule.instrument({maxAge: 25}),
-		EffectsModule.forRoot([]),
+		EffectsModule.forRoot([UserEffects]),
 		StoreRouterConnectingModule.forRoot({
 			serializer: RouterSerializer
 		})
