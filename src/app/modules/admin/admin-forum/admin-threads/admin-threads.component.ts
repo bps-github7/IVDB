@@ -26,8 +26,11 @@ import { Observable } from 'rxjs';
 export class AdminThreadsComponent implements OnInit {
 
 
+	// should really clean this up. how many of these are no longer of use?
 	forumData : any = {};
 	threadData : any={}
+	forumInfoData: any;
+
 
 	families$ : Observable<any>;
 	forumFamilies : any;
@@ -36,8 +39,12 @@ export class AdminThreadsComponent implements OnInit {
 	chosenFamily : string;
 	chosenForum: any;
 	threadsSelected$ : Observable<any>;
+	
 	selectedThread: Thread;
 	selectedForum: Forum;
+
+	showForm: boolean = false;
+	showOptions: boolean = false;
 
 
   constructor(
@@ -50,6 +57,11 @@ export class AdminThreadsComponent implements OnInit {
 		this.forumStore.dispatch(  forumActions.readForum() );
 		this.forumInfoStore.dispatch( forumInfoActions.readForumInfo() );
 
+		this.forumInfoData = {
+			"families" : this.forumInfoStore.select( selectForumInfoFamily("family") ),
+			"prefixes" : this.forumInfoStore.select( selectForumInfoFamily("prefix") ),
+			"types" : this.forumInfoStore.select( selectForumInfoFamily("type") ) 			
+		}
 		this.families$ = this.forumInfoStore.select( selectForumInfoFamily("family") )
 		this.families$.subscribe(response => this.forumFamilies = response);
 
@@ -62,23 +74,23 @@ export class AdminThreadsComponent implements OnInit {
 
 	forumSelected(forum : Forum) {
 		this.selectedForum = forum;
-		// console.log("got this for forum title :", forum.title);
 		this.threadsSelected$	= this.threadStore.select( selectThreadsByForum(forum.title) )
 	}
 
 	threadSelected(thread : Thread) {
 		this.selectedThread = thread;
+		this.showOptions = true
+		// this.showForm = true;
 	}
 
 	filterThreads(event) {
-		// in this case family is forum, but we should look past that for convenience sake
-		const { query, family } = event	
-		console.log(query, family);
-		// if (query) {
-		// 	this.threadData[family] = this.threadStore.select(selectThreadsByForumAndTitleSubstring(family, query));
-		// } else {
-		// 	this.threadData[family] = this.threadStore.select(selectThreadsByForum(family))
-		// }
+
+	}
+
+	openCreateThreadForm() {
+		this.showForm = true;
+		// do we have a better way to ensure there is no existing data on the form when we open it for create event
+		this.selectedThread = undefined;
 	}
 
 	createThread(thread : Thread) {

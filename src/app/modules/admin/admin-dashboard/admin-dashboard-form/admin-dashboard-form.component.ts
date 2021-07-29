@@ -24,6 +24,7 @@ export class AdminDashboardFormComponent implements OnInit {
 	@Input() familyChoices : string [];
 	
 	// these are specifically for threads
+	@Input() updateData : any;
 	@Input() forumFamilyChoices : Observable<any>;
 	@Input() prefixChoices : Observable<any>;
 	@Input() typeChoices : Observable<any>;
@@ -73,7 +74,8 @@ export class AdminDashboardFormComponent implements OnInit {
 		}	else if (this.dataType === "forum-info") {
 			this.forumInfoSelectedService.selected$.subscribe((data) => this.selected = data)
 		} else if (this.dataType === "thread") {
-			this.threadSelectedService.selected$.subscribe((data) => this.selected = data)
+			this.selected = this.updateData;
+			// this.threadSelectedService.selected$.subscribe((data) => this.selected = data)
 		}	else {
 			console.error("no form update data recieved in admin-dashboard-form component")
 		}

@@ -147,7 +147,7 @@
 				name="family" 
 				id="family" 
 				class="form-control">
-				<option [value]="f" *ngFor="let f of forumFamilyChoices | async">{{ f.title }}</option>
+				<option [value]="f.title" *ngFor="let f of forumFamilyChoices | async">{{ f.title }}</option>
 			</select>
 		</div>
 
@@ -159,7 +159,7 @@
 				name="prefixes" 
 				id="prefixes" 
 				class="form-control">
-				<option [value]="f" *ngFor="let f of prefixChoices | async">{{ f.title }}</option>
+				<option [value]="f.title" *ngFor="let f of prefixChoices | async">{{ f.title }}</option>
 			</select>
 		</div>
 
@@ -171,7 +171,7 @@
 				name="type" 
 				id="type" 
 				class="form-control">
-				<option [value]="f" *ngFor="let f of typeChoices | async">{{ f.title }}</option>
+				<option [value]="f.title" *ngFor="let f of typeChoices | async">{{ f.title }}</option>
 			</select>
 		</div>
 
@@ -211,17 +211,15 @@
 			</mat-button-toggle-group>
 		</div>
 
-
-		prefixes
-
-		threadType
-
-		select moderators
-
-		invite users
-
-		block users
-
+		<div>
+			select moderators
+			<br>
+			invite users
+			<br>
+			block users
+			<br>
+		</div>
+		
 
 
 		

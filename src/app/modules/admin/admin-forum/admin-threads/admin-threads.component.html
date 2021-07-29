@@ -8,9 +8,9 @@
 		(selectedEvent$)="forumSelected($event)"	
 	></forum-selection>
 
-	<section *ngIf="chosenForum">
-		<h3>{{ chosenForum.title }}</h3>
-		<p>{{ chosenForum.description }}</p>
+	<section *ngIf="selectedForum">
+		<h3>Forum Selected : {{ selectedForum.title }}</h3>
+		<p>{{ selectedForum.description }}</p>
 		
 		
 		<thread-selection
@@ -19,6 +19,41 @@
 		>
 			
 		</thread-selection>
+		<button mat-stroked-button class="btn btn-default" (click)="openCreateThreadForm()">Add New Thread</button>
+
+
+		<section *ngIf="selectedThread">
+			<h3>Thread Selected : {{ selectedThread.title }}</h3>
+			<p>{{ selectedThread.description }}</p>
+	
+
+			<h4>Options:</h4>
+
+
+			<button mat-raised-button (click)="showForm = true">Edit thread details</button>
+			<button mat-stroked-button class="btn alert-danger" (click)="deleteThread(selectedThread.id)">delete thread</button>
+			<button mat-raised-button clss="btn btn-danger">close thread</button>
+			<hr>
+			<button mat-stroked-button>go to thread as contributor</button>
+			<button mat-raised-button>go to thread as admin (edit contents)</button>
+			<button mat-stroked-button>move thread</button>
+						
+
+		</section>
+
+		<dashboard-form
+			*ngIf="showForm"
+			dataType="thread"
+			[updateData]="selectedThread"
+			[forumFamilyChoices]="forumInfoData['families']"
+			[prefixChoices]="forumInfoData['prefixes']"
+			[typeChoices]="forumInfoData['types']"
+			(createEvent$)="createThread($event)"
+			(updateEvent$)="updateThread($event)"
+			(deleteEvent$)="deleteThread($event)"
+			>
+
+		</dashboard-form>
 
 	</section>
 
