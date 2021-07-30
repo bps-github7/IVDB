@@ -10,8 +10,8 @@ export const userAdapter = createEntityAdapter<User>();
 export interface State extends EntityState<User> { }
 
 const defaultUser = {
-	ids: [],
-	entities : {}
+	ids: ['12345'],
+	entities : new User('12345', 'GUEST')
 }
 
 export const initialState: State = userAdapter.getInitialState(defaultUser);
@@ -19,9 +19,16 @@ export const initialState: State = userAdapter.getInitialState(defaultUser);
 export const UserReducer = createReducer(
   initialState,
 
-	//2. had to make action 'contents' here, action does not work.
-	// contents was the identifier of variable passed to readContentSuccess
-  //3. also, had to make this an object for entityAdapter to know what to do with it (even though it already was made an object)
+	///... not exactly sure how we handle this one within the entity adapter....
+	// on(actions.getUser, (state, action) => {
+	// 	return {state, action}
+	// 	return userAdapter.setOne(...state, loading: true)
+	// })
+
+	on(actions.authenticated, (state, {user}) => {
+		return userAdapter.setOne(user, loading: false)
+	})
+
 	on(actions.readUsersSuccess, (state, {users}) => {
 		return userAdapter.addMany(users, state)
 		
