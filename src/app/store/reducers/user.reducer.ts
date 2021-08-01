@@ -25,9 +25,19 @@ export const UserReducer = createReducer(
 	// 	return userAdapter.setOne(...state, loading: true)
 	// })
 
-	on(actions.authenticated, (state, {user}) => {
-		return userAdapter.setOne(user, loading: false)
-	})
+	// on(actions.authenticated, (state, action) => {
+	// 	return userAdapter.setOne({...state, action, loading: false})
+	// })
+
+
+	// TODO: eventually, the reducer should do this w/ entity adapter:
+	// 1. getUser : ...state, loading : true
+	// 2. authenticated : ...state, ...action.payload, laoding : false
+	// 3. notAuthenticated : ...state, ...defaultUser, loading : false
+	// 4. googleLogin : ...state, loading : true
+	// 5. facebookLogn : ...state, lading : true
+	// 6. authError : ...state, ...action.payload, loading : false
+	// 7. logout : ...state, ...action.payload, loading : true
 
 	on(actions.readUsersSuccess, (state, {users}) => {
 		return userAdapter.addMany(users, state)
