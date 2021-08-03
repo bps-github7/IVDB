@@ -4,21 +4,27 @@ export interface Thread {
 
 	// essential + logisitcal data.
 	id : string;
-	forum: string;
 	title: string;
 
 
-	// authorship + maintance.
-	creator: string;
-	moderator: string;
-
-
-	// metadata + descriptors.
-	closed : boolean;
-	description?: string;
+	// metadata - ideally should just use a metadata model and include all these props in there, based on metadata type
 	metadata ?: Metadata;
+	forum: string;
+	creator?: string;
+	moderator?: string;
+	closed?: boolean;
+	description?: string;
 	family ?: string;
 	prefixes?: string;
 	threadType ?: string;
 	invitees?: string [];
 }
+
+export class Thread {
+	constructor(
+		public id : string,  
+		public title : string,  
+
+	) {}
+}
+
