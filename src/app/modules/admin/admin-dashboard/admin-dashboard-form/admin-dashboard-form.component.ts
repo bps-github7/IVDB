@@ -74,7 +74,32 @@ export class AdminDashboardFormComponent implements OnInit {
 		}	else if (this.dataType === "forum-info") {
 			this.forumInfoSelectedService.selected$.subscribe((data) => this.selected = data)
 		} else if (this.dataType === "thread") {
-			this.selected = this.updateData;
+			if (this.updateData)
+				this.selected = this.updateData;
+			else {
+				// some thoughts while doing this...
+				/* 
+					1. would be nice to create objects for threads, consoles, etc
+						so we dont have to hard code a default impl like this. kind of the point of OOP.
+					2. dido with metadata, we can give default values to things needed in every obj that uses metadata
+						ie . creator, time published, time updated, whatever else. then pass in the values
+						for things that change to the constructor.
+				
+				*/
+				this.selected = {
+					id : "",
+					forum : "",
+					title : "",
+					creator : "",
+					moderator : "",
+					closed : false,
+					metadata : {},
+					family : "",
+					prefixes : "",
+					threadType : "",
+					description : "",	
+				}
+			}
 			// this.threadSelectedService.selected$.subscribe((data) => this.selected = data)
 		}	else {
 			console.error("no form update data recieved in admin-dashboard-form component")

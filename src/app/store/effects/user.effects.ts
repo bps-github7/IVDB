@@ -9,12 +9,9 @@ import { AngularFirestore, AngularFirestoreCollection } from "@angular/fire/fire
 import { switchMap, mergeMap, map, exhaustMap, delay } from "rxjs/operators";
 import 'rxjs/add/observable/fromPromise';
 import 'rxjs/add/observable/of';
-import 'rxjs/add/observable/catch';
 
-
-// import { AngularFireAuth } from "@angular/fire/auth";
-import { AngularFireAuth  } from 'angularfire2/auth'
 import firebase from 'firebase/app'
+import { AngularFireAuth } from '@angular/fire/auth';
 
 @Injectable()
 export class UserEffects {
@@ -48,6 +45,7 @@ export class UserEffects {
 	googleLogin$ = createEffect(() => this.actions$.pipe(
 		ofType(userActions.googleLogin),
 		switchMap(payload => {
+			console.log("switch mapity map map yall at the effect level")	
 			return Observable.fromPromise( this.googleLogin() )
 		}),
 		map( credential => {
@@ -61,7 +59,7 @@ export class UserEffects {
 
 	// helper method
 	private googleLogin() : Promise<any> {
-		return this.afAuth.auth.signInWithPopup(new firebase.auth.GoogleAuthProvider);
+		return this.afAuth.signInWithPopup(new firebase.auth.GoogleAuthProvider);
 	}
 
 
@@ -69,7 +67,7 @@ export class UserEffects {
 		ofType(userActions.logout),
 		map((action) => action.payload),
 		switchMap(payload => {
-			return Observable.of( this.afAuth.auth.signOut() );
+			return Observable.of( this.afAuth.signOut() );
 		}),
 		map( authData => {
 			// return userActions.notAuthenticated({})

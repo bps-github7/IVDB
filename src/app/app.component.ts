@@ -31,6 +31,7 @@ export class AppComponent implements OnInit {
 	}
 
 	googleLogin() {
+		console.log("got called at component level")
 		this.store.dispatch( userActions.googleLogin() );
 	}
 

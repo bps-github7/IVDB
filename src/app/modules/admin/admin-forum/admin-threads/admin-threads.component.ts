@@ -57,6 +57,9 @@ export class AdminThreadsComponent implements OnInit {
 		this.forumStore.dispatch(  forumActions.readForum() );
 		this.forumInfoStore.dispatch( forumInfoActions.readForumInfo() );
 
+		// Question : why would this be undefined if we are creating an obejct? 
+		// perhaps we need to force a re render whenever something happens with the form (vauge)
+
 		this.forumInfoData = {
 			"families" : this.forumInfoStore.select( selectForumInfoFamily("family") ),
 			"prefixes" : this.forumInfoStore.select( selectForumInfoFamily("prefix") ),
@@ -87,6 +90,7 @@ export class AdminThreadsComponent implements OnInit {
 
 	}
 
+	// TODO: make showing and hiding of form after form submission more streamlined - is there a way to integrate this behiavor into the form? it seems pretty default desirable...
 	openCreateThreadForm() {
 		this.showForm = true;
 		// do we have a better way to ensure there is no existing data on the form when we open it for create event
@@ -95,14 +99,17 @@ export class AdminThreadsComponent implements OnInit {
 
 	createThread(thread : Thread) {
 		this.threadStore.dispatch( threadActions.createThread({id : v4(), ...thread}) )
+		this.showForm = !this.showForm;
 	}
 
 	updateThread(thread : Partial<Thread>) {
 		this.threadStore.dispatch( threadActions.updateThread({id : thread.id, data : thread}) );
+		this.showForm = !this.showForm;
 	}
 
 	deleteThread(id : string) {
 		this.threadStore.dispatch( threadActions.deleteThread({ id }) );
+		this.showForm = !this.showForm;
 	}
 
 	

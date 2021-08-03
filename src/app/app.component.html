@@ -1,4 +1,4 @@
-<div class="card" *ngIf="user$ | async as user">
+<!-- <div class="card" *ngIf="user$ | async as user">
 	<h1 class="card-header">Howdy, {{ user.displayName }}</h1>
 	<p class="card-text">
 		uid :{{user?.uid }} <br>
@@ -6,7 +6,7 @@
 	</p>
 	<button  
 	 	*ngIf="!user.id"
-		(click)="googleLogin"
+		(click)="googleLogin()"
 		mat-flat-button
 		[class.is-loading]="user.loading"> 
 		Sign in with a Googley eyed lobster that wants to claw your face
@@ -21,11 +21,11 @@
 	</button>
 
 
-</div>
+</div> -->
 
 
 <!-- heres what was originally in the template. can probably recreate the dropdown menu once we confirm that auth works -->
-<!-- <navbar></navbar> -->
-<!-- <div class="content"> -->
-	<!-- <router-outlet></router-outlet> -->
-<!-- </div> -->
+<navbar></navbar>
+<div class="content">
+	<router-outlet></router-outlet>
+</div>

@@ -16,9 +16,9 @@ export interface Thread {
 	// metadata + descriptors.
 	closed : boolean;
 	description?: string;
-	metadata : Metadata;
-	family : string;
+	metadata ?: Metadata;
+	family ?: string;
 	prefixes?: string;
-	threadType : string;
+	threadType ?: string;
 	invitees?: string [];
 }

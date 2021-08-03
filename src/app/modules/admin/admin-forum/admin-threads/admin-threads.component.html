@@ -44,13 +44,13 @@
 		<dashboard-form
 			*ngIf="showForm"
 			dataType="thread"	
-			[updateData]="selectedThread"
 			[forumFamilyChoices]="forumInfoData['families']"
 			[prefixChoices]="forumInfoData['prefixes']"
 			[typeChoices]="forumInfoData['types']"
 			(createEvent$)="createThread($event)"
 			(updateEvent$)="updateThread($event)"
 			(deleteEvent$)="deleteThread($event)"
+			[updateData]="selectedThread"
 			>
 
 		</dashboard-form>
