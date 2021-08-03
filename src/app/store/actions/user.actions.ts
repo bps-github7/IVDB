@@ -20,12 +20,12 @@ export const notAuthenticated = createAction(
 
 export const googleLogin = createAction(
 	'[Auth] Google Login Attempt',
-	props<{payload : any}>()
+	// props<any>()
 )
 
 export const facebookLogin = createAction(
 	'[Auth] Facebook Login Attempt',
-	props<{payload : any}>()
+	// props<{payload : any}>()
 	)
 
 export const emailLogin = createAction(
@@ -35,7 +35,7 @@ export const emailLogin = createAction(
 
 export const logout = createAction(
 	'[Auth] logged out',
-	props<{payload : any}>()
+	props<{payload ?: any}>()
 )
 
 export const authError = createAction(

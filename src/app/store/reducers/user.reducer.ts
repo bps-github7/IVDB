@@ -26,7 +26,7 @@ export const UserReducer = createReducer(
 	// })
 
 	// on(actions.authenticated, (state, action) => {
-	// 	return userAdapter.setOne({...state, action, loading: false})
+	// 	return userAdapter.setOne()
 	// })
 
 

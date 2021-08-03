@@ -8,21 +8,20 @@ import * as userActions from '../actions/user.actions'
 import { AngularFirestore, AngularFirestoreCollection } from "@angular/fire/firestore";
 import { switchMap, mergeMap, map, exhaustMap, delay } from "rxjs/operators";
 import 'rxjs/add/observable/fromPromise';
-import 'rxjs/add/operator/of';
-import 'rxjs/add/operator/catch';
+import 'rxjs/add/observable/of';
+import 'rxjs/add/observable/catch';
 
 
-import { AngularFireAuth } from "@angular/fire/auth";
-
-import * as firebase from 'firebase'l
-
+// import { AngularFireAuth } from "@angular/fire/auth";
+import { AngularFireAuth  } from 'angularfire2/auth'
+import firebase from 'firebase/app'
 
 @Injectable()
 export class UserEffects {
 
 	constructor(private actions$: Actions, private afAuth : AngularFireAuth, private afs : AngularFirestore) {}
 
-
+	// fetch the auth status of the currebt user
 	getUser$ = createEffect(() => this.actions$.pipe(
 		ofType(userActions.getUser),
 		switchMap(payload => this.afAuth.authState),
@@ -32,36 +31,45 @@ export class UserEffects {
 				const user = new User(authData.uid, authData.displayName);
 				return userActions.authenticated(user);
 			} else {
+				// todo : when u get the reducer working, this action should take no arguments.
 				return userActions.notAuthenticated(new User('12345', 'GUEST'))
-				// this is what should get run, if our reducer worked...
-				// return userActions.notAuthenticated();
 			}
 		}),
-		// need to lookinto how error handling in ngrx effects
-		// catch((err) => Observable.of(userActons.authError({err})))
+		// catchError((err) =>{
+		// 	return Observable.of({
+		// 		type : userActons.authError({err}),
+		// 		payload : { err }
+		// 	})
+		// }
+		// )
 	));
 
 
 	googleLogin$ = createEffect(() => this.actions$.pipe(
 		ofType(userActions.googleLogin),
-		switchMap(oayload => {
+		switchMap(payload => {
 			return Observable.fromPromise( this.googleLogin() )
 		}),
 		map( credential => {
 			// should just be a blank ()
 			return userActions.getUser({});
 		} ),
-		// catch( err => {
-			// return Observable.of(user.action.authError({error : err.message}))
+		// catch( (err) => {
+		// 	return Observable.of(user.action.authError({error : err.message}))
 		// })
 	))
+
+	// helper method
+	private googleLogin() : Promise<any> {
+		return this.afAuth.auth.signInWithPopup(new firebase.auth.GoogleAuthProvider);
+	}
 
 
 	logout$ = createEffect(() => this.actions$.pipe(
 		ofType(userActions.logout),
 		map((action) => action.payload),
 		switchMap(payload => {
-			return Observable.of( this.afAuth.signOut() );
+			return Observable.of( this.afAuth.auth.signOut() );
 		}),
 		map( authData => {
 			// return userActions.notAuthenticated({})
@@ -72,14 +80,9 @@ export class UserEffects {
 
 
 
-	// helper method
-	private googleLogin() {
-		const provider = new firebase.auth
-	// }
 
 
-
-
+// returns an observable of all users in firestore/users 
 	query$ = createEffect(() => this.actions$.pipe(
 		ofType(userActions.readUsers),
 		exhaustMap(() => this.afs.collection<User>('users').valueChanges().pipe(
