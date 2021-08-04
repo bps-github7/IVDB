@@ -1,41 +1,48 @@
-import { timestamp } from 'src/app/services/firebase.service';
 
 export interface Metadata {
 	// this is a tricky little fig twiddler,,,
 	createdAt: any,
 	updatedAt?: any,
-	creator: string,
-
-	// 
+	creator: string | string [], 
 	family: string,
 	tags?: string [],
-
-	// specfic for threads.
-	forum?: string;
-	moderator?: string;
-	closed?: boolean;
-	description?: string;
-	prefixes?: string;
-	threadType ?: string;
-	invitees?: string [];
-
 }
 
 export class Metadata {
 	constructor(
-
-		public creator : string,
+		public creator : string | string [],
 		public family : string,
-		public tags ?: string [],
+		public createdAt: any
+	) {}	
+}
+
+export class ContentMetadata extends Metadata {
+	constructor(
+		public creator : string | string [],
+		public createdAt: any,
+		public tags : string [],
+	) {
+		super(creator, createdAt, "CONTENT")
+	}
+}
+
+export class ThreadMetadata extends Metadata {
+	constructor(
+		public creator : string | string [],
+		public createdAt: any,
+	
+		// categorical properties
+		public forumFamily?: string,
 		public forum?: string,
+		public prefixes?: string [],
+		public threadType?: string,
+		
+		// administrative properties
 		public moderator?: string,
 		public closed?: boolean,
-		public description?: string,
-		public prefixes?: string,
-		public threadType ?: string,
 		public invitees?: string [],
-
-		public createdAt = timestamp
-
-	) {}
+		public banned?: string []
+		) {
+		super(creator, createdAt, "THREAD")
+	}
 }

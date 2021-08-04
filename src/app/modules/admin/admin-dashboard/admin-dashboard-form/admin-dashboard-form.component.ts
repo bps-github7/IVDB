@@ -10,6 +10,7 @@ import { GameInfoSelectedService } from 'src/app/services/behaivor-subjects/game
 //ngrx stuff
 import { ForumInfoSelectedService } from 'src/app/services/behaivor-subjects/forum-info-selected.service';
 import { ThreadSelectedService } from 'src/app/services/behaivor-subjects/thread-selected.service';
+import { Thread } from 'src/app/models';
 
 
 @Component({
@@ -86,19 +87,21 @@ export class AdminDashboardFormComponent implements OnInit {
 						for things that change to the constructor.
 				
 				*/
-				this.selected = {
-					id : "",
-					forum : "",
-					title : "",
-					creator : "",
-					moderator : "",
-					closed : false,
-					metadata : {},
-					family : "",
-					prefixes : "",
-					threadType : "",
-					description : "",	
-				}
+				this.selected = new Thread()
+
+				// this.selected = {
+				// 	id : "",
+				// 	forum : "",
+				// 	title : "",
+				// 	creator : "",
+				// 	moderator : "",
+				// 	closed : false,
+				// 	metadata : {},
+				// 	family : "",
+				// 	prefixes : "",
+				// 	threadType : "",
+				// 	description : "",	
+				// }
 			}
 			// this.threadSelectedService.selected$.subscribe((data) => this.selected = data)
 		}	else {
@@ -107,6 +110,7 @@ export class AdminDashboardFormComponent implements OnInit {
   }
 
 	save(form : NgForm) {
+		// TODO : this will be the tricjy part- need to make sure all the form values match with the class constructor in order of appearance.
 		if (this.selected.id) {
 			this.updateEvent$.emit({id : this.selected.id, ...form.value});
 		} else {

@@ -1,3 +1,4 @@
+import { ContentMetadata } from './../../../models/content/metadata.model';
 
 import { Observable } from 'rxjs/Observable';
 import { Component, OnInit } from '@angular/core';
@@ -294,12 +295,7 @@ export class AdminContentComponent implements OnInit {
 				title : returned.title,
 				description : returned.description,
 				body : returned.body,
-				metadata : {
-					createdAt : this.fb.timestamp,
-					creator : "get this from auth module when its created",
-					family : contentType,
-					tags : returned.tags
-				}		
+				metadata : new ContentMetadata("some user", this.fb.timestamp, returned.tags)
 			}
 			this.store.dispatch( contentActions.createContent(content))
 		})
