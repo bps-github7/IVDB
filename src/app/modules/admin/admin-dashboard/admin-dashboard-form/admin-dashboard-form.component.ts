@@ -1,3 +1,4 @@
+import { FirebaseService } from 'src/app/services/firebase.service';
 // core and form stuff
 import { NgForm } from '@angular/forms';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
@@ -10,7 +11,7 @@ import { GameInfoSelectedService } from 'src/app/services/behaivor-subjects/game
 //ngrx stuff
 import { ForumInfoSelectedService } from 'src/app/services/behaivor-subjects/forum-info-selected.service';
 import { ThreadSelectedService } from 'src/app/services/behaivor-subjects/thread-selected.service';
-import { Thread } from 'src/app/models';
+import { Thread, ThreadMetadata } from 'src/app/models';
 
 
 @Component({
@@ -27,6 +28,7 @@ export class AdminDashboardFormComponent implements OnInit {
 	// these are specifically for threads
 	@Input() updateData : any;
 	@Input() forumFamilyChoices : Observable<any>;
+	@Input() forumChoices : Observable<any>;
 	@Input() prefixChoices : Observable<any>;
 	@Input() typeChoices : Observable<any>;
 
@@ -43,6 +45,7 @@ export class AdminDashboardFormComponent implements OnInit {
 		private videogameConsoleSelectedService : ConsoleSelectedService,		
 		private forumInfoSelectedService : ForumInfoSelectedService,
 		private threadSelectedService : ThreadSelectedService,		
+		private firebaseService : FirebaseService
 		) { }
 
   ngOnInit(): void {
@@ -80,14 +83,9 @@ export class AdminDashboardFormComponent implements OnInit {
 			else {
 				// some thoughts while doing this...
 				/* 
-					1. would be nice to create objects for threads, consoles, etc
-						so we dont have to hard code a default impl like this. kind of the point of OOP.
-					2. dido with metadata, we can give default values to things needed in every obj that uses metadata
-						ie . creator, time published, time updated, whatever else. then pass in the values
-						for things that change to the constructor.
-				
+				vvv el bado vvv
 				*/
-				this.selected = new Thread()
+				this.selected = new Thread('','', new ThreadMetadata('','','',''))
 
 				// this.selected = {
 				// 	id : "",
@@ -110,11 +108,18 @@ export class AdminDashboardFormComponent implements OnInit {
   }
 
 	save(form : NgForm) {
-		// TODO : this will be the tricjy part- need to make sure all the form values match with the class constructor in order of appearance.
+		// 
+		const {title, description, ...metadata} = form.value;
+		metadata.creator = "bisk man flavor on!"
+		const thread = new Thread(title, description, metadata)		
 		if (this.selected.id) {
-			this.updateEvent$.emit({id : this.selected.id, ...form.value});
+			metadata.updatedAt = this.firebaseService.timestamp;
+			const thread = new Thread(title, description, metadata)		
+			this.updateEvent$.emit({id : this.selected.id, ...thread});
 		} else {
-			this.createEvent$.emit(form.value);
+			metadata.createdAt = this.firebaseService.timestamp;
+			const thread = new Thread(title, description, metadata)		
+			this.createEvent$.emit(thread);
 		}
 		/* 
 			do a hard reset, so that the form has no data displayed 

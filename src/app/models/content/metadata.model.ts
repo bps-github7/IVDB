@@ -26,14 +26,23 @@ export class ContentMetadata extends Metadata {
 	}
 }
 
+
+export interface ThreadMetadata {
+	creator : string | string [];
+	createdAt : any	;
+	family : string;
+	forum : string;
+}
+
+
 export class ThreadMetadata extends Metadata {
 	constructor(
 		public creator : string | string [],
 		public createdAt: any,
 	
 		// categorical properties
-		public forumFamily?: string,
-		public forum?: string,
+		public family: string,
+		public forum: string,
 		public prefixes?: string [],
 		public threadType?: string,
 		

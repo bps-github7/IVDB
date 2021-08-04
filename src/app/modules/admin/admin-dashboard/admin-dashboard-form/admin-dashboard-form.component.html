@@ -141,9 +141,20 @@
 		</div>	
 
 		<div class="form-group">
-			<label for="forum">Forum families:</label>
+			<label for="description">Description:</label>
+			<textarea 
+				class="form-control"
+				[ngModel]="selected.description"
+				name="description"
+				></textarea>
+		</div>	
+
+
+
+		<div class="form-group">
+			<label for="family">Forum family:</label>
 			<select 
-				[ngModel]="selected.family"
+				[ngModel]="selected?.metadata?.family"
 				name="family" 
 				id="family" 
 				class="form-control">
@@ -151,11 +162,27 @@
 			</select>
 		</div>
 
+		<!-- will take some finess to get the observable based on above choice. alternatively, we could just get all forum families and render the appropriate one -->
+		<div class="form-group" *ngIf="selected?.metadata?.family">
+			<label for="forum">Forum:</label>
+			<select 
+				[ngModel]="selected?.metadata?.forum"
+				name="forum" 
+				id="forum" 
+				class="form-control">
+				<option [value]="f.title" *ngFor="let f of forumChoices | async">{{ f.title }}</option>
+			</select>
+		</div>
+
+
+
+
 		<!-- TODO: use mat-chip multiselect component -->
 		<div class="form-group">
 			<label for="prefixes">Prefixes:</label>
 			<select 
-				[ngModel]="selected.prefixes"
+				[ngModel]="selected?.metadata?.prefixes"
+				multiple
 				name="prefixes" 
 				id="prefixes" 
 				class="form-control">
@@ -167,41 +194,13 @@
 		<div class="form-group">
 			<label for="type">thread type:</label>
 			<select 
-				[ngModel]="selected.type"
+				[ngModel]="selected?.metadata?.threadType"
 				name="type" 
 				id="type" 
 				class="form-control">
 				<option [value]="f.title" *ngFor="let f of typeChoices | async">{{ f.title }}</option>
 			</select>
 		</div>
-
-
-		<!-- this depends on user choice for forum, so it should come last and appear only if a choice was made for forum family -->
-		<!-- <div class="form-group">
-			<label for="forum">Forum:</label>
-			<select 
-				[ngModel]="selected.forum"
-				name="forum" 
-				id="forum" 
-				class="form-control">
-				<option [value]="f" *ngFor="let f of familyChoices">{{ f }}</option>
-			</select>
-		</div>
-
-		 -->
-
-		
-		<div class="form-group">
-			<label for="description">Description:</label>
-			<textarea 
-				[ngModel]="selected.description" 
-				name="description" 
-				id="description"
-				class="form-control"
-				cols="30" rows="10">
-			</textarea>
-		</div>
-
 
 		<div class="form-group">
 			<label for="closed">thread open or closed?</label>
@@ -211,16 +210,50 @@
 			</mat-button-toggle-group>
 		</div>
 
-		<div>
-			select moderators
-			<br>
-			invite users
-			<br>
-			block users
-			<br>
+		<!-- tODO: these should use a custom form control -->
+		<div class="form-group">
+			<label for="moderators">Select Moderator(s)</label>
+			<select 
+				[ngModel]="selected?.metadata?.moderators"
+				name="moderators" 
+				id="moderators" 
+				class="form-control">
+				<option value="A">mod A</option>
+				<option value="B">mod B</option>
+				<option value="C">mod C</option>
+			</select>		
 		</div>
 		
-
+		
+		
+		
+		<div class="form-group">
+			<label for="invitees">Invite user(s)</label>
+			<select 
+				multiple
+				[ngModel]="selected?.metadata?.invitees"
+				name="invitees" 
+				id="invitees" 
+				class="form-control">
+				<option value="A">user A</option>
+				<option value="B">user B</option>
+				<option value="C">user C</option>
+			</select>		
+		</div>
+		
+		<div class="form-group">
+			<label for="banned">ban user(s)</label>
+			<select 
+				multiple
+				[ngModel]="selected?.metadata?.banned"
+				name="banned" 
+				id="banned" 
+				class="form-control">
+				<option value="A">user A</option>
+				<option value="B">user B</option>
+				<option value="C">user C</option>
+			</select>		
+		</div>
 
 		
 		<button	primary	class="btn btn-primary">Create / update thread</button>

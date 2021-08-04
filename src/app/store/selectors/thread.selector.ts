@@ -17,7 +17,7 @@ export const selectThreadsByForum = (forum: string) =>
 	createSelector(
 		fromThread.selectAll, 
 		(entities : Thread[]) => {
-			return entities.filter((entity : Thread) => entity?.forum === forum)
+			return entities.filter((entity : Thread) => entity?.metadata.forum === forum)
 });
 
 
@@ -25,7 +25,7 @@ export const selectThreadsByCreator = (creator: string) =>
 	createSelector(
 		fromThread.selectAll, 
 		(entities : Thread[]) => {
-			return entities.filter((entity : Thread) => entity?.creator === creator)
+			return entities.filter((entity : Thread) => entity?.metadata.creator === creator)
 });
 
 export const selectThreadEntity = id => createSelector(
