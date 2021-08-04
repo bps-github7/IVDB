@@ -111,7 +111,6 @@ export class AdminDashboardFormComponent implements OnInit {
 		// 
 		const {title, description, ...metadata} = form.value;
 		metadata.creator = "bisk man flavor on!"
-		const thread = new Thread(title, description, metadata)		
 		if (this.selected.id) {
 			metadata.updatedAt = this.firebaseService.timestamp;
 			const thread = new Thread(title, description, metadata)		
