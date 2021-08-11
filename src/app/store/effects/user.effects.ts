@@ -1,7 +1,7 @@
 import { notAuthenticated } from './../actions/user.actions';
 // import { googleLogin } from './../actions/user.actions';
 import { Injectable } from "@angular/core";
-import { Observable } from "rxjs/Observable";
+import { Observable } from "rxjs";
 import { Actions, createEffect, ofType } from "@ngrx/effects";
 import { User } from "src/app/models/user/user.model";
 import * as userActions from '../actions/user.actions'

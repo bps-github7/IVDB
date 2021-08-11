@@ -1,4 +1,4 @@
-import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { GameInfo } from 'src/app/models/content/game-info.model';
 import { v4 } from 'uuid';

@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core";
-import { Observable } from "rxjs/Observable";
+import { Observable } from "rxjs";
 import { Actions, createEffect, ofType } from "@ngrx/effects";
 import { Thread } from "src/app/models/contrib/thread.model";
 import * as threadActions from '../actions/thread.actions'

@@ -1,4 +1,4 @@
-import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { VideogameConsole } from 'src/app/models/content/videogame-console.model';
 import { v4 } from 'uuid';

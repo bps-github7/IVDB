@@ -1,6 +1,6 @@
 import { ContentMetadata } from './../../../models/content/metadata.model';
 
-import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs';
 import { Component, OnInit } from '@angular/core';
 import { select, Store } from '@ngrx/store';
 import { Content } from 'src/app/models/content/content.model';

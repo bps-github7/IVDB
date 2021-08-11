@@ -1,4 +1,4 @@
-import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs';
 import { Component, Input, OnInit } from '@angular/core';
 import * as fromForum from 'src/app/store/reducers/forum.reducer';
 import * as forumActions from 'src/app/store/actions/forum.actions';

@@ -28,16 +28,13 @@ import { CustomFormsModule } from 'ng2-validation';
 // angular material
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
-//angular fire
-import { AngularFireModule } from '@angular/fire';
-import { AngularFirestoreModule } from '@angular/fire/firestore';
-import { AngularFireAuthModule } from '@angular/fire/auth';
-
 
 // our custom service for getting server timestamps
 import { FirebaseService } from './services/firebase.service';
-import { environment } from 'src/environments/environment';
 import { RouterSerializer } from './store/router-serializer';
+
+
+import { InitFirebaseModule } from './services/init-firebase/init-firebase.module';
 
 
 @NgModule({
@@ -52,9 +49,8 @@ import { RouterSerializer } from './store/router-serializer';
 		CoreModule,
 
 		//firebase
-		AngularFireModule.initializeApp(environment.firebase),
-		AngularFireAuthModule,
-    AngularFirestoreModule,
+		InitFirebaseModule,
+
 
 		//for forms
 		FormsModule,

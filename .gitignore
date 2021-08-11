@@ -1,5 +1,11 @@
 # See http://help.github.com/ignore-files/ for more about ignoring files.
 
+
+# avoid commiting the secret API keys
+.env.development
+/src/env.js
+
+
 # compiled output
 /dist
 /tmp

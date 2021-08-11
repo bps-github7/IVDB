@@ -1,5 +1,5 @@
 import { logging } from 'protractor';
-import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs';
 import { Component, OnInit } from '@angular/core';
 import { User } from './models';
 import { Store } from '@ngrx/store';
