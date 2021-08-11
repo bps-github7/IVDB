@@ -1,4 +1,4 @@
-import { createAction, props, Action } from "@ngrx/store";
+import { createAction, props } from "@ngrx/store";
 import { Review } from "src/app/models/contrib/review.model";
 
 // get every document in the collection
@@ -39,14 +39,3 @@ export const deleteReview = createAction(
 export const deleteReviewSuccess = createAction(
 	'[Review] deleteReviewSuccess',
 );
-
-export const reviewActionTypes = {
-	readReviews,
-	readReviewsSuccess,
-	createReview,
-	createReviewSuccess,
-	deleteReview,
-	deleteReviewSuccess,
-	updateReview,
-	updateReviewSuccess
-}

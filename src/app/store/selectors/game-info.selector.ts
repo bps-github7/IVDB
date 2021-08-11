@@ -1,4 +1,4 @@
-import { createFeatureSelector, createSelector } from '@ngrx/store';
+import { createSelector } from '@ngrx/store';
 import {GameInfo} from 'src/app/models/content/game-info.model'
 import * as fromGameInfo  from '../reducers/game-info.reducer';
 

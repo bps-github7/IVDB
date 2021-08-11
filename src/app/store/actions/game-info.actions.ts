@@ -1,4 +1,4 @@
-import { createAction, props, Action } from "@ngrx/store";
+import { createAction, props } from "@ngrx/store";
 import { GameInfo } from 'src/app/models/content/game-info.model';
 
 // get every document in the collection
@@ -11,8 +11,6 @@ export const readGameInfoSuccess = createAction(
 	props<{gameInfo : GameInfo[]}>()
 );
 
-// came across a weird one, which forced out hand -> gameInfo.type is now gameInfo.family
-// apparently - action doesnt respond well to objects passed into props with attribute 'type'
 export const createGameInfo = createAction(
 	'[GameInfo] createGameInfo',
 	props<GameInfo>()
@@ -39,15 +37,3 @@ export const deleteGameInfo = createAction(
 export const deleteGameInfoSuccess = createAction(
 	'[GameInfo] deleteGameInfoSuccess',
 );
-
-export const gameInfoActionTypes = {
-
-	readGameInfo,
-	readGameInfoSuccess,
-	createGameInfo,
-	createGameInfoSuccess,
-	deleteGameInfo,
-	deleteGameInfoSuccess,
-	updateGameInfo,
-	updateGameInfoSuccess
-}

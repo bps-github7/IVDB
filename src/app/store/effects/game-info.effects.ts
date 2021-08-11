@@ -1,15 +1,11 @@
-import { exhaustMap } from 'rxjs/operators';
 // angular core stuff + ngrx 
 import { Injectable } from "@angular/core";
-import { Observable } from "rxjs/Observable";
+import { from } from "rxjs";
 import { Actions, createEffect, ofType } from "@ngrx/effects";
 
 //firestore + rxjs
 import { AngularFirestore  } from "@angular/fire/firestore";
-import { switchMap, mergeMap, map } from "rxjs/operators";
-import 'rxjs/add/observable/fromPromise';
-
-import { of } from "rxjs";
+import { switchMap, exhaustMap, map } from "rxjs/operators";
 
 // our model and actions
 import { GameInfo } from "src/app/models/content/game-info.model";
@@ -32,7 +28,7 @@ export class GameInfoEffects {
 		switchMap(data => {
 			const {type, ...payload} = data
 			const ref = this.afs.doc<GameInfo>(`game-info/${data.id}`);
-			return Observable.fromPromise(ref.set(payload));
+			return from(ref.set(payload));
 		}),
 		map(() => gameInfoActions.createGameInfoSuccess())
 	))
@@ -44,7 +40,7 @@ export class GameInfoEffects {
 		map((action) => action),
 		switchMap(content => {
 			const ref = this.afs.doc<GameInfo>(`game-info/${content.id}`)
-			return Observable.fromPromise(ref.update({id : content.id,  ...content.data}))
+			return from(ref.update({id : content.id,  ...content.data}))
 		}),
 		map(() => gameInfoActions.updateGameInfoSuccess())
 	))
@@ -54,7 +50,7 @@ export class GameInfoEffects {
 		map(action => action),
 		switchMap(action => {
 			const ref = this.afs.doc<GameInfo>(`game-info/${action.id}`)
-			return Observable.fromPromise(ref.delete())
+			return from(ref.delete())
 		}),
 		map(()=> gameInfoActions.deleteGameInfoSuccess())
 	))

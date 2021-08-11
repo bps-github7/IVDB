@@ -28,6 +28,7 @@ import { FeedbackReducer } from './feedback.reducer';
 import { ThreadReducer } from './thread.reducer';
 import { UserReducer } from './user.reducer';
 
+/* We implement the app State, Array of reducers and some meta reudcers in this file */
 export interface AppState  {
 	router : RouterReducerState<any>;
 	content : ReadonlyArray<Content>;

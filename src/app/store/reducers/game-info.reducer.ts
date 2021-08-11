@@ -3,9 +3,7 @@ import { EntityState, createEntityAdapter } from '@ngrx/entity';
 import { createFeatureSelector, createReducer, on } from '@ngrx/store';
 import { GameInfo } from 'src/app/models/content/game-info.model';
 
-
 export const gameInfoAdapter = createEntityAdapter<GameInfo>();
-
 export interface State extends EntityState<GameInfo> { }
 
 const defaultGameInfo = {
@@ -32,28 +30,16 @@ export const {
 	selectTotal,
 } = gameInfoAdapter.getSelectors(getGameInfoState);
 
+
+// TODO: is this nesc so that the selectors work? kind of defeats the purpose of the above lines
 // select the array of GameInfo ids
-export const selectGameInfoIds = selectIds;
+// export const selectGameInfoIds = selectIds;
  
-// select the dictionary of GameInfo entities
-export const selectGameInfoEntities = selectEntities;
+// // select the dictionary of GameInfo entities
+// export const selectGameInfoEntities = selectEntities;
  
-// select the array of GameInfo
-export const selectAllGameInfos = selectAll;
+// // select the array of GameInfo
+// export const selectAllGameInfos = selectAll;
  
-// select the total GameInfo count
-export const selectGameInfoTotal = selectTotal;
-
-
-// an alternative reducer which doesnt use entityAdapter to track gameInfo data in state
-// export interface GameInfoState {
-// 	gameInfo : ReadonlyArray<GameInfo>;
-// }
-
-// const initialState : ReadonlyArray<GameInfo> = [];
-
-// export const GameInfoReducer = createReducer(
-// 	initialState,
-// 	on(actions.readGameInfoSuccess, (state, {gameInfo}) => [...gameInfo]),
-// 	on(actions.createGameInfo, (state, action) =>  [...state, action])
-// )
+// // select the total GameInfo count
+// export const selectGameInfoTotal = selectTotal;

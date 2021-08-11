@@ -1,4 +1,4 @@
-import { createAction, props, Action } from "@ngrx/store";
+import { createAction, props } from "@ngrx/store";
 import { Feedback } from "src/app/models/contrib/feedback.model";
 
 // get every document in the collection
@@ -39,14 +39,3 @@ export const deleteFeedback = createAction(
 export const deleteFeedbackSuccess = createAction(
 	'[Feedback] deleteFeedbackSuccess',
 );
-
-export const feedbackActionTypes = {
-	readFeedback,
-	readFeedbackSuccess,
-	createFeedback,
-	createFeedbackSuccess,
-	deleteFeedback,
-	deleteFeedbackSuccess,
-	updateFeedback,
-	updateFeedbackSuccess
-}

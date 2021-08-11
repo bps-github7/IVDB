@@ -1,4 +1,4 @@
-import { createAction, props, Action } from "@ngrx/store";
+import { createAction, props } from "@ngrx/store";
 import { Forum } from "src/app/models/content/forum.model";
 
 // get every document in the collection
@@ -11,8 +11,6 @@ export const readForumSuccess = createAction(
 	props<{forums : Forum[]}>()
 );
 
-// came across a weird one, which forced out hand -> gameInfo.type is now gameInfo.family
-// apparently - action doesnt respond well to objects passed into props with attribute 'type'
 export const createForum = createAction(
 	'[Forum] createForum',
 	props<Forum>()
@@ -39,14 +37,3 @@ export const deleteForum = createAction(
 export const deleteForumSuccess = createAction(
 	'[Forum] deleteForumSuccess',
 );
-
-export const forumActionTypes = {
-	readForum,
-	readForumSuccess,
-	createForum,
-	createForumSuccess,
-	deleteForum,
-	deleteForumSuccess,
-	updateForum,
-	updateForumSuccess
-}

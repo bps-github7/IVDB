@@ -1,8 +1,7 @@
 import { createSelector } from "@ngrx/store";
 import { Forum } from "src/app/models/content/forum.model";
 import * as fromForum from 'src/app/store/reducers/forum.reducer';
-import { AppState } from "../reducers";
-import { selectParams, selectQueryParams } from "./router.selector";
+import { selectParams } from "./router.selector";
 
 
 // select by titleSubstring

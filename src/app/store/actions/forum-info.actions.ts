@@ -1,4 +1,4 @@
-import { createAction, props, Action } from "@ngrx/store";
+import { createAction, props } from "@ngrx/store";
 import { ForumInfo } from 'src/app/models/content/forum-info.model';
 
 // get every document in the collection
@@ -39,15 +39,3 @@ export const deleteForumInfo = createAction(
 export const deleteForumInfoSuccess = createAction(
 	'[ForumInfo] deleteForumInfoSuccess',
 );
-
-export const forumInfoActionTypes = {
-
-	readForumInfo,
-	readForumInfoSuccess,
-	createForumInfo,
-	createForumInfoSuccess,
-	deleteForumInfo,
-	deleteForumInfoSuccess,
-	updateForumInfo,
-	updateForumInfoSuccess
-}

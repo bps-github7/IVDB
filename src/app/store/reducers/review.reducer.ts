@@ -3,8 +3,6 @@ import { EntityState, createEntityAdapter } from '@ngrx/entity';
 import { createFeatureSelector, createReducer, on } from '@ngrx/store';
 import { Review } from 'src/app/models/contrib/review.model';
 
-// need to export review model from here, for this example. hopefully we can find a workaround
-
 
 export const reviewAdapter = createEntityAdapter<Review>();
 export interface State extends EntityState<Review> { }
@@ -19,9 +17,6 @@ export const initialState: State = reviewAdapter.getInitialState(defaultReview);
 export const ReviewReducer = createReducer(
   initialState,
 
-	//2. had to make action 'contents' here, action does not work.
-	// contents was the identifier of variable passed to readContentSuccess
-  //3. also, had to make this an object for entityAdapter to know what to do with it (even though it already was made an object)
 	on(actions.readReviewsSuccess, (state, {reviews}) => {
 		return reviewAdapter.addMany(reviews, state)
 		
@@ -42,7 +37,6 @@ export const ReviewReducer = createReducer(
   })
 	
 );
-
 
 // create the default selectors
 export const getReviewState = createFeatureSelector<State>('review');

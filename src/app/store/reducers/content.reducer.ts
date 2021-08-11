@@ -1,5 +1,4 @@
 import { createContent, deleteContent, readContent, updateContent, readContentSuccess } from './../actions/content.actions';
-import { contentActionTypes } from '../actions/content.actions';
 import { EntityState, createEntityAdapter } from '@ngrx/entity';
 import { createFeatureSelector, createReducer, on } from '@ngrx/store';
 import { Content } from 'src/app/models/content/content.model';
@@ -17,7 +16,6 @@ export const ContentReducer = createReducer(
 
 	on(readContentSuccess, (state, {contents}) => {
 		return contentAdapter.addMany(contents, state)
-		
 	}),
 
   on(createContent, (state, action) => {
@@ -41,8 +39,3 @@ export const {
 	selectAll,
 	selectTotal,
 } = contentAdapter.getSelectors(getContentState);
-
-// export const selectAllContent = selectAll;
-// export const selectContentIds = selectIds;
-// export const selectContentEntities = selectEntities;
-// export const selectContentTotal = selectTotal;

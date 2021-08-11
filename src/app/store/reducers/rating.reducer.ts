@@ -19,9 +19,6 @@ export const initialState: State = ratingAdapter.getInitialState(defaultRating);
 export const RatingReducer = createReducer(
   initialState,
 
-	//2. had to make action 'contents' here, action does not work.
-	// contents was the identifier of variable passed to readContentSuccess
-  //3. also, had to make this an object for entityAdapter to know what to do with it (even though it already was made an object)
 	on(actions.readRatingsSuccess, (state, {ratings}) => {
 		return ratingAdapter.addMany(ratings, state)
 		
@@ -42,7 +39,6 @@ export const RatingReducer = createReducer(
   })
 	
 );
-
 
 // create the default selectors
 export const getRatingState = createFeatureSelector<State>('rating');

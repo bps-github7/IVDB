@@ -1,4 +1,4 @@
-import { createAction, props, Action } from "@ngrx/store";
+import { createAction, props } from "@ngrx/store";
 import { Thread } from "src/app/models/contrib/thread.model";
 
 // get all threads in thread collection
@@ -39,14 +39,3 @@ export const deleteThread = createAction(
 export const deleteThreadSuccess = createAction(
 	'[Thread] deleteThreadSuccess',
 );
-
-export const threadActionTypes = {
-	readThreads,
-	readThreadsSuccess,
-	createThread,
-	createThreadSuccess,
-	deleteThread,
-	deleteThreadSuccess,
-	updateThread,
-	updateThreadSuccess
-}

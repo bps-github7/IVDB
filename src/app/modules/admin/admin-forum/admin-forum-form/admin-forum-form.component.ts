@@ -11,7 +11,7 @@ import * as forumInfoActions from 'src/app/store/actions/forum-info.actions';
 import { selectForumInfoFamily } from 'src/app/store/selectors/forum-info.selector';
 import { selectForumEntity, selectForumByIdParam } from 'src/app/store/selectors/forum.selector';
 
-import v4 from 'uuid';
+import { v4 } from 'uuid';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 @Component({

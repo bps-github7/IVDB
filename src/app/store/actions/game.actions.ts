@@ -1,4 +1,4 @@
-import { createAction, props, Action } from "@ngrx/store";
+import { createAction, props } from "@ngrx/store";
 import { Game } from "src/app/models/content/game.model";
 
 // get every document in the collection
@@ -39,14 +39,3 @@ export const deleteGame = createAction(
 export const deleteGameSuccess = createAction(
 	'[Game] deleteGameSuccess',
 );
-
-export const gameActionTypes = {
-	readGames,
-	readGamesSuccess,
-	createGame,
-	createGameSuccess,
-	deleteGame,
-	deleteGameSuccess,
-	updateGame,
-	updateGameSuccess
-}

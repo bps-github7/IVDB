@@ -1,13 +1,11 @@
-import { exhaustMap } from 'rxjs/operators';
 // angular core stuff + ngrx 
 import { Injectable } from "@angular/core";
-import { Observable } from "rxjs/Observable";
 import { Actions, createEffect, ofType } from "@ngrx/effects";
 
 //firestore + rxjs
 import { AngularFirestore  } from "@angular/fire/firestore";
-import { switchMap, mergeMap, map } from "rxjs/operators";
-import 'rxjs/add/observable/fromPromise';
+import { switchMap, exhaustMap, map } from "rxjs/operators";
+import { from } from "rxjs";
 
 // our model and actions
 import { Forum } from "src/app/models/content/forum.model";
@@ -30,7 +28,7 @@ export class ForumEffects {
 		switchMap(data => {
 			const {type, ...payload} = data
 			const ref = this.afs.doc<Forum>(`forums/${data.id}`);
-			return Observable.fromPromise(ref.set(payload));
+			return from(ref.set(payload));
 		}),
 		map(() => forumActions.createForumSuccess())
 	))
@@ -42,7 +40,7 @@ export class ForumEffects {
 		map((action) => action),
 		switchMap(forum => {
 			const ref = this.afs.doc<Forum>(`forums/${forum.id}`)
-			return Observable.fromPromise(ref.update({id : forum.id,  ...forum.data}))
+			return from(ref.update({id : forum.id,  ...forum.data}))
 		}),
 		map(() => forumActions.updateForumSuccess())
 	))
@@ -52,7 +50,7 @@ export class ForumEffects {
 		map(action => action),
 		switchMap(action => {
 			const ref = this.afs.doc<Forum>(`forums/${action.id}`)
-			return Observable.fromPromise(ref.delete())
+			return from(ref.delete())
 		}),
 		map(()=> forumActions.deleteForumSuccess())
 	))

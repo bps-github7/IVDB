@@ -1,13 +1,12 @@
 import { exhaustMap } from 'rxjs/operators';
 // angular core stuff + ngrx 
 import { Injectable } from "@angular/core";
-import { Observable } from "rxjs/Observable";
+import { from, Observable } from "rxjs";
 import { Actions, createEffect, ofType } from "@ngrx/effects";
 
 //firestore + rxjs
 import { AngularFirestore  } from "@angular/fire/firestore";
 import { switchMap, mergeMap, map } from "rxjs/operators";
-import 'rxjs/add/observable/fromPromise';
 
 import { of } from "rxjs";
 
@@ -32,7 +31,7 @@ export class VideogameConsoleEffects {
 		switchMap(data => {
 			const {type, ...payload} = data
 			const ref = this.afs.doc<VideogameConsole>(`consoles/${data.id}`);
-			return Observable.fromPromise(ref.set(payload));
+			return from(ref.set(payload));
 		}),
 		map(() => videogameConsoleActions.createVideogameConsoleSuccess())
 	))
@@ -44,7 +43,7 @@ export class VideogameConsoleEffects {
 		map((action) => action),
 		switchMap(console => {
 			const ref = this.afs.doc<VideogameConsole>(`consoles/${console.id}`)
-			return Observable.fromPromise(ref.update({id : console.id,  ...console.data}))
+			return from(ref.update({id : console.id,  ...console.data}))
 		}),
 		map(() => videogameConsoleActions.updateVideogameConsoleSuccess())
 	))
@@ -54,7 +53,7 @@ export class VideogameConsoleEffects {
 		map(action => action),
 		switchMap(action => {
 			const ref = this.afs.doc<VideogameConsole>(`consoles/${action.id}`)
-			return Observable.fromPromise(ref.delete())
+			return from(ref.delete())
 		}),
 		map(()=> videogameConsoleActions.deleteVideogameConsoleSuccess())
 	))

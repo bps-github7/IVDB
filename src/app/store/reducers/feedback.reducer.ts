@@ -19,9 +19,6 @@ export const initialState: State = feedbackAdapter.getInitialState(defaultFeedba
 export const FeedbackReducer = createReducer(
   initialState,
 
-	//2. had to make action 'contents' here, action does not work.
-	// contents was the identifier of variable passed to readContentSuccess
-  //3. also, had to make this an object for entityAdapter to know what to do with it (even though it already was made an object)
 	on(actions.readFeedbackSuccess, (state, {feedback}) => {
 		return feedbackAdapter.addMany(feedback, state)
 		

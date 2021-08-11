@@ -1,16 +1,15 @@
 import { createSelector } from "@ngrx/store";
 import { User } from "src/app/models/user/user.model";
 import * as fromUser from 'src/app/store/reducers/user.reducer';
-import { AppState } from "../reducers";
-import { selectParams, selectQueryParams } from "./router.selector";
+import { selectParams } from "./router.selector";
 
 
 // select by titleSubstring
-export const selectUserByUsernameSubstring = (username : string) =>
+export const selectUserByDisplayNameSubstring = (displayName: string) =>
 	createSelector(
 		fromUser.selectAll,
 		(entities : User []) => {
-			return entities.filter((entity : User) => (entity.username.toLowerCase()).includes(username.toLowerCase()))
+			return entities.filter((entity : User) => (entity.displayName.toLowerCase()).includes(displayName.toLowerCase()))
 		} 
 	)
 
@@ -34,10 +33,10 @@ export const selectUserByIdParam = createSelector(
 	}	
 )
 
-export const selectUserByUsernameParam = createSelector(
+export const selectUserByDisplayNameParam = createSelector(
 	fromUser.selectAll,
 	selectParams,
-	(users, { username } ) => { 
-		return users.filter((user : User) => user.username === username.replaceAll("+"," "))[0]
+	(users, { displayName } ) => { 
+		return users.filter((user : User) => user.displayName === displayName.replaceAll("+"," "))[0]
 	}
 )

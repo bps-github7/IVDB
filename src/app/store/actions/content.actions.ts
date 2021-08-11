@@ -1,4 +1,4 @@
-import { createAction, props, Action } from "@ngrx/store";
+import { createAction, props } from "@ngrx/store";
 import { Content } from 'src/app/models/content/content.model';
 
 // get every document in the collection
@@ -39,13 +39,3 @@ export const deleteContent = createAction(
 export const deleteContentSuccess = createAction(
 	'[Content] deleteContentSuccess',
 );
-
-export const contentActionTypes = {
-	readContent,
-	createContent,
-	createContentSuccess,
-	deleteContent,
-	deleteContentSuccess,
-	updateContent,
-	updateContentSuccess
-}

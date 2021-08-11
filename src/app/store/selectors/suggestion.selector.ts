@@ -1,8 +1,7 @@
 import { createSelector } from "@ngrx/store";
 import { Suggestion } from "src/app/models/contrib/suggestion.model";
 import * as fromSuggestion from 'src/app/store/reducers/suggestion.reducer';
-import { AppState } from "../reducers";
-import { selectParams, selectQueryParams } from "./router.selector";
+import { selectParams } from "./router.selector";
 
 
 // select by titleSubstring

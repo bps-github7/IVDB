@@ -22,6 +22,7 @@ import { StoreRouterConnectingModule } from '@ngrx/router-store';
 
 // forms + form components
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+
 // this lil shit is always causing dependency issues v
 import { CustomFormsModule } from 'ng2-validation';
 
@@ -39,7 +40,7 @@ import { InitFirebaseModule } from './services/init-firebase/init-firebase.modul
 
 @NgModule({
   declarations: [
-    AppComponent,
+    AppComponent
   ],
   imports: [
 		// angular base stuff + our modules
@@ -63,7 +64,7 @@ import { InitFirebaseModule } from './services/init-firebase/init-firebase.modul
 		// ngrx 
 		StoreModule.forRoot(reducers, { metaReducers }),
 		StoreDevtoolsModule.instrument({maxAge: 25}),
-		EffectsModule.forRoot([UserEffects]),
+		EffectsModule.forRoot([]),
 		StoreRouterConnectingModule.forRoot({
 			serializer: RouterSerializer
 		})

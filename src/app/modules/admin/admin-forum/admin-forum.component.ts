@@ -4,7 +4,7 @@ import { ForumInfo } from 'src/app/models/content/forum-info.model';
 import { Observable } from 'rxjs';
 import { select, Store } from '@ngrx/store';
 
-import v4 from 'uuid';
+import { v4 } from 'uuid';
 import { MatDialog } from '@angular/material/dialog';
 import { selectForumByTitleSubstring } from 'src/app/store/selectors/forum.selector';
 import * as forumActions from 'src/app/store/actions/forum.actions'

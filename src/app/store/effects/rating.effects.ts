@@ -1,12 +1,10 @@
 import { Injectable } from "@angular/core";
-import { Observable } from "rxjs/Observable";
+import { from } from "rxjs";
 import { Actions, createEffect, ofType } from "@ngrx/effects";
 import { Rating } from "src/app/models/contrib/rating.model";
 import * as ratingActions from '../actions/rating.actions'
-import { AngularFirestore, AngularFirestoreCollection } from "@angular/fire/firestore";
+import { AngularFirestore } from "@angular/fire/firestore";
 import { switchMap, map, exhaustMap } from "rxjs/operators";
-import 'rxjs/add/observable/fromPromise';
-
 
 @Injectable()
 export class RatingEffects {
@@ -26,7 +24,7 @@ export class RatingEffects {
 		switchMap(data => {
 			const {type, ...payload} = data
 			const ref = this.afs.doc<Rating>(`ratings/${data.id}`);
-			return Observable.fromPromise(ref.set(payload));
+			return from(ref.set(payload));
 		}),
 		map(() => ratingActions.createRatingSuccess())
 	))
@@ -38,7 +36,7 @@ export class RatingEffects {
 		map((action) => action),
 		switchMap(rating => {
 			const ref = this.afs.doc<Rating>(`ratings/${rating.id}`)
-			return Observable.fromPromise(ref.update({id : rating.id,  ...rating.data}))
+			return from(ref.update({id : rating.id,  ...rating.data}))
 		}),
 		map(() => ratingActions.updateRatingSuccess())
 	))
@@ -48,7 +46,7 @@ export class RatingEffects {
 		map(action => action),
 		switchMap(action => {
 			const ref = this.afs.doc<Rating>(`ratings/${action.id}`)
-			return Observable.fromPromise(ref.delete())
+			return from(ref.delete())
 		}),
 		map(()=> ratingActions.deleteRatingSuccess())
 	))

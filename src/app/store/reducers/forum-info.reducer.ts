@@ -38,7 +38,6 @@ export const ForumInfoReducer = createReducer(
 	
 );
 
-
 // create the feature selector and default entity selectors
 export const getForumInfo = createFeatureSelector<State>('forumInfo');
 

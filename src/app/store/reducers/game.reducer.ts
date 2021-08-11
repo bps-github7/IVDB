@@ -19,9 +19,6 @@ export const initialState: State = gameAdapter.getInitialState(defaultGame);
 export const GameReducer = createReducer(
   initialState,
 
-	//2. had to make action 'contents' here, action does not work.
-	// contents was the identifier of variable passed to readContentSuccess
-  //3. also, had to make this an object for entityAdapter to know what to do with it (even though it already was made an object)
 	on(actions.readGamesSuccess, (state, {games}) => {
 		return gameAdapter.addMany(games, state)
 		
@@ -42,7 +39,6 @@ export const GameReducer = createReducer(
   })
 	
 );
-
 
 // create the default selectors
 export const getGameState = createFeatureSelector<State>('game');

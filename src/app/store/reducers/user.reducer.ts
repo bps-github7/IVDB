@@ -3,9 +3,6 @@ import { EntityState, createEntityAdapter } from '@ngrx/entity';
 import { createFeatureSelector, createReducer, on } from '@ngrx/store';
 import { User } from 'src/app/models/user/user.model';
 
-// need to export user model from here, for this example. hopefully we can find a workaround
-
-
 export const userAdapter = createEntityAdapter<User>();
 export interface State extends EntityState<User> { }
 

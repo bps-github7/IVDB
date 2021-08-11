@@ -1,8 +1,7 @@
 import { createSelector } from "@ngrx/store";
 import { Feedback } from "src/app/models/contrib/feedback.model";
 import * as fromFeedback from 'src/app/store/reducers/feedback.reducer';
-import { AppState } from "../reducers";
-import { selectParams, selectQueryParams } from "./router.selector";
+import { selectParams } from "./router.selector";
 
 
 

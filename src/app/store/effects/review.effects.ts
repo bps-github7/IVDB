@@ -1,11 +1,10 @@
 import { Injectable } from "@angular/core";
-import { Observable } from "rxjs/Observable";
+import { from } from "rxjs";
 import { Actions, createEffect, ofType } from "@ngrx/effects";
 import { Review } from "src/app/models/contrib/review.model";
 import * as reviewActions from '../actions/review.actions'
-import { AngularFirestore, AngularFirestoreCollection } from "@angular/fire/firestore";
-import { switchMap, mergeMap, map, exhaustMap } from "rxjs/operators";
-import 'rxjs/add/observable/fromPromise';
+import { AngularFirestore } from "@angular/fire/firestore";
+import { switchMap, map, exhaustMap } from "rxjs/operators";
 
 
 @Injectable()
@@ -26,7 +25,7 @@ export class ReviewEffects {
 		switchMap(data => {
 			const {type, ...payload} = data
 			const ref = this.afs.doc<Review>(`reviews/${data.id}`);
-			return Observable.fromPromise(ref.set(payload));
+			return from(ref.set(payload));
 		}),
 		map(() => reviewActions.createReviewSuccess())
 	))
@@ -38,7 +37,7 @@ export class ReviewEffects {
 		map((action) => action),
 		switchMap(review => {
 			const ref = this.afs.doc<Review>(`reviews/${review.id}`)
-			return Observable.fromPromise(ref.update({id : review.id,  ...review.data}))
+			return from(ref.update({id : review.id,  ...review.data}))
 		}),
 		map(() => reviewActions.updateReviewSuccess())
 	))
@@ -48,7 +47,7 @@ export class ReviewEffects {
 		map(action => action),
 		switchMap(action => {
 			const ref = this.afs.doc<Review>(`reviews/${action.id}`)
-			return Observable.fromPromise(ref.delete())
+			return from(ref.delete())
 		}),
 		map(()=> reviewActions.deleteReviewSuccess())
 	))

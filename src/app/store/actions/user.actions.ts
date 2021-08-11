@@ -1,4 +1,4 @@
-import { createAction, props, Action } from "@ngrx/store";
+import { createAction, props } from "@ngrx/store";
 import { User } from "src/app/models/user/user.model";
 
 
@@ -82,14 +82,3 @@ export const deleteUser = createAction(
 export const deleteUserSuccess = createAction(
 	'[User] deleteUserSuccess',
 );
-
-export const userActionTypes = {
-	readUsers,
-	readUsersSuccess,
-	createUser,
-	createUserSuccess,
-	deleteUser,
-	deleteUserSuccess,
-	updateUser,
-	updateUserSuccess
-}
