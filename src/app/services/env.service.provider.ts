@@ -13,10 +13,11 @@ export const EnvServiceFactory = () => {
   // If needed, a deep merge can be performed here to merge properties instead of overwriting them.
   for (const key in browserWindowEnv) {
     if (browserWindowEnv.hasOwnProperty(key)) {
-      env[key] = window['__env'][key];
+
+			env[key] = window['__env'][key];
     }
   }
-
+	// env.firebaseConfig = window['__env'].firebaseConfig;
   return env;
 };
 

@@ -1,3 +1,4 @@
+import { EnvService } from './services/env.service';
 import { logging } from 'protractor';
 import { Observable } from 'rxjs';
 import { Component, OnInit } from '@angular/core';
@@ -20,23 +21,23 @@ export class AppComponent implements OnInit {
 	user$ : Observable<User>;
 	
 
-	constructor(private store : Store<AppState>) {	}
+	constructor(private store : Store<AppState>) {}
 
 	ngOnInit() {
-		this.user$ = this.store.select('user');
+		// this.user$ = this.store.select('user');
 
 		/// ughh this unneeded prop is so ugly. deal w it please (tomorrow || later)
-		this.store.dispatch( userActions.getUser({}));
+		// this.store.dispatch( userActions.getUser({}));
 		
 	}
 
 	googleLogin() {
-		console.log("got called at component level")
-		this.store.dispatch( userActions.googleLogin() );
+		// console.log("got called at component level")
+		// this.store.dispatch( userActions.googleLogin() );
 	}
 
 	logout() {
-		this.store.dispatch(  userActions.logout({}) );
+		// this.store.dispatch(  userActions.logout({}) );
 	}
 
 }

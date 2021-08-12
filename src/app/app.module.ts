@@ -1,3 +1,5 @@
+import { EnvServiceProvider } from './services/env.service.provider';
+import { EnvService } from './services/env.service';
 import { UserEffects } from './store/effects/user.effects';
 import { ConsoleSelectedService } from './services/behaivor-subjects/console-selected.service';
 import { GameInfoSelectedService } from './services/behaivor-subjects/game-info-selected.service';
@@ -33,9 +35,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 // our custom service for getting server timestamps
 import { FirebaseService } from './services/firebase.service';
 import { RouterSerializer } from './store/router-serializer';
-
-
 import { InitFirebaseModule } from './services/init-firebase/init-firebase.module';
+
+
 
 
 @NgModule({
@@ -51,6 +53,9 @@ import { InitFirebaseModule } from './services/init-firebase/init-firebase.modul
 
 		//firebase
 		InitFirebaseModule,
+		// AngularFireModule.initializeApp( this.env.firebaseConfig),
+		// AngularFireAuthModule,
+		// AngularFirestoreModule,
 
 
 		//for forms

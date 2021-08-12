@@ -45,14 +45,14 @@ export const reducers : ActionReducerMap<any> = {
   declarations: [],
   imports: [
 
-		StoreModule.forFeature('admin', reducers),
-		// StoreModule.forFeature('game', GameReducer),
-		// StoreModule.forFeature('gameInfo', GameInfoReducer),
-		// StoreModule.forFeature('content', ContentReducer),
-		// StoreModule.forFeature('videogameConsole', VideogameConsoleReducer),
-		// StoreModule.forFeature('forum', ForumReducer),
-		// StoreModule.forFeature('forumInfo', ForumInfoReducer),
-		// StoreModule.forFeature('thread', ThreadReducer),
+		// StoreModule.forFeature('admin', reducers),
+		StoreModule.forFeature('game', GameReducer),
+		StoreModule.forFeature('gameInfo', GameInfoReducer),
+		StoreModule.forFeature('content', ContentReducer),
+		StoreModule.forFeature('videogameConsole', VideogameConsoleReducer),
+		StoreModule.forFeature('forum', ForumReducer),
+		StoreModule.forFeature('forumInfo', ForumInfoReducer),
+		StoreModule.forFeature('thread', ThreadReducer),
 				
 
 		EffectsModule.forFeature([ContentEffects]),
