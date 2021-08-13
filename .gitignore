@@ -5,6 +5,8 @@
 .env.development
 /src/env.js
 
+src/environments/environment.ts
+
 
 # compiled output
 /dist

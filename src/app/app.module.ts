@@ -36,6 +36,10 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FirebaseService } from './services/firebase.service';
 import { RouterSerializer } from './store/router-serializer';
 import { InitFirebaseModule } from './services/init-firebase/init-firebase.module';
+import { environment } from 'src/environments/environment';
+import { AngularFireModule } from '@angular/fire';
+import { AngularFireAuthModule } from '@angular/fire/auth';
+import { AngularFirestoreModule } from '@angular/fire/firestore';
 
 
 
@@ -52,10 +56,10 @@ import { InitFirebaseModule } from './services/init-firebase/init-firebase.modul
 		CoreModule,
 
 		//firebase
-		InitFirebaseModule,
-		// AngularFireModule.initializeApp( this.env.firebaseConfig),
-		// AngularFireAuthModule,
-		// AngularFirestoreModule,
+		// InitFirebaseModule,
+		AngularFireModule.initializeApp(environment.firebaseConfig),
+		AngularFireAuthModule,
+		AngularFirestoreModule,
 
 
 		//for forms
