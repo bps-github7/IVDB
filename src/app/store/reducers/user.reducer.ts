@@ -16,29 +16,37 @@ export const initialState: State = userAdapter.getInitialState(defaultUser);
 export const UserReducer = createReducer(
   initialState,
 
-	///... not exactly sure how we handle this one within the entity adapter....
+	// effect returns an action of either authenticated or notAuthenticated, not sure we need getUser to do anything
 	// on(actions.getUser, (state, action) => {
-	// 	return {state, action}
-	// 	return userAdapter.setOne(...state, loading: true)
-	// })
+	// 	return(state, action, {loading : true });
+	// }),
+	
+	on(actions.authenticated, (state, action) => {
+		return userAdapter.setOne(action.payload, {...state, loading: false})
+	}),
+	
+	// ideally, we would inject the default argument here in reducer, but with action.payload its beeing tricky.
+	on(actions.notAuthenticated, (state, action) => {
+		return userAdapter.setOne(defaultUser.entities, {...state, loading: false})
+	}),
+	
+	// on(actions.googleLogin, (state, action) => {
+	// 	return userAdapter.setOne(action, {...state, loading: true})
+	// }),
 
-	// on(actions.authenticated, (state, action) => {
-	// 	return userAdapter.setOne()
-	// })
+	// TODO: we still need to remove the user data from entity?
+	// on(actions.logout, (state, action) => {
+	// 	return userAdapter.removeOne(...action, {...state, loading: false})
+	// }),
+	
+	// also not sure this is right
+	on(actions.authError, (state, action) => {
+		return userAdapter.setOne(action.payload, {...state, loading: false})
+	}),
 
-
-	// TODO: eventually, the reducer should do this w/ entity adapter:
-	// 1. getUser : ...state, loading : true
-	// 2. authenticated : ...state, ...action.payload, laoding : false
-	// 3. notAuthenticated : ...state, ...defaultUser, loading : false
-	// 4. googleLogin : ...state, loading : true
-	// 5. facebookLogn : ...state, lading : true
-	// 6. authError : ...state, ...action.payload, loading : false
-	// 7. logout : ...state, ...action.payload, loading : true
-
+	// the OG reducer  
 	on(actions.readUsersSuccess, (state, {users}) => {
 		return userAdapter.addMany(users, state)
-		
 	}),
 
   on(actions.createUser, (state, action) => {
@@ -49,7 +57,6 @@ export const UserReducer = createReducer(
     return userAdapter.removeOne(action.id, state);
   }),
 
-	//4. updateOne method expects {id, changes : <change object emitted by firestore doc reference when updated>} 
   on(actions.updateUser, (state, action) => { 
 		return userAdapter.updateOne({id : action.id, changes : action.data}, state);
 

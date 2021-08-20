@@ -73,7 +73,7 @@ import { AngularFirestoreModule } from '@angular/fire/firestore';
 		// ngrx 
 		StoreModule.forRoot(reducers, { metaReducers }),
 		StoreDevtoolsModule.instrument({maxAge: 25}),
-		EffectsModule.forRoot([]),
+		EffectsModule.forRoot([UserEffects]),
 		StoreRouterConnectingModule.forRoot({
 			serializer: RouterSerializer
 		})

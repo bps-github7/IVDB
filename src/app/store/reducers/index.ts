@@ -62,7 +62,7 @@ export const reducers: ActionReducerMap<any> = {
 	suggestion : SuggestionReducer,
 	feedback : FeedbackReducer,
 	thread : ThreadReducer,
-	// user : UserReducer,	
+	user : UserReducer,	
 
 
 	// unimplemented reducers...

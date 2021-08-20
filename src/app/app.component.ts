@@ -24,20 +24,22 @@ export class AppComponent implements OnInit {
 	constructor(private store : Store<AppState>) {}
 
 	ngOnInit() {
-		// this.user$ = this.store.select('user');
+		// I think fireship example is too simple. you may nned to do one of two things:
+		// 1. create a seperate store slice / feature selector for 'signedInUser'. that would be if u want to use the curremt/below very elegant syntax
+		// 2. write a selector that somehow knows the id of current authenticated user and grab that patocilar one
+		this.user$ = this.store.select('user');
 
-		/// ughh this unneeded prop is so ugly. deal w it please (tomorrow || later)
-		// this.store.dispatch( userActions.getUser({}));
+		this.store.dispatch( userActions.getUser());
 		
 	}
 
 	googleLogin() {
-		// console.log("got called at component level")
-		// this.store.dispatch( userActions.googleLogin() );
+		console.log("got called at component level")
+		this.store.dispatch( userActions.googleLogin() );
 	}
 
 	logout() {
-		// this.store.dispatch(  userActions.logout({}) );
+		this.store.dispatch(  userActions.logout() );
 	}
 
 }
