@@ -1,22 +1,26 @@
+import { AngularFireAuth } from '@angular/fire/auth';
 import { Injectable } from "@angular/core";
 import { from, of } from "rxjs";
 import { Actions, createEffect, ofType } from "@ngrx/effects";
 import { User } from "src/app/models/user/user.model";
 import * as userActions from '../actions/user.actions'
 import { AngularFirestore } from "@angular/fire/firestore";
-import { switchMap, map, exhaustMap, delay } from "rxjs/operators";
-
+import { switchMap, map, delay } from "rxjs/operators";
 import firebase from 'firebase/app'
-import { AngularFireAuth } from '@angular/fire/auth';
 
 @Injectable()
 export class UserEffects {
 
+	/* 
+		PLEASE NOTE:
+		USER effect chain deals with authentication. 
+		avoid confusion with users effect chain
+	*/
 	constructor(
-		private actions$: Actions,
-		private afAuth : AngularFireAuth,
-		private afs : AngularFirestore
-		) { }
+		private actions$ : Actions,
+		// private afs: AngularFirestore,
+		private afAuth : AngularFireAuth 
+	) {}
 
 	// fetch the auth status of the current user
 	getUser$ = createEffect(() => this.actions$.pipe(
@@ -46,7 +50,6 @@ export class UserEffects {
 			return from(this.googleLogin())
 		}),
 		map( credential => {
-			console.log(credential)
 			return userActions.getUser();
 		} ),
 		// catchError( (err) => {
@@ -78,42 +81,5 @@ export class UserEffects {
 
 
 
-// returns an observable of all users in firestore/users 
-	query$ = createEffect(() => this.actions$.pipe(
-		ofType(userActions.readUsers),
-		exhaustMap(() => this.afs.collection<User>('users').valueChanges().pipe(
-				map((users) => userActions.readUsersSuccess({users}))
-		))
-	))
 
-
-	create$ = createEffect(() => this.actions$.pipe(
-		ofType(userActions.createUser),
-		switchMap(data => {
-			const {type, ...payload} = data
-			const ref = this.afs.doc<User>(`users/${data.id}`);
-			return from(ref.set(payload));
-		}),
-		map(() => userActions.createUserSuccess())
-	))
-
-	update$ = createEffect(() => this.actions$.pipe(
-		ofType(userActions.updateUser),
-		map((action) => action),
-		switchMap(user => {
-			const ref = this.afs.doc<User>(`users/${user.id}`)
-			return from(ref.update({id : user.id,  ...user.data}))
-		}),
-		map(() => userActions.updateUserSuccess())
-	))
-
-	delete$ = createEffect(() => this.actions$.pipe(
-		ofType(userActions.deleteUser),
-		map(action => action),
-		switchMap(action => {
-			const ref = this.afs.doc<User>(`users/${action.id}`)
-			return from(ref.delete())
-		}),
-		map(()=> userActions.deleteUserSuccess())
-	))
 }

@@ -45,25 +45,6 @@ export const UserReducer = createReducer(
 	on(actions.authError, (state, action) => {
 		return userAdapter.setOne({...action.payload, loading: false}, state)
 	}),
-
-	// grab all the user data in the collection : [ {}] 
-	on(actions.readUsersSuccess, (state, {users}) => {
-		return userAdapter.addMany(users, state)
-	}),
-
-  on(actions.createUser, (state, action) => {
-		return userAdapter.addOne(action, state);
-  }),
-
-  on(actions.deleteUser, (state, action) => {
-    return userAdapter.removeOne(action.id, state);
-  }),
-
-  on(actions.updateUser, (state, action) => { 
-		return userAdapter.updateOne({id : action.id, changes : action.data}, state);
-
-  })
-	
 );
 
 // create the default selectors

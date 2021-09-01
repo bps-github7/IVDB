@@ -27,6 +27,7 @@ import { SuggestionReducer } from './suggestion.reducer';
 import { FeedbackReducer } from './feedback.reducer';
 import { ThreadReducer } from './thread.reducer';
 import { UserReducer } from './user.reducer';
+import { UsersReducer } from './users.reducer';
 
 /* We implement the app State, Array of reducers and some meta reudcers in this file */
 export interface AppState  {
@@ -42,7 +43,8 @@ export interface AppState  {
 	review : ReadonlyArray<Review>;
 	feedback : ReadonlyArray<Feedback>;
 	suggestion : ReadonlyArray<Suggestion>;
-	User : ReadonlyArray<User>;
+	user : ReadonlyArray<User>;
+	users : ReadonlyArray<User>;
 }
 
 export const reducers: ActionReducerMap<any> = {
@@ -63,18 +65,11 @@ export const reducers: ActionReducerMap<any> = {
 	feedback : FeedbackReducer,
 	thread : ThreadReducer,
 	user : UserReducer,	
+	users: UsersReducer,
 
-
-	// unimplemented reducers...
-	// contrib : contribReducer,
-	// user : userReducer,
-	// admin : adminReducer
 }
+//not sure what this does here but suspect it should get gone!
 export * from './content.reducer';
-// export * from './game.reducer';
-// export * from './content.reducer';
-// export * from './content.reducer';
-// export * from './content.reducer';
 
 const metaDebugger = (reducer : ActionReducer<any>) : ActionReducer<any> => {
 	return (state, action) => {

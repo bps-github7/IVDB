@@ -1,4 +1,5 @@
-import { ThreadEffects } from './../../store/effects/thread.effects';
+import { UsersEffects } from 'src/app/store/effects/users.effects';
+import { ThreadEffects } from 'src/app/store/effects/thread.effects';
 import { NgModule } from '@angular/core';
 
 import { ActionReducer, ActionReducerMap } from "@ngrx/store";
@@ -16,18 +17,15 @@ import { ForumReducer } from 'src/app/store/reducers/forum.reducer';
 // effects
 import { GameInfoEffects } from 'src/app/store/effects/game-info.effects';
 import { ContentEffects } from 'src/app/store/effects/content.effects';
-import { GameEffects } from '../../store/effects/game.effects';
+import { GameEffects } from 'src/app/store/effects/game.effects';
 import { ForumEffects } from 'src/app/store';
 import { ForumInfoEffects } from 'src/app/store';
 import { VideogameConsoleEffects } from 'src/app/store/effects/videogame-console.effects';
 import { ThreadReducer } from 'src/app/store/reducers/thread.reducer';
-
-// import { ContributionEffects } from '../../store/effects/contribution.effects';
-// import { ForumEffects } from './forum.effects';
+import { UserReducer } from 'src/app/store/reducers/user.reducer';
 
 
 //** I dont think this is working */
-// export const effects : any [] = [ContentEffects, GameEffects, ContributionEffects, GameInfoEffects, ForumEffects];
 export const effects : any [] = [ContentEffects, GameInfoEffects];
 
 export const reducers : ActionReducerMap<any> = {
@@ -53,7 +51,9 @@ export const reducers : ActionReducerMap<any> = {
 		StoreModule.forFeature('forum', ForumReducer),
 		StoreModule.forFeature('forumInfo', ForumInfoReducer),
 		StoreModule.forFeature('thread', ThreadReducer),
-				
+		StoreModule.forFeature('users', UserReducer),
+
+
 
 		EffectsModule.forFeature([ContentEffects]),
 		EffectsModule.forFeature([GameInfoEffects]),
@@ -61,7 +61,8 @@ export const reducers : ActionReducerMap<any> = {
 		EffectsModule.forFeature([VideogameConsoleEffects]),
 		EffectsModule.forFeature([ForumInfoEffects]),
 		EffectsModule.forFeature([ForumEffects]),
-		EffectsModule.forFeature([ThreadEffects])
+		EffectsModule.forFeature([ThreadEffects]),
+		EffectsModule.forFeature([UsersEffects])
 	],
 	exports: [ ]
 })
