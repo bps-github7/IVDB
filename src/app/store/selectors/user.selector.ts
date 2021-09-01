@@ -13,6 +13,15 @@ export const selectUserByDisplayNameSubstring = (displayName: string) =>
 		} 
 	)
 
+export const selectUserById = (id : string) => 
+		createSelector(
+			fromUser.selectAll,
+			(entities : User []) => {
+				console.log(id)
+				return entities.filter((entity : User) => (entity?.id === id))[0]
+			}
+		)
+
 // export const selectUserFamily = (family: string) => 
 // 	createSelector(
 // 		fromUser.selectAll, 

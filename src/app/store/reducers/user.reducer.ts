@@ -7,8 +7,8 @@ export const userAdapter = createEntityAdapter<User>();
 export interface State extends EntityState<User> { }
 
 const defaultUser = {
-	ids: ['12345'],
-	entities : new User('12345', 'GUEST')
+	ids: [''],
+	entities : new User('', 'GUEST')
 }
 
 export const initialState: State = userAdapter.getInitialState(defaultUser);
@@ -16,31 +16,34 @@ export const initialState: State = userAdapter.getInitialState(defaultUser);
 export const UserReducer = createReducer(
   initialState,
 
-	// effect returns an action of either authenticated or notAuthenticated, not sure we need getUser to do anything
-	// on(actions.getUser, (state, action) => {
-	// 	return(state, action, {loading : true });
-	// }),
-	
-	on(actions.authenticated, (state, action) => {
-		return userAdapter.setOne(action.payload, {...state, loading: false})
+	// just set user state to loading, everything else is empty until we get a return from api
+	on(actions.getUser, (state, action) => {
+		return userAdapter.updateOne({...defaultUser[''], loading : true }, state);
 	}),
 	
-	// on(actions.notAuthenticated, (state, action) => {
-	// 	return userAdapter.setOne({...state, loading: false})
-	// }),
+	on(actions.authenticated, (state, action) => {
+		// jenkily... get rid of default user before adding authenticated one. 
+		userAdapter.removeOne('', state);
+		return userAdapter.setOne({...action.payload, loading: false}, state)
+	}),
+
+	// TODO: better way of doing this than defaultUser[0]
+	on(actions.notAuthenticated, (state, action) => {
+		return userAdapter.updateOne({...defaultUser[''], loading: false}, state)
+	}),
 	
-	// on(actions.googleLogin, (state, action) => {
-	// 	return userAdapter.setOne(action, {...state, loading: true})
-	// }),
+	on(actions.googleLogin, (state, action) => {
+		return userAdapter.updateOne({...defaultUser[''], loading: true}, state)
+	}),
 
 	// // TODO: we still need to remove the user data from entity?
-	// on(actions.logout, (state, action) => {
-	// 	return userAdapter.removeOne(action, {...state, loading: false})
-	// }),
+	on(actions.logout, (state, action) => {
+		return userAdapter.removeOne({...defaultUser[''], loading: true}, state)
+	}),
 	
 	// also not sure this is right
 	on(actions.authError, (state, action) => {
-		return userAdapter.setOne(action.payload, {...state, loading: false})
+		return userAdapter.setOne({...action.payload, loading: false}, state)
 	}),
 
 	// grab all the user data in the collection : [ {}] 
@@ -62,7 +65,6 @@ export const UserReducer = createReducer(
   })
 	
 );
-
 
 // create the default selectors
 export const getUserState = createFeatureSelector<State>('user');

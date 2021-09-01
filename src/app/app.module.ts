@@ -1,4 +1,3 @@
-import { AUTH_STATE_NAME } from './components/auth/auth-state/auth.selector';
 import { EnvServiceProvider } from './services/env.service.provider';
 import { EnvService } from './services/env.service';
 import { UserEffects } from './store/effects/user.effects';
@@ -47,7 +46,6 @@ import { HomeComponent } from './components/home/home.component';
 import { DropdownComponent } from './components/dropdown/dropdown.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { NotFoundComponent } from './components/not-found/not-found.component';
-import { AuthReducer } from './components/auth/auth-state/auth.reducer';
 
 
 
@@ -88,9 +86,8 @@ import { AuthReducer } from './components/auth/auth-state/auth.reducer';
 
 		// ngrx 
 		StoreModule.forRoot(reducers, { metaReducers }),
-		StoreModule.forFeature(AUTH_STATE_NAME, AuthReducer),
 		StoreDevtoolsModule.instrument({maxAge: 25}),
-		EffectsModule.forRoot([]),
+		EffectsModule.forRoot([UserEffects]),
 		StoreRouterConnectingModule.forRoot({
 			serializer: RouterSerializer
 		})
