@@ -25,11 +25,9 @@ export class AppComponent implements OnInit {
 	constructor(private store : Store<AppState>) {}
 
 	ngOnInit() {
-		// I think fireship example is too simple. you may nned to do one of two things:
-		// 1. create a seperate store slice / feature selector for 'signedInUser'. that would be if u want to use the curremt/below very elegant syntax
-		// 2. write a selector that somehow knows the id of current authenticated user and grab that patocilar one
-		this.user$ = this.store.select(selectUserById("zLA9vJbBzDTnDVLCSecjJXUr1sx2"));
-		// INOTHERWORDS: app doesnt know when the above code fires that we want the specific user that signed in now
+		// instead- you should have two features in store- 1) users: all users with accounts 2) user : the current signed in user- can be 'guest' or authenticated user
+		// this also reduces the responsiblitiy of existing feature, which now handles both authentication and user account c.r.u.d
+		this.user$ = this.store.select(selectUserById(localStorage.getItem("AUTHENTICATED")));
 		this.store.dispatch( userActions.getUser());
 		
 	}
@@ -39,6 +37,7 @@ export class AppComponent implements OnInit {
 	}
 
 	logout() {
+		// console.log("hello ths happened!")
 		this.store.dispatch(  userActions.logout() );
 	}
 

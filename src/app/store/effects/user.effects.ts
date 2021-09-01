@@ -26,6 +26,8 @@ export class UserEffects {
 		map( authData => {
 			if (authData) {
 				const user = new User(authData.uid, authData.displayName);
+				// TODO: fix- another bandaid solution, very insecure!
+				localStorage.setItem("AUTHENTICATED",user.id)
 				return userActions.authenticated({payload : user});
 			} else {
 				return userActions.notAuthenticated()
@@ -67,7 +69,6 @@ export class UserEffects {
 			return of( this.afAuth.signOut() );
 		}),
 		map( authData => {
-			// return 
 			return userActions.notAuthenticated()
 		})
 	))

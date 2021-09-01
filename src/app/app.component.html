@@ -1,27 +1,22 @@
-<div class="card" *ngIf="user$ | async as user">
-	<h1 class="card-header">Howdy, {{ user.displayName }}</h1>
-	<p class="card-text">
-		id : {{user?.id}}
-	</p>
+<div class="card">
+	<div *ngIf="user$ | async as user">
+		<h1 class="card-header">Howdy, {{ user.displayName }}</h1>
+		<p class="card-text">
+			id : {{user?.id}}
+		</p>
+		<button
+			*ngIf="user.id"
+			mat-stroked-button
+			(click)="logout()">
+			log out
+		</button>
+	</div>
 	<button  
-	 	*ngIf="!user.id"
 		(click)="googleLogin()"
-		mat-flat-button
-		[class.is-loading]="user.loading"> 
-		Sign in with a Googley eyed lobster that wants to claw your face
+		mat-flat-button> 
+		log in
 	</button>
-
-
-	<button
-		*ngIf="user.id"
-		mat-stroked-button
-		(click)="logout()">
-		log out
-	</button>
-
-
 </div>
-
 
 <!-- heres what was originally in the template. can probably recreate the dropdown menu once we confirm that auth works -->
 <!-- <navbar></navbar>
