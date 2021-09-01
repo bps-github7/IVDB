@@ -28,13 +28,12 @@ export class AppComponent implements OnInit {
 		// 1. create a seperate store slice / feature selector for 'signedInUser'. that would be if u want to use the curremt/below very elegant syntax
 		// 2. write a selector that somehow knows the id of current authenticated user and grab that patocilar one
 		this.user$ = this.store.select('user');
-
+		// INOTHERWORDS: app doesnt know when the above code fires that we want the specific user that signed in now
 		this.store.dispatch( userActions.getUser());
 		
 	}
 
 	googleLogin() {
-		console.log("got called at component level")
 		this.store.dispatch( userActions.googleLogin() );
 	}
 

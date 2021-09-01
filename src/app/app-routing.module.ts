@@ -1,11 +1,9 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { AdminModule } from './modules/admin/admin.module';
-import { HomeComponent } from './modules/core/home/home.component';
-import { NotFoundComponent } from './modules/core/not-found/not-found.component';
 
+import { HomeComponent } from './components/home/home.component';
+import { NotFoundComponent } from './components/not-found/not-found.component';
 import { SharedModule } from './modules/shared/shared.module';
-import { UserModule } from './modules/user/user.module';
  
  
 const routes: Routes = [
@@ -37,11 +35,16 @@ const routes: Routes = [
           path: 'content',
           loadChildren: () => import('./modules/content/content.module').then(m => m.ContentModule)
         },
-        { 
+        // Debating if we really need this module
+				{ 
           path: 'contrib',
           loadChildren: () => import('./modules/contrib/contrib.module').then(m => m.ContribModule)
         },
-        { path: '**', component: NotFoundComponent }
+				{
+					path: 'auth',
+					loadChildren : () => import('./components/auth/auth.module').then(m => m.AuthModule)
+				},
+				{ path: '**', component: NotFoundComponent }
     ]
  
 @NgModule({

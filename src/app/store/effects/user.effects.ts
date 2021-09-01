@@ -12,7 +12,11 @@ import { AngularFireAuth } from '@angular/fire/auth';
 @Injectable()
 export class UserEffects {
 
-	constructor(private actions$: Actions, private afAuth : AngularFireAuth, private afs : AngularFirestore) {}
+	constructor(
+		private actions$: Actions,
+		private afAuth : AngularFireAuth,
+		private afs : AngularFirestore
+		) { }
 
 	// fetch the auth status of the current user
 	getUser$ = createEffect(() => this.actions$.pipe(
@@ -24,7 +28,6 @@ export class UserEffects {
 				const user = new User(authData.uid, authData.displayName);
 				return userActions.authenticated({payload : user});
 			} else {
-				// TODO: when u get the reducer working, this action should take no arguments.
 				return userActions.notAuthenticated()
 			}
 		}),
@@ -41,7 +44,7 @@ export class UserEffects {
 			return from(this.googleLogin())
 		}),
 		map( credential => {
-			// should just be a blank () TODO: fix this once you adjust your actions.
+			console.log(credential)
 			return userActions.getUser();
 		} ),
 		// catchError( (err) => {
@@ -64,7 +67,7 @@ export class UserEffects {
 			return of( this.afAuth.signOut() );
 		}),
 		map( authData => {
-			// return userActions.notAuthenticated({})
+			// return 
 			return userActions.notAuthenticated()
 		})
 	))

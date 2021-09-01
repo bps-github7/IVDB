@@ -1,3 +1,4 @@
+import { AUTH_STATE_NAME } from './components/auth/auth-state/auth.selector';
 import { EnvServiceProvider } from './services/env.service.provider';
 import { EnvService } from './services/env.service';
 import { UserEffects } from './store/effects/user.effects';
@@ -11,7 +12,7 @@ import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { SharedModule } from './modules/shared/shared.module';
-import { CoreModule } from './modules/core/core.module';
+// import { CoreModule } from './modules/core/core.module';
 
 // ngrx
 import { reducers, metaReducers } from 'src/app/store/reducers';
@@ -41,19 +42,34 @@ import { AngularFireModule } from '@angular/fire';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 
+// components in the app level- home page, navigation menu, not found error
+import { HomeComponent } from './components/home/home.component';
+import { DropdownComponent } from './components/dropdown/dropdown.component';
+import { NavbarComponent } from './components/navbar/navbar.component';
+import { NotFoundComponent } from './components/not-found/not-found.component';
+import { AuthReducer } from './components/auth/auth-state/auth.reducer';
+
 
 
 
 @NgModule({
   declarations: [
-    AppComponent
+		HomeComponent,
+		DropdownComponent,
+		NavbarComponent,
+		NotFoundComponent,
+
+		
+		AppComponent
   ],
   imports: [
 		// angular base stuff + our modules
 		BrowserModule,
     AppRoutingModule,
 		SharedModule,
-		CoreModule,
+		// AuthModule,
+
+		// CoreModule,
 
 		//firebase
 		// InitFirebaseModule,
@@ -72,8 +88,9 @@ import { AngularFirestoreModule } from '@angular/fire/firestore';
 
 		// ngrx 
 		StoreModule.forRoot(reducers, { metaReducers }),
+		StoreModule.forFeature(AUTH_STATE_NAME, AuthReducer),
 		StoreDevtoolsModule.instrument({maxAge: 25}),
-		EffectsModule.forRoot([UserEffects]),
+		EffectsModule.forRoot([]),
 		StoreRouterConnectingModule.forRoot({
 			serializer: RouterSerializer
 		})

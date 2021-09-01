@@ -1,20 +1,20 @@
 import { RouterModule } from '@angular/router';
-import { NotFoundComponent } from './not-found/not-found.component';
-import { HomeComponent } from './home/home.component';
+// import { NotFoundComponent } from './not-found/not-found.component';
+// import { HomeComponent } from './home/home.component';
 import { NgModule, Optional, SkipSelf } from '@angular/core';
 import { CommonModule } from '@angular/common';
 // import { AuthService } from './auth.service';
-import { DropdownComponent } from './dropdown/dropdown.component';
+import { DropdownComponent } from '../../components/dropdown/dropdown.component';
 import { SharedModule } from '../shared/shared.module';
-import { NavbarComponent } from './navbar/navbar.component';
+// import { NavbarComponent } from './navbar/navbar.component';
 
 
 @NgModule({
   declarations: [
-    HomeComponent,
+    // HomeComponent,
     DropdownComponent,
-    NotFoundComponent,
-    NavbarComponent
+    // NotFoundComponent,
+    // NavbarComponent
   ],
   imports: [
     CommonModule,
@@ -25,11 +25,12 @@ import { NavbarComponent } from './navbar/navbar.component';
     // AuthService,
   ],
   exports: [
+		// do we need to export router module here? i dont really get why
       RouterModule,
-      HomeComponent,
+      // HomeComponent,
       DropdownComponent,
-      NotFoundComponent,
-			NavbarComponent
+      // NotFoundComponent,
+			// NavbarComponent
   ]
 })
 /*Credit for these lines: Menhdi Benmoja 

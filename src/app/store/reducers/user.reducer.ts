@@ -25,18 +25,17 @@ export const UserReducer = createReducer(
 		return userAdapter.setOne(action.payload, {...state, loading: false})
 	}),
 	
-	// ideally, we would inject the default argument here in reducer, but with action.payload its beeing tricky.
-	on(actions.notAuthenticated, (state, action) => {
-		return userAdapter.setOne(defaultUser.entities, {...state, loading: false})
-	}),
+	// on(actions.notAuthenticated, (state, action) => {
+	// 	return userAdapter.setOne({...state, loading: false})
+	// }),
 	
 	// on(actions.googleLogin, (state, action) => {
 	// 	return userAdapter.setOne(action, {...state, loading: true})
 	// }),
 
-	// TODO: we still need to remove the user data from entity?
+	// // TODO: we still need to remove the user data from entity?
 	// on(actions.logout, (state, action) => {
-	// 	return userAdapter.removeOne(...action, {...state, loading: false})
+	// 	return userAdapter.removeOne(action, {...state, loading: false})
 	// }),
 	
 	// also not sure this is right
@@ -44,7 +43,7 @@ export const UserReducer = createReducer(
 		return userAdapter.setOne(action.payload, {...state, loading: false})
 	}),
 
-	// the OG reducer  
+	// grab all the user data in the collection : [ {}] 
 	on(actions.readUsersSuccess, (state, {users}) => {
 		return userAdapter.addMany(users, state)
 	}),
