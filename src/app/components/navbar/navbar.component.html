@@ -7,9 +7,13 @@
 	<input type="checkbox" class="nav-toggle" id="nav-toggle"/>
 	<nav>
 		<ul>
-			<li>
+			<li *ngIf="!user">
 				<a routerLink="auth">Login</a>
 			</li>
+			<li *ngIf="user">
+				<a routerLink="user/profile">{{ user.displayName }}</a>
+			</li>
+		
 						<!-- this should be a dynamic list of the feature modules,
 			fed into dropdown component (which need to be customized for this situation) -->
 			<li>

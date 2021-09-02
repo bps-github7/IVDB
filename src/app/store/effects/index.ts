@@ -10,7 +10,6 @@ import { ForumEffects } from './forum.effects';
 import { ForumInfoEffects } from './forum-info.effects';
 import { VideogameConsoleEffects } from './videogame-console.effects';
 import { FeedbackEffects } from './feedback.effects';
-import { UserEffects } from './user.effects';
 
 export const effects : any [] = [
 	ContentEffects, 
@@ -39,6 +38,5 @@ export * from './suggestion.effects';
 export * from './thread.effects';
 export * from './rating.effects';
 export * from './review.effects';
-export * from './user.effects';
 
 export * from './videogame-console.effects';

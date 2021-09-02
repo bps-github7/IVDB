@@ -17,7 +17,6 @@ export const selectUserById = (id : string) =>
 		createSelector(
 			fromUsers.selectAll,
 			(entities : User []) => {
-				console.log(id)
 				return entities.filter((entity : User) => (entity?.id === id))[0]
 			}
 		)

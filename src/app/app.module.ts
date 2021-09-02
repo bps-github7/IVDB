@@ -1,6 +1,5 @@
 // import { EnvServiceProvider } from './services/env.service.provider';
 // import { EnvService } from './services/env.service';
-import { UserEffects } from './store/effects/user.effects';
 import { ConsoleSelectedService } from './services/behaivor-subjects/console-selected.service';
 import { GameInfoSelectedService } from './services/behaivor-subjects/game-info-selected.service';
 // ng common stuff
@@ -46,6 +45,8 @@ import { HomeComponent } from './components/home/home.component';
 import { DropdownComponent } from './components/dropdown/dropdown.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { NotFoundComponent } from './components/not-found/not-found.component';
+import { CoreModule } from './modules/core/core.module';
+import { AuthService } from './modules/core/auth.service';
 
 
 
@@ -67,7 +68,7 @@ import { NotFoundComponent } from './components/not-found/not-found.component';
 		SharedModule,
 		// AuthModule,
 
-		// CoreModule,
+		CoreModule,
 
 		//firebase
 		// InitFirebaseModule,
@@ -87,12 +88,13 @@ import { NotFoundComponent } from './components/not-found/not-found.component';
 		// ngrx 
 		StoreModule.forRoot(reducers, { metaReducers }),
 		StoreDevtoolsModule.instrument({maxAge: 25}),
-		EffectsModule.forRoot([UserEffects]),
+		EffectsModule.forRoot([]),
 		StoreRouterConnectingModule.forRoot({
 			serializer: RouterSerializer
 		})
 	],
   providers: [
+		AuthService,
 		FirebaseService,
 		GameInfoSelectedService,
 		ConsoleSelectedService

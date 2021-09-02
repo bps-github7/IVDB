@@ -26,7 +26,6 @@ import {
 import { SuggestionReducer } from './suggestion.reducer';
 import { FeedbackReducer } from './feedback.reducer';
 import { ThreadReducer } from './thread.reducer';
-import { UserReducer } from './user.reducer';
 import { UsersReducer } from './users.reducer';
 
 /* We implement the app State, Array of reducers and some meta reudcers in this file */
@@ -43,7 +42,6 @@ export interface AppState  {
 	review : ReadonlyArray<Review>;
 	feedback : ReadonlyArray<Feedback>;
 	suggestion : ReadonlyArray<Suggestion>;
-	user : ReadonlyArray<User>;
 	users : ReadonlyArray<User>;
 }
 
@@ -64,7 +62,6 @@ export const reducers: ActionReducerMap<any> = {
 	suggestion : SuggestionReducer,
 	feedback : FeedbackReducer,
 	thread : ThreadReducer,
-	user : UserReducer,	
 	users: UsersReducer,
 
 }

@@ -6,31 +6,19 @@ import { CommonModule } from '@angular/common';
 // import { AuthService } from './auth.service';
 import { DropdownComponent } from '../../components/dropdown/dropdown.component';
 import { SharedModule } from '../shared/shared.module';
+import { AuthService } from './auth.service';
 // import { NavbarComponent } from './navbar/navbar.component';
 
 
 @NgModule({
-  declarations: [
-    // HomeComponent,
-    DropdownComponent,
-    // NotFoundComponent,
-    // NavbarComponent
-  ],
+  declarations: [ ],
   imports: [
-    CommonModule,
-    SharedModule,
-    RouterModule
   ],
   providers: [
-    // AuthService,
+    AuthService,
   ],
   exports: [
 		// do we need to export router module here? i dont really get why
-      RouterModule,
-      // HomeComponent,
-      DropdownComponent,
-      // NotFoundComponent,
-			// NavbarComponent
   ]
 })
 /*Credit for these lines: Menhdi Benmoja 
