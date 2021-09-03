@@ -1,5 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { CustomValidation } from 'src/app/modules/shared/validators/custom-validation';
+import { NoPasswordMatch } from 'src/app/modules/shared/validators/no-password-match.validators';
+
+
 
 @Component({
   selector: 'app-create-account',
@@ -14,11 +18,20 @@ export class CreateAccountComponent implements OnInit {
 
   ngOnInit(): void {
 		this.form = this.fb.group({
-			email : ["", [Validators.required]],
+			email : ["", Validators.compose([Validators.required, Validators.email])],
 			displayName : ["", [Validators.required]],
 			// need to make custom validators for password and password match
-			password : ["", [Validators.required]],
-			confirmPassword : ["", [Validators.required]], 
+			password : ["",	Validators.compose([
+					Validators.required,
+					CustomValidation.patternValidator(/\d/, { hasNumber: true }),
+					CustomValidation.patternValidator(/[A-Z]/, { hasCapitalCase: true }),
+					CustomValidation.patternValidator(/[a-z]/, { hasLowerCase: true }),
+					CustomValidation.patternValidator(/\W|_/g, { hasSpecialCharacters: true }),
+					Validators.minLength(8)
+			])],
+			// confirmPassword : ["", Validators.compose([Validators.required]) ], 
+
+			confirmPassword : ["", Validators.compose([Validators.required, NoPasswordMatch.passwordMatchValidator]) ], 
 		})
 	}
 
