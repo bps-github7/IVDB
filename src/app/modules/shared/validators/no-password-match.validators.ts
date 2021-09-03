@@ -1,17 +1,18 @@
-import { AbstractControl, ValidationErrors } from "@angular/forms";
+import { AbstractControl, ValidationErrors, ValidatorFn } from "@angular/forms";
 
 export class NoPasswordMatch {
-	static passwordMatchValidator(control: AbstractControl) : ValidationErrors | null {
-		let password = control.get('password');
-		let confirmPassword = control.get('confirmPassword');
-		// compare is the password match
-		if (password.value && confirmPassword.value){
-			if (password.value !== confirmPassword.value) {
-				// if they don't match, set an error in our confirmPassword form control
-				control.get('confirmPassword').setErrors({NoPasswordMatch : true})
-				return { NoPassswordMatch: true };
-			} 
-			return null;
-		}
+	static passwordMatchValidator() : ValidatorFn | null {
+		return (group: AbstractControl): { [key: string]: any } => {
+			// stop validating if no value to avoid errors
+			// if (!group.value) {
+			// 	return null
+			// }
+
+			let pass = group.get('password').value;
+			let confirmPass = group.get('confirmPassword').value
+			return pass === confirmPass ? null : { NoPasswordMatch : true }
+
+
+		} 
 	}
 }
