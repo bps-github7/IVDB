@@ -1,104 +1,162 @@
 <div class="row">
 	<div class="col-md-6 offset-md-3">
-<h3>Sign up for an IVDB account</h3>
+		<h3>Sign up for an IVDB account</h3>
 		<form [formGroup]="form" (ngSubmit)="createAccount()">
-			<div class="mb-3">
+	
+			<!-- Email form control -->
+			<div class="mb-3 form-group">
 				<label for="email">Email:</label>
 				<input type="text" formControlName="email" class="form-control">
+				
+				<!-- validation errors for email -->
 				<div *ngIf="email?.touched && !email?.valid">
-					<div *ngIf="email?.errors.required" class="alert-danger">Email is required</div>
-					<div *ngIf="email?.errors.email" class="alert-danger">Email is badly formatted (must be name@something.domain)</div>
+					<label for="error-email-required"
+						*ngIf="email.errors.required"
+						class="alert-danger">
+						<i class="material-icons">cancel</i>
+						Email is required
+					</label>
+
+					<label for="error-email-bad-format"
+						*ngIf="email.errors.email"
+						class="alert-danger">
+						<i class="material-icons">cancel</i>
+						Email is badly formatted - must be name@domain.tdl
+					</label>
 				</div>
 			</div>
 
-			<div class="mb-3">
+			<!-- user name form control -->
+			<div class="mb-3 form-group">
 				<label for="displayName">Display Name:</label>
 				<input type="text" formControlName="displayName" class="form-control">
+				
+				<!-- validation errors for display name -->
 				<div *ngIf="displayName.touched && !displayName.valid">
-					<div *ngIf="displayName.errors.required" class="alert-danger">Display Name is required</div>
+					<label for="error-displayName-required"
+						*ngIf="displayName.errors.required"
+						class="alert-danger">
+						<i class="material-icons">cancel</i>
+						Display name is required.
+					</label>
 				</div>
 			</div>
 
 
-			<div class="mb-3" formGroupName="passwords">
+			<div class="mb-3 form-group" formGroupName="passwords">
 				<!-- password  -->
-			<div class="mb-3 form-group" >
-				<label for="password">Password:</label>
-				<input type="password" formControlName="password" class="form-control">
-				<div *ngIf="password.touched && !password.valid">
-					<div *ngIf="password.errors.required" class="alert-danger">
-						password is required
-					</div>
-					<div *ngIf="password.errors.minLength">
-						<label
-							[ngClass]="password.errors.required || password.errors.minLength ? 'text-danger' : 'text-success'">
-							<i class="material-icons">
-								{{ password.errors.required ||
-								password.errors.minlength ? 'cancel' :
-								'check_circle' }}
-							</i>
-							Must be at least 8 characters!
-						</label>
-					</div>
+				<div class="mb-3 form-group" >
+					<label for="password">Password:</label>
+					<input type="password" formControlName="password" class="form-control">
 					
-					<div *ngIf="password.errors.hasNumber" class="alert-danger">
-						<label
-						class="col"
-						[ngClass]="password.errors.required|| password.errors.hasNumber  ? 'text-danger' :'text-success'">
-						<i class="material-icons">
-							{{ password.errors.hasNumbers ? 'cancel' : 'check_circle' }}
-						</i>
-						password must contain at least 1 number!
+					<!-- password validation errors -->
+					<div *ngIf="password.touched && !password.valid">
+						
+						<label for="error-password-required"
+							*ngIf="password.errors.required"
+							class="alert-danger">
+							<i class="material-icons">cancel</i>
+							Password is required.
 						</label>
-					</div>
-					<div *ngIf="password.errors.hasLowerCase" class="alert-danger">
+							
+
 						<label
-						class="col"
-						[ngClass]="password.errors.required || password.errors.hasLowerCase  ? 'text-danger' :'text-success'">
-						<i class="material-icons">
-							{{ password.errors.hasLowerCase ? 'cancel' : 'check_circle' }}
-						</i>
-						password must contain at least 1 lowercase character!
+							[ngClass]="password.errors.required ||
+							password.errors.minLength ?
+							'text-danger' : 'text-success'">
+							<i class="material-icons">
+								{{ 
+									password.errors.required ||
+									password.errors.minlength ?
+									'cancel' : 'check_circle' 
+								}}
+							</i>
+							Password must be at least 8 characters!
 						</label>
-					</div>
-					<div *ngIf="password.errors.hasCapitalCase" class="alert-danger">
+						
 						<label
-						class="col"
-						[ngClass]="password.errors.required || password.errors.hasCapitalCase  ? 'text-danger' :'text-success'">
-						<i class="material-icons">
-							{{ password.errors.hasCapitalCase ? 'cancel' : 'check_circle' }}
-						</i>
-						password must contain at least 1 uppercase character!
+							class="col"
+							[ngClass]="password.errors.required || password.errors.hasNumber ?
+							'text-danger' :'text-success'">
+							<i class="material-icons">{{ password.errors.hasNumbers ? 'cancel' : 'check_circle'	}}</i>
+							Password must contain at least 1 number!
 						</label>
-					</div>
-					<div *ngIf="password.errors.hasSpecialCharacters" class="alert-danger">
+				
 						<label
-						class="col"
-						[ngClass]="password.errors.required || password.errors.hasSpecialCharacters ? 'text-danger' :'text-success'">
-						<i class="material-icons">
-							{{ password.errors.hasSpecialCharacters ? 'cancel' : 'check_circle' }}
-						</i>
-						password must contain at least 1 special character!
+							class="col"
+							[ngClass]="password.errors.required || password.errors.hasLowerCase  
+							? 'text-danger' :'text-success'">
+							<i class="material-icons">{{ password.errors.hasLowerCase ? 'cancel' : 'check_circle' }}</i>
+							password must contain at least 1 lowercase character!
+						</label>
+				
+						<label
+							class="col"
+							[ngClass]="password.errors.required || password.errors.hasCapitalCase ?
+							'text-danger' :'text-success'">
+							<i class="material-icons">{{ password.errors.hasCapitalCase ? 'cancel' : 'check_circle' }}</i>
+							password must contain at least 1 uppercase character!
+						</label>
+				
+						<label
+							class="col"
+							[ngClass]="password.errors.required ||
+							password.errors.hasSpecialCharacters ?
+							'text-danger' :'text-success'">
+							<i class="material-icons">{{ password.errors.hasSpecialCharacters ? 'cancel' : 'check_circle' }}</i>
+							password must contain at least 1 special character!
 						</label>
 					</div>
 				</div>
-			</div>
 
-			<!-- confirm password -->
-			<div class="mb-3 form-group">
-				<label for="confirm-password">Confirm Password:</label>
-				<input type="password" formControlName="confirmPassword" class="form-control">
-				<div *ngIf="confirmPassword.touched && !confirmPassword.valid">
-					<div *ngIf="confirmPassword.errors.required" class="alert-danger">confirm password is required</div>
+				<!-- confirm password -->
+				<div class="mb-3 form-group">
+					<label for="confirm-password">Confirm Password:</label>
+					<input type="password" formControlName="confirmPassword" class="form-control">
+					
+					<!-- Confirm password validation errors -->
+					<div *ngIf="confirmPassword.touched && !confirmPassword.valid">
+
+						<label for="error-confirm-password-required"
+							*ngIf="confirmPassword.errors.required"
+							class="alert-danger">
+							<i class="material-icons">cancel</i>
+							Confirm password is required.
+						</label>
+					
+						<label 
+							for="error-confirm-password-no-match"
+							class="alert-danger"
+							*ngIf="(password.value !== confirmPassword.value)">
+							Confirm password does not match
+						</label>
+						<!-- <label
+							[ngClass]="confirmPassword.touched &&
+							(password.value !== confirmPassword.value) ?
+							'text-danger' : 'text-success'">
+							<i class="material-icons">
+								{{ 
+									confirmPassword.touched &&
+									(password.value != confirmPassword.value)?
+									'cancel' : 'check_circle' 
+								}}
+							</i>
+								Password and Confirm Password do not match!
+						</label> -->
+					</div>
 				</div>
-			</div>
 
-			<div *ngIf="form.hasError('NoPasswordMatch', 'passwords')" class="alert-danger">password and confirm password do not match</div>
+
+
+				{{ password.value }}
+
+				{{ confirmPassword.value }}
+
+				<!-- TODO: this is the correct way to implement password validation in  -->
+				<!-- <div *ngIf="form.hasError('NoPasswordMatch', 'passwords')" class="alert-danger">password and confirm password do not match</div> -->
+
 
 			</div>
-			
-			password value: {{ password.value  }}
-			confirm Password value : {{ confirmPassword.value }}
 
 			<div class="mb-3">
 				<button type="submit" class="btn btn-primary" [disabled]="!form.valid">Enter</button>

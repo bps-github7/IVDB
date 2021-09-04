@@ -35,7 +35,7 @@ export class CreateAccountComponent implements OnInit {
 		})
 
 		// i THINK this is the problem line...
-		this.form.controls.passwords.setValidators(this.checkPasswords)
+		// this.form.controls.passwords.setValidators(this.checkPasswords)
 	}
 	checkPasswords: ValidatorFn = (group: AbstractControl):  ValidationErrors | null => { 
 		let pass = group.get('password').value;
