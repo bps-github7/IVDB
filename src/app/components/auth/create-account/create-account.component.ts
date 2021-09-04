@@ -1,7 +1,7 @@
+import { AuthService } from 'src/app/modules/core/auth.service';
 import { Component, OnInit } from '@angular/core';
-import { AbstractControl, FormBuilder, FormGroup, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CustomValidation } from 'src/app/modules/shared/validators/custom-validation';
-import { NoPasswordMatch } from 'src/app/modules/shared/validators/no-password-match.validators';
 
 
 
@@ -14,7 +14,7 @@ export class CreateAccountComponent implements OnInit {
 
 	form : FormGroup;
 
-  constructor(private fb : FormBuilder) { }
+  constructor(private fb : FormBuilder, private authService : AuthService)  { }
 
   ngOnInit(): void {
 		this.form = this.fb.group({
@@ -30,19 +30,24 @@ export class CreateAccountComponent implements OnInit {
 					CustomValidation.patternValidator(/[a-z]/, { hasLowerCase: true }),
 					CustomValidation.patternValidator(/\W|_/g, { hasSpecialCharacters: true })
 				])],
-				confirmPassword : ["", Validators.compose([Validators.required])]
+				confirmPassword : ["", Validators.compose([
+					Validators.required,
+				])]
 			}) 
 		})
+	}
 
-		// i THINK this is the problem line...
-		// this.form.controls.passwords.setValidators(this.checkPasswords)
+	onPasswordChange() {
+		if (this.password.value && this.confirmPassword.value === "") {
+			this.confirmPassword.setErrors({required : true})
+			return
+		}
+
+		if (this.confirmPassword.value != this.password.value) {
+			this.confirmPassword.setErrors({ NoPasswordMatch : true });
+		}		
 	}
-	checkPasswords: ValidatorFn = (group: AbstractControl):  ValidationErrors | null => { 
-		let pass = group.get('password').value;
-		let confirmPass = group.get('confirmPassword').value
-	
-		return pass === confirmPass ? null : { notSame: true }
-	}
+
 
 	get email () {
 		return this.form.get('email');
@@ -52,10 +57,6 @@ export class CreateAccountComponent implements OnInit {
 		return this.form.get('displayName');
 	}
 
-
-	// get passwords () {
-	// 	return this.form.get('passwords');
-	// }
 
 	get password () {
 		return this.form.get('passwords.password');
@@ -67,7 +68,15 @@ export class CreateAccountComponent implements OnInit {
 
 	// 
 	createAccount() {
-		console.log(this.form.value)
+		if (this.form.valid) {
+			this.authService.signUpWithEmailAndPassword(this.email.value, this.password.value)
+			// IF the above line is successful, create a user with the form data in store and users collection 
+
+		} else {
+			console.log("error: could not create account, there was errors in the create account form")
+		}
+		
+		
 	}
 
 }

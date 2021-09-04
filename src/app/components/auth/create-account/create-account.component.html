@@ -47,7 +47,7 @@
 				<!-- password  -->
 				<div class="mb-3 form-group" >
 					<label for="password">Password:</label>
-					<input type="password" formControlName="password" class="form-control">
+					<input type="password" formControlName="password" class="form-control" (change)="onPasswordChange()">
 					
 					<!-- password validation errors -->
 					<div *ngIf="password.touched && !password.valid">
@@ -112,7 +112,7 @@
 				<!-- confirm password -->
 				<div class="mb-3 form-group">
 					<label for="confirm-password">Confirm Password:</label>
-					<input type="password" formControlName="confirmPassword" class="form-control">
+					<input type="password" formControlName="confirmPassword" class="form-control" (change)="onPasswordChange()">
 					
 					<!-- Confirm password validation errors -->
 					<div *ngIf="confirmPassword.touched && !confirmPassword.valid">
@@ -124,25 +124,12 @@
 							Confirm password is required.
 						</label>
 					
-						<label 
-							for="error-confirm-password-no-match"
-							class="alert-danger"
-							*ngIf="(password.value !== confirmPassword.value)">
-							Confirm password does not match
+						<label
+							*ngIf="confirmPassword.errors.NoPasswordMatch"
+							class="alert-danger">
+							<i class="material-icons">cancel</i>
+							Password does not match Confirm Password!
 						</label>
-						<!-- <label
-							[ngClass]="confirmPassword.touched &&
-							(password.value !== confirmPassword.value) ?
-							'text-danger' : 'text-success'">
-							<i class="material-icons">
-								{{ 
-									confirmPassword.touched &&
-									(password.value != confirmPassword.value)?
-									'cancel' : 'check_circle' 
-								}}
-							</i>
-								Password and Confirm Password do not match!
-						</label> -->
 					</div>
 				</div>
 

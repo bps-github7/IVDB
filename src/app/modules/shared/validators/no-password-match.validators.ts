@@ -10,9 +10,11 @@ export class NoPasswordMatch {
 
 			let pass = group.get('password').value;
 			let confirmPass = group.get('confirmPassword').value
-			return pass === confirmPass ? null : { NoPasswordMatch : true }
-
-
+			if (confirmPass !== pass) {
+				group.setErrors({ NoPasswordMatch : true })
+				return {NoPasswordMatch : true}
+			}
+			return null
 		} 
 	}
 }
