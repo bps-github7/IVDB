@@ -2,6 +2,7 @@ import { AuthService } from 'src/app/modules/core/auth.service';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CustomValidation } from 'src/app/modules/shared/validators/custom-validation';
+// import { DisplayNameValidation } from 'src/app/modules/shared/validators/display-name.validators';
 
 
 
@@ -19,7 +20,10 @@ export class CreateAccountComponent implements OnInit {
   ngOnInit(): void {
 		this.form = this.fb.group({
 			email : ["", Validators.compose([Validators.required, Validators.email])],
-			displayName : ["", [Validators.required]],
+			displayName : ["", Validators.compose([
+				Validators.required,
+				// DisplayNameValidation.displayNameValidator
+			])],
 			// need to make custom validators for password and password match
 			passwords : this.fb.group({
 				password : ["",	Validators.compose([

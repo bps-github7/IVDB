@@ -2,7 +2,7 @@ import { Injectable } from "@angular/core";
 import { AngularFireAuth } from "@angular/fire/auth";
 import { AngularFirestore, AngularFirestoreDocument } from "@angular/fire/firestore";
 import firebase from 'firebase/app';
-import { map } from "rxjs";
+import { map, of } from "rxjs";
 import { User } from "src/app/models/user";
 
 @Injectable()
@@ -31,9 +31,11 @@ export class AuthService {
 			unavailable.push(user.displayName);
 		})
 		
+		console.log("Hi from displayNameTaken in AuthService:")
+		console.log(unavailable);
 		
 
-		return unavailable.includes(name) 
+		return of(unavailable); 
 	}
 
 	googleLogin() {

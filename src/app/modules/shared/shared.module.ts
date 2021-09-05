@@ -19,6 +19,7 @@ import { CarouselComponent } from './components/carousel/carousel.component';
 import { MaterialModule } from './material/material.module';
 import { ReactiveAsyncFormControlComponent } from './components/reactive-async-form-control/reactive-async-form-control.component';
 import { ConnectFormDirective } from './directives/connect-form.directive';
+import { DisplayNameValidationDirective } from './directives/display-name-validation.directive';
 
 @NgModule({
   declarations: [
@@ -33,6 +34,7 @@ import { ConnectFormDirective } from './directives/connect-form.directive';
 		CrudHubComponent,
   ReactiveAsyncFormControlComponent,
   ConnectFormDirective,
+  DisplayNameValidationDirective,
     // pipes
 
     // directives 
