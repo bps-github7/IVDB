@@ -1,3 +1,4 @@
+import { CreateAccountComponent } from './components/auth/create-account/create-account.component';
 // import { EnvServiceProvider } from './services/env.service.provider';
 // import { EnvService } from './services/env.service';
 import { ConsoleSelectedService } from './services/behaivor-subjects/console-selected.service';
@@ -47,6 +48,7 @@ import { NavbarComponent } from './components/navbar/navbar.component';
 import { NotFoundComponent } from './components/not-found/not-found.component';
 import { CoreModule } from './modules/core/core.module';
 import { AuthService } from './modules/core/auth.service';
+import { LoginComponent } from './components/auth/login/login.component';
 
 
 
@@ -57,7 +59,8 @@ import { AuthService } from './modules/core/auth.service';
 		DropdownComponent,
 		NavbarComponent,
 		NotFoundComponent,
-
+		CreateAccountComponent,
+		LoginComponent,
 		
 		AppComponent
   ],

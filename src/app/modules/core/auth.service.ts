@@ -1,7 +1,8 @@
 import { Injectable } from "@angular/core";
 import { AngularFireAuth } from "@angular/fire/auth";
-import { AngularFirestore, AngularFirestoreDocument } from "@angular/fire/firestore";
+import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument, DocumentChangeAction } from "@angular/fire/firestore";
 import firebase from 'firebase/app';
+import { Observable } from "rxjs";
 import { map, of } from "rxjs";
 import { User } from "src/app/models/user";
 
@@ -14,29 +15,19 @@ export class AuthService {
 		this.afAuth.signInWithEmailAndPassword(email, password);
 	}
 
-	displayNameTaken(name : string) {
-		let docs = [];
-		let unavailable = [];
-		
-		this.afs.collection('users')
-		.snapshotChanges()
-		.pipe(map((snapshot) => {
-			snapshot.map((doc) => {
-				unavailable.push(doc.payload)
-			})
-		})) 
-
-		// TODO: is there a cleaner way to do this?
-		docs.forEach((user : User) => {
-			unavailable.push(user.displayName);
-		})
-		
-		console.log("Hi from displayNameTaken in AuthService:")
-		console.log(unavailable);
-		
-
-		return of(unavailable); 
+	getUsers$ () : Observable<any> {
+		return this.afs.collection('users').snapshotChanges()
 	}
+
+	// displayNameTaken(name : string) {
+	// 	let docs = [];
+	// 	let unavailable = [];
+		
+	// 	this.afs.collection('users')
+	// 	.snapshotChanges()
+	
+	// 	return of(unavailable); 
+	// }
 
 	googleLogin() {
 		this.afAuth.signInWithPopup(new firebase.auth.GoogleAuthProvider);

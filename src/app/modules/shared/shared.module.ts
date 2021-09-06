@@ -19,7 +19,7 @@ import { CarouselComponent } from './components/carousel/carousel.component';
 import { MaterialModule } from './material/material.module';
 import { ReactiveAsyncFormControlComponent } from './components/reactive-async-form-control/reactive-async-form-control.component';
 import { ConnectFormDirective } from './directives/connect-form.directive';
-import { DisplayNameValidationDirective } from './directives/display-name-validation.directive';
+import { DisplayNameUniqueValidationDirective } from './directives/display-name-unique-validation.directive';
 
 @NgModule({
   declarations: [
@@ -32,9 +32,9 @@ import { DisplayNameValidationDirective } from './directives/display-name-valida
     MultiSelectChipsComponent,
     CarouselComponent,
 		CrudHubComponent,
-  ReactiveAsyncFormControlComponent,
-  ConnectFormDirective,
-  DisplayNameValidationDirective,
+		ReactiveAsyncFormControlComponent,
+		ConnectFormDirective,
+		DisplayNameUniqueValidationDirective,
     // pipes
 
     // directives 
