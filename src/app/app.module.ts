@@ -1,11 +1,11 @@
-import { CreateAccountComponent } from './components/auth/create-account/create-account.component';
+import { UsersEffects } from 'src/app/store/effects/users.effects';
 // import { EnvServiceProvider } from './services/env.service.provider';
 // import { EnvService } from './services/env.service';
 import { ConsoleSelectedService } from './services/behaivor-subjects/console-selected.service';
 import { GameInfoSelectedService } from './services/behaivor-subjects/game-info-selected.service';
 // ng common stuff
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { ErrorHandler, NgModule } from '@angular/core';
 
 // routing, root component and our shared + core modules
 import { AppRoutingModule } from './app-routing.module';
@@ -48,7 +48,8 @@ import { NavbarComponent } from './components/navbar/navbar.component';
 import { NotFoundComponent } from './components/not-found/not-found.component';
 import { CoreModule } from './modules/core/core.module';
 import { AuthService } from './modules/core/auth.service';
-import { LoginComponent } from './components/auth/login/login.component';
+import { AuthModule } from './components/auth/auth.module';
+import { GlobalErrorHandler } from './components/global-error-handler.class';
 
 
 
@@ -59,17 +60,14 @@ import { LoginComponent } from './components/auth/login/login.component';
 		DropdownComponent,
 		NavbarComponent,
 		NotFoundComponent,
-		CreateAccountComponent,
-		LoginComponent,
 		
 		AppComponent
   ],
   imports: [
 		// angular base stuff + our modules
 		BrowserModule,
-    AppRoutingModule,
+		AppRoutingModule,
 		SharedModule,
-		// AuthModule,
 
 		CoreModule,
 
@@ -91,7 +89,7 @@ import { LoginComponent } from './components/auth/login/login.component';
 		// ngrx 
 		StoreModule.forRoot(reducers, { metaReducers }),
 		StoreDevtoolsModule.instrument({maxAge: 25}),
-		EffectsModule.forRoot([]),
+		EffectsModule.forRoot([UsersEffects]),
 		StoreRouterConnectingModule.forRoot({
 			serializer: RouterSerializer
 		})
@@ -100,7 +98,8 @@ import { LoginComponent } from './components/auth/login/login.component';
 		AuthService,
 		FirebaseService,
 		GameInfoSelectedService,
-		ConsoleSelectedService
+		ConsoleSelectedService,
+		{provide: ErrorHandler, useClass: GlobalErrorHandler}
 	],
   bootstrap: [AppComponent]
 })

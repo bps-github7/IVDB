@@ -13,6 +13,16 @@ export const selectUserByDisplayNameSubstring = (displayName: string) =>
 		} 
 	)
 
+export const selectUserByDisplayNameExactMatch = (displayName: string) =>
+	createSelector(
+		fromUsers.selectAll,
+		(entities : User []) => {
+			// keeping the lowercase on both terms, to avoid many identically spelled usernames with unique case.
+			return entities.filter((entity : User) => (entity.displayName.toLowerCase()) === displayName.toLowerCase())
+		} 
+	)
+
+
 export const selectUserById = (id : string) => 
 		createSelector(
 			fromUsers.selectAll,

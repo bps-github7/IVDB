@@ -1,3 +1,6 @@
+import { SharedStoreModule } from './shared.index';
+import { DisplayNameUniqueService } from './validators/display-name-unique.service';
+import { uniqueDisplayNameValidator } from './validators/display-name-unique.validators';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
@@ -19,7 +22,7 @@ import { CarouselComponent } from './components/carousel/carousel.component';
 import { MaterialModule } from './material/material.module';
 import { ReactiveAsyncFormControlComponent } from './components/reactive-async-form-control/reactive-async-form-control.component';
 import { ConnectFormDirective } from './directives/connect-form.directive';
-import { DisplayNameUniqueValidationDirective } from './directives/display-name-unique-validation.directive';
+// import { DisplayNameUniqueValidationDirective } from './directives/display-name-unique-validation.directive';
 
 @NgModule({
   declarations: [
@@ -33,24 +36,29 @@ import { DisplayNameUniqueValidationDirective } from './directives/display-name-
     CarouselComponent,
 		CrudHubComponent,
 		ReactiveAsyncFormControlComponent,
+
+		
+		// uniqueDisplayNameValidator,
+		// pipes
+
+    // directives     
 		ConnectFormDirective,
-		DisplayNameUniqueValidationDirective,
-    // pipes
-
-    // directives 
-    // DisableControlDirective,
+		// DisplayNameUniqueValidationDirective,
+		// DisableControlDirective,
     // DropzoneDirective,
-
     
 ],
   imports: [
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
-    MaterialModule
+    MaterialModule,
+		//basically just User reducer + effect since we need that in create-account
+		// SharedStoreModule
   ],
   providers: [
-  ],
+		DisplayNameUniqueService
+	],
   exports: [
     FormsModule,
     ReactiveFormsModule,

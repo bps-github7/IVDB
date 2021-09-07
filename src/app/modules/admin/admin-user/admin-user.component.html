@@ -1,1 +1,95 @@
-<p>admin-user works!</p>
+<h2>Administer users, privalleges and more:</h2>
+<mat-button-toggle-group (change)="chosen = $event.value">
+	<mat-button-toggle value="users">Users</mat-button-toggle>
+	<mat-button-toggle value="game-info" disabled>Game-Info</mat-button-toggle>
+	<mat-button-toggle value="consoles" disabled>Consoles</mat-button-toggle>
+</mat-button-toggle-group>
+<div *ngIf="chosen === 'users'">
+	<!-- <a routerLink="/admin/game/new">
+    <button mat-stroked-button class="btn" style="width: 17rem;">Add New Game</button>
+	</a> -->
+	<button (click)="testing()">selector works over here, not sure why</button>
+	<section>
+		<input
+			#query
+			(keyup)="filter(query.value)" 
+			type="text" 
+			class="form-control" 
+			placeholder="Search...">
+		<!-- <div>use this space to apply a filter: game-info categories, creators, platform or consoles are probably the only ones relevant to an admin view</div> -->
+	</section>
+
+	<!-- new material table! -->
+	<!-- TODO: get this working, lot of moving parts, not my priority to sort out right now -->
+	<!-- <table mat-table [dataSource]="tableData" class="mat-elevation-z8">
+	
+
+		<ng-container matColumnDef="title">
+			<th mat-header-cell *matHeaderCellDef>title</th>
+			<td mat-cell *matCellDef="let row">
+				<span 
+				#tooltip="matTooltip"
+				[matTooltip]="row.description"
+				matTooltipPosition="after"
+				matTooltipHideDelay="0">
+				{{row.title}}
+			</span> 
+			</td>
+		</ng-container>
+	
+	
+		<ng-container matColumnDef="edit">
+			<th mat-header-cell *matHeaderCellDef> </th>
+			<td mat-cell *matCellDef="let row">
+				<button 
+					(click)="updateItem(row)"
+					mat-stroked-button>Edit
+				</button>  
+			</td>
+		</ng-container>
+	
+		
+		<ng-container matColumnDef="delete">
+			<th mat-header-cell *matHeaderCellDef> </th>
+			<td mat-cell *matCellDef="let row">
+				<button 
+					(click)="deleteItem(row.id)"
+					mat-stroked-button>Delete
+				</button>
+			</td>
+		</ng-container>
+	
+	
+	
+		<tr mat-header-row *matHeaderRowDef="tableColumns"></tr>
+		<tr mat-row *matRowDef="let row; columns: tableColumns;"></tr>
+	</table>
+ -->
+
+
+
+	<!-- OG impl -->
+	<table class="table">
+			<thead>
+					<tr>
+							<th>Display Name</th>
+							<th>Email</th>
+							<!-- <th></th> -->
+					</tr>
+			</thead>
+			<tbody>
+					<tr *ngFor="let g of filteredUsers$ | async">
+							<td>{{ g?.displayName }}</td>
+							<td>{{ g?.email }}</td>
+							<!-- <td><a [routerLink]="['./', g?.id]">edit</a></td> -->
+					</tr>
+			</tbody>
+	</table>
+	<p>TODO: plan this component out before implementing- duh</p>
+</div>
+<!-- <div *ngIf="chosen === 'game-info'">
+	<admin-game-info></admin-game-info>
+</div>
+<div *ngIf="chosen === 'consoles'">
+	<admin-consoles></admin-consoles>
+</div> -->

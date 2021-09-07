@@ -16,18 +16,33 @@ export class AuthService {
 	}
 
 	getUsers$ () : Observable<any> {
-		return this.afs.collection('users').snapshotChanges()
+		return this.afs.collection('users').valueChanges()
 	}
 
-	// displayNameTaken(name : string) {
-	// 	let docs = [];
-	// 	let unavailable = [];
+	displayNameTaken(name : string): Observable<boolean> {
+		// displayNameTaken(name : string) : boolean {
+		let docs = [];
+		let unavailable = [];
 		
-	// 	this.afs.collection('users')
-	// 	.snapshotChanges()
-	
-	// 	return of(unavailable); 
-	// }
+		this.afs.collection('users')
+		.snapshotChanges()
+		.pipe(map((snapshot) => {
+			snapshot.map((doc) => {
+				docs.push(doc)
+			})
+		}))
+		
+		// TODO: is there a cleaner way to do this?
+		docs.forEach((user : User) => {
+			console.log(user)
+			unavailable.push(user.displayName);
+		})
+		
+		console.log("hi from authService")
+		console.log(unavailable)
+		// return unavailable.includes(name);
+		return of(unavailable.includes(name)) 
+	}
 
 	googleLogin() {
 		this.afAuth.signInWithPopup(new firebase.auth.GoogleAuthProvider);

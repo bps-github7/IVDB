@@ -1,7 +1,7 @@
 <div class="row">
 	<div class="col-md-6 offset-md-3">
 		<h3>Sign up for an IVDB account</h3>
-		<form [formGroup]="form" (ngSubmit)="createAccount()" appDisplayNameUniqueValidator>
+		<form [formGroup]="form" (ngSubmit)="createAccount()">
 	
 			<!-- Email form control -->
 			<div class="mb-3 form-group">
@@ -30,7 +30,7 @@
 			<div class="mb-3 form-group">
 				<label for="displayName">Display Name:</label>
 				<input type="text" formControlName="displayName" class="form-control">
-				
+				<button (click)="testing()" type="button">heres a button for testing what the selector returned</button>				
 				<!-- validation errors for display name -->
 				<div *ngIf="displayName.touched && !displayName.valid">
 					<label for="error-displayName-required"
@@ -39,6 +39,28 @@
 						<i class="material-icons">cancel</i>
 						Display name is required.
 					</label>
+
+
+					<div class="alert" *ngIf="displayName.errors.DisplayNameTaken">
+						<label for="error-displayName-taken"
+							class="alert-danger">
+							<i class="material-icons">cancel</i>
+							Display name is not available.
+						</label>
+
+						<label for="error-displayName-taken-info"
+							class="alert-info">
+							<i class="material-icons">perm_identity</i>
+							<span>
+								<h4>Please Note:</h4>
+								<p>To make our moderators and admin lives easier, display names with identical spelling but unique capitalization/casing are not permitted
+									(ie. if "Luigi" is an existing account, the display name "lUIgi", "luigi", "lUIgI", ...etc is not available)
+
+								</p>
+							</span>
+						</label>
+
+					</div>
 				</div>
 			</div>
 

@@ -1,7 +1,7 @@
 export interface User {
 	id: string;
 	email : string;
-	displayname ?: string;
+	displayName : string;
 	privalleges? : number;
 
 	// stuff that fireship impls, not sure how 

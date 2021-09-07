@@ -1,9 +1,12 @@
+import { DisplayNameUniqueService } from './../../../modules/shared/validators/display-name-unique.service';
+import { uniqueDisplayNameValidator } from './../../../modules/shared/validators/display-name-unique.validators';
 import { AuthService } from 'src/app/modules/core/auth.service';
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, AsyncValidator, FormControl } from '@angular/forms';
 import { CustomValidation } from 'src/app/modules/shared/validators/custom-validation';
 // import { DisplayNameValidation } from 'src/app/modules/shared/validators/display-name.validators';
-
+import { State } from 'src/app/store/reducers/users.reducer';
+import { Store } from '@ngrx/store';
 
 
 @Component({
@@ -15,15 +18,21 @@ export class CreateAccountComponent implements OnInit {
 
 	form : FormGroup;
 
-  constructor(private fb : FormBuilder, private authService : AuthService)  { }
+  constructor(
+		private fb : FormBuilder, 
+		private authService : AuthService,
+		private displayNameUniqueService : DisplayNameUniqueService,
+		// private usersStore : Store<State>
+		)  { }
 
   ngOnInit(): void {
 		this.form = this.fb.group({
 			email : ["", Validators.compose([Validators.required, Validators.email])],
-			displayName : ["", Validators.compose([
-				Validators.required,
-				// DisplayNameValidation.displayNameValidator
-			])],
+			displayName : new FormControl(null, 
+				{
+					validators : [Validators.required],
+					asyncValidators : [ this.displayNameUniqueService.uniqueDisplayNameValidator()	]
+				}),
 			// need to make custom validators for password and password match
 			passwords : this.fb.group({
 				password : ["",	Validators.compose([
@@ -39,6 +48,10 @@ export class CreateAccountComponent implements OnInit {
 				])]
 			}) 
 		})
+	}
+
+	testing () {
+		this.displayNameUniqueService.testing()
 	}
 
 	onPasswordChange() {

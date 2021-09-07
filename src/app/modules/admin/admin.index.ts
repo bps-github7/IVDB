@@ -22,6 +22,7 @@ import { ForumEffects } from 'src/app/store';
 import { ForumInfoEffects } from 'src/app/store';
 import { VideogameConsoleEffects } from 'src/app/store/effects/videogame-console.effects';
 import { ThreadReducer } from 'src/app/store/reducers/thread.reducer';
+import { UsersReducer } from 'src/app/store/reducers/users.reducer';
 
 
 //** I dont think this is working */
@@ -50,7 +51,7 @@ export const reducers : ActionReducerMap<any> = {
 		StoreModule.forFeature('forum', ForumReducer),
 		StoreModule.forFeature('forumInfo', ForumInfoReducer),
 		StoreModule.forFeature('thread', ThreadReducer),
-
+		StoreModule.forFeature('users', UsersReducer),
 
 
 		EffectsModule.forFeature([ContentEffects]),
