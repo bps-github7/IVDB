@@ -10,6 +10,7 @@ import { AdminForumFormComponent } from './admin-forum/admin-forum-form/admin-fo
 
 const routes: Routes = [
 	{ path: '', component: AdminComponent, children: [
+		// { path: '', component: DisplayNameCheckComponent },
 		{ path: 'game/:gameId', component: AdminGameFormComponent },
 		{ path: 'forum/:forumId', component: AdminForumFormComponent },
 		{ path: 'game/new', component: AdminGameFormComponent },

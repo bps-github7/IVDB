@@ -89,7 +89,7 @@ import { GlobalErrorHandler } from './components/global-error-handler.class';
 		// ngrx 
 		StoreModule.forRoot(reducers, { metaReducers }),
 		StoreDevtoolsModule.instrument({maxAge: 25}),
-		EffectsModule.forRoot([UsersEffects]),
+		EffectsModule.forRoot([]),
 		StoreRouterConnectingModule.forRoot({
 			serializer: RouterSerializer
 		})

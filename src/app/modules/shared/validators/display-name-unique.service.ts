@@ -11,24 +11,22 @@ import { map } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
-export class DisplayNameUniqueService implements OnInit {
+export class DisplayNameUniqueService {
 
 	filteredUsers$ : Observable<any>;
 	users$ : Observable<any>;
 
-  constructor(private usersStore : Store<fromUsers.State>) { }
+  constructor(private usersStore : Store<fromUsers.State>) {
+		this.filteredUsers$ = this.users$ = this.usersStore.select(fromUsers.selectAll)
+		this.usersStore.dispatch( readUsers() );
+	 }
 
-	ngOnInit() {
-		// this.filteredUsers$ = this.users$ =  this.usersStore.select(fromUsers.selectAll)	
-		// this.filteredUsers$ = this.users$ = this.usersStore.select(fromUsers.selectAll)
-		// this.usersStore.dispatch( readUsers() );
-	}
 
 	testing() {
 		console.log(this.filteredUsers$)
-		// this.filteredUsers$.subscribe(resp => {
-		// 	console.log(resp)
-		// })
+		this.filteredUsers$.subscribe(resp => {
+			console.log(resp)
+		})
 	}
 
 
@@ -37,12 +35,14 @@ export class DisplayNameUniqueService implements OnInit {
 		this.filteredUsers$ = (query) ?
 					this.usersStore.pipe(select(selectUserByDisplayNameExactMatch(query))) :
 					this.users$;
-		// this.filteredUsers$.pipe(map(user => {
-		// console.log(user)
-		// if (user.length === 1 && user[0] === query) {
-		// 		finished = true
-		// 	}
-		// }))
+		this.filteredUsers$.pipe(map(user => {
+			console.log("inside filter method we are. return value of observable below it is")
+			console.log(user)
+
+			if (user.length) {
+				finished = true
+			}
+		}))
 		return finished; 
 	}
 
@@ -52,7 +52,10 @@ export class DisplayNameUniqueService implements OnInit {
 		return (control : FormControl) => {
 			return new Promise((resolve, reject) => {
 				setTimeout(() => {
-						resolve(this.filter(control.value) ? {DisplayNameTaken : true} : null)		
+					let response;
+					this.filter(control.value)
+					this.filteredUsers$.subscribe(resp => response = resp)
+					resolve(response.length === 1 ? {DisplayNameTaken : true} : null)		
 					},1000)
 				})
 		}

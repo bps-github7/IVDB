@@ -54,7 +54,7 @@ import { ConnectFormDirective } from './directives/connect-form.directive';
     ReactiveFormsModule,
     MaterialModule,
 		//basically just User reducer + effect since we need that in create-account
-		// SharedStoreModule
+		SharedStoreModule
   ],
   providers: [
 		DisplayNameUniqueService
