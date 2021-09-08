@@ -7,12 +7,18 @@
 	<input type="checkbox" class="nav-toggle" id="nav-toggle"/>
 	<nav>
 		<ul>
-			<li *ngIf="!user">
-				<a routerLink="auth">Login</a>
-			</li>
-			<li *ngIf="user">
+			
+			<li *ngIf="auth.user$ | async as user; else anonymousUser">
 				<a routerLink="user/profile">{{ user.displayName }}</a>
 			</li>
+			<li *ngIf="auth.user$ | async">
+				<a (click)="logout()">Log out</a>
+			</li>
+			<ng-template #anonymousUser>
+				<li>
+					<a routerLink="auth">Log in</a>
+				</li>
+			</ng-template>	
 		
 						<!-- this should be a dynamic list of the feature modules,
 			fed into dropdown component (which need to be customized for this situation) -->

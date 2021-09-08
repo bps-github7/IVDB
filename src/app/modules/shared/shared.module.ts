@@ -1,6 +1,5 @@
 import { SharedStoreModule } from './shared.index';
 import { DisplayNameUniqueService } from './validators/display-name-unique.service';
-import { uniqueDisplayNameValidator } from './validators/display-name-unique.validators';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
@@ -22,6 +21,7 @@ import { CarouselComponent } from './components/carousel/carousel.component';
 import { MaterialModule } from './material/material.module';
 import { ReactiveAsyncFormControlComponent } from './components/reactive-async-form-control/reactive-async-form-control.component';
 import { ConnectFormDirective } from './directives/connect-form.directive';
+import { AuthGuardService } from './guards/auth-guard.service';
 // import { DisplayNameUniqueValidationDirective } from './directives/display-name-unique-validation.directive';
 
 @NgModule({
@@ -57,7 +57,8 @@ import { ConnectFormDirective } from './directives/connect-form.directive';
 		SharedStoreModule
   ],
   providers: [
-		DisplayNameUniqueService
+		DisplayNameUniqueService,
+		AuthGuardService
 	],
   exports: [
     FormsModule,

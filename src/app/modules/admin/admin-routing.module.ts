@@ -1,3 +1,4 @@
+import { AuthGuardService } from './../shared/guards/auth-guard.service';
 import { AdminGameFormComponent } from './admin-game/admin-game-form/admin-game-form.component';
 import { AdminComponent } from './admin.component';
 import { NgModule } from '@angular/core';
@@ -9,7 +10,7 @@ import { AdminUserComponent } from './admin-user/admin-user.component';
 import { AdminForumFormComponent } from './admin-forum/admin-forum-form/admin-forum-form.component';
 
 const routes: Routes = [
-	{ path: '', component: AdminComponent, children: [
+	{ path: '', component: AdminComponent, canActivate: [AuthGuardService], children: [
 		// { path: '', component: DisplayNameCheckComponent },
 		{ path: 'game/:gameId', component: AdminGameFormComponent },
 		{ path: 'forum/:forumId', component: AdminForumFormComponent },

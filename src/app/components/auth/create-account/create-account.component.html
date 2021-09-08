@@ -48,13 +48,14 @@
 						</label>
 
 						<label for="error-displayName-taken-info"
-							class="alert-info">
+							class="alert-info"
+							*ngIf="!hideWarning">
 							<i class="material-icons">perm_identity</i>
 							<span>
 								<h4>Please Note:</h4>
 								<p>To make our moderators and admin lives easier, display names with identical spelling but unique capitalization/casing are not permitted
 									(ie. if "Luigi" is an existing account, the display name "lUIgi", "luigi", "lUIgI", ...etc is not available)
-
+								<button class="btn" mat-raised-button (click)="hideWarning = true">Dismiss</button>
 								</p>
 							</span>
 						</label>

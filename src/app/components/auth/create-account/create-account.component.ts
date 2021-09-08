@@ -1,5 +1,4 @@
 import { DisplayNameUniqueService } from './../../../modules/shared/validators/display-name-unique.service';
-import { uniqueDisplayNameValidator } from './../../../modules/shared/validators/display-name-unique.validators';
 import { AuthService } from 'src/app/modules/core/auth.service';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, AsyncValidator, FormControl } from '@angular/forms';
@@ -17,6 +16,7 @@ import { Store } from '@ngrx/store';
 export class CreateAccountComponent implements OnInit {
 
 	form : FormGroup;
+	hideWarning: boolean = false;
 
   constructor(
 		private fb : FormBuilder, 
@@ -88,8 +88,6 @@ export class CreateAccountComponent implements OnInit {
 		} else {
 			console.log("error: could not create account, there was errors in the create account form")
 		}
-		
-		
 	}
 
 }

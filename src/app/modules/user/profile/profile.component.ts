@@ -14,8 +14,7 @@ export class ProfileComponent implements OnInit {
 
 
   constructor(
-		private afAuth : AngularFireAuth,
-		private authService : AuthService) { }
+		private afAuth : AngularFireAuth) { }
 
 
 	// is there a more centralized way to store the authenticated user 
@@ -24,7 +23,7 @@ export class ProfileComponent implements OnInit {
 	}
 
 	logOut() {
-		this.authService.logOut()
+		this.afAuth.signOut()
 	}
 
 }
