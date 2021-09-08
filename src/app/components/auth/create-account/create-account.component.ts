@@ -50,10 +50,6 @@ export class CreateAccountComponent implements OnInit {
 		})
 	}
 
-	testing () {
-		this.displayNameUniqueService.testing()
-	}
-
 	onPasswordChange() {
 		if (this.password.value && this.confirmPassword.value === "") {
 			this.confirmPassword.setErrors({required : true})

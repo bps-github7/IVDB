@@ -30,7 +30,6 @@
 			<div class="mb-3 form-group">
 				<label for="displayName">Display Name:</label>
 				<input type="text" formControlName="displayName" class="form-control">
-				<button (click)="testing()" type="button">heres a button for testing what the selector returned</button>				
 				<!-- validation errors for display name -->
 				<div *ngIf="displayName.touched && !displayName.valid">
 					<label for="error-displayName-required"

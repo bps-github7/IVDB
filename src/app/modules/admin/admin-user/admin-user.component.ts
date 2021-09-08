@@ -27,12 +27,6 @@ export class AdminUserComponent implements OnInit {
 		this.usersStore.dispatch( usersActions.readUsers() );
 	}
 
-	testing() {
-		console.log(this.filteredUsers$)
-		this.filteredUsers$.subscribe(resp => {
-			console.log(resp)
-		})
-	}
 
 	filter(query: string) {
 			this.filteredUsers$ = (query) ?

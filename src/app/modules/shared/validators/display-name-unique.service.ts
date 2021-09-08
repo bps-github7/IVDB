@@ -22,12 +22,6 @@ export class DisplayNameUniqueService {
 	 }
 
 
-	testing() {
-		console.log(this.filteredUsers$)
-		this.filteredUsers$.subscribe(resp => {
-			console.log(resp)
-		})
-	}
 
 
 	filter(query : string) {
@@ -35,15 +29,6 @@ export class DisplayNameUniqueService {
 		this.filteredUsers$ = (query) ?
 					this.usersStore.pipe(select(selectUserByDisplayNameExactMatch(query))) :
 					this.users$;
-		this.filteredUsers$.pipe(map(user => {
-			console.log("inside filter method we are. return value of observable below it is")
-			console.log(user)
-
-			if (user.length) {
-				finished = true
-			}
-		}))
-		return finished; 
 	}
 
 
