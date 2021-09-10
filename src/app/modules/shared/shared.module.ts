@@ -22,6 +22,8 @@ import { MaterialModule } from './material/material.module';
 import { ReactiveAsyncFormControlComponent } from './components/reactive-async-form-control/reactive-async-form-control.component';
 import { ConnectFormDirective } from './directives/connect-form.directive';
 import { AuthGuardService } from './guards/auth-guard.service';
+import { AdminAuthGuardService } from './guards/admin-auth-guard.service';
+import { UserAuthGuardService } from './guards/user-auth-guard.service';
 // import { DisplayNameUniqueValidationDirective } from './directives/display-name-unique-validation.directive';
 
 @NgModule({
@@ -58,7 +60,9 @@ import { AuthGuardService } from './guards/auth-guard.service';
   ],
   providers: [
 		DisplayNameUniqueService,
-		AuthGuardService
+		AuthGuardService,
+		AdminAuthGuardService,
+		UserAuthGuardService
 	],
   exports: [
     FormsModule,

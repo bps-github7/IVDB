@@ -23,7 +23,8 @@ export const selectUserByDisplayNameExactMatch = (displayName: string) =>
 	)
 
 
-export const selectUserById = (id : string) => 
+export const selectUserById = (id : string) =>
+	/* returns a single user object */ 
 		createSelector(
 			fromUsers.selectAll,
 			(entities : User []) => {
