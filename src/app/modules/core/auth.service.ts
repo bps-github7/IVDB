@@ -11,6 +11,7 @@ import { select, Store } from '@ngrx/store';
 
 import * as fromUsers from 'src/app/store/reducers/users.reducer'
 import * as usersActions from 'src/app/store/actions/users.actions';
+import { selectUserById } from 'src/app/store/selectors/users.selector';
 import { map } from 'rxjs';
 
 
@@ -24,6 +25,8 @@ export class AuthService {
 		private usersStore : Store<fromUsers.State>
 		) {
 		this.user$ = this.afAuth.authState;
+		this.usersStore.select(fromUsers.selectAll)
+		this.usersStore.dispatch( usersActions.readUsers() )
 	}
 	
 	emailAndPasswordLogIn(email : string, password : string) {
@@ -33,11 +36,31 @@ export class AuthService {
 	googleLogin() {
 		let returnUrl = this.route.snapshot.queryParamMap.get('returnUrl') || '/';
 		localStorage.setItem('returnUrl', returnUrl)
-		this.afAuth.signInWithRedirect(new firebase.auth.GoogleAuthProvider)
-		.then((userCredential) => {
-			console.log("got this far");
-			console.log(userCredential);
-		}).catch((err) => console.error(err))
+		this.afAuth.signInWithPopup(new firebase.auth.GoogleAuthProvider)
+		.then((result) => {
+			let credentials = result.user
+			let defaultMetadata = {
+				provider : 'google',
+				firstLogin : true,
+				hasProfile : false,
+				hasPreferences: false
+			}
+			let newGoogleUser = {
+				id : credentials.uid,
+				displayName : credentials.displayName,
+				email : credentials.email,
+				// cant be here for good...
+				metadata: defaultMetadata
+			}
+			this.usersStore.pipe(select(selectUserById(newGoogleUser.id)))
+			.subscribe(user => {
+				// TODO: if the document is deleted from collection, ngrx needs to know and update store/entity!!! not happening here!
+				if (!user) {
+					this.usersStore.dispatch(usersActions.createUser(newGoogleUser))
+				}
+
+			})
+		});
 	}
 
 	logout() {
