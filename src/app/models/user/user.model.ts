@@ -6,7 +6,7 @@ export interface User {
 	privalleges? : number;
 
 	metadata : {
-		provider : '',
+		provider : string,
 		firstLogin : boolean,
 		hasProfile : boolean,
 		hasPreferences : boolean

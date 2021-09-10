@@ -3,10 +3,6 @@ import { AuthService } from 'src/app/modules/core/auth.service';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, AsyncValidator, FormControl } from '@angular/forms';
 import { CustomValidation } from 'src/app/modules/shared/validators/custom-validation';
-// import { DisplayNameValidation } from 'src/app/modules/shared/validators/display-name.validators';
-import { State } from 'src/app/store/reducers/users.reducer';
-import { Store } from '@ngrx/store';
-
 
 @Component({
   selector: 'app-create-account',
@@ -22,7 +18,6 @@ export class CreateAccountComponent implements OnInit {
 		private fb : FormBuilder, 
 		private authService : AuthService,
 		private displayNameUniqueService : DisplayNameUniqueService,
-		// private usersStore : Store<State>
 		)  { }
 
   ngOnInit(): void {
@@ -82,9 +77,11 @@ export class CreateAccountComponent implements OnInit {
 	// 
 	createAccount() {
 		if (this.form.valid) {
-			this.authService.signUpWithEmailAndPassword(this.email.value, this.password.value)
-			// IF the above line is successful, create a user with the form data in store and users collection 
+			// havent figured out why the app is routing to app.component when we create account, its not tied to form submission.
 
+			this.authService.signUpWithEmailAndPassword(this.email.value, this.password.value, this.displayName.value)
+
+			// should the user creation step go here or in service
 		} else {
 			console.log("error: could not create account, there was errors in the create account form")
 		}
