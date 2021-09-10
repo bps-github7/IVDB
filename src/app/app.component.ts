@@ -16,7 +16,8 @@ import { Observable } from 'rxjs';
 export class AppComponent implements OnInit {
 	title="IVDB"
 	users$: any;
-	currentUser$ : Observable<User>;
+	currentUser : any;
+	userDocument : User
 
 	constructor(
 		private auth : AuthService,
@@ -27,37 +28,36 @@ export class AppComponent implements OnInit {
 	ngOnInit() {
 		this.usersStore.dispatch(usersActions.readUsers());
 		this.auth.user$.subscribe(user => {
-			if (user) {		
-				this.usersStore.pipe(select(selectUserById(user?.uid)))				
-				.subscribe(userDocument => {
-					// whether provider is google or not determines whether
-					// we have access to display name through subscription predicate or localStorage
-					if (userDocument.metadata.provider === 'google') {
-						this.usersStore.dispatch(usersActions.updateUser({ id : user.uid, data : {email : user.email, displayName : user.displayName } }));
-					} else {
+			if (user) {	
+				this.currentUser =  user;
+				this.router.navigateByUrl(localStorage.getItem('returnUrl'))
+			}
+				
+			this.usersStore.pipe(select(selectUserById(user?.uid)))				
+			.subscribe(userDocument => { this.userDocument = userDocument })
+
+			// whether provider is google or not determines whether
+			// we have access to display name through subscription predicate or localStorage
+				if (this.userDocument.metadata.provider === 'google') {
+					this.usersStore.dispatch(usersActions.updateUser({ id : user.uid, data : {email : user.email, displayName : user.displayName } }));
+				} else {
+					if (this.userDocument.metadata.firstLogin) {
 						// we only need to set the displayName like this on first login
 						// so firstLogin gets flipped off in process of running this update
-						if (userDocument.metadata.firstLogin) {
-							this.usersStore.dispatch(usersActions.updateUser({ 
-								id : user.uid, 
-								data : { 
-									displayName : localStorage.getItem('displayName'),
-									metadata : { 
-										provider : userDocument.metadata.provider,
-										firstLogin : false,
-										hasProfile : userDocument.metadata.hasProfile,
-										hasPreferences : userDocument.metadata.hasPreferences									
-									}
-								} 
-							}))
-						}
+						this.usersStore.dispatch(usersActions.updateUser({ 
+							id : this.currentUser.uid, 
+							data : { 
+								displayName : localStorage.getItem('displayName'),
+								metadata : { 
+									provider : this.userDocument.metadata.provider,
+									firstLogin : false,
+									hasProfile : this.userDocument.metadata.hasProfile,
+									hasPreferences : this.userDocument.metadata.hasPreferences									
+								}
+							} 
+						}))
 					}
-				})
-
-			
-				this.router.navigateByUrl(localStorage.getItem('returnUrl'))
-			
-			}
+				}			
 		})
 	}
 

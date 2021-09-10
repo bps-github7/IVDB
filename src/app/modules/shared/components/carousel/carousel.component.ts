@@ -10,14 +10,14 @@ export interface Breakpoints {
 
 
 @Component({
-  selector: 'app-carousel',
+  selector: 'carousel',
   templateUrl: './carousel.component.html',
   styleUrls: ['./carousel.component.sass']
 })
 export class CarouselComponent implements OnInit {
 
 
-	// TODO: take games as an input prop of type ob=servbale. making this a dumb reusable component.
+	// TODO: take games as an input prop of type observbale. making this a dumb reusable component.
   dom: HTMLElement | null = null;
   slidesWrapper: HTMLElement | null = null;
   carouselElement: HTMLElement | null = null;
