@@ -26,7 +26,7 @@ export class AppComponent implements OnInit {
 		) {}
 
 	ngOnInit() {
-		this.usersStore.dispatch(usersActions.readUsers());
+	/* 	this.usersStore.dispatch(usersActions.readUsers());
 		this.auth.user$.subscribe(user => {
 			if (user) {	
 				this.currentUser =  user;
@@ -58,7 +58,7 @@ export class AppComponent implements OnInit {
 						}))
 					}
 				}			
-		})
+		}) */
 	}
 
 }

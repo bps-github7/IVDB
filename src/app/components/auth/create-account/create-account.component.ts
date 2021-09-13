@@ -74,6 +74,14 @@ export class CreateAccountComponent implements OnInit {
 		return this.form.get('passwords.confirmPassword');
 	}
 
+	testing() {
+		if (!this.form.valid) {
+			console.log("la forma es mal")
+		}
+		console.log(this.form);
+	}
+
+
 	// 
 	createAccount() {
 		if (this.form.valid) {
