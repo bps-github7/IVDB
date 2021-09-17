@@ -39,6 +39,7 @@ export class AuthService {
 		this.afAuth.signInWithPopup(new firebase.auth.GoogleAuthProvider)
 		.then((result) => {
 			let credentials = result.user
+			// TODO: you could probably live without this- profile and preferences can use a selector to check if user has these, others are unnessecary
 			let defaultMetadata = {
 				provider : 'google',
 				firstLogin : true,
@@ -60,7 +61,10 @@ export class AuthService {
 				}
 
 			})
-		});
+		})
+		.catch(err => console.error(err))
+
+		// if (this.afAuth.authState)
 	}
 
 	logout() {

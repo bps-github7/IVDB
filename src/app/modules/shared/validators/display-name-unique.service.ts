@@ -25,7 +25,6 @@ export class DisplayNameUniqueService {
 
 
 	filter(query : string) {
-		let finished;
 		this.filteredUsers$ = (query) ?
 					this.usersStore.pipe(select(selectUserByDisplayNameExactMatch(query))) :
 					this.users$;
@@ -34,13 +33,19 @@ export class DisplayNameUniqueService {
 
 
 	uniqueDisplayNameValidator() : AsyncValidatorFn {
+		// TODO: regacotor this as an observable and use first() method to ensure that the observable completes.
 		return (control : FormControl) => {
 			return new Promise((resolve, reject) => {
 				setTimeout(() => {
 					let response;
 					this.filter(control.value)
 					this.filteredUsers$.subscribe(resp => response = resp)
-					resolve(response.length === 1 ? {DisplayNameTaken : true} : null)		
+					if (response.length === 1) {
+						resolve({DisplayNameTaken : true})
+					} else {
+						reject(null);
+					}
+					// resolve(response.length === 1 ? {DisplayNameTaken : true} : null)		
 					},1000)
 				})
 		}
