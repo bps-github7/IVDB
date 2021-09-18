@@ -26,7 +26,7 @@ export class CreateAccountComponent implements OnInit {
 			displayName : new FormControl(null, 
 				{
 					validators : [Validators.required],
-					asyncValidators : [ this.displayNameUniqueService.uniqueDisplayNameValidator()	]
+					asyncValidators : [ this.displayNameUniqueService.uniqueDisplayNameValidator() ]
 				}),
 			// need to make custom validators for password and password match
 			passwords : this.fb.group({
