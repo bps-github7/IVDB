@@ -4,7 +4,7 @@ import { Injectable, OnInit } from '@angular/core';
 import { select, Store } from '@ngrx/store';
 import * as fromUsers from 'src/app/store/reducers/users.reducer';
 import { readUsers } from 'src/app/store/actions/users.actions';
-import { Observable } from 'rxjs';
+import { catchError, first, Observable, of } from 'rxjs';
 import { map } from 'rxjs';
 
 
@@ -30,24 +30,28 @@ export class DisplayNameUniqueService {
 					this.users$;
 	}
 
-
-
 	uniqueDisplayNameValidator() : AsyncValidatorFn {
-		// TODO: regacotor this as an observable and use first() method to ensure that the observable completes.
 		return (control : FormControl) => {
-			return new Promise((resolve, reject) => {
-				setTimeout(() => {
-					let response;
-					this.filter(control.value)
-					this.filteredUsers$.subscribe(resp => response = resp)
-					if (response.length === 1) {
-						resolve({DisplayNameTaken : true})
-					} else {
-						reject(null);
-					}
-					// resolve(response.length === 1 ? {DisplayNameTaken : true} : null)		
-					},1000)
-				})
+			
+		
 		}
 	}
+
+	// uniqueDisplayNameValidator() : AsyncValidatorFn {
+	// 	return (control : FormControl) => {
+	// 		return new Promise((resolve, reject) => {
+	// 			setTimeout(() => {
+	// 				let response;
+	// 				this.filter(control.value)
+	// 				this.filteredUsers$.subscribe(resp => response = resp)
+	// 				if (response.length === 1) {
+	// 					resolve({DisplayNameTaken : true})
+	// 				} else {
+	// 					reject(null);
+	// 				}
+	// 				// resolve(response.length === 1 ? {DisplayNameTaken : true} : null)		
+	// 				},1000)
+	// 			})
+	// 	}
+	// }
 }
