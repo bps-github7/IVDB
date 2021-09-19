@@ -18,7 +18,7 @@ export const selectUserByDisplayNameExactMatch = (displayName: string) =>
 		fromUsers.selectAll,
 		(entities : User []) => {
 			// keeping the lowercase on both terms, to avoid many identically spelled usernames with unique case.
-			return entities.filter((entity : User) => (entity.displayName.toLowerCase()) === displayName.toLowerCase())
+			return entities.filter((entity : User) => (entity.displayName.toLowerCase()) == displayName.toLowerCase())
 		} 
 	)
 

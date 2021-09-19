@@ -5,19 +5,19 @@ import { Injectable, OnInit } from '@angular/core';
 import { select, Store } from '@ngrx/store';
 import * as fromUsers from 'src/app/store/reducers/users.reducer';
 import { readUsers } from 'src/app/store/actions/users.actions';
-import { catchError, delay, first, Observable, of } from 'rxjs';
-import { map } from 'rxjs';
-
+import { catchError, delay, first, Observable, of, map } from 'rxjs';
+import { AngularFirestore } from '@angular/fire/firestore';
 
 @Injectable({
   providedIn: 'root'
 })
+
 export class DisplayNameUniqueService {
 
 	filteredUsers$ : Observable<any>;
 	users$ : Observable<any>;
 
-  constructor(private usersStore : Store<fromUsers.State>) {
+  constructor(private usersStore : Store<fromUsers.State>, private afs : AngularFirestore) {
 		this.filteredUsers$ = this.users$ = this.usersStore.select(fromUsers.selectAll)
 		this.usersStore.dispatch( readUsers() );
 	 }
@@ -27,68 +27,51 @@ export class DisplayNameUniqueService {
 
 	filter(query : string) {
 		this.filteredUsers$ = (query) ?
-					this.usersStore.pipe(select(selectUserByDisplayNameExactMatch(query))) :
-					this.users$;
-
-		this.filteredUsers$.subscribe(response => console.log(response))
+			this.usersStore.pipe(select(selectUserByDisplayNameExactMatch(query))) :
+			this.users$;
 	}
-/* 
+
+	testingUniqueDisplayName( value ) {
+		/* P.O.C with naive way to do this without consulting entity. sort of brittle,
+		 has to match case of field value, no way around that 
+		 except saving a duplicate field with the display name in lowercase*/
+
+		var userRef = this.afs.collection('users')	
+		userRef.ref.where('displayName', '==', value).get()
+				.then(snapshot => {
+						if (snapshot.empty) {
+								console.log('displayName is unique', snapshot.empty);
+								return of({DisplayNameTaken : true});
+						} else {
+								console.log('displayName already exists');
+								return of(null)
+						}
+				});
+
+	}
+
 	uniqueDisplayNameValidator() : AsyncValidatorFn {
 		return (control : FormControl) => {
-			this.filter(control.value);
-			return this.filteredUsers$
-			.pipe(
-				map(response => (response.length ? {DisplayNameTaken : true} : null)),
-				catchError(() => of(null)),
-				first()
-			)
+			// return of({DisplayNameTaken : true});
+			this.filter(control.value)
+			setTimeout(() => {
+				console.log("got this far doe")
+				this.filteredUsers$.subscribe(resp => console.log(resp));
+
+			}, 1000)
+			return of(null);
+
+			
+			// let returned;
+			// setTimeout(() => {
+			// 	let response;
+			// 	this.filter(control.value);
+			// 	this.filteredUsers$.subscribe(resp => response = resp);
+			// 	returned = of((response.length === 1 ? {DisplayNameTaken : true} : null))
+			// }, 1000);
+			
+			// // sloppy, probably better suited to use async await. this look like shit!
+			// return returned
 		}
 	}
- */
-
-	/* uniqueDisplayNameValidator() : AsyncValidatorFn {
-		return (control: FormControl) => {
-			return of(control.value).pipe(
-				delay(500),
-				switchMap(() => this.filteredUsers$.pipe(
-					map(isAvail => isAvail.length === 1 ? { DisplayNameTaken: true } : null),
-					first())));
-		}
-	}
-	 */
-	
-	uniqueDisplayNameValidator(): AsyncValidatorFn {
-		return (control: AbstractControl): Observable<{ [key: string]: boolean } | null> => {
-			this.filter(control.value)	
-			return this.filteredUsers$
-				.pipe(
-					map(valueExists => {
-						if (valueExists) {
-							return { DisplayNameTaken: true };
-						}
-						return null;
-					}
-					)
-			)
-		}
-	}
-
-
-	// uniqueDisplayNameValidator() : AsyncValidatorFn {
-	// 	return (control : FormControl) => {
-	// 		return new Promise((resolve, reject) => {
-	// 			setTimeout(() => {
-	// 				let response;
-	// 				this.filter(control.value)
-	// 				this.filteredUsers$.subscribe(resp => response = resp)
-	// 				if (response.length === 1) {
-	// 					resolve({DisplayNameTaken : true})
-	// 				} else {
-	// 					reject(null);
-	// 				}
-	// 				// resolve(response.length === 1 ? {DisplayNameTaken : true} : null)		
-	// 				},1000)
-	// 			})
-	// 	}
-	// }
 }
