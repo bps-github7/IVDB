@@ -14,21 +14,7 @@ import { AngularFirestore } from '@angular/fire/firestore';
 
 export class DisplayNameUniqueService {
 
-	filteredUsers$ : Observable<any>;
-	users$ : Observable<any>;
-
-  constructor(private usersStore : Store<fromUsers.State>, private afs : AngularFirestore) {
-		this.filteredUsers$ = this.users$ = this.usersStore.select(fromUsers.selectAll)
-		this.usersStore.dispatch( readUsers() );
-	 }
-
-
-
-
-	filter(query : string) {
-		this.filteredUsers$ = (query) ?
-			this.usersStore.pipe(select(selectUserByDisplayNameExactMatch(query))) :
-			this.users$;
+	constructor(private afs : AngularFirestore) {
 	}
 
 	testingUniqueDisplayName( value ) {
@@ -52,26 +38,7 @@ export class DisplayNameUniqueService {
 
 	uniqueDisplayNameValidator() : AsyncValidatorFn {
 		return (control : FormControl) => {
-			// return of({DisplayNameTaken : true});
-			this.filter(control.value)
-			setTimeout(() => {
-				console.log("got this far doe")
-				this.filteredUsers$.subscribe(resp => console.log(resp));
-
-			}, 1000)
-			return of(null);
-
-			
-			// let returned;
-			// setTimeout(() => {
-			// 	let response;
-			// 	this.filter(control.value);
-			// 	this.filteredUsers$.subscribe(resp => response = resp);
-			// 	returned = of((response.length === 1 ? {DisplayNameTaken : true} : null))
-			// }, 1000);
-			
-			// // sloppy, probably better suited to use async await. this look like shit!
-			// return returned
+			return of({DisplayNameTaken : true});
 		}
 	}
 }
