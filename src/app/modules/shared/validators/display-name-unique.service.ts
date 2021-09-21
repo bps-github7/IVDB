@@ -1,5 +1,5 @@
 import { switchMap } from 'rxjs/operators';
-import { selectUserByDisplayNameExactMatch } from './../../../store/selectors/users.selector';
+import { selectUserByDisplayNameExactMatch, uniqueDisplayName } from './../../../store/selectors/users.selector';
 import { AbstractControl, AsyncValidatorFn, FormControl, ValidatorFn } from '@angular/forms';
 import { Injectable, OnInit } from '@angular/core';
 import { select, Store } from '@ngrx/store';
@@ -14,8 +14,17 @@ import { AngularFirestore } from '@angular/fire/firestore';
 
 export class DisplayNameUniqueService {
 
-	constructor(private afs : AngularFirestore) {
-	}
+	users$ : Observable<any>;
+	filteredUsers$ : Observable<any>
+	allUsers: any;
+
+
+	constructor(
+		private afs : AngularFirestore,
+		private usersStore : Store<fromUsers.State>) {
+		this.filteredUsers$ = this.users$ = this.usersStore.select(fromUsers.selectAll)
+		this.usersStore.dispatch( readUsers() );
+	 }
 
 	testingUniqueDisplayName( value ) {
 		/* P.O.C with naive way to do this without consulting entity. sort of brittle,
@@ -34,6 +43,29 @@ export class DisplayNameUniqueService {
 						}
 				});
 
+	}
+
+	getUsers() {
+		let users, displayNames;
+		this.users$.subscribe(resp => users = resp)
+		users.forEach(user => displayNames.push( user.displayName.toLowerCase() ))
+		console.log(users)
+		console.log(displayNames)
+		
+		return displayNames;
+	}
+
+	userExists(displayName : string) {
+		return this.getUsers().includes(displayName.toLowerCase())
+	}
+
+	testing(query) {
+		this.filteredUsers$ = (query) ?
+					of(this.userExists(query)) :
+					of("this bitch empty... yeeet");
+		this.filteredUsers$.pipe(first()).subscribe(resp => {
+			console.log(resp)
+		})
 	}
 
 	uniqueDisplayNameValidator() : AsyncValidatorFn {

@@ -75,14 +75,7 @@ export class CreateAccountComponent implements OnInit {
 	}
 
 	testing() {
-		this.displayNameUniqueService.testingUniqueDisplayName(this.displayName.value);
-
-
-
-		// if (!this.form.valid) {
-		// 	console.log("la forma es mal")
-		// }
-		// console.log(this.form);
+		this.displayNameUniqueService.testing(this.displayName.value);
 	}
 
 

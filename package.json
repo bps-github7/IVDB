@@ -32,9 +32,12 @@
     "glob-parent": "^6.0.1",
     "ng2-validation": "^4.2.0",
     "npm-check-updates": "^11.8.3",
+    "pac-resolver": "5.0.0",
     "postcss-sass": "^0.5.0",
     "rxjs": "^7.3.0",
     "rxjs-compat": "^6.6.7",
+    "set-value": "4.0.1",
+    "tar": "6.1.9",
     "tslib": "^2.3.1",
     "uuid": "^8.3.2",
     "zone.js": "~0.11.4"
