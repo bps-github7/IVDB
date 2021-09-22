@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
 import { AngularFireAuth } from "@angular/fire/auth";
 import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument, DocumentChangeAction } from "@angular/fire/firestore";
-import { Observable } from "rxjs";
+import { first, Observable, of } from "rxjs";
 import { User } from "src/app/models/user";
 import firebase from "firebase/app"
 import { ActivatedRoute } from "@angular/router";
@@ -18,6 +18,8 @@ import { map } from 'rxjs';
 @Injectable()
 export class AuthService {
 	user$ : Observable<firebase.User>	
+	user : User;
+
 
 	constructor(
 		private afAuth : AngularFireAuth,
@@ -27,6 +29,17 @@ export class AuthService {
 		this.user$ = this.afAuth.authState;
 		this.usersStore.select(fromUsers.selectAll)
 		this.usersStore.dispatch( usersActions.readUsers() )
+	}
+
+	getUserEntity$() {
+		let uid;
+		this.user$.subscribe(user => {
+			uid = user.uid;
+		})
+		if (uid) {
+			return this.usersStore.pipe(select(selectUserById(uid)))
+		} 
+		return of(null);
 	}
 	
 	emailAndPasswordLogIn(email : string, password : string) {
@@ -63,11 +76,10 @@ export class AuthService {
 			})
 		})
 		.catch(err => console.error(err))
-
 		// if (this.afAuth.authState)
 	}
 
-	logout() {
+	logOut() {
 		this.afAuth.signOut();
 	}
 
@@ -93,11 +105,6 @@ export class AuthService {
 		}).catch((err) => {
 			console.error(err);
 		})
-		// this.user$.subscribe(user => {
-		// })
-
-
-
 	}
 
 }

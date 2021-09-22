@@ -23,17 +23,17 @@ export class NavbarComponent implements OnInit {
 
   ngOnInit(): void {
 		// hmm,. do we not have to do this because its a component of root module where we have done this already?
-		// this.usersStore.dispatch(readUsers())
-		// this.auth.user$.subscribe(user => {
-		// 	if (user) {
-		// 		this.user$ = this.usersStore.pipe(select(selectUserById(user.uid))) 
-		// 	}
-		// })
+		this.usersStore.dispatch(readUsers())
+		this.auth.user$.subscribe(user => {
+			if (user) {
+				this.user$ = this.usersStore.pipe(select(selectUserById(user.uid))) 
+			}
+		})
 	}
 
 
 	logout() {
-		this.auth.logout();
+		this.auth.logOut();
 	}
 
 }

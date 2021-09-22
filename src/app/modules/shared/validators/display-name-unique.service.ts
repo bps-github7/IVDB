@@ -7,6 +7,7 @@ import * as fromUsers from 'src/app/store/reducers/users.reducer';
 import { readUsers } from 'src/app/store/actions/users.actions';
 import { catchError, delay, first, Observable, of, map } from 'rxjs';
 import { AngularFirestore } from '@angular/fire/firestore';
+import { User } from 'src/app/models/user';
 
 @Injectable({
   providedIn: 'root'
@@ -45,32 +46,35 @@ export class DisplayNameUniqueService {
 
 	}
 
-	getUsers() {
-		let users, displayNames;
-		this.users$.subscribe(resp => users = resp)
-		users.forEach(user => displayNames.push( user.displayName.toLowerCase() ))
-		console.log(users)
-		console.log(displayNames)
-		
+	getDisplayNames() {
+		let displayNames = []
+		this.users$.subscribe(resp => {
+			resp.forEach((user : User) => {
+				displayNames.push(user.displayName.toLowerCase())
+			})
+		})
 		return displayNames;
-	}
-
-	userExists(displayName : string) {
-		return this.getUsers().includes(displayName.toLowerCase())
 	}
 
 	testing(query) {
 		this.filteredUsers$ = (query) ?
-					of(this.userExists(query)) :
-					of("this bitch empty... yeeet");
+					of(this.getDisplayNames().includes(query.toLowerCase())) :
+					of(false);
 		this.filteredUsers$.pipe(first()).subscribe(resp => {
 			console.log(resp)
 		})
 	}
 
 	uniqueDisplayNameValidator() : AsyncValidatorFn {
+		// TODO: this isnt the best way to do this... not really asynchronous. 
+		// but we have been stuck on this for a while and need some kind of solution. this works but not ideal
+		// something must be wrong with our selector or logic of previous impl.
 		return (control : FormControl) => {
-			return of({DisplayNameTaken : true});
+			if (this.getDisplayNames().includes(control.value.toLowerCase())) {
+				return of({DisplayNameTaken : true})
+			} else {
+				return of(null);
+			}
 		}
 	}
 }

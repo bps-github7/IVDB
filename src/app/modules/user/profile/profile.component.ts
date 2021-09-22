@@ -1,8 +1,10 @@
+import { User } from 'src/app/models/user/user.model';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { Component, OnInit } from '@angular/core';
 
 import firebase from 'firebase';
 import { AuthService } from '../../core/auth.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-profile',
@@ -10,20 +12,20 @@ import { AuthService } from '../../core/auth.service';
   styleUrls: ['./profile.component.sass']
 })
 export class ProfileComponent implements OnInit {
-	user : firebase.User;
+	user$ : Observable<User>;
 
 
   constructor(
-		private afAuth : AngularFireAuth) { }
+		private authService : AuthService) { }
 
 
 	// is there a more centralized way to store the authenticated user 
   ngOnInit(): void {
-		this.afAuth.authState.subscribe(user => this.user = user);
+		this.user$ = this.authService.getUserEntity$()
 	}
 
 	logOut() {
-		this.afAuth.signOut()
+		this.authService.logOut()
 	}
 
 }
