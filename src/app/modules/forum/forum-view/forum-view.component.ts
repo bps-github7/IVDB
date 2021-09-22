@@ -4,7 +4,7 @@ import { ActivationStart } from '@angular/router';
 import { select, Store } from '@ngrx/store';
 import * as fromForum from 'src/app/store/reducers/forum.reducer';
 import * as forumActions from 'src/app/store/actions/forum.actions';
-import { selectForumByIdParam, selectForumByTitleParam } from 'src/app/store/selectors/forum.selector';
+import { selectForumByTitleParam } from 'src/app/store/selectors/forum.selector';
 import { Forum } from 'src/app/models/content/forum.model';
 
 

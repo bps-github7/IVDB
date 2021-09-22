@@ -6,6 +6,7 @@ import { Game } from 'src/app/models/content/game.model';
 import * as fromGame from 'src/app/store/reducers/game.reducer';
 import { readGames } from 'src/app/store';
 import { selectGameByTitleParam } from 'src/app/store/selectors/game.selector';
+import { ActivatedRoute } from '@angular/router';
 
 
 @Component({
