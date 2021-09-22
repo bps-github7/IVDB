@@ -24,6 +24,8 @@ export class NavbarComponent implements OnInit {
   ngOnInit(): void {
 		// hmm,. do we not have to do this because its a component of root module where we have done this already?
 		this.usersStore.dispatch(readUsers())
+
+		// at the end of day, this isnt so bad... just going to be redundant / in a lot of places
 		this.auth.user$.subscribe(user => {
 			if (user) {
 				this.user$ = this.usersStore.pipe(select(selectUserById(user.uid))) 

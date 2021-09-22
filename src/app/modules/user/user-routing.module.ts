@@ -16,7 +16,7 @@ const routes: Routes = [
 
 			{path : 'profile/new', component: ProfileEditorComponent, canActivate: [AuthGuardService, UserAuthGuardService]},
 
-			{path : 'profile', component: ProfileComponent}
+			{path : 'profile/:displayName', component: ProfileComponent}
 		]
 	}
 ];

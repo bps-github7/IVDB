@@ -29,7 +29,8 @@ export const selectGameByIdParam = createSelector(
 export const selectGameByTitleParam = createSelector(
 	fromGame.selectAll,
 	selectParams,
-	(games, { gameTitle } ) => { 
+	(games, { gameTitle } ) => {
+		// TODO: I think you want to use encodeComponentURI to do this instead... 
 		return games.filter((game : Game) => game.title === gameTitle.replaceAll("+"," "))[0]
 	}
 )
