@@ -9,7 +9,7 @@
 		<ul>
 			
 			<li *ngIf="user$ | async as user; else anonymousUser">
-				<a [routerLink]="['user/profile', user.displayName.replaceAll(' ','-')]">{{ user.displayName }}</a>
+				<a [routerLink]="['user/', user.displayName.replaceAll(' ','-')]">{{ user.displayName }}</a>
 			</li>
 			<li *ngIf="user$ | async">
 				<a (click)="logout()">Log out</a>

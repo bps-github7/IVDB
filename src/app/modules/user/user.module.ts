@@ -6,10 +6,11 @@ import { UserComponent } from './user.component';
 import { ProfileComponent } from './profile/profile.component';
 import { ProfileEditorComponent } from './profile/profile-editor/profile-editor.component';
 import { SharedModule } from '../shared/shared.module';
+import { UsersBrowserComponent } from './users-browser/users-browser.component';
 
 
 @NgModule({
-  declarations: [UserComponent, ProfileComponent, ProfileEditorComponent],
+  declarations: [UserComponent, ProfileComponent, ProfileEditorComponent, UsersBrowserComponent],
   imports: [
     CommonModule,
 		SharedModule,

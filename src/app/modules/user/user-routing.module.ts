@@ -5,18 +5,19 @@ import { ProfileComponent } from './profile/profile.component';
 import { UserComponent } from './user.component';
 import { ProfileEditorComponent } from './profile/profile-editor/profile-editor.component';
 import { UserAuthGuardService } from '../shared/guards/user-auth-guard.service';
+import { UsersBrowserComponent } from './users-browser/users-browser.component';
 
 
 // TODO: figure out where to apply the auth-guard 
 const routes: Routes = [
 	{path: '', component: UserComponent,
 		children: [
-			{path : 'profile/:displayName/edit', component: ProfileEditorComponent, canActivate: [AuthGuardService, UserAuthGuardService]},
 
-
-			{path : 'profile/new', component: ProfileEditorComponent, canActivate: [AuthGuardService, UserAuthGuardService]},
-
-			{path : 'profile/:displayName', component: ProfileComponent}
+			// Allows us to browse all users of site
+			{path : '', component : UsersBrowserComponent },
+			{path : 'new', component: ProfileEditorComponent, canActivate: [AuthGuardService, UserAuthGuardService]},
+			{path : ':displayName/edit', component: ProfileEditorComponent, canActivate: [AuthGuardService, UserAuthGuardService]},
+			{path : ':displayName', component: ProfileComponent}
 		]
 	}
 ];

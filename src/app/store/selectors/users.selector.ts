@@ -70,6 +70,6 @@ export const selectUserByDisplayNameParam = createSelector(
 	fromUsers.selectAll,
 	selectParams,
 	(users, { displayName } ) => { 
-		return users.filter((user : User) => user.displayName === displayName.replaceAll("+"," "))[0]
+		return users.filter((user : User) => user.displayName === displayName.replaceAll("-"," "))[0]
 	}
 )
