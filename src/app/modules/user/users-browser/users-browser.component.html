@@ -1,6 +1,16 @@
 <h3>IVDB user directory:</h3>
-<ul *ngIf="users$ | async as users; else userListNotFound" class="list-group">
-	<li *ngFor="let user of users" class="list-group-item">
+
+	
+	<ul *ngIf="users$; else userListNotFound" class="list-group">
+	<li class="list-group-item">
+		<input
+		#query
+		(keyup)="filter(query.value)" 
+		type="text" 
+		class="form-control" 
+		placeholder="Search...">
+	</li>
+	<li *ngFor="let user of filteredUsers$ | async" class="list-group-item">
 			<h3>display name:
 				<a [routerLink]="user.displayName.replaceAll(' ','-')">
 				{{user.displayName}}

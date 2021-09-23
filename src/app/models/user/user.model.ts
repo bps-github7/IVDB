@@ -1,4 +1,4 @@
-import { Metadata } from '..';
+import { Metadata, Preferences, Profile } from '..';
 export interface User {
 	id: string;
 	email : string;
@@ -11,6 +11,9 @@ export interface User {
 		hasProfile : boolean,
 		hasPreferences : boolean
 	}
+	profile?: Profile;
+	preferences?: Preferences;
+
 }
 
 export class User {

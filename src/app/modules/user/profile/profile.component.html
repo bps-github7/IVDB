@@ -1,7 +1,26 @@
 <div class="card" *ngIf="user$ | async as user; else userNotFound">
+	<img [src]="user?.profile?.backgroundImg" alt="user's profile background img" style="width: inherit; height: 15rem;">
 	<h1 class="card-title">{{user.displayName}}'s profile</h1>
+	<section class="profile info panel">
+	
+		<img [src]="user?.profile?.avatar" alt="user's profile picture / avatar">
+	
+	
+		<h3 *ngIf="user?.profile?.nickname">{{ user?.profile?.nickname }}</h3>
 
-	<p class="card-body">Welcome to my profile. PLEASE dont feed the giraffes !</p>
+		<p *ngIf="user?.profile?.bio">{{ user?.profile?.bio }}</p>
+
+	</section>	
+
+<!-- 
+	TODO: Id like to be doing this instead... AVOID ALL THESE nasty repetetive conditionals se? 
+	<section class="profile info panel" *ngIf="user.profile | async as profile">
+		<h3 *ngIf="profile?.nickname">{{ profile.nickname }}</h3>
+
+		<p *ngIf="profile?.bio">{{ profile.bio }}</p>
+
+		this appears
+	</section> -->
 </div>
 
 <ng-template #userNotFound>

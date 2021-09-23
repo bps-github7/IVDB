@@ -1,6 +1,6 @@
 export interface Profile {
     nickname : string,
-    profileImg : string,
+    avatar: string,
     backgroundImg : string,
     bio : string,
     gamerTags : string [],
