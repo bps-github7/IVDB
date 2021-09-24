@@ -1,5 +1,5 @@
 import { createAction, props } from "@ngrx/store";
-import { Contribution } from "src/app/models/user/contribution.model";
+import { Contribution } from "src/app/models/contrib/contribution.model";
 
 // get every document in the collection
 export const readContributions = createAction(

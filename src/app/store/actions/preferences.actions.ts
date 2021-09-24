@@ -8,7 +8,7 @@ export const readPreferences = createAction(
 
 export const readPreferencesSuccess = createAction(
 	'[Preferences] readPreferencesSuccess',
-	props<{Preferences : Preferences[]}>()
+	props<{preferences : Preferences[]}>()
 );
 
 export const createPreferences = createAction(

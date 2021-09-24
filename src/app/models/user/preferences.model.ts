@@ -1,6 +1,7 @@
 import { Game } from 'src/app/models/content/game.model';
 
 export interface Preferences {
+		id : string;
     wouldYouPlay? : (string | Game) [],
     likes : {
         games : (Game | string ) [],

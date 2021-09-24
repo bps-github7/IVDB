@@ -4,3 +4,4 @@ export * from './review.model';
 export * from './suggestion.model';
 export * from './thread.model';
 export * from './feedback.model';
+export * from './contribution.model'

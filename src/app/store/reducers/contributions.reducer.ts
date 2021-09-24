@@ -1,7 +1,7 @@
 import { createContribution, deleteContribution, readContributions, updateContribution, readContributionsSuccess } from './../actions/contributions.actions';
 import { EntityState, createEntityAdapter } from '@ngrx/entity';
 import { createFeatureSelector, createReducer, on } from '@ngrx/store';
-import { Contribution } from 'src/app/models/user/contribution.model';
+import { Contribution } from 'src/app/models/contrib/contribution.model';
 
 
 
@@ -15,7 +15,7 @@ export const ContributionsReducer = createReducer(
   initialState,
 
 	on(readContributionsSuccess, (state, {contributions}) => {
-		contributionsAdapter.addMany(contributions, state)
+		return contributionsAdapter.addMany(contributions, state)
 	}),
 
   on(createContribution, (state, action) => {

@@ -18,34 +18,18 @@ export class UserAuthGuardService implements CanActivate {
 
   constructor(private auth : AuthService, private userStore : Store<fromUsers.State>,  private router : Router) { }
 
-	canActivate(route, state : RouterStateSnapshot) {
+	async canActivate(route, state : RouterStateSnapshot) {
 		/* 
 			Grab unique identifier of both auth state and ngrx user entity
 			canActivate will return true if both these identifiers are equal.
 		*/
-	
-		// put this in timeout with hopes that its done executing after 5 seconds.
-		setTimeout(() => {
-			// read user session data from authState 
-			this.auth.user$.subscribe(user => { 
-				if (user) {
-					this.currentAuthUser = user				
-				}
-			});
-	
-			// if the signed in user is the user tied to the displayName route param
-			// they should be able to edit their profile, preferences, etc...
-			this.userStore.pipe(select(selectUserByDisplayNameParam))
-			.subscribe(user => {
-				if (user) {
-					this.ngrxUser = user
-				}
-			})					
-		}, 5000);
+		this.currentAuthUser = await this.auth.getUser$().lastValueFrom()
+
+		this.ngrxUser = await this.auth.getUserEntity$().lastValueFrom();
 
 
-		// TODO: this guy needs massive work- above not great methods for getting obsv values. stuff commented out should not be.
-		// if (this.currentAuthUser && this.ngrxUser) {
+		// TODO: test this... 
+		if (this.currentAuthUser && this.ngrxUser) {
 			if (this.currentAuthUser?.uid == this.ngrxUser?.id) {
 				return true;
 			} else {
@@ -53,10 +37,10 @@ export class UserAuthGuardService implements CanActivate {
 				this.router.navigateByUrl('/');
 				return false
 			}
-		// } else {
-		// 	console.error("User Auth Guard Error: user credentials were not defined for both parties");
-		// 	this.router.navigateByUrl('/');
-		// 	return false
-		// }
+		} else {
+			console.error("User Auth Guard Error: user credentials were not defined for both parties");
+			this.router.navigateByUrl('/');
+			return false
+		}
 	}
 }

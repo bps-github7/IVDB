@@ -21,12 +21,16 @@ import {
 	Review,
 	Feedback,
 	Suggestion,
-	User
+	User,
+	Preferences,
+	Contribution
 } from 'src/app/models';
 import { SuggestionReducer } from './suggestion.reducer';
 import { FeedbackReducer } from './feedback.reducer';
 import { ThreadReducer } from './thread.reducer';
 import { UsersReducer } from './users.reducer';
+import { PreferencesReducer } from './preferences.reducer';
+import { ContributionsReducer } from './contributions.reducer';
 
 /* We implement the app State, Array of reducers and some meta reudcers in this file */
 export interface AppState  {
@@ -43,6 +47,8 @@ export interface AppState  {
 	feedback : ReadonlyArray<Feedback>;
 	suggestion : ReadonlyArray<Suggestion>;
 	users : ReadonlyArray<User>;
+	preferences : ReadonlyArray<Preferences>;
+	contributions: ReadonlyArray<Contribution>;
 }
 
 export const reducers: ActionReducerMap<any> = {
@@ -63,7 +69,8 @@ export const reducers: ActionReducerMap<any> = {
 	feedback : FeedbackReducer,
 	thread : ThreadReducer,
 	users: UsersReducer,
-
+	preferences : PreferencesReducer,
+	contributions : ContributionsReducer
 }
 //not sure what this does here but suspect it should get gone!
 export * from './content.reducer';
@@ -72,7 +79,7 @@ const metaDebugger = (reducer : ActionReducer<any>) : ActionReducer<any> => {
 	return (state, action) => {
 		// // yes, commenting this out makes metaReducer pretty much pointless,
 		// // but we will keep in the case where this debug output is something we need
-		// // ... a lot more contol here, than random console log t/o the application src.
+		// // ... a lot more contol here, than random console log throughout the application src.
 		// console.log("action : ",action);
 		// console.log("state : ",state);
 		return reducer(state, action);

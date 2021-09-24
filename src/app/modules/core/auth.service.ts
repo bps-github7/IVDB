@@ -31,16 +31,22 @@ export class AuthService {
 		this.usersStore.dispatch( usersActions.readUsers() )
 	}
 
-	getUserEntity$() {
-		let uid;
-		this.user$.subscribe(user => {
-			uid = user.uid;
-		})
-		if (uid) {
-			return this.usersStore.pipe(select(selectUserById(uid)))
-		} 
-		return of(null);
+	getUser$(): any {
+		return this.afAuth.authState.pipe(first());
 	}
+
+
+	getUserEntity$(): any {
+		this.getUser$().lastValueFrom()
+		.then(user => {
+			if (user.uid) {
+				return this.usersStore.pipe(select(selectUserById(user.uid)),first())
+			} 
+			return of(null);	
+		})
+	}
+
+
 	
 	emailAndPasswordLogIn(email : string, password : string) {
 		this.afAuth.signInWithEmailAndPassword(email, password);
