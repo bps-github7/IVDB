@@ -19,6 +19,10 @@ import { select, Store } from '@ngrx/store';
 })
 export class ProfileComponent implements OnInit {
 	user$ : Observable<any>
+	menuOpts = ["profile-info","social", "preferences", "contributions"];
+	selected = "profile-info"
+
+	currentAuthUser : any;
 
 	constructor(private authService : AuthService,
 		private usersStore : Store<fromUsers.State>) { }
@@ -26,9 +30,36 @@ export class ProfileComponent implements OnInit {
 	ngOnInit(): void {
 		// this.usersStore.dispatch( usersActions.readUsers() )
 		this.user$ = this.usersStore.pipe(select(selectUserByDisplayNameParam))
+		this.authService.user$.subscribe(user => {
+			console.log(user)
+			this.currentAuthUser = user;
+		})
 	}
 	logOut() {
 		this.authService.logOut()
 	}
 
+	currentAuthUserOwnsProfile() {
+		let firebaseUid, ngrxUid = "";
+
+		this.user$.subscribe(user => {
+			console.log("from entity")
+			console.log(user)
+			ngrxUid = user.uid;
+		})	
+
+		this.authService.user$.subscribe(user => {
+			console.log("from firebase")
+			console.log(user);
+
+			firebaseUid = user.uid
+		})
+
+		// console.log(firebaseUid)
+		// console.log(ngrxUid)
+		// console.log(ngrxUid === firebaseUid)
+
+		return (ngrxUid === firebaseUid);
+	}
+	
 }

@@ -7,10 +7,12 @@ import { ProfileComponent } from './profile/profile.component';
 import { ProfileEditorComponent } from './profile/profile-editor/profile-editor.component';
 import { SharedModule } from '../shared/shared.module';
 import { UsersBrowserComponent } from './users-browser/users-browser.component';
+import { PreferencesEditorComponent } from './preferences-editor/preferences-editor.component';
+import { ContributionsDashboardComponent } from './contributions-dashboard/contributions-dashboard.component';
 
 
 @NgModule({
-  declarations: [UserComponent, ProfileComponent, ProfileEditorComponent, UsersBrowserComponent],
+  declarations: [UserComponent, ProfileComponent, ProfileEditorComponent, UsersBrowserComponent, PreferencesEditorComponent, ContributionsDashboardComponent],
   imports: [
     CommonModule,
 		SharedModule,

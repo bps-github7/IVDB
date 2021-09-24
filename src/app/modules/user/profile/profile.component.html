@@ -1,32 +1,73 @@
 <section class="card" *ngIf="user$ | async as user; else userNotFound">
-	<img [src]="user?.profile?.backgroundImg" alt="user's profile background img" style="width: inherit; height: 15rem;">
-	<h1 class="card-title">{{user.displayName}}'s profile</h1>
+
+	<!-- <img
+		*ngIf="user?.profile?.backgroundImg" 
+	  [src]="user?.profile?.backgroundImg" 
+		alt="user's profile background img">
+	 -->
+	
 	<section class="profile-wrapper" *ngIf="user.profile as profile">
-		<section class="profile info panel">
-			<img [src]="profile?.avatar" alt="user's profile picture / avatar">
-			<h3 *ngIf="profile?.nickname">{{ user?.profile?.nickname }}</h3>
-			<p *ngIf="profile?.bio">{{ user?.profile?.bio }}</p>
+		
 
-		<!-- TODO: these should not render if the array in question is empty -->
-			<section *ngIf="profile?.gamerTags as tags" class="profile list">
-				<h5>gamer tags:</h5>
-				<ul class="list-group">
-					<!-- TODO: eventually, we will wanna make this a mapping and have a link to xbox live or whatever  -->
-					<li *ngFor="let t of tags">{{t}}</li>
-				</ul>	
-			</section>
+		<section class="card-title">
+			<img 
+				class="profile-avatar"
+				[src]="profile?.avatar"
+				alt="user's profile picture / avatar">
+			<h1 class="profile-name">{{user.displayName}}'s profile</h1>
+		</section>
+			
+		
+		<section class="card-body"> 
+			<!-- TODO: good usecase for ngSwitch? -->
+			<section *ngIf="selected == 'profile-info'">
+				<p class="profile-nickname" *ngIf="profile?.nickname">
+					AKA: {{ user?.profile?.nickname }}
+				</p>
+				<p class="profile-bio" *ngIf="profile?.bio">{{ user?.profile?.bio }}</p>	
 
-			<section *ngIf="profile?.links as links" class="profile list">
-				<h5>user's links:</h5>
-				<ul class="list-group">
-					<!-- TODO: eventually, we will wanna make this a mapping and have an anchor tag with src pointing to ext url-->
-					<li *ngFor="let t of links">{{t}}</li>
-				</ul>	
+				<button *ngIf="currentAuthUser?.uid == user.id" routerLink="profile/edit">Edit your profile</button>
+
 			</section>
+			
+			<!-- for some reason, we cant select this one if neither social based property is defined on the user object  -->
+			<section *ngIf="selected == 'social'">
+
+				<p *ngIf="!profile?.gamerTags.length && !profile?.links.length || !profile?.gamerTags">Note: if the user has any associated social tags, they will appear below</p>
+				
+				<section *ngIf="profile?.gamerTags.length" class="profile list">
+					<h5>gamer tags:</h5>
+					<ul class="list-group">
+						<li *ngFor="let t of profile?.gamerTags">{{t}}</li>
+					</ul>	
+				</section>
+
+				<section *ngIf="profile?.links.length !== 0" class="profile list">
+					<h5>user's links:</h5>
+					<ul class="list-group">
+						<li *ngFor="let t of profile?.links">{{t}}</li>
+					</ul>	
+				</section>				
+			</section>
+			
+			<section *ngIf="selected == 'preferences'">
+				preferences shown here <br>
+				<button *ngIf="currentAuthUser?.uid == user?.id" [routerLink]="['../', user.displayName, 'preferences/edit']">Edit your preferences</button>
+			</section>			
+
+
+			<section *ngIf="selected == 'contributions'">
+				contributions shown here <br>
+				<button *ngIf="currentAuthUser?.uid == user?.id" routerLink="contributions/dashboard">Go to Contribution dashboard</button>
+			</section>			
 
 			
+		</section>
 
-		</section>	
+		<section class="profile-toggle-menu">
+			<button (click)="selected = opt" [disabled]="selected == opt" *ngFor="let opt of menuOpts">{{opt}}</button>
+		</section>
+
 
 	</section>
 </section>
