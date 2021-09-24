@@ -9,4 +9,5 @@ export * from './rating.actions';
 export * from './review.actions';
 export * from './suggestion.actions';
 export * from './feedback.actions';
-
+export * from './contributions.actions';
+export * from './preferences.actions';

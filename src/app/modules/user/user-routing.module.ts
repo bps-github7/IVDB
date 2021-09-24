@@ -8,6 +8,7 @@ import { UserAuthGuardService } from '../shared/guards/user-auth-guard.service';
 import { UsersBrowserComponent } from './users-browser/users-browser.component';
 import { PreferencesEditorComponent } from './preferences-editor/preferences-editor.component';
 import { ContributionsDashboardComponent } from './contributions-dashboard/contributions-dashboard.component';
+import { AboutComponent } from './about/about.component';
 
 
 // TODO: figure out where to apply the auth-guard 
@@ -17,7 +18,7 @@ const routes: Routes = [
 
 			// Allows us to browse all users of site
 			{ path : '', component : UsersBrowserComponent },
-			
+			{ path : 'about', component: AboutComponent },
 			{ path : 'new', component: ProfileEditorComponent, canActivate: [AuthGuardService, UserAuthGuardService]},
 			{ path : ':displayName', component: ProfileComponent},
 			{ path : ':displayName/profile/edit', component: ProfileEditorComponent, canActivate: [AuthGuardService, UserAuthGuardService]},

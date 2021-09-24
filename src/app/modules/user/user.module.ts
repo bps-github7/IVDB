@@ -9,10 +9,11 @@ import { SharedModule } from '../shared/shared.module';
 import { UsersBrowserComponent } from './users-browser/users-browser.component';
 import { PreferencesEditorComponent } from './preferences-editor/preferences-editor.component';
 import { ContributionsDashboardComponent } from './contributions-dashboard/contributions-dashboard.component';
+import { AboutComponent } from './about/about.component';
 
 
 @NgModule({
-  declarations: [UserComponent, ProfileComponent, ProfileEditorComponent, UsersBrowserComponent, PreferencesEditorComponent, ContributionsDashboardComponent],
+  declarations: [UserComponent, ProfileComponent, ProfileEditorComponent, UsersBrowserComponent, PreferencesEditorComponent, ContributionsDashboardComponent, AboutComponent],
   imports: [
     CommonModule,
 		SharedModule,
