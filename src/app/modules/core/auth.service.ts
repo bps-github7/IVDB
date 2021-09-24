@@ -12,7 +12,7 @@ import { select, Store } from '@ngrx/store';
 import * as fromUsers from 'src/app/store/reducers/users.reducer'
 import * as usersActions from 'src/app/store/actions/users.actions';
 import { selectUserById } from 'src/app/store/selectors/users.selector';
-import { map } from 'rxjs';
+import { map, firstValueFrom } from 'rxjs';
 
 
 @Injectable()
@@ -36,14 +36,13 @@ export class AuthService {
 	}
 
 
-	getUserEntity$(): any {
-		this.getUser$().lastValueFrom()
-		.then(user => {
-			if (user.uid) {
-				return this.usersStore.pipe(select(selectUserById(user.uid)),first())
-			} 
-			return of(null);	
-		})
+	async getUserEntity$() {
+		const user : firebase.User = await firstValueFrom(this.getUser$())
+		// console.log("got this in async fn",user.uid)		
+		return this.usersStore.pipe(select(selectUserById(user.uid)))
+		
+	
+	
 	}
 
 

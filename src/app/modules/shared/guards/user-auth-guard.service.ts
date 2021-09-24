@@ -6,7 +6,7 @@ import { map } from 'rxjs';
 import { User } from 'src/app/models';
 import { AuthService } from '../../core/auth.service';
 import * as fromUsers from 'src/app/store/reducers/users.reducer';
-
+import { firstValueFrom } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -18,29 +18,21 @@ export class UserAuthGuardService implements CanActivate {
 
   constructor(private auth : AuthService, private userStore : Store<fromUsers.State>,  private router : Router) { }
 
-	async canActivate(route, state : RouterStateSnapshot) {
+	async canActivate(route, state : RouterStateSnapshot) : Promise<boolean> {
 		/* 
 			Grab unique identifier of both auth state and ngrx user entity
 			canActivate will return true if both these identifiers are equal.
 		*/
-		this.currentAuthUser = await this.auth.getUser$().lastValueFrom()
-
-		this.ngrxUser = await this.auth.getUserEntity$().lastValueFrom();
-
-
-		// TODO: test this... 
-		if (this.currentAuthUser && this.ngrxUser) {
-			if (this.currentAuthUser?.uid == this.ngrxUser?.id) {
-				return true;
-			} else {
-				alert("Request Error: you tried to access resources which you are not authorized to view/edit.");
-				this.router.navigateByUrl('/');
-				return false
-			}
+		
+		this.currentAuthUser = await firstValueFrom(this.auth.getUser$());
+		this.ngrxUser = await firstValueFrom(await this.auth.getUserEntity$());
+		
+		if (this.currentAuthUser?.uid === this.ngrxUser?.id) {
+			return true;
 		} else {
-			console.error("User Auth Guard Error: user credentials were not defined for both parties");
-			this.router.navigateByUrl('/');
-			return false
+			alert("Request Error: you tried to access resources you are not authorized to view and/or edit");
+			this.router.navigateByUrl("/");
 		}
 	}
+
 }

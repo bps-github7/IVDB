@@ -26,7 +26,11 @@
 				</p>
 				<p class="profile-bio" *ngIf="profile?.bio">{{ user?.profile?.bio }}</p>	
 
-				<button *ngIf="currentAuthUser?.uid == user.id" routerLink="profile/edit">Edit your profile</button>
+				
+				<a *ngIf="currentAuthUser?.uid == user.id" routerLink="profile/edit">
+					<button  routerLink="profile/edit">Edit your profile</button>
+						
+				</a>
 
 			</section>
 			
