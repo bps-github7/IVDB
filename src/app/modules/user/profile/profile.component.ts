@@ -30,10 +30,7 @@ export class ProfileComponent implements OnInit {
 	ngOnInit(): void {
 		// this.usersStore.dispatch( usersActions.readUsers() )
 		this.user$ = this.usersStore.pipe(select(selectUserByDisplayNameParam))
-		this.authService.user$.subscribe(user => {
-			console.log(user)
-			this.currentAuthUser = user;
-		})
+		this.authService.user$.subscribe(user => this.currentAuthUser = user)
 	}
 	logOut() {
 		this.authService.logOut()

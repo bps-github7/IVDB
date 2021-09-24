@@ -1,29 +1,37 @@
+import { selectUserByDisplayNameParam } from './../../../store/selectors/users.selector';
 import { Injectable } from '@angular/core';
 import { CanActivate, Router, RouterStateSnapshot } from '@angular/router';
+import { select, Store } from '@ngrx/store';
 import { map } from 'rxjs';
 import { User } from 'src/app/models';
 import { AuthService } from '../../core/auth.service';
+import * as fromUsers from 'src/app/store/reducers/users.reducer';
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserAuthGuardService implements CanActivate {
 
-  constructor(private auth : AuthService, private router : Router) { }
+	currentAuthUser;
+	ngrxUser;
+
+  constructor(private auth : AuthService, private userStore : Store<fromUsers.State>,  private router : Router) { }
 
 	canActivate(route, state : RouterStateSnapshot) {
-		// TODO: implement this- should activate only if authenticated user is user trying to edit their own profile, comment, etc
-		// need to find a way to safely transmit non-spoofable data through route params or other means (is it possible?) local storage?
-		let displayName = route.snapshot.queryParamMap.get('displayName');
 		
-		return this.auth.user$.pipe(map(user => {
-			if (user?.displayName === displayName) {
-				return true;
-			} else {
-				this.router.navigateByUrl('/');
-				return false
-			}
-		
-		}))
+		this.auth.user$.subscribe(user => this.currentAuthUser = user);
+
+		this.userStore.pipe(select(selectUserByDisplayNameParam))
+		.subscribe(user => this.ngrxUser = user)
+
+		if (this.currentAuthUser.uid === this.ngrxUser.id) {
+			return true;
+		} else {
+			this.router.navigateByUrl('/home');
+			return false
+		}
+		// return true;
+	
 	}
 }

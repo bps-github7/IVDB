@@ -52,7 +52,7 @@
 			
 			<section *ngIf="selected == 'preferences'">
 				preferences shown here <br>
-				<button *ngIf="currentAuthUser?.uid == user?.id" [routerLink]="['../', user.displayName, 'preferences/edit']">Edit your preferences</button>
+				<button *ngIf="currentAuthUser?.uid == user?.id" routerLink="preferences/edit">Edit your preferences</button>
 			</section>			
 
 
