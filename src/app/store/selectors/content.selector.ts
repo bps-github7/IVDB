@@ -1,4 +1,4 @@
-import { createFeatureSelector, createSelector } from '@ngrx/store';
+import { createSelector } from '@ngrx/store';
 import { Content } from 'src/app/models/content/content.model'
 import * as fromContent  from '../reducers/content.reducer';
 

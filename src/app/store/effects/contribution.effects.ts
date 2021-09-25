@@ -27,7 +27,7 @@ export class ContributionEffects {
 		ofType(contribActions.createContribution),
 		switchMap(data => {
 			const {type, ...payload} = data
-			const ref = this.afs.doc<Contribution>(`forums/${data.id}`);
+			const ref = this.afs.doc<Contribution>(`contributions/${data.id}`);
 			return from(ref.set(payload));
 		}),
 		map(() => contribActions.createContributionSuccess())

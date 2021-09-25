@@ -74,11 +74,6 @@ export class CreateAccountComponent implements OnInit {
 		return this.form.get('passwords.confirmPassword');
 	}
 
-	testing() {
-		this.displayNameUniqueService.testing(this.displayName.value);
-	}
-
-
 	// 
 	createAccount() {
 		if (this.form.valid) {

@@ -22,21 +22,6 @@ export const selectUserByDisplayNameExactMatch = (displayName: string) =>
 		} 
 	)
 
-export const uniqueDisplayName = (displayName) => 
-		createSelector(
-			fromUsers.selectAll,
-			(entities : User[]) => {
-				entities.filter((entity : User) => (entity.displayName.toLowerCase()) == displayName.toLowerCase())
-				console.log("hi from selector")
-				console.log(entities)
-				if (entities.length){
-					return true
-				}
-				return false;
-			}
-		)
-
-
 export const selectUserById = (id : string) =>
 	/* returns a single user object */ 
 		createSelector(
