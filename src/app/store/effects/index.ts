@@ -1,3 +1,5 @@
+import { PreferencesEffects } from './preferences.effects';
+import { ContributionEffects } from './contribution.effects';
 import { UsersEffects } from './users.effects';
 import { SuggestionEffects } from './suggestion.effects';
 import { ReviewEffects } from './review.effects';
@@ -25,7 +27,9 @@ export const effects : any [] = [
 	FeedbackEffects,
 	//this one is injected at root
 	// UserEffects,
-	UsersEffects
+	UsersEffects,
+	ContributionEffects,
+	PreferencesEffects
 ];
 
 export * from './content.effects';
@@ -38,5 +42,6 @@ export * from './suggestion.effects';
 export * from './thread.effects';
 export * from './rating.effects';
 export * from './review.effects';
-
+export * from './contribution.effects';
+export * from './preferences.effects';
 export * from './videogame-console.effects';

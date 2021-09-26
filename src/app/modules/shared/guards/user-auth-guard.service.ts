@@ -1,11 +1,6 @@
-import { selectUserByDisplayNameParam } from './../../../store/selectors/users.selector';
 import { Injectable } from '@angular/core';
 import { CanActivate, Router, RouterStateSnapshot } from '@angular/router';
-import { select, Store } from '@ngrx/store';
-import { map } from 'rxjs';
-import { User } from 'src/app/models';
 import { AuthService } from '../../core/auth.service';
-import * as fromUsers from 'src/app/store/reducers/users.reducer';
 import { firstValueFrom } from 'rxjs';
 
 @Injectable({
@@ -16,7 +11,7 @@ export class UserAuthGuardService implements CanActivate {
 	currentAuthUser;
 	ngrxUser;
 
-  constructor(private auth : AuthService, private userStore : Store<fromUsers.State>,  private router : Router) { }
+  constructor(private auth : AuthService,  private router : Router) { }
 
 	async canActivate(route, state : RouterStateSnapshot) : Promise<boolean> {
 		/* 
