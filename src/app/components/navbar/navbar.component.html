@@ -7,12 +7,17 @@
 	<input type="checkbox" class="nav-toggle" id="nav-toggle"/>
 	<nav>
 		<ul>
-			<li *ngIf="user$ as user; else anonymousUser">
-				<a [routerLink]="['user/', user.displayName.replace(' ','-')]">{{ user.displayName }}</a>
-			</li>
-			<li *ngIf="user">
-				<a (click)="logout()">Log out</a>
-			</li>
+		<!-- ignore the meh looking css for now- going to completely redo this component in a modular, responsive reactive way
+		once things are moving ahead in multiple directions  -->
+			<span  *ngIf="user$ | async as user; else anonymousUser">
+				<li>
+					<a [routerLink]="['user/', user.displayName.replace(' ','-')]">{{ user.displayName }}</a>
+				</li>
+				<li>
+					<a (click)="logout()">Log out</a>
+				</li>
+			</span>
+		
 			<ng-template #anonymousUser>
 				<li>
 					<a routerLink="auth">Log in</a>

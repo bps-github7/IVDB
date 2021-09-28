@@ -16,36 +16,24 @@ import firebase from 'firebase/app'
 })
 export class NavbarComponent implements OnInit {
 
-	user$ : User;
-	user: firebase.User;
+	firebaseUser: firebase.User;
+
+	user$ : Observable<User>;
 
   constructor(
 		public auth : AuthService,
 		private usersStore : Store<fromUsers.State> ) { }
 
 	async ngOnInit() {
-		this.user = await firstValueFrom(this.auth.getUser$())
-		// this.auth.user$.subscribe((res) => this.user = res)
-		// this.user$ = await lastValueFrom( await this.auth.getUserEntity$()  )
-		// .then((resp) => {
-		// 	console.log("eventually we got this from the jawn:")
-		// 	console.log(this.user$)
-		// 	console.log(resp)
+		this.firebaseUser = await firstValueFrom(this.auth.getUser$())
+		
+		this.user$ = this.usersStore.pipe(select(selectUserById(this.firebaseUser.uid)))
+		// .subscribe(res => {
+		// 	console.log(res);
+		// 	this.user$ = res;
 		// })
-		// console.log(this.user$)
-		this.usersStore.pipe(select(selectUserById(this.user.uid)))
-		.subscribe(res => {
-			console.log(res);
-			this.user$ = res;
-		})
 	}
 
-
-/* 	async getUser() {
-		const user = await firstValueFrom(this.auth.getUser$())
-		return
-	}
- */
 	logout() {
 		this.auth.logOut();
 	}
