@@ -16,7 +16,7 @@ import firebase from 'firebase/app'
 })
 export class NavbarComponent implements OnInit {
 
-	user$ : User [];
+	user$ : User;
 	user: firebase.User;
 
   constructor(

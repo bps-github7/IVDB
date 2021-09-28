@@ -22,12 +22,17 @@ export class CreateAccountComponent implements OnInit {
 
   ngOnInit(): void {
 		this.form = this.fb.group({
-			email : ["", Validators.compose([Validators.required, Validators.email])],
+			email : ["", Validators.compose([
+				Validators.required,
+				Validators.email]
+			)],
 			displayName : new FormControl(null, 
 				{
+					updateOn : 'blur',
 					validators : [Validators.required],
-					asyncValidators : [ this.displayNameUniqueService.uniqueDisplayNameValidator() ]
-				}),
+					asyncValidators : [ this.displayNameUniqueService.uniqueDisplayNameValidator() ],
+				}
+			),
 			// need to make custom validators for password and password match
 			passwords : this.fb.group({
 				password : ["",	Validators.compose([
@@ -80,8 +85,7 @@ export class CreateAccountComponent implements OnInit {
 			// havent figured out why the app is routing to app.component when we create account, its not tied to form submission.
 
 			this.authService.signUpWithEmailAndPassword(this.email.value, this.password.value, this.displayName.value)
-
-			// should the user creation step go here or in service
+			
 		} else {
 			console.log("error: could not create account, there was errors in the create account form")
 		}

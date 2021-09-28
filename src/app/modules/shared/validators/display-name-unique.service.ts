@@ -23,11 +23,10 @@ export class DisplayNameUniqueService {
 			return new Promise((resolve,reject) => {
 				this.usersStore.pipe(select(selectUserByDisplayNameExactMatch(control.value)))
 				.subscribe((result : any) => {
-					if (result.length === 1) {
-						resolve({DisplayNameTaken: true})
-					} else {
-						reject(null)
+					if(result) {
+						resolve({DisplayNameTaken : true});
 					}
+					reject(null);
 				})
 			})
 		}
