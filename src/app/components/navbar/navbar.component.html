@@ -1,5 +1,5 @@
 <header>
-	<a routerLink="">
+	<a routerLink="/home">
 		<h1 class="logo">
 			IVDB
 		</h1>
@@ -8,9 +8,9 @@
 	<nav>
 		<ul>
 			<li *ngIf="user$ as user; else anonymousUser">
-				<a [routerLink]="['user/', user.displayName.replaceAll(' ','-')]">{{ user.displayName }}</a>
+				<a [routerLink]="['user/', user.displayName.replace(' ','-')]">{{ user.displayName }}</a>
 			</li>
-			<li *ngIf="user$">
+			<li *ngIf="user">
 				<a (click)="logout()">Log out</a>
 			</li>
 			<ng-template #anonymousUser>
