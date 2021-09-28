@@ -24,8 +24,8 @@ export class NavbarComponent implements OnInit {
 		private usersStore : Store<fromUsers.State> ) { }
 
 	async ngOnInit() {
-		// this.user = await firstValueFrom(this.auth.getUser$())
-		this.auth.user$.subscribe((res) => this.user = res)
+		this.user = await firstValueFrom(this.auth.getUser$())
+		// this.auth.user$.subscribe((res) => this.user = res)
 		// this.user$ = await lastValueFrom( await this.auth.getUserEntity$()  )
 		// .then((resp) => {
 		// 	console.log("eventually we got this from the jawn:")
@@ -33,7 +33,7 @@ export class NavbarComponent implements OnInit {
 		// 	console.log(resp)
 		// })
 		// console.log(this.user$)
-		this.usersStore.pipe(select(selectUserByDisplayNameExactMatch(this.user.displayName)))
+		this.usersStore.pipe(select(selectUserById(this.user.uid)))
 		.subscribe(res => {
 			console.log(res);
 			this.user$ = res;
