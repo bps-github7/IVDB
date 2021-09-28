@@ -40,9 +40,6 @@ export class AuthService {
 		const user : firebase.User = await firstValueFrom(this.getUser$())
 		// console.log("got this in async fn",user.uid)		
 		return this.usersStore.pipe(select(selectUserById(user.uid)))
-		
-	
-	
 	}
 
 
@@ -77,7 +74,7 @@ export class AuthService {
 				if (!user) {
 					this.usersStore.dispatch(usersActions.createUser(newGoogleUser))
 				}
-
+				// then we need to do something to tell the caller - sign in component, what to do next...
 			})
 		})
 		.catch(err => console.error(err))

@@ -7,10 +7,10 @@
 	<input type="checkbox" class="nav-toggle" id="nav-toggle"/>
 	<nav>
 		<ul>
-			<li *ngIf="user$ | async as user; else anonymousUser">
+			<li *ngIf="user$ as user; else anonymousUser">
 				<a [routerLink]="['user/', user.displayName.replaceAll(' ','-')]">{{ user.displayName }}</a>
 			</li>
-			<li *ngIf="user$ | async">
+			<li *ngIf="user$">
 				<a (click)="logout()">Log out</a>
 			</li>
 			<ng-template #anonymousUser>

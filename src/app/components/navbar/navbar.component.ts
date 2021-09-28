@@ -1,4 +1,4 @@
-import { firstValueFrom, Observable } from 'rxjs';
+import { firstValueFrom, lastValueFrom, map, Observable } from 'rxjs';
 import { AuthService } from 'src/app/modules/core/auth.service';
 import { Component, OnInit } from '@angular/core';
 import { select, Store } from '@ngrx/store';
@@ -6,7 +6,8 @@ import { select, Store } from '@ngrx/store';
 import * as fromUsers from 'src/app/store/reducers/users.reducer';
 import { readUsers } from 'src/app/store/actions/users.actions';
 import { User } from 'src/app/models';
-import { selectUserById } from 'src/app/store/selectors/users.selector';
+import { selectUserById, selectUserByDisplayNameExactMatch } from 'src/app/store/selectors/users.selector';
+import firebase from 'firebase/app'
 
 @Component({
   selector: 'navbar',
@@ -15,36 +16,36 @@ import { selectUserById } from 'src/app/store/selectors/users.selector';
 })
 export class NavbarComponent implements OnInit {
 
-	user$ : Observable<User>
-	user: any;
+	user$ : User [];
+	user: firebase.User;
 
   constructor(
 		public auth : AuthService,
 		private usersStore : Store<fromUsers.State> ) { }
 
-  	ngOnInit() {
-		// hmm,. do we not have to do this because its a component of root module where we have done this already?
-		// this.usersStore.dispatch(readUsers())
-
-		// at the end of day, this isnt so bad... just going to be redundant / in a lot of places
-		this.auth.user$.subscribe(user => {
-			if (user) {
-				this.user$ = this.usersStore.pipe(select(selectUserById(user.uid))) 
-			}
+	async ngOnInit() {
+		// this.user = await firstValueFrom(this.auth.getUser$())
+		
+		// this.user$ = await lastValueFrom( await this.auth.getUserEntity$()  )
+		// .then((resp) => {
+		// 	console.log("eventually we got this from the jawn:")
+		// 	console.log(this.user$)
+		// 	console.log(resp)
+		// })
+		// console.log(this.user$)
+		this.usersStore.pipe(select(selectUserByDisplayNameExactMatch("Rehash Skonedalone")))
+		.subscribe(res => {
+			console.log(res);
+			this.user$ = res;
 		})
-		// don't get this- works in user auth guard. not here
-		// TODO: fix this, then a bunch of cleanup / contingency work with auth- still not updating from google,
-		// ,,, or able to get user from entity based on auth state.
-		this.user = this.getUser(); 
-		console.log("hi from navbar")
-		console.log(this.user);
 	}
 
-	async getUser() {
-		const user = await firstValueFrom(await this.auth.getUserEntity$())
-		return user;
-	}
 
+/* 	async getUser() {
+		const user = await firstValueFrom(this.auth.getUser$())
+		return
+	}
+ */
 	logout() {
 		this.auth.logOut();
 	}
