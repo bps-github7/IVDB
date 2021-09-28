@@ -9,14 +9,14 @@
 		<ul>
 		<!-- ignore the meh looking css for now- going to completely redo this component in a modular, responsive reactive way
 		once things are moving ahead in multiple directions  -->
-			<span  *ngIf="user$ | async as user; else anonymousUser">
+			<div  *ngIf="user$ | async as user; else anonymousUser">
 				<li>
 					<a [routerLink]="['user/', user.displayName.replace(' ','-')]">{{ user.displayName }}</a>
 				</li>
 				<li>
 					<a (click)="logout()">Log out</a>
 				</li>
-			</span>
+			</div>
 		
 			<ng-template #anonymousUser>
 				<li>
