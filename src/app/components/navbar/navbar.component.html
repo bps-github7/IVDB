@@ -4,12 +4,31 @@
 			IVDB
 		</h1>
 	</a>
+	<nav>
+		<ul class="dd-menu">
+			<dropdown
+				*ngFor="let m of modules"
+				[module]="m"
+				[children]="children[m]"
+				></dropdown>
+		</ul>		
+	</nav>
+	
+
+
+</header>
+
+<!-- <header>
+	<a routerLink="/home">
+		<h1 class="logo">
+			IVDB
+		</h1>
+	</a>
 	<input type="checkbox" class="nav-toggle" id="nav-toggle"/>
 	<nav>
 		<ul>
-		<!-- ignore the meh looking css for now- going to completely redo this component in a modular, responsive reactive way
-		once things are moving ahead in multiple directions  -->
 			<div  *ngIf="user$ | async as user; else anonymousUser">
+
 				<li>
 					<a [routerLink]="['user/', user.displayName.replace(' ','-')]">{{ user.displayName }}</a>
 				</li>
@@ -23,17 +42,9 @@
 					<a routerLink="auth">Log in</a>
 				</li>
 			</ng-template>	
-		
-						<!-- this should be a dynamic list of the feature modules,
-			fed into dropdown component (which need to be customized for this situation) -->
 			<li>
 				<a routerLink="content">Content</a>
 			</li>
-<!-- 			
-			<li>
-				<a routerLink="contrib">Contribute</a>
-			</li>
-			 -->
 			<li>
 				<a routerLink="forum">Forum</a>
 			</li>
@@ -55,4 +66,4 @@
 	<label for="nav-toggle" class="nav-toggle-label">
 		<span></span>
 	</label>
-</header>
+</header> -->

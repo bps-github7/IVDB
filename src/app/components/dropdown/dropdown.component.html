@@ -1,5 +1,24 @@
-<h3>I skonced a beagel</h3>
-<!---navbar/drop down menu--->
+<!---drop down menu--->
+<li
+	class="dd-menu-trigger"
+	(click)="hidden = !hidden">
+	<a [routerLink]="['/',module]">
+		{{module}}
+	</a>
+	<ul
+		class="dd-sub-menu"
+		*ngIf="!hidden"	 >
+		<li
+			*ngFor="let c of children">
+			<a [routerLink]="['/',module,c]">
+				{{c}}
+			</a>
+		</li>
+	</ul>
+</li>
+
+
+<!-- old nav bar -->
 <!-- <nav>
     <header>
         <a class="logo" alt="Internet Video-game Database" routerLink=''>IVDB</a>

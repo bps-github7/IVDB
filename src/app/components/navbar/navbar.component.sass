@@ -12,156 +12,156 @@ header
   color: white
   font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif
 
-.nav-toggle 
-  display: none
+// .nav-toggle 
+//   display: none
 
 
-.nav-toggle-label 
-  position: absolute
-  top: 0
-  left: 0
-  margin-left: 1em
-  // border: 1px solid red
-  height: 100%
-  display: flex
-  align-items: center
+// .nav-toggle-label 
+//   position: absolute
+//   top: 0
+//   left: 0
+//   margin-left: 1em
+//   // border: 1px solid red
+//   height: 100%
+//   display: flex
+//   align-items: center
 
-.nav-toggle-label span,
-.nav-toggle-label span::before,
-.nav-toggle-label span::after 
-  display: block
-  background: white
-  height: 2px
-  width: 2em
-  border-radius: 2px
-  position: relative
+// .nav-toggle-label span,
+// .nav-toggle-label span::before,
+// .nav-toggle-label span::after 
+//   display: block
+//   background: white
+//   height: 2px
+//   width: 2em
+//   border-radius: 2px
+//   position: relative
 
-.nav-toggle-label span::before,
-.nav-toggle-label span::after 
-  content: ''
-  position: absolute
+// .nav-toggle-label span::before,
+// .nav-toggle-label span::after 
+//   content: ''
+//   position: absolute
 
-.nav-toggle-label span::before 
-  bottom: 7px
-
-
-.nav-toggle-label span::after
-  top: 7px
+// .nav-toggle-label span::before 
+//   bottom: 7px
 
 
-nav
-  position: absolute
-  text-align: left
-  top: 100%
-  left:0
-  background: var(--background)
-  width: 100%
-  transform: scale(1, 0)
-  transform-origin: top
-  transition: transform 400ms ease-in-out
-
-nav ul
-  margin: 0
-  padding: 0 
-  list-style: none
+// .nav-toggle-label span::after
+//   top: 7px
 
 
-nav li
-  margin-bottom: 1em
-  margin-left: 1em
+// nav
+//   position: absolute
+//   text-align: left
+//   top: 100%
+//   left:0
+//   background: var(--background)
+//   width: 100%
+//   transform: scale(1, 0)
+//   transform-origin: top
+//   transition: transform 400ms ease-in-out
+
+// nav ul
+//   margin: 0
+//   padding: 0 
+//   list-style: none
 
 
-nav a 
-  color: white
-  text-decoration: none
-  font-size: 1.2rem
-  text-transform: uppercase
-  opacity: 0
-  transition: opacity 150ms ease-in-out
+// nav li
+//   margin-bottom: 1em
+//   margin-left: 1em
 
 
-nav a:hover 
-  color: grey
+// nav a 
+//   color: white
+//   text-decoration: none
+//   font-size: 1.2rem
+//   text-transform: uppercase
+//   opacity: 0
+//   transition: opacity 150ms ease-in-out
 
 
-.nav-toggle:checked ~ nav 
-  transform: scale(1,1)
+// nav a:hover 
+//   color: grey
+
+
+// .nav-toggle:checked ~ nav 
+//   transform: scale(1,1)
 
 
 
-.nav-toggle:checked ~ nav a 
-  opacity: 1
-  transition: opacity 250ms ease-in-out 250ms
+// .nav-toggle:checked ~ nav a 
+//   opacity: 1
+//   transition: opacity 250ms ease-in-out 250ms
 
 
-@media only screen and (min-width: 600px)
-  nav
-    width: 500px
+// @media only screen and (min-width: 600px)
+//   nav
+//     width: 500px
   
 
-  nav ul 
-    max-width: 450px
+//   nav ul 
+//     max-width: 450px
   
   
-  nav li 
-    margin : 0px
-    padding: 0px
-    a 
-      padding: 0px
+//   nav li 
+//     margin : 0px
+//     padding: 0px
+//     a 
+//       padding: 0px
     
-@media screen and (min-width: 800px) 
-  .nav-toggle-label 
-    display: none
+// @media screen and (min-width: 800px) 
+//   .nav-toggle-label 
+//     display: none
   
 
-  header 
-    display: grid
-    grid-template-columns: 1fr auto minmax() 1fr
+//   header 
+//     display: grid
+//     grid-template-columns: 1fr auto minmax() 1fr
   
 
-  .logo 
-    grid-column: 2 / span 1
+//   .logo 
+//     grid-column: 2 / span 1
 
-  nav 
+//   nav 
 
-    // take everything from previous rulesets and get rid of them
-    // not fully supported (edge, uhghh)
-    all: unset
-    grid-column: 3 / 4
-    display: flex
-    justify-content: flex-end
-    align-items: center
+//     // take everything from previous rulesets and get rid of them
+//     // not fully supported (edge, uhghh)
+//     all: unset
+//     grid-column: 3 / 4
+//     display: flex
+//     justify-content: flex-end
+//     align-items: center
 
-  nav ul 
-    display: flex
-    justify-content: flex-end
-    /* just for testing... see the line height */
-    // border: 1px solid red;
+//   nav ul 
+//     display: flex
+//     justify-content: flex-end
+//     /* just for testing... see the line height */
+//     // border: 1px solid red;
   
 
 
-  nav a 
-    opacity: 1
-    position: relative
-    padding-right: 30px
+//   nav a 
+//     opacity: 1
+//     position: relative
+//     padding-right: 30px
 
 
-  nav a::before 
-    content: ''
-    display: block
-    height: 5px
-    background: black
-    position: absolute
-    top: -.75em
-    left: 0
-    right: 0
-    transform: scale(0,1)
-    transition: transform ease-in-out 250ms
+//   nav a::before 
+//     content: ''
+//     display: block
+//     height: 5px
+//     background: black
+//     position: absolute
+//     top: -.75em
+//     left: 0
+//     right: 0
+//     transform: scale(0,1)
+//     transition: transform ease-in-out 250ms
   
 
-  nav a:hover::before 
-    transform: scale(1,1)
+//   nav a:hover::before 
+//     transform: scale(1,1)
   
-  nav li 
-    margin-left: 3rem
-    margin-bottom: 0
+//   nav li 
+//     margin-left: 3rem
+//     margin-bottom: 0
