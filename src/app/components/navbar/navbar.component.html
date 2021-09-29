@@ -4,11 +4,14 @@
 			IVDB
 		</a>
 		<ul class="dd-menu">
-			<!-- <li *ngIf="user$ | async as user; else guestUser">
-				<a routerLink="['/user/',user.displayName">{{user.displayName}}</a>
+			<li *ngIf="user$ | async as user; else guestUser">
+				you are logged in as
+				<a [routerLink]="['/user/',user.displayName]">{{user.displayName}}</a>
 				<ul>
 					<li><a routerLink="/user">Browse users</a></li>
-					<li (click)="logout()">Log out</li>
+					<li>
+						<button (click)="logout()">Log out</button>
+					</li>
 				</ul>
 			</li>
 
@@ -16,7 +19,7 @@
 				<li>
 					<a routerLink="/auth/login">log in</a>
 				</li>
-			</ng-template> -->
+			</ng-template>
 
 			<!-- gettng some hesitancy about this solution below, makes debugging and styling a huge pain... -->
 			<dropdown

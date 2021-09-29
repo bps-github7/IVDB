@@ -15,6 +15,7 @@ export class NotAuthGuardService {
 
 	canActivate() {
 		return this.auth.user$.pipe(map(user => {
+			// TODO: we have some edge case where user is logged out but cannt access auth links. figure out whats going on
 			if (user) {
 				return false
 			}
