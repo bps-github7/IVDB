@@ -1,0 +1,103 @@
+li 
+  display: inline-block
+  background: #1b1b1b
+  margin: 0 5px
+
+
+li a 
+  color: white
+  text-decoration: none
+  line-height: 50px
+  font-size: 20px
+  padding: 8px 15px
+
+
+li a:hover 
+    box-shadow: 0 0 5px #33ffff,0 0 5ox #66ffff
+    color: cyan
+
+
+
+/* trying to make the drop down menu text fit within the box they appear in */
+li a:hover > ul 
+  width: 400px
+
+
+/*would be cool to have the animation/transition, ul li ul scrolls up from where its bottom ends, to where its top ends*/
+ul 
+  z-index: 3
+  position: absolute
+  top: -50px
+  border-top: 3px solid cyan
+  opacity: 0
+  visibility: hidden
+  transition: top .5s
+
+
+ul ul 
+  border-top: none
+
+
+li:hover > ul 
+  z-index: 0
+  top: 50px
+  opacity: 1
+  visibility: visible
+
+
+
+ul:hover 
+  z-index: 1
+  visibility: visible
+
+
+ul li 
+  position: relative
+  text-overflow: ellipsis
+  margin: 0px
+  width: 350px
+  float: none
+  display: list-item
+  border-bottom: 1px solid rgba(0,0,0,0.3)
+
+
+
+
+ul li a 
+  line-height: 50px
+
+
+ul li a:hover 
+  color: cyan
+  box-sizing: none
+
+
+ul ul li 
+  position: relative
+  top: -70px
+  left: 350px
+
+
+
+li:hover > ul 
+  z-index: 1
+  top: 48px
+  opacity: 1
+  visibility: visible
+  padding-bottom: 2px
+
+
+ul:hover 
+  z-index: 1
+  visibility: visible
+
+
+
+li ul li 
+    display: inline-block
+    background: #1b1b1b
+    margin: 0 1px
+
+
+nav header #searchbar 
+    color: black

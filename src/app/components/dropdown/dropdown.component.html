@@ -1,13 +1,13 @@
 <!---drop down menu--->
 <li
 	class="dd-menu-trigger"
-	(click)="hidden = !hidden">
+	>
 	<a [routerLink]="['/',module]">
 		{{module}}
 	</a>
 	<ul
 		class="dd-sub-menu"
-		*ngIf="!hidden"	 >
+		>
 		<li
 			*ngFor="let c of children">
 			<a [routerLink]="['/',module,c]">

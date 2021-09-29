@@ -51,8 +51,8 @@ export class NavbarComponent implements OnInit {
 			'user',
 			'content'
 		],
-		'games' : [],
-		'forum' : [],
+		'games' : ['browse','info'],
+		'forum' : ['threads','posts'],
 		'user' : []
 		// 'games' : [
 		// 	'browse',

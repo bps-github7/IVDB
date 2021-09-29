@@ -1,16 +1,30 @@
 <header>
-	<a routerLink="/home">
-		<h1 class="logo">
-			IVDB
-		</h1>
-	</a>
 	<nav>
+		<a class="logo" routerLink="/home">
+			IVDB
+		</a>
 		<ul class="dd-menu">
+			<!-- <li *ngIf="user$ | async as user; else guestUser">
+				<a routerLink="['/user/',user.displayName">{{user.displayName}}</a>
+				<ul>
+					<li><a routerLink="/user">Browse users</a></li>
+					<li (click)="logout()">Log out</li>
+				</ul>
+			</li>
+
+			<ng-template #guestUser>
+				<li>
+					<a routerLink="/auth/login">log in</a>
+				</li>
+			</ng-template> -->
+
+			<!-- gettng some hesitancy about this solution below, makes debugging and styling a huge pain... -->
 			<dropdown
 				*ngFor="let m of modules"
 				[module]="m"
 				[children]="children[m]"
 				></dropdown>
+			
 		</ul>		
 	</nav>
 	

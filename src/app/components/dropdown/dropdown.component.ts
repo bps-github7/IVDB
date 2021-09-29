@@ -37,8 +37,7 @@ export class DropdownComponent implements OnInit {
 
 	@Input() module : string | Link;
 	@Input() children : string | Link [];
-
-	hidden : boolean = true;
+	// hidden : boolean = true;
 
 	constructor() { }
 
