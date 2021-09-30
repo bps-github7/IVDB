@@ -1,3 +1,4 @@
+import { updateUser } from './../../store/actions/users.actions';
 import { Injectable } from "@angular/core";
 import { AngularFireAuth } from "@angular/fire/auth";
 import { first, Observable, of } from "rxjs";
@@ -38,7 +39,6 @@ export class AuthService {
 		 * which gives us current user crentials via firebase
 		 * among other things- { uid, displayName, email } 
 		 */
-		//TODO: double check that features depending on this work, since we now cast the type as observable
 		return this.afAuth.authState.pipe(first());
 	}
 
@@ -59,6 +59,44 @@ export class AuthService {
 		return this.usersStore.pipe(select(selectUserById(user.uid)))
 	}
 
+	/* TODO: idea for helper method- cut some crap out of google login-
+		if the 
+	*/
+	private saveUser (userCredentials : firebase.User) {
+		/**
+		 * helper method that queries the store and updates a user
+		 * with new data if the document exists, and creates one if not
+		 * 
+		 * @param {firebase.User} userCredentials : object pulled
+		 * from promise returned from firebase authentication method-
+		 * the data associated with user we are trying to save to user collection.
+		 */
+		return new Promise((resolve, reject) => {
+			this.usersStore.pipe(select(selectUserById(userCredentials.uid)))
+			.subscribe((user : User) => {
+			 // TODO: if the document is deleted from collection, ngrx needs to know and update store/entity!!! not happening here!
+				if (!user) {
+					this.usersStore.dispatch(usersActions.createUser({
+					id : userCredentials.uid,
+					displayName : userCredentials.displayName,
+					email : userCredentials.email,
+					}))
+				} else {
+					this.usersStore.dispatch(usersActions.updateUser({
+						id : userCredentials.uid, 
+						data : {
+							displayName : userCredentials.displayName,
+							email: userCredentials.email
+							} 
+					}))
+				}		
+				resolve(true)
+			},
+			// TODO: wanted error catch here but this call signiture is deprecated .subscribe(Res=> do subscriber error, err => handle error)
+			)
+			
+		})
+	}
 
 	
 	emailAndPasswordLogIn(email : string, password : string) {
@@ -73,8 +111,17 @@ export class AuthService {
 		 * 
 		 */
 
-		this.afAuth.signInWithEmailAndPassword(email, password);
+		this.afAuth.signInWithEmailAndPassword(email, password)
+		.then((userCredentials) => {
+			console.log("sign in successful")
+			console.log(userCredentials)
+			return true;
+		}).catch((err) => {
+			console.error("Auth Service: Error while logging in with Email and password");
+			console.error(err);
+		})
 	}
+
 
 	googleLogin() {
 		/**
@@ -93,29 +140,23 @@ export class AuthService {
 		localStorage.setItem('returnUrl', returnUrl)
 		this.afAuth.signInWithPopup(new firebase.auth.GoogleAuthProvider)
 		.then((result) => {
+			if (result) {
+				console.log("Hi the google login was successful sawn")
+			}
+			
 			let credentials = result.user
-			this.usersStore.pipe(select(selectUserById(credentials.uid)))
-			.subscribe(user => {
-				// TODO: if the document is deleted from collection, ngrx needs to know and update store/entity!!! not happening here!
-				if (!user) {
-					this.usersStore.dispatch(usersActions.createUser({
-						id : credentials.uid,
-						displayName : credentials.displayName,
-						email : credentials.email,
-					}))
+	
+			this.saveUser(credentials)
 			/* 		
 				TODO: create option in preferences to use own displayName,
 				in the case this option is selected, we should not update
 				the user displayname with the current google displayName
 			*/
 				
-				}
+		})
 
 				// TODO: we need to do something to tell the caller - sign in component, what to do next...
-			})
-		})
-		.catch(err => console.error(err))
-		// if (this.afAuth.authState)
+
 	}
 
 
