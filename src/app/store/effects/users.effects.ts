@@ -1,18 +1,16 @@
 import { Injectable } from "@angular/core";
-import { from } from "rxjs";
+import { from, of } from "rxjs";
 import { Actions, createEffect, ofType } from "@ngrx/effects";
 import { User } from "src/app/models/user/user.model";
 import * as userActions from '../actions/users.actions'
 import { AngularFirestore } from "@angular/fire/firestore";
-import { switchMap, map, exhaustMap } from "rxjs/operators";
+import { switchMap, map, exhaustMap, catchError } from "rxjs/operators";
 
 @Injectable()
 export class UsersEffects {
 
 	/*
-		PLEASE NOTE:
-		USERS effect chain deals with C.R.U.D of all site users
-		avoid confusion with USER effect chain.
+	TODO: error handling for CRUD actions with users.
 	*/
 	constructor(
 		private actions$: Actions,
@@ -24,8 +22,17 @@ export class UsersEffects {
 		ofType(userActions.readUsers),
 		exhaustMap(() => this.afs.collection<User>('users').valueChanges().pipe(
 				map((users) => userActions.readUsersSuccess({users}))
-		))
-	))
+				)),
+				catchError((err) => {
+					// ... this prob not the right way to do this.
+					userActions.readUserFailure({message: err})
+
+					return of(err)
+				})
+
+
+	)
+	)
 
 
 	create$ = createEffect(() => this.actions$.pipe(

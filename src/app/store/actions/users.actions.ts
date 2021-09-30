@@ -11,6 +11,11 @@ export const readUsersSuccess = createAction(
 	props<{users : User[]}>()
 );
 
+export const readUserFailure = createAction(
+	'[User] readUserFailure',
+	props<{message : string}>()
+)
+
 
 export const createUser = createAction(
 	'[Users] createUsers',
@@ -20,6 +25,11 @@ export const createUser = createAction(
 export const createUserSuccess = createAction(
 	'[User] createUserSuccess',
 );
+
+export const createUserFailure = createAction(
+	'[User] createUserFailure',
+	props<{message : string}>()	
+)
 
 export const updateUser = createAction(
 	'[User] updateUser',
@@ -31,6 +41,13 @@ export const updateUserSuccess = createAction(
 	'[User] updateUserSuccess',
 );
 
+
+export const updateUserFailure = createAction(
+	'[User] updateUserFailure',
+	props<{message : string}>()	
+)
+
+
 export const deleteUser = createAction(
 	'[User] deleteUser',
 	props<{id : string}>()
@@ -39,3 +56,9 @@ export const deleteUser = createAction(
 export const deleteUserSuccess = createAction(
 	'[User] deleteUserSuccess',
 );
+
+
+export const deleteUserFailure = createAction(
+	'[User] deleteUserFailure',
+	props<{message : string}>()	
+)

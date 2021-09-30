@@ -81,6 +81,9 @@ export class AuthService {
 					displayName : userCredentials.displayName,
 					email : userCredentials.email,
 					}))
+					
+					
+
 				} else {
 					this.usersStore.dispatch(usersActions.updateUser({
 						id : userCredentials.uid, 
@@ -90,7 +93,6 @@ export class AuthService {
 							} 
 					}))
 				}		
-				resolve(true)
 			},
 			// TODO: wanted error catch here but this call signiture is deprecated .subscribe(Res=> do subscriber error, err => handle error)
 			)
@@ -146,7 +148,7 @@ export class AuthService {
 			
 			let credentials = result.user
 	
-			this.saveUser(credentials)
+			// this.saveUser(credentials)
 			/* 		
 				TODO: create option in preferences to use own displayName,
 				in the case this option is selected, we should not update
