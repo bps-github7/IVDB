@@ -4,7 +4,7 @@
 			IVDB
 		</a>
 		<ul class="dd-menu">
-			<li *ngIf="user$ | async as user; else guestUser">
+			<!-- <li *ngIf="user$ | async as user; else guestUser">
 				you are logged in as
 				<a [routerLink]="['/user/',user.displayName]">{{user.displayName}}</a>
 				<ul>
@@ -19,15 +19,19 @@
 				<li>
 					<a routerLink="/auth/login">log in</a>
 				</li>
-			</ng-template>
+			</ng-template> -->
 
 			<!-- gettng some hesitancy about this solution below, makes debugging and styling a huge pain... -->
 			<dropdown
 				*ngFor="let m of modules"
 				[module]="m"
 				[children]="children[m]"
+
 				></dropdown>
-			
+
+			<auth-user-dropdown></auth-user-dropdown>
+
+
 		</ul>		
 	</nav>
 	

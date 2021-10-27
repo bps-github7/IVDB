@@ -2,15 +2,15 @@
 <li
 	class="dd-menu-trigger"
 	>
-	<a [routerLink]="['/',module]">
-		{{module}}
-	</a>
+    <a [routerLink]="['/',module]">
+        {{module}}
+    </a>    
 	<ul
 		class="dd-sub-menu"
 		>
 		<li
 			*ngFor="let c of children">
-			<a [routerLink]="['/',module,c]">
+            <a [routerLink]="['/',module,c]">
 				{{c}}
 			</a>
 		</li>

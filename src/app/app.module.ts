@@ -50,6 +50,7 @@ import { CoreModule } from './modules/core/core.module';
 import { AuthService } from './modules/core/auth.service';
 import { AuthModule } from './components/auth/auth.module';
 import { GlobalErrorHandler } from './components/global-error-handler.class';
+import { AuthUserDropdownComponent } from './components/auth-user-dropdown/auth-user-dropdown.component';
 
 
 
@@ -60,8 +61,8 @@ import { GlobalErrorHandler } from './components/global-error-handler.class';
 		DropdownComponent,
 		NavbarComponent,
 		NotFoundComponent,
-		
-		AppComponent
+    AuthUserDropdownComponent,
+		AppComponent,
   ],
   imports: [
 		// angular base stuff + our modules

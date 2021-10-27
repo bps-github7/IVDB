@@ -1,0 +1,20 @@
+<li
+  class="dd-menu-trigger"
+  *ngIf="user$ | async as currentUser; else guest"
+  >
+  <a>
+      {{currentUser.displayName}
+  </a>    
+  <ul
+    class="dd-sub-menu"
+    >
+    <li><button (click)="logout()">Sign out</button></li>
+  </ul>
+</li>
+
+<!-- we never change out of this state... -->
+<ng-container #guest>
+  <li>
+    <a routerLink="auth/login"><button>Sign in</button></a> or <a routerLink="user">Browse users</a>
+  </li>
+</ng-container>

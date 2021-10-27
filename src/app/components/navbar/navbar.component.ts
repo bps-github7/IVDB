@@ -7,26 +7,22 @@ import * as fromUsers from 'src/app/store/reducers/users.reducer';
 import { readUsers } from 'src/app/store/actions/users.actions';
 import { User } from 'src/app/models';
 import { selectUserById, selectUserByDisplayNameExactMatch } from 'src/app/store/selectors/users.selector';
-import firebase from 'firebase/app'
 
 @Component({
   selector: 'navbar',
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.sass']
 })
-export class NavbarComponent implements OnInit {
+export class NavbarComponent {
 
 // still not super happy with this set up but it works for now
-	firebaseUser: firebase.User;
-	user$ : Observable<User>;
-
 	modules = [
-		"user",
 		"content",
 		"games",
 		"forum",
 		"admin"
 	]
+
 
 	// this is still redundant except in cases where the route is complex for example 'user/profile/edit'
 
@@ -53,7 +49,6 @@ export class NavbarComponent implements OnInit {
 		],
 		'games' : ['browse','info'],
 		'forum' : ['threads','posts'],
-		'user' : []
 		// 'games' : [
 		// 	'browse',
 		// 	//this is an example of a potential nested link
@@ -79,20 +74,8 @@ export class NavbarComponent implements OnInit {
 
 
 
-  constructor(
-		public auth : AuthService,
-		private usersStore : Store<fromUsers.State> ) { }
+	constructor() {
 
-	async ngOnInit() {
-		this.firebaseUser = await firstValueFrom(this.auth.getUser$())
-		
-		/* ideally we'd be using the getUSerEntity$ method 
-		from auth service and not inject user store once again */
-		this.user$ = this.usersStore.pipe(select(selectUserById(this.firebaseUser.uid)))
-	}
-
-	logout() {
-		this.auth.logOut();
 	}
 
 }
