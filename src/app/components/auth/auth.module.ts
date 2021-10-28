@@ -11,10 +11,11 @@ import { UsersEffects } from 'src/app/store/effects/users.effects';
 import { UsersReducer } from 'src/app/store/reducers/users.reducer';
 import { EffectsModule } from '@ngrx/effects';
 import { NotAuthGuardService } from 'src/app/modules/shared/guards/not-auth-guard.service';
+import { AuthUserDropdownComponent } from './auth-user-dropdown/auth-user-dropdown.component';
 
 const routes : Route [] = [
 	{path : '', children : [
-			{path : '', redirectTo : 'login' },
+			{path : '', redirectTo : 'login', pathMatch: 'full' },
 			{
 				path : 'create-account', component : CreateAccountComponent
 			},
@@ -30,7 +31,8 @@ const routes : Route [] = [
 @NgModule({
 	declarations: [
     LoginComponent,
-    CreateAccountComponent
+    CreateAccountComponent,
+		AuthUserDropdownComponent
   ],
 	imports: [
 		MaterialModule,
@@ -39,6 +41,9 @@ const routes : Route [] = [
 		CommonModule,
 		ReactiveFormsModule,
 		RouterModule.forChild(routes)
+	],
+	exports: [
+		AuthUserDropdownComponent
 	]
 })
 export class AuthModule {

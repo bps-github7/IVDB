@@ -50,7 +50,6 @@ import { CoreModule } from './modules/core/core.module';
 import { AuthService } from './modules/core/auth.service';
 import { AuthModule } from './components/auth/auth.module';
 import { GlobalErrorHandler } from './components/global-error-handler.class';
-import { AuthUserDropdownComponent } from './components/auth-user-dropdown/auth-user-dropdown.component';
 
 
 
@@ -61,7 +60,6 @@ import { AuthUserDropdownComponent } from './components/auth-user-dropdown/auth-
 		DropdownComponent,
 		NavbarComponent,
 		NotFoundComponent,
-    AuthUserDropdownComponent,
 		AppComponent,
   ],
   imports: [
@@ -69,7 +67,7 @@ import { AuthUserDropdownComponent } from './components/auth-user-dropdown/auth-
 		BrowserModule,
 		AppRoutingModule,
 		SharedModule,
-
+		AuthModule,
 		CoreModule,
 
 		//firebase
