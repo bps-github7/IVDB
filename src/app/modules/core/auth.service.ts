@@ -148,6 +148,7 @@ export class AuthService {
 			
 			let credentials = result.user
 	
+			//TODO: makes site unresponsive...
 			// this.saveUser(credentials)
 			/* 		
 				TODO: create option in preferences to use own displayName,
