@@ -155,7 +155,6 @@ export class AuthService {
 				in the case this option is selected, we should not update
 				the user displayname with the current google displayName
 			*/
-				
 		})
 
 				// TODO: we need to do something to tell the caller - sign in component, what to do next...
