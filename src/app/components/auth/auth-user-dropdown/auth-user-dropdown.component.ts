@@ -36,7 +36,8 @@ export class AuthUserDropdownComponent implements OnInit {
 
 		// this doesnt work consistently
 		setTimeout(() => {
-			window.location.reload()
+			//deprecated
+			window.location.reload(true)
 		},600)
 
 		// setTimeout(() => {

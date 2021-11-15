@@ -62,7 +62,7 @@ export class AuthService {
 	/* TODO: idea for helper method- cut some crap out of google login-
 		if the 
 	*/
-	private saveUser (userCredentials : firebase.User) {
+	async saveUser(userCredentials : firebase.User) {
 		/**
 		 * helper method that queries the store and updates a user
 		 * with new data if the document exists, and creates one if not
@@ -71,33 +71,52 @@ export class AuthService {
 		 * from promise returned from firebase authentication method-
 		 * the data associated with user we are trying to save to user collection.
 		 */
-		return new Promise((resolve, reject) => {
-			this.usersStore.pipe(select(selectUserById(userCredentials.uid)))
-			.subscribe((user : User) => {
-			 // TODO: if the document is deleted from collection, ngrx needs to know and update store/entity!!! not happening here!
-				if (!user) {
-					this.usersStore.dispatch(usersActions.createUser({
-					id : userCredentials.uid,
-					displayName : userCredentials.displayName,
-					email : userCredentials.email,
-					}))
+		const ngrx_user = await firstValueFrom(await this.getUserEntity$())
+		if (ngrx_user) {
+			// is there something in the database associated with this user 's uid?
+				// then update the data
+
+			// else
+				// then create a new record.
+		} else {
+			// is there an auth instance or firebase instance but no ngrx record?
+
+			// is there a ngrx record but no f
+
+		  // TODO: if the document is deleted from collection, ngrx needs to know and update store/entity!!! not happening here!
+			// ^^^ just different wording of the nested else block above
+
+		}
+
+		// return new Promise((resolve, reject) => {
+		// 	const ngrx_user = await firstValueFrom
+		// })
+		// return new Promise((resolve, reject) => {
+		// 	this.usersStore.pipe(select(selectUserById(userCredentials.uid)))
+		// 	.subscribe((user : User) => {
+		// 		if (!user) {
+		// 			this.usersStore.dispatch(usersActions.createUser({
+		// 			id : userCredentials.uid,
+		// 			displayName : userCredentials.displayName,
+		// 			email : userCredentials.email,
+		// 			}))
 					
 					
 
-				} else {
-					this.usersStore.dispatch(usersActions.updateUser({
-						id : userCredentials.uid, 
-						data : {
-							displayName : userCredentials.displayName,
-							email: userCredentials.email
-							} 
-					}))
-				}		
-			},
-			// TODO: wanted error catch here but this call signiture is deprecated .subscribe(Res=> do subscriber error, err => handle error)
-			)
+		// 		} else {
+		// 			this.usersStore.dispatch(usersActions.updateUser({
+		// 				id : userCredentials.uid, 
+		// 				data : {
+		// 					displayName : userCredentials.displayName,
+		// 					email: userCredentials.email
+		// 					} 
+		// 			}))
+		// 		}		
+		// 	},
+		// 	// TODO: wanted error catch here but this call signiture is deprecated .subscribe(Res=> do subscriber error, err => handle error)
+		// 	)
 			
-		})
+		// })
 	}
 
 	
