@@ -29,6 +29,23 @@ export class AuthUserDropdownComponent implements OnInit {
 	}
 
 	logout() {
+		/**
+		 * Tried this bandaid solution... it NEEDS to happen in the auth service with rxjs and promises
+		 *   */
 		this.auth.logOut();
+
+		// this doesnt work consistently
+		setTimeout(() => {
+			window.location.reload()
+		},600)
+
+		// setTimeout(() => {
+		// 	// TODO: do this with a component? seems wasteful but its better for usability 
+		// 	// ...(make a generic 'panel' component with message and color input)
+		// 	alert("you have logged out")
+		// },1200)
+ 
+		
+	
 	}
 }

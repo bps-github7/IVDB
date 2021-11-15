@@ -7,9 +7,21 @@
   <!-- If the user is signed in, show their displayname at the top of the dropdown menu -->
   <ul
     class="dd-sub-menu">
-    <li>View Profile</li>
-    <li>Edit Preferences</li>
-    <li>Edit Contributions</li>
+    <li>
+      <a [routerLink]="[currentUser.displayname,'user/profile/edit']">
+        View Profile
+      </a>
+    </li>
+    <li>
+      <a [routerLink]="[currentUser.displayname,'user/preferences/edit']">
+        Edit Preferences
+      </a>
+    </li>
+    <li>
+      <a [routerLink]="[currentUser.displayname,'user/contributions/edit']">
+        Edit Contributions
+      </a>
+    </li>
     <li>
       <a (click)="logout()">
         Sign out

@@ -6430,6 +6430,11 @@ json-parse-helpfulerror@^1.0.3:
   dependencies:
     jju "^1.1.0"
 
+json-ptr@3.0.0:
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/json-ptr/-/json-ptr-3.0.0.tgz#77dc484740270c6148fd2778f000f439c7f08ff2"
+  integrity sha512-p3hBrUrcbzAdmIVOQA85C/TvapouI1M1YxLbrM0lEs0AVLweBqNfZcS1mlo83uneHBYYtc/T4pzHZzrYNQpu+w==
+
 json-ptr@^2.2.0:
   version "2.2.0"
   resolved "https://registry.yarnpkg.com/json-ptr/-/json-ptr-2.2.0.tgz#a4de4ed638cb23ae4cd4b51f8bf972a1c2293f1e"
