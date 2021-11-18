@@ -71,21 +71,44 @@ export class AuthService {
 		 * from promise returned from firebase authentication method-
 		 * the data associated with user we are trying to save to user collection.
 		 */
+		const firebase_user = await firstValueFrom(this.getUser$())
 		const ngrx_user = await firstValueFrom(await this.getUserEntity$())
 		if (ngrx_user) {
-			// is there something in the database associated with this user 's uid?
-				// then update the data
+			
+			if (firebase_user) {
+				console.log("UPDATE: The user exists in firestore and ngrx!")
 
-			// else
-				// then create a new record.
+				this.usersStore.dispatch(usersActions.updateUser({
+					id : userCredentials.uid, 
+					data : {
+						displayName : userCredentials.displayName,
+						email: userCredentials.email
+						} 
+				}))			
+			} else {
+				console.log("CREATE: user exists in ngrx but not firestore")
+
+				// this case should not happen. assuming you trust your effects work 100%
+
+				//create record for user
+				this.usersStore.dispatch(usersActions.createUser({
+					id : userCredentials.uid,
+					displayName : userCredentials.displayName,
+					email : userCredentials.email,
+				}))
+			}
 		} else {
-			// is there an auth instance or firebase instance but no ngrx record?
-
-			// is there a ngrx record but no f
-
-		  // TODO: if the document is deleted from collection, ngrx needs to know and update store/entity!!! not happening here!
-			// ^^^ just different wording of the nested else block above
-
+			if (firebase_user) {
+				// we need to delete the firestore record of that user and start again with effects.
+			} else {
+				
+				// this is the default case- no ngrx record, nor firestore. so create one.
+				this.usersStore.dispatch(usersActions.createUser({
+					id : userCredentials.uid,
+					displayName : userCredentials.displayName,
+					email : userCredentials.email,
+					}))
+			}
 		}
 
 		// return new Promise((resolve, reject) => {
@@ -168,7 +191,7 @@ export class AuthService {
 			let credentials = result.user
 	
 			//TODO: makes site unresponsive...
-			// this.saveUser(credentials)
+			this.saveUser(credentials)
 			/* 		
 				TODO: create option in preferences to use own displayName,
 				in the case this option is selected, we should not update
