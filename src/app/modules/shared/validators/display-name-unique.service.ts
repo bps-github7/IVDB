@@ -1,5 +1,5 @@
 import { selectUserByDisplayNameExactMatch } from 'src/app/store/selectors/users.selector';
-import { AsyncValidatorFn, FormControl } from '@angular/forms';
+import { AbstractControl, AsyncValidatorFn, FormControl, ValidatorFn } from '@angular/forms';
 import { Injectable } from '@angular/core';
 import { select, Store } from '@ngrx/store';
 import * as fromUsers from 'src/app/store/reducers/users.reducer';
@@ -15,20 +15,39 @@ import { User } from 'src/app/models/user';
 export class DisplayNameUniqueService {
 
 	constructor(private usersStore : Store<fromUsers.State>) { }
+	
+	async checkUserStore(value : string) {
+		const result =  await firstValueFrom(await this.usersStore.pipe(select(selectUserByDisplayNameExactMatch(value))))
+		return result ? true : false
+	}
 
+	// TODO: this doesnt work, 
 	uniqueDisplayNameValidator() : AsyncValidatorFn {
-		// TODO: this works but if we get an error, then delete some part of display name, error stays up.
-		// question is, is this an issue with this validator or the component logic/ markdown
 		return (control : FormControl ) => {
 			return new Promise((resolve,reject) => {
-				this.usersStore.pipe(select(selectUserByDisplayNameExactMatch(control.value)))
-				.subscribe((result : any) => {
-					if(result) {
-						resolve({DisplayNameTaken : true});
-					}
-					reject(null);
-				})
+				const ngrx_user = this.checkUserStore(control.value)
+				console.log(ngrx_user)
+				if (ngrx_user) {
+					resolve({DisplayNameTaken : true});
+				}
+				reject(null)
 			})
 		}
 	}
+
+	/* 
+	static passwordMatchValidator() : ValidatorFn | null {
+		return (group: AbstractControl): { [key: string]: any } => {
+			let displayName = group.get('displayName').value;
+			
+			if (confirmPass !== pass) {
+				group.setErrors({ NoPasswordMatch : true })
+				return {NoPasswordMatch : true}
+			}
+			return null
+		} 
+	}
+	*/
+
+
 }

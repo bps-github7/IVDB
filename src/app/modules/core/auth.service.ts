@@ -180,7 +180,7 @@ export class AuthService {
 			
 			let credentials = result.user
 	
-			//TODO: makes site unresponsive...
+			//TODO: this doesnt work- we deleted rehash record in firestore, still hit the update case??
 			this.saveUser(credentials)
 			/* 		
 				TODO: create option in preferences to use own displayName,

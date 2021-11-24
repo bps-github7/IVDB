@@ -61,6 +61,9 @@ export class CreateAccountComponent implements OnInit {
 		}		
 	}
 
+	testing() {
+		console.log(this.form)
+	}
 
 	get email () {
 		return this.form.get('email');
