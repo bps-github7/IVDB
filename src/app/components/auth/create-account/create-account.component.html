@@ -157,14 +157,15 @@
 
 
 
-				<!-- {{ password.value }}
+				{{ password.value }}
 
-				{{ confirmPassword.value }} -->
+				{{ confirmPassword.value }}
 
 				<!-- TODO: this is the correct way to implement password validation in  -->
 				<!-- <div *ngIf="form.hasError('NoPasswordMatch', 'passwords')" class="alert-danger">password and confirm password do not match</div> -->
 
-
+				{{ form.valid | json }}
+ 
 			</div>
 
 			<div class="mb-3">

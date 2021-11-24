@@ -85,23 +85,12 @@ export class AuthService {
 						email: userCredentials.email
 						} 
 				}))			
-			} else {
-				console.log("CREATE: user exists in ngrx but not firestore")
-
-				// this case should not happen. assuming you trust your effects work 100%
-
-				//create record for user
-				this.usersStore.dispatch(usersActions.createUser({
-					id : userCredentials.uid,
-					displayName : userCredentials.displayName,
-					email : userCredentials.email,
-				}))
 			}
 		} else {
 			if (firebase_user) {
 				// we need to delete the firestore record of that user and start again with effects.
 			} else {
-				
+				console.log("first time user has signed in!")
 				// this is the default case- no ngrx record, nor firestore. so create one.
 				this.usersStore.dispatch(usersActions.createUser({
 					id : userCredentials.uid,
@@ -159,6 +148,7 @@ export class AuthService {
 		.then((userCredentials) => {
 			console.log("sign in successful")
 			console.log(userCredentials)
+			// this.saveUser(userCredentials)
 			return true;
 		}).catch((err) => {
 			console.error("Auth Service: Error while logging in with Email and password");
