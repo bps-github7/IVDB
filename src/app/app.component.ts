@@ -52,10 +52,10 @@ export class AppComponent implements OnInit {
 		 * should only get called when user signs in for the first time
 		  */
 		const config = new MatDialogConfig();
-		config.disableClose = true;
-		config.autoFocus = true;
-		config.height = '1600px';
-		config.width = `1200px`;
+		// config.disableClose = true;
+		// config.autoFocus = true;
+		// config.height = '1600px';
+		// config.width = `1200px`;
 
 		config.data = {
 			googleUser : true
@@ -63,9 +63,9 @@ export class AppComponent implements OnInit {
 
 
 
-		this.dialog.open(NewUserDialogComponent)
+		// this.dialog.open(NewUserDialogComponent)
 		// TODO: doing this breaks the form for some reason
-		// this.dialog.open(NewUserDialogComponent, config)
+		this.dialog.open(NewUserDialogComponent, config)
 
 	}
 

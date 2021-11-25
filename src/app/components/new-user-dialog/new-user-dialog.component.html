@@ -6,19 +6,18 @@
       <label>Provide now or later?</label>
       <!-- TODO: make below a tool tip, shown when user scrolls over the above -->
       <!-- <label>your preferences about games, consoles and more that you like or dislike. This helps us get a clearer picture of what games to reccomend and what not to reccomend to you, among other things</label> -->
-      <div class="form-group">
+      <mat-form-field class="form-group">
         <mat-radio-group 
           class="form-control" 
           ngModel
           name="immediatePreferences"
-          #immediatePreferences="ngModel"
-          >
-          <!-- Gets stuck on later...  passing config breaks it!-->
+          #immediatePreferences="ngModel">
+          <!-- Gets stuck on 'later'...  passing config breaks it!-->
           <mat-radio-button value="now">now</mat-radio-button><br>
           <mat-radio-button value="later">later</mat-radio-button>
         </mat-radio-group>  
 
-      </div>
+      </mat-form-field>
 
     <div class="form-group" *ngIf="immediatePreferences.value === 'now'">
       <!-- 
@@ -30,15 +29,15 @@
     </div>
 
     <mat-form-field 
-      *ngIf="googleUser"
-      class="form-control"
-      name="displayNamePreference"
-      ngModel
-      #displayNamePreferences="ngModel"
+      class="form-group"
       >
       <h3>You created your account with google:</h3>
       <label>Would you like to provide a custom display name, or use your google username?</label>
-      <mat-checkbox value="true">I'd like to provide a custom display name</mat-checkbox>
+      <mat-checkbox value="true" *ngIf="googleUser"
+      class="form-control"
+      name="displayNamePreference"
+      ngModel
+      #displayNamePreferences="ngModel">I'd like to provide a custom display name</mat-checkbox>
     </mat-form-field>
   </form>
 

@@ -50,7 +50,7 @@ import { CoreModule } from './modules/core/core.module';
 import { AuthService } from './modules/core/auth.service';
 import { AuthModule } from './components/auth/auth.module';
 import { GlobalErrorHandler } from './components/global-error-handler.class';
-import { NewUserDialogComponent } from './components/new-user-dialog/new-user-dialog.component';
+import { DIALOG_DATA, NewUserDialogComponent } from './components/new-user-dialog/new-user-dialog.component';
 
 
 
@@ -100,7 +100,10 @@ import { NewUserDialogComponent } from './components/new-user-dialog/new-user-di
 		FirebaseService,
 		GameInfoSelectedService,
 		ConsoleSelectedService,
-		{provide: ErrorHandler, useClass: GlobalErrorHandler}
+		{ provide: ErrorHandler, useClass: GlobalErrorHandler },
+
+		// TODO: added this to try and get data passed to new-user-dialog working. but it still doesnt. so this may be useless code. CLEANUP!
+		{ provide: DIALOG_DATA, useValue: {} }
 	],
   bootstrap: [AppComponent]
 })
