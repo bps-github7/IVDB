@@ -1,3 +1,6 @@
+import { NewUserDialogComponent } from './components/new-user-dialog/new-user-dialog.component';
+import { DialogComponent } from 'src/app/modules/shared/components/dialog/dialog.component';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { UserSelectedService } from './services/behaivor-subjects/user-selected.service';
 import { selectUserById } from './store/selectors/users.selector';
 import { AuthService } from 'src/app/modules/core/auth.service';
@@ -23,7 +26,8 @@ export class AppComponent implements OnInit {
   constructor(
 		private UserSelectedService : UserSelectedService,
 		public auth : AuthService,
-		private usersStore : Store<fromUsers.State> ) { }
+		private usersStore : Store<fromUsers.State>,
+		private dialog : MatDialog ) { }
 
 	async ngOnInit() {
 		this.firebaseUser = await firstValueFrom(this.auth.getUser$())
@@ -36,6 +40,35 @@ export class AppComponent implements OnInit {
 		// available through behaivor subjects?
 		// TODO: double back!!!
 		this.UserSelectedService.select(this.user$);
+
+
+
+		//if user has signed in for the first time, create a dialog for initial preference/ data collection
+		/* ... */
 	}
+
+	openDialog() {
+		/**
+		 * should only get called when user signs in for the first time
+		  */
+		const config = new MatDialogConfig();
+		config.disableClose = true;
+		config.autoFocus = true;
+		config.height = '1600px';
+		config.width = `1200px`;
+
+		config.data = {
+			googleUser : true
+		};
+
+
+
+		this.dialog.open(NewUserDialogComponent)
+		// TODO: doing this breaks the form for some reason
+		// this.dialog.open(NewUserDialogComponent, config)
+
+	}
+
+
 
 }

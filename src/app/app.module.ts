@@ -50,6 +50,7 @@ import { CoreModule } from './modules/core/core.module';
 import { AuthService } from './modules/core/auth.service';
 import { AuthModule } from './components/auth/auth.module';
 import { GlobalErrorHandler } from './components/global-error-handler.class';
+import { NewUserDialogComponent } from './components/new-user-dialog/new-user-dialog.component';
 
 
 
@@ -61,6 +62,7 @@ import { GlobalErrorHandler } from './components/global-error-handler.class';
 		NavbarComponent,
 		NotFoundComponent,
 		AppComponent,
+  NewUserDialogComponent,
   ],
   imports: [
 		// angular base stuff + our modules

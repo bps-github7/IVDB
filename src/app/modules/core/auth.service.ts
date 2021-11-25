@@ -73,33 +73,28 @@ export class AuthService {
 		 */
 		const firebase_user = await firstValueFrom(this.getUser$())
 		const ngrx_user = await firstValueFrom(await this.getUserEntity$())
-		if (ngrx_user) {
-			
-			if (firebase_user) {
-				console.log("UPDATE: The user exists in firestore and ngrx!")
+		// TODO: there are fallthrough cases- what if firestore User collection was deleted? etc..
+		// this works for now but is a farcry from comprehensive!
+		if (ngrx_user && firebase_user) {
+			// shouldnt this be more responsive? like check on page reload if user's name has changed?
+			this.usersStore.dispatch(usersActions.updateUser({
+				id : userCredentials.uid, 
+				data : {
+					displayName : userCredentials.displayName,
+					email: userCredentials.email
+					} 
+			}))		
+			console.log("updated user info successfully!")
 
-				this.usersStore.dispatch(usersActions.updateUser({
-					id : userCredentials.uid, 
-					data : {
-						displayName : userCredentials.displayName,
-						email: userCredentials.email
-						} 
-				}))			
-			}
 		} else {
-			if (firebase_user) {
-				// we need to delete the firestore record of that user and start again with effects.
-			} else {
-				console.log("first time user has signed in!")
-				// this is the default case- no ngrx record, nor firestore. so create one.
+			console.log("first time user has signed in!")
 				this.usersStore.dispatch(usersActions.createUser({
 					id : userCredentials.uid,
 					displayName : userCredentials.displayName,
 					email : userCredentials.email,
-					}))
-			}
+				}))
 		}
-
+		
 		// return new Promise((resolve, reject) => {
 		// 	const ngrx_user = await firstValueFrom
 		// })
@@ -176,22 +171,25 @@ export class AuthService {
 		.then((result) => {
 			if (result) {
 				console.log("Hi the google login was successful sawn")
+				console.log(result)
 			}
 			
 			let credentials = result.user
-	
-			//TODO: this doesnt work- we deleted rehash record in firestore, still hit the update case??
+			
+			// saves user in ngrx + firestore: updating if record exists, creating one if not. 
 			this.saveUser(credentials)
-			/* 		
-				TODO: create option in preferences to use own displayName,
-				in the case this option is selected, we should not update
-				the user displayname with the current google displayName
-			*/
+
 		})
 
 				// TODO: we need to do something to tell the caller - sign in component, what to do next...
-
-	}
+				// TODO: ^^^ REUP! cant test save user method unless the app component detected this method is done executing.
+				// TODO: create a dialog box when google sign in is successful for firsttime. for the below
+				/* 		
+					TODO: create option in preferences to use own displayName,
+					in the case this option is selected, we should not update
+					the user displayname with the current google displayName
+				*/
+			}
 
 
 	signUpWithEmailAndPassword(email : string, password : string, displayName : string) {
