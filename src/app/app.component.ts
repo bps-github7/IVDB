@@ -66,6 +66,10 @@ export class AppComponent implements OnInit {
 		// this.dialog.open(NewUserDialogComponent)
 		// TODO: doing this breaks the form for some reason
 		this.dialog.open(NewUserDialogComponent, config)
+		.afterClosed()
+		.subscribe(response => {
+			console.log(response)
+		})
 
 	}
 

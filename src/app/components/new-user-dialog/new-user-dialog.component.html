@@ -3,32 +3,23 @@
 <mat-dialog-content>
   <form #newUser="ngForm">
       <h5>Preferences:</h5>
+      <!-- TODO: provide tooltip with info for users about what preferences are/ what they are used for.-->
       <label>Provide now or later?</label>
-      <!-- TODO: make below a tool tip, shown when user scrolls over the above -->
-      <!-- <label>your preferences about games, consoles and more that you like or dislike. This helps us get a clearer picture of what games to reccomend and what not to reccomend to you, among other things</label> -->
       <mat-form-field class="form-group">
-        <mat-radio-group 
-          class="form-control" 
-          ngModel
-          name="immediatePreferences"
-          #immediatePreferences="ngModel">
+    
+        <mat-radio-group>
           <!-- Gets stuck on 'later'...  passing config breaks it!-->
-          <mat-radio-button value="now">now</mat-radio-button><br>
-          <mat-radio-button value="later">later</mat-radio-button>
+          <mat-radio-button matInput name="immediatePreferences" ngModel #immediatePreferences="ngModel"  value="now">now</mat-radio-button>
+          <mat-radio-button matInput name="immediatePreferences" ngModel #immediatePreferences="ngModel" value="later">later</mat-radio-button>
         </mat-radio-group>  
 
       </mat-form-field>
 
-    <div class="form-group" *ngIf="immediatePreferences.value === 'now'">
-      <!-- 
-      class="form-control"
-      name="preferences"
-      ngModel
-      #preferences="ngModel"> -->
+    <!-- <div *ngIf="immediatePreferences.value === 'now'">
       preferences collection widget here!
-    </div>
+    </div> -->
 
-    <mat-form-field 
+    <!-- <mat-form-field 
       class="form-group"
       >
       <h3>You created your account with google:</h3>
@@ -38,7 +29,7 @@
       name="displayNamePreference"
       ngModel
       #displayNamePreferences="ngModel">I'd like to provide a custom display name</mat-checkbox>
-    </mat-form-field>
+    </mat-form-field> -->
   </form>
 
   {{ newUser.value | json }}
