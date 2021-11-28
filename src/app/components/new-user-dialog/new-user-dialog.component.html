@@ -2,34 +2,40 @@
 
 <mat-dialog-content>
   <form #newUser="ngForm">
-      <h5>Preferences:</h5>
-      <!-- TODO: provide tooltip with info for users about what preferences are/ what they are used for.-->
-      <label>Provide now or later?</label>
-      <mat-form-field class="form-group">
-    
-        <mat-radio-group>
-          <!-- Gets stuck on 'later'...  passing config breaks it!-->
-          <mat-radio-button matInput name="immediatePreferences" ngModel #immediatePreferences="ngModel"  value="now">now</mat-radio-button>
-          <mat-radio-button matInput name="immediatePreferences" ngModel #immediatePreferences="ngModel" value="later">later</mat-radio-button>
+      
+        <mat-radio-group class="radio">
+          <h3>Provide preferences now or later?</h3>
+          <p>Preferences help us understand what you like and dislike, so we can better reccomend you content</p>
+          <label for="">
+            <input ngModel type="radio" [(ngModel)]="newUserPreferences.setPreferencesNow" name="setPreferencesNow" id="" value="now">
+            Now
+          </label>
+          <label for="">
+            <input ngModel type="radio" [(ngModel)]="newUserPreferences.setPreferencesNow" name="setPreferencesNow" value="later">
+            Later
+          </label>
         </mat-radio-group>  
 
-      </mat-form-field>
 
-    <!-- <div *ngIf="immediatePreferences.value === 'now'">
+    <div *ngIf="newUserPreferences.setPreferencesNow === 'now'">
       preferences collection widget here!
-    </div> -->
+    </div>
 
-    <!-- <mat-form-field 
-      class="form-group"
-      >
+    <div class="checkbox" *ngIf="googleUser">
       <h3>You created your account with google:</h3>
       <label>Would you like to provide a custom display name, or use your google username?</label>
-      <mat-checkbox value="true" *ngIf="googleUser"
-      class="form-control"
-      name="displayNamePreference"
-      ngModel
-      #displayNamePreferences="ngModel">I'd like to provide a custom display name</mat-checkbox>
-    </mat-form-field> -->
+        
+      <label>
+        <mat-checkbox value="true" name="setNewDisplayName" ngModel [(ngModel)]="newUserPreferences.setNewDisplayName">
+        I'd like to provide a custom display name
+        </mat-checkbox>
+      </label>
+    </div>
+
+    <mat-form-field *ngIf="newUserPreferences.setNewDisplayName">
+      <label for="">Enter your new Display Name:</label>
+      <input type="text" name="newDisplayName" ngModel [(ngModel)]="newUserPreferences.newDisplayName"  >
+    </mat-form-field>
   </form>
 
   {{ newUser.value | json }}

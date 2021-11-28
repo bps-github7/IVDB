@@ -1,17 +1,6 @@
 <navbar></navbar>
 <div class="content">
 	<button md-raised-button (click)="openDialog()">Click here for dialog</button>
-	<form #newUser="ngForm">
-		<div class="form-group">
-			<h3>questions?</h3>
-			<!-- Weird that we cant use #templateVariable="ngModel" here- did we not import formModule in app root? -->
-			<!-- error NG8003: No directive found with exportAs 'ngModel'. -->
-			<input type="radio" name="preference" id="preference" ngModel formControlName="preference" value="yes"> yes
-			<input type="radio" name="preference" id="preference" ngModel formControlName="preference" value="no"> no
 
-		</div>
-
-		{{ newUser.value | json }}
-	</form>
 	<router-outlet></router-outlet>
 </div>

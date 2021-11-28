@@ -14,7 +14,13 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 export class NewUserDialogComponent implements OnInit {
 
   googleUser : boolean = false;
+  newUserPreferences = {
+    setPreferencesNow: '',
+    preferences : {},
+    setNewDisplayName : false,
+    newDisplayName: null
 
+  }
 
 
   constructor(
@@ -22,6 +28,7 @@ export class NewUserDialogComponent implements OnInit {
     ) { }
 
   ngOnInit(): void {
+
     if (this?.data) {
       this.googleUser = this?.data?.googleUser
     }
