@@ -68,6 +68,7 @@ export class AppComponent implements OnInit {
 		this.dialog.open(NewUserDialogComponent, config)
 		.afterClosed()
 		.subscribe(response => {
+			console.log(response)
 			if (response.newDisplayName) {
 				this.usersStore.dispatch( usersActions.updateUser({ id: this.firebaseUser.uid, data : {displayName : response.newDisplayName} }) )
 			}
