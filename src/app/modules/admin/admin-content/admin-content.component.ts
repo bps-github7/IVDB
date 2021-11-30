@@ -346,6 +346,9 @@ export class AdminContentComponent implements OnInit {
 	}
 
 	deleteContent(id) {
+
+		// TODO: deletes from firestore but not ngrx it seems. on delete, reappears in table but goes to bottom of list
+
 		if(confirm("Are you sure you want to delete this piece of content?\n(warning: cannot be undone)"))
 			this.store.dispatch( contentActions.deleteContent(id))
 		return;

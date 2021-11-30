@@ -8,17 +8,17 @@
   <ul
     class="dd-sub-menu">
     <li>
-      <a [routerLink]="[currentUser.displayname,'user/profile/edit']">
+      <a [routerLink]="['user', currentUser?.displayName,'profile','edit']">
         View Profile
       </a>
     </li>
     <li>
-      <a [routerLink]="[currentUser.displayname,'user/preferences/edit']">
+      <a [routerLink]="['user', currentUser?.displayName,'preferences','edit']">
         Edit Preferences
       </a>
     </li>
     <li>
-      <a [routerLink]="[currentUser.displayname,'user/contributions/edit']">
+      <a [routerLink]="['user',currentUser?.displayName, 'contributions','dashboard']">
         Edit Contributions
       </a>
     </li>

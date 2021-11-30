@@ -7,6 +7,7 @@
 <br>
 <!-- create / update form -->
 <button mat-stroked-button (click)="showForm = !showForm">Create or update an item</button>
+<!-- TODO: close abd reset form when you change tabs, currently showing last selected item, even if in a different family -->
 <dashboard-form 
 	*ngIf="showForm"
 	[dataType]="dataType" 

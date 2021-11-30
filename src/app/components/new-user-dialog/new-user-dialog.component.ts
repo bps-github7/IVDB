@@ -1,8 +1,6 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 
-// export const DIALOG_DATA = new InjectionToken('DIALOG_DATA')
-
 
 @Component({
   selector: 'app-new-user-dialog',
@@ -12,7 +10,11 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 
 
 export class NewUserDialogComponent implements OnInit {
-
+  /**
+   * For gathering initially user preferences.
+   * Will ask user a few questions after their first login
+   * which will inform preference gathering for future logins.
+   */
   googleUser : boolean = false;
   newUserPreferences = {
     setPreferencesNow: '',
@@ -25,19 +27,16 @@ export class NewUserDialogComponent implements OnInit {
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any,
+    private dialogRef : MatDialogRef<NewUserDialogComponent>,
     ) { }
 
   ngOnInit(): void {
-
     if (this?.data) {
       this.googleUser = this?.data?.googleUser
     }
-    console.log(this.data)
-
   }
 
-  // submitPreferences(newUser : any) {
-  //   console.log(newUser)
-  // }
-
+  submitPreferences() {
+    this.dialogRef.close(this.newUserPreferences)
+  }
 }
