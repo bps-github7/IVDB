@@ -19,10 +19,10 @@ export class NewUserDialogComponent implements OnInit {
   newUserPreferences = {
     setPreferencesNow: '',
     preferences : {},
-    remindMeLater : null,
-    setReminder: null,
+    remindMe : '',
+    setReminder: '',
     setNewDisplayName : false,
-    newDisplayName: null
+    newDisplayName: ''
 
   }
 

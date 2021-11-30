@@ -3,38 +3,26 @@
 <mat-dialog-content>
   <form #newUser="ngForm">
   
-    <mat-radio-group class="radio">
-      <h3>Provide preferences now or later?</h3>
-      <label for="">
-        <!-- is there a Reason you not using mat-radio element? -->
-        <input ngModel type="radio" [(ngModel)]="newUserPreferences.setPreferencesNow" name="setPreferencesNow" id="" value="now">
-        Now
-      </label>
-      <label for="">
-        <input ngModel type="radio" [(ngModel)]="newUserPreferences.setPreferencesNow" name="setPreferencesNow" value="later">
-        Later
-      </label>
+    <mat-radio-group class="radio" ngModel [(ngModel)]="newUserPreferences.setPreferencesNow" name="setPreferencesNow">
+      <h3>Provide preferences now?</h3>
+      <mat-radio-button value="yes">yes</mat-radio-button>
+      <mat-radio-button value="no">no</mat-radio-button>
       <p>Preferences help us understand what you like and dislike, so we can better reccomend you content</p>
     </mat-radio-group>  
 
-    <div *ngIf="newUserPreferences.setPreferencesNow === 'now'">
+    <div *ngIf="newUserPreferences.setPreferencesNow === 'yes'">
       <!-- TODO: implement preference collection widget- see https://github.com/bps-github7/IVDB/issues/16 about this for client instructions and NFR -->
       preferences collection widget here!
     </div>
 
-    <div 
-      *ngIf="newUserPreferences.setPreferencesNow === 'later'"
-      class="checkbox">
-      <label for="">
-        <mat-checkbox value="true" name="remindMeLater" ngModel [(ngModel)]="newUserPreferences.remindMeLater">Remind me later</mat-checkbox>
-      </label>
-      
-      
-    </div>
 
-  <!-- TODO: figure this out- you may need to use radio instead of checkbox for above.
-    You want it to show only if user did not select 'remind me later' but not by default- so need confirm/deny... not checkbox -->
-    <div *ngIf="newUserPreferences.remindMeLater" class="alert alert-info">
+    <mat-radio-group *ngIf="newUserPreferences.setPreferencesNow === 'no'" class="radio" name="remindMe" ngModel [(ngModel)]="newUserPreferences.remindMe">
+      should we remind you about preferences later?
+      <mat-radio-button value="yes">Yes</mat-radio-button>
+      <mat-radio-button value="no">No</mat-radio-button>
+    </mat-radio-group>  <br>
+
+    <div *ngIf="newUserPreferences.remindMe === 'no'" class="alert alert-info">
       Note: We won't bug you to provide your preferences again.
       However, it is reccomended for better IVDB experience. 
       <i>
@@ -42,12 +30,12 @@
       </i>
     </div>
 
-    <mat-radio-group *ngIf="newUserPreferences.remindMeLater" class="radio">
+    <mat-radio-group *ngIf="newUserPreferences.remindMe === 'yes'" class="radio" name="setReminder" ngModel [(ngModel)]="newUserPreferences.setReminder">
       When should we remind you again?
-      <mat-radio-button name="remindMeLater" ngModel [(ngModel)]="newUserPreferences.remindMeLater" value="next">Next time I sign in</mat-radio-button>
-      <mat-radio-button name="remindMeLater" ngModel [(ngModel)]="newUserPreferences.remindMeLater" value="tomorrow">tomorrow</mat-radio-button>
-      <mat-radio-button name="remindMeLater" ngModel [(ngModel)]="newUserPreferences.remindMeLater" value="week">a week from now</mat-radio-button>
-      <mat-radio-button name="remindMeLater" ngModel [(ngModel)]="newUserPreferences.remindMeLater" value="month">a month from now</mat-radio-button>
+      <mat-radio-button value="next">Next time I sign in</mat-radio-button>
+      <mat-radio-button value="tomorrow">tomorrow</mat-radio-button>
+      <mat-radio-button value="week">a week from now</mat-radio-button>
+      <mat-radio-button value="month">a month from now</mat-radio-button>
 
 
     </mat-radio-group>
@@ -67,9 +55,9 @@
       <input type="text" name="newDisplayName" ngModel [(ngModel)]="newUserPreferences.newDisplayName"  >
     </mat-form-field>
   </form>
-
+  {{ newUserPreferences | json }}
 </mat-dialog-content>
 
 <mat-dialog-actions>
-  <button type="submit" (click)="submitPreferences()" matDialogClose="true"> Submit</button>
+  <button type="submit" class="submit-btn" (click)="submitPreferences()" matDialogClose="true"> Submit</button>
 </mat-dialog-actions>
