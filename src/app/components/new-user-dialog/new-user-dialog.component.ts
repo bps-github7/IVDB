@@ -18,7 +18,14 @@ export class NewUserDialogComponent implements OnInit {
   googleUser : boolean = false;
   newUserPreferences = {
     setPreferencesNow: '',
-    preferences : {},
+    preferences : {
+      currentlyPlaying: '',
+      favoriteGame: '',
+      consolesOwned: '',
+      categories : '',
+      creators: '',
+      consoleMakers : ''
+    },
     remindMe : '',
     setReminder: '',
     setNewDisplayName : false,

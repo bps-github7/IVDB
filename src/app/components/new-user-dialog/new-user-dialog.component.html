@@ -11,8 +11,41 @@
     </mat-radio-group>  
 
     <div *ngIf="newUserPreferences.setPreferencesNow === 'yes'">
-      <!-- TODO: implement preference collection widget- see https://github.com/bps-github7/IVDB/issues/16 about this for client instructions and NFR -->
-      preferences collection widget here!
+      <!-- TODO: implement a nicer preference collection widget, this will all require connection to 3-5 stores at least for auto population-->
+      <mat-form-field>
+        <label for="">A game you are currently playing</label>
+        <input type="text" name="currentlyPlaying" ngModel [(ngModel)]="newUserPreferences.preferences.currentlyPlaying">
+      </mat-form-field>
+
+      <mat-form-field>
+        <label for="">Favorite game?</label>
+        <input type="text" name="favoriteGame" ngModel [(ngModel)]="newUserPreferences.preferences.favoriteGame">
+      </mat-form-field>
+
+      <!-- this should be a tack on checkbox list. when something is selected from auto pop dropdown, at it to list beneath this input -->
+      <mat-form-field>
+        <label for="">Favorite game?</label>
+        <input type="text" name="consolesOwned" ngModel [(ngModel)]="newUserPreferences.preferences.consolesOwned">
+      </mat-form-field>
+
+      <!-- maybe make this a like dislike tack on checkbox list -->
+      <mat-form-field>
+        <label for="">categories (like/disliked)?</label>
+        <input type="text" name="categories" ngModel [(ngModel)]="newUserPreferences.preferences.categories">
+      </mat-form-field>
+
+      <mat-form-field>
+        <label for="">creators (like/disliked)?</label>
+        <input type="text" name="creators" ngModel [(ngModel)]="newUserPreferences.preferences.creators">
+      </mat-form-field>
+
+
+      <mat-form-field>
+        <label for="">console makers (like/disliked)?</label>
+        <input type="text" name="consoleMakers" ngModel [(ngModel)]="newUserPreferences.preferences.consoleMakers">
+      </mat-form-field>
+
+      
     </div>
 
 
@@ -41,6 +74,7 @@
     </mat-radio-group>
 
 
+    <!-- breaks after you provide answer to first input and then preferences- stays checked or unchecked. weird -->
     <div class="checkbox" *ngIf="googleUser">
       <h3>You created your account with google:</h3>
       <label>
