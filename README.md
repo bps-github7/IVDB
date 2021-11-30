@@ -1,6 +1,6 @@
 # IVDB
 The Internet Videogame Database is a project to build the most comprehensive online videogame database
-Please read the [contribution guidelines](./documentation/CONTRIBUTING) to learn about the project, before you start working on it.
+Please read the [contribution guidelines](./documentation/CONTRIBUTING.md) to learn about the project, before you start working on it.
 
 Reach out to me @ bps53@protonmail.com if you would like to be added as a contributor to the firebase project.
 this will allow you to make changes to the database and work on other features such as image storage and authentication
