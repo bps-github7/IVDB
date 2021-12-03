@@ -3,52 +3,15 @@
 <mat-dialog-content>
   <form #newUser="ngForm">
   
+    <h3>Provide preferences now?</h3>
     <mat-radio-group class="radio" ngModel [(ngModel)]="newUserPreferences.setPreferencesNow" name="setPreferencesNow">
-      <h3>Provide preferences now?</h3>
       <mat-radio-button value="yes">yes</mat-radio-button>
       <mat-radio-button value="no">no</mat-radio-button>
-      <p>Preferences help us understand what you like and dislike, so we can better reccomend you content</p>
     </mat-radio-group>  
-
-    <div *ngIf="newUserPreferences.setPreferencesNow === 'yes'">
-      <!-- TODO: implement a nicer preference collection widget, this will all require connection to 3-5 stores at least for auto population-->
-      <mat-form-field>
-        <label for="">A game you are currently playing</label>
-        <input type="text" name="currentlyPlaying" ngModel [(ngModel)]="newUserPreferences.preferences.currentlyPlaying">
-      </mat-form-field>
-
-      <mat-form-field>
-        <label for="">Favorite game?</label>
-        <input type="text" name="favoriteGame" ngModel [(ngModel)]="newUserPreferences.preferences.favoriteGame">
-      </mat-form-field>
-
-      <!-- this should be a tack on checkbox list. when something is selected from auto pop dropdown, at it to list beneath this input -->
-      <mat-form-field>
-        <label for="">Favorite game?</label>
-        <input type="text" name="consolesOwned" ngModel [(ngModel)]="newUserPreferences.preferences.consolesOwned">
-      </mat-form-field>
-
-      <!-- maybe make this a like dislike tack on checkbox list -->
-      <mat-form-field>
-        <label for="">categories (like/disliked)?</label>
-        <input type="text" name="categories" ngModel [(ngModel)]="newUserPreferences.preferences.categories">
-      </mat-form-field>
-
-      <mat-form-field>
-        <label for="">creators (like/disliked)?</label>
-        <input type="text" name="creators" ngModel [(ngModel)]="newUserPreferences.preferences.creators">
-      </mat-form-field>
+    <p>Preferences help us understand what you like and dislike, so we can better reccomend you content</p>
 
 
-      <mat-form-field>
-        <label for="">console makers (like/disliked)?</label>
-        <input type="text" name="consoleMakers" ngModel [(ngModel)]="newUserPreferences.preferences.consoleMakers">
-      </mat-form-field>
-
-      
-    </div>
-
-
+    
     <mat-radio-group *ngIf="newUserPreferences.setPreferencesNow === 'no'" class="radio" name="remindMe" ngModel [(ngModel)]="newUserPreferences.remindMe">
       should we remind you about preferences later?
       <mat-radio-button value="yes">Yes</mat-radio-button>
@@ -58,35 +21,41 @@
     <div *ngIf="newUserPreferences.remindMe === 'no'" class="alert alert-info">
       Note: We won't bug you to provide your preferences again.
       However, it is reccomended for better IVDB experience. 
-      <i>
-        You can always choose to provide them by following the preferences link inside your user profile pages
-      </i>
+      <em>You can always choose to provide them by following the preferences link inside your user profile pages</em>
+
     </div>
 
     <mat-radio-group *ngIf="newUserPreferences.remindMe === 'yes'" class="radio" name="setReminder" ngModel [(ngModel)]="newUserPreferences.setReminder">
-      When should we remind you again?
+      <h3>
+        When should we remind you again?
+      </h3>
       <mat-radio-button value="next">Next time I sign in</mat-radio-button>
       <mat-radio-button value="tomorrow">tomorrow</mat-radio-button>
       <mat-radio-button value="week">a week from now</mat-radio-button>
       <mat-radio-button value="month">a month from now</mat-radio-button>
-
-
     </mat-radio-group>
 
 
     <!-- breaks after you provide answer to first input and then preferences- stays checked or unchecked. weird -->
-    <div class="checkbox" *ngIf="googleUser">
-      <h3>You created your account with google:</h3>
-      <label>
-        <mat-checkbox value="true" name="setNewDisplayName" ngModel [(ngModel)]="newUserPreferences.setNewDisplayName"> 
-        I'd like to provide a custom display name
-        </mat-checkbox>
-      </label>
-    </div>
 
-    <mat-form-field *ngIf="newUserPreferences.setNewDisplayName">
-      <label for="">Display Name:</label>
-      <input type="text" name="newDisplayName" ngModel [(ngModel)]="newUserPreferences.newDisplayName"  >
+    <mat-form-field *ngIf="googleUser">
+      <div class="checkbox">
+        <h3>You created your account with google:</h3>
+        <label>
+          <mat-checkbox value="true" name="setNewDisplayName" ngModel [(ngModel)]="newUserPreferences.setNewDisplayName"> 
+          I'd like to provide a custom display name
+          </mat-checkbox>
+        </label>
+      </div>
+    
+
+      <div *ngIf="newUserPreferences.setNewDisplayName">
+        <label for="">Display Name:</label>
+        <input type="text" name="newDisplayName" ngModel [(ngModel)]="newUserPreferences.newDisplayName"  >
+      </div>
+      
+
+      
     </mat-form-field>
   </form>
   {{ newUserPreferences | json }}
