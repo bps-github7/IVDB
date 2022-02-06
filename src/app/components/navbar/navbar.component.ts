@@ -27,7 +27,7 @@ export class NavbarComponent {
 	// this is still redundant except in cases where the route is complex for example 'user/profile/edit'
 
 	// I suggest two configuration/ enhancements-
-	// 1) ability to pass another nested dropdown as a link object, which dropdown will know how to render recursively (flex ur angular muscles son!)
+	// 1) ability to pass another nested dropdown as a link object, which dropdown will know how to render recursively
 	// 2) if the Link is an object, assume that its a complex link where {text : 'simple phrase', url : 'some/nested/route' }
 	// 	otherwise, the link is a string and we just need to prepend a slash for it to be a working link
 	children = {
@@ -47,6 +47,8 @@ export class NavbarComponent {
 			'user',
 			'content'
 		],
+		// here bug showing need for feature number 2 in above comments- text in link for browse should go to route ''. 
+		// however, why do we even need a link at all, if it does the same thing as clicking the dropdown head link?
 		'games' : ['browse','info'],
 		'forum' : ['threads','posts'],
 		// 'games' : [
