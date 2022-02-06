@@ -9,6 +9,7 @@ const routes: Routes = [
 	{path: '',component: GamesComponent,
 		children: [
 			{ path: '', component: GameBrowserComponent },
+			{ path: 'browse', component: GameBrowserComponent },
 			{ path: 'info', component: GameInfoPanelComponent },
 			// { path: ':gameId', component: GameViewComponent }
 			{ path: ':gameTitle', component: GameViewComponent }
