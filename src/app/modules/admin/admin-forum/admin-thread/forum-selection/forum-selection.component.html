@@ -1,6 +1,0 @@
-<ul class="list-group" *ngIf="forums$">
-	<li class="list-group-item" *ngFor="let forum of forums$ | async">
-		<input (change)="forumSelected($event, forum)" type="checkbox">
-		{{ forum.title }}
-	</li>
-</ul>
