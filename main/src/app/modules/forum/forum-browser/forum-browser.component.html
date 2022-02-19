@@ -1,0 +1,7 @@
+<h4>IVDB Forum</h4>
+<zippy *ngFor="let family of forumFamilies$ | async" [title]="family.title">
+	<!-- look into content projection with ng content -->
+
+	{{ family.description }}
+	<forum-list [family]="family.title"></forum-list>
+</zippy>

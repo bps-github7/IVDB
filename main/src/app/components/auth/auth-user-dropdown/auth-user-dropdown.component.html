@@ -1,0 +1,43 @@
+<li
+  class="dd-menu-trigger"
+  *ngIf="user$ | async as currentUser; else guest"
+  ><a href="">
+    {{currentUser.displayName}}
+  </a>
+  <!-- If the user is signed in, show their displayname at the top of the dropdown menu -->
+  <ul
+    class="dd-sub-menu">
+    <li>
+      <a [routerLink]="['user', currentUser?.displayName]">
+        View Profile
+      </a>
+    </li>
+    <li>
+      <a [routerLink]="['user', currentUser?.displayName,'preferences','edit']">
+        Edit Preferences
+      </a>
+    </li>
+    <li>
+      <a [routerLink]="['user',currentUser?.displayName, 'contributions','dashboard']">
+        Edit Contributions
+      </a>
+    </li>
+    <li>
+      <a (click)="logout()">
+        Sign out
+      </a>
+    </li>
+  </ul>
+</li>
+<ng-template #guest>
+  <!-- If the user is not signed in, show the root of user module + dropdown option to sign in -->
+  <li>
+    <a routerLink="user">Users</a>
+    <ul
+      class="dd-sub-menu"
+      >
+      <li><a routerLink="auth/login">Sign In</a></li>    
+    </ul>
+  </li>
+
+</ng-template>

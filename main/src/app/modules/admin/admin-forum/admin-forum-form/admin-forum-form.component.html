@@ -1,0 +1,72 @@
+<div class="row">
+	<h3>Forum form: create, edit or delete a forum</h3>
+	<div class="col-md-6">       
+		<form [connectForm]="forum$ | async" [formGroup]="form">
+
+			<div class="form-group">
+				<label for="title">Title: </label>
+				<input 
+					type="text"
+					class="form-control"
+					formControlName="title">
+				<div *ngIf="title.touched && title.invalid" class="alert alert-danger d-flex align-items-center">
+					<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-exclamation-triangle-fill flex-shrink-0 me-2" viewBox="0 0 16 16" role="img" aria-label="Warning:">
+						<path d="M8.982 1.566a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566zM8 5c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995A.905.905 0 0 1 8 5zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
+					</svg>
+					<div *ngIf="title.errors.required" class="alert alert-danger">Title is required</div>
+				</div>
+			</div>
+
+			<div class="form-group">
+				<label for="description">Description: </label>
+				<textarea 
+					class="form-control"
+					formControlName="description"></textarea>
+				<div *ngIf="description.touched && description.invalid" class="alert alert-danger d-flex align-items-center">
+					<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-exclamation-triangle-fill flex-shrink-0 me-2" viewBox="0 0 16 16" role="img" aria-label="Warning:">
+						<path d="M8.982 1.566a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566zM8 5c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995A.905.905 0 0 1 8 5zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
+					</svg>
+					<div *ngIf="description.errors.required" class="alert alert-danger">Description is required</div>
+				</div>				
+
+			</div>
+		
+
+			<div class="form-group">
+				<label for="categories">Family: </label>
+				<select 
+					multiple 
+					class="form-control"
+					formControlName="family">
+					<option value=""></option>
+					<option 
+						*ngFor="let opt of (forumFamilies$ | async)"	
+						[value]="opt.title">
+						{{ opt.title }}
+					</option>
+				</select>
+
+				<div *ngIf="family.touched && family.invalid" class="alert alert-danger d-flex align-items-center">
+					<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-exclamation-triangle-fill flex-shrink-0 me-2" viewBox="0 0 16 16" role="img" aria-label="Warning:">
+						<path d="M8.982 1.566a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566zM8 5c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995A.905.905 0 0 1 8 5zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
+					</svg>
+					<div *ngIf="family.errors.required" class="alert alert-danger">Description is required</div>
+				</div>
+			</div>
+			
+			<button class="btn btn-primary" (click)="save(form.value)" [disabled]="form.invalid">Save game</button>
+			<button class="btn alert-danger" (click)="delete()" [disabled]="disableDeleteButton">Delete game</button>
+		
+		</form>
+
+	</div>
+	<div class="col-md-6">
+			<div class="card" style="width: 18rem;">
+
+					<div class="card-body">
+						<h5 class="card-title">maybe put some info here about the forum in question, or details on how to work with forums</h5>
+						<!-- <p class="card-text">{{ game.price | currency:'USD':true }}</p> -->
+					</div>
+				</div>
+	</div>
+</div> 

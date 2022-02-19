@@ -1,0 +1,32 @@
+<h2 mat-dialog-title>Create or Update {{ contentType }} </h2>
+
+<mat-dialog-content [formGroup]="form">
+
+  <!-- <h3 *ngFor="let control of controls">{{buildInfo[control]}}</h3> -->
+  
+  
+  <reactiveFormControl 
+    *ngFor="let builds of buildInfo"
+    dialog=true
+    [buildInfo]="builds"
+  ></reactiveFormControl>
+
+<mat-dialog-actions>
+  <button
+    mat-stroked-button
+    (click)="reset()">
+    Clear
+  </button>
+  <button
+    mat-dialog-close
+    mat-stroked-button>
+    Cancle
+  </button>
+  <button
+    (click)="save()"
+    mat-raised-button>
+    Save
+  </button>
+
+  <p>Form data: {{ form.value | json }}</p>
+</mat-dialog-actions>

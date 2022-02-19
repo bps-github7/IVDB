@@ -1,0 +1,52 @@
+<div class="row">
+	<div class="col-3">
+			<div class="list-group">
+				<li class="list-group-item">
+						<h2>Game Categories</h2>
+				</li>
+				<li *ngFor="let g of categories$ | async" class="list-group-item list-group-item-action">
+						<input type="checkbox">
+						{{ g.title }}
+				</li>
+				<li class="list-group-item">
+						<h2>Game Creators</h2>
+				</li>
+				<li *ngFor="let g of creators$ | async" class="list-group-item list-group-item-action">
+						<input type="checkbox"> 
+						{{ g.title }}
+				</li>
+				<li class="list-group-item">
+						<h2>Game Platforms</h2>
+				</li>
+				<li *ngFor="let g of platforms$ | async" class="list-group-item list-group-item-action">
+						<input type="checkbox"> 
+						{{ g.title }}
+						<!-- find a way to show nintendo, microsoft, sony consoles when the appropriate checkbox is clicked -->
+				</li>
+		</div>
+	</div>
+	<div class="col">
+			<div class="row">
+					<ng-container *ngFor="let g of games$ | async; let i = index">
+							<div class="col" id="gamecard">
+									<div class="card" style="width: 15rem;">
+											<!-- clicking on the image or game title should take you to gameview component -->
+											<a [routerLink]="['../game/', g.title.replaceAll(' ','-')]" class="gamelink">
+													<img class="card-img-top" src="{{ g.imageUrl }}" alt="Card image cap">
+											</a>
+											<div class="card-body">
+													<a id="title" class="gamelink" [routerLink]="['/games',g.title.replaceAll(' ','-')]">
+															<h5 class="card-title">{{ g.title }}</h5>
+													</a>
+													<p class="card-text">{{ g.price | currency:'USD': 'symbol' }}</p>
+													<a [href]="g.purchase_link" class="btn btn-primary" id="buy">Buy</a>
+													<a [routerLink]="[g?.title, 'review']" class="btn btn-primary">Review</a>
+													<!-- rating here is default mode so we don't need to pass in any additional arguments -->
+											</div>
+									</div>
+							</div>
+							<div *ngIf="(i + 1) % 2 === 4" class="w-100"></div>
+					</ng-container>
+			</div>
+	</div>
+</div>

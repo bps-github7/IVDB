@@ -1,0 +1,90 @@
+<header>
+	<nav>
+		<a class="logo" routerLink="/home">
+			IVDB
+		</a>
+		<ul class="dd-menu">
+			<!-- <li *ngIf="user$ | async as user; else guestUser">
+				you are logged in as
+				<a [routerLink]="['/user/',user.displayName]">{{user.displayName}}</a>
+				<ul>
+					<li><a routerLink="/user">Browse users</a></li>
+					<li>
+						<button (click)="logout()">Log out</button>
+					</li>
+				</ul>
+			</li>
+
+			<ng-template #guestUser>
+				<li>
+					<a routerLink="/auth/login">log in</a>
+				</li>
+			</ng-template> -->
+
+			<!-- gettng some hesitancy about this solution below, makes debugging and styling a huge pain... -->
+			<dropdown
+				*ngFor="let m of modules"
+				[module]="m"
+				[children]="children[m]"
+
+				></dropdown>
+
+			<auth-user-dropdown></auth-user-dropdown>
+
+
+		</ul>		
+	</nav>
+	
+
+
+</header>
+
+<!-- <header>
+	<a routerLink="/home">
+		<h1 class="logo">
+			IVDB
+		</h1>
+	</a>
+	<input type="checkbox" class="nav-toggle" id="nav-toggle"/>
+	<nav>
+		<ul>
+			<div  *ngIf="user$ | async as user; else anonymousUser">
+
+				<li>
+					<a [routerLink]="['user/', user.displayName.replace(' ','-')]">{{ user.displayName }}</a>
+				</li>
+				<li>
+					<a (click)="logout()">Log out</a>
+				</li>
+			</div>
+		
+			<ng-template #anonymousUser>
+				<li>
+					<a routerLink="auth">Log in</a>
+				</li>
+			</ng-template>	
+			<li>
+				<a routerLink="content">Content</a>
+			</li>
+			<li>
+				<a routerLink="forum">Forum</a>
+			</li>
+			
+			<li>
+				<a routerLink="games">Games</a>
+			</li>
+			
+			<li>
+				<a routerLink="user">User</a>
+			</li>
+			
+			<li>
+				<a routerLink="admin">Admin</a>
+			</li>
+			
+		</ul>
+	</nav>
+	<label for="nav-toggle" class="nav-toggle-label">
+		<span></span>
+	</label>
+</header> -->

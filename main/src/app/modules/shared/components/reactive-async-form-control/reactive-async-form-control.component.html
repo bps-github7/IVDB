@@ -1,0 +1,53 @@
+<div *ngIf="!dialog; else dialog">
+	<label 
+		*ngIf="buildInfo.type === 'multiple select' && buildInfo.options.length > 1"
+		[for]="buildInfo.formControlName"> {{buildInfo.label}}
+		<select *ngIf="buildInfo.options" multiple class="form-control" [id]="control" [formControl]="control" multiple>
+			<option [value]=" "></option>            
+			<option *ngFor="let option of (buildInfo.options | async)" [ngValue]="option?.title">{{ option?.title }}</option>
+		</select>
+	</label>
+
+
+		<!-- these async type ones are highly non reusable. async object must have a title property that contains a title -->
+	<label 
+    *ngIf="buildInfo.type === 'select' && buildInfo.options.length > 1"
+    [for]="buildInfo.formControlName"> {{buildInfo.label}}
+    <select *ngIf="buildInfo.options" multiple class="form-control" [id]="control" [formControl]="control">
+      <option [value]=" "></option>            
+      <option *ngFor="let option of (buildInfo?.options | async)" [ngValue]="option?.title">{{ option?.title }}</option>
+    </select>
+  </label>
+</div>
+
+<ng-template #dialog>
+	
+	<mat-form-field *ngIf="buildInfo.type === 'select async' && buildInfo.options.length > 1" appearance="fill">
+    <mat-label>{{ buildInfo.label }}</mat-label>
+    <mat-select
+			*ngIf="buildInfo.options" 
+      matInput  
+      [formControl]="control"
+      class="form-control">
+      <mat-option *ngFor="let option of (buildInfo.options | async)" [value]="option?.title">
+        {{ option?.title }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>    
+
+
+	
+	<mat-form-field *ngIf="buildInfo.type === 'multi select async' && buildInfo.options.length > 1" appearance="fill">
+    <mat-label>{{ buildInfo.label }}</mat-label>
+    <mat-select 
+			*ngIf="buildInfo.options"
+			matInput
+			multiple
+      [formControl]="control"
+      class="form-control">
+      <mat-option *ngFor="let option of (buildInfo.options | async)" [value]="option?.title">
+        {{ option?.title }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>   
+</ng-template>

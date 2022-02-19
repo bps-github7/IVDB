@@ -1,0 +1,100 @@
+<div *ngIf="mode == 'minified'; else routed">
+  
+Show recent streams<mat-slide-toggle (change)="show = !show"></mat-slide-toggle>
+  <table *ngIf="show" mat-table [dataSource]="source" class="mat-elevation-z8">
+
+    <ng-container matColumnDef="title">
+      <th mat-header-cell *matHeaderCellDef> title </th>
+      <td mat-cell *matCellDef="let item">
+        <span 
+        #tooltip="matTooltip"
+        [matTooltip]="item.description"
+        matTooltipPosition="after"
+        matTooltipHideDelay="0">
+        {{ item.title}}
+      </span> 
+      </td>
+    </ng-container>
+
+    
+
+
+    <ng-container matColumnDef="edit">
+      <th mat-header-cell *matHeaderCellDef> </th>
+      <td mat-cell *matCellDef="let item">
+        <button 
+          (click)="openDialog(type, item)"
+          mat-stroked-button>Edit
+        </button>  
+
+      </td>
+    </ng-container>
+
+    
+    <ng-container matColumnDef="delete">
+      <th mat-header-cell *matHeaderCellDef> </th>
+      <td mat-cell *matCellDef="let item">
+        <button 
+          (click)="delete(item.uid)"
+          mat-stroked-button>Delete
+        </button>
+      </td>
+    </ng-container>
+
+
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table><br>
+</div>
+
+<!-- routed is the more feature rich version of this component, that displays
+the entire content source and provides interface for filtering, searching, ordering -->
+<ng-template #routed>  
+  Show recent streams<mat-slide-toggle (change)="show = !show"></mat-slide-toggle>
+  <table *ngIf="show" mat-table [dataSource]="source" class="mat-elevation-z8">
+
+    <ng-container matColumnDef="title">
+      <th mat-header-cell *matHeaderCellDef> title </th>
+      <td mat-cell *matCellDef="let item">
+        <span 
+        #tooltip="matTooltip"
+        [matTooltip]="item.description"
+        matTooltipPosition="after"
+        matTooltipHideDelay="0">
+        {{ item.title}}
+      </span> 
+      </td>
+    </ng-container>
+
+    
+
+
+    <ng-container matColumnDef="edit">
+      <th mat-header-cell *matHeaderCellDef> </th>
+      <td mat-cell *matCellDef="let item">
+        <button 
+          (click)="openDialog(type, item)"
+          mat-stroked-button>Edit
+        </button>  
+
+      </td>
+    </ng-container>
+
+    
+    <ng-container matColumnDef="delete">
+      <th mat-header-cell *matHeaderCellDef> </th>
+      <td mat-cell *matCellDef="let item">
+        <button 
+          (click)="delete(item.uid)"
+          mat-stroked-button>Delete
+        </button>
+      </td>
+    </ng-container>
+
+
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table><br>
+</ng-template>

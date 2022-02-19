@@ -1,0 +1,40 @@
+<div class="row">
+	<div class="col-md-6 offset-md-3">
+		<h3>Login:</h3>
+		<form [formGroup]="form" (ngSubmit)="login()">
+			<div class="mb-3">
+				<label for="email">Email:</label>
+				<input type="text" formControlName="email" class="form-control">
+				<div *ngIf="email.touched && !email.valid">
+					<div *ngIf="email.errors.required" class="alert-danger">Email is required</div>
+					<div *ngIf="email.errors.email" class="alert-danger">Email is badly formatted (must be name@something.domain)</div>
+				</div>
+			</div>
+
+			<div class="mb-3">
+				<label for="password">Password:</label>
+				<input type="password" formControlName="password" class="form-control">
+				<div *ngIf="password.touched && !password.valid">
+					<div *ngIf="password.errors.required" class="alert-danger">password is required</div>
+				</div>
+			</div>
+
+
+			<div class="mb-2">
+				Need an account?
+				<a routerLink="../create-account">create one now!</a>
+			</div>
+
+			<div>
+				<button class="btn btn-primary" type="button" (click)="googleLogin()">Sign in with google</button>
+			</div>
+
+
+			<div class="mb-3">
+				<button type="submit" class="btn btn-primary" [disabled]="!form.valid">Enter</button>
+			</div>
+
+
+		</form>
+	</div>
+</div>

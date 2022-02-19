@@ -1,0 +1,263 @@
+<section *ngIf="dataType === 'game-info' || dataType === 'forum-info'" >
+	<form #finished="ngForm" (ngSubmit)="save(finished)">
+		<div class="form-group">
+			<label for="title">Title:</label>
+			<input 
+				[ngModel]="selected.title"
+				name="title"
+				type="text" 
+				mat-input
+				class="form-control">
+		</div>
+		<div class="form-group">
+			<label for="description">Description:</label>
+			<textarea 
+				[ngModel]="selected.description"
+				name="description"	
+				mat-text-area
+				class="form-control"
+				cols="30" rows="10">
+			</textarea>
+		</div>
+		<div class="form-group">
+			<label for="family">Family:</label>
+			<select 
+				[ngModel]="selected.family" 
+				name="family" id="family"
+				class="form-control">
+				<option [value]="f" *ngFor="let f of familyChoices">{{f}}</option>
+			</select>
+		</div>
+		
+		<button	type="submit"	class="btn btn-primary">Create / update game info</button>
+		<button type="button" class="btn alert-danger" (click)="reset(finished)">Reset</button>
+		<button type="button" class="btn btn-danger" (click)="delete(selected.id, finished)" [disabled]="!selected.id">Delete</button>
+	</form>
+</section>
+
+<section *ngIf="dataType === 'console'">
+	<form #finished="ngForm" (ngSubmit)="save(finished)">
+		<div class="form-group">
+			<label for="title">Title:</label>
+			<input 
+				class="form-control"
+				[ngModel]="selected.title"
+				name="title" 
+				type="text"
+				>	
+		</div>	
+			
+		<div class="form-group">
+			<label for="nickname">Nickname:</label>
+			<input 
+				[ngModel]="selected.nickname"
+				name="nickname" 
+				type="text" 
+				class="form-control">
+		</div>
+
+		<div class="form-group">
+			<label for="generation">Generation:</label>
+			<input 
+				[ngModel]="selected.generation"
+				name="generation" 
+				type="number" 
+				min=0 
+				class="form-control">
+		</div>
+
+		<div class="form-group">
+			<label for="maker">Maker:</label>
+			<select 
+				[ngModel]="selected.maker"
+				name="maker"
+				id="maker"
+				class="form-control">
+				<option [value]="m" *ngFor="let m of makerChoices">{{ m }}</option>
+			</select>
+		</div>
+		
+
+		<div class="form-group">
+			<label for="family">Family:</label>
+			<select 
+				[ngModel]="selected.family"
+				name="family" 
+				id="family" 
+				class="form-control">
+				<option [value]="f" *ngFor="let f of familyChoices">{{ f }}</option>
+			</select>
+		</div>
+
+		
+		<div class="form-group">
+			<label for="description">Description:</label>
+			<textarea 
+				[ngModel]="selected.description" 
+				name="description" 
+				id="description"
+				class="form-control"
+				cols="30" rows="10">
+			</textarea>
+		</div>
+
+			
+		<div class="form-group">
+			<label for="image">Image:</label>
+			<input 
+				url 
+				[ngModel]="selected.image"
+				name="image" 
+				type="text" 
+				class="form-control" 
+				id='image'>
+		</div>
+
+		<div class="form-control">
+			<label for="released">Released:</label>
+			<input 
+				[ngModel]="selected.released"
+				name="released"
+				type="date"
+				class="form-control"
+				id='released'>
+		</div>
+		
+		<button	primary	class="btn btn-primary">Create / update a console</button>
+		<button class="btn btn-danger" (click)="reset(finished)">Reset</button>
+		<button class="btn alert-danger" (click)="delete(selected.id, finished)" [disabled]="!selected.id">Delete</button>
+	</form>		
+</section>
+<section *ngIf="dataType === 'thread'">
+	<form #finished="ngForm" (ngSubmit)="save(finished)">
+		<div class="form-group">
+			<label for="title">Title:</label>
+			<input 
+				class="form-control"
+				[ngModel]="selected.title"
+				name="title" 
+				type="text"
+				>	
+		</div>	
+
+		<div class="form-group">
+			<label for="description">Description:</label>
+			<textarea 
+				class="form-control"
+				[ngModel]="selected.description"
+				name="description"
+				></textarea>
+		</div>	
+
+
+
+		<div class="form-group">
+			<label for="family">Forum family:</label>
+			<select 
+				[ngModel]="selected?.metadata?.family"
+				name="family" 
+				id="family" 
+				class="form-control">
+				<option [value]="f.title" *ngFor="let f of forumFamilyChoices | async">{{ f.title }}</option>
+			</select>
+		</div>
+
+		<!-- will take some finess to get the observable based on above choice. alternatively, we could just get all forum families and render the appropriate one -->
+		<div class="form-group" *ngIf="selected?.metadata?.family">
+			<label for="forum">Forum:</label>
+			<select 
+				[ngModel]="selected?.metadata?.forum"
+				name="forum" 
+				id="forum" 
+				class="form-control">
+				<option [value]="f.title" *ngFor="let f of forumChoices | async">{{ f.title }}</option>
+			</select>
+		</div>
+
+
+
+
+		<!-- TODO: use mat-chip multiselect component -->
+		<div class="form-group">
+			<label for="prefixes">Prefixes:</label>
+			<select 
+				[ngModel]="selected?.metadata?.prefixes"
+				multiple
+				name="prefixes" 
+				id="prefixes" 
+				class="form-control">
+				<option [value]="f.title" *ngFor="let f of prefixChoices | async">{{ f.title }}</option>
+			</select>
+		</div>
+
+
+		<div class="form-group">
+			<label for="type">thread type:</label>
+			<select 
+				[ngModel]="selected?.metadata?.threadType"
+				name="type" 
+				id="type" 
+				class="form-control">
+				<option [value]="f.title" *ngFor="let f of typeChoices | async">{{ f.title }}</option>
+			</select>
+		</div>
+
+		<div class="form-group">
+			<label for="closed">thread open or closed?</label>
+			<mat-button-toggle-group class="form-control" name="closed" [ngModel]="selected.closed" [value]="selected.closed">
+				<mat-button-toggle value="false">Open</mat-button-toggle>
+				<mat-button-toggle value="true">Closed</mat-button-toggle>
+			</mat-button-toggle-group>
+		</div>
+
+		<!-- tODO: these should use a custom form control -->
+		<div class="form-group">
+			<label for="moderators">Select Moderator(s)</label>
+			<select 
+				[ngModel]="selected?.metadata?.moderators"
+				name="moderators" 
+				id="moderators" 
+				class="form-control">
+				<option value="A">mod A</option>
+				<option value="B">mod B</option>
+				<option value="C">mod C</option>
+			</select>		
+		</div>
+		
+		
+		
+		
+		<div class="form-group">
+			<label for="invitees">Invite user(s)</label>
+			<select 
+				multiple
+				[ngModel]="selected?.metadata?.invitees"
+				name="invitees" 
+				id="invitees" 
+				class="form-control">
+				<option value="A">user A</option>
+				<option value="B">user B</option>
+				<option value="C">user C</option>
+			</select>		
+		</div>
+		
+		<div class="form-group">
+			<label for="banned">ban user(s)</label>
+			<select 
+				multiple
+				[ngModel]="selected?.metadata?.banned"
+				name="banned" 
+				id="banned" 
+				class="form-control">
+				<option value="A">user A</option>
+				<option value="B">user B</option>
+				<option value="C">user C</option>
+			</select>		
+		</div>
+
+		
+		<button	primary	class="btn btn-primary">Create / update thread</button>
+		<button class="btn btn-danger" (click)="reset(finished)">Reset</button>
+		<button class="btn alert-danger" (click)="delete(selected.id, finished)" [disabled]="!selected.id">Delete</button>
+	</form>
+</section>
