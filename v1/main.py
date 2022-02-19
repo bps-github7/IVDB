@@ -103,7 +103,9 @@ the user's input (choice argument)
     if choice.lower() in ("quit","q","done","d"):
         return False
     elif choice.lower() in ("help","h"):
-        print("\n\n<---Help Page--->\nVideo Game Database Application:\n\nEnter a number to perform an action. \n\n\Make sure to only enter the number!\n\n\n")
+        print("\n\n<---Help Page--->\nVideo Game Database Application:\n\n\
+        Enter a number to perform an action.\n\n\
+        Make sure to only enter the number!\n")
         return True
     elif int(choice) in range(1,limit):
         print("this is where the management facade goes to work with your choice")
