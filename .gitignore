@@ -7,9 +7,10 @@
 
 /src/environments/*
 
-# avoid commiting unneeded peer dependencies
-/node_modules
 
+### TODO: what can we do to avoid prepending /main/ to every path to directory?
+# avoid commiting unneeded peer dependencies
+/main/node_modules
 
 # compiled output
 /dist
@@ -17,9 +18,6 @@
 /out-tsc
 # Only exists if Bazel was run
 /bazel-out
-
-# dependencies
-/node_modules
 
 # profiling files
 chrome-profiler-events*.json

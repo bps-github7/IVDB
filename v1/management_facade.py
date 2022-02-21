@@ -3,16 +3,14 @@
 ###Program: Managment Facade class
 ###Software: CS680ST Assignment 4: Database Backed Scholarship Management System.
 
-from Student import Student
-from Scholarship import Scholarship
 import sqlite3
-
-from v1.Game import Game
-from v1.Rating import Rating
+from Game import Game
+from Rating import Rating
+from User import User
 
 """
 Module level docstring: Implements simple interface for managing a 
-Student or Scholarship Database.
+videogame datanase.
 """
 
 class Management_Facade(object):
@@ -38,14 +36,17 @@ class Management_Facade(object):
         """
     Adds a row to one of the tables.
     No return value. Single Positional for mode
-    1 for Game, 2 for Rating (????)
+    1 for Game, 2 for Rating, 3 for User
         """
         if int(mode) == 1:
-            s = Game()
-            s.insert()
+            row = Game()
+            row.insert()
         elif int(mode) == 2:
-            s = Rating()
-            s.insert()
+            row = Rating()
+            row.insert()
+        elif int(mode) == 3:
+            row = User()
+            row.insert()
 
         
 if __name__ == "__main__":
