@@ -5,7 +5,7 @@ import { from, Observable } from "rxjs";
 import { Actions, createEffect, ofType } from "@ngrx/effects";
 
 //firestore + rxjs
-import { Firestore, collectionData, collection, DocumentData  } from "@angular/fire/firestore";
+import { Firestore, collectionData, docData } from '@angular/fire/firestore';
 import { switchMap, mergeMap, map } from "rxjs/operators";
 
 import { of } from "rxjs";
@@ -13,68 +13,80 @@ import { of } from "rxjs";
 // our model and actions
 import { VideogameConsole } from "src/app/models/content/videogame-console.model";
 import * as videogameConsoleActions from '../actions/videogame-console.actions'
+import {
+  CollectionReference,
+  DocumentData,
+  addDoc,
+  collection,
+  deleteDoc,
+  doc,
+  updateDoc,
+} from '@firebase/firestore';
+
+
+// P.O.C CRUD for firestore
+class ConsolePersistenceInterface {
+	consoles;
+
+	constructor(private afs: Firestore) {
+		this.consoles = collection(this.afs, 'consoles')
+	}
+
+	getAll() {
+		return collectionData(this.consoles, {
+			idField: 'id'
+		}) as Observable<VideogameConsole []>
+	}
+
+	create(console : VideogameConsole) {
+		return addDoc(this.consoles, console)
+	}
+
+	update(console : Partial<VideogameConsole>) {
+		const consoleDocumentReference = doc(
+			this.consoles,
+			`consoles/${console.id}`
+		)
+		return updateDoc(consoleDocumentReference, { ...console })
+	}
+
+	delete(id: string) {
+		const consoleDocumentReference = doc(this.consoles, `consoles/${id}`)
+		return deleteDoc(consoleDocumentReference)
+	}
+}
 
 @Injectable()
 export class VideogameConsoleEffects {
 
 	consoles$: Observable<DocumentData>;
 
-	constructor(private actions$: Actions, private afs : Firestore) {
-		/*
-		new syntax for getting firestore document	
-			const collection = collection(firestore, 'items');
-    	this.item$ = collectionData(collection);
-		*/
-		const consoles_collection = collection(this.afs, 'consoles')
-		this.consoles$ = collectionData(consoles_collection)
-
-	}
-			
-		
-/* wonder if this is solution to all this boilerplate NgRx crap
-	create angular firestore interface, 
-
-		- construct collection , with datatype passed in 
-
-		- getAll() -> collection data as Observable<type []>
-		- get(id : string) : -> docData({id})
-		- create(data : datatype) addDoc(data)
-		- update
-		- delete 
-		see here: https://betterprogramming.pub/angular-13-firebase-crud-tutorial-with-angularfire-7-2d6980dcc091
-
-	these effects have been notoriously buggy and hard to work with,
-	perhaps not meant to be doing it this way after all.
-
-	ngrx was supposed to simplify , not doing that here
-
-*/
-
+	constructor(
+		private actions$: Actions, 
+		private afs : ConsolePersistenceInterface) {}
+	
 	query$ = createEffect(() => this.actions$.pipe(
 		ofType(videogameConsoleActions.readVideogameConsole),
-		exhaustMap(() => this.consoles$.valueChanges().pipe(
+		exhaustMap(() => this.afs.getAll().pipe(
 			map((videogameConsoles) => videogameConsoleActions.readVideogameConsoleSuccess({videogameConsoles}))
 		))
 	))
 
 	create$ = createEffect(() => this.actions$.pipe(
 		ofType(videogameConsoleActions.createVideogameConsole),
-		switchMap(data => {
+		// is map the operator we want for the following 3 methods???
+		map(data => {
 			const {type, ...payload} = data
-			const ref = this.afs.doc<VideogameConsole>(`consoles/${data.id}`);
-			return from(ref.set(payload));
+			this.afs.create(payload)
 		}),
 		map(() => videogameConsoleActions.createVideogameConsoleSuccess())
 	))
 
-
-
 	update$ = createEffect(() => this.actions$.pipe(
 		ofType(videogameConsoleActions.updateVideogameConsole),
 		map((action) => action),
-		switchMap(console => {
-			const ref = this.afs.doc<VideogameConsole>(`consoles/${console.id}`)
-			return from(ref.update({id : console.id,  ...console.data}))
+		map(console => {
+			this.afs.update(console)
 		}),
 		map(() => videogameConsoleActions.updateVideogameConsoleSuccess())
 	))
@@ -82,10 +94,9 @@ export class VideogameConsoleEffects {
 	delete$ = createEffect(() => this.actions$.pipe(
 		ofType(videogameConsoleActions.deleteVideogameConsole),
 		map(action => action),
-		switchMap(action => {
-			const ref = this.afs.doc<VideogameConsole>(`consoles/${action.id}`)
-			return from(ref.delete())
+		map(action => {
+			this.afs.delete(action.id)
 		}),
 		map(()=> videogameConsoleActions.deleteVideogameConsoleSuccess())
 	))
-}
+}	
