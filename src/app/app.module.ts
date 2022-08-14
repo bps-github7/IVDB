@@ -35,11 +35,14 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 // our custom service for getting server timestamps
 import { FirebaseService } from './services/firebase.service';
 import { RouterSerializer } from './store/router-serializer';
-import { InitFirebaseModule } from './services/init-firebase/init-firebase.module';
 import { environment } from 'src/environments/environment';
-import { AngularFireModule } from '@angular/fire';
-import { AngularFireAuthModule } from '@angular/fire/auth';
-import { AngularFirestoreModule } from '@angular/fire/firestore';
+
+// InitFirebaseModule does not seem to be working, initializing here instead.
+import { InitFirebaseModule } from './services/init-firebase/init-firebase.module';
+import { provideFirebaseApp, getApp, initializeApp } from '@angular/fire/app';
+import { getFirestore, provideFirestore } from '@angular/fire/firestore';
+import { getAuth, provideAuth } from '@angular/fire/auth'
+
 
 // components in the app level- home page, navigation menu, not found error
 import { HomeComponent } from './components/home/home.component';
@@ -74,10 +77,11 @@ import { NewUserDialogComponent } from './components/new-user-dialog/new-user-di
 
 		//firebase
 		// InitFirebaseModule,
-		AngularFireModule.initializeApp(environment.firebaseConfig),
-		AngularFireAuthModule,
-		AngularFirestoreModule,
 
+		provideFirebaseApp(() => initializeApp(environment.firebaseConfig)),
+		provideFirestore(() => getFirestore()),
+		// totally unsure this is how you do that. 
+		provideAuth(() => getAuth()),
 
 		//for forms
 		FormsModule,

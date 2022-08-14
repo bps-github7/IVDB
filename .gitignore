@@ -1,5 +1,8 @@
 # See http://help.github.com/ignore-files/ for more about ignoring files.
 
+# dev env stuff
+/.angular
+/.vscode
 
 # avoid commiting the secret API keys
 .env.development
