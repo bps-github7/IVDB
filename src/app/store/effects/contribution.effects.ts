@@ -1,8 +1,6 @@
 import { Injectable } from "@angular/core";
 import { Actions, createEffect, ofType } from "@ngrx/effects";
 import { switchMap, exhaustMap, map } from "rxjs/operators";
-// our model and actions
-import { Contribution } from "src/app/models/contrib/contribution.model";
 import { ContributionService } from "src/app/services/persistence/contribution.service"
 import * as contribActions from '../actions/contributions.actions'
 

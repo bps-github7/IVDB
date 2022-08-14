@@ -1,19 +1,17 @@
 import { Injectable } from "@angular/core";
-import { from } from "rxjs";
 import { Actions, createEffect, ofType } from "@ngrx/effects";
-import { Feedback } from "src/app/models/contrib/feedback.model";
 import * as feedbackActions from '../actions/feedback.actions'
-import { AngularFirestore } from "@angular/fire/firestore";
+import { FeedbackService } from '../../services/persistence/feedback.service'
 import { switchMap, map, exhaustMap } from "rxjs/operators";
 
 @Injectable()
 export class FeedbackEffects {
 
-	constructor(private actions$: Actions, private afs : AngularFirestore) {}
+	constructor(private actions$: Actions, private afs : FeedbackService) {}
 
 		query$ = createEffect(() => this.actions$.pipe(
 			ofType(feedbackActions.readFeedback),
-			exhaustMap(() => this.afs.collection<Feedback>('feedback').valueChanges().pipe(
+			exhaustMap(() => this.afs.getAll().pipe(
 					map((feedback) => feedbackActions.readFeedbackSuccess({feedback}))
 			))
 		))
@@ -21,10 +19,9 @@ export class FeedbackEffects {
 
 	create$ = createEffect(() => this.actions$.pipe(
 		ofType(feedbackActions.createFeedback),
-		switchMap(data => {
+		map(data => {
 			const {type, ...payload} = data
-			const ref = this.afs.doc<Feedback>(`feedback/${data.id}`);
-			return from(ref.set(payload));
+			this.afs.create(payload)	
 		}),
 		map(() => feedbackActions.createFeedbackSuccess())
 	))
@@ -32,9 +29,8 @@ export class FeedbackEffects {
 	update$ = createEffect(() => this.actions$.pipe(
 		ofType(feedbackActions.updateFeedback),
 		map((action) => action),
-		switchMap(feedback => {
-			const ref = this.afs.doc<Feedback>(`feedback/${feedback.id}`)
-			return from(ref.update({id : feedback.id,  ...feedback.data}))
+		map(feedback => {
+			this.afs.update(feedback)
 		}),
 		map(() => feedbackActions.updateFeedbackSuccess())
 	))
@@ -42,9 +38,8 @@ export class FeedbackEffects {
 	delete$ = createEffect(() => this.actions$.pipe(
 		ofType(feedbackActions.deleteFeedback),
 		map(action => action),
-		switchMap(action => {
-			const ref = this.afs.doc<Feedback>(`feedback/${action.id}`)
-			return from(ref.delete())
+		map(action => {
+			this.afs.delete(action.id)
 		}),
 		map(()=> feedbackActions.deleteFeedbackSuccess())
 	))
