@@ -1,60 +1,10 @@
-import { exhaustMap } from 'rxjs/operators';
-// angular core stuff + ngrx 
 import { Injectable } from "@angular/core";
-import { from, Observable } from "rxjs";
+import { switchMap, mergeMap, map, exhaustMap } from "rxjs/operators";
+import { Observable } from "rxjs";
 import { Actions, createEffect, ofType } from "@ngrx/effects";
-
-//firestore + rxjs
-import { Firestore, collectionData, docData } from '@angular/fire/firestore';
-import { switchMap, mergeMap, map } from "rxjs/operators";
-
-import { of } from "rxjs";
-
-// our model and actions
-import { VideogameConsole } from "src/app/models/content/videogame-console.model";
+import { DocumentData } from '@firebase/firestore';
 import * as videogameConsoleActions from '../actions/videogame-console.actions'
-import {
-  CollectionReference,
-  DocumentData,
-  addDoc,
-  collection,
-  deleteDoc,
-  doc,
-  updateDoc,
-} from '@firebase/firestore';
-
-
-// P.O.C CRUD for firestore
-class ConsolePersistenceInterface {
-	consoles;
-
-	constructor(private afs: Firestore) {
-		this.consoles = collection(this.afs, 'consoles')
-	}
-
-	getAll() {
-		return collectionData(this.consoles, {
-			idField: 'id'
-		}) as Observable<VideogameConsole []>
-	}
-
-	create(console : VideogameConsole) {
-		return addDoc(this.consoles, console)
-	}
-
-	update(console : Partial<VideogameConsole>) {
-		const consoleDocumentReference = doc(
-			this.consoles,
-			`consoles/${console.id}`
-		)
-		return updateDoc(consoleDocumentReference, { ...console })
-	}
-
-	delete(id: string) {
-		const consoleDocumentReference = doc(this.consoles, `consoles/${id}`)
-		return deleteDoc(consoleDocumentReference)
-	}
-}
+import { VideogameConsoleService } from '../../services/persistence/videogame-console.service'
 
 @Injectable()
 export class VideogameConsoleEffects {
@@ -63,7 +13,7 @@ export class VideogameConsoleEffects {
 
 	constructor(
 		private actions$: Actions, 
-		private afs : ConsolePersistenceInterface) {}
+		private afs : VideogameConsoleService) {}
 	
 	query$ = createEffect(() => this.actions$.pipe(
 		ofType(videogameConsoleActions.readVideogameConsole),

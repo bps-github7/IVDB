@@ -14,7 +14,6 @@ export class ConsoleSelectedService {
 	private _selected: BehaviorSubject<VideogameConsole> = new BehaviorSubject(null);
 
 	public selected$ = this._selected.asObservable().pipe(filter(videogameConsole => !!videogameConsole));
-	meCVideogameConsole
 	
 	select(videogameConsole : VideogameConsole) {
 			 this._selected.next(videogameConsole);

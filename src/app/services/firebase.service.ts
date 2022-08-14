@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
-import firebase from 'firebase/app'; 
-import 'firebase/firestore';
+import { serverTimestamp } from 'firebase/firestore';
 
 @Injectable({
   providedIn: 'root'
@@ -10,7 +9,8 @@ export class FirebaseService {
   constructor() { }
 
   get timestamp() {
-    return firebase.firestore.FieldValue.serverTimestamp();
+    //todo prob a bandaid solution, should just do this manually when serverTimestamp is needed
+    return serverTimestamp
   };
 
 }
