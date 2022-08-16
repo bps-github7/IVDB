@@ -3,18 +3,17 @@ import { from } from "rxjs";
 import { Actions, createEffect, ofType } from "@ngrx/effects";
 import { Suggestion } from "src/app/models/contrib/suggestion.model";
 import * as suggestionActions from '../actions/suggestion.actions'
-import { AngularFirestore } from "@angular/fire/firestore";
 import { switchMap, map, exhaustMap } from "rxjs/operators";
-
+import { SuggestionService } from "src/app/services/persistence/suggestion.service";
 
 @Injectable()
 export class SuggestionEffects {
 
-	constructor(private actions$: Actions, private afs : AngularFirestore) {}
+	constructor(private actions$: Actions, private afs : SuggestionService) {}
 
 		query$ = createEffect(() => this.actions$.pipe(
 			ofType(suggestionActions.readSuggestions),
-			exhaustMap(() => this.afs.collection<Suggestion>('suggestions').valueChanges().pipe(
+			exhaustMap(() => this.afs.getAll().pipe(
 					map((suggestions) => suggestionActions.readSuggestionsSuccess({suggestions}))
 			))
 		))
@@ -22,10 +21,9 @@ export class SuggestionEffects {
 
 	create$ = createEffect(() => this.actions$.pipe(
 		ofType(suggestionActions.createSuggestion),
-		switchMap(data => {
+		map(data => {
 			const {type, ...payload} = data
-			const ref = this.afs.doc<Suggestion>(`suggestions/${data.id}`);
-			return from(ref.set(payload));
+			this.afs.create(payload)
 		}),
 		map(() => suggestionActions.createSuggestionSuccess())
 	))
@@ -35,9 +33,8 @@ export class SuggestionEffects {
 	update$ = createEffect(() => this.actions$.pipe(
 		ofType(suggestionActions.updateSuggestion),
 		map((action) => action),
-		switchMap(suggestion => {
-			const ref = this.afs.doc<Suggestion>(`suggestions/${suggestion.id}`)
-			return from(ref.update({id : suggestion.id,  ...suggestion.data}))
+		map(suggestion => {
+			this.afs.update(suggestion)
 		}),
 		map(() => suggestionActions.updateSuggestionSuccess())
 	))
@@ -45,9 +42,8 @@ export class SuggestionEffects {
 	delete$ = createEffect(() => this.actions$.pipe(
 		ofType(suggestionActions.deleteSuggestion),
 		map(action => action),
-		switchMap(action => {
-			const ref = this.afs.doc<Suggestion>(`suggestions/${action.id}`)
-			return from(ref.delete())
+		map(suggestion => {
+			this.afs.delete(suggestion.id)
 		}),
 		map(()=> suggestionActions.deleteSuggestionSuccess())
 	))

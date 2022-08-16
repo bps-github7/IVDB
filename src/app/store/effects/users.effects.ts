@@ -3,8 +3,8 @@ import { from, of } from "rxjs";
 import { Actions, createEffect, ofType } from "@ngrx/effects";
 import { User } from "src/app/models/user/user.model";
 import * as userActions from '../actions/users.actions'
-import { AngularFirestore } from "@angular/fire/firestore";
 import { switchMap, map, exhaustMap, catchError } from "rxjs/operators";
+import {  }
 
 @Injectable()
 export class UsersEffects {

@@ -1,19 +1,17 @@
 import { Injectable } from "@angular/core";
-import { from, Observable } from "rxjs";
 import { Actions, createEffect, ofType } from "@ngrx/effects";
-import { Thread } from "src/app/models/contrib/thread.model";
 import * as threadActions from '../actions/thread.actions'
-import { AngularFirestore } from "@angular/fire/firestore";
 import { switchMap, map, exhaustMap } from "rxjs/operators";
+import { ThreadService } from "src/app/services/persistence/thread.service";
 
 @Injectable()
 export class ThreadEffects {
 
-	constructor(private actions$: Actions, private afs : AngularFirestore) {}
+	constructor(private actions$: Actions, private afs : ThreadService) {}
 
 		query$ = createEffect(() => this.actions$.pipe(
 			ofType(threadActions.readThreads),
-			exhaustMap(() => this.afs.collection<Thread>('threads').valueChanges().pipe(
+			exhaustMap(() => this.afs.getAll().pipe(
 					map((threads) => threadActions.readThreadsSuccess({threads}))
 			))
 		))
@@ -21,10 +19,9 @@ export class ThreadEffects {
 
 	create$ = createEffect(() => this.actions$.pipe(
 		ofType(threadActions.createThread),
-		switchMap(data => {
-			const {type, ...payload} = data
-			const ref = this.afs.doc<Thread>(`threads/${data.id}`);
-			return from(ref.set(payload))
+		map(data => {
+			const {type, ...thread} = data
+			this.afs.create(thread)
 		}),
 		map(() => threadActions.createThreadSuccess())
 	))
@@ -34,9 +31,8 @@ export class ThreadEffects {
 	update$ = createEffect(() => this.actions$.pipe(
 		ofType(threadActions.updateThread),
 		map((action) => action),
-		switchMap(thread => {
-			const ref = this.afs.doc<Thread>(`threads/${thread.id}`)
-			return from(ref.update({id : thread.id, ...thread.data}))
+		map(thread => {
+			this.afs.update(thread)
 		}),
 		map(() => threadActions.updateThreadSuccess())
 	))
@@ -44,9 +40,8 @@ export class ThreadEffects {
 	delete$ = createEffect(() => this.actions$.pipe(
 		ofType(threadActions.deleteThread),
 		map(action => action),
-		switchMap(action => {
-			const ref = this.afs.doc<Thread>(`threads/${action.id}`)
-			return from(ref.delete());
+		map(thread => {
+			this.afs.delete(thread.id)
 		}),
 		map(()=> threadActions.deleteThreadSuccess())
 	))

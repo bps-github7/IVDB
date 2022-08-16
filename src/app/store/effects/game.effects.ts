@@ -2,28 +2,27 @@ import { Injectable } from "@angular/core";
 import { from } from "rxjs";
 import { Actions, createEffect, ofType } from "@ngrx/effects";
 import * as gameActions from '../actions/game.actions'
-import { AngularFirestore } from "@angular/fire/firestore";
+import { GameService } from "../../services/persistence/game.service";
 import { switchMap, map, exhaustMap } from "rxjs/operators";
 import { Game } from "src/app/models/content/game.model";
 
 @Injectable()
 export class GameEffects {
 
-	constructor(private actions$: Actions, private afs : AngularFirestore) {}
+	constructor(private actions$: Actions, private afs : GameService) {}
 
 		query$ = createEffect(() => this.actions$.pipe(
 			ofType(gameActions.readGames),
-			exhaustMap(() => this.afs.collection<Game>('games').valueChanges().pipe(
+			exhaustMap(() => this.afs.getAll().pipe(
 					map((games) => gameActions.readGamesSuccess({games}))
 			))
 		))
 
 		create$ = createEffect(() => this.actions$.pipe(
 			ofType(gameActions.createGame),
-			switchMap(data => {
+			map(data => {
 				const {type, ...payload} = data
-				const ref = this.afs.doc<Game>(`games/${data.id}`);
-				return from(ref.set(payload));
+				this.afs.create(payload)
 			}),
 			map(() => gameActions.createGameSuccess())
 		))
@@ -33,9 +32,8 @@ export class GameEffects {
 	update$ = createEffect(() => this.actions$.pipe(
 		ofType(gameActions.updateGame),
 		map((action) => action),
-		switchMap(game => {
-			const ref = this.afs.doc<Game>(`games/${game.id}`)
-			return from(ref.update({id : game.id,  ...game.data}))
+		map(game => {
+			this.afs.update(game)
 		}),
 		map(() => gameActions.updateGameSuccess())
 	))
@@ -43,9 +41,8 @@ export class GameEffects {
 	delete$ = createEffect(() => this.actions$.pipe(
 		ofType(gameActions.deleteGame),
 		map(action => action),
-		switchMap(action => {
-			const ref = this.afs.doc<Game>(`games/${action.id}`)
-			return from(ref.delete())
+		map(action => {
+			this.afs.delete(action.id)
 		}),
 		map(()=> gameActions.deleteGameSuccess())
 	))
