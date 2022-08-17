@@ -22,8 +22,8 @@ export class SuggestionEffects {
 	create$ = createEffect(() => this.actions$.pipe(
 		ofType(suggestionActions.createSuggestion),
 		map(data => {
-			const {type, ...payload} = data
-			this.afs.create(payload)
+			const {type, ...suggestion} = data
+			this.afs.create(suggestion)
 		}),
 		map(() => suggestionActions.createSuggestionSuccess())
 	))

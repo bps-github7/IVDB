@@ -19,8 +19,8 @@ export class GameInfoEffects {
 	create$ = createEffect(() => this.actions$.pipe(
 		ofType(gameInfoActions.createGameInfo),
 		map(data => {
-			const {type, ...payload} = data
-			this.afs.create(payload)
+			const {type, ...gameInfo} = data
+			this.afs.create(gameInfo)
 		}),
 		map(() => gameInfoActions.createGameInfoSuccess())
 	))
@@ -30,8 +30,8 @@ export class GameInfoEffects {
 	update$ = createEffect(() => this.actions$.pipe(
 		ofType(gameInfoActions.updateGameInfo),
 		map((action) => action),
-		map(content => {
-			this.afs.update(content)
+		map(gameInfo => {
+			this.afs.update(gameInfo)
 		}),
 		map(() => gameInfoActions.updateGameInfoSuccess())
 	))
@@ -39,8 +39,8 @@ export class GameInfoEffects {
 	delete$ = createEffect(() => this.actions$.pipe(
 		ofType(gameInfoActions.deleteGameInfo),
 		map(action => action),
-		map(action => {
-			this.afs.delete(action.id)
+		map(gameInfo => {
+			this.afs.delete(gameInfo.id)
 		}),
 		map(()=> gameInfoActions.deleteGameInfoSuccess())
 	))

@@ -20,8 +20,8 @@ export class FeedbackEffects {
 	create$ = createEffect(() => this.actions$.pipe(
 		ofType(feedbackActions.createFeedback),
 		map(data => {
-			const {type, ...payload} = data
-			this.afs.create(payload)	
+			const {type, ...feedback} = data
+			this.afs.create(feedback)	
 		}),
 		map(() => feedbackActions.createFeedbackSuccess())
 	))
@@ -38,8 +38,8 @@ export class FeedbackEffects {
 	delete$ = createEffect(() => this.actions$.pipe(
 		ofType(feedbackActions.deleteFeedback),
 		map(action => action),
-		map(action => {
-			this.afs.delete(action.id)
+		map(feedback => {
+			this.afs.delete(feedback.id)
 		}),
 		map(()=> feedbackActions.deleteFeedbackSuccess())
 	))

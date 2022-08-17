@@ -20,8 +20,8 @@ export class ReviewEffects {
 	create$ = createEffect(() => this.actions$.pipe(
 		ofType(reviewActions.createReview),
 		map(data => {
-			const {type, ...payload} = data
-			this.afs.create(payload)
+			const {type, ...review} = data
+			this.afs.create(review)
 		}),
 		map(() => reviewActions.createReviewSuccess())
 	))
@@ -38,8 +38,8 @@ export class ReviewEffects {
 	delete$ = createEffect(() => this.actions$.pipe(
 		ofType(reviewActions.deleteReview),
 		map(action => action),
-		map(action => {
-			this.afs.delete(action.id)
+		map(review => {
+			this.afs.delete(review.id)
 		}),
 		map(()=> reviewActions.deleteReviewSuccess())
 	))

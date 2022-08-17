@@ -19,8 +19,8 @@ export class ContributionEffects {
 	create$ = createEffect(() => this.actions$.pipe(
 		ofType(contribActions.createContribution),
 		map(data => {
-			const {type, ...payload} = data
-			this.afs.create(payload)
+			const {type, ...contrib} = data
+			this.afs.create(contrib)
 		}),
 		map(() => contribActions.createContributionSuccess())
 	))
@@ -39,8 +39,8 @@ export class ContributionEffects {
 	delete$ = createEffect(() => this.actions$.pipe(
 		ofType(contribActions.deleteContribution),
 		map(action => action),
-		map(action => {
-			this.afs.delete(action.id)
+		map(contrib => {
+			this.afs.delete(contrib.id)
 		}),
 		map(()=> contribActions.deleteContributionSuccess())
 	))

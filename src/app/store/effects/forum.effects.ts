@@ -24,8 +24,8 @@ export class ForumEffects {
 	create$ = createEffect(() => this.actions$.pipe(
 		ofType(forumActions.createForum),
 		map(data => {
-			const {type, ...payload} = data
-			this.afs.create(payload)
+			const {type, ...forum} = data
+			this.afs.create(forum)
 		}),
 		map(() => forumActions.createForumSuccess())
 	))
@@ -44,8 +44,8 @@ export class ForumEffects {
 	delete$ = createEffect(() => this.actions$.pipe(
 		ofType(forumActions.deleteForum),
 		map(action => action),
-		map(action => {
-			this.afs.delete(action.id)
+		map(forum => {
+			this.afs.delete(forum.id)
 		}),
 		map(()=> forumActions.deleteForumSuccess())
 	))

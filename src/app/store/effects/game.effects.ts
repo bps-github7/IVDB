@@ -21,8 +21,8 @@ export class GameEffects {
 		create$ = createEffect(() => this.actions$.pipe(
 			ofType(gameActions.createGame),
 			map(data => {
-				const {type, ...payload} = data
-				this.afs.create(payload)
+				const {type, ...game} = data
+				this.afs.create(game)
 			}),
 			map(() => gameActions.createGameSuccess())
 		))
@@ -41,8 +41,8 @@ export class GameEffects {
 	delete$ = createEffect(() => this.actions$.pipe(
 		ofType(gameActions.deleteGame),
 		map(action => action),
-		map(action => {
-			this.afs.delete(action.id)
+		map(game => {
+			this.afs.delete(game.id)
 		}),
 		map(()=> gameActions.deleteGameSuccess())
 	))

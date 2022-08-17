@@ -22,8 +22,8 @@ export class ContentEffects {
 	create$ = createEffect(() => this.actions$.pipe(
 		ofType(contentActions.createContent),
 		map(data => {
-			const {type, ...payload} = data
-			this.afs.create(payload)
+			const {type, ...content} = data
+			this.afs.create(content)
 		}),
 		map(() => contentActions.createContentSuccess())
 	))
@@ -42,8 +42,8 @@ export class ContentEffects {
 	delete$ = createEffect(() => this.actions$.pipe(
 		ofType(contentActions.deleteContent),
 		map(action => action),
-		map(action => {
-			this.afs.delete(action.id)
+		map(content => {
+			this.afs.delete(content.id)
 		}),
 		map(()=> contentActions.deleteContentSuccess())
 	))

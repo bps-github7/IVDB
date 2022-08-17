@@ -21,8 +21,8 @@ export class RatingEffects {
 	create$ = createEffect(() => this.actions$.pipe(
 		ofType(ratingActions.createRating),
 		map(data => {
-			const {type, ...payload} = data
-			this.afs.create(payload)
+			const {type, ...rating} = data
+			this.afs.create(rating)
 		}),
 		map(() => ratingActions.createRatingSuccess())
 	))
@@ -39,8 +39,8 @@ export class RatingEffects {
 	delete$ = createEffect(() => this.actions$.pipe(
 		ofType(ratingActions.deleteRating),
 		map(action => action),
-		map(action => {
-			this.afs.delete(action.id)
+		map(rating => {
+			this.afs.delete(rating.id)
 		}),
 		map(()=> ratingActions.deleteRatingSuccess())
 	))

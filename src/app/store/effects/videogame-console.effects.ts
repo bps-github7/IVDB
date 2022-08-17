@@ -24,10 +24,9 @@ export class VideogameConsoleEffects {
 
 	create$ = createEffect(() => this.actions$.pipe(
 		ofType(videogameConsoleActions.createVideogameConsole),
-		// is map the operator we want for the following 3 methods???
 		map(data => {
-			const {type, ...payload} = data
-			this.afs.create(payload)
+			const {type, ...console} = data
+			this.afs.create(console)
 		}),
 		map(() => videogameConsoleActions.createVideogameConsoleSuccess())
 	))
@@ -44,8 +43,8 @@ export class VideogameConsoleEffects {
 	delete$ = createEffect(() => this.actions$.pipe(
 		ofType(videogameConsoleActions.deleteVideogameConsole),
 		map(action => action),
-		map(action => {
-			this.afs.delete(action.id)
+		map(console => {
+			this.afs.delete(console.id)
 		}),
 		map(()=> videogameConsoleActions.deleteVideogameConsoleSuccess())
 	))
